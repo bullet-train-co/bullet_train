@@ -1,0 +1,72 @@
+<% content_for :breadcrumbs do %>
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to 'Dashboard', main_app.account_dashboard_path %></li>
+    <li class="breadcrumb-item"><%= link_to 'Your Account', main_app.edit_account_user_path(current_user) %></li>
+  </ul>
+<% end %>
+
+<% @title = t('.section') %>
+<div class="element-wrapper">
+
+  <h6 class="element-header"><%= t('.section') %></h6>
+  <%= render 'shared/notices' %>
+
+  <%= form_for [:account, @user] do |f| %>
+  <%= render 'shared/forms/errors', form: f %>
+  <% end %>
+
+  <div class="padded-lg">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="element-box">
+          <%= form_for [:account, @user] do |f| %>
+            <h5 class="form-header"><%= t('.profile.header') %></h5>
+            <div class="form-desc"><%= t('.profile.description') %></div>
+
+            <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true} %>
+
+            <div class="row">
+              <div class="col-sm-6">
+                <%= render 'shared/fields/text_field', form: f, method: :first_name %>
+              </div>
+              <div class="col-sm-6">
+                <%= render 'shared/fields/text_field', form: f, method: :last_name %>
+              </div>
+            </div>
+
+            <% if cloudinary_enabled? %>
+              <%= render 'shared/fields/cloudinary_image', form: f, method: :profile_photo_id %>
+            <% end %>
+
+            <%= render 'shared/fields/select', form: f, method: :time_zone, choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone) %>
+
+            <div class="form-buttons-w">
+              <%= f.submit t('.buttons.update_profile'), class: "btn btn-primary" %>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="element-box">
+          <% within_fields_namespace(:update_self) do %>
+          <%= form_for [:account, @user] do |f| %>
+            <h5 class="form-header"><%= t('.password.header') %></h5>
+            <div class="form-desc"></div>
+
+            <%= render 'shared/fields/password_field', form: f, method: :current_password %>
+            <%= render 'shared/fields/password_field', form: f, method: :password %>
+            <%= render 'shared/fields/password_field', form: f, method: :password_confirmation %>
+
+            <div class="form-buttons-w">
+              <%= f.submit t('.buttons.update_password'), class: "btn btn-primary" %>
+            </div>
+
+          <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

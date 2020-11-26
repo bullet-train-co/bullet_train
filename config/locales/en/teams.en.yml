@@ -1,0 +1,62 @@
+en:
+  teams: &teams
+    label: &label Teams
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: Team
+    buttons: &buttons
+      new: Add New Team
+      create: Create Team
+      edit: Edit Team
+      update: Update Team
+    index:
+      header: Your Teams
+      create: Create New Team
+      buttons: *buttons
+    show:
+      header: '%{teams_possessive} Dashboard'
+    new:
+      header: Create a New Team
+      former_user_header: Join a Team
+      buttons: *buttons
+      you_can: "You can either:"
+      invitation_header: Accept an invitation
+      logout_header: Log out of this account
+      new_team_header: Create a new team
+      alert: The account <b>%{user_email}</b> is not currently a member of any teams.
+      invitation: If you have received an email inviting you to join a new team, click the link in that email to accept the invitation.
+      log_out: You can log out of this account and log in with a different account that is a member of a team.
+      new_team: You can use the form below to create a new team of your own.
+    edit:
+      header: Edit Team Details
+      description: You can update the details of and settings for this team below.
+      buttons: *buttons
+    notifications:
+      created: Team was successfully created.
+      updated: Team was successfully updated.
+      invitation_only: Creating new teams is currently limited to users who have been invited for early access. If you've received an early access URL, please visit it before trying again.
+    form:
+      buttons: *buttons
+    fields: &fields
+      name:
+        _: &name Team Name
+        label: *name
+        heading: Team
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Created
+        heading: *created_at
+    _: &self
+      name:
+        label: Your Team Name
+    self:
+      <<: [*self, *fields]
+  account:
+    teams: *teams
+  activerecord:
+    attributes:
+      user:
+        name: *name
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at

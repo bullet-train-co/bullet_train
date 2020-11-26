@@ -1,0 +1,51 @@
+<style>
+.content-w {
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  border-top-left-radius: 6px !important;
+  border-top-right-radius: 6px !important;
+}
+
+pre code {
+  display: block;
+  color: #eee;
+  background-color: #111;
+  padding: 15px;
+  border-radius: 3px;
+}
+
+.element-box {
+  font-size: 12pt;
+}
+
+.element-box h1 {
+  text-transform: none;
+  font-size: 28pt;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+  margin-bottom: 20px;
+}
+
+.element-box h2 {
+  margin-top: 35px;
+  font-size: 18pt;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+  margin-bottom: 20px;
+}
+
+</style>
+
+<div class="element-wrapper">
+  <div class="element-actions">
+  </div>
+  <h6 class="element-header">
+    Bullet Train Developer Documentation
+  </h6>
+
+  <div class="padded-lg">
+    <div class="element-box">
+      <%= markdown(File.read(Rails.root.to_s + "/docs/#{@file}.md")) %>
+    </div>
+  </div>
+</div>

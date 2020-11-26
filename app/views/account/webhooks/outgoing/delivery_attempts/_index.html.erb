@@ -1,0 +1,39 @@
+<div class="element-box">
+  <h5 class="form-header"><%= t('webhooks/outgoing/delivery_attempts.header') %></h5>
+  <div class="form-desc"><%= raw t('webhooks/outgoing/delivery_attempts.description') %></div>
+  <div class="table-responsive">
+    <% if delivery_attempts.count > 0 %>
+      <table class="table table-lightborder" data-class="Webhooks::Outgoing::DeliveryAttempt">
+        <thead>
+          <tr>
+            <th><%= t('webhooks/outgoing/delivery_attempts.fields.attempt_number.heading') %></th>
+            <th><%= t('webhooks/outgoing/delivery_attempts.fields.created_at.heading') %></th>
+            <th class="text-center"><%= t('webhooks/outgoing/delivery_attempts.fields.successful.heading') %></th>
+            <th><%= t('webhooks/outgoing/delivery_attempts.fields.response_code.heading') %></th>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% delivery_attempts.each do |delivery_attempt| %>
+          <tr data-id="<%= delivery_attempt.id %>">
+            <td><%= link_to delivery_attempt.attempt_number, [:account, delivery_attempt] %></td>
+            <td><%= display_date_and_time(delivery_attempt.created_at) %></td>
+            <td class="text-center">
+              <%= render 'account/webhooks/outgoing/delivery_attempts/success_indicator', delivery_attempt: delivery_attempt %>
+            </td>
+            <td><code><%= delivery_attempt.response_code %></code></td>
+            <%# 🚅 super scaffolding will insert new fields above this line. %>
+            <td class="text-right">
+              <%= link_to t('global.buttons.debug'), [:account, delivery_attempt], class: 'btn btn-link btn-sm' if can? :show, delivery_attempt %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <%= link_to t('webhooks/outgoing/delivery_attempts.buttons.new'), [:new, :account, @delivery, :delivery_attempt], class: 'btn btn-primary' if can? :create, @delivery.delivery_attempts.new %>
+
+  </div>
+</div>

@@ -1,0 +1,32 @@
+.select2-selection.select2-selection--single {
+  min-height: 37px;
+  .select2-selection__rendered {
+    padding-left: 12px;
+    min-height: 34px;
+    line-height: 34px;
+  }
+  .select2-selection__arrow {
+    padding-top: 35px;
+  }
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+  font-weight: 300;
+  margin-top: 6px;
+}
+
+.select2 {
+  display: block;
+  img {
+    display: none;
+  }
+}
+
+.select2-results {
+  img {
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+    margin-right: 8px;
+  }
+}

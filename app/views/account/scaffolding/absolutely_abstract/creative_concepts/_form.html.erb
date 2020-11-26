@@ -1,0 +1,17 @@
+<%= form_with(model: [:account, (@team unless creative_concept.persisted?), creative_concept], local: true) do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <%= render 'shared/fields/text_field', form: form, method: :name, options: {autofocus: true} %>
+  <%= render 'shared/fields/trix_editor', form: form, method: :description %>
+  <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+  <div class="form-buttons-w">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "btn btn-primary" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:account, creative_concept], class: "btn btn-link" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:account, @team, :scaffolding, :absolutely_abstract, :creative_concepts], class: "btn btn-link" %>
+    <% end %>
+  </div>
+
+<% end %>

@@ -1,4 +1,10 @@
 Rails.application.configure do
+
+  # 🚫 DEFAULT RAILS CONFIGURATION
+  # This section represents the default settings for a Rails 6.0.0-rc1 application. Bullet Train's configuration and
+  # your own should be specified at the end of the file, not in this section, even if the value you're configuring
+  # has a default value here. This helps avoid merge conflicts in the future should the framework defaults change.
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -13,18 +19,23 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  # Run rails dev:cache to toggle caching.
+  if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.action_controller.perform_caching = true
+    config.action_controller.enable_fragment_cache_logging = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      'Cache-Control' => 'public, max-age=172800'
+      'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
   else
     config.action_controller.perform_caching = false
 
     config.cache_store = :null_store
   end
+
+  # Store uploaded files on the local file system (see config/storage.yml for options).
+  config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
@@ -37,6 +48,9 @@ Rails.application.configure do
   # Raise an error on page load if there are pending migrations.
   config.active_record.migration_error = :page_load
 
+  # Highlight code that triggered database queries in logs.
+  config.active_record.verbose_query_logs = true
+
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
@@ -45,13 +59,40 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  # Raises error for missing translations
+  # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # 🚫 DEFAULT BULLET TRAIN CONFIGURATION
+  # This section represents the default settings for a Bullet Train application. Your own configuration should be
+  # specified at the end of the file. Don't specify your application specific configuration in this section, even
+  # if you want to change a default value specified here. Instead, simply re-specify the value in the section that
+  # follows this section.
+
+  # generate full urls using the base url configuration setting.
+  Rails.application.routes.default_url_options = default_url_options_from_base_url
+  config.action_mailer.default_url_options = default_url_options_from_base_url
+
+  # allow users to access this application via the configured application domain.
+  config.hosts << default_url_options_from_base_url[:host]
+
+  config.action_mailer.delivery_method = :letter_opener
+  config.active_job.queue_adapter = :sidekiq
+
+  # Raises error for missing translations
+  # Don't disable this. Localization is a big part of Bullet Train and you want hard errors when something goes wrong.
+  # Furthermore, some Bullet Train functionality depends on receiving an error when a translation is missing.
+  config.action_view.raise_on_missing_translations = true
+
+  # i don't plan on mailgun being the default for much longer, but since they're the default in the production
+  # configuration right now, i'm making them the default here as well.
+  config.action_mailbox.ingress = :mailgun
+
+  # ✅ YOUR APPLICATION'S CONFIGURATION
+  # If you need to customize your application's configuration, this is the place to do it. This helps avoid merge
+  # conflicts in the future when Rails or Bullet Train update their own default settings.
 
 end

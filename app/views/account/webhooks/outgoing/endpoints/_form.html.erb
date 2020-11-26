@@ -1,0 +1,23 @@
+<%= form_with(model: [:account, (@team unless endpoint.persisted?), endpoint], local: true) do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <%= render 'shared/forms/field', form: form, attribute: :name, field_type: :text_field, field_attributes: {autofocus: true} %>
+  <%= render 'shared/forms/field', form: form, attribute: :url, field_type: :text_field, field_attributes: {} %>
+  <%= render 'shared/forms/has_many_through', form: form, attribute: :event_type_ids, options: Webhooks::Outgoing::EventType.all.collect { |event_type| [event_type.name, event_type.id] } do %>
+    <% content_for :help do %>
+      If you don't select any specific event types, all event types will be delivered.
+    <% end %>
+  <% end %>
+
+  <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+  <div class="form-buttons-w">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "btn btn-primary" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:account, endpoint], class: "btn btn-link" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:account, @team, :webhooks, :outgoing, :endpoints], class: "btn btn-link" %>
+    <% end %>
+  </div>
+
+<% end %>

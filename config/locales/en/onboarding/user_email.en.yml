@@ -1,0 +1,13 @@
+# if you're looking for form fields, they're namespaced within `user.yml`.
+en:
+  onboarding: &onboarding
+    user_email:
+      buttons: &buttons
+        next: Next
+      edit:
+        header: What's your email address?
+        description: We weren't able to fetch your email address from the account you used to sign in.
+        email_taken: Sorry, the email address you're trying to use is already associated with another account. You should sign in with your email address and password and then add this account in your account settings.
+        buttons: *buttons
+  account:
+    onboarding: *onboarding

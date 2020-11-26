@@ -1,0 +1,11 @@
+:concurrency: 5
+staging:
+  :concurrency: 5
+production:
+  :concurrency: 5
+:queues:
+  - critical
+  - default
+  - mailers
+  - low
+  - action_mailbox_routing

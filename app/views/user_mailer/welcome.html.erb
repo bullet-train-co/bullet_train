@@ -1,0 +1,31 @@
+<% content_for :preheader do %>
+<%= t('.preview', @values) %>
+<% end %>
+
+<h1><%= t('.heading', @values) %></h1>
+<%= t('.body.html', @values) %>
+
+<h2><%= t('.cta.heading', @values) %></h2>
+<p><%= t('.cta.body', @values) %></p>
+<!-- Action -->
+<table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center">
+      <!-- Border based button https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center">
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td>
+                  <a href="<%= @cta_url %>" class="button button--" target="_blank"><%= t('.cta.label', @values) %></a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<%= t('.signature.html', @values.merge({support_email: t('application.support_email')})) %>

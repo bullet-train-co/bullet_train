@@ -1,0 +1,7 @@
+<% if any_oauth_enabled? %>
+  <% verb ||= 'Sign in' %>
+  <div class="buttons-w mt-4">
+    <%= render 'devise/shared/oauth/stripe', verb: verb if stripe_enabled? %>
+    <%# 🚅 super scaffolding will insert new oauth providers above this line. %>
+  </div>
+<% end %>

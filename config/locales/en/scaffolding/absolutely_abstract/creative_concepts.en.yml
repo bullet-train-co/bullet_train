@@ -1,0 +1,80 @@
+en:
+  scaffolding/absolutely_abstract/creative_concepts: &creative_concepts
+    label: &label Creative Concepts
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+    buttons: &buttons
+      new: Add New Creative Concept
+      create: Create Creative Concept
+      edit: Edit Creative Concept
+      update: Update Creative Concept
+      destroy: Remove Creative Concept
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{creative_concept_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      name:
+        name: &name Name
+        label: *name
+        heading: *name
+      description:
+        name: &description Description
+        label: *description
+        heading: *description
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        name: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        name: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    index:
+      section: "%{teams_possessive} Creative Concepts"
+      contexts:
+        team:
+          header: Creative Concepts
+          description: Below is a list of Creative Concepts that have been added to %{team_name}. You can manage them with the options below.
+          description_empty: No Creative Concepts have been added for %{team_name} yet. To get started, use the button below!
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{creative_concept_name}"
+      header: Creative Concept Details
+      description: Below are the details we have for %{creative_concept_name}. You'll also find options for updating these details or removing %{creative_concept_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+    new:
+      section: "New Creative Concept for %{team_name}"
+      header: New Creative Concept Details
+      description: Please provide the details of the new Creative Concept you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{creative_concept_name}"
+      header: Edit Creative Concept Details
+      description: You can update the details or settings for %{creative_concept_name} below.
+      form: *form
+    notifications:
+      created: Creative Concept was successfully created.
+      updated: Creative Concept was successfully updated.
+      destroyed: Creative Concept was successfully destroyed.
+  account:
+    scaffolding:
+      absolutely_abstract:
+        creative_concepts: *creative_concepts
+  activerecord:
+    attributes:
+      scaffolding/absolutely_abstract/creative_concept:
+        name: *name
+        description: *description
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

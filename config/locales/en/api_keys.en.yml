@@ -1,0 +1,40 @@
+en:
+  api_keys: &api_keys
+    label: &label API Keys
+    breadcrumbs:
+      label: *label
+    header: API Keys
+    description: It's okay if other people see the public token below, but you should keep the secret token completely secure.
+    notifications:
+      created: API Key was successfully created.
+      destroyed: API Key was successfully revoked.
+    buttons:
+      reveal: Click to Reveal
+      create: Generate New API Key
+      destroy: Revoke
+    fields:
+      token:
+        name: &token Public Token
+        label: *token
+        heading: *token
+      secret:
+        name: &secret Secret Token
+        label: *secret
+        heading: *secret
+      last_used:
+        name: &last_used Last Used
+        label: *last_used
+        heading: *last_used
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        name: &created_at Generated
+        heading: *created_at
+  account:
+    api_keys: *api_keys
+  activerecord:
+    attributes:
+      api_key:
+        token: *token
+        secret: *secret
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at

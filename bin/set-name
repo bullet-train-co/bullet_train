@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby
+
+require 'active_support/inflector'
+
+def replace_in_file(file, before, after)
+  puts "Replacing in '#{file}'."
+  target_file_content = File.open(file).read
+  target_file_content.gsub!(before, after)
+  File.open(file, "w+") do |f|
+    f.write(target_file_content)
+  end
+end
+
+unless ARGV.count >= 1
+  puts ""
+  puts "🚅  usage: bin/set-name \"<Your App Name in Title Case with Spaces>\""
+  puts ""
+  exit
+end
+
+human = ARGV[0]
+variable = ActiveSupport::Inflector.parameterize(human, separator: '_')
+environment_variable = ActiveSupport::Inflector.parameterize(human, separator: '_').upcase
+class_name = variable.classify
+
+puts ""
+replace_in_file("./config/database.yml", "bullet_train", variable)
+replace_in_file("./config/database.yml", "BULLET_TRAIN", environment_variable)
+replace_in_file("./config/cable.yml", "bullet_train", variable)
+replace_in_file("./config/initializers/session_store.rb", "bullet_train", variable)
+replace_in_file("./config/environments/production.rb", "bullet_train", variable)
+replace_in_file("./config/environments/development.rb", "bullet_train", variable)
+replace_in_file("./config/application.rb", "BulletTrain", class_name)
+replace_in_file("./config/locales/en/application.en.yml", "Bullet Train", human)
+replace_in_file("./config/locales/en/application.en.yml", "bullet_train", variable)
+
+puts ""
+puts "Be sure to do a global search for 'Bullet Train' to find places you might want to update with your own application name and marketing copy. At the very least you should update `config/locales/en/application.en.yml`."
+puts ""

@@ -1,0 +1,30 @@
+<% yield %>
+
+<%
+options ||= {}
+other_options ||= {}
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, helper: :file_field, options: options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div class="file-field">
+    <%= form.hidden_field "#{method}_removal".to_sym, value: nil, class: 'remove-file-flag' %>
+    <div style="display: none;">
+      <%= form.file_field method, class: 'file-upload', onchange: "$(this).closest('.file-field').find('.download-file').remove(); $(this).closest('.file-field').find('.upload-file i').removeClass('ti-upload').addClass('ti-check'); $(this).closest('.file-field').find('.upload-file span').text('Select Another File');" %>
+    </div>
+    <% if form.object.send(method).attached? %>
+      <%= link_to url_for(form.object.send(method)), class: 'btn btn-primary download-file' do %>
+        <i class="ti-download"></i><span>Download Current Document</span>
+      <% end %>
+    <% end %>
+    <%= link_to "#", onclick: "$(this).closest('.file-field').find('.file-upload').click(); return false;", class: 'btn btn-link btn-link-with-icon upload-file' do %>
+      <i class="ti-upload"></i><span>Upload New Document</span>
+    <% end %>
+    <% if form.object.send(method).attached? %>
+      <%= link_to "#", onclick: "$(this).closest('.file-field').find('.download-file').hide(); $(this).closest('.file-field').find('.remove-file').hide(); $(this).closest('.file-field').find('.remove-file-flag').val(true); return false;", class: 'btn btn-link btn-link-with-icon remove-file' do %>
+        <i class="ti-trash"></i><span>Remove Current Document</span>
+      <% end %>
+    <% end %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,0 +1,84 @@
+<style>
+pre code {
+  display: block;
+  color: #eee;
+  background-color: #111;
+  padding: 15px;
+  border-radius: 3px;
+}
+.padded-lg h6 {
+  margin-top: 30px;
+}
+table td, table th {
+  width: 35%;
+}
+table td + td, table th + th {
+  width: 20%;
+}
+table td + td + td, table th + th + th {
+  width: 45%;
+}
+
+</style>
+
+<div class="element-wrapper">
+
+  <div class="element-actions">
+    <% if user_signed_in? %>
+    <a class="btn btn-link btn-sm" href="<%= account_dashboard_path %>">Back to Account</a>
+    <% else %>
+    <a class="btn btn-link btn-sm" href="<%= root_path %>">Back to Homepage</a>
+    <% end %>
+  </div>
+  <h6 class="element-header">
+    <%= t('application.name').possessive %> API Documentation
+  </h6>
+
+  <div class="padded-lg">
+    <div class="element-box">
+      <h5 class="form-header">Authentication and Requests</h5>
+      <p>
+        We use standard HTTP Authentication over HTTPS to authorize your requests.
+        <% if user_signed_in? %>
+        First you'll need to <%= link_to 'generate a new API key in your account', account_user_api_keys_path(current_user) %>.
+        <% else %>
+        First you'll need to <%= link_to 'sign up', new_user_registration_path %> and then generate a new API key in your account.
+        <% end %>
+
+        Once you have an API key, you can generate a request to the server like so:
+
+        <pre><code>wget -qO /dev/stdout \<br>--user "<%= @token %>" \<br>--password "<%= @secret %>" \<br><%= ENV['BASE_URL'] %>/api/v1/teams</code></pre>
+
+        <% if @live_token %>
+        <div class="alert alert-success"><strong>Heads up!</strong> You'll notice we don't display live secret tokens in the example above by default. You have to click the <span style="font-family: monospace;">{{click to reveal}}</span> placeholder in order to reveal it. The example won't work unless you do that.</div>
+        <% end %>
+
+      </p>
+
+    </div>
+
+    <div class="element-box">
+      <h5 class="form-header">Shallow Nesting</h5>
+      <p>
+        Many resources are nested under other resources. To keep the nesting of routes sane, we use shallow nesting.
+        This means that a route will only be nested under the parent resource if the target action requires knowing that scope.
+      </p>
+    </div>
+  </div>
+
+  <% Dir.foreach(File.dirname(__FILE__) + '/api').to_a.sort.select { |file| file != '.' && file != '..' }.each do |file| %>
+    <% real_file_name = "#{File.dirname(__FILE__) + '/api'}/#{file}" %>
+    <% if File.directory?(real_file_name) %>
+      <% Dir.foreach(real_file_name).to_a.sort.select { |file| file != '.' && file != '..' }.each do |namespaced_file| %>
+        <% next if namespaced_file == '_things.html.erb' && scaffolding_things_disabled? %>
+        <% real_namespaced_file_name = "#{File.dirname(__FILE__) + '/api'}/#{file}/#{namespaced_file}" %>
+        <% if File.file?(real_namespaced_file_name) %>
+          <%= render "public/home/api/#{file}/#{namespaced_file[1..-1]}" %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= render "public/home/api/#{file[1..-1]}" %>
+    <% end %>
+  <% end %>
+
+</div>

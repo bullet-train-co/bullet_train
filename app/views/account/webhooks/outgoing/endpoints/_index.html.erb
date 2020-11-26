@@ -1,0 +1,34 @@
+<div class="element-box">
+  <h5 class="form-header"><%= t('.header') %></h5>
+  <div class="form-desc"><%= raw t('.description') %></div>
+  <div class="table-responsive">
+    <% if endpoints.count > 0 %>
+      <table class="table table-lightborder" data-class="Webhooks::Outgoing::Endpoint">
+        <thead>
+          <tr>
+            <th><%= t('.fields.name.heading') %></th>
+            <th><%= t('.fields.url.heading') %></th>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% endpoints.each do |endpoint| %>
+          <tr data-id="<%= endpoint.id %>">
+            <td><%= link_to endpoint.name, [:account, endpoint] %></td>
+            <td><code><%= endpoint.url %></code></td>
+            <%# 🚅 super scaffolding will insert new fields above this line. %>
+            <td class="text-right">
+              <%= link_to t('global.buttons.details'), [:account, endpoint], class: 'btn btn-link btn-sm' if can? :edit, endpoint %>
+              <%= link_to t('.buttons.shorthand.destroy'), [:account, endpoint], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(endpoint)) }, class: 'btn btn-link btn-sm' if can? :destroy, endpoint %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <%= link_to t('.buttons.new'), [:new, :account, @team, :webhooks, :outgoing, :endpoint], class: 'btn btn-primary' if can? :create, @team.webhooks_outgoing_endpoints.new %>
+
+  </div>
+</div>

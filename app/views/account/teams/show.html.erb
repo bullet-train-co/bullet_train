@@ -1,0 +1,20 @@
+<div class="element-wrapper">
+  <div class="element-actions">
+    <%= link_to edit_account_team_path(@team), class: 'btn btn-link btn-sm' do %>
+      <%= t('teams.buttons.edit') %>
+    <% end if can? :edit, @team %>
+  </div>
+  <h6 class="element-header">
+    <%= t('.header', teams_possessive: possessive_string(@team.name)) %>
+  </h6>
+  <%= render 'shared/notices' %>
+
+  <div class="padded-lg">
+    <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts unless scaffolding_things_disabled? %>
+    <%# 🚅 super scaffolding will insert new children above this line. %>
+  </div>
+
+  </div>
+</div>
+
+<%= render 'shared/customizers' %>

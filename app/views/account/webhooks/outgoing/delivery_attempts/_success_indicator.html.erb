@@ -1,0 +1,7 @@
+<% if delivery_attempt.successful? %>
+  <div class="square-icon text-success"><i class="ti-check"></i></div>
+<% elsif delivery_attempt.still_attempting? %>
+  <div class="square-icon"><i class="ti-reload rotating"></i></div>
+<% else %>
+  <div class="square-icon text-danger"><i class="ti-close"></i></div>
+<% end %>

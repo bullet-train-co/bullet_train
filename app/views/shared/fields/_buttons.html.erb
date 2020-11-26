@@ -1,0 +1,28 @@
+<% yield %>
+
+<%
+html_options ||= {}
+html_options[:id] ||= id_for(form, method)
+multiple ||= false
+other_options ||= {}
+options ||= options_for(form, method)
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div>
+      <% options.each do |value, label| %>
+        <label class="btn-toggle">
+          <% if multiple %>
+            <%= form.check_box method, {}, value %>
+          <% else %>
+            <%= form.radio_button method, value %>
+          <% end %>
+          <button type="button" class="btn">
+            <%= label %>
+          </button>
+        </label>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

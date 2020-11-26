@@ -1,0 +1,24 @@
+// invitation options
+.auth-box-w {
+  .invitation-options {
+    li + li {
+      margin-top: 10px;
+    }
+    li {
+      a {
+        display: inline-block;
+        margin-bottom: 10px;
+      }
+    }
+    .alert {
+      margin-top: 0px;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.invitation-form {
+  .form-check + .form-check {
+    margin-top: 10px;
+  }
+}

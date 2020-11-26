@@ -1,0 +1,400 @@
+#!/usr/bin/env ruby
+
+require 'active_support/inflector'
+require 'active_support/core_ext/string'
+require 'fileutils'
+require 'pry'
+require 'colorize'
+
+require_relative '../config/initializers/inflections'
+require_relative 'lib/super_scaffolding/oauth_providers'
+require_relative '../lib/scaffolding'
+
+# TODO these methods were removed from the global scope in super scaffolding and moved to `Scaffolding::Transformer`,
+# but oauth provider scaffolding hasn't been updated yet.
+
+def legacy_replace_in_file(file, before, after)
+  puts "Replacing in '#{file}'."
+  target_file_content = File.open(file).read
+  target_file_content.gsub!(before, after)
+  File.open(file, "w+") do |f|
+    f.write(target_file_content)
+  end
+end
+
+def legacy_add_line_to_file(file, content, after, child, parent, options = {})
+  increase_indent = options[:increase_indent]
+  add_before = options[:add_before]
+  add_after = options[:add_after]
+
+  transformed_file_name = file
+  transformed_content = content
+  transformed_after = after
+
+  target_file_content = File.open(transformed_file_name).read
+
+  if target_file_content.include?(transformed_content)
+    puts "No need to update '#{transformed_file_name}'. It already has '#{transformed_content}'."
+  else
+    new_target_file_content = []
+    target_file_content.split("\n").each do |line|
+      if line.match(/#{Regexp.escape(transformed_after)}\s*$/)
+
+        if add_before
+          new_target_file_content << "#{line} #{add_before}"
+        else
+          unless options[:prepend]
+            new_target_file_content << line
+          end
+        end
+
+        # get leading whitespace.
+        line.match(/^(\s*).*#{Regexp.escape(transformed_after)}.*/)
+        leading_whitespace = $1
+        new_target_file_content << "#{leading_whitespace}#{"  " if increase_indent}#{transformed_content}"
+
+        new_target_file_content << "#{leading_whitespace}#{add_after}" if add_after
+
+        if options[:prepend]
+          new_target_file_content << line
+        end
+      else
+        new_target_file_content << line
+      end
+    end
+
+    puts "Updating '#{transformed_file_name}'."
+
+    File.open(transformed_file_name, "w+") do |f|
+      f.write(new_target_file_content.join("\n"))
+    end
+  end
+end
+
+# filter out options.
+argv = []
+@options = {}
+ARGV.each do |arg|
+  if arg[0..1] == '--'
+    arg = arg[2..-1]
+    if arg.split('=').count > 1
+      @options[arg.split('=')[0]] = arg.split('=')[1]
+    else
+      @options[arg] = true
+    end
+  else
+    argv << arg
+  end
+end
+
+def show_usage
+  puts ""
+  puts "🚅  usage: bin/super-scaffold [type] (... | --help)"
+  puts ""
+  puts "Supported types of scaffolding:"
+  puts ""
+  puts "  crud"
+  puts "  crud-field"
+  puts "  oauth-provider"
+  puts "  breadcrumbs"
+  puts ""
+end
+
+unless argv.count > 0
+  show_usage
+end
+
+# grab the _type_ of scaffold we're doing.
+scaffolding_type = argv.shift
+
+# if we're doing the classic super scaffolding ..
+if scaffolding_type == 'crud'
+
+  unless argv.count >= 3
+    puts ""
+    puts "🚅  usage: bin/super-scaffold crud <Model> <ParentModel[s]> <attribute:type> <attribute:type> ..."
+    puts ""
+    puts "E.g. a Team has many Sites with some attributes:"
+    puts "  rails g model Site team:references name:string url:text"
+    puts "  bin/super-scaffold Site Team name:string url:text"
+    puts ""
+    puts "E.g. a Section belongs to a Page, which belongs to a Site, which belongs to a Team:"
+    puts "  rails g model Section page:references title:text body:text"
+    puts "  bin/super-scaffold Section Page,Site,Team page:references title:text body:text"
+    puts ""
+    puts "E.g. an Image belongs to either a Page or a Site:"
+    puts "  Doable! See https://bit.ly/2NvO8El for a step by step guide."
+    puts ""
+    puts "E.g. Pages belong to a Site and are sortable via drag-and-drop:"
+    puts "  rails g model Page site:references name:string path:text"
+    puts "  bin/super-scaffold Page Site,Team name:text path:text --sortable"
+    puts ""
+    puts "Protip: Commit your other changes before running super scaffolding so it's easy to undo if you (or we) make any mistakes."
+    puts "If you do that, you can reset to your last commit state by using `git checkout .` and `git clean -d -f` ."
+    puts ""
+    puts "Give it a shot! Let us know if you have any trouble with it! ✌️"
+    puts ""
+    exit
+  end
+
+  child = argv[0]
+  parents = argv[1] ? argv[1].split(',') : []
+  parents += ['Team']
+  parents = parents.map(&:classify).uniq
+  parent = parents.first
+
+  # get all the attributes.
+  attributes = argv[2..-1]
+
+  transformer = Scaffolding::Transformer.new(child, parents, @options)
+  transformer.scaffold_crud(attributes)
+
+  transformer.additional_steps.each_with_index do |additional_step, index|
+    color, message = additional_step
+    puts ""
+    puts "#{index + 1}. #{message}".send(color)
+  end
+  puts ""
+
+elsif scaffolding_type == 'crud-field'
+
+  unless argv.count >= 3
+    puts ""
+    puts "🚅  usage: bin/super-scaffold crud-field <Model> <ParentModels> <attribute:type> <attribute:type> ... [options]"
+    puts ""
+    puts "E.g. add a description and body to Pages:"
+    puts "  rails g migration add_description_etc_to_pages description:text body:text"
+    puts "  bin/super-scaffold crud-field Page Site,Team description:text body:text"
+    puts ""
+    puts "Options:"
+    puts ""
+    puts "  --skip-table: Only add to the new/edit form and show view."
+    puts ""
+    # TODO make this go away.
+    puts "(Sorry to ask for the parent model again. We don't actually need it. It will go away at some point.)"
+    puts ""
+    exit
+  end
+
+  child = argv[0]
+  parents = argv[1] ? argv[1].split(',') : []
+  parents += ['Team']
+  parents = parents.map(&:classify).uniq
+  parent = parents.first
+
+  # get all the attributes.
+  attributes = argv[2..-1]
+
+  # check that attributes have required options.
+  attributes.each do |attribute|
+    parts = attribute.split(':')
+    name = parts.shift
+    type = parts.join(':')
+
+    # extract any options they passed in with the field.
+    type, attribute_options = type.scan(/^(.*)\[(.*)\]/).first || type
+
+    # create a hash of the options.
+    attribute_options = if attribute_options
+      attribute_options.split(',').map do |s|
+        option_name, option_value = s.split('=')
+        [option_name.to_sym, option_value || true]
+      end.to_h
+    else
+      {}
+    end
+
+    if name.match?(/_id$/) || name.match?(/_ids$/)
+      attribute_options ||= {}
+      unless attribute_options[:vanilla]
+        name_without_id = if name.match?(/_id$/)
+          name.gsub(/_id$/, '')
+        elsif name.match?(/_ids$/)
+          name.gsub(/_ids$/, '')
+        end
+
+        attribute_options[:class_name] ||= name_without_id.classify
+
+        file_name = "app/models/#{attribute_options[:class_name].underscore}.rb"
+        unless File.exists?(file_name)
+          puts ""
+          puts "Attributes that end with `_id` or `_ids` trigger awesome, powerful magic in Super Scaffolding. However, because no `#{attribute_options[:class_name]}` class was found defined in `#{file_name}`, you'll need to specify a `class_name` that exists to let us know what model class is on the other side of the association, like so:".red
+          puts ""
+          puts "  bin/super-scaffold crud-field #{child} #{parents.join(',')} #{name}:#{type}[class_name=#{name.gsub(/_ids?$/, '').classify}]".red
+          puts ""
+          puts "If `#{name}` is just a regular field and isn't backed by an ActiveRecord association, you can skip all this with the `[vanilla]` option, e.g.:".red
+          puts ""
+          puts "  bin/super-scaffold crud-field #{child} #{parents.join(',')} #{name}:#{type}[vanilla]".red
+          puts ""
+          exit
+        end
+      end
+    end
+
+  end
+
+  transformer = Scaffolding::Transformer.new(child, parents, @options)
+  transformer.add_attributes_to_various_views(attributes, type: :crud_field)
+
+  transformer.additional_steps.each_with_index do |additional_step, index|
+    color, message = additional_step
+    puts ""
+    puts "#{index + 1}. #{message}".send(color)
+  end
+  puts ""
+
+elsif scaffolding_type == 'breadcrumbs'
+
+  unless argv.count == 2
+    puts ""
+    puts "🚅  usage: bin/super-scaffold breadcrumbs <Model> <ParentModel>"
+    puts ""
+    puts "Heads up! You only need to use this if you generated your views before the new Bullet Train breadcrumbs implementation came into effect.".green
+    puts ""
+    puts "E.g. create updated breadcrumbs for Pages:"
+    puts "  bin/super-scaffold breadcrumbs Page Site"
+    puts ""
+    puts "You only have to specify the immediate parent, not the entire path back to Team (unless the immediate parent is Team)."
+    puts ""
+    exit
+  end
+
+  child = argv[0]
+  parents = argv[1] ? argv[1].split(',') : []
+  parents += ['Team']
+  parents = parents.map(&:classify).uniq
+  parent = parents.first
+
+  # get all the attributes.
+  scaffold_new_breadcrumbs(child, parents)
+
+elsif scaffolding_type == 'oauth-provider'
+
+  unless argv.count >= 5
+    puts ""
+    puts "🚅  usage: bin/super-scaffold oauth-provider <omniauth_gem> <gems_provider_name> <our_provider_name> <PROVIDER_API_KEY_IN_ENV> <PROVIDER_API_SECRET_IN_ENV> [options]"
+    puts ""
+    puts "E.g. what we'd do to start Stripe off (if we didn't already do it):"
+    puts "  rails g model Oauth::StripeAccount uid:string data:jsonb team:references{optional} user:references{optional}"
+    puts "  bin/super-scaffold oauth-provider omniauth-stripe-connect stripe_connect Oauth::StripeAccount STRIPE_CLIENT_ID STRIPE_SECRET_KEY --icon=ti-money"
+    puts ""
+    puts "E.g. what we actually did to start Shopify off:"
+    puts "  rails g model Oauth::ShopifyAccount uid:string data:jsonb team:references{optional} user:references{optional}"
+    puts "  bin/super-scaffold oauth-provider omniauth-shopify-oauth2 shopify Oauth::ShopifyAccount SHOPIFY_API_KEY SHOPIFY_API_SECRET_KEY --icon=ti-shopping-cart"
+    puts ""
+    puts "Options:"
+    puts ""
+    puts "  --icon={ti-*}: Specify an icon."
+    puts ""
+    exit
+  end
+
+  _, omniauth_gem, gems_provider_name, our_provider_name, api_key, api_secret = *ARGV
+
+  unless match = our_provider_name.match(/Oauth::(.*)Account/)
+    puts "\n🚨 Your provider name must match the pattern of `Oauth::{Name}Account`, e.g. `Oauth::StripeAccount`\n".red
+    return
+  end
+
+  options = {
+    omniauth_gem: omniauth_gem,
+    gems_provider_name: gems_provider_name,
+    our_provider_name: match[1],
+    api_key: api_key,
+    api_secret: api_secret,
+  }
+
+  unless File.exists?(oauth_transform_string("./app/models/oauth/stripe_account.rb", options))
+    puts ""
+    puts oauth_transform_string("🚨 Before doing the actual Super Scaffolding, you'll need to generate the model like so:", options).red
+    puts ""
+    puts oauth_transform_string("  rails g model Oauth::StripeAccount uid:string data:jsonb team:references user:references", options).red
+    puts ""
+    puts "However, don't do the `rake db:migrate` until after you re-run Super Scaffolding, as it will need to update some settings in that migration.".red
+    puts ""
+    return
+  end
+
+  icon_name = nil
+  if @options['icon'].present?
+    icon_name = @options['icon']
+  else
+    puts "OK, great! Let's do this! By default providers will appear with a dollar symbol,"
+    puts "but after you hit enter I'll open a page where you can view other icon options."
+    puts "When you find one you like, hover your mouse over it and then come back here and"
+    puts "and enter the name of the icon you want to use."
+    response = STDIN.gets.chomp
+    `open http://light.pinsupreme.com/icon_fonts_themefy.html`
+    puts ""
+    puts "Did you find an icon you wanted to use? Enter the name here or hit enter to just"
+    puts "use the dollar symbol:"
+    icon_name = STDIN.gets.chomp
+    puts ""
+    unless icon_name.length > 0 || icon_name.downcase == 'y'
+      icon_name = 'icon-puzzle'
+    end
+  end
+
+  options[:icon] = icon_name
+
+  [
+    './app/views/account/oauth/stripe_accounts',
+    './app/controllers/account/oauth/stripe_accounts_controller.rb',
+    './app/views/layouts/account/menus/oauth/_stripe_accounts.html.erb',
+    './config/locales/en/oauth/stripe_accounts.en.yml',
+    './app/models/oauth/stripe_account.rb',
+    './app/views/devise/shared/oauth/_stripe.html.erb',
+  ].each do |name|
+    if File.directory?(name)
+      oauth_scaffold_directory(name, options)
+    else
+      oauth_scaffold_file(name, options)
+    end
+  end
+
+  oauth_scaffold_add_line_to_file("./app/views/devise/shared/_oauth.html.erb", "<%= render 'devise/shared/oauth/stripe', verb: verb if stripe_enabled? %>", "<%# 🚅 super scaffolding will insert new oauth providers above this line. %>", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./config/initializers/devise.rb", "config.omniauth :stripe_connect, ENV['STRIPE_CLIENT_ID'], ENV['STRIPE_SECRET_KEY'], {\n    ## specify options for your oauth provider here, e.g.:\n    # scope: 'read_products,read_orders,write_content',\n  }\n", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/controllers/account/oauth/omniauth_callbacks_controller.rb", "def stripe_connect\n    team_id = request.env['omniauth.params']['team_id']\n    callback(::Oauth::StripeAccount, :oauth_stripe_accounts, team_id ? team_id.to_i : nil)\n  end\n", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/models/team.rb", "has_many :oauth_stripe_accounts, class_name: 'Oauth::StripeAccount', dependent: :destroy if stripe_enabled?", "# 🚅 add oauth providers above.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/models/user.rb", "has_many :oauth_stripe_accounts, class_name: 'Oauth::StripeAccount' if stripe_enabled?", "# 🚅 add oauth providers above.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./config/locales/en/oauth.en.yml", "stripe_connect: Stripe", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/views/layouts/account/menus/_main_menu.html.erb", "<%= render 'layouts/account/menus/oauth/stripe_accounts' if stripe_enabled? %>", "<%# 🚅 super scaffolding will insert new oauth providers above this line. %>", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./config/routes.rb", "resources :stripe_accounts if stripe_enabled?", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./Gemfile", "gem 'omniauth-stripe-connect'", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./lib/bullet_train.rb", "def stripe_enabled?\n  ENV['STRIPE_CLIENT_ID'].present? && ENV['STRIPE_SECRET_KEY'].present?\nend\n", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./lib/bullet_train.rb", "stripe_enabled?,", "# 🚅 super scaffolding will insert new oauth provider checks above this line.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/models/ability.rb", "if stripe_enabled?
+        can :manage, Oauth::StripeAccount, team_id: user.team_ids
+        cannot :edit, Oauth::StripeAccount
+      end
+", "# 🚅 super scaffolding will insert any new oauth providers above.", options, prepend: true)
+
+  # find the database migration that defines this relationship.
+  migration_file_name = `grep "create_table #{oauth_transform_string(':oauth_stripe_accounts', options)}" db/migrate/*`.split(":").first
+  legacy_replace_in_file(migration_file_name, 'null: false', 'null: true')
+
+  puts ""
+  puts "🎉"
+  puts ""
+  puts "You'll probably need to `bundle install`.".green
+  puts ""
+  puts "If the OAuth provider asks you for some whitelisted callback URLs, the URL structure for those is as so:"
+  puts ""
+  puts oauth_transform_string("  https://yourdomain.co/users/auth/stripe_connect/callback", options)
+  puts oauth_transform_string("  https://yourtunnel.ngrok.io/users/auth/linkedin/callback", options)
+  puts oauth_transform_string("  http://localhost:3000/users/auth/stripe_connect/callback", options)
+  puts ""
+  puts "If you'd like to edit how your Bullet Train application refers to this provider, just edit the locale file at `config/locales/en/oauth.en.yml`."
+  puts ""
+  puts "And finally, if you need to specify any custom authorizations or options for your OAuth integration with this provider, you can configure those in `config/initializers/devise.rb`."
+  puts ""
+
+elsif argv.count > 1
+
+  puts ""
+  puts "👋"
+  puts "The command line options for Super Scaffolding have changed slightly:".yellow
+  puts "To use the original Super Scaffolding that you know and love, use the `crud` option.".yellow
+  show_usage
+
+end

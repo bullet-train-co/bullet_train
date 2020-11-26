@@ -1,0 +1,68 @@
+<div class="padded-lg">
+
+  <div class="element-box">
+
+    <a name="tangible_things"></a>
+    <h3 class="form-header">Scaffolding::CompletelyConcrete::TangibleThings</h3>
+    <div class="form-desc">TangibleThings are nested under <%= link_to 'CreativeConcepts', '#creative_concepts' %>.</div>
+
+    <h6>TangibleThing Collection Actions</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Method</th>
+          <th>Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fetch all TangibleThings within a CreativeConcept</td>
+          <td><code>GET</code></td>
+          <td><code><%= api_v1_creative_concept_scaffolding_completely_concrete_tangible_things_path(2) %></code></td>
+        </tr>
+        <tr>
+          <td>Create a new TangibleThing within a CreativeConcept</td>
+          <td><code>POST</code></td>
+          <td><code><%= api_v1_creative_concept_scaffolding_completely_concrete_tangible_things_path(2) %></code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h6>Individual TangibleThing Actions</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Method</th>
+          <th>Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Get all details of a TangibleThing</td>
+          <td><code>GET</code></td>
+          <td><code><%= api_v1_scaffolding_completely_concrete_tangible_thing_path(1) %></code></td>
+        </tr>
+        <tr>
+          <td>Update a TangibleThing</td>
+          <td><code>PATCH</code> or <code>PUT</code></td>
+          <td><code><%= api_v1_scaffolding_completely_concrete_tangible_thing_path(1) %></code></td>
+        </tr>
+        <tr>
+          <td>Delete a TangibleThing</td>
+          <td><code>DELETE</code></td>
+          <td><code><%= api_v1_scaffolding_completely_concrete_tangible_thing_path(1) %></code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h6>Example TangibleThing Object</h6>
+    <p>Whether you're receiving a list of TangibleThings or posting to update a TangibleThing, this is the structure you should expect and provide:</p>
+    <% creative_concept = FactoryBot.build(:creative_concept); creative_concept.id = 1 %>
+    <% tangible_thing = FactoryBot.build(:scaffolding_completely_concrete_tangible_thing); tangible_thing.id = 2; tangible_thing.creative_concept = creative_concept; %>
+    <pre><code><%= JSON.pretty_generate(Api::V1::Scaffolding::CompletelyConcrete::TangibleThingSerializer.new(tangible_thing).serializable_hash) %></code></pre>
+
+  </div>
+
+</div>

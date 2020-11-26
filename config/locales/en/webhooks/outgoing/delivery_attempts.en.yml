@@ -1,0 +1,29 @@
+en:
+  breadcrumbs:
+    delivery_attempts: Delivery Attempts
+    webhooks_outgoing_delivery_attempts: Delivery Attempts
+  webhooks/outgoing/delivery_attempts:
+    label: &label Delivery Attempts
+    breadcrumbs:
+      label: *label
+    header: Delivery Attempts
+    delivery_header: '%{delivery_name} Delivery Attempts'
+    description: Below is a list of individual attempts to deliver this webhook event.
+    show:
+      header: Delivery Attempt Details
+      description: Below are all the available details for this individual attempt to deliver the webhook event.
+    fields:
+      attempt_number:
+        heading: Attempt Number
+      response_code:
+        heading: HTTP Response Code
+      response_body:
+        heading: Response Body
+      response_message:
+        heading: Response Message
+      error_message:
+        heading: Error Message
+      created_at:
+        heading: Attempted At
+      successful:
+        heading: Successful?

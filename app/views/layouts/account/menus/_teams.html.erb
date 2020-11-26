@@ -1,0 +1,27 @@
+<% mobile ||= false %>
+<li class="has-sub-menu">
+  <%= link_to main_app.account_team_path(current_team), class: 'team-menu' do %>
+    <div class="icon-w">
+      <i class="icon-people"></i>
+    </div>
+    <span><%= t('teams.navigation.label') %></span>
+  <% end %>
+  <% unless mobile %>
+  <div class="sub-menu-w">
+    <div class="sub-menu-header"><%= current_team.name %></div>
+    <div class="sub-menu-icon"><i class="icon-people"></i></div>
+    <div class="sub-menu-i">
+    <% end %>
+      <ul class="sub-menu">
+        <li><%= link_to t('menus.main.labels.team_members'), main_app.account_team_memberships_path(current_team) %></li>
+        <% if current_user.multiple_teams? %>
+          <li><%= link_to t('menus.main.labels.switch_teams'), main_app.account_teams_path %></li>
+        <% else %>
+          <li><%= link_to t('menus.main.labels.add_new_team'), main_app.new_account_team_path %></li>
+        <% end %>
+      </ul>
+    <% unless mobile %>
+    </div>
+  </div>
+  <% end %>
+</li>

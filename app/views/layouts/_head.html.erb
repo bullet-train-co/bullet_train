@@ -1,0 +1,29 @@
+<% if content_for? :title %>
+  <% yield :title %>
+<% elsif @title.present? %>
+  <title><%= @title %> | <%= t('application.name') %></title>
+<% else %>
+  <title><%= t('application.name') %></title>
+<% end %>
+
+<meta charset="utf-8" />
+<meta content="ie=edge" http-equiv="x-ua-compatible" />
+<meta content="<%= t('application.keywords') %>" name="keywords" />
+<meta content="<%= t('application.description') %>" name="description" />
+<meta content="width=device-width, initial-scale=1" name="viewport" />
+<meta name="turbolinks-cache-control" content="no-cache">
+<link href="<%= image_path('logo/favicon.png') %>" rel="shortcut icon" />
+<link href="<%= image_path('logo/logo-square-bg.png') %>" rel="apple-touch-icon" />
+
+<%= csrf_meta_tags %>
+
+<%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Rubik:300,400,500', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_include_tag 'https://js.stripe.com/v3/', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
+<% if cloudinary_enabled? %>
+<script src="//widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+<% end %>
+
+<% # put your application-specific additions below to avoid merge conflicts later. %>

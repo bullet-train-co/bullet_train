@@ -1,0 +1,18 @@
+<%= form_with(model: [:account, (@delivery unless delivery_attempt.persisted?), delivery_attempt], url: (delivery_attempt.persisted? ? account_webhooks_delivery_attempt_path(delivery_attempt) : account_webhooks_delivery_delivery_attempts_path(@delivery)), local: true) do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <%= render 'shared/forms/field', form: form, attribute: :name, field_type: :text_field, field_attributes: {autofocus: true} %>
+  <%= render 'shared/forms/field', form: form, attribute: :response_code, field_type: :text_field, field_attributes: {} %>
+
+  <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+  <div class="form-buttons-w">
+    <%= form.submit (form.object.persisted? ? t('webhooks/outgoing/delivery_attempts.buttons.update') : t('webhooks/outgoing/delivery_attempts.buttons.create')), class: "btn btn-primary" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:account, delivery_attempt], class: "btn btn-link" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:account, @delivery, :delivery_attempts], class: "btn btn-link" %>
+    <% end %>
+  </div>
+
+<% end %>

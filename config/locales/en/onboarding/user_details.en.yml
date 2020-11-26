@@ -1,0 +1,11 @@
+# if you're looking for form fields, they're namespaced within `user.yml` and `team.yml`.
+en:
+  onboarding: &onboarding
+    user_details:
+      buttons: &buttons
+        next: Next
+      edit:
+        header: Tell us about you
+        buttons: *buttons
+  account:
+    onboarding: *onboarding

@@ -1,0 +1,11 @@
+<div class="element-wrapper">
+  <h6 class="element-header"><%= @team.name_was %></h6>
+  <%= render 'shared/notices' %>
+  <div class="padded-lg">
+    <div class="element-box">
+      <h5 class="form-header"><%= t('teams.edit.header') %></h5>
+      <div class="form-desc"><%= t('teams.edit.description') %></div>
+      <%= render 'form', team: @team %>
+    </div>
+  </div>
+</div>

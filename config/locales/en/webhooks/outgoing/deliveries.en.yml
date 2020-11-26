@@ -1,0 +1,28 @@
+en:
+  webhooks/outgoing/deliveries:
+    label: &label Deliveries
+    breadcrumbs:
+      label: *label
+    header: Webhook Deliveries
+    endpoint_header: '%{endpoint_name} Deliveries'
+    description: Below is a list of webhooks we've recently issued to this endpoint.
+    show:
+      header: Webhook Delivery Details
+      description: Below are all the available details for the webhook event we attempted to deliver.
+    fields:
+      name:
+        heading: Description
+      event:
+        heading: Event
+      json_payload:
+        heading: JSON Payload
+      endpoint:
+        heading: Webhooks Endpoint
+      event_type:
+        heading: Event Type
+      created_at:
+        heading: Issued
+      delivered:
+        heading: Status
+      endpoint_url:
+        heading: Endpoint URL (at Time of Issue)

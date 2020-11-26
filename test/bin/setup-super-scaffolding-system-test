@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+rails g model TestSite team:references name:string url:text
+rails g model TestPage test_site:references name:string path:text
+rails g model Project team:references name:string description:text
+rails g model Projects::Deliverable project:references name:string description:text
+rails g model Objective projects_deliverable:references name:string description:text
+rails g model Personality::CharacterTrait objective:references name:string description:text
+rails g model Personality::Note character_trait:references name:string description:text
+rails g model Personality::Reactions::Response note:references name:string description:text
+
+bin/super-scaffold crud TestSite Team name:string url:string --sidebar=icon-globe-alt
+bin/super-scaffold crud TestPage TestSite name:text_field path:text_field
+bin/super-scaffold crud Project Team name:text_field description:trix_editor --sidebar=ti-settings
+bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
+bin/super-scaffold crud Objective Projects::Deliverable,Project,Team name:text_field description:trix_editor
+bin/super-scaffold crud Personality::CharacterTrait Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
+bin/super-scaffold crud Personality::Note Personality::CharacterTrait,Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
+bin/super-scaffold crud Personality::Reactions::Response Personality::Note,Personality::CharacterTrait,Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
+
+rake db:migrate
+rake db:test:prepare
+
+spring stop

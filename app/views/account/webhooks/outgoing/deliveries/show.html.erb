@@ -1,0 +1,61 @@
+<div class="element-wrapper">
+  <h6 class="element-header">Delivery of Event <code><%= @delivery.event.short_uuid %></code> to <%= @delivery.endpoint.name %></h6>
+  <%= render 'shared/notices' %>
+  <div class="padded-lg">
+    <div class="element-box element-box-show">
+      <h5 class="form-header"><%= t('webhooks/outgoing/deliveries.show.header') %></h5>
+      <div class="form-desc"><%= t('webhooks/outgoing/deliveries.show.description') %></div>
+
+      <div class="row">
+
+        <div class="form-group col-md-6">
+          <label class="col-form-label" for=""><%= t('webhooks/outgoing/deliveries.fields.event.heading') %></label>
+          <div>
+            <code><%= link_to @delivery.event.uuid, [:account, @delivery.event] %></code>
+          </div>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label class="col-form-label" for=""><%= t('webhooks/outgoing/delivery_attempts.fields.successful.heading') %></label>
+          <div>
+            <%= render 'account/webhooks/outgoing/deliveries/success_indicator', delivery: @delivery %>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="form-group">
+        <label class="col-form-label" for=""><%= t('webhooks/outgoing/deliveries.fields.endpoint.heading') %></label>
+        <div>
+          <%= link_to @delivery.endpoint.name, [:account, @delivery.endpoint] %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-form-label" for=""><%= t('webhooks/outgoing/deliveries.fields.endpoint.heading_url') %></label>
+        <div>
+          <code><%= @delivery.endpoint_url %></code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-form-label" for=""><%= t('webhooks/outgoing/deliveries.fields.json_payload.heading') %></label>
+        <div>
+          <pre class="code-block"><%= JSON.pretty_generate(@delivery.event.payload) %></pre>
+        </div>
+      </div>
+
+      <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+      <div class="form-buttons-w">
+        <%= link_to t('global.buttons.edit'), [:edit, :account, @delivery], class: "btn #{first_btn_primary}" if can? :edit, @delivery %>
+        <%= link_to t('global.buttons.back'), [:account, @endpoint, :deliveries], class: "btn #{first_btn_primary}" %>
+      </div>
+
+    </div>
+
+    <%# 🚅 super scaffolding will insert new children above this line. %>
+    <%= render 'account/webhooks/outgoing/delivery_attempts/index', delivery_attempts: @delivery.delivery_attempts.newest.first(100) %>
+
+  </div>
+</div>

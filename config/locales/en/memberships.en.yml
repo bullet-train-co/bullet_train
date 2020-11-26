@@ -1,0 +1,65 @@
+en:
+  memberships: &memberships
+    label: &label Team Members
+    singular: Team Member
+    breadcrumbs:
+      label: *label
+    buttons: &buttons
+      edit: Settings
+      show: Details
+      update: Update Membership
+      demote: Demote from Admin
+      promote: Promote to Admin
+      destroy: Remove from Team
+      destroy_own: Leave This Team
+      reinvite: Re-Invite to Team
+      confirmations:
+        destroy: Are you sure you want to remove %{membership_name} from %{team_name}?
+        destroy_own: Are you sure you want to remove yourself from %{team_name}? You won't be able to undo this.
+        reinvite: Are you sure you want to re-invite %{membership_name} to %{team_name}?
+    fields: &fields
+      user_first_name:
+        name: &user_first_name First Name
+        label: *user_first_name
+      user_last_name:
+        name: &user_last_name Last Name
+        label: *user_last_name
+      user_profile_photo_id:
+        name: &user_profile_photo_id Profile Photo
+        label: *user_profile_photo_id
+    index:
+      section: "%{team_name} Team Members"
+      header: Team Members
+      header_tombstone: Former Team Members
+      description: The following people are members of your team. You can also invite new team members.
+      description_tombstone: The following people have been removed from %{team_name}, but you can still manage their profile and reassign their assignments to other team members.
+      buttons: *buttons
+    edit:
+      section: "%{membership_name} on %{team_name}"
+      header: Update Membership Settings
+      description: You can edit the settings for %{memberships_possessive} membership on %{team_name} below.
+    show:
+      section: "%{memberships_possessive} Membership on %{team_name}"
+      header: Membership Details
+      invitation_header: Invitation Details
+      tombstone_header: Former Team Member
+      description: The following are the details for %{memberships_possessive} Membership on %{team_name}.
+      buttons: *buttons
+    form:
+      grant_privileges_of: Grant Privileges of %{role_name}
+      buttons: *buttons
+    notifications:
+      updated: Membership successfully updated.
+      destroyed: That user has been successfully removed from the team.
+      no_members: You don't have any other team members yet! Get started by sending an invitation.
+      cant_demote: Sorry, you can't demote the last admin on a team. Please make someone else an admin first.
+      cant_remove: Sorry, you can't remove the last admin on a team. Please make someone else an admin first.
+      you_removed_yourself: You've successfully removed yourself from %{team_name}.
+      reinvited: The user has been successfully re-invited.  They will receive an email to rejoin the team.
+  account:
+    memberships: *memberships
+  activerecord:
+    attributes:
+      memberships:
+        user_first_name: *user_first_name
+        user_last_name: *user_last_name

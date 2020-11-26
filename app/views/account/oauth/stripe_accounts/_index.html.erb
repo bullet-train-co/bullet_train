@@ -1,0 +1,32 @@
+<div class="element-box">
+  <h5 class="form-header"><%= t('oauth/stripe_accounts.header') %></h5>
+  <div class="form-desc"><%= t('oauth/stripe_accounts.description', team_name: @team.name) %></div>
+  <div class="table-responsive">
+    <% if stripe_accounts.count > 0 %>
+      <table class="table table-lightborder">
+        <thead>
+          <tr>
+            <th><%= t('oauth/stripe_accounts.fields.name.heading') %></th>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% stripe_accounts.each do |stripe_account| %>
+          <tr>
+            <td><%= link_to stripe_account.name, [:account, stripe_account] %></td>
+            <%# 🚅 super scaffolding will insert new fields above this line. %>
+            <td class="text-right">
+              <%= link_to t('oauth/stripe_accounts.buttons.edit'), [:edit, :account, stripe_account], class: 'btn btn-link btn-sm' if can? :edit, stripe_account %>
+              <%= link_to t('oauth/stripe_accounts.buttons.destroy'), [:account, stripe_account], method: :delete, data: { confirm: t('global.confirm_message') }, class: 'btn btn-link btn-sm' if can? :destroy, stripe_account %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <%= link_to t('oauth/stripe_accounts.buttons.new'), [:new, :account, @team, :oauth, :stripe_account], class: 'btn btn-primary' if can? :create, @team.oauth_stripe_accounts.new %>
+
+  </div>
+</div>

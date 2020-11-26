@@ -1,0 +1,17 @@
+<%= form_with(model: [:account, team], local: true) do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <%= render 'shared/fields/text_field', form: form, method: :name, options: {autofocus: true} %>
+
+  <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+  <div class="form-buttons-w">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "btn btn-primary" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), account_team_path(team), class: "btn btn-link" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), account_teams_path, class: "btn btn-link" %>
+    <% end %>
+  </div>
+
+<% end %>

@@ -1,0 +1,48 @@
+<div class="element-wrapper">
+  <h6 class="element-header"><%= t('.section') %></h6>
+  <%= render 'shared/notices' %>
+  <div class="padded-lg">
+    <div class="element-box element-box-show">
+      <h5 class="form-header"><%= t('.header') %></h5>
+      <div class="form-desc"><%= t('.description') %></div>
+
+      <div class="form-group">
+        <label class="col-form-label" for=""><%= t('.fields.name.heading') %></label>
+        <div>
+          <%= @endpoint.name %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-form-label" for=""><%= t('.fields.url.heading') %></label>
+        <div>
+          <code><%= @endpoint.url %></code>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-form-label" for=""><%= t('.fields.event_types.heading') %></label>
+        <div>
+          <% if @endpoint.event_types.any? %>
+            <%= @endpoint.event_types.map { |event_type| "<code>#{event_type.name}</code>" }.to_sentence.html_safe %>
+          <% else %>
+            All
+          <% end %>
+        </div>
+      </div>
+
+      <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+      <div class="form-buttons-w">
+        <%= link_to t('.buttons.edit'), [:edit, :account, @endpoint], class: "btn #{first_btn_primary}" if can? :edit, @endpoint %>
+        <%= link_to t('.buttons.destroy'), [:account, @endpoint], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@endpoint)) }, class: "btn #{first_btn_primary}" if can? :destroy, @endpoint %>
+        <%= link_to t('global.buttons.back'), [:account, @team, :webhooks, :outgoing, :endpoints], class: "btn #{first_btn_primary}" %>
+      </div>
+
+    </div>
+
+    <%# 🚅 super scaffolding will insert new children above this line. %>
+    <%= render 'account/webhooks/outgoing/deliveries/index', deliveries: @endpoint.deliveries.newest.first(100) %>
+
+  </div>
+</div>

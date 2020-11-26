@@ -1,0 +1,8 @@
+require("./buttons")
+require("./ckeditor")
+require("./cloudinary_image")
+require("./date_field")
+require("./date_and_time_field")
+require("./phone_field")
+require("./select")
+require("./trix_editor")

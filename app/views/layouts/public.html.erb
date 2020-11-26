@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'layouts/head' %>
+    <%= stylesheet_link_tag 'public', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+<% @body_class ||= nil %>
+<body class="<%= @body_class %>">
+
+  <div class="all-wrapper">
+
+    <!-- is there some way we want to display these? -->
+    <div style="display: none;">
+    <div class="alert alert-warning"><%= notice %></div>
+    <div class="alert alert-danger"><%= alert %></div>
+    </div>
+
+    <%= render "public/shared/navigation" %>
+    <%= yield %>
+
+
+    <div class="footer-w">
+      <div class="fade3">
+      </div>
+      <div class="os-container">
+        <div class="footer-i">
+          <div class="row">
+            <div class="col-sm-7 col-lg-4 b-r padded">
+              <div class="logo-element">
+              </div>
+              <h3 class="heading-big"><%= t('application.name') %></h3>
+              <h6 class="heading-small"><%= t('application.tagline') %></h6>
+              <p><%= t('application.description') %></p>
+            </div>
+            <div class="col-sm-5 col-lg-8">
+              <div class="row">
+                <div class="col-lg-4 b-r padded">
+                  <h6 class="heading-small"><%= t('.developed_by') %></h6>
+                  <p><a href="https://twitter.com/andrewculver"><%= t('global.creator') %></a></p>
+                </div>
+                <div class="col-lg-4 b-r padded">
+                  <h6 class="heading-small"><%= t('.made_with_love') %></h6>
+                  <p><%= t('.location') %></p>
+                </div>
+                <div class="col-lg-4 padded">
+                  <h6 class="heading-small"><%= t('.follow_us') %></h6>
+                  <ul class="social-links">
+                    <li><a href="https://twitter.com/bullettrainco"><i class="icon-social-twitter"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="deep-footer">&copy; <%= t('.all_rights_reserved', year: Date.today.year) %></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

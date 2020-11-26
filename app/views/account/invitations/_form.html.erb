@@ -1,0 +1,45 @@
+<%= form_with(model: [:account, (@team unless invitation.persisted?), invitation], class: 'invitation-form', local: true) do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <%= render 'shared/fields/email_field', form: form, method: :email, options: {autofocus: true} %>
+
+  <%= form.fields_for :membership do |membership_form| %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= render 'shared/fields/text_field', form: membership_form, method: :user_first_name %>
+      </div>
+      <div class="col-md-6">
+        <%= render 'shared/fields/text_field', form: membership_form, method: :user_last_name %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if can? :manage, @team %>
+    <%= form.fields_for :membership do |f| %>
+      <%= f.hidden_field :team_id, value: @team.id %>
+      <% Role.order(:display_order).each do |role| %>
+        <% if current_membership.can_manage_role?(role) %>
+          <div class="form-check">
+            <label class="form-check-label">
+              <%= f.check_box :role_ids, {multiple: true, class: "form-check-input"}, role.id, nil %>
+              <b><%= t('invitations.form.invite_as', role_name: t("roles.labels.#{role.key}")) %></b>
+              <div class='text-muted'><%= t("roles.descriptions.#{role.key}") %></div>
+            </label>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+  <div class="form-buttons-w">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "btn btn-primary" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), account_invitation_path(invitation), class: "btn btn-link" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), params[:cancel_path] || account_team_invitations_path(@team), class: "btn btn-link" %>
+    <% end %>
+  </div>
+
+<% end %>

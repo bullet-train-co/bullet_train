@@ -1,0 +1,57 @@
+<% content_for :preheader do %>
+<%= t('.thanks', product_name: t('application.name')) %>
+<% end %>
+
+<%= t('.top_description', name: name, product_name: t('application.name')) %>
+<!-- Action -->
+<table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td align="center">
+      <!-- Border based button https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center">
+            <table border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td>
+                  <a href="{{action_url}}" class="button button--" target="_blank"><%= t('.labels.next') %></a>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<p><%= t('.labels.info') %></p>
+<table class="attributes" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="attributes_content">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="attributes_item"><strong><%= t('.labels.login') %></strong> {{login_url}}</td>
+        </tr>
+        <tr>
+          <td class="attributes_item"><strong><%= t('.labels.info') %></strong> {{username}}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<p><%= t('.labels.trial', trial_length: trial_length) %></p>
+<table class="attributes" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td class="attributes_content">
+      <table width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td class="attributes_item"><strong><%= t('.labels.start_date') %></strong> {{trial_start_date}}</td>
+        </tr>
+        <tr>
+          <td class="attributes_item"><strong><%= t('.labels.end_date') %></strong> {{trial_end_date}}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<%= t('.bottom_desciption', support_email: support_email, live_chat_url: live_chat_url, product_name: t('application.name'), help_url: help_url) %>

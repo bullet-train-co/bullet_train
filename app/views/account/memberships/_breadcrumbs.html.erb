@@ -1,0 +1,10 @@
+<% membership ||= @membership %>
+<% team ||= @team || membership&.team %>
+<%= render 'account/teams/breadcrumbs', team: team %>
+<li class="breadcrumb-item">
+  <%= breadcrumb_link_to t('.label'), [:account, team, :memberships] %>
+</li>
+<% if membership&.persisted? %>
+  <li class="breadcrumb-item"><%= link_to membership.label_string, [:account, membership] %></li>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'memberships' %>

@@ -1,0 +1,3 @@
+namespace :cron do
+
+end

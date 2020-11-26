@@ -1,0 +1,29 @@
+<%= form_with(model: tangible_thing, url: (tangible_thing.persisted? ? [:account, tangible_thing] : [:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things]), local: true) do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <%# 🚅 skip this section when scaffolding. %>
+  <%= render 'shared/fields/text_field', form: form, method: :text_field_value, options: {autofocus: true} %>
+  <%= render 'shared/fields/buttons', form: form, method: :button_value %>
+  <%= render 'shared/fields/cloudinary_image', form: form, method: :cloudinary_image_value %>
+  <%= render 'shared/fields/date_field', form: form, method: :date_field_value %>
+  <%= render 'shared/fields/email_field', form: form, method: :email_field_value %>
+  <%= render 'shared/fields/password_field', form: form, method: :password_field_value %>
+  <%= render 'shared/fields/phone_field', form: form, method: :phone_field_value %>
+  <%= render 'shared/fields/select', form: form, method: :select_value %>
+  <%= render 'shared/fields/super_select', form: form, method: :super_select_value %>
+  <%= render 'shared/fields/text_area', form: form, method: :text_area_value %>
+  <%= render 'shared/fields/trix_editor', form: form, method: :trix_editor_value %>
+  <%= render 'shared/fields/ckeditor', form: form, method: :ckeditor_value %>
+  <%# 🚅 stop any skipping we're doing now. %>
+  <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+  <div class="form-buttons-w">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "btn btn-primary" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:account, tangible_thing], class: "btn btn-link" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things], class: "btn btn-link" %>
+    <% end %>
+  </div>
+
+<% end %>

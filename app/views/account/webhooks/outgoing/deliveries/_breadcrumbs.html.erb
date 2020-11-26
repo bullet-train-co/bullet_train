@@ -1,0 +1,10 @@
+<% delivery ||= @delivery %>
+<% endpoint ||= @endpoint || delivery&.endpoint %>
+<%= render 'account/webhooks/outgoing/endpoints/breadcrumbs', endpoint: endpoint %>
+<li class="breadcrumb-item">
+  <%= breadcrumb_link_to t('.label'), [:account, endpoint, :deliveries] %>
+</li>
+<% if delivery&.persisted? %>
+  <li class="breadcrumb-item"><%= link_to delivery.name, [:account, delivery] %></li>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'webhooks/outgoing/deliveries' %>

@@ -1,0 +1,24 @@
+<%= form_with(model: scaffolding_completely_concrete_tangible_things_reassignment, url: (scaffolding_completely_concrete_tangible_things_reassignment.persisted? ? [:account, scaffolding_completely_concrete_tangible_things_reassignment] : [:account, @membership, :reassignments_scaffolding_completely_concrete_tangible_things_reassignments]), local: true) do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <%= render 'shared/fields/super_select', form: form, method: :membership_ids, options: {autofocus: true},
+    html_options: {multiple: true, class: can_invite? ? 'accepts-new' : ''},
+    choices: memberships_as_select_options(scaffolding_completely_concrete_tangible_things_reassignment.valid_memberships, form.object.membership_ids) do %>
+    <% if can_invite? %>
+      <% content_for :after_help do %>
+        <%= t('memberships/reassignments/scaffolding_completely_concrete_tangible_things_reassignments.fields.membership_ids.invite_help').html_safe %>
+      <% end %>
+    <% end %>
+  <% end %>
+  <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+  <div class="form-buttons-w">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "btn btn-primary" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:account, scaffolding_completely_concrete_tangible_things_reassignment], class: "btn btn-link" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:account, @membership, :reassignments_scaffolding_completely_concrete_tangible_things_reassignments], class: "btn btn-link" %>
+    <% end %>
+  </div>
+
+<% end %>

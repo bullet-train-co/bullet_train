@@ -1,0 +1,11 @@
+<div class="element-wrapper">
+  <h6 class="element-header"><%= t('webhooks/outgoing/delivery_attempts.new.header') %></h6>
+  <%= render 'shared/notices' %>
+  <div class="padded-lg">
+    <div class="element-box">
+      <h5 class="form-header"><%= t('webhooks/outgoing/delivery_attempts.new.form_header') %></h5>
+      <div class="form-desc"><%= t('webhooks/outgoing/delivery_attempts.new.description') %></div>
+      <%= render 'form', delivery_attempt: @delivery_attempt %>
+    </div>
+  </div>
+</div>

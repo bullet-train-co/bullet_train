@@ -1,0 +1,30 @@
+<% @title = t('.header') %>
+<div class="all-wrapper menu-side with-pattern">
+  <div class="auth-box-w wider">
+    <%= render 'devise/shared/logo' %>
+
+    <h4 class="auth-header"><%= @title %></h4>
+
+    <% within_fields_namespace(:self) do %>
+    <%= form_for(@user, url: account_onboarding_user_email_path(@user), method: :put) do |f| %>
+      <% if @email_taken %>
+        <div class="alert alert-danger" role="alert">
+          <%= t('.email_taken') %>
+        </div>
+      <% else %>
+        <div class="alert alert-warning" role="alert">
+          <%= t('.description') %>
+        </div>
+        <%= render 'shared/forms/errors', form: f %>
+      <% end %>
+
+      <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true} %>
+
+      <div class="buttons-w">
+        <%= f.submit t('.buttons.next'), class: "btn btn-primary" %>
+        <%= link_to t('menus.main.labels.logout'), main_app.destroy_user_session_path, method: 'delete', class: "btn btn-link" %>
+      </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>

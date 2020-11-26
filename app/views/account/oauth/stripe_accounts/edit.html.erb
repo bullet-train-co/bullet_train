@@ -1,0 +1,11 @@
+<div class="element-wrapper">
+  <h6 class="element-header"><%= @stripe_account.name_was %></h6>
+  <%= render 'shared/notices' %>
+  <div class="padded-lg">
+    <div class="element-box">
+      <h5 class="form-header"><%= t('oauth/stripe_accounts.edit.header') %></h5>
+      <div class="form-desc"><%= t('oauth/stripe_accounts.edit.description') %></div>
+      <%= render 'form', stripe_account: @stripe_account %>
+    </div>
+  </div>
+</div>

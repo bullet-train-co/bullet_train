@@ -1,0 +1,64 @@
+<div class="padded-lg">
+
+  <div class="element-box">
+
+    <a name="teams"></a>
+    <h3 class="form-header">Teams</h3>
+
+    <h6>Team Collection Actions</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Method</th>
+          <th>Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fetch all Teams</td>
+          <td><code>GET</code></td>
+          <td><code><%= api_v1_teams_path %></code></td>
+        </tr>
+        <tr>
+          <td>Create a new Team</td>
+          <td colspan="2">You can't currently do this via the API.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h6>Individual Team Actions</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Method</th>
+          <th>Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Get all details of a Team</td>
+          <td><code>GET</code></td>
+          <td><code><%= api_v1_team_path(1) %></code></td>
+        </tr>
+        <tr>
+          <td>Update a Team</td>
+          <td><code>PATCH</code> or <code>PUT</code></td>
+          <td><code><%= api_v1_team_path(1) %></code></td>
+        </tr>
+        <tr>
+          <td>Delete a Team</td>
+          <td colspan="2">You can't currently do this via the API.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h6>Example Team Object</h6>
+    <p>Whether you're receiving a list of Teams or posting to update a Team, this is the structure you should expect and provide:</p>
+    <% team = FactoryBot.build(:team); team.id = 1 %>
+    <pre><code><%= JSON.pretty_generate(Api::V1::TeamSerializer.new(team).serializable_hash) %></code></pre>
+
+  </div>
+
+</div>

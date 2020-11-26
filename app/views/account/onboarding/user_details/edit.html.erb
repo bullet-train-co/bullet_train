@@ -1,0 +1,61 @@
+<% @title = t('.header') %>
+<div class="all-wrapper menu-side with-pattern">
+  <div class="auth-box-w wider">
+    <%= render 'devise/shared/logo' %>
+
+    <h4 class="auth-header"><%= @title %></h4>
+
+    <% within_fields_namespace(:self) do %>
+    <%= form_for(@user, url: account_onboarding_user_detail_path(@user), method: :put) do |f| %>
+      <%= render 'shared/forms/errors', form: f %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= render 'shared/fields/text_field', form: f, method: :first_name, options: {autofocus: true} %>
+        </div>
+        <div class="col-sm-6">
+          <%= render 'shared/fields/text_field', form: f, method: :last_name %>
+        </div>
+      </div>
+
+      <% # only edit the team name if this user is an admin and they are the first user. %>
+      <% # yes, that's redundant. %>
+      <% if can?(:edit, f.object.current_team) && f.object.current_team.users.count == 1 %>
+        <%= f.fields_for :current_team do |tf| %>
+          <%= render 'shared/fields/text_field', form: tf, method: :name %>
+        <% end %>
+      <% end %>
+
+      <%= render 'shared/fields/select', form: f, method: :time_zone, choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone) %>
+
+      <div class="buttons-w">
+        <%= f.submit t('.buttons.next'), class: "btn btn-primary" %>
+      </div>
+    <% end %>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(document).on('turbolinks:load', function() {
+
+    // generate a mapping of js timezones compared to rails timezones.
+    var jsTimezoneMapping = {
+      <% ActiveSupport::TimeZone::MAPPING.each do |key, value| %>
+      "<%= value.html_safe %>": "<%= key.html_safe %>",
+      <% end %>
+    }
+
+    // figure out the rails timezone value.
+    var railsValue = jsTimezoneMapping[jstz.determine().name()];
+
+    // set the form accordingly.
+    var $option = $("#user_time_zone option[value=\"" + railsValue + "\"]")
+    $option.prop('selected', true);
+
+    // update the select2 as well. is there a better way to handle this?
+    // why don't _they_ handle this for us?
+    $("#select2-user_time_zone-container").attr('title', $option.text());
+    $("#select2-user_time_zone-container").text($option.text());
+
+  });
+</script>

@@ -1,0 +1,150 @@
+en:
+  scaffolding/completely_concrete/tangible_things: &tangible_things
+    label: &label Tangible Things
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: icon-puzzle
+    buttons: &buttons
+      new: Add New Tangible Thing
+      create: Create Tangible Thing
+      edit: Edit Tangible Thing
+      update: Update Tangible Thing
+      destroy: Remove Tangible Thing
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{tangible_thing_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      # 🚅 skip this section when scaffolding.
+      text_field_value:
+        name: &text_field_value Text Field Value
+        label: *text_field_value
+        heading: *text_field_value
+      button_value:
+        name: &button_value Button Value
+        label: *button_value
+        heading: *button_value
+        options:
+          one: One
+          two: Two
+          three: Three
+      cloudinary_image_value:
+        name: &cloudinary_image_value Cloudinary Image Value
+        label: *cloudinary_image_value
+        heading: *cloudinary_image_value
+      date_field_value:
+        name: &date_field_value Date Field Value
+        label: *date_field_value
+        heading: *date_field_value
+      email_field_value:
+        name: &email_field_value Email Field Value
+        label: *email_field_value
+        heading: *email_field_value
+      password_field_value:
+        name: &password_field_value Password Field Value
+        label: *password_field_value
+        heading: *password_field_value
+      phone_field_value:
+        name: &phone_field_value Phone Field Value
+        label: *phone_field_value
+        heading: *phone_field_value
+      select_value:
+        name: &select_value Select Value
+        label: *select_value
+        heading: *select_value
+        options:
+          one: One
+          two: Two
+          three: Three
+      super_select_value:
+        name: &super_select_value Super Select Value
+        label: *super_select_value
+        heading: *super_select_value
+        options:
+          one: One
+          two: Two
+          three: Three
+      text_area_value:
+        name: &text_area_value Text Area Value
+        label: *text_area_value
+        heading: *text_area_value
+      trix_editor_value:
+        name: &trix_editor_value Trix Editor Value
+        label: *trix_editor_value
+        heading: *trix_editor_value
+      ckeditor_value:
+        name: &ckeditor_value Ckeditor Value
+        label: *ckeditor_value
+        heading: *ckeditor_value
+      # 🚅 stop any skipping we're doing now.
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        name: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        name: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    index:
+      section: "%{creative_concepts_possessive} Tangible Things"
+      contexts:
+        scaffolding/absolutely_abstract/creative_concept:
+          header: Tangible Things
+          description: Below is a list of Tangible Things that have been added to %{creative_concept_name}. You can manage them with the options below.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{tangible_thing_name}"
+      header: Tangible Thing Details
+      description: Below are the details we have for %{tangible_thing_name}. You'll also find options for updating these details or removing %{tangible_thing_name} from %{creative_concept_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Tangible Thing for %{creative_concept_name}"
+      header: New Tangible Thing Details
+      description: Please provide the details of the new Tangible Thing you'd like to add to %{creative_concept_name}.
+      form: *form
+    edit:
+      section: "%{tangible_thing_name}"
+      header: Edit Tangible Thing Details
+      description: You can update the details or settings for %{tangible_thing_name} below.
+      form: *form
+    notifications:
+      created: Tangible Thing was successfully created.
+      updated: Tangible Thing was successfully updated.
+      destroyed: Tangible Thing was successfully destroyed.
+  account:
+    # 🚅 skip this section when scaffolding.
+    scaffolding:
+      completely_concrete:
+        tangible_things: *tangible_things
+    # 🚅 stop any skipping we're doing now.
+    # 🚅 super scaffolding will insert the export for the locale view helper here.
+  activerecord:
+    attributes:
+      scaffolding/completely_concrete/tangible_thing:
+        # 🚅 skip this section when scaffolding.
+        text_field_value: *text_field_value
+        button_value: *button_value
+        cloudinary_image_value: *cloudinary_image_value
+        date_field_value: *date_field_value
+        email_field_value: *email_field_value
+        password_field_value: *password_field_value
+        phone_field_value: *phone_field_value
+        select_value: *select_value
+        super_select_value: *super_select_value
+        text_area_value: *text_area_value
+        trix_editor_value: *trix_editor_value
+        ckeditor_value: *ckeditor_value
+        # 🚅 stop any skipping we're doing now.
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

@@ -1,0 +1,22 @@
+<% yield %>
+
+<%
+options ||= {}
+options[:id] ||= id_for(form, method)
+options[:class] = "form-control single-daterange #{options[:class]}".strip
+options[:value] = form.object.send(method)&.strftime('%m/%d/%Y')
+other_options ||= {}
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div class="date-input">
+      <%= form.text_field method, options %>
+      <% unless options[:disabled] %>
+      <button class="clear">
+        <i class="ti-trash"></i>
+      </button>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

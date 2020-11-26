@@ -1,0 +1,47 @@
+<div class="element-box">
+  <h5 class="form-header"><%= t('webhooks/outgoing/deliveries.header') %></h5>
+  <div class="form-desc"><%= raw t('webhooks/outgoing/deliveries.description') %></div>
+  <div class="table-responsive">
+    <% if deliveries.count > 0 %>
+      <table class="table table-lightborder" data-class="Webhooks::Outgoing::Delivery">
+        <thead>
+          <tr>
+            <th><%= t('webhooks/outgoing/deliveries.fields.event.heading') %></th>
+            <th><%= t('webhooks/outgoing/deliveries.fields.event.heading_type') %></th>
+            <th class="text-center"><%= t('webhooks/outgoing/deliveries.fields.delivered.heading') %></th>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th><%= t('webhooks/outgoing/deliveries.fields.created_at.heading') %></th>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% deliveries.each do |delivery| %>
+          <tr data-id="<%= delivery.id %>">
+            <tr
+              data-class="Webhooks::Outgoing::Delivery"
+              data-id="<%= delivery.id %>"
+              data-updated="<%= delivery.updated_at.to_i %>"
+              <%= "data-progressing=true" if delivery.still_attempting? %>
+            >
+            <td><code><%= link_to delivery.event.short_uuid, [:account, delivery] %></code></td>
+            <td><code><%= delivery.event.event_type.name %></code></td>
+            <td class="text-center">
+              <%= render 'account/webhooks/outgoing/deliveries/success_indicator', delivery: delivery %>
+            </td>
+            <%# 🚅 super scaffolding will insert new fields above this line. %>
+            <td><%= display_date_and_time(delivery.created_at) %></td>
+            <td class="text-right">
+              <%= link_to t('global.buttons.details'), [:account, delivery], class: 'btn btn-link btn-sm' if can? :show, delivery %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      No webhooks issued yet.
+    <% end %>
+
+    <%= link_to t('webhooks/outgoing/deliveries.buttons.new'), [:new, :account, @endpoint, :delivery], class: 'btn btn-primary' if can? :create, @endpoint.deliveries.new %>
+
+  </div>
+</div>

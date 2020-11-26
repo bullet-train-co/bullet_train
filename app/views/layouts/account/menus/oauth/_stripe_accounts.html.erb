@@ -1,0 +1,10 @@
+<% if can? :read, current_team.oauth_stripe_accounts.new %>
+  <li>
+    <%= link_to main_app.account_team_oauth_stripe_accounts_path(current_team) do %>
+      <div class="icon-w">
+        <i class="ti-money"></i>
+      </div>
+      <span><%= t('stripe_connect') %></span>
+    <% end %>
+  </li>
+<% end %>

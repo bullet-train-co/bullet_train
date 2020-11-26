@@ -1,0 +1,69 @@
+en:
+  invitations: &invitations
+    label: &label Invitations
+    breadcrumbs:
+      label: *label
+    buttons: &buttons
+      new: Invite a New Team Member
+      create: Create Invitation
+      update: Update Invitation
+      destroy: Cancel
+      join_team: 'Join %{team_name}'
+      logout: 'Logout'
+      confirmations:
+        destroy: Are you sure you want cancel the invitation to %{invitation_name}? The invitation they've received will no longer work. This can't be undone.
+    fields: &fields
+      email:
+        name: &email Email Address
+        label: *email
+        heading: *email
+      roles: &role_ids
+        name: &roles Special Privileges
+        label: *roles
+        heading: *roles
+      role_ids: *role_ids
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        name: &created_at Sent
+        heading: *created_at
+    index:
+      section: "Invitations for %{team_name}"
+      header: Team Member Invitations
+      description: We've sent the following invitations.
+      fields: *fields
+      buttons: *buttons
+    show:
+      join_team: 'Join %{team_name}'
+      header: Team Invitation
+      has_invited: "<b>%{user_name}</b> has invited you to join %{team_name}."
+      alert: "This invitation was emailed to <b>%{invitation_email}</b>, but you're currently signed in as <b>%{user_email}</b>."
+      you_can: "You can either:"
+      accept_the_invitation: "Accept the invitation below and you'll join the team as <b>%{user_email}</b>."
+      sign_out: "Sign out below, re-click the link in your email, and either sign into another account or create a new account."
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      invite_as: 'Invite as %{role_name}'
+      buttons: *buttons
+    new:
+      section: New Invitation for %{team_name}
+      header: New Invitation Details
+      description: We'll email them a link where they can sign up to join your team.
+      form: *form
+    notifications:
+      edit_message: We don't support editing invitations because it introduces security problems. Please remove and recreate them.
+      welcome: 'Welcome to %{team_name}!'
+      created: 'Invitation was successfully created.'
+      updated: 'Invitation was successfully updated.'
+      destroyed: 'Invitation was successfully destroyed.'
+    values:
+      name: 'Invitation to Join %{team_name}'
+  account:
+    invitations: *invitations
+  activerecord:
+    attributes:
+      invitation:
+        email: *email
+        role_ids: *roles
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at

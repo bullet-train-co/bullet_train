@@ -1,0 +1,43 @@
+<div class="element-wrapper">
+  <h6 class="element-header"><%= t('.section') %></h6>
+  <%= render 'shared/notices' %>
+  <div class="padded-lg">
+    <div class="element-box">
+      <h5 class="form-header"><%= t('.header') %></h5>
+      <div class="form-desc"><%= t('.description') %></div>
+      <div class="table-responsive">
+        <table class="table table-lightborder">
+          <thead>
+            <tr>
+              <th><%= t('invitations.fields.email.heading') %></th>
+              <th><%= t('invitations.fields.roles.heading') %></th>
+              <th class="text-right" colspan="3"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @invitations.each do |invitation| %>
+              <tr>
+                <td><%= invitation.email %></td>
+                <td>
+                  <% if invitation.roles.any? %>
+                    <%= invitation.roles.order(:display_order).map { |role| t("roles.labels.#{role.key}") }.to_sentence %>
+                  <% else %>
+                    <%= t("roles.labels.none") %>
+                  <% end %>
+                </td>
+                <td class="text-right">
+                  <%= link_to t('.buttons.destroy'), [:account, invitation], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(invitation)) }, class: 'btn btn-link btn-sm' if can? :destroy, invitation %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+        <% if can? :create, Invitation.new(team: @team) %>
+          <%= link_to t('.buttons.new'), new_account_team_invitation_path(@team), class: 'btn btn-primary' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+</div>

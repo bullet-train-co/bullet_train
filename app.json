@@ -1,0 +1,23 @@
+{
+  "name": "New Bullet Train App",
+  "description": "The Ruby on Rails SaaS-in-a-Box",
+  "repository": "https://github.com/bullet-train-co/bullet-train",
+  "logo": "https://bullettrain.co/assets/logo/logo-square-bg.png",
+  "keywords": ["ruby", "rails"],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "hobby"
+    },
+    "worker": {
+      "quantity": 1,
+      "size": "hobby"
+    }
+  },
+  "addons": [
+    "heroku-postgresql:dev",
+    "mailgun:starter",
+    "sentry:free",
+    "heroku-redis:free"
+  ]
+}

@@ -1,0 +1,76 @@
+en:
+  webhooks/outgoing/endpoints: &endpoints
+    label: &label Webhooks
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+    buttons: &buttons
+      new: Add New Endpoint
+      create: Create Endpoint
+      edit: Edit Endpoint
+      update: Update Endpoint Configuration
+      destroy: Remove Endpoint
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        destroy: Are you sure you want to remove %{endpoint_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      name:
+        name: &name Name
+        label: *name
+        heading: *name
+      url:
+        name: &url URL
+        label: *url
+        heading: *url
+      event_types: &event_type_ids
+        name: &event_types Event Types to Deliver
+        label: Event Types Delivered
+        heading: *event_types
+      event_type_ids: *event_type_ids
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        name: &created_at Added
+        heading: *created_at
+    index:
+      section: '%{team_name} Endpoints'
+      header: Webhook Endpoints
+      description: Below is a list of external endpoints we will try to deliver webhooks to.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{endpoint_name}"
+      header: Webhooks Endpoint Configuration
+      description: Below are the current configuration details for this webhooks endpoint.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+    new:
+      section: New Endpoint
+      header: New Webhooks Endpoint Configuration
+      description: You can add a new webhooks endpoint below.
+      form: *form
+    edit:
+      section: "%{endpoint_name}"
+      header: Edit Webhooks Endpoint Configuration
+      description: You can update the configuration for this endpoint below.
+      form: *form
+    notifications:
+      created: Endpoint was successfully created.
+      updated: Endpoint was successfully updated.
+      destroyed: Endpoint was successfully destroyed.
+  account:
+    webhooks:
+      outgoing:
+        endpoints: *endpoints
+  activerecord:
+    attributes:
+      webhooks/outgoing/endpoint:
+        name: *name
+        url: *url
+        event_type_ids: *event_types
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at

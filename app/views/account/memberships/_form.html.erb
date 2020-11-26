@@ -1,0 +1,43 @@
+<%= form_with(model: [:account, (@team unless membership.persisted?), membership], class: 'membership-form', local: true) do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <% if membership.unclaimed? || membership.tombstone? %>
+    <div class="row">
+      <div class="col-md-6">
+        <%= render 'shared/fields/text_field', form: form, method: :user_first_name %>
+      </div>
+      <div class="col-md-6">
+        <%= render 'shared/fields/text_field', form: form, method: :user_last_name %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if membership.tombstone? %>
+    <% if cloudinary_enabled? %>
+      <%= render 'shared/fields/cloudinary_image', form: form, method: :user_profile_photo_id %>
+    <% end %>
+  <% end %>
+
+  <%= hidden_field_tag 'membership[role_ids][]', nil %>
+
+  <% Role.order(:display_order).each do |role| %>
+    <% if current_membership.can_manage_role?(role) %>
+      <div class="form-check">
+        <label class="form-check-label">
+          <%= form.check_box :role_ids, {multiple: true, class: "form-check-input"}, role.id, nil %>
+          <b><%= t('.grant_privileges_of', role_name: t("roles.labels.#{role.key}")) %></b>
+          <div class='text-muted'><%= t("roles.descriptions.#{role.key}") %></div>
+        </label>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+  <div class="form-buttons-w">
+    <%= form.submit t('.buttons.update'), class: "btn btn-primary" %>
+    <%= link_to t('.buttons.destroy'), [:account, membership], method: :delete, data: { confirm: t('.buttons.confirmations.destroy') }, class: 'btn btn-link' if can? :destroy, membership %>
+    <%= link_to t('global.buttons.cancel'), [:account, @team, :memberships], class: "btn btn-link" %>
+  </div>
+
+<% end %>

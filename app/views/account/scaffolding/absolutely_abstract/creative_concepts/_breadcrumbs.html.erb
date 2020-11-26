@@ -1,0 +1,10 @@
+<% creative_concept ||= @creative_concept %>
+<% team ||= @team || creative_concept&.team %>
+<%= render 'account/teams/breadcrumbs', team: team %>
+<li class="breadcrumb-item">
+  <%= breadcrumb_link_to t('.label'), [:account, team, :scaffolding, :absolutely_abstract, :creative_concepts] %>
+</li>
+<% if creative_concept&.persisted? %>
+  <li class="breadcrumb-item"><%= link_to creative_concept.name, [:account, creative_concept] %></li>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'scaffolding/absolutely_abstract/creative_concepts' %>

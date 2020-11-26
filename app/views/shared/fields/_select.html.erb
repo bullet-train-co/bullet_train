@@ -1,0 +1,16 @@
+<% yield %>
+
+<%
+options ||= {}
+other_options ||= {}
+html_options ||= {}
+html_options[:id] ||= id_for(form, method)
+html_options[:class] = "form-control #{'select2' unless other_options[:simple_select]} disable-search #{html_options[:class]}".strip
+choices ||= options_for(form, method)&.invert
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
+  <% content_for :field do %>
+    <%= form.select method, choices, options, html_options %>
+  <% end %>
+<% end %>

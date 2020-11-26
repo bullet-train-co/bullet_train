@@ -1,0 +1,4 @@
+<% content = render('breadcrumbs').strip %>
+<% if content.present? %>
+  <ol class='breadcrumb'><%= content.html_safe %></ol>
+<% end %>

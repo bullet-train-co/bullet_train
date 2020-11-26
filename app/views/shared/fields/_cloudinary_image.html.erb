@@ -1,0 +1,46 @@
+<% yield %>
+
+<% if cloudinary_enabled? %>
+
+<%
+options ||= {}
+options[:id] ||= id_for(form, method)
+options[:width] ||= nil
+options[:height] ||= 100
+options[:cloud_name] ||= Cloudinary.config.cloud_name
+options[:api_key] ||= Cloudinary.config.api_key
+options[:google_search_key] ||= ENV['CLOUDINARY_GOOGLE_API_KEY']
+other_options ||= {}
+%>
+
+<%
+cloudinary_id = if_present(form.object.send(method))
+preview_image_options = {width: options[:width]&.*(2), height: options[:height]&.*(2), crop: :fill}
+cloudinary_url = cl_image_path(cloudinary_id, preview_image_options) if cloudinary_id
+cloudinary_url_format = cl_image_path('CLOUDINARY_ID', preview_image_options)
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div class="cloudinary-field"
+        data-height="<%= options[:width] %>"
+        data-width="<%= options[:height] %>"
+        data-cloud-name="<%= options[:cloud_name] %>"
+        data-api-key="<%= options[:api_key] %>"
+        data-upload-preset="<%= options[:upload_preset] %>"
+        data-google-api-key="<%= options[:google_search_key] %>"
+        data-url-format="<%= cloudinary_url_format %>"
+        >
+      <%= form.hidden_field method %>
+      <button type="button" class="upload <%= 'present' if cloudinary_url %>">
+        <%= image_tag cloudinary_url, width: options[:width], height: options[:height] if cloudinary_url %>
+        <i class="ti-cloud-up"></i>
+      </button>
+      <button type="button" class="clear">
+        <i class="ti-trash"></i>
+      </button>
+    </div>
+  <% end %>
+<% end %>
+
+<% end %>

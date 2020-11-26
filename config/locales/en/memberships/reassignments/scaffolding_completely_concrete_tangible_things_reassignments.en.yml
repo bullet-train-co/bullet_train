@@ -1,0 +1,42 @@
+en:
+  memberships/reassignments/scaffolding_completely_concrete_tangible_things_reassignments: &scaffolding_completely_concrete_tangible_things_reassignments
+    label: &label Tangible Things Reassignments
+    breadcrumbs:
+      label: *label
+    buttons: &buttons
+      new: Reassign to Another Team Member
+      create: Reassign Tangible Things
+    fields: &fields
+      membership_ids:
+        name: &membership_ids Target Members
+        label: Who should %{memberships_possessive} Tangible Things be reassigned to?
+        heading: *membership_ids
+        help: You can reassign to multiple team members. You can leave this blank to simply unassign Tangible Things from %{membership_name}.
+        invite_help: You can invite new team members by entering their email address and hitting <kbd>enter</kbd>.
+      # 🚅 super scaffolding will insert new fields above this line.
+    index:
+      section: "%{memberships_possessive} Tangible Things Reassignments"
+      contexts:
+        membership:
+          header: Tangible Things Reassignments
+          description: Below is a list of Tangible Things Reassignments that have been added to %{membership_name}. You can manage them with the options below.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+    new:
+      section: "Reassign %{memberships_possessive} Tangible Things"
+      header: Reassign Tangible Things
+      description: This will unassign all Tangible Things currently assigned to %{membership_name} and assign them to whichever team members are specified below.
+      form: *form
+    notifications:
+      created: Tangible Things were successfully reassigned.
+  account:
+    memberships:
+      reassignments:
+        scaffolding_completely_concrete_tangible_things_reassignments: *scaffolding_completely_concrete_tangible_things_reassignments
+  activerecord:
+    attributes:
+      memberships/reassignments/scaffolding_completely_concrete_tangible_things_reassignment:
+        membership_ids: *membership_ids
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.

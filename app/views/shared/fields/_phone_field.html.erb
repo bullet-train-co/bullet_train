@@ -1,0 +1,9 @@
+<% yield %>
+
+<%
+options ||= {}
+options = options.merge({type: 'tel', data: {method: method}})
+other_options ||= {}
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, helper: :text_field, options: options, other_options: other_options %>

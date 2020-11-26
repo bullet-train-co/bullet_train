@@ -1,0 +1,89 @@
+en:
+  users: &users
+    label: &label Users
+    breadcrumbs:
+      label: *label
+    buttons: &buttons
+      update_profile: Update Profile
+      update_password: Update Password
+    edit:
+      section: "%{users_possessive} Profile"
+      profile:
+        header: Update Your Profile
+        description: You can update the email address where you'll receive notifications and also update the way your name is displayed.
+      password:
+        header: Update Your Password
+      buttons: *buttons
+    notifications:
+      updated: User was successfully updated.
+    fields: &fields
+      name:
+        heading: Name
+      first_name:
+        _: &first_name First Name
+        label: *first_name
+        heading: *first_name
+      last_name:
+        _: &last_name Last Name
+        label: *last_name
+        heading: *last_name
+      email:
+        _: &email Email Address
+        label: *email
+        heading: *email
+      time_zone:
+        _: &time_zone Your Time Zone
+        label: *time_zone
+        heading: *time_zone
+      profile_photo_id:
+        _: &profile_photo_id Profile Photo
+        label: *profile_photo_id
+        heading: *profile_photo_id
+      current_password:
+        label: Current Password
+      password:
+        _: &password Password
+        label: *password
+      password_confirmation:
+        _: &password_confirmation Password Confirmation
+        label: Confirm Password
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Signed Up
+        heading: *created_at
+    # this is how we define customizations to fields for a specific namespace.
+    _: &self
+      email:
+        label: Your Email Address
+      password:
+        label: Your Password
+      first_name:
+        label: Your First Name
+      last_name:
+        label: Your Last Name
+    self:
+      <<: [*self, *fields]
+    _: &sign_up
+      password:
+        label: Set Password
+    sign_up:
+      <<: [*sign_up, *self, *fields]
+    _: &update_self
+      password:
+        label: New Password
+    update_self:
+      <<: [*update_self, *self, *fields]
+  account:
+    users: *users
+  activerecord:
+    attributes:
+      user:
+        first_name: *first_name
+        last_name: *last_name
+        email: *email
+        profile_photo_id: *profile_photo_id
+        time_zone: *time_zone
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        password: *password
+        password_confirmation: *password_confirmation

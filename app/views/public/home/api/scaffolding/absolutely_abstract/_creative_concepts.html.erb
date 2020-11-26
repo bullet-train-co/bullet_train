@@ -1,0 +1,68 @@
+<div class="padded-lg">
+
+  <div class="element-box">
+
+    <a name="creative_concepts"></a>
+    <h3 class="form-header">Scaffolding::AbsolutelyAbstract::CreativeConcepts</h3>
+    <div class="form-desc">CreativeConcepts are nested under <%= link_to 'Teams', '#teams' %>.</div>
+
+    <h6>CreativeConcept Collection Actions</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Method</th>
+          <th>Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Fetch all CreativeConcepts within a Team</td>
+          <td><code>GET</code></td>
+          <td><code><%= api_v1_team_scaffolding_absolutely_abstract_creative_concepts_path(2) %></code></td>
+        </tr>
+        <tr>
+          <td>Create a new CreativeConcept within a Team</td>
+          <td><code>POST</code></td>
+          <td><code><%= api_v1_team_scaffolding_absolutely_abstract_creative_concepts_path(2) %></code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h6>Individual CreativeConcept Actions</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Method</th>
+          <th>Path</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Get all details of a CreativeConcept</td>
+          <td><code>GET</code></td>
+          <td><code><%= api_v1_scaffolding_absolutely_abstract_creative_concept_path(1) %></code></td>
+        </tr>
+        <tr>
+          <td>Update a CreativeConcept</td>
+          <td><code>PATCH</code> or <code>PUT</code></td>
+          <td><code><%= api_v1_scaffolding_absolutely_abstract_creative_concept_path(1) %></code></td>
+        </tr>
+        <tr>
+          <td>Delete a CreativeConcept</td>
+          <td><code>DELETE</code></td>
+          <td><code><%= api_v1_scaffolding_absolutely_abstract_creative_concept_path(1) %></code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h6>Example CreativeConcept Object</h6>
+    <p>Whether you're receiving a list of CreativeConcepts or posting to update a CreativeConcept, this is the structure you should expect and provide:</p>
+    <% team = FactoryBot.build(:team); team.id = 1 %>
+    <% creative_concept = FactoryBot.build(:scaffolding_absolutely_abstract_creative_concept); creative_concept.id = 2; creative_concept.team = team; %>
+    <pre><code><%= JSON.pretty_generate(Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConceptSerializer.new(creative_concept).serializable_hash) %></code></pre>
+
+  </div>
+
+</div>
