@@ -25,38 +25,14 @@ require("channels")
 // at the end of the file. This helps avoid merge conflicts in the future, should we need to change our own includes.
 
 global.$ = require('jquery')
-require("bootstrap")
-require("bootstrap-validator")
-require("tether")
-require("popper.js")
-require("slick-carousel")
 
-// // These are the packages Light Admin depends on. We recommend only enabling the ones you need as you need them.
-// // You'll also need to do an `yarn install {library}` before these work.
-// require("chart.js")
-// require("ckeditor")
-// require("datatables.net")
-// require("datatables.net-bs")
-// require("dropzone")
-// require("editable-table")
-// require("fullcalendar")
-// require("ion-rangeslider")
-// require("jquery-bar-rating")
-// require("moment")
-// require("perfect-scrollbar")
-
-// // For some of the libraries above, you also want to include their CSS.
-require("slick-carousel/slick/slick.scss")
-// require("perfect-scrollbar/dist/css/perfect-scrollbar.min.css")
-// require("fullcalendar/dist/fullcalendar.min.css")
-// require("datatables.net-bs/css/dataTables.bootstrap.min.css")
-// require("dropzone/dist/dropzone")
+require("stylesheets/application.scss")
 
 // Custom JavaScript for Bullet Train
 require("../index")
 
 // For inline use in `app/views/account/onboarding/user_details/edit.html.erb`.
-global.jstz = require("jstz");
+// global.jstz = require("jstz");
 
 // ✅ YOUR APPLICATION'S INCLUDES
 // If you need to customize your application's includes, this is the place to do it. This helps avoid merge
