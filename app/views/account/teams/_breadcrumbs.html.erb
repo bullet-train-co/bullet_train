@@ -1,15 +1,11 @@
 <% team ||= @team %>
 <% unless current_user.one_team? %>
-  <li class="breadcrumb-item">
-    <%= breadcrumb_link_to t('.label'), [:account, :teams] %>
-  </li>
+  <%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, :teams], first: true %>
   <% if team&.persisted? %>
-    <li class="breadcrumb-item">
-      <%= breadcrumb_link_to team.name, [:account, team] %>
-    </li>
+    <%= render 'account/shared/breadcrumb', label: team.name, url: [:account, team] %>
   <% end %>
 <% end %>
 <%= render 'account/shared/breadcrumbs/actions', only_for: 'teams' %>
 <% if (action_name == 'show' && controller_name == 'teams') || current_user.one_team? %>
-  <li class="breadcrumb-item"><%= breadcrumb_link_to 'Dashboard', [:account, team] %></li>
+  <%= render 'account/shared/breadcrumb', label: 'Dashboard', url: [:account, team] %>
 <% end %>

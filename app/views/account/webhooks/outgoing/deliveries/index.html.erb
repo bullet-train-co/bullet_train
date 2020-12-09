@@ -1,7 +1,7 @@
 <div class="element-wrapper">
   <h6 class="element-header"><%= t('webhooks/outgoing/deliveries.endpoint_header', endpoint_name: possessive_string(@endpoint.name)) %></h6>
   <div class="padded-lg">
-    <%= render 'shared/notices' %>
+    <%= render 'account/shared/notices' %>
     <%= render 'index', deliveries: @deliveries %>
   </div>
 </div>

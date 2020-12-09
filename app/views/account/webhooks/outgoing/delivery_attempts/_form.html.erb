@@ -1,5 +1,5 @@
 <%= form_with(model: [:account, (@delivery unless delivery_attempt.persisted?), delivery_attempt], url: (delivery_attempt.persisted? ? account_webhooks_delivery_attempt_path(delivery_attempt) : account_webhooks_delivery_delivery_attempts_path(@delivery)), local: true) do |form| %>
-  <%= render 'shared/forms/errors', form: form %>
+  <%= render 'account/shared/forms/errors', form: form %>
 
   <%= render 'shared/forms/field', form: form, attribute: :name, field_type: :text_field, field_attributes: {autofocus: true} %>
   <%= render 'shared/forms/field', form: form, attribute: :response_code, field_type: :text_field, field_attributes: {} %>

@@ -1,6 +1,8 @@
 en:
   oauth/stripe_accounts: &stripe_accounts
     label: &label Stripe Accounts
+    navigation:
+      label: *label
     breadcrumbs:
       label: *label
     header: Stripe Accounts

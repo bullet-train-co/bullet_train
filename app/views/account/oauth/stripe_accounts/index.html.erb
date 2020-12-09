@@ -1,7 +1,7 @@
 <div class="element-wrapper">
   <h6 class="element-header"><%= t('oauth/stripe_accounts.team_header', team_name: @team.name.possessive) %></h6>
   <div class="padded-lg">
-    <%= render 'shared/notices' %>
+    <%= render 'account/shared/notices' %>
     <%= render 'index', stripe_accounts: @stripe_accounts %>
   </div>
 </div>

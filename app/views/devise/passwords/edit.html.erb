@@ -5,7 +5,7 @@
     <% within_fields_namespace(:update_self) do %>
     <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
       <%= f.hidden_field :reset_password_token %>
-      <%= render 'shared/forms/errors', form: f, attributes: [:reset_password_token] %>
+      <%= render 'account/shared/forms/errors', form: f, attributes: [:reset_password_token] %>
       <%= render 'shared/fields/password_field', form: f, method: :password, options: {autofocus: true, autocomplete: "off"}, other_options: {icon: 'os-icon-fingerprint'} %>
       <%= render 'shared/fields/password_field', form: f, method: :password_confirmation, options: {autocomplete: "off"}, other_options: {icon: 'os-icon-fingerprint'} %>
       <div class="buttons-w">

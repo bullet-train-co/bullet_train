@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/andrewculver/nice_partials.git
+  revision: f2317e6792a1c6212292c56499d77aad5518fc17
+  branch: bt
+  specs:
+    nice_partials (0.1.2)
+
+GIT
   remote: https://github.com/bullet-train-co/trix.git
   revision: 078043a8bb6a95d8cf6742984b02fa96be689847
   specs:
@@ -343,17 +350,6 @@ GEM
       netrc (~> 0.8)
     ruby_dep (1.5.0)
     rubyzip (2.3.0)
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-    sass-rails (5.1.0)
-      railties (>= 5.2.0)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -455,6 +451,7 @@ DEPENDENCIES
   minitest-matchers_vaccine
   minitest-retry
   mocha (= 1.4.0)
+  nice_partials!
   omniauth
   omniauth-stripe-connect
   paper_trail
@@ -469,7 +466,6 @@ DEPENDENCIES
   rails_admin
   redcarpet
   redis (~> 4.0)
-  sass-rails (~> 5)
   selenium-webdriver
   sentry-raven
   shoulda-matchers

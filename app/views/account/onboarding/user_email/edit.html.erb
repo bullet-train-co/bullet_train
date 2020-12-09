@@ -15,7 +15,7 @@
         <div class="alert alert-warning" role="alert">
           <%= t('.description') %>
         </div>
-        <%= render 'shared/forms/errors', form: f %>
+        <%= render 'account/shared/forms/errors', form: f %>
       <% end %>
 
       <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true} %>

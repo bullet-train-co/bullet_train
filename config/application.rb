@@ -17,10 +17,6 @@ module BulletTrain
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # only enable this when generating api scaffold controllers.
-    # config.api_only = true
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
-
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.i18n.default_locale = :en
 

@@ -27,6 +27,7 @@ require("channels")
 global.$ = require('jquery')
 
 require("stylesheets/application.scss")
+require("@icon/themify-icons/themify-icons.css")
 
 // Custom JavaScript for Bullet Train
 require("../index")

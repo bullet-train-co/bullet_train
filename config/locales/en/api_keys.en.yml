@@ -1,6 +1,8 @@
 en:
   api_keys: &api_keys
     label: &label API Keys
+    navigation:
+      label: *label
     breadcrumbs:
       label: *label
     header: API Keys

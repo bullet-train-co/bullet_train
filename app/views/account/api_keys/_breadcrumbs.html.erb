@@ -2,7 +2,7 @@
 <% user ||= @user || api_key&.user %>
 <%= render 'account/users/breadcrumbs', user: user %>
 <li class="breadcrumb-item">
-  <%= breadcrumb_link_to t('.label'), [:account, user, :api_keys] %>
+  <%= link_to t('.label'), [:account, user, :api_keys] %>
 </li>
 <% if api_key&.persisted? %>
   <li class="breadcrumb-item"><%= link_to api_key.name, [:account, api_key] %></li>

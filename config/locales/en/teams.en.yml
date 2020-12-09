@@ -1,6 +1,7 @@
 en:
   teams: &teams
     label: &label Teams
+    singular: Team
     breadcrumbs:
       label: *label
     navigation:

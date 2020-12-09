@@ -7,7 +7,7 @@
 
     <% within_fields_namespace(:self) do %>
     <%= form_for(@user, url: account_onboarding_user_detail_path(@user), method: :put) do |f| %>
-      <%= render 'shared/forms/errors', form: f %>
+      <%= render 'account/shared/forms/errors', form: f %>
       <div class="row">
         <div class="col-sm-6">
           <%= render 'shared/fields/text_field', form: f, method: :first_name, options: {autofocus: true} %>

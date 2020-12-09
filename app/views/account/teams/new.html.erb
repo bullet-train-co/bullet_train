@@ -10,8 +10,8 @@
       <% end %>
     </h4>
     <%= form_for([:account, @team]) do |f| %>
-      <%= render 'shared/notices' %>
-      <%= render 'shared/forms/errors', form: f %>
+      <%= render 'account/shared/notices' %>
+      <%= render 'account/shared/forms/errors', form: f %>
 
       <% if current_user.former_user? && current_user.teams.none? %>
 

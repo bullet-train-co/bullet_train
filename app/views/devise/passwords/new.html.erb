@@ -1,26 +1,19 @@
-<% @title = t('devise.titles.reset_password') %>
-
-<div class="all-wrapper menu-side with-pattern">
-  <div class="auth-box-w">
-    <%= render 'devise/shared/logo' %>
-    <h4 class="auth-header"><%= t('devise.headers.reset_password') %></h4>
+<%= render 'account/shared/workflow/box', title: t('devise.titles.reset_password') do |p| %>
+  <% p.content_for :body do %>
     <% within_fields_namespace(:sign_up) do %>
-    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= form_for resource, as: resource_name, url: password_path(resource_name), html: {method: :post, class: 'form'} do |f| %>
+        <%= render 'account/shared/forms/errors', form: f %>
 
-      <%= render 'shared/forms/errors', form: f %>
-
-      <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true}, other_options: {icon: 'os-icon-email-2-at2'} do %>
-        <% if show_sign_up_options? %>
-          <% content_for :help do %>
-            <%= link_to t('devise.links.account'), new_user_registration_path %>
+        <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true} do %>
+          <% if show_sign_up_options? %>
+            <% content_for :help do %>
+              <%= link_to t('devise.links.account'), new_user_registration_path %>
+            <% end %>
           <% end %>
         <% end %>
-      <% end %>
 
-      <div class="buttons-w">
-        <%= f.submit t('devise.buttons.reset_password'), class: "btn btn-primary" %>
-      </div>
+        <%= f.submit t('devise.buttons.reset_password'), class: 'button full' %>
+      <% end %>
     <% end %>
-    <% end %>
-  </div>
-</div>
+  <% end %>
+<% end %>

@@ -1,5 +1,5 @@
 <%= form_with(model: [:account, (@team unless invitation.persisted?), invitation], class: 'invitation-form', local: true) do |form| %>
-  <%= render 'shared/forms/errors', form: form %>
+  <%= render 'account/shared/forms/errors', form: form %>
 
   <%= render 'shared/fields/email_field', form: form, method: :email, options: {autofocus: true} %>
 

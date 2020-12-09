@@ -1,5 +1,5 @@
 <%= form_with(model: [:account, (@team unless stripe_account.persisted?), stripe_account], local: true) do |form| %>
-  <%= render 'shared/forms/errors', form: form %>
+  <%= render 'account/shared/forms/errors', form: form %>
 
   <div class="alert alert-warning">
     There are no configurable settings for this Stripe account by default. Because there are no form fields by default,

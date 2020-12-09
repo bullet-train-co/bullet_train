@@ -1,10 +1,8 @@
 <% tangible_thing ||= @tangible_thing %>
 <% absolutely_abstract_creative_concept ||= @absolutely_abstract_creative_concept || tangible_thing&.absolutely_abstract_creative_concept %>
 <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/breadcrumbs', creative_concept: absolutely_abstract_creative_concept %>
-<li class="breadcrumb-item">
-  <%= breadcrumb_link_to t('.label'), [:account, absolutely_abstract_creative_concept, :completely_concrete_tangible_things] %>
-</li>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, absolutely_abstract_creative_concept, :completely_concrete_tangible_things] %>
 <% if tangible_thing&.persisted? %>
-  <li class="breadcrumb-item"><%= link_to tangible_thing.label_string, [:account, tangible_thing] %></li>
+  <%= render 'account/shared/breadcrumb', label: tangible_thing.label_string, url: [:account, tangible_thing] %>
 <% end %>
 <%= render 'account/shared/breadcrumbs/actions', only_for: 'scaffolding/completely_concrete/tangible_things' %>

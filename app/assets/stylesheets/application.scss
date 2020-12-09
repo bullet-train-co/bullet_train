@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .button {
+    @apply py-2 px-4 border border-transparent rounded-md shadow-sm text-white hover:text-white bg-blue hover:bg-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark;
+    &.full {
+      @apply w-full flex justify-center;
+    }
+  }
+
+  a {
+    @apply text-blue hover:text-blue-dark hover:underline;
+  }
+
+  .button-secondary {
+    @apply py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-blue hover:text-blue-dark hover:bg-gray-50;
+  }
+
+  form {
+    @apply space-y-6;
+  }
+
+  .bg-dark-blue-gradient {
+    background-image: linear-gradient(to bottom, #1c4cc3 0%, #0e369a 100%);
+  }
+
+  .text-2xs {
+    font-size: 0.65rem;
+    line-height: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+}
+
+.hover-indent-child {
+  .indent-child {
+    transition: transform 0.2s ease;
+  }
+  &:hover {
+    .indent-child {
+      transform:translateX(8px);
+    }
+  }
+}
+
+body {
+  // TODO figure out how to implement this in the view itself?
+  &:before {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    background: linear-gradient(to bottom right, #D7BBEA, #65A8F1);
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+  }
+}
+
+html {
+  // TODO do we want to enable this? it was the default in clean admin.
+  // -webkit-font-smoothing: antialiased;
+}

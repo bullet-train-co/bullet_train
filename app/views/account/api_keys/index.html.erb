@@ -1,7 +1,7 @@
 <div class="element-wrapper">
   <h6 class="element-header"><%= @user.name.possessive %> <%= t('api_keys.header') %></h6>
   <div class="padded-lg">
-    <%= render 'shared/notices' %>
+    <%= render 'account/shared/notices' %>
     <%= render 'index', api_keys: @api_keys %>
   </div>
 </div>

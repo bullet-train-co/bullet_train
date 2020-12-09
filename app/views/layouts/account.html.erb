@@ -1,145 +1,80 @@
 <!DOCTYPE html>
 
-<% menu_position_classes = (@menu_position == 'top' ? 'menu-position-top' : 'menu-position-side menu-side-left') %>
-
-<% unless @hide_menus %>
-
-<% content_for :logged_user_info do %>
-  <div class="avatar-w">
-    <%= image_tag user_profile_photo_url(current_user), title: current_user.name %>
-  </div>
-  <div class="logged-user-info-w">
-      <div class="logged-user-name"><%= current_user.full_name %></div>
-      <% if current_team %>
-        <div class="logged-user-role"><%= current_team.name %></div>
-      <% end %>
-  </div>
-<% end %>
-
-<% content_for :logged_user_menu do %>
-  <div class="logged-user-menu color-style-bright">
-    <div class="logged-user-avatar-info">
-      <%= yield :logged_user_info %>
-    </div>
-    <div class="bg-icon"><i class="os-icon os-icon-wallet-loaded"></i></div>
-    <ul>
-      <li>
-        <%= link_to main_app.edit_account_user_path(current_user.id) do %>
-          <i class="icon-notebook"></i>
-          <span><%= t('menus.main.labels.edit_account_details') %></span>
-        <% end %>
-      </li>
-      <li>
-        <%= link_to main_app.account_user_api_keys_path(current_user.id) do %>
-          <i class="icon-key"></i>
-          <span><%= t('menus.main.labels.manage_api_keys') %></span>
-        <% end %>
-      </li>
-      <% if current_user.multiple_teams? %>
-      <li>
-        <%= link_to main_app.account_teams_path do %>
-          <i class="icon-shuffle"></i>
-          <span><%= t('menus.main.labels.switch_teams') %></span>
-        <% end %>
-      </li>
-      <% elsif show_sign_up_options? %>
-      <li>
-        <%= link_to main_app.new_account_team_path do %>
-          <i class="icon-shuffle"></i>
-          <span><%= t('menus.main.labels.add_new_team') %></span>
-        <% end %>
-      </li>
-      <% end %>
-      <li>
-        <%= link_to main_app.destroy_user_session_path, method: 'delete' do %>
-          <i class="icon-logout"></i>
-          <span><%= t('menus.main.labels.logout') %></span>
-        <% end %>
-      </li>
-    </ul>
-  </div>
-<% end %>
-
-<% end %>
-
 <html>
   <head>
     <%= render 'layouts/head' %>
-    <%= stylesheet_link_tag 'account', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'developer', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
-  <% @body_class ||= nil %>
-  <body class="body-account <%= @body_class %> <%= menu_position_classes %>">
-  <div class="all-wrapper solid-bg-all">
-    <div class="layout-w">
+  <body class="text-gray-700 text-sm font-base font-normal">
 
-      <% unless @hide_menus %>
+    <div class="h-screen md:p-5">
+      <div class="overflow-hidden md:rounded-lg flex shadow">
 
-      <div class="menu-mobile menu-activated-on-click color-scheme-dark">
-        <div class="mm-logo-buttons-w">
-          <%= link_to main_app.account_dashboard_path, class: 'mm-logo' do %>
-            <%= image_tag image_path('logo/logo.png') %>
-            <span><%= t('application.name') %></span>
-          <% end %>
-          <div class="mm-buttons">
-            <div class="content-panel-open">
-              <div class="os-icon os-icon-grid-circles"></div>
-            </div>
-            <div class="mobile-menu-trigger">
-              <div class="os-icon os-icon-hamburger-menu-1"></div>
+        <!-- Static sidebar for desktop -->
+        <div class="hidden bg-dark-blue-gradient lg:flex lg:flex-shrink-0 bg-gray-100">
+          <div class="flex flex-col w-64">
+            <!-- Sidebar component, swap this element with another sidebar if you like -->
+            <div class="flex flex-col h-0 flex-1">
+              <div class="flex-1 flex flex-col overflow-y-auto">
+
+                <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker">
+                  <%= image_tag image_path('logo/logo.png'), class: 'h-5 w-auto mx-auto' %>
+                </div>
+
+                <nav class="flex-1 space-y-1">
+                  <div class="flex-shrink-0 flex shadow px-5 py-4">
+                    <div class="flex-shrink-0 w-full group block no-underline">
+                      <div class="flex items-center">
+                        <div class="inline-block rounded-full border border-white p-1">
+                          <%= image_tag membership_profile_photo_url(current_membership), class: 'h-9 w-9 rounded-full', alt: current_user.name %>
+                        </div>
+                        <div class="ml-3">
+                          <div class="text-white">
+                            <%= current_user.name %>
+                          </div>
+                          <div class="text-2xs tracking-widest uppercase text-blue-light group-hover:text-white">
+                            <%= current_team.name %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="px-5 py-4">
+                    <%= render 'account/shared/menu' %>
+                  </div>
+                </nav>
+              </div>
             </div>
           </div>
         </div>
-        <div class="menu-and-user">
-          <div class="logged-user-w">
-            <%= yield :logged_user_info %>
+        <div class="flex flex-col w-0 flex-1 overflow-hidden bg-gray-100">
+          <div class="lg:hidden pl-1 pt-1 sm:pl-3 sm:pt-3">
+            <button class="-ml-0.5 -mt-0.5 h-12 w-12 inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+              <span class="sr-only">Open sidebar</span>
+              <!-- Heroicon name: menu -->
+              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
-          <%= render 'layouts/account/menus/main_menu', mobile: true %>
+          <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
+
+            <!-- This example requires Tailwind CSS v2.0+ -->
+            <nav class="flex px-6 py-3 shadow-sm" aria-label="Breadcrumb">
+              <ol class="flex items-center space-x-3">
+                <%= render('breadcrumbs').strip.html_safe %>
+              </ol>
+            </nav>
+
+            <div class="py-6">
+              <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+                <%= yield %>
+                <div class="rounded-lg h-96"></div>
+              </div>
+            </div>
+          </main>
         </div>
       </div>
-      <div class="menu-w menu-has-selected-link selected-menu-color-light menu-activated-on-hover color-scheme-dark color-style-bright sub-menu-color-bright menu-position-side <%= menu_position_classes %> menu-layout-compact sub-menu-style-flyout">
-        <div class="logo-w">
-          <%= link_to main_app.account_dashboard_path, class: 'logo' do %>
-            <%= image_tag image_path('logo/logo.png'), width: 26, height: 26 %>
-            <div class="logo-label"><%= t('application.name') %></div>
-          <% end %>
-        </div>
-        <div class="logged-user-w avatar-inline">
-          <div class="logged-user-i">
-            <%= yield :logged_user_info %>
-            <div class="logged-user-toggler-arrow">
-              <div class="os-icon os-icon-chevron-down"></div>
-            </div>
-            <%= yield :logged_user_menu %>
-          </div>
-        </div>
-        <h1 class="menu-page-header">Page Header</h1>
-        <%= render 'layouts/account/menus/main_menu' %>
-      </div>
-
-      <% end %>
-
-      <div class="content-w">
-        <%= breadcrumbs %>
-        <div class="content-i">
-          <div class="content-box">
-            <%= yield %>
-          </div>
-        </div>
-      </div>
-
     </div>
-
-  </div>
-
-  <div class="modal bt-modal chat-style-scrolling" id="modal-template" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-        </div>
-      </div>
-    </div>
-  </div>
-
   </body>
 </html>

@@ -9,10 +9,10 @@
 <div class="element-wrapper">
 
   <h6 class="element-header"><%= t('.section') %></h6>
-  <%= render 'shared/notices' %>
+  <%= render 'account/shared/notices' %>
 
   <%= form_for [:account, @user] do |f| %>
-  <%= render 'shared/forms/errors', form: f %>
+  <%= render 'account/shared/forms/errors', form: f %>
   <% end %>
 
   <div class="padded-lg">

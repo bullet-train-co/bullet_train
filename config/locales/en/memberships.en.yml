@@ -2,6 +2,8 @@ en:
   memberships: &memberships
     label: &label Team Members
     singular: Team Member
+    navigation:
+      label: *label
     breadcrumbs:
       label: *label
     buttons: &buttons

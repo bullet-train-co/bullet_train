@@ -7,14 +7,10 @@
   <h6 class="element-header">
     <%= t('.header', teams_possessive: possessive_string(@team.name)) %>
   </h6>
-  <%= render 'shared/notices' %>
+  <%= render 'account/shared/notices' %>
 
   <div class="padded-lg">
     <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts unless scaffolding_things_disabled? %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
   </div>
-
-  </div>
 </div>
-
-<%= render 'shared/customizers' %>

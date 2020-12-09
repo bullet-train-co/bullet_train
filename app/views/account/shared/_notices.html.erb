@@ -1,0 +1,19 @@
+<% attributes ||= [] %>
+<% attributes.select! { |attribute| form.object.errors[attribute].any? } %>
+
+<% if notice.present? %>
+  <div class="rounded-md bg-green-50 p-4">
+    <h3 class="text-sm text-green-800">
+      <%= notice %>
+    </h3>
+  </div>
+<% end %>
+
+<% if alert.present? || flash[:error] %>
+  <div class="rounded-md bg-red-50 p-4">
+    <h3 class="text-sm text-red-800">
+      <%= alert %>
+      <%= flash[:error] %>
+    </h3>
+  </div>
+<% end %>

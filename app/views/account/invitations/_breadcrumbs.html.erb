@@ -2,10 +2,10 @@
 <% team ||= @team || invitation&.team %>
 <%= render 'account/teams/breadcrumbs', team: team %>
 <li class="breadcrumb-item">
-  <%= breadcrumb_link_to t('memberships.breadcrumbs.label'), [:account, team, :memberships] %>
+  <%= link_to t('memberships.breadcrumbs.label'), [:account, team, :memberships] %>
 </li>
 <li class="breadcrumb-item">
-  <%= breadcrumb_link_to t('.label'), [:account, team, :invitations] %>
+  <%= link_to t('.label'), [:account, team, :invitations] %>
 </li>
 <% if invitation&.persisted? %>
   <li class="breadcrumb-item"><%= link_to invitation.name, [:account, invitation] %></li>

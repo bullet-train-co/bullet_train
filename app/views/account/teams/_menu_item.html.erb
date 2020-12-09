@@ -1,0 +1,8 @@
+<%= render 'account/shared/menu/item', {
+  url: main_app.polymorphic_url([:account, current_team]),
+  label: t('menus.main.labels.dashboard'),
+} do |p| %>
+  <% p.content_for :icon do %>
+    <i class="ti ti-home"></i>
+  <% end %>
+<% end %>

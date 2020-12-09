@@ -1,5 +1,5 @@
 <%= form_with(model: tangible_thing, url: (tangible_thing.persisted? ? [:account, tangible_thing] : [:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things]), local: true) do |form| %>
-  <%= render 'shared/forms/errors', form: form %>
+  <%= render 'account/shared/forms/errors', form: form %>
 
   <%# 🚅 skip this section when scaffolding. %>
   <%= render 'shared/fields/text_field', form: form, method: :text_field_value, options: {autofocus: true} %>

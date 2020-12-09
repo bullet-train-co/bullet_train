@@ -2,7 +2,7 @@
 <% membership ||= @membership || scaffolding_completely_concrete_tangible_things_reassignment&.membership %>
 <%= render 'account/memberships/breadcrumbs', membership: membership %>
 <li class="breadcrumb-item">
-  <%= breadcrumb_link_to t('.label'), [:account, membership, :reassignments_scaffolding_completely_concrete_tangible_things_reassignments] %>
+  <%= link_to t('.label'), [:account, membership, :reassignments_scaffolding_completely_concrete_tangible_things_reassignments] %>
 </li>
 <% if scaffolding_completely_concrete_tangible_things_reassignment&.persisted? %>
   <li class="breadcrumb-item"><%= scaffolding_completely_concrete_tangible_things_reassignment.label_string %></li>
