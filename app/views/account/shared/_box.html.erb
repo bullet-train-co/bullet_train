@@ -1,11 +1,11 @@
 <% yield p = np %>
 
-<div class="bg-white rounded-md shadow-sm py-7 px-8 space-y-8">
+<div class="bg-white rounded-md shadow-sm py-7 px-8 space-y-4">
   <div class="space-y-3">
     <% if p.content_for? :title %>
-      <h1 class="text-xl font-semibold">
+      <h2 class="text-xl font-semibold">
         <%= p.content_for :title %>
-      </h1>
+      </h2>
     <% end %>
 
     <% if p.content_for? :description %>
@@ -22,9 +22,8 @@
   <% end %>
 
   <% if p.content_for? :actions %>
-    <div class="space-x-2">
+    <div class="pt-2 space-x-2">
       <%= p.content_for :actions %>
     </div>
   <% end %>
-
 </div>

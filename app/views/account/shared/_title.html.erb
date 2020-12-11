@@ -1,0 +1,17 @@
+<% yield p = np %>
+
+<div class="border-b border-gray-200 pb-4" style="position: relative;">
+  <div class="grid grid-cols-2 gap-6">
+    <div class="col-span-2 sm:col-span-1">
+      <h1 class="font-semibold text-base">
+        <%= p.content_for :title %>
+      </h1>
+    </div>
+    <div class="col-span-2 sm:col-span-1 text-right">
+      <% if p.content_for? :actions %>
+        <%= p.content_for :actions %>
+      <% end %>
+    </div>
+  </div>
+  <div style="background-color: #047bf8; width: 26px; height: 4px; position: absolute; left: 0; bottom: -2px; border: 1px solid #047bf8; border-radius: 1px;"></div>
+</div>

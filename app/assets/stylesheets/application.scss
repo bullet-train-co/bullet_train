@@ -2,20 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-  .button {
-    @apply py-2 px-4 border border-transparent rounded-md shadow-sm text-white hover:text-white bg-blue hover:bg-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark;
-    &.full {
-      @apply w-full flex justify-center;
-    }
+@layer utilities {
+  .text-2xs {
+    @apply uppercase;
+    font-size: 0.65rem;
+    line-height: 0.9rem;
+    letter-spacing: 1px;
   }
+}
 
+@layer components {
   a {
     @apply text-blue hover:text-blue-dark hover:underline;
   }
 
+  .button {
+    @apply shadow-sm text-white hover:text-white bg-blue hover:bg-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark hover:no-underline;
+  }
+
   .button-secondary {
-    @apply py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-blue hover:text-blue-dark hover:bg-gray-50;
+    @apply text-blue hover:text-blue-dark hover:underline;
+  }
+
+  .button, .button-secondary {
+    @apply py-2 px-4 border border-transparent rounded-md;
+    &.button-smaller {
+      @apply py-1 px-3 text-xs;
+    }
+  }
+
+  .full {
+    @apply w-full flex justify-center;
   }
 
   form {
@@ -26,14 +43,31 @@
     background-image: linear-gradient(to bottom, #1c4cc3 0%, #0e369a 100%);
   }
 
-  .text-2xs {
-    font-size: 0.65rem;
-    line-height: 0.9rem;
-    letter-spacing: 1px;
-  }
+  .table {
+    @apply w-full divide-y divide-gray-300 text-left;
 
+    & thead {
+      @apply text-2xs;
+    }
+
+    & th {
+      @apply px-3 py-3 font-semibold;
+    }
+
+    & tbody {
+      @apply divide-y divide-gray-100;
+    }
+
+    & td {
+      @apply px-3 py-3.5;
+      &.buttons {
+        @apply text-right pr-0 space-x-2;
+      }
+    }
+  }
 }
 
+// TODO there is probably a better way to do this.
 .hover-indent-child {
   .indent-child {
     transition: transform 0.2s ease;
@@ -57,9 +91,4 @@ body {
     bottom: 0px;
     right: 0px;
   }
-}
-
-html {
-  // TODO do we want to enable this? it was the default in clean admin.
-  // -webkit-font-smoothing: antialiased;
 }
