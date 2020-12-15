@@ -13,6 +13,16 @@ module.exports = {
         'xs': '.81rem',
       },
       colors: {
+        red: {
+          darker: '#652424',
+          DEFAULT: '#e86060',
+          light: '#ee8989',
+        },
+        yellow: {
+          darker: '#6e6446',
+          DEFAULT: '#fbe6a8',
+          light: '#fcedbe',
+        },
         blue: {
           light: '#95acff',
           lightish: '#448eef',

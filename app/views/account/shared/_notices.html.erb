@@ -2,16 +2,16 @@
 <% attributes.select! { |attribute| form.object.errors[attribute].any? } %>
 
 <% if notice.present? %>
-  <div class="rounded-md bg-green-50 p-4 my-3">
-    <h3 class="text-sm text-green-800">
+  <div class="rounded-md bg-yellow-light border-2 border-yellow py-3 px-5 my-3">
+    <h3 class="text-sm text-yellow-darker">
       <%= notice %>
     </h3>
   </div>
 <% end %>
 
 <% if alert.present? || flash[:error] %>
-  <div class="rounded-md bg-red-50 p-4 my-3">
-    <h3 class="text-sm text-red-800">
+  <div class="rounded-md bg-red-light border-2 border-red py-3 px-5 my-3">
+    <h3 class="text-sm text-red-darker">
       <%= alert %>
       <%= flash[:error] %>
     </h3>
