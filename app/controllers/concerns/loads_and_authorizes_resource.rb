@@ -14,11 +14,10 @@ module LoadsAndAuthorizesResource
 
     # this is the only place i use this commenting style. let me know if you hate it.
     def self.model_namespace_from_controller_namespace
-
-      controller_class_name = self.name
-
-      if regex_to_remove_controller_namespace
-        controller_class_name.gsub!(regex_to_remove_controller_namespace, '')
+      controller_class_name = if regex_to_remove_controller_namespace
+        self.name.gsub(regex_to_remove_controller_namespace, '')
+      else
+        self.name
       end
 
       namespace = controller_class_name.split("::")

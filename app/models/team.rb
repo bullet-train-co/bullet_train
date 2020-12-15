@@ -18,8 +18,6 @@ class Team < ApplicationRecord
   # memberships and invitations
   has_many :memberships, dependent: :destroy
   has_many :users, through: :memberships
-  has_many :admin_memberships, -> { joins(:roles).where(roles: {key: Role.administrative_role_keys}).distinct(:id) }, class_name: 'Membership'
-  has_many :admin_users, -> { joins(memberships: :roles) }, through: :admin_memberships, source: :user
   has_many :invitations
 
   # oauth providers
@@ -58,8 +56,16 @@ class Team < ApplicationRecord
   # 🚫 DEFAULT BULLET TRAIN TEAM FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
 
+  def admin_memberships
+    memberships.select(&:admin?)
+  end
+
+  def admin_users
+    admin_memberships.map(&:user).compact
+  end
+
   def primary_contact
-    admin_users.order(:created_at).first
+    admin_users.sort { |user| user.created_at }.first
   end
 
   def formatted_email_address
