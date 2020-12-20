@@ -1,7 +1,9 @@
 <% yield p = np %>
 
-<div class="bg-white rounded-md shadow-sm py-7 px-8 space-y-4">
-  <div class="space-y-3">
+<% divider ||= nil %>
+
+<div class="bg-white rounded-md shadow py-7 px-8 space-y-4">
+  <div class="space-y <%= 'border-b pb-5' if divider %>">
     <% if p.content_for? :title %>
       <h2 class="text-xl font-semibold">
         <%= p.content_for :title %>
@@ -16,13 +18,13 @@
   </div>
 
   <% if p.content_for? :body %>
-    <div>
+    <div class="space-y">
       <%= p.content_for :body %>
     </div>
   <% end %>
 
   <% if p.content_for? :actions %>
-    <div class="pt-2 space-x-2">
+    <div class="pt-5 space-x-3">
       <%= p.content_for :actions %>
     </div>
   <% end %>

@@ -1,16 +1,14 @@
 <% attributes ||= [] %>
 <% attributes.select! { |attribute| form.object.errors[attribute].any? } %>
 <% if form.object.errors[:base].any? || form.object.errors.present? || attributes.any? %>
-  <div class="rounded-md bg-red-50 p-4">
-    <h3 class="text-sm text-red-800">
-      <% if form.object.errors[:base].any? || attributes.any? %>
-        <%= form.object.errors[:base].join(' ') %>
-        <% attributes.each do |attribute| %>
-        <%= resource.class.human_attribute_name(attribute) %> <%= resource.errors[attribute].to_sentence %>.
-        <% end %>
-      <% else %>
-        Please correct the errors below.
+  <%= render 'account/shared/alert', color: 'red' do %>
+    <% if form.object.errors[:base].any? || attributes.any? %>
+      <%= form.object.errors[:base].join(' ') %>
+      <% attributes.each do |attribute| %>
+      <%= resource.class.human_attribute_name(attribute) %> <%= resource.errors[attribute].to_sentence %>.
       <% end %>
-    </h3>
-  </div>
+    <% else %>
+      Please correct the errors below.
+    <% end %>
+  <% end %>
 <% end %>

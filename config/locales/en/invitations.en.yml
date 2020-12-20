@@ -50,6 +50,7 @@ en:
       header: New Invitation Details
       description: We'll email them a link where they can sign up to join your team.
       form: *form
+      buttons: *buttons
     notifications:
       edit_message: We don't support editing invitations because it introduces security problems. Please remove and recreate them.
       welcome: 'Welcome to %{team_name}!'

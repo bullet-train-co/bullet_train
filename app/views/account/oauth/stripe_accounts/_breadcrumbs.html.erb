@@ -1,10 +1,8 @@
 <% stripe_account ||= @stripe_account %>
 <% team ||= @team || stripe_account&.team %>
 <%= render 'account/teams/breadcrumbs', team: team %>
-<li class="breadcrumb-item">
-  <%= link_to t('.label'), [:account, team, :oauth, :stripe_accounts] %>
-</li>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, team, :oauth, :stripe_accounts] %>
 <% if stripe_account&.persisted? %>
-  <li class="breadcrumb-item"><%= link_to stripe_account.name, [:account, stripe_account] %></li>
+  <%= render 'account/shared/breadcrumb', label: stripe_account.label_string, url: [:account, stripe_account] %>
 <% end %>
 <%= render 'account/shared/breadcrumbs/actions', only_for: 'oauth/stripe_accounts' %>

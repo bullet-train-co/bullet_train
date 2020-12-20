@@ -1,39 +1,24 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('.section') %></h6>
-  <%= render 'account/shared/notices' %>
-  <div class="padded-lg">
-    <div class="element-box element-box-show">
-      <h5 class="form-header"><%= t('.header') %></h5>
-      <div class="form-desc"><%= t('.description') %></div>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description, t('.description') %>
 
-      <div class="form-group">
-        <label class="col-form-label" for=""><%= t('.fields.name.heading') %></label>
-        <div>
-          <%= @creative_concept.name %>
-        </div>
-      </div>
-
-      <% if strip_tags(@creative_concept.description).present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.description.heading') %></label>
-          <div>
-            <%= @creative_concept.description.html_safe %>
-          </div>
-        </div>
+      <% p.content_for :body do %>
+        <%= render 'shared/attributes/text', object: @creative_concept, attribute: :name %>
+        <%= render 'shared/attributes/html', object: @creative_concept, attribute: :description %>
+        <%# 🚅 super scaffolding will insert new fields above this line. %>
       <% end %>
 
-      <%# 🚅 super scaffolding will insert new fields above this line. %>
-
-      <div class="form-buttons-w">
-        <%= link_to t('.buttons.edit'), [:edit, :account, @creative_concept], class: "btn #{first_btn_primary}" if can? :edit, @creative_concept %>
-        <%= link_to t('.buttons.destroy'), [:account, @creative_concept], method: :delete, class: "btn #{first_btn_primary}", data: { confirm: t('.buttons.confirmations.destroy', model_locales(@creative_concept)) } if can? :destroy, @creative_concept %>
-        <%= link_to t('global.buttons.back'), [:account, @team, :scaffolding, :absolutely_abstract, :creative_concepts], class: "btn #{first_btn_primary}" %>
-      </div>
-
-    </div>
+      <% p.content_for :actions do %>
+        <%= link_to t('.buttons.edit'), [:edit, :account, @creative_concept], class: first_button_primary if can? :edit, @creative_concept %>
+        <%= link_to t('.buttons.destroy'), [:account, @creative_concept], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@creative_concept)) } if can? :destroy, @creative_concept %>
+        <%= link_to t('global.buttons.back'), [:account, @team, :scaffolding_absolutely_abstract_creative_concepts], class: first_button_primary %>
+      <% end %>
+    <% end %>
 
     <%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @creative_concept.completely_concrete_tangible_things %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
-
-  </div>
-</div>
+  <% end %>
+<% end %>

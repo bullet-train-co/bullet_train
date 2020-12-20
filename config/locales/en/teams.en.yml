@@ -12,6 +12,7 @@ en:
       edit: Edit Team
       update: Update Team
     index:
+      section: Teams
       header: Your Teams
       create: Create New Team
       buttons: *buttons
@@ -30,6 +31,7 @@ en:
       log_out: You can log out of this account and log in with a different account that is a member of a team.
       new_team: You can use the form below to create a new team of your own.
     edit:
+      section: '%{team_name}'
       header: Edit Team Details
       description: You can update the details of and settings for this team below.
       buttons: *buttons

@@ -1,27 +1,22 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= @stripe_account.name %></h6>
-  <%= render 'account/shared/notices' %>
-  <div class="padded-lg">
-    <div class="element-box element-box-show">
-      <h5 class="form-header"><%= t('oauth/stripe_accounts.show.header') %></h5>
-      <div class="form-desc"><%= t('oauth/stripe_accounts.show.description') %></div>
-      <div class="form-group">
-        <label class="col-form-label" for="">Name</label>
-        <div>
-          <%= @stripe_account.name %>
-        </div>
-      </div>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description, t('.description') %>
+      <% p.content_for :body do %>
+        <%= render 'shared/attributes/text', object: @stripe_account, attribute: :name %>
+        <%# 🚅 super scaffolding will insert new fields above this line. %>
+      <% end %>
 
-      <%# 🚅 super scaffolding will insert new fields above this line. %>
-
-      <div class="form-buttons-w">
-        <%= link_to t('oauth/stripe_accounts.buttons.edit'), [:edit, :account, @stripe_account], class: "btn #{first_btn_primary}" if can? :edit, @stripe_account %>
-        <%= link_to t('global.buttons.back'), [:account, @team, :oauth, :stripe_accounts], class: "btn #{first_btn_primary}" %>
-      </div>
-
-    </div>
+      <% p.content_for :actions do %>
+        <%= link_to t('.buttons.edit'), [:edit, :account, @stripe_account], class: first_button_primary if can? :edit, @stripe_account %>
+        <%= link_to t('.buttons.destroy'), [:account, @stripe_account], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@stripe_account)) } if can? :destroy, @stripe_account %>
+        <%= link_to t('global.buttons.back'), [:account, @team, :oauth_stripe_accounts], class: first_button_primary %>
+      <% end %>
+    <% end %>
 
     <%# 🚅 super scaffolding will insert new children above this line. %>
 
-  </div>
-</div>
+  <% end %>
+<% end %>

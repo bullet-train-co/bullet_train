@@ -1,8 +1,5 @@
 <%= render 'account/shared/title' do |p| %>
-  <% p.content_for :title do %>
-    <%= t('.header', teams_possessive: possessive_string(@team.name)) %>
-  <% end %>
-
+  <% p.content_for :title, t('.header', teams_possessive: possessive_string(@team.name)) %>
   <% p.content_for :actions do %>
     <%= link_to edit_account_team_path(@team), class: 'button-secondary button-smaller' do %>
       <%= t('teams.buttons.edit') %>
@@ -12,7 +9,7 @@
 
 <%= render 'account/shared/notices' %>
 
-<div class="py-12 px-8">
+<div class="py-8 px-8">
   <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts unless scaffolding_things_disabled? %>
   <%# 🚅 super scaffolding will insert new children above this line. %>
 </div>

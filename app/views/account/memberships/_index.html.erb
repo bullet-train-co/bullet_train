@@ -1,0 +1,64 @@
+<% context ||= @team %>
+<% hide_actions ||= false %>
+
+<%= render 'account/shared/box' do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= raw t(".contexts.#{context.class.name.underscore}.#{memberships.any? ? 'description' : 'description_empty'}") %>
+  <% end %>
+
+  <% p.content_for :body do %>
+    <% if memberships.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%= t('memberships.singular') %></th>
+            <th><%= t('roles.header') %></th>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody data-model="Membership" data-scope="current">
+          <% memberships.each do |membership| %>
+            <tr data-id="<%= membership.id %>">
+
+              <td class="px-6 py-4 whitespace-nowrap">
+                <%= link_to [:account, membership], class: 'block flex items-center group hover:no-underline no-underline' do %>
+                  <div class="flex-shrink-0 h-10 w-10">
+                    <%= image_tag membership_profile_photo_url(membership), title: membership.label_string, class: 'h-10 w-10 rounded-full' %>
+                  </div>
+
+                  <div class="ml-3">
+                    <span class="group-hover:underline"><%= membership.label_string %></span>
+                    <% if membership.unclaimed? %>
+                      <span class="ml-1 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                        Invited
+                      </span>
+                    <% end %>
+                  </div>
+                <% end %>
+              </td>
+
+              <td>
+                <% if membership.roles.any? %>
+                  <%= membership.roles.order(:display_order).map { |role| t("roles.labels.#{role.key}") }.to_sentence %>
+                <% else %>
+                  <%= t("roles.labels.none") %>
+                <% end %>
+              </td>
+              <td class="text-right">
+                <%= link_to t('.buttons.show'), [:account, membership], class: 'button-secondary button-smaller' %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+
+  <% unless hide_actions %>
+    <% p.content_for :actions do %>
+      <%= link_to t('invitations.buttons.new'), new_account_team_invitation_path(@team, cancel_path: account_team_memberships_path(@team)), class: 'button' %>
+    <% end %>
+  <% end %>
+<% end %>

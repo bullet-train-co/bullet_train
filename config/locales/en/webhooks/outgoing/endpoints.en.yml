@@ -5,6 +5,7 @@ en:
       label: *label
     navigation:
       label: *label
+      icon: fal fa-plug
     buttons: &buttons
       new: Add New Endpoint
       create: Create Endpoint

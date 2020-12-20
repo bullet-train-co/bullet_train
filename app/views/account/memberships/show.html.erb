@@ -1,66 +1,48 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('.section') %></h6>
-  <%= render 'account/shared/notices' %>
-  <div class="padded-lg">
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title do %>
+        <% if @membership.unclaimed? %>
+          <%= t('.invitation_header') %>
+        <% elsif @membership.tombstone? %>
+          <%= t('.tombstone_header') %>
+        <% else %>
+          <%= t('.header') %>
+        <% end %>
+      <% end %>
 
-    <div class="user-profile" style="margin-bottom: 2rem;">
-      <div class="up-head-w" style="background-color: #047bf8;">
-        <div class="up-social"></div>
-        <div class="up-main-info" style="padding-top: 5%;">
-          <div class="user-avatar-w">
-            <div class="user-avatar"><%= image_tag membership_profile_photo_url(@membership), title: @membership.label_string %></div>
-          </div>
-          <h1 class="up-header"><%= @membership.name %></h1>
-          <h5 class="up-sub-header">
-            <% if @membership.unclaimed? %>
-              <%= t('.invitation_header') %>
-            <% elsif @membership.tombstone? %>
-              <%= t('.tombstone_header') %>
-            <% else %>
-              <%= t('.header') %>
-            <% end %>
-          </h5>
-        </div>
-        <svg class="decor" width="842px" height="219px" viewBox="0 0 842 219" preserveAspectRatio="xMaxYMax meet" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-          <g transform="translate(-381.000000, -362.000000)" fill="#FFFFFF">
-            <path class="decor-path" d="M1223,362 L1223,584 L381,584 C868.912802,575.666667 1149.57947,602.666667 1223,362 Z"></path>
-          </g>
-        </svg>
-      </div>
+      <% p.content_for :description do %>
+        <%= t('.description') %>
+      <% end %>
 
-      <div class="up-contents element-box-show" style="padding: 1.5rem 2rem;">
-        <div class="form-group">
-          <label class="col-form-label"><%= t('roles.header') %></label>
-          <div>
-            <% if @membership.roles.any? %>
-              <%= @membership.roles.order(:display_order).map { |role| t("roles.labels.#{role.key}") }.to_sentence %>
-            <% else %>
-              <%= t("roles.labels.none") %>
-            <% end %>
-          </div>
-        </div>
+      <% p.content_for :body do %>
+        <%= render 'shared/attributes/text', object: @membership, attribute: :name %>
+        <%# 🚅 super scaffolding will insert new fields above this line. %>
+      <% end %>
 
-        <div class="form-buttons-w">
-          <% if @membership.tombstone? %>
-          <%= link_to t('.buttons.reinvite'), [:reinvite, :account, @membership], class: "btn #{first_btn_primary}", method: :post, data: {confirm: t('.buttons.confirmations.reinvite', membership_name: @membership.name)} if can? :edit, @membership %>
+      <% p.content_for :actions do %>
+        <% if @membership.tombstone? %>
+          <%= link_to t('.buttons.reinvite'), [:reinvite, :account, @membership], class: first_button_primary, method: :post, data: {confirm: t('.buttons.confirmations.reinvite', membership_name: @membership.name)} if can? :edit, @membership %>
+        <% end %>
+
+        <%= link_to t('.buttons.edit'), [:edit, :account, @membership], class: first_button_primary if can? :edit, @membership %>
+
+        <% unless @membership.tombstone? %>
+          <% if @membership.admin? %>
+            <%= link_to t('.buttons.demote'), [:demote, :account, @membership], method: :post, data: { confirm: t('global.confirm_message') }, class: first_button_primary if can? :demote, @membership %>
+          <% else %>
+            <%= link_to t('.buttons.promote'), [:promote, :account, @membership], method: :post, data: { confirm: t('global.confirm_message') }, class: first_button_primary if can? :promote, @membership %>
           <% end %>
-          <%= link_to t('.buttons.edit'), [:edit, :account, @membership], class: "btn #{first_btn_primary}" if can? :edit, @membership %>
-          <% unless @membership.tombstone? %>
-            <% if @membership.admin? %>
-              <%= link_to t('.buttons.demote'), [:demote, :account, @membership], method: :post, data: { confirm: t('global.confirm_message') }, class: "btn #{first_btn_primary}" if can? :demote, @membership %>
-            <% else %>
-              <%= link_to t('.buttons.promote'), [:promote, :account, @membership], method: :post, data: { confirm: t('global.confirm_message') }, class: "btn #{first_btn_primary}" if can? :promote, @membership %>
-            <% end %>
-            <%= link_to t(".buttons.#{membership_destroy_locale_key(@membership)}"), [:account, @membership], method: :delete, data: { confirm: t(".buttons.confirmations.#{membership_destroy_locale_key(@membership)}", model_locales(@membership)) }, class: "btn #{first_btn_primary}" if can? :destroy, @membership %>
-          <% end %>
-          <%= link_to t('global.buttons.back'), [:account, @team, :memberships], class: "btn #{first_btn_primary}" %>
-        </div>
+          <%= link_to t(".buttons.#{membership_destroy_locale_key(@membership)}"), [:account, @membership], method: :delete, data: { confirm: t(".buttons.confirmations.#{membership_destroy_locale_key(@membership)}", model_locales(@membership)) }, class: first_button_primary if can? :destroy, @membership %>
+        <% end %>
 
-      </div>
-    </div>
+        <%= link_to t('global.buttons.back'), [:account, @team, :memberships], class: first_button_primary %>
+      <% end %>
 
-    <%= render 'account/scaffolding/completely_concrete/tangible_things/index', cards: @membership.scaffolding_completely_concrete_tangible_things, context: @membership if @membership.scaffolding_completely_concrete_tangible_things.any? %>
+    <% end %>
+
+    <%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @membership.scaffolding_completely_concrete_tangible_things, context: @membership if @membership.scaffolding_completely_concrete_tangible_things.any? %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
-
-  </div>
-</div>
+  <% end %>
+<% end %>

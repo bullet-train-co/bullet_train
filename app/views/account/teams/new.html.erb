@@ -1,14 +1,14 @@
-<% @title = t('teams.new.header') %>
-<div class="all-wrapper menu-side with-pattern">
-  <div class="auth-box-w wider">
-    <%= render 'devise/shared/logo' %>
-    <h4 class="auth-header">
-      <% if current_user.former_user? && current_user.teams.none? %>
-        <%= t('teams.new.former_user_header') %>
-      <% else %>
-        <%= t('teams.new.header') %>
-      <% end %>
-    </h4>
+<%
+@title = if current_user.former_user? && current_user.teams.none?
+  t('teams.new.former_user_header')
+else
+  t('teams.new.header')
+end
+%>
+
+<%= render 'account/shared/workflow/box' do |p| %>
+  <% p.content_for :title, @title %>
+  <% p.content_for :body do %>
     <%= form_for([:account, @team]) do |f| %>
       <%= render 'account/shared/notices' %>
       <%= render 'account/shared/forms/errors', form: f %>
@@ -31,13 +31,15 @@
 
       <% if invited? || !invitation_only? %>
 
-      <%= render 'shared/fields/text_field', form: f, method: :name, options: {autofocus: true} %>
-      <div class="buttons-w">
-        <%= f.submit t('.buttons.create'), class: "btn btn-primary" %>
-        <% if current_user.teams.select(&:persisted?).count > 0 %>
-          <%= link_to t('global.buttons.back'), account_teams_path, class: 'btn btn-link' %>
-        <% end %>
-      </div>
+        <%= render 'shared/fields/text_field', form: f, method: :name, options: {autofocus: true} %>
+        <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+        <div class="space-x-2">
+          <%= f.submit t('.buttons.create'), class: first_button_primary %>
+          <% if current_user.teams.select(&:persisted?).count > 0 %>
+            <%= link_to t('global.buttons.back'), account_teams_path, class: first_button_primary %>
+          <% end %>
+        </div>
 
       <% else %>
 
@@ -47,14 +49,15 @@
           <p class="alert alert-warning"><%= t('teams.notifications.invitation_only') %></p>
           <div class="buttons-w">
             <% if current_user.teams.any? %>
-            <%= link_to t('global.buttons.back'), main_app.account_teams_path, class: "btn #{first_btn_primary}" %>
+            <%= link_to t('global.buttons.back'), main_app.account_teams_path, class: first_button_primary %>
             <% else %>
-            <%= link_to t('menus.main.labels.logout'), main_app.destroy_user_session_path, class: "btn #{first_btn_primary}", method: 'delete' %>
+            <%= link_to t('menus.main.labels.logout'), main_app.destroy_user_session_path, class: first_button_primary, method: 'delete' %>
             <% end %>
           </div>
         <% end %>
 
       <% end %>
     <% end %>
-  </div>
-</div>
+
+  <% end %>
+<% end %>

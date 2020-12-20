@@ -1,14 +1,15 @@
-<%= form_with(model: [:account, (@team unless invitation.persisted?), invitation], class: 'invitation-form', local: true) do |form| %>
+<%= form_with(model: [:account, (@team unless invitation.persisted?), invitation], class: 'form', local: true) do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
   <%= render 'shared/fields/email_field', form: form, method: :email, options: {autofocus: true} %>
 
   <%= form.fields_for :membership do |membership_form| %>
-    <div class="row">
-      <div class="col-md-6">
+    <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-6">
+      <div class="sm:col-span-3">
         <%= render 'shared/fields/text_field', form: membership_form, method: :user_first_name %>
       </div>
-      <div class="col-md-6">
+
+      <div class="sm:col-span-3">
         <%= render 'shared/fields/text_field', form: membership_form, method: :user_last_name %>
       </div>
     </div>
@@ -33,13 +34,12 @@
 
   <%# 🚅 super scaffolding will insert new fields above this line. %>
 
-  <div class="form-buttons-w">
-    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "btn btn-primary" %>
+  <div class="buttons">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
     <% if form.object.persisted? %>
-    <%= link_to t('global.buttons.cancel'), account_invitation_path(invitation), class: "btn btn-link" %>
+    <%= link_to t('global.buttons.cancel'), account_invitation_path(invitation), class: "button-secondary" %>
     <% else %>
-    <%= link_to t('global.buttons.cancel'), params[:cancel_path] || account_team_invitations_path(@team), class: "btn btn-link" %>
+    <%= link_to t('global.buttons.cancel'), params[:cancel_path] || account_team_invitations_path(@team), class: "button-secondary" %>
     <% end %>
   </div>
-
 <% end %>

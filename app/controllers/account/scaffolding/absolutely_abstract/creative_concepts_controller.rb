@@ -6,7 +6,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
   def index
     # since we're showing creative_concepts on the team show page by default,
     # we might as well just go there.
-    redirect_to [:account, @team]
+    # redirect_to [:account, @team]
   end
 
   # GET /account/scaffolding/absolutely_abstract/creative_concepts/:id

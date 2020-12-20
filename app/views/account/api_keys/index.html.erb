@@ -1,7 +1,11 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= @user.name.possessive %> <%= t('api_keys.header') %></h6>
-  <div class="padded-lg">
-    <%= render 'account/shared/notices' %>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section', users_possessive: @user.name.possessive) %>
+
+  <% p.content_for :actions do %>
+    <%= link_to 'View API Documentation', api_path, class: 'button-secondary button-smaller' %>
+  <% end %>
+
+  <% p.content_for :body do %>
     <%= render 'index', api_keys: @api_keys %>
-  </div>
-</div>
+  <% end %>
+<% end %>

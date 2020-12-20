@@ -7,10 +7,8 @@
   <div class="inline-block indent-child flex items-center">
     <!-- Heroicon name: home -->
     <% if p.content_for? :icon %>
-      <span class="mr-3 h-6 w-6 text-center text-blue-light text-xl">
-        <span style="line-height: 0;">
-          <%= p.content_for :icon %>
-        </span>
+      <span class="mr-3 h-6 w-6 text-center text-blue-light text-xl leading-6">
+        <%= p.content_for :icon %>
       </span>
     <% end %>
     <%= label %>

@@ -1,10 +1,8 @@
 <% api_key ||= @api_key %>
 <% user ||= @user || api_key&.user %>
 <%= render 'account/users/breadcrumbs', user: user %>
-<li class="breadcrumb-item">
-  <%= link_to t('.label'), [:account, user, :api_keys] %>
-</li>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, user, :api_keys] %>
 <% if api_key&.persisted? %>
-  <li class="breadcrumb-item"><%= link_to api_key.name, [:account, api_key] %></li>
+  <%= render 'account/shared/breadcrumb', label: api_key.label_string, url: [:account, api_key] %>
 <% end %>
 <%= render 'account/shared/breadcrumbs/actions', only_for: 'api_keys' %>

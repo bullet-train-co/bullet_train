@@ -9,11 +9,31 @@
     line-height: 0.9rem;
     letter-spacing: 1px;
   }
+
+  .space-y {
+    @apply space-y-5;
+  }
+
+  .space-x {
+    @apply space-x-3;
+  }
+
+  .gap-y {
+    @apply gap-y-5;
+  }
+
+  .gap-x {
+    @apply gap-x-4;
+  }
 }
 
 @layer components {
   a {
     @apply text-blue hover:text-blue-dark hover:underline;
+  }
+
+  .buttons {
+    @apply space-x;
   }
 
   .button {
@@ -35,8 +55,11 @@
     @apply w-full flex justify-center;
   }
 
-  form {
-    @apply space-y-6;
+  form.form {
+    @apply space-y;
+    .buttons {
+      @apply pt-3;
+    }
   }
 
   .bg-dark-blue-gradient {
@@ -55,7 +78,7 @@
     }
 
     & tbody {
-      @apply divide-y divide-gray-100;
+      @apply divide-y divide-gray-200;
     }
 
     & td {

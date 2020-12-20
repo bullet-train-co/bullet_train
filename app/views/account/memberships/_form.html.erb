@@ -1,12 +1,13 @@
-<%= form_with(model: [:account, (@team unless membership.persisted?), membership], class: 'membership-form', local: true) do |form| %>
+<%= form_with(model: [:account, (@team unless membership.persisted?), membership], class: 'form', local: true) do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
   <% if membership.unclaimed? || membership.tombstone? %>
-    <div class="row">
-      <div class="col-md-6">
+    <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-6">
+      <div class="sm:col-span-3">
         <%= render 'shared/fields/text_field', form: form, method: :user_first_name %>
       </div>
-      <div class="col-md-6">
+
+      <div class="sm:col-span-3">
         <%= render 'shared/fields/text_field', form: form, method: :user_last_name %>
       </div>
     </div>
@@ -34,10 +35,10 @@
 
   <%# 🚅 super scaffolding will insert new fields above this line. %>
 
-  <div class="form-buttons-w">
-    <%= form.submit t('.buttons.update'), class: "btn btn-primary" %>
-    <%= link_to t('.buttons.destroy'), [:account, membership], method: :delete, data: { confirm: t('.buttons.confirmations.destroy') }, class: 'btn btn-link' if can? :destroy, membership %>
-    <%= link_to t('global.buttons.cancel'), [:account, @team, :memberships], class: "btn btn-link" %>
+  <div class="buttons">
+    <%= form.submit t('.buttons.update'), class: "button" %>
+    <%= link_to t('.buttons.destroy'), [:account, membership], method: :delete, data: { confirm: t('.buttons.confirmations.destroy') }, class: 'button-secondary' if can? :destroy, membership %>
+    <%= link_to t('global.buttons.cancel'), [:account, @team, :memberships], class: "button-secondary" %>
   </div>
 
 <% end %>

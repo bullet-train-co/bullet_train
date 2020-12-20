@@ -3,7 +3,8 @@ class Public::HomeController < ApplicationController
     if ENV['MARKETING_SITE_URL']
       redirect_to ENV['MARKETING_SITE_URL']
     else
-      render 'public/home/index', layout: 'public'
+      redirect_to '/account'
+      # render 'public/home/index', layout: 'public'
     end
   end
 

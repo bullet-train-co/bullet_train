@@ -2,12 +2,9 @@
 <% hide_actions ||= false %>
 
 <%= render 'account/shared/box' do |p| %>
-  <% p.content_for :title do %>
-    <%= t(".contexts.#{context.class.name.underscore}.header") %>
-  <% end %>
-
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
   <% p.content_for :description do %>
-    <%= raw creative_concepts.any? ? t(".contexts.#{context.class.name.underscore}.description") : t(".contexts.#{context.class.name.underscore}.description_empty") %>
+    <%= raw t(".contexts.#{context.class.name.underscore}.#{creative_concepts.any? ? 'description' : 'description_empty'}") %>
   <% end %>
 
   <% p.content_for :body do %>
@@ -42,7 +39,7 @@
 
   <% p.content_for :actions do %>
     <% unless hide_actions %>
-      <%= link_to t('.buttons.new'), [:new, :account, @team, :scaffolding, :absolutely_abstract, :creative_concept], class: 'button' if can? :create, @team.scaffolding_absolutely_abstract_creative_concepts.new %>
+      <%= link_to t('.buttons.new'), [:new, :account, @team, :scaffolding_absolutely_abstract_creative_concept], class: 'button' if can? :create, @team.scaffolding_absolutely_abstract_creative_concepts.new %>
     <% end %>
   <% end %>
 <% end %>

@@ -1,7 +1,6 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('.section') %></h6>
-  <div class="padded-lg">
-    <%= render 'account/shared/notices' %>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
     <%= render 'index', tangible_things: @tangible_things %>
-  </div>
-</div>
+  <% end %>
+<% end %>

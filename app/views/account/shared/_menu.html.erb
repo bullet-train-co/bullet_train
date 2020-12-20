@@ -21,7 +21,7 @@
 
   <%= render 'account/shared/menu/item', url: main_app.edit_account_user_path(current_user.id), label: t('menus.main.labels.edit_account_details') do |p| %>
     <% p.content_for :icon do %>
-      <i class="ti ti-user"></i>
+      <i class="fal fa-user-cog"></i>
     <% end %>
   <% end %>
 
@@ -43,9 +43,9 @@
 
   <% end %>
 
-  <%= render 'account/shared/menu/item', url: main_app.destroy_user_session_path, method: :destroy, label: t('menus.main.labels.logout') do |p| %>
+  <%= render 'account/shared/menu/item', url: main_app.destroy_user_session_path, method: :delete, label: t('menus.main.labels.logout') do |p| %>
     <% p.content_for :icon do %>
-      <i class="ti ti-back-left"></i>
+      <i class="fal fa-sign-out"></i>
     <% end %>
   <% end %>
 </div>

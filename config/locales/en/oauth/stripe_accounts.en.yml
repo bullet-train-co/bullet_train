@@ -1,29 +1,23 @@
 en:
   oauth/stripe_accounts: &stripe_accounts
     label: &label Stripe Accounts
-    navigation:
-      label: *label
     breadcrumbs:
       label: *label
-    header: Stripe Accounts
-    team_header: '%{team_name} Stripe Accounts'
-    description: The following Stripe accounts are connect and available for use by %{team_name}.
-    show:
-      header: Stripe Account Details
-      description: You may not need this page for simple Stripe integrations, but we leave it here by default incase there are any account details you want to surface for your users.
-    edit:
-      header: Stripe Account Settings
-      description: You may not need this page if your Stripe integration doesn't have any configurable settings, but we leave the page here by default in case you need it.
-    notifications:
-      created: Great! We've added that Stripe account to your team!
-      updated: Stripe account settings were successfully updated.
-      destroyed: We've disconnected that Stripe account.
-    buttons:
+    navigation:
+      label: *label
+      icon: fab fa-stripe-s
+    buttons: &buttons
       new: Connect New Stripe Account
       edit: Settings
       update: Save Settings
       destroy: Disconnect
-    fields:
+      shorthand:
+        edit: Settings
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{stripe_account_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
       name:
         name: &name Name
         label: *name
@@ -32,6 +26,34 @@ en:
       created_at:
         name: &created_at Connected
         heading: *created_at
+    index:
+      section: '%{teams_possessive} Stripe Accounts'
+      contexts:
+        team:
+          header: Stripe Accounts
+          description: The following Stripe Accounts are connect and available for use by %{team_name}.
+          description_empty: No Stripe Accounts have been added for %{team_name} yet. To get started, use the button below!
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{stripe_account_name}"
+      header: Stripe Account Details
+      description: You may not need this page for simple Stripe integrations, but we leave it here by default incase there are any account details you want to surface for your users.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    edit:
+      section: "%{stripe_account_name}"
+      header: Stripe Account Settings
+      description: You may not need this page if your Stripe integration doesn't have any configurable settings, but we leave the page here by default in case you need it.
+      form: *form
+      buttons: *buttons
+    notifications:
+      created: Great! We've added that Stripe account to your team!
+      updated: Stripe account settings were successfully updated.
+      destroyed: We've disconnected that Stripe account.
   account:
     oauth:
       stripe_accounts: *stripe_accounts

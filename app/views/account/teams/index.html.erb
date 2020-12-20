@@ -1,31 +1,6 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('.header') %></h6>
-  <%= render 'account/shared/notices' %>
-  <div class="projects-list">
-    <% @teams.each do |team| %>
-      <div class="project-box">
-        <div class="project-head">
-          <div class="project-title">
-            <h5><%= link_to team.name, account_team_path(team) %></h5>
-          </div>
-          <div class="project-users">
-            <% team.users.first(5).each do |user| %>
-              <div class="avatar">
-                <%= image_tag user_profile_photo_url(user) %>
-              </div>
-            <% end %>
-            <% if team.users.count > 5 %>
-            <div class="more">+ <%= team.users.count - 5 %> <%= t('global.more') %></div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-
-  </div>
-
-  <% if show_sign_up_options? %>
-  <%= link_to t('.buttons.create'), new_account_team_path(@team), class: 'btn btn-primary' if can? :create, current_user.teams.new %>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'index', creative_concepts: @creative_concepts %>
   <% end %>
-
-</div>
+<% end %>

@@ -4,6 +4,7 @@ en:
     singular: Team Member
     navigation:
       label: *label
+      icon: fal fa-users
     breadcrumbs:
       label: *label
     buttons: &buttons
@@ -20,6 +21,9 @@ en:
         destroy_own: Are you sure you want to remove yourself from %{team_name}? You won't be able to undo this.
         reinvite: Are you sure you want to re-invite %{membership_name} to %{team_name}?
     fields: &fields
+      name:
+        _: &name Full Name
+        heading: *name
       user_first_name:
         name: &user_first_name First Name
         label: *user_first_name
@@ -31,15 +35,26 @@ en:
         label: *user_profile_photo_id
     index:
       section: "%{team_name} Team Members"
-      header: Team Members
-      header_tombstone: Former Team Members
-      description: The following people are members of your team. You can also invite new team members.
-      description_tombstone: The following people have been removed from %{team_name}, but you can still manage their profile and reassign their assignments to other team members.
+      contexts:
+        team:
+          header: Team Members
+          description: The following people are members of your team. You can also invite new team members.
+      buttons: *buttons
+    tombstones:
+      contexts:
+        team:
+          header: Former Team Members
+          description: The following people have been removed from %{team_name}, but you can still manage their profile and reassign their assignments to other team members.
+      buttons: *buttons
+    form: &form
+      grant_privileges_of: Grant Privileges of %{role_name}
       buttons: *buttons
     edit:
       section: "%{membership_name} on %{team_name}"
       header: Update Membership Settings
       description: You can edit the settings for %{memberships_possessive} membership on %{team_name} below.
+      buttons: *buttons
+      grant_privileges_of: Grant Privileges of %{role_name}
     show:
       section: "%{memberships_possessive} Membership on %{team_name}"
       header: Membership Details
@@ -47,9 +62,7 @@ en:
       tombstone_header: Former Team Member
       description: The following are the details for %{memberships_possessive} Membership on %{team_name}.
       buttons: *buttons
-    form:
-      grant_privileges_of: Grant Privileges of %{role_name}
-      buttons: *buttons
+      fields: *fields
     notifications:
       updated: Membership successfully updated.
       destroyed: That user has been successfully removed from the team.

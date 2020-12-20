@@ -1,11 +1,12 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('.section') %></h6>
-  <%= render 'account/shared/notices' %>
-  <div class="padded-lg">
-    <div class="element-box">
-      <h5 class="form-header"><%= t('.header') %></h5>
-      <div class="form-desc"><%= t('.description') %></div>
-      <%= render 'form', invitation: @invitation %>
-    </div>
-  </div>
-</div>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description, t('.description') %>
+      <% p.content_for :body do %>
+        <%= render 'form', invitation: @invitation %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

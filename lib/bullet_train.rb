@@ -31,7 +31,6 @@ def free_trial?
 end
 
 def stripe_enabled?
-  return true
   ENV['STRIPE_CLIENT_ID'].present?
 end
 

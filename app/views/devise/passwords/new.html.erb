@@ -1,4 +1,5 @@
-<%= render 'account/shared/workflow/box', title: t('devise.titles.reset_password') do |p| %>
+<%= render 'account/shared/workflow/box' do |p| %>
+  <% p.content_for :title, t('devise.titles.reset_password') %>
   <% p.content_for :body do %>
     <% within_fields_namespace(:sign_up) do %>
       <%= form_for resource, as: resource_name, url: password_path(resource_name), html: {method: :post, class: 'form'} do |f| %>

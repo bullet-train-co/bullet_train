@@ -15,7 +15,7 @@ class Membership < ApplicationRecord
   has_many :roles, through: :membership_roles
 
   has_many :scaffolding_completely_concrete_tangible_things_assignments, class_name: 'Scaffolding::CompletelyConcrete::TangibleThings::Assignment'
-  has_many :scaffolding_completely_concrete_tangible_things, through: :scaffolding_completely_concrete_tangible_things_assignments, class_name: 'Scaffolding::CompletelyConcrete::TangibleThing', source: :card
+  has_many :scaffolding_completely_concrete_tangible_things, through: :scaffolding_completely_concrete_tangible_things_assignments, source: :tangible_thing
   has_many :reassignments_scaffolding_completely_concrete_tangible_things_reassignments, class_name: 'Memberships::Reassignments::ScaffoldingCompletelyConcreteTangibleThingsReassignment', dependent: :destroy, foreign_key: :membership_id
 
   after_save :invalidate_caches

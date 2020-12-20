@@ -1,13 +1,9 @@
 <% invitation ||= @invitation %>
 <% team ||= @team || invitation&.team %>
 <%= render 'account/teams/breadcrumbs', team: team %>
-<li class="breadcrumb-item">
-  <%= link_to t('memberships.breadcrumbs.label'), [:account, team, :memberships] %>
-</li>
-<li class="breadcrumb-item">
-  <%= link_to t('.label'), [:account, team, :invitations] %>
-</li>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, team, :memberships] %>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, team, :invitations] %>
 <% if invitation&.persisted? %>
-  <li class="breadcrumb-item"><%= link_to invitation.name, [:account, invitation] %></li>
+  <%= render 'account/shared/breadcrumb', label: invitation.label_string, url: [:account, invitation] %>
 <% end %>
 <%= render 'account/shared/breadcrumbs/actions', only_for: 'invitations' %>

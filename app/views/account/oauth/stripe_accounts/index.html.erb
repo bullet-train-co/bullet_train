@@ -1,7 +1,6 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('oauth/stripe_accounts.team_header', team_name: @team.name.possessive) %></h6>
-  <div class="padded-lg">
-    <%= render 'account/shared/notices' %>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
     <%= render 'index', stripe_accounts: @stripe_accounts %>
-  </div>
-</div>
+  <% end %>
+<% end %>

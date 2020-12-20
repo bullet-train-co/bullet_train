@@ -13,10 +13,10 @@ other_options[:help] = [other_options[:help], labels.help].compact.join(" ")
 errors = [method, method.to_s.gsub(/_id$/, '').to_sym].uniq.map { |attribute| form.object.errors.full_messages_for(attribute) }.flatten
 has_errors = errors.any? || content_for(:error).present? || other_options[:error].present?
 
-options[:class] = "block w-full rounded-md shadow-sm"
+options[:class] = "block w-full rounded-md shadow-sm font-light text-sm"
 
 options[:class] += if has_errors
-  " pr-10 border-red-300 text-red-900 placeholder-red-300 focus:outline-none focus:ring-red-500 focus:border-red-500"
+  " pr-10 border-red text-red-darker placeholder-red focus:outline-none focus:ring-red focus:border-red"
 else
   " focus:ring-blue focus:border-blue border-gray-300"
 end
@@ -25,7 +25,7 @@ options[:class] += " #{options[:class]}"
 
 %>
 
-<div class="form-group <%= 'required' if presence_validated?(form.object, method) %> <%= 'has-error' if has_errors %>">
+<div class="<%= 'required' if presence_validated?(form.object, method) %>">
 
   <% # the label. %>
   <% unless other_options[:hide_label] == true %>
@@ -35,11 +35,11 @@ options[:class] += " #{options[:class]}"
     <% else %>
       <% # allow the label to be defined via an inline option or else one of the locale yaml definitions. %>
       <% label = (other_options[:label].presence || labels.label || legacy_label_for(form, method)) %>
-      <%= form.label method, label&.html_safe, class: 'block text-gray-700', for: options[:id] %>
+      <%= form.label method, label&.html_safe, class: 'block', for: options[:id] %>
     <% end %>
   <% end %>
 
-  <div class="mt-1">
+  <div class="mt-1.5">
 
     <% # the actual field. %>
     <% if content_for? :field %>
@@ -54,7 +54,7 @@ options[:class] += " #{options[:class]}"
 
   <% # any error messages. %>
   <% if has_errors %>
-    <p class="text-xs text-red-600">
+    <p class="mt-1.5 text-xs text-red">
       <%= errors.map { |error| error + ". " }.join %>
       <%= yield :error %>
       <% flush_content_for :error %>
@@ -64,7 +64,7 @@ options[:class] += " #{options[:class]}"
 
   <% # any help text. %>
   <% if content_for?(:help) || other_options[:help] || content_for?(:after_help) %>
-    <p class="mt-2 text-xs text-gray-500">
+    <p class="mt-1.5 text-xs text-gray-500">
       <%= yield :help %>
       <% flush_content_for :help %>
       <%= other_options[:help]&.html_safe %>

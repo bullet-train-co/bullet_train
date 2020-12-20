@@ -1,17 +1,16 @@
 <%= form_with(model: [:account, (@team unless stripe_account.persisted?), stripe_account], local: true) do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
-  <div class="alert alert-warning">
-    There are no configurable settings for this Stripe account by default. Because there are no form fields by default,
+  <%= render 'account/shared/alert' do %>
+    There are no configurable settings for this Stripe Account by default. Because there are no form fields by default,
     clicking the button below will raise an exception and you'll see an error page. This isn't a bug. The error will go
     away when you add your first field here.
-  </div>
+  <% end %>
 
   <%# 🚅 super scaffolding will insert new fields above this line. %>
 
-  <div class="form-buttons-w">
-    <%= form.submit 'Save Settings', class: "btn btn-primary" %>
-    <%= link_to 'Cancel', [:account, stripe_account], class: "btn btn-link" %>
+  <div class="buttons">
+    <%= form.submit 'Save Settings', class: "button" %>
+    <%= link_to 'Cancel', [:account, stripe_account], class: "button-secondary" %>
   </div>
-
 <% end %>

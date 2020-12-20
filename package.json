@@ -16,6 +16,7 @@
     "@ckeditor/ckeditor5-list": "^23.1.0",
     "@ckeditor/ckeditor5-paragraph": "^23.1.0",
     "@ckeditor/ckeditor5-theme-lark": "^23.1.0",
+    "@fortawesome/fontawesome-pro": "^5.15.1",
     "@icon/themify-icons": "^1.0.1-alpha.3",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",

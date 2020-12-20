@@ -15,7 +15,7 @@
 
   <% p.content_for :body do %>
     <% if tangible_things.any? %>
-      <table class="table table-lightborder">
+      <table class="table">
         <thead>
           <tr>
             <%# 🚅 skip this section when scaffolding. %>
@@ -63,10 +63,10 @@
             <td class="text-right">
               <% unless hide_actions %>
                 <% if can? :edit, tangible_thing %>
-                  <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, tangible_thing], class: 'btn btn-link btn-sm' %>
+                  <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, tangible_thing], class: 'button-secondary button-smaller' %>
                 <% end %>
                 <% if can? :destroy, tangible_thing %>
-                  <%= link_to t('.buttons.shorthand.destroy'), [:account, tangible_thing], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(tangible_thing)) }, class: 'btn btn-link btn-sm' %>
+                  <%= link_to t('.buttons.shorthand.destroy'), [:account, tangible_thing], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(tangible_thing)) }, class: 'button-secondary button-smaller' %>
                 <% end %>
               <% end %>
             </td>

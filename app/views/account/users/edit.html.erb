@@ -1,72 +1,67 @@
-<% content_for :breadcrumbs do %>
-  <ul class="breadcrumb">
-    <li class="breadcrumb-item"><%= link_to 'Dashboard', main_app.account_dashboard_path %></li>
-    <li class="breadcrumb-item"><%= link_to 'Your Account', main_app.edit_account_user_path(current_user) %></li>
-  </ul>
-<% end %>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= form_for [:account, @user] do |form| %>
+      <%= render 'account/shared/forms/errors', form: form %>
+    <% end if @user.errors.any? %>
 
-<% @title = t('.section') %>
-<div class="element-wrapper">
+    <div class="grid grid-cols-1 gap-y gap-x-8 xl:grid-cols-2">
+      <div class="xl:col-span-1">
+        <%= render 'account/shared/box', divider: true do |p| %>
+          <% p.content_for :title, t('.profile.header') %>
+          <% p.content_for :description, t('.profile.description') %>
+          <% p.content_for :body do %>
+            <%= form_for [:account, @user], html: {class: 'form'} do |f| %>
+              <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-2">
+                <div class="sm:col-span-2">
+                  <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true} %>
+                </div>
 
-  <h6 class="element-header"><%= t('.section') %></h6>
-  <%= render 'account/shared/notices' %>
+                <div class="sm:col-span-1">
+                  <%= render 'shared/fields/text_field', form: f, method: :first_name %>
+                </div>
 
-  <%= form_for [:account, @user] do |f| %>
-  <%= render 'account/shared/forms/errors', form: f %>
-  <% end %>
+                <div class="sm:col-span-1">
+                  <%= render 'shared/fields/text_field', form: f, method: :last_name %>
+                </div>
 
-  <div class="padded-lg">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="element-box">
-          <%= form_for [:account, @user] do |f| %>
-            <h5 class="form-header"><%= t('.profile.header') %></h5>
-            <div class="form-desc"><%= t('.profile.description') %></div>
+                <% if cloudinary_enabled? %>
+                  <div class="sm:col-span-2">
+                    <%= render 'shared/fields/cloudinary_image', form: f, method: :profile_photo_id %>
+                  </div>
+                <% end %>
 
-            <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true} %>
-
-            <div class="row">
-              <div class="col-sm-6">
-                <%= render 'shared/fields/text_field', form: f, method: :first_name %>
+                <div class="sm:col-span-2">
+                  <%= render 'shared/fields/select', form: f, method: :time_zone, choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone) %>
+                </div>
               </div>
-              <div class="col-sm-6">
-                <%= render 'shared/fields/text_field', form: f, method: :last_name %>
-              </div>
-            </div>
 
-            <% if cloudinary_enabled? %>
-              <%= render 'shared/fields/cloudinary_image', form: f, method: :profile_photo_id %>
+              <div class="buttons">
+                <%= f.submit t('.buttons.update_profile'), class: "button" %>
+              </div>
             <% end %>
-
-            <%= render 'shared/fields/select', form: f, method: :time_zone, choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone) %>
-
-            <div class="form-buttons-w">
-              <%= f.submit t('.buttons.update_profile'), class: "btn btn-primary" %>
-            </div>
-
           <% end %>
-        </div>
+        <% end %>
       </div>
 
-      <div class="col-md-6">
-        <div class="element-box">
-          <% within_fields_namespace(:update_self) do %>
-          <%= form_for [:account, @user] do |f| %>
-            <h5 class="form-header"><%= t('.password.header') %></h5>
-            <div class="form-desc"></div>
+      <div class="xl:col-span-1">
+        <%= render 'account/shared/box', divider: true do |p| %>
+          <% p.content_for :title, t('.password.header') %>
+          <% p.content_for :body do %>
+            <% within_fields_namespace(:update_self) do %>
+              <%= form_for [:account, @user], html: {class: 'form'} do |f| %>
+                <%= render 'shared/fields/password_field', form: f, method: :current_password %>
+                <%= render 'shared/fields/password_field', form: f, method: :password %>
+                <%= render 'shared/fields/password_field', form: f, method: :password_confirmation %>
 
-            <%= render 'shared/fields/password_field', form: f, method: :current_password %>
-            <%= render 'shared/fields/password_field', form: f, method: :password %>
-            <%= render 'shared/fields/password_field', form: f, method: :password_confirmation %>
-
-            <div class="form-buttons-w">
-              <%= f.submit t('.buttons.update_password'), class: "btn btn-primary" %>
-            </div>
-
+                <div class="buttons">
+                  <%= f.submit t('.buttons.update_password'), class: "button" %>
+                </div>
+              <% end %>
+            <% end %>
           <% end %>
-          <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
-  </div>
-</div>
+  <% end %>
+<% end %>

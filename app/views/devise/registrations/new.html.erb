@@ -1,4 +1,5 @@
-<%= render 'account/shared/workflow/box', title: t('devise.headers.create_account') do |p| %>
+<%= render 'account/shared/workflow/box' do |p| %>
+  <% p.content_for :title, t('devise.headers.create_account') %>
   <% p.content_for :body do %>
     <% within_fields_namespace(:sign_up) do %>
      <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: {class: 'form'} do |f| %>

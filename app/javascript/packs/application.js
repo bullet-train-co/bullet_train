@@ -25,6 +25,7 @@ global.$ = require('jquery')
 
 require("stylesheets/application.scss")
 require("@icon/themify-icons/themify-icons.css")
+require("@fortawesome/fontawesome-pro/css/all.css")
 
 // Custom JavaScript for Bullet Train
 require("../index")
