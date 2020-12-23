@@ -9,6 +9,7 @@ class ApplicationMailer < ActionMailer::Base
   helper :images
   helper "account/teams"
   helper "account/users"
+  helper "account/locale"
   helper "fields/trix_editor"
 
 end

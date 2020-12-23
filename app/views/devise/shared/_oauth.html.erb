@@ -1,20 +1,8 @@
 <% if any_oauth_enabled? %>
   <% verb ||= 'Sign In' %>
 
-  <div class="mt-6">
-    <div class="relative">
-      <div class="absolute inset-0 flex items-center">
-        <div class="w-full border-t border-gray-300"></div>
-      </div>
-      <div class="relative flex justify-center">
-        <span class="px-2 bg-white text-gray-500">
-          Or
-        </span>
-      </div>
-    </div>
-
-    <div class="mt-6 grid grid-cols-1 gap-1">
-      <%= render 'devise/shared/oauth/stripe', verb: verb if stripe_enabled? %>
-    </div>
+  <%= render 'account/shared/decision_line' %>
+  <div class="grid grid-cols-1 gap-2">
+    <%= render 'devise/shared/oauth/stripe', verb: verb if stripe_enabled? %>
   </div>
 <% end %>

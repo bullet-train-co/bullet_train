@@ -14,10 +14,8 @@ class InvitationsTest < ActionDispatch::IntegrationTest
     resize_for(display_details)
     login_as(@jane, :scope => :user)
     visit new_account_team_invitation_path(@jane.current_team)
-    within '.padded-lg' do
-      fill_in 'Email', with: 'someone@bullettrain.co'
-      click_on 'Create Invitation'
-    end
+    fill_in 'Email', with: 'someone@bullettrain.co'
+    click_on 'Create Invitation'
     assert page.has_no_css?('div[data-title="Admin"]')
     assert page.has_content?('Invitation was successfully created.')
     assert page.has_content?('someone@bullettrain.co')
@@ -27,11 +25,9 @@ class InvitationsTest < ActionDispatch::IntegrationTest
     resize_for(display_details)
     login_as(@jane, :scope => :user)
     visit new_account_team_invitation_path(@jane.current_team)
-    within '.padded-lg' do
-      fill_in 'Email', with: 'someone@bullettrain.co'
-      check 'Invite as Team Administrator'
-      click_on 'Create Invitation'
-    end
+    fill_in 'Email', with: 'someone@bullettrain.co'
+    check 'Invite as Team Administrator'
+    click_on 'Create Invitation'
     assert page.has_content?('Team Administrator')
     assert page.has_content?('Invitation was successfully created.')
     assert page.has_content?('someone@bullettrain.co')
@@ -41,10 +37,8 @@ class InvitationsTest < ActionDispatch::IntegrationTest
     resize_for(display_details)
     login_as(@jane, :scope => :user)
     visit new_account_team_invitation_path(@jane.current_team)
-    within '.padded-lg' do
-      fill_in 'Email', with: ''
-      click_on 'Create Invitation'
-    end
+    fill_in 'Email', with: ''
+    click_on 'Create Invitation'
     assert page.has_content?('Please correct the errors below.')
     assert page.has_content?('Email Address can\'t be blank.')
   end

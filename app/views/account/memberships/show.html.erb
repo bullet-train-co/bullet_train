@@ -18,6 +18,16 @@
 
       <% p.content_for :body do %>
         <%= render 'shared/attributes/text', object: @membership, attribute: :name %>
+        <%= render 'shared/attributes/base' do |p| %>
+          <% p.content_for :heading, t('roles.header') %>
+          <% p.content_for :body do %>
+            <% if @membership.roles.any? %>
+              <%= @membership.roles.order(:display_order).map { |role| t("roles.labels.#{role.key}") }.to_sentence %>
+            <% else %>
+              <%= t("roles.labels.none") %>
+            <% end %>
+          <% end %>
+        <% end %>
         <%# 🚅 super scaffolding will insert new fields above this line. %>
       <% end %>
 

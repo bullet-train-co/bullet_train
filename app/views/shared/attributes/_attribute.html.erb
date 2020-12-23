@@ -1,8 +1,4 @@
-<div>
-  <label class="block text-2xs font-semibold py-2">
-    <%= t(".fields.#{attribute}.heading") %>
-  </label>
-  <div>
-    <%= yield %>
-  </div>
-</div>
+<%= render 'shared/attributes/base' do |p| %>
+  <% p.content_for :heading, t(".fields.#{attribute}.heading") %>
+  <% p.content_for :body, yield %>
+<% end %>

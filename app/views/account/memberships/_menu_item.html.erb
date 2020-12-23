@@ -1,10 +1,8 @@
-<% if can? :read, Membership.new(team: current_team) %>
-  <%= render 'account/shared/menu/item', {
-    url: main_app.polymorphic_url([:account, current_team, :memberships]),
-    label: t('memberships.navigation.label'),
-  } do |p| %>
-    <% p.content_for :icon do %>
-      <i class="<%= t('memberships.navigation.icon') %>"></i>
-    <% end %>
+<%= render 'account/shared/menu/item', {
+  url: main_app.polymorphic_url([:account, current_team, :memberships]),
+  label: t('memberships.navigation.label'),
+} do |p| %>
+  <% p.content_for :icon do %>
+    <i class="<%= t('memberships.navigation.icon') %>"></i>
   <% end %>
 <% end %>

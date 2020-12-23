@@ -22,6 +22,7 @@
 en:
 
   global:
+    or: Or
     more: More
     is_admin: Admin?
     person: Person
