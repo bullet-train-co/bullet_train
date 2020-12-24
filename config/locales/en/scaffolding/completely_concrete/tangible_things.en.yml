@@ -5,7 +5,7 @@ en:
       label: *label
     navigation:
       label: *label
-      icon: icon-puzzle
+      icon: fal fa-puzzle-piece
     buttons: &buttons
       new: Add New Tangible Thing
       create: Create Tangible Thing

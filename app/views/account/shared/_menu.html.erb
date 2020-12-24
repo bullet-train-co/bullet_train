@@ -1,12 +1,13 @@
 <%= render 'account/shared/menu/section', title: t('menus.main.labels.resources') do %>
   <%= render 'account/teams/menu_item' %>
   <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/menu_item' unless scaffolding_things_disabled? %>
+  <% # added by super scaffolding. %>
 <% end %>
 
 <%= render 'account/shared/menu/section', title: t('menus.main.labels.integrations') do %>
   <%= render 'account/oauth/stripe_accounts/menu_item' if stripe_enabled? %>
   <%# 🚅 super scaffolding will insert new oauth providers above this line. %>
-  <%= render 'account/api_keys/menu_item' if stripe_enabled? %>
+  <%= render 'account/api_keys/menu_item' %>
   <%= render 'account/webhooks/outgoing/endpoints/menu_item' if webhooks_enabled? %>
 <% end %>
 
