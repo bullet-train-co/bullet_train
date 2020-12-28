@@ -1,4 +1,4 @@
-<li class="breadcrumb-item">Your Account</li>
+<%= render 'account/shared/breadcrumb', label: 'Your Account', first: true %>
 <% if action_name == 'edit' && controller_name == 'users' %>
-  <li class="breadcrumb-item">Settings</li>
+  <%= render 'account/shared/breadcrumb', label: 'Settings' %>
 <% end %>

@@ -66,7 +66,7 @@ def legacy_add_line_to_file(file, content, after, child, parent, options = {})
     puts "Updating '#{transformed_file_name}'."
 
     File.open(transformed_file_name, "w+") do |f|
-      f.write(new_target_file_content.join("\n"))
+      f.write(new_target_file_content.join("\n") + "\n")
     end
   end
 end
@@ -358,7 +358,7 @@ elsif scaffolding_type == 'oauth-provider'
   oauth_scaffold_add_line_to_file("./app/models/team.rb", "has_many :oauth_stripe_accounts, class_name: 'Oauth::StripeAccount', dependent: :destroy if stripe_enabled?", "# 🚅 add oauth providers above.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./app/models/user.rb", "has_many :oauth_stripe_accounts, class_name: 'Oauth::StripeAccount' if stripe_enabled?", "# 🚅 add oauth providers above.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./config/locales/en/oauth.en.yml", "stripe_connect: Stripe", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
-  oauth_scaffold_add_line_to_file("./app/views/layouts/account/menus/_main_menu.html.erb", "<%= render 'layouts/account/menus/oauth/stripe_accounts' if stripe_enabled? %>", "<%# 🚅 super scaffolding will insert new oauth providers above this line. %>", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/views/account/shared/_menu.html.erb", "<%= render 'account/oauth/stripe_accounts/menu_item' if stripe_enabled? %>", "<%# 🚅 super scaffolding will insert new oauth providers above this line. %>", options, prepend: true)
   oauth_scaffold_add_line_to_file("./config/routes.rb", "resources :stripe_accounts if stripe_enabled?", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./Gemfile", "gem 'omniauth-stripe-connect'", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./lib/bullet_train.rb", "def stripe_enabled?\n  ENV['STRIPE_CLIENT_ID'].present? && ENV['STRIPE_SECRET_KEY'].present?\nend\n", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)

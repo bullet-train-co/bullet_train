@@ -5,7 +5,7 @@ en:
       label: *label
     navigation:
       label: *label
-      icon: icon-puzzle
+      icon: fal fa-puzzle-piece
     buttons: &buttons
       new: Add New Tangible Thing
       create: Create Tangible Thing
@@ -112,11 +112,13 @@ en:
       header: New Tangible Thing Details
       description: Please provide the details of the new Tangible Thing you'd like to add to %{creative_concept_name}.
       form: *form
+      buttons: *buttons
     edit:
       section: "%{tangible_thing_name}"
       header: Edit Tangible Thing Details
       description: You can update the details or settings for %{tangible_thing_name} below.
       form: *form
+      buttons: *buttons
     notifications:
       created: Tangible Thing was successfully created.
       updated: Tangible Thing was successfully updated.

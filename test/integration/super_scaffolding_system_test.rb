@@ -17,7 +17,7 @@ class SuperScaffoldingSystemTest < ActionDispatch::IntegrationTest
   #   rails test test/integration/super_scaffolding_system_test.rb
   #
   # after the test you can tear down what we've done here in the db:
-  #   rake db:migrate VERSION=`ls db/migrate | sort | tail -n 3 | head -n 1`
+  #   rake db:migrate VERSION=`ls db/migrate | sort | tail -n 9 | head -n 1`
   #   git checkout .
   #   git clean -d -f
 
@@ -62,7 +62,7 @@ class SuperScaffoldingSystemTest < ActionDispatch::IntegrationTest
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("/test")
 
-      within ".menu-w .main-menu" do
+      within "#menu" do
         click_on 'Dashboard'
       end
 

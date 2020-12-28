@@ -6,6 +6,10 @@ class Oauth::StripeAccount < ApplicationRecord
 
   validates :uid, presence: true
 
+  def label_string
+    name
+  end
+
   def name
     data['info']['name'] rescue 'Stripe Account'
   end

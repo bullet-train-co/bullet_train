@@ -1,38 +1,46 @@
-<div class="element-box">
-  <div class="element-actions">
-    <a class="btn btn-link btn-sm" href="<%= api_path %>">View API Documentation</a>
-  </div>
-  <h5 class="form-header"><%= t('api_keys.header') %></h5>
-  <div class="form-desc"><%= t('api_keys.description') %></div>
-  <div class="table-responsive">
-    <% if api_keys.count > 0 %>
-      <table class="table table-lightborder">
+<% context ||= @user %>
+<% hide_actions ||= false %>
+
+<%= render 'account/shared/box' do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= raw t(".contexts.#{context.class.name.underscore}.#{api_keys.any? ? 'description' : 'description_empty'}") %>
+  <% end %>
+
+  <% p.content_for :body do %>
+    <% if api_keys.any? %>
+      <table class="table">
         <thead>
           <tr>
-            <th><%= t('api_keys.fields.token.heading') %></th>
-            <th><%= t('api_keys.fields.secret.heading') %></th>
-            <th><%= t('api_keys.fields.last_used.heading') %></th>
+            <th><%= t('.fields.token.heading') %></th>
+            <th><%= t('.fields.secret.heading') %></th>
+            <th><%= t('.fields.last_used.heading') %></th>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
-            <th class="text-right"></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <% api_keys.each do |api_key| %>
-          <tr>
+          <tr data-id="<%= api_key.id %>">
             <td><%= api_key.token %></td>
-            <td><%= link_to t("api_keys.buttons.reveal"), "#", onclick: "$(this).parent().text('#{api_key.secret}'); return false;" %></td>
+            <td><%= link_to t(".buttons.reveal"), "#", onclick: "$(this).parent().text('#{api_key.secret}'); return false;" %></td>
             <td><%= time_ago_in_words(api_key.last_used_at) %> ago</td>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
-            <td class="text-right">
-              <%= link_to t('api_keys.buttons.destroy'), [:account, api_key], method: :delete, data: { confirm: t('global.confirm_message') }, class: 'btn btn-link btn-sm' if can? :destroy, api_key %>
+            <td class="buttons">
+              <% unless hide_actions %>
+                <%= link_to t('.buttons.destroy'), [:account, api_key], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(api_key)) }, class: 'button-secondary button-smaller' if can? :destroy, api_key %>
+              <% end %>
             </td>
           </tr>
           <% end %>
         </tbody>
       </table>
     <% end %>
+  <% end %>
 
-    <%= link_to t('api_keys.buttons.create'), account_user_api_keys_path(@user), method: :post, class: 'btn btn-primary' if can? :create, @user.api_keys.new %>
-
-  </div>
-</div>
+  <% p.content_for :actions do %>
+    <% unless hide_actions %>
+      <%= link_to t('.buttons.create'), [:account, @user, :api_keys], method: :post, class: 'button' if can? :create, @user.api_keys.new %>
+    <% end %>
+  <% end %>
+<% end %>

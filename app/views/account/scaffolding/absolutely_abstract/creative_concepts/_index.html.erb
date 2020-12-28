@@ -1,17 +1,21 @@
 <% context ||= @team %>
 <% hide_actions ||= false %>
-<div class="element-box">
-  <h5 class="form-header"><%= t(".contexts.#{context.class.name.underscore}.header") %></h5>
-  <div class="form-desc"><%= raw creative_concepts.any? ? t(".contexts.#{context.class.name.underscore}.description") : t(".contexts.#{context.class.name.underscore}.description_empty") %></div>
-  <div class="table-responsive">
+
+<%= render 'account/shared/box' do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= raw t(".contexts.#{context.class.name.underscore}.#{creative_concepts.any? ? 'description' : 'description_empty'}") %>
+  <% end %>
+
+  <% p.content_for :body do %>
     <% if creative_concepts.any? %>
-      <table class="table table-lightborder" data-class="Scaffolding::AbsolutelyAbstract::CreativeConcept">
+      <table class="table">
         <thead>
           <tr>
             <th><%= t('.fields.name.heading') %></th>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
             <th><%= t('.fields.created_at.heading') %></th>
-            <th class="text-right"></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -20,10 +24,10 @@
             <td><%= link_to creative_concept.name, [:account, creative_concept] %></td>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
             <td><%= display_date_and_time(creative_concept.created_at) %></td>
-            <td class="text-right">
+            <td class="buttons">
               <% unless hide_actions %>
-                <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, creative_concept], class: 'btn btn-link btn-sm' if can? :edit, creative_concept %>
-                <%= link_to t('.buttons.shorthand.destroy'), [:account, creative_concept], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(creative_concept)) }, class: 'btn btn-link btn-sm' if can? :destroy, creative_concept %>
+                <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, creative_concept], class: 'button-secondary button-smaller' if can? :edit, creative_concept %>
+                <%= link_to t('.buttons.shorthand.destroy'), [:account, creative_concept], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(creative_concept)) }, class: 'button-secondary button-smaller' if can? :destroy, creative_concept %>
               <% end %>
             </td>
           </tr>
@@ -31,10 +35,13 @@
         </tbody>
       </table>
     <% end %>
+  <% end %>
 
+  <% p.content_for :actions do %>
     <% unless hide_actions %>
-      <%= link_to t('.buttons.new'), [:new, :account, @team, :scaffolding, :absolutely_abstract, :creative_concept], class: 'btn btn-primary' if can? :create, @team.scaffolding_absolutely_abstract_creative_concepts.new %>
+      <% if can? :create, Scaffolding::AbsolutelyAbstract::CreativeConcept.new(team: @team) %>
+        <%= link_to t('.buttons.new'), [:new, :account, @team, :scaffolding_absolutely_abstract_creative_concept], class: 'button' %>
+      <% end %>
     <% end %>
-
-  </div>
-</div>
+  <% end %>
+<% end %>

@@ -1,6 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
-require 'rails/test_help'
+require_relative "../config/environment"
+require "rails/test_help"
+
 require 'capybara/rails'
 require 'capybara/minitest'
 require 'capybara/email'
@@ -111,7 +112,7 @@ class ActionDispatch::IntegrationTest
   include Waiting
 
   @@test_devices = {
-    iphone_8: {resolution: [750, 1334], mobile: true, high_dpi: true},
+    # iphone_8: {resolution: [750, 1334], mobile: true, high_dpi: true},
     macbook_pro_15_inch: {resolution: [2880, 1800], mobile: false, high_dpi: true},
     # hd_monitor: {resolution: [1920, 1080], mobile: false, high_dpi: false},
   }
@@ -132,6 +133,9 @@ class ActionDispatch::IntegrationTest
 
   def within_team_menu_for(display_details)
     within_primary_menu_for(display_details) do
+      return yield
+
+      # these menus haven't been properly implemented yet.
       if display_details[:mobile]
         click_on 'Team'
       else
@@ -142,6 +146,7 @@ class ActionDispatch::IntegrationTest
   end
 
   def open_mobile_menu
+    raise "We haven't implemented mobile menus in the Tailwind CSS port of Bullet Train yet."
     find(".mobile-menu-trigger").click
   end
 
@@ -151,38 +156,25 @@ class ActionDispatch::IntegrationTest
       open_mobile_menu
       click_on 'Logout'
     else
-      within ".logged-user-w" do
-        first(".logged-user-i").hover
-        click_on 'Logout'
+      within "#menu" do
+        # first(".logged-user-i").hover
+        click_on "Logout"
       end
     end
   end
 
   def sign_in_from_homepage_for(display_details)
-    if display_details[:mobile]
-      open_mobile_menu
-      click_on 'Login'
-    else
-      within ".small-menu" do
-        click_on 'Login'
-      end
-    end
+    # TODO the tailwind port of bullet train doesn't currently support a homepage.
+    visit new_user_session_path
+
+    # this forces capybara to wait until the proper page loads.
+    # otherwise our tests will immediately start trying to match things before the page even loads.
+    assert page.has_content?("Sign In")
   end
 
   def sign_up_from_homepage_for(display_details)
-    # if the marketing site is hosted elsewhere, we just skip this step altogether.
-    if ENV['MARKETING_SITE_URL'].present?
-      visit new_user_registration_path
-    else
-      if display_details[:mobile]
-        open_mobile_menu
-        click_on 'Sign Up'
-      else
-        within ".small-menu" do
-          click_on 'Sign Up'
-        end
-      end
-    end
+    # TODO the tailwind port of bullet train doesn't currently support a homepage.
+    visit new_user_registration_path
 
     # this forces capybara to wait until the proper page loads.
     # otherwise our tests will immediately start trying to match things before the page even loads.
@@ -205,7 +197,7 @@ class ActionDispatch::IntegrationTest
         yield
       end
     else
-      within ".menu-w .main-menu" do
+      within "#menu" do
         yield
       end
     end

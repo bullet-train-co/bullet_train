@@ -1,25 +1,27 @@
-require_relative '../lib/bullet_train'
-require_relative '../lib/colorizer'
-require_relative '../lib/string/emoji'
-require_relative 'boot'
-require 'rails/all'
+require_relative "../lib/bullet_train"
+require_relative "../lib/colorizer"
+require_relative "../lib/string/emoji"
+
+require_relative "boot"
+
+require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module BulletTrain
+module Railsdiff
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 6.1
 
-    # Settings in config/environments/* take precedence over those specified here.
-    # Application configuration should go into files in config/initializers
-    # -- all .rb files in that directory are automatically loaded.
-
-    # only enable this when generating api scaffold controllers.
-    # config.api_only = true
-    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    # Configuration for the application, engines, and railties goes here.
+    #
+    # These settings can be overridden in specific environments using the files
+    # in config/environments, which are processed later.
+    #
+    # config.time_zone = "Central Time (US & Canada)"
+    # config.eager_load_paths << Rails.root.join("extras")
 
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
     config.i18n.default_locale = :en

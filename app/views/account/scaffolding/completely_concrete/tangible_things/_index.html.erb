@@ -3,12 +3,19 @@
 <% collection ||= :completely_concrete_tangible_things %>
 <% hide_actions ||= false %>
 <% hide_back ||= false %>
-<div class="element-box">
-  <h5 class="form-header"><%= t(".contexts.#{context.class.name.underscore}.header") %></h5>
-  <div class="form-desc"><%= raw t(".contexts.#{context.class.name.underscore}.description") %></div>
-  <div class="table-responsive" data-collection="<%= collection %>">
+
+<%= render 'account/shared/box' do |p| %>
+  <% p.content_for :title do %>
+    <%= t(".contexts.#{context.class.name.underscore}.header") %>
+  <% end %>
+
+  <% p.content_for :description do %>
+    <%= t(".contexts.#{context.class.name.underscore}.description") %>
+  <% end %>
+
+  <% p.content_for :body do %>
     <% if tangible_things.any? %>
-      <table class="table table-lightborder">
+      <table class="table">
         <thead>
           <tr>
             <%# 🚅 skip this section when scaffolding. %>
@@ -53,13 +60,13 @@
             <%# 🚅 stop any skipping we're doing now. %>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
             <td><%= display_date_and_time(tangible_thing.created_at) %></td>
-            <td class="text-right">
+            <td class="buttons">
               <% unless hide_actions %>
                 <% if can? :edit, tangible_thing %>
-                  <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, tangible_thing], class: 'btn btn-link btn-sm' %>
+                  <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, tangible_thing], class: 'button-secondary button-smaller' %>
                 <% end %>
                 <% if can? :destroy, tangible_thing %>
-                  <%= link_to t('.buttons.shorthand.destroy'), [:account, tangible_thing], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(tangible_thing)) }, class: 'btn btn-link btn-sm' %>
+                  <%= link_to t('.buttons.shorthand.destroy'), [:account, tangible_thing], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(tangible_thing)) }, class: 'button-secondary button-smaller' %>
                 <% end %>
               <% end %>
             </td>
@@ -68,18 +75,19 @@
         </tbody>
       </table>
     <% end %>
+  <% end %>
 
+  <% p.content_for :actions do %>
     <% unless hide_actions %>
       <% if context == absolutely_abstract_creative_concept %>
         <% if can? :create, Scaffolding::CompletelyConcrete::TangibleThing.new(absolutely_abstract_creative_concept: absolutely_abstract_creative_concept) %>
-          <%= link_to t('.buttons.new'), [:new, :account, absolutely_abstract_creative_concept, :completely_concrete_tangible_thing], class: 'btn btn-primary' %>
+          <%= link_to t('.buttons.new'), [:new, :account, absolutely_abstract_creative_concept, :completely_concrete_tangible_thing], class: 'button' %>
         <% end %>
       <% end %>
 
       <% unless hide_back %>
-        <%= link_to t('global.buttons.back'), [:account, context], class: 'btn btn-link' %>
+        <%= link_to t('global.buttons.back'), [:account, context], class: 'button-secondary' %>
       <% end %>
     <% end %>
-
-  </div>
-</div>
+  <% end %>
+<% end %>

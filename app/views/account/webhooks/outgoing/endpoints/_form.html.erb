@@ -1,5 +1,5 @@
 <%= form_with(model: [:account, (@team unless endpoint.persisted?), endpoint], local: true) do |form| %>
-  <%= render 'shared/forms/errors', form: form %>
+  <%= render 'account/shared/forms/errors', form: form %>
 
   <%= render 'shared/forms/field', form: form, attribute: :name, field_type: :text_field, field_attributes: {autofocus: true} %>
   <%= render 'shared/forms/field', form: form, attribute: :url, field_type: :text_field, field_attributes: {} %>

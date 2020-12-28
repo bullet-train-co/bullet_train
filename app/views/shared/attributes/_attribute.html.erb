@@ -1,0 +1,4 @@
+<%= render 'shared/attributes/base' do |p| %>
+  <% p.content_for :heading, t(".fields.#{attribute}.heading") %>
+  <% p.content_for :body, yield %>
+<% end %>

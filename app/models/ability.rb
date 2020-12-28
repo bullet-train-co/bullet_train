@@ -83,7 +83,7 @@ class Ability
 
       if stripe_enabled?
         can :manage, Oauth::StripeAccount, team_id: user.team_ids
-        cannot :edit, Oauth::StripeAccount
+        # cannot :edit, Oauth::StripeAccount
       end
 
       # 🚅 super scaffolding will insert any new oauth providers above.

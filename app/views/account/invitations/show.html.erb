@@ -1,34 +1,30 @@
-<% @title = t(".join_team") %>
-<div class="all-wrapper menu-side with-pattern">
-  <div class="auth-box-w wider">
-    <%= render 'devise/shared/logo' %>
-    <h4 class="auth-header"><%= t(".join_team") %></h4>
-    <form>
-      <div class="row">
-        <div class="col-sm-12">
-          <% if !@invitation.is_for?(current_user) %>
-            <div class="invitation-options">
-              <p><%= raw t('.has_invited', user_name: @invitation.from_membership.name) %></p>
-              <div class="alert alert-warning"><%= raw t('.alert', invitation_email: @invitation.email, user_email: current_user.email) %></div>
-              <p><%= t('.you_can') %></p>
-              <ul>
-                <li>
-                  <p><%= raw t('.accept_the_invitation', user_email: current_user.email) %></p>
-                  <%= link_to t('.buttons.join_team'), accept_account_invitation_path(@invitation.uuid), method: :post, class: 'btn btn-primary' %>
-                </li>
-                <li>
-                  <p><%= t('.sign_out') %></p>
-                  <%= link_to t('.buttons.logout'), main_app.destroy_user_session_path, method: 'delete', class: 'btn btn-primary' %>
-                </li>
-              </ul>
-            </div>
-          <% else %>
-            <div class="buttons-w">
-              <%= link_to t('.buttons.join_team'), accept_account_invitation_path(@invitation.uuid), method: :post, class: 'btn btn-primary' %>
-            </div>
-          <% end %>
+<%= render 'account/shared/workflow/box' do |p| %>
+  <% p.content_for :title, t(".join_team") %>
+  <% p.content_for :body do %>
+    <div class="space-y">
+      <% if !@invitation.is_for?(current_user) %>
+        <p><%= raw t('.has_invited', user_name: @invitation.from_membership.name) %></p>
+
+        <%= render 'account/shared/alert' do %>
+          <%= raw t('.alert', invitation_email: @invitation.email, user_email: current_user.email) %>
+        <% end %>
+
+        <p><%= t('.you_can') %></p>
+
+        <div class="space-y-3 pb-1">
+          <p><%= raw t('.accept_the_invitation', user_email: current_user.email) %></p>
+          <%= link_to t('.buttons.join_team'), accept_account_invitation_path(@invitation.uuid), method: :post, class: 'button full' %>
         </div>
-      </div>
-    </form>
-  </div>
-</div>
+
+        <%= render 'account/shared/decision_line' %>
+
+        <div class="space-y-3">
+          <p><%= t('.sign_out') %></p>
+          <%= link_to t('.buttons.logout'), main_app.destroy_user_session_path, method: 'delete', class: 'button-alternative full' %>
+        </div>
+      <% else %>
+        <%= link_to t('.buttons.join_team'), accept_account_invitation_path(@invitation.uuid), method: :post, class: 'button full' %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

@@ -1,159 +1,37 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('.section') %></h6>
-  <%= render 'shared/notices' %>
-  <div class="padded-lg">
-    <div class="element-box element-box-show">
-      <h5 class="form-header"><%= t('.header') %></h5>
-      <div class="form-desc"><%= t('.description') %></div>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description, t('.description') %>
 
-      <%# 🚅 skip this section when scaffolding. %>
-
-      <%# 🚅 show `text_field` attribute. %>
-      <% if @tangible_thing.text_field_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.text_field_value.heading') %></label>
-          <div>
-            <%= @tangible_thing.text_field_value %>
-          </div>
-        </div>
+      <% p.content_for :body do %>
+        <%# 🚅 skip this section when scaffolding. %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :text_field_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :button_value %>
+        <%= render 'shared/attributes/html', object: @tangible_thing, attribute: :ckeditor_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :cloudinary_image_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :date_field_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :email_field_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :password_field_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :phone_field_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :select_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :super_select_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :text_area_value %>
+        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :trix_editor_value %>
+        <%# 🚅 stop any skipping we're doing now. %>
+        <%# 🚅 super scaffolding will insert new fields above this line. %>
       <% end %>
-      <%# 🚅 stop showing attribute. %>
 
-      <%# 🚅 show `button` attribute. %>
-      <% if @tangible_thing.button_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.button_value.heading') %></label>
-          <div>
-            <%= t(".fields.button_value.options.#{@tangible_thing.button_value}") %>
-          </div>
-        </div>
+      <% p.content_for :actions do %>
+        <%= link_to t('.buttons.edit'), [:edit, :account, @tangible_thing], class: first_button_primary if can? :edit, @tangible_thing %>
+        <%= link_to t('.buttons.destroy'), [:account, @tangible_thing], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@tangible_thing)) } if can? :destroy, @tangible_thing %>
+        <%= link_to t('global.buttons.back'), [:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things], class: first_button_primary %>
       <% end %>
-      <%# 🚅 stop showing attribute. %>
 
-      <%# 🚅 show `ckeditor` attribute. %>
-      <% if strip_tags(@tangible_thing.ckeditor_value).present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.ckeditor_value.heading') %></label>
-          <div>
-            <%= html_sanitize(@tangible_thing.ckeditor_value) %>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show `cloudinary_image` attribute. %>
-      <% if cloudinary_enabled? %>
-        <% if @tangible_thing.cloudinary_image_value.present? %>
-          <div class="form-group">
-            <label class="col-form-label"><%= t('.fields.cloudinary_image_value.heading') %></label>
-            <div>
-              <%= cloudinary_image_tag @tangible_thing.cloudinary_image_value, height: 200 %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show `date_field` attribute. %>
-      <% if @tangible_thing.date_field_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.date_field_value.heading') %></label>
-          <div>
-            <%= display_date(@tangible_thing.date_field_value) %>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show `email_field` attribute. %>
-      <% if @tangible_thing.email_field_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.email_field_value.heading') %></label>
-          <div>
-            <%= @tangible_thing.email_field_value %>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show a `password_field` attribute. %>
-      <% if @tangible_thing.password_field_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.password_field_value.heading') %></label>
-          <div>
-            <%= @tangible_thing.password_field_value %>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show `phone_field` attribute. %>
-      <% if @tangible_thing.phone_field_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.phone_field_value.heading') %></label>
-          <div>
-            <%= display_phone_number(@tangible_thing.phone_field_value) %>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show `ckeditor` attribute. %>
-      <% if @tangible_thing.select_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.select_value.heading') %></label>
-          <div>
-            <%= t(".fields.select_value.options.#{@tangible_thing.select_value}") %>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show `ckeditor` attribute. %>
-      <% if @tangible_thing.super_select_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.super_select_value.heading') %></label>
-          <div>
-            <%= t(".fields.super_select_value.options.#{@tangible_thing.super_select_value}") %>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show `ckeditor` attribute. %>
-      <% if @tangible_thing.text_area_value.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.text_area_value.heading') %></label>
-          <div>
-            <pre><%= @tangible_thing.text_area_value %></pre>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 show `ckeditor` attribute. %>
-      <% if strip_tags(@tangible_thing.trix_editor_value).present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.trix_editor_value.heading') %></label>
-          <div>
-            <%= @tangible_thing.trix_editor_value.html_safe %>
-          </div>
-        </div>
-      <% end %>
-      <%# 🚅 stop showing attribute. %>
-
-      <%# 🚅 stop any skipping we're doing now. %>
-      <%# 🚅 super scaffolding will insert new fields above this line. %>
-
-      <div class="form-buttons-w">
-        <%= link_to t('.buttons.edit'), [:edit, :account, @tangible_thing], class: "btn #{first_btn_primary}" if can? :edit, @tangible_thing %>
-        <%= link_to t('.buttons.destroy'), [:account, @tangible_thing], method: :delete, class: "btn #{first_btn_primary}", data: { confirm: t('.buttons.confirmations.destroy', model_locales(@tangible_thing)) } if can? :destroy, @tangible_thing %>
-        <%= link_to t('global.buttons.back'), [:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things], class: "btn #{first_btn_primary}" %>
-      </div>
-
-    </div>
+    <% end %>
 
     <%# 🚅 super scaffolding will insert new children above this line. %>
 
-  </div>
-</div>
+  <% end %>
+<% end %>

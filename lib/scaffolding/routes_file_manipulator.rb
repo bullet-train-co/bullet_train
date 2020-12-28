@@ -317,7 +317,7 @@ class Scaffolding::RoutesFileManipulator
   def write
     puts "Updating '#{@filename}'."
     File.open(@filename, "w+") do |file|
-      file.puts(lines)
+      file.puts(lines.join.strip + "\n")
     end
   end
 end

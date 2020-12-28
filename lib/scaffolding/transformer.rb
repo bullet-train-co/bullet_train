@@ -191,7 +191,7 @@ class Scaffolding::Transformer
     puts "Writing '#{transformed_file_name}'."
 
     File.open(transformed_file_name, "w+") do |f|
-      f.write(transformed_file_content)
+      f.write(transformed_file_content.strip + "\n")
     end
   end
 
@@ -258,7 +258,7 @@ class Scaffolding::Transformer
       puts "Updating '#{transformed_file_name}'."
 
       File.open(transformed_file_name, "w+") do |f|
-        f.write(new_target_file_content.join("\n"))
+        f.write(new_target_file_content.join("\n").strip + "\n")
       end
 
     end
@@ -1160,30 +1160,26 @@ RUBY
         icon_name = options['sidebar']
       else
         puts ""
-        puts "Hey, models that are scoped directly off of a Team (or nothing) are eligible to be"
-        puts "added to the sidebar. Do you want to add this resource to the sidebar menu? (y/N)"
+        puts "Hey, models that are scoped directly off of a Team (or nothing) are eligible to be added to the sidebar. Do you want to add this resource to the sidebar menu? (y/N)"
         response = STDIN.gets.chomp
         if response.downcase[0] == "y"
           puts ""
-          puts "OK, great! Let's do this! By default these menu items appear with a puzzle piece,"
-          puts "but after you hit enter I'll open a page where you can view other icon options."
-          puts "When you find one you like, hover your mouse over it and then come back here and"
-          puts "and enter the name of the icon you want to use. (Or hit enter to skip this step.)"
+          puts "OK, great! Let's do this! By default these menu items appear with a puzzle piece, but after you hit enter I'll open two different pages where you can view other icon options. When you find one you like, hover your mouse over it and then come back here and and enter the name of the icon you want to use. (Or hit enter to skip this step.)"
           response = STDIN.gets.chomp
-          `open http://light.pinsupreme.com/icon_fonts_themefy.html`
+          `open https://themify.me/themify-icons`
+          `open https://fontawesome.com/icons?d=gallery&s=light`
           puts ""
-          puts "Did you find an icon you wanted to use? Enter the name here or hit enter to just"
-          puts "use the puzzle piece:"
+          puts "Did you find an icon you wanted to use? Enter the name here or hit enter to just use the puzzle piece:"
           icon_name = STDIN.gets.chomp
           puts ""
           unless icon_name.length > 0 || icon_name.downcase == 'y'
-            icon_name = 'icon-puzzle'
+            icon_name = 'fal fa-puzzle-piece'
           end
         end
       end
       if icon_name.present?
-        replace_in_file(transform_string("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml"), 'icon-puzzle', icon_name)
-        scaffold_add_line_to_file("./app/views/layouts/account/menus/_main_menu.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/menu_item' %>", "<% # added by super scaffolding. %>")
+        replace_in_file(transform_string("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml"), 'fal fa-puzzle-piece', icon_name)
+        scaffold_add_line_to_file("./app/views/account/shared/_menu.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/menu_item' %>", "<% # added by super scaffolding. %>")
       end
     end
 

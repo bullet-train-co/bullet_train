@@ -3,16 +3,19 @@ en:
     label: &label API Keys
     breadcrumbs:
       label: *label
-    header: API Keys
-    description: It's okay if other people see the public token below, but you should keep the secret token completely secure.
+    navigation:
+      label: *label
+      icon: fal fa-key
     notifications:
       created: API Key was successfully created.
       destroyed: API Key was successfully revoked.
-    buttons:
+    buttons: &buttons
       reveal: Click to Reveal
       create: Generate New API Key
       destroy: Revoke
-    fields:
+      confirmations:
+        destroy: Are you sure you want to remove this API Key?
+    fields: &fields
       token:
         name: &token Public Token
         label: *token
@@ -29,6 +32,15 @@ en:
       created_at:
         name: &created_at Generated
         heading: *created_at
+    index:
+      section: '%{users_possessive} API Keys'
+      contexts:
+        user:
+          header: API Keys
+          description: It's okay if other people see the public token below, but you should keep the secret token completely secure.
+          description_empty: No API Keys have been generated for %{user_name} yet. To get started, use the button below!
+      fields: *fields
+      buttons: *buttons
   account:
     api_keys: *api_keys
   activerecord:

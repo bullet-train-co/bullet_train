@@ -1,5 +1,5 @@
 <%= form_with(model: scaffolding_completely_concrete_tangible_things_reassignment, url: (scaffolding_completely_concrete_tangible_things_reassignment.persisted? ? [:account, scaffolding_completely_concrete_tangible_things_reassignment] : [:account, @membership, :reassignments_scaffolding_completely_concrete_tangible_things_reassignments]), local: true) do |form| %>
-  <%= render 'shared/forms/errors', form: form %>
+  <%= render 'account/shared/forms/errors', form: form %>
 
   <%= render 'shared/fields/super_select', form: form, method: :membership_ids, options: {autofocus: true},
     html_options: {multiple: true, class: can_invite? ? 'accepts-new' : ''},

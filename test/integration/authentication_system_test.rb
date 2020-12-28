@@ -86,7 +86,7 @@ class AuthenticationSystemTest < ActionDispatch::IntegrationTest
     sign_in_from_homepage_for(display_details)
 
     click_on 'Forgot your password?'
-    assert page.has_content?("Reset Password")
+    assert page.has_content?("Reset Your Password")
 
     click_on 'Reset Password by Email'
     assert page.has_content?("Email Address can't be blank.")

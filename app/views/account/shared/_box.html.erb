@@ -1,0 +1,31 @@
+<% yield p = np %>
+
+<% divider ||= nil %>
+
+<div class="bg-white rounded-md shadow py-7 px-8 space-y-4">
+  <div class="space-y-2 <%= 'border-b pb-5' if divider %>">
+    <% if p.content_for? :title %>
+      <h2 class="text-xl font-semibold">
+        <%= p.content_for :title %>
+      </h2>
+    <% end %>
+
+    <% if p.content_for? :description %>
+      <p class="text-gray-400 font-light leading-normal">
+        <%= p.content_for :description %>
+      </p>
+    <% end %>
+  </div>
+
+  <% if p.content_for? :body %>
+    <div class="space-y">
+      <%= p.content_for :body %>
+    </div>
+  <% end %>
+
+  <% if p.content_for? :actions %>
+    <div class="pt-2 space-x">
+      <%= p.content_for :actions %>
+    </div>
+  <% end %>
+</div>

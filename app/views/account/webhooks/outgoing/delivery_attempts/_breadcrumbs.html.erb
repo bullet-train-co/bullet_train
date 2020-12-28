@@ -2,7 +2,7 @@
 <% delivery ||= @delivery || delivery_attempt&.delivery %>
 <%= render 'account/webhooks/outgoing/deliveries/breadcrumbs', delivery: delivery %>
 <li class="breadcrumb-item">
-  <%= breadcrumb_link_to t('.label'), [:account, delivery, :delivery_attempts] %>
+  <%= link_to t('.label'), [:account, delivery, :delivery_attempts] %>
 </li>
 <% if delivery_attempt&.persisted? %>
   <li class="breadcrumb-item"><%= link_to delivery_attempt.name, [:account, delivery_attempt] %></li>

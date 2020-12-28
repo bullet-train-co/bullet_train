@@ -2,14 +2,8 @@
 <html>
   <head>
     <%= render 'layouts/head' %>
-    <%= stylesheet_link_tag 'account', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'developer', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
-  <% @page_modal ||= false %>
-  <% @body_class ||= nil %>
-  <body class="<%= @body_class %>">
-    <div class="page-padding">
-      <%= yield %>
-    </div>
+  <body class="text-gray-700 text-sm font-normal">
+    <%= yield %>
   </body>
 </html>

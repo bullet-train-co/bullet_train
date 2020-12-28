@@ -1,13 +1,12 @@
 class Scaffolding::CompletelyConcrete::TangibleThings::Assignment < ApplicationRecord
   # 🚅 add concerns above.
 
-  belongs_to :tangible_thing
-  belongs_to :membership
+  belongs_to :tangible_thing, class_name: 'Scaffolding::CompletelyConcrete::TangibleThing'
+  belongs_to :membership, class_name: 'Membership'
   # 🚅 add belongs_to associations above.
 
   # 🚅 add has_many associations above.
 
-  has_one :membership, through: :membership
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.

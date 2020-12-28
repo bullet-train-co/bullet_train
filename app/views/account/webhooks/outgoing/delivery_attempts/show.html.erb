@@ -1,6 +1,6 @@
 <div class="element-wrapper">
   <h6 class="element-header"><%= @delivery_attempt.name %> to Deliver Event <code><%= @delivery.event.short_uuid %></code> to <%= @delivery.endpoint.name %></h6>
-  <%= render 'shared/notices' %>
+  <%= render 'account/shared/notices' %>
   <div class="padded-lg">
     <div class="element-box element-box-show">
       <h5 class="form-header"><%= t('webhooks/outgoing/delivery_attempts.show.header') %></h5>

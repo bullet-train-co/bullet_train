@@ -1,6 +1,6 @@
-<div class="d-block d-sm-inline">
-  <%= link_to user_stripe_connect_omniauth_authorize_path, class: 'btn btn-primary mt-2', id: 'sign_in_with_stripe' do %>
-    <i class="ti-money"></i>
-    <span class="d-none d-sm-inline"><%= verb %> with</span> Stripe
+<div>
+  <%= link_to user_stripe_connect_omniauth_authorize_path, class: 'button-alternative full', id: 'sign_in_with_stripe' do %>
+    <i class="text-lg leading-5 mr-3 <%= t('oauth/stripe_accounts.navigation.icon') %>"></i>
+    <span class="group-hover:underline"><%= verb %> with Stripe</span>
   <% end %>
 </div>
