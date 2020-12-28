@@ -30,6 +30,8 @@ require("@fortawesome/fontawesome-pro/css/all.css")
 // Custom JavaScript for Bullet Train
 require("../index")
 
+require("alpinejs")
+
 // For inline use in `app/views/account/onboarding/user_details/edit.html.erb`.
 // global.jstz = require("jstz");
 
