@@ -67,6 +67,7 @@
 
   .button, .button-secondary, .button-alternative {
     @apply py-2 px-4 border border-transparent rounded-md;
+    @apply inline-flex items-center whitespace-nowrap;
     &.button-smaller {
       @apply py-1 px-3 text-xs;
     }
@@ -106,6 +107,11 @@
       @apply px-3 py-3.5;
       &.buttons {
         @apply text-right pr-0 space-x-2;
+
+        // just having a cell with buttons shouldn't expand the height of a table row.
+        & > * {
+          @apply -mt-5 -mb-5;
+        }
       }
     }
   }

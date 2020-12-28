@@ -39,7 +39,9 @@
 
   <% p.content_for :actions do %>
     <% unless hide_actions %>
-      <%= link_to t('.buttons.new'), [:new, :account, @team, :scaffolding_absolutely_abstract_creative_concept], class: 'button' if can? :create, @team.scaffolding_absolutely_abstract_creative_concepts.new %>
+      <% if can? :create, Scaffolding::AbsolutelyAbstract::CreativeConcept.new(team: @team) %>
+        <%= link_to t('.buttons.new'), [:new, :account, @team, :scaffolding_absolutely_abstract_creative_concept], class: 'button' %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

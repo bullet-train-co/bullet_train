@@ -60,7 +60,7 @@
             <%# 🚅 stop any skipping we're doing now. %>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
             <td><%= display_date_and_time(tangible_thing.created_at) %></td>
-            <td class="text-right">
+            <td class="buttons">
               <% unless hide_actions %>
                 <% if can? :edit, tangible_thing %>
                   <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, tangible_thing], class: 'button-secondary button-smaller' %>
