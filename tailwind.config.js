@@ -30,6 +30,12 @@ module.exports = {
           dark: '#0362c6',
           darker: '#00369D',
         },
+        green: {
+          darker: '#166e0c',
+          dark: '#1b850f',
+          DEFAULT: '#71c21a',
+          light: '#c5f0c0',
+        },
       },
       fontFamily: {
         // "Avenir Next W01", "Proxima Nova W01", "", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif
