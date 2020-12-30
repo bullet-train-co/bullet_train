@@ -1,13 +1,11 @@
-require("intl-tel-input/build/css/intlTelInput.css")
-
-import 'intl-tel-input';
+import 'intl-tel-input/build/css/intlTelInput.css';
+import intlTelInput from 'intl-tel-input';
 
 function enablePhoneFields($scope) {
   $scope.find('input[type="tel"]').each(function (index, field) {
-    var $field = $(field);
-    $field.intlTelInput({
-      hiddenInput: $field.attr('data-method'),
-      utilsScript: "https://intl-tel-input.com/node_modules/intl-tel-input/build/js/utils.js"
+    intlTelInput(field, {
+      hiddenInput: $(field).attr('data-method'),
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
     });
   });
 };
