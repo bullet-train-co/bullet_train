@@ -5,7 +5,8 @@ function enablePhoneFields($scope) {
   $scope.find('input[type="tel"]').each(function (index, field) {
     intlTelInput(field, {
       hiddenInput: $(field).attr('data-method'),
-      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      customContainer: "w-full"
     });
   });
 };
