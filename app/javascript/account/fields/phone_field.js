@@ -5,7 +5,9 @@ function enablePhoneFields($scope) {
   $scope.find('input[type="tel"]').each(function (index, field) {
     intlTelInput(field, {
       hiddenInput: $(field).attr('data-method'),
-      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+      // See `config/webpack/environment.js` for where we copy this into place.
+      // TODO Wish we could somehow incorporate webpacker's cache-breaking hash into this. Anyone know how?
+      utilsScript: "/assets/intl-tel-input/utils.js",
       customContainer: "w-full"
     });
   });
