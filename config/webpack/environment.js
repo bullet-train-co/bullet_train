@@ -22,11 +22,12 @@ environment.plugins.prepend('CKEditor',
   })
 )
 
-// Copy utils.js from intl-tel-input dependency to public/assets
+// Copy utils.js from intl-tel-input dependency to `public/assets`.
+// See `app/javascript/account/fields/phone_field.js` for where we use this.
 environment.plugins.prepend('CopyPlugin',
   new CopyPlugin({
     patterns: [
-      { from: "node_modules/intl-tel-input/build/js/utils.js", to: "../assets/intl-tel-input_utils.js" }
+      { from: "node_modules/intl-tel-input/build/js/utils.js", to: "../assets/intl-tel-input/utils.js" }
     ]
   })
 )
