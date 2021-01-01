@@ -1,0 +1,8 @@
+<% collaborator ||= @collaborator %>
+<% creative_concept ||= @creative_concept || collaborator&.creative_concept %>
+<%= render 'account/scaffolding/absolutely_abstract/creative_concepts/breadcrumbs', creative_concept: creative_concept %>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, creative_concept, :collaborators] %>
+<% if collaborator&.persisted? %>
+  <%= render 'account/shared/breadcrumb', label: collaborator.label_string, url: [:account, collaborator] %>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'scaffolding/absolutely_abstract/creative_concepts/collaborators' %>

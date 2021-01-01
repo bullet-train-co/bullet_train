@@ -90,6 +90,7 @@ class Ability
 
       # don't remove or edit the following comment or you'll break super scaffolding.
       # the following abilities were added by super scaffolding.
+      can :manage, Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator, creative_concept: {team_id: user.team_ids}
 
       if user.developer?
         # the following admin abilities were added by super scaffolding.

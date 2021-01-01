@@ -1,0 +1,83 @@
+en:
+  scaffolding/absolutely_abstract/creative_concepts/collaborators: &collaborators
+    label: &label Collaborators
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Collaborator
+      create: Create Collaborator
+      edit: Edit Collaborator
+      update: Update Collaborator
+      destroy: Remove Collaborator
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{collaborator_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      membership_id:
+        name: &membership_id Membership
+        label: *membership_id
+        heading: *membership_id
+        placeholder: Select a Membership
+
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        name: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        name: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    index:
+      section: "%{creative_concepts_possessive} Collaborators"
+      contexts:
+        scaffolding/absolutely_abstract/creative_concept:
+          header: Collaborators
+          description: Below is a list of Collaborators that have been added to %{creative_concept_name}. You can manage them with the options below.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{collaborator_name}"
+      header: Collaborator Details
+      description: Below are the details we have for %{collaborator_name}. You'll also find options for updating these details or removing %{collaborator_name} from %{creative_concept_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Collaborator for %{creative_concept_name}"
+      header: New Collaborator Details
+      description: Please provide the details of the new Collaborator you'd like to add to %{creative_concept_name}.
+      form: *form
+      fields: *fields
+      buttons: *buttons
+    edit:
+      section: "%{collaborator_name}"
+      header: Edit Collaborator Details
+      description: You can update the details or settings for %{collaborator_name} below.
+      form: *form
+      fields: *fields
+      buttons: *buttons
+    notifications:
+      created: Collaborator was successfully created.
+      updated: Collaborator was successfully updated.
+      destroyed: Collaborator was successfully destroyed.
+  account:
+    scaffolding:
+      absolutely_abstract:
+        creative_concepts:
+          collaborators: *collaborators
+  activerecord:
+    attributes:
+      scaffolding/absolutely_abstract/creative_concepts/collaborator:
+        membership_id: *membership_id
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

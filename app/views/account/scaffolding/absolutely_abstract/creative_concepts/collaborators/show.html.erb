@@ -1,0 +1,32 @@
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description, t('.description') %>
+
+      <% p.content_for :body do %>
+        <% if @collaborator.membership %>
+        <div class="form-group">
+          <label class="col-form-label"><%= t('.fields.membership_id.heading') %></label>
+          <div>
+            <%= link_to @collaborator.membership.label_string, [:account, @collaborator.membership] %>
+          </div>
+        </div>
+      <% end %>
+
+        <%# 🚅 super scaffolding will insert new fields above this line. %>
+      <% end %>
+
+      <% p.content_for :actions do %>
+        <%= link_to t('.buttons.edit'), [:edit, :account, @collaborator], class: first_button_primary if can? :edit, @collaborator %>
+        <%= link_to t('.buttons.destroy'), [:account, @collaborator], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@collaborator)) } if can? :destroy, @collaborator %>
+        <%= link_to t('global.buttons.back'), [:account, @creative_concept, :collaborators], class: first_button_primary %>
+      <% end %>
+
+    <% end %>
+
+    <%# 🚅 super scaffolding will insert new children above this line. %>
+
+  <% end %>
+<% end %>
