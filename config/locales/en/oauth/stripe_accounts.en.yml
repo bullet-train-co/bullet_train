@@ -49,7 +49,6 @@ en:
       header: Stripe Account Settings
       description: You may not need this page if your Stripe integration doesn't have any configurable settings, but we leave the page here by default in case you need it.
       form: *form
-      buttons: *buttons
     notifications:
       created: Great! We've added that Stripe account to your team!
       updated: Stripe account settings were successfully updated.

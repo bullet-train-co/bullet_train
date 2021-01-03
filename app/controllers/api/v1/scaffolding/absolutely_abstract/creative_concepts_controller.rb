@@ -1,4 +1,6 @@
 class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Api::V1::AuthenticatedController
+  include Scaffolding::AbsolutelyAbstract::CreativeConcepts::ControllerSupport
+
   account_load_and_authorize_resource :creative_concept, through: :team, through_association: :scaffolding_absolutely_abstract_creative_concepts
 
   def serializer
@@ -20,6 +22,10 @@ class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Api
   # POST /api/v1/team/1/scaffolding/absolutely_abstract/creative_concepts
   # POST /api/v1/team/1/scaffolding/absolutely_abstract/creative_concepts.json
   def create
+
+    # any user adding a creative concept should be able to manage it.
+    ensure_current_user_can_manage_creative_concept @creative_concept
+
     if @creative_concept.save
       render json: @creative_concept, status: :created, location: [:api, :v1, @team, :scaffolding, :absolutely_abstract, :creative_concepts], serializer: serializer
     else

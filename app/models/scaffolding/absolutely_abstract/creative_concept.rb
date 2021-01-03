@@ -21,5 +21,21 @@ class Scaffolding::AbsolutelyAbstract::CreativeConcept < ApplicationRecord
 
   # 🚅 add delegations above.
 
+  def admins
+    collaborators.admins.map(&:membership)
+  end
+
+  def editors
+    collaborators.editors.map(&:membership)
+  end
+
+  def viewers
+    collaborators.viewers.map(&:membership)
+  end
+
+  def all_collaborators
+    (team.admin_memberships + collaborators.map(&:membership)).uniq
+  end
+
   # 🚅 add methods above.
 end

@@ -1,0 +1,7 @@
+<% size ||= 12 %>
+
+<div class="flex overflow-hidden">
+  <% memberships.each_with_index do |membership, index| %>
+    <%= image_tag membership_profile_photo_url(membership), class: "#{'-ml-1' if index > 0} inline-block h-#{size} w-#{size} rounded-full ring-2 ring-white" %>
+  <% end %>
+</div>

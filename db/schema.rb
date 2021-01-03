@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_01_210524) do
+ActiveRecord::Schema.define(version: 2021_01_01_231429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -324,6 +324,7 @@ ActiveRecord::Schema.define(version: 2021_01_01_210524) do
     t.bigint "membership_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.jsonb "roles", default: []
     t.index ["creative_concept_id"], name: "index_creative_concepts_collaborators_on_creative_concept_id"
     t.index ["membership_id"], name: "index_creative_concepts_collaborators_on_membership_id"
   end

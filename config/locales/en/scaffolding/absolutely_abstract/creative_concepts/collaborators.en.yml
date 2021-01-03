@@ -19,11 +19,22 @@ en:
         # TODO customize for your use-case.
         destroy: Are you sure you want to remove %{collaborator_name}? This will also remove it's associated data. This can't be undone.
     fields: &fields
-      membership_id:
+      membership_id: &membership
         name: &membership_id Membership
         label: *membership_id
         heading: *membership_id
         placeholder: Select a Membership
+
+      membership: *membership
+
+      roles:
+        name: &roles Privileges
+        label: *roles
+        heading: *roles
+        options:
+          admin: Administrator
+          editor: Editor
+        none: Observer
 
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
@@ -38,8 +49,8 @@ en:
       section: "%{creative_concepts_possessive} Collaborators"
       contexts:
         scaffolding/absolutely_abstract/creative_concept:
-          header: Collaborators
-          description: Below is a list of Collaborators that have been added to %{creative_concept_name}. You can manage them with the options below.
+          header: Additional Collaborators
+          description: All %{team_name} Administrators can collaborate on %{creative_concept_name} by default. Below is a list of additional Collaborators that have been added for %{creative_concept_name}. Only %{team_name} and %{creative_concept_name} Administrators can manage Collaborators below.
       fields: *fields
       buttons: *buttons
     show:
@@ -56,15 +67,11 @@ en:
       header: New Collaborator Details
       description: Please provide the details of the new Collaborator you'd like to add to %{creative_concept_name}.
       form: *form
-      fields: *fields
-      buttons: *buttons
     edit:
       section: "%{collaborator_name}"
       header: Edit Collaborator Details
       description: You can update the details or settings for %{collaborator_name} below.
       form: *form
-      fields: *fields
-      buttons: *buttons
     notifications:
       created: Collaborator was successfully created.
       updated: Collaborator was successfully updated.
@@ -78,6 +85,7 @@ en:
     attributes:
       scaffolding/absolutely_abstract/creative_concepts/collaborator:
         membership_id: *membership_id
+        roles: *roles
         # 🚅 super scaffolding will insert new activerecord attributes above this line.
         created_at: *created_at
         updated_at: *updated_at

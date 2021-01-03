@@ -1,4 +1,6 @@
 class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Account::ApplicationController
+  include Scaffolding::AbsolutelyAbstract::CreativeConcepts::ControllerSupport
+
   account_load_and_authorize_resource :creative_concept, through: :team, through_association: :scaffolding_absolutely_abstract_creative_concepts
 
   # GET /account/teams/:team_id/scaffolding/absolutely_abstract/creative_concepts
@@ -27,7 +29,11 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
   def create
     respond_to do |format|
       if @creative_concept.save
-        format.html { redirect_to [:account, @team, :scaffolding_absolutely_abstract_creative_concepts], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts.notifications.created') }
+
+        # any user adding a creative concept should be able to manage it.
+        ensure_current_user_can_manage_creative_concept @creative_concept
+
+        format.html { redirect_to [:account, @creative_concept], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts.notifications.created') }
         format.json { render :show, status: :created, location: [:account, @team, @creative_concept] }
       else
         format.html { render :new }

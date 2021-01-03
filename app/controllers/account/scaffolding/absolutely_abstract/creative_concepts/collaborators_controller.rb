@@ -4,13 +4,13 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
   # GET /account/scaffolding/absolutely_abstract/creative_concepts/:creative_concept_id/collaborators
   # GET /account/scaffolding/absolutely_abstract/creative_concepts/:creative_concept_id/collaborators.json
   def index
-    # if you only want these objects shown on their parent's show page, uncomment this:
-    # redirect_to [:account, @creative_concept]
+    redirect_to [:account, @creative_concept]
   end
 
   # GET /account/scaffolding/absolutely_abstract/creative_concepts/collaborators/:id
   # GET /account/scaffolding/absolutely_abstract/creative_concepts/collaborators/:id.json
   def show
+    redirect_to [:account, @creative_concept]
   end
 
   # GET /account/scaffolding/absolutely_abstract/creative_concepts/:creative_concept_id/collaborators/new
@@ -65,9 +65,11 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
       strong_params = params.require(:scaffolding_absolutely_abstract_creative_concepts_collaborator).permit(
         :membership_id,
         # 🚅 super scaffolding will insert new fields above this line.
+        roles: [],
         # 🚅 super scaffolding will insert new arrays above this line.
       )
 
+      assign_checkboxes(strong_params, :roles)
       # 🚅 super scaffolding will insert processing for new fields above this line.
 
       strong_params

@@ -13,6 +13,7 @@
         <thead>
           <tr>
             <th><%= t('.fields.name.heading') %></th>
+            <th><%= t('.fields.all_collaborators.heading') %></th>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
             <th><%= t('.fields.created_at.heading') %></th>
             <th></th>
@@ -22,6 +23,7 @@
           <% creative_concepts.each do |creative_concept| %>
           <tr data-id="<%= creative_concept.id %>">
             <td><%= link_to creative_concept.name, [:account, creative_concept] %></td>
+            <td><%= render 'account/shared/memberships/photos', memberships: creative_concept.all_collaborators, size: 9 %></td>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
             <td><%= display_date_and_time(creative_concept.created_at) %></td>
             <td class="buttons">

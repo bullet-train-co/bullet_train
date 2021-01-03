@@ -56,8 +56,9 @@ class Team < ApplicationRecord
   # 🚫 DEFAULT BULLET TRAIN TEAM FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
 
+  # TODO rename this to admins.
   def admin_memberships
-    memberships.select(&:admin?)
+    memberships.current_and_invited.select(&:admin?)
   end
 
   def admin_users

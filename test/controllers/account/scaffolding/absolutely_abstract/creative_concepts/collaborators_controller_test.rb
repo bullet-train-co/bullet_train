@@ -27,6 +27,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
       post url_for([:account, @creative_concept, :collaborators]), params: {
         scaffolding_absolutely_abstract_creative_concepts_collaborator: {
           membership_id: @collaborator.membership_id,
+          roles: @collaborator.roles,
           # 🚅 super scaffolding will insert new fields above this line.
         }
       }
@@ -49,6 +50,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
     patch url_for([:account, @collaborator]), params: {
       scaffolding_absolutely_abstract_creative_concepts_collaborator: {
         membership_id: @collaborator.membership_id,
+        roles: @collaborator.roles,
         # 🚅 super scaffolding will also insert new fields above this line.
       }
     }

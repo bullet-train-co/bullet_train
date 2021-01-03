@@ -27,6 +27,14 @@ en:
         name: &description Description
         label: *description
         heading: *description
+      all_collaborators:
+        heading: Collaborators
+      admins:
+        heading: Administrators
+      editors:
+        heading: Editors
+      viewers:
+        heading: Viewers
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
         name: &created_at Added
@@ -41,14 +49,16 @@ en:
       contexts:
         team:
           header: Creative Concepts
-          description: Below is a list of Creative Concepts that have been added to %{team_name}. You can manage them with the options below.
-          description_empty: No Creative Concepts have been added for %{team_name} yet. To get started, use the button below!
+          description_admin: Below is a list of all Creative Concepts for %{team_name}. You can manage them with the options below.
+          description: Below is a list of Creative Concepts you can see on %{team_name}. You can manage them with the options below.
+          description_empty_admin: No Creative Concepts have been added for %{team_name} yet. To get started, use the button below!
+          description_empty: There are no Creative Concepts for you to see on %{team_name} yet. To add your own, use the button below!
       fields: *fields
       buttons: *buttons
     show:
       section: "%{creative_concept_name}"
       header: Creative Concept Details
-      description: Below are the details we have for %{creative_concept_name}. You'll also find options for updating these details or removing %{creative_concept_name} from %{team_name} entirely.
+      description: Below are the details we have for %{creative_concept_name}.
       fields: *fields
       buttons: *buttons
     form: &form
@@ -58,13 +68,11 @@ en:
       header: New Creative Concept Details
       description: Please provide the details of the new Creative Concept you'd like to add to %{team_name}.
       form: *form
-      buttons: *buttons
     edit:
       section: "%{creative_concept_name}"
       header: Edit Creative Concept Details
       description: You can update the details or settings for %{creative_concept_name} below.
       form: *form
-      buttons: *buttons
     notifications:
       created: Creative Concept was successfully created.
       updated: Creative Concept was successfully updated.

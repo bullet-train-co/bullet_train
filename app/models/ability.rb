@@ -9,6 +9,9 @@ class Ability
       # or destroyed.
       :team_ids,
       :administrating_team_ids,
+      :admin_scaffolding_absolutely_abstract_creative_concepts_ids,
+      :editor_scaffolding_absolutely_abstract_creative_concepts_ids,
+      :viewer_scaffolding_absolutely_abstract_creative_concepts_ids,
 
     ]
 
@@ -73,9 +76,35 @@ class Ability
       can :read, Webhooks::Outgoing::Event, {team: {id: user.team_ids}}
 
       # the super scaffolding objects.
-      can :manage, Scaffolding::CompletelyConcrete::TangibleThing, {absolutely_abstract_creative_concept: {team: {id: user.team_ids}}}
-      can :manage, Scaffolding::AbsolutelyAbstract::CreativeConcept, {team: {id: user.team_ids}}
-      can :manage, Memberships::Reassignments::ScaffoldingCompletelyConcreteTangibleThingsReassignment, membership: {team_id: user.team_ids}
+
+      # all team admins can read, create, update, and destroy all creative concepts on their team.
+      can :manage, Scaffolding::AbsolutelyAbstract::CreativeConcept, team: {id: user.administrating_team_ids}
+
+      # all team members can create new creative concepts.
+      # this requires the controller making team members that aren't a team admin an admin of the creative concepts they create.
+      can :create, Scaffolding::AbsolutelyAbstract::CreativeConcept, team: {id: user.team_ids}
+
+      # admins and editors at the creative concept level can manage the creative concepts they've been added to.
+      # this list of ids will be used again below when evaluating permissions for child objects.
+      editable_creative_concept_ids = user.admin_scaffolding_absolutely_abstract_creative_concepts_ids + user.editor_scaffolding_absolutely_abstract_creative_concepts_ids
+      can [:read, :update], Scaffolding::AbsolutelyAbstract::CreativeConcept, id: editable_creative_concept_ids
+
+      # beside the team admins above, only admins at the creative concept level can actually delete the creative concept.
+      can :destroy, Scaffolding::AbsolutelyAbstract::CreativeConcept, id: user.admin_scaffolding_absolutely_abstract_creative_concepts_ids
+
+      # regular team members can only view creative concepts they've been assigned a viewer for.
+      can :read, Scaffolding::AbsolutelyAbstract::CreativeConcept, id: user.viewer_scaffolding_absolutely_abstract_creative_concepts_ids
+
+      # only admins (either team or creative concept level) can manage collaborators for creative concepts.
+      can :manage, Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator, creative_concept: {team: {id: user.administrating_team_ids}}
+      can :manage, Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator, creative_concept: {id: user.admin_scaffolding_absolutely_abstract_creative_concepts_ids}
+
+      # team members can read, create, update, and destroy tangible things that belong to creative concepts they can edit.
+      can :manage, Scaffolding::CompletelyConcrete::TangibleThing, absolutely_abstract_creative_concept: {team: {id: user.administrating_team_ids}}
+      can :manage, Scaffolding::CompletelyConcrete::TangibleThing, absolutely_abstract_creative_concept: {id: editable_creative_concept_ids}
+
+      # team members can read tangible things that belong to creative concepts they can read.
+      can :read, Scaffolding::CompletelyConcrete::TangibleThing, absolutely_abstract_creative_concept: {id: user.viewer_scaffolding_absolutely_abstract_creative_concepts_ids}
 
       # we only disable editing by default, because by default there are no settings for oauth accounts.
       # however, if you've added editable settings for your oauth integrations, you should remove the `cannot`
@@ -83,14 +112,13 @@ class Ability
 
       if stripe_enabled?
         can :manage, Oauth::StripeAccount, team_id: user.team_ids
-        # cannot :edit, Oauth::StripeAccount
+        # cannot :update, Oauth::StripeAccount
       end
 
       # 🚅 super scaffolding will insert any new oauth providers above.
 
       # don't remove or edit the following comment or you'll break super scaffolding.
       # the following abilities were added by super scaffolding.
-      can :manage, Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator, creative_concept: {team_id: user.team_ids}
 
       if user.developer?
         # the following admin abilities were added by super scaffolding.

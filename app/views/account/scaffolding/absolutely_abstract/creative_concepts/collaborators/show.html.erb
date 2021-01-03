@@ -6,15 +6,14 @@
       <% p.content_for :description, t('.description') %>
 
       <% p.content_for :body do %>
-        <% if @collaborator.membership %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.membership_id.heading') %></label>
-          <div>
-            <%= link_to @collaborator.membership.label_string, [:account, @collaborator.membership] %>
-          </div>
-        </div>
-      <% end %>
-
+        <%= render 'shared/attributes/belongs_to', object: @collaborator, attribute: :membership %>
+        <%= render 'shared/attributes/attribute', object: @collaborator, attribute: :roles do %>
+          <% if @collaborator.roles.present? %>
+            <%= @collaborator.roles.map { |role| t(".fields.roles.options.#{role}") }.to_sentence %>
+          <% else %>
+            <%= t(".fields.roles.none") %>
+          <% end %>
+        <% end %>
         <%# 🚅 super scaffolding will insert new fields above this line. %>
       <% end %>
 

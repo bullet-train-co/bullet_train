@@ -50,6 +50,7 @@ class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
       strong_params = params.require(:scaffolding_absolutely_abstract_creative_concepts_collaborator).permit(
         :membership_id,
         # 🚅 super scaffolding will insert new fields above this line.
+        roles: [],
         # 🚅 super scaffolding will insert new arrays above this line.
       )
 

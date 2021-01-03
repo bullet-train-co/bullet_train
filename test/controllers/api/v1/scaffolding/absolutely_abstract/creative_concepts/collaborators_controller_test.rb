@@ -37,6 +37,7 @@ class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
     assert_equal(collaborator_data['type'], 'scaffolding-absolutely-abstract-creative-concepts-collaborators')
 
     assert_equal collaborator_attributes['membership-id'], collaborator.membership_id
+    assert_equal collaborator_attributes['roles'], collaborator.roles
     # 🚅 super scaffolding will insert new fields above this line.
 
     assert_equal collaborator_attributes['scaffolding-absolutely-abstract-creative-concept-id'], collaborator.creative_concept_id

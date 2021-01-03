@@ -1,4 +1,4 @@
-<% creative_concept = @creative_concept || @creative_concept %>
+<% creative_concept = @creative_concept %>
 <% context ||= creative_concept %>
 <% collection ||= :collaborators %>
 <% hide_actions ||= false %>
@@ -19,28 +19,34 @@
         <thead>
           <tr>
             <th><%= t('.fields.membership_id.heading') %></th>
+            <th><%= t('.fields.roles.heading') %></th>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
-            <th><%= t('.fields.created_at.heading') %></th>
             <th class="text-right"></th>
           </tr>
         </thead>
         <tbody>
           <% collaborators.each do |collaborator| %>
-          <tr data-id="<%= collaborator.id %>">
-            <td><%= link_to collaborator.membership.label_string, [:account, collaborator.membership] if collaborator.membership %></td>
-            <%# 🚅 super scaffolding will insert new fields above this line. %>
-            <td><%= display_date_and_time(collaborator.created_at) %></td>
-            <td class="buttons">
-              <% unless hide_actions %>
-                <% if can? :edit, collaborator %>
-                  <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, collaborator], class: 'button-secondary button-smaller' %>
+            <tr data-id="<%= collaborator.id %>">
+              <td><%= link_to collaborator.membership.label_string, [:account, collaborator] %></td>
+              <td>
+                <% if collaborator.roles.present? %>
+                  <%= collaborator.roles.map { |role| t(".fields.roles.options.#{role}") }.to_sentence %>
+                <% else %>
+                  <%= t(".fields.roles.none") %>
                 <% end %>
-                <% if can? :destroy, collaborator %>
-                  <%= link_to t('.buttons.shorthand.destroy'), [:account, collaborator], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(collaborator)) }, class: 'button-secondary button-smaller' %>
+              </td>
+              <%# 🚅 super scaffolding will insert new fields above this line. %>
+              <td class="buttons">
+                <% unless hide_actions %>
+                  <% if can? :edit, collaborator %>
+                    <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, collaborator], class: 'button-secondary button-smaller' %>
+                  <% end %>
+                  <% if can? :destroy, collaborator %>
+                    <%= link_to t('.buttons.shorthand.destroy'), [:account, collaborator], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(collaborator)) }, class: 'button-secondary button-smaller' %>
+                  <% end %>
                 <% end %>
-              <% end %>
-            </td>
-          </tr>
+              </td>
+            </tr>
           <% end %>
         </tbody>
       </table>
