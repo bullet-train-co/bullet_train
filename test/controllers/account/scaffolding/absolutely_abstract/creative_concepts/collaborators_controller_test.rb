@@ -9,12 +9,12 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
     sign_in @user
     @team = @user.current_team
     @creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
-@collaborator = create(:scaffolding_absolutely_abstract_creative_concepts_collaborator, creative_concept: @creative_concept)
+    @collaborator = create(:scaffolding_absolutely_abstract_creative_concepts_collaborator, creative_concept: @creative_concept, roles: [:admin])
   end
 
   test "should get index" do
     get url_for([:account, @creative_concept, :collaborators])
-    assert_response :success
+    assert_redirected_to url_for([:account, @creative_concept])
   end
 
   test "should get new" do
@@ -38,7 +38,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
 
   test "should show collaborator" do
     get url_for([:account, @collaborator])
-    assert_response :success
+    assert_redirected_to url_for([:account, @creative_concept])
   end
 
   test "should get edit" do

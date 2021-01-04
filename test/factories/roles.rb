@@ -3,6 +3,5 @@ FactoryBot.define do
     sequence(:display_order) { |n| n }
 
     key { "MyString" }
-    name { "MyString" }
   end
 end
