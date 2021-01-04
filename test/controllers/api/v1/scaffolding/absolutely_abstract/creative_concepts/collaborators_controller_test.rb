@@ -13,7 +13,7 @@ class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
     @another_api_key = create(:api_key, user: @another_user)
     @team = @user.current_team
     @creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
-@collaborator = create(:scaffolding_absolutely_abstract_creative_concepts_collaborator, creative_concept: @creative_concept)
+    @collaborator = create(:scaffolding_absolutely_abstract_creative_concepts_collaborator, creative_concept: @creative_concept)
     @other_collaborators = create_list(:scaffolding_absolutely_abstract_creative_concepts_collaborator, 3)
   end
 
@@ -40,7 +40,7 @@ class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
     assert_equal collaborator_attributes['roles'], collaborator.roles
     # 🚅 super scaffolding will insert new fields above this line.
 
-    assert_equal collaborator_attributes['scaffolding-absolutely-abstract-creative-concept-id'], collaborator.creative_concept_id
+    assert_equal collaborator_attributes['creative-concept-id'], collaborator.creative_concept_id
 
   end
 
@@ -81,7 +81,9 @@ class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
   test '#create' do
 
     # use the serializer to generate a payload, but stripe some attributes out.
-    collaborator_data = Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorSerializer.new(build(:scaffolding_absolutely_abstract_creative_concepts_collaborator, creative_concept: nil)).attributes
+    membership = @team.memberships.current_and_invited.first
+    creative_concept = create(:creative_concept)
+    collaborator_data = Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorSerializer.new(build(:scaffolding_absolutely_abstract_creative_concepts_collaborator, creative_concept: creative_concept, membership: membership, roles: ['editor'])).attributes
     collaborator_data.except!(:id, :creative_concept_id, :created_at, :updated_at)
 
     post url_for([:api, :v1, @creative_concept, :collaborators]), params: { scaffolding_absolutely_abstract_creative_concepts_collaborator: collaborator_data }, headers: auth_header
@@ -103,6 +105,8 @@ class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
     put url_for([:api, :v1, @collaborator]), params: {
       scaffolding_absolutely_abstract_creative_concepts_collaborator: {
         # 🚅 super scaffolding will also insert new fields above this line.
+        membership_id: @collaborator.membership_id,
+        roles: ['editor']
       }
     }, headers: auth_header
     assert_response :success
