@@ -9,7 +9,7 @@ First, [create a new private repository on GitHub](https://github.com/new). (Ple
 Once you have the new repository ready, clone our repository to your local machine.
 
 ```
-git clone git@github.com:bullet-train-co/bullet-train.git your-new-app-name
+git clone git@github.com:bullet-train-co/bullet-train-tailwind-css.git your-new-app-name
 cd your-new-app-name
 git remote rename origin bullet-train
 git remote add origin git@github.com:your-username/your-new-app-name.git
