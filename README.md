@@ -13,10 +13,10 @@ git clone git@github.com:bullet-train-co/bullet-train-tailwind-css.git your-new-
 cd your-new-app-name
 git remote rename origin bullet-train
 git remote add origin git@github.com:your-username/your-new-app-name.git
-git push origin master
+git push origin main
 ```
 
-In those steps you've renamed the original Bullet Train repository to be referred to as `bullet-train` and your own repository is now your `origin`. (This means you'll be able to merge in updates from `bullet-train/master`.)
+In those steps you've renamed the original Bullet Train repository to be referred to as `bullet-train` and your own repository is now your `origin`. (This means you'll be able to merge in updates from `bullet-train/main`.)
 
 Using GitHub's "Fork" feature is only for developers when they want to submit a Pull Request to the Bullet Train codebase. It's _not_ the correct way to get started building a new project with Bullet Train.
 
@@ -72,17 +72,17 @@ git clean -d -f
 git fetch bullet-train
 ````
 
-3. Create a new "upgrade" branch off of your main branch (e.g. `master` in this example.)
+3. Create a new "upgrade" branch off of your main branch (e.g. `main` in this example.)
 
 ```
-git checkout master
+git checkout main
 git checkout -b updating-bullet-train
 ```
 
 4. Merge in the newest stuff from Bullet Train and resolve any merge conflicts.
 
 ```
-git merge bullet-train/master
+git merge bullet-train/main
 ```
 
 (It's quite possible you'll get some merge conflicts at this point. No big deal! Just go through and resolve them like you would if you were integrating code from another developer on your team. We try to comment our code heavily, but if you have any questions about the code you're trying to understand, let us know on Slack!)
@@ -99,12 +99,12 @@ git commit -m "Upgrading Bullet Train."
 rails test
 ```
 
-6. Merge into `master` and delete the branch.
+6. Merge into `main` and delete the branch.
 
 ```
-git checkout master
+git checkout main
 git merge updating-bullet-train
-git push origin master
+git push origin main
 git branch -d updating-bullet-train
 ```
 
@@ -153,7 +153,7 @@ To upgrade the framework, you’ll simply merge the upstream Bullet Train reposi
 
 If you _have_ modified some framework defaults _and_ we also happened to update that same logic upstream, then pulling the most recent version of the framework should cause a merge conflict in Git, which will give you an opportunity to compare our upstream changes with your local customizations and resolve them in a way that makes sense for your application.
 
-Practically speaking, most framework updates will be a feature branch that you merge our upstream changes into, and then after it checks out in testing, you can merge that into master.
+Practically speaking, most framework updates will be a feature branch that you merge our upstream changes into, and then after it checks out in testing, you can merge that into main.
 
 ### It’s Weeks of Work, Already Done!
 Not only have we done all these things, but we’ve put them all together in a way that feels consistent to the user. There were many design decisions and debugging sessions along the way. All of it has added up to several weeks of work, and there are many more months of work to come in the future. By using Bullet Train as your foundation, you’re saving all that time both now and in the future. It’s like hiring someone to manage all of these features in your application, and keep improving them as well.
