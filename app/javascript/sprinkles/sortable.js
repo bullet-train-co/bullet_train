@@ -58,7 +58,7 @@ function enableSortable($scope) {
   }, 500);
 }
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   console.log("🍩 Sortable: Enabling on <body> after a Turbolinks load.")
   enableSortable($('body'));
 })

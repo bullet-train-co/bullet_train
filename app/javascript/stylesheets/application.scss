@@ -57,12 +57,16 @@
     @apply space-x;
   }
 
+  form.button_to {
+    @apply inline;
+  }
+
   .button {
     @apply shadow-sm text-white hover:text-white bg-blue hover:bg-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark hover:no-underline;
   }
 
   .button-secondary {
-    @apply text-blue hover:text-blue-dark hover:underline;
+    @apply text-blue bg-transparent hover:text-blue-dark hover:underline;
   }
 
   .button, .button-secondary, .button-alternative {

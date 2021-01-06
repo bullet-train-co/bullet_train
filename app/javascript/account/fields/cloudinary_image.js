@@ -96,7 +96,7 @@ function enableCloudinaryImages($scope) {
   $scope.find(".cloudinary-field button.clear").click(clearImageFromCloudinaryField);
 }
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   enableCloudinaryImages($('body'));
 })
 

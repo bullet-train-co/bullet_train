@@ -37,7 +37,7 @@
 
   <div class="buttons">
     <%= form.submit t('.buttons.update'), class: "button" %>
-    <%= link_to t('.buttons.destroy'), [:account, membership], method: :delete, data: { confirm: t('.buttons.confirmations.destroy') }, class: 'button-secondary' if can? :destroy, membership %>
+    <%= button_to t('.buttons.destroy'), [:account, membership], method: :delete, data: { confirm: t('.buttons.confirmations.destroy') }, class: 'button-secondary' if can? :destroy, membership %>
     <%= link_to t('global.buttons.cancel'), [:account, @team, :memberships], class: "button-secondary" %>
   </div>
 

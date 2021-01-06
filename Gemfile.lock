@@ -401,9 +401,8 @@ GEM
     thor (1.0.1)
     tilt (2.0.10)
     time_ago_in_words (0.1.1)
-    turbolinks (5.2.1)
-      turbolinks-source (~> 5.2)
-    turbolinks-source (5.2.0)
+    turbo-rails (0.5.2)
+      rails (>= 6.0.0)
     tzinfo (2.0.3)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -493,7 +492,7 @@ DEPENDENCIES
   stripe
   time_ago_in_words
   trix!
-  turbolinks (~> 5)
+  turbo-rails
   tzinfo-data
   valid_email
   web-console (>= 4.1.0)

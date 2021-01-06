@@ -44,7 +44,7 @@
           <% else %>
             <%= link_to t('.buttons.promote'), [:promote, :account, @membership], method: :post, data: { confirm: t('global.confirm_message') }, class: first_button_primary if can? :promote, @membership %>
           <% end %>
-          <%= link_to t(".buttons.#{membership_destroy_locale_key(@membership)}"), [:account, @membership], method: :delete, data: { confirm: t(".buttons.confirmations.#{membership_destroy_locale_key(@membership)}", model_locales(@membership)) }, class: first_button_primary if can? :destroy, @membership %>
+          <%= button_to t(".buttons.#{membership_destroy_locale_key(@membership)}"), [:account, @membership], method: :delete, data: { confirm: t(".buttons.confirmations.#{membership_destroy_locale_key(@membership)}", model_locales(@membership)) }, class: first_button_primary if can? :destroy, @membership %>
         <% end %>
 
         <%= link_to t('global.buttons.back'), [:account, @team, :memberships], class: first_button_primary %>

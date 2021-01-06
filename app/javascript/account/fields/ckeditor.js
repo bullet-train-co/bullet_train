@@ -72,7 +72,7 @@ function enableCKEditors($scope) {
   });
 }
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   enableCKEditors($('body'));
 })
 

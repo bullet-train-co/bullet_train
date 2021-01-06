@@ -51,7 +51,7 @@ function enableReassignable($scope) {
   }, 500);
 }
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   console.log("🍩 Reassignable: Enabling on <body> after a Turbolinks load.")
   enableReassignable($('body'));
 })

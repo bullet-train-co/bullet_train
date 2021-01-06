@@ -13,7 +13,7 @@ function enablePhoneFields($scope) {
   });
 };
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   enablePhoneFields($('body'));
 })
 
