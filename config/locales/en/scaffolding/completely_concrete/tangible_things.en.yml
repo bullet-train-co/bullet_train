@@ -95,13 +95,15 @@ en:
       contexts:
         scaffolding/absolutely_abstract/creative_concept:
           header: Tangible Things
-          description: Below is a list of Tangible Things that have been added to %{creative_concept_name}. You can manage them with the options below.
+          description: Below is a list of Tangible Things that have been added for %{creative_concept_name}.
+          description_empty: No Tangible Things have been added for %{creative_concept_name}.
       fields: *fields
       buttons: *buttons
     show:
       section: "%{tangible_thing_name}"
       header: Tangible Thing Details
-      description: Below are the details we have for %{tangible_thing_name}. You'll also find options for updating these details or removing %{tangible_thing_name} from %{creative_concept_name} entirely.
+      description: Below are the details we have for %{tangible_thing_name}.
+      manage_description: You'll also find options for updating these details or removing %{tangible_thing_name} from %{creative_concept_name} entirely.
       fields: *fields
       buttons: *buttons
     form: &form
@@ -112,13 +114,11 @@ en:
       header: New Tangible Thing Details
       description: Please provide the details of the new Tangible Thing you'd like to add to %{creative_concept_name}.
       form: *form
-      buttons: *buttons
     edit:
       section: "%{tangible_thing_name}"
       header: Edit Tangible Thing Details
       description: You can update the details or settings for %{tangible_thing_name} below.
       form: *form
-      buttons: *buttons
     notifications:
       created: Tangible Thing was successfully created.
       updated: Tangible Thing was successfully updated.

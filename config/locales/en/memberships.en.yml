@@ -53,7 +53,6 @@ en:
       section: "%{membership_name} on %{team_name}"
       header: Update Membership Settings
       description: You can edit the settings for %{memberships_possessive} membership on %{team_name} below.
-      buttons: *buttons
       grant_privileges_of: Grant Privileges of %{role_name}
     show:
       section: "%{memberships_possessive} Membership on %{team_name}"

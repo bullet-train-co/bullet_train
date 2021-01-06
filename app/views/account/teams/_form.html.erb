@@ -1,4 +1,4 @@
-<%= form_with(model: [:account, team], local: true) do |form| %>
+<%= form_with model: [:account, team], local: true, class: 'form' do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
   <%= render 'shared/fields/text_field', form: form, method: :name, options: {autofocus: true} %>

@@ -14,7 +14,7 @@ options ||= options_for(form, method)
       <% options.each do |value, label| %>
         <label class="btn-toggle">
           <% if multiple %>
-            <%= form.check_box method, {}, value %>
+            <%= form.check_box method, {multiple: multiple, checked: form.object.send(method).map(&:to_s).include?(value.to_s)}, value %>
           <% else %>
             <%= form.radio_button method, value %>
           <% end %>

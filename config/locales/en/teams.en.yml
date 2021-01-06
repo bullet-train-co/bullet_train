@@ -34,7 +34,6 @@ en:
       section: '%{team_name}'
       header: Edit Team Details
       description: You can update the details of and settings for this team below.
-      buttons: *buttons
     notifications:
       created: Team was successfully created.
       updated: Team was successfully updated.

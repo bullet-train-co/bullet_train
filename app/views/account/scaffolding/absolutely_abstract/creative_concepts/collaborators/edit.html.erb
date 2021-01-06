@@ -1,0 +1,12 @@
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description, t('.description') %>
+      <% p.content_for :body do %>
+        <%= render 'form', collaborator: @collaborator %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

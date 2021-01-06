@@ -152,6 +152,22 @@ class User < ApplicationRecord
     update_column(:ability_cache, nil) if ability_cache
   end
 
+  def scaffolding_absolutely_abstract_creative_concepts_collaborators
+    Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator.joins(:membership).where(membership: {user_id: id})
+  end
+
+  def admin_scaffolding_absolutely_abstract_creative_concepts_ids
+    scaffolding_absolutely_abstract_creative_concepts_collaborators.admins.pluck(:creative_concept_id)
+  end
+
+  def editor_scaffolding_absolutely_abstract_creative_concepts_ids
+    scaffolding_absolutely_abstract_creative_concepts_collaborators.editors.pluck(:creative_concept_id)
+  end
+
+  def viewer_scaffolding_absolutely_abstract_creative_concepts_ids
+    scaffolding_absolutely_abstract_creative_concepts_collaborators.viewers.pluck(:creative_concept_id)
+  end
+
   def developer?
     return false unless ENV['DEVELOPER_EMAILS']
     # we use email_was so they can't try setting their email to the email of an admin.

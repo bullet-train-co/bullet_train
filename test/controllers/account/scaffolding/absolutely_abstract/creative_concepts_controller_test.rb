@@ -28,7 +28,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsControllerTest <
       post account_team_scaffolding_absolutely_abstract_creative_concepts_url(@team), params: { scaffolding_absolutely_abstract_creative_concept: { name: @creative_concept.name } }
     end
 
-    assert_redirected_to account_team_scaffolding_absolutely_abstract_creative_concepts_path(@team)
+    assert_redirected_to account_scaffolding_absolutely_abstract_creative_concept_path(Scaffolding::AbsolutelyAbstract::CreativeConcept.last)
   end
 
   test "should show creative_concept" do

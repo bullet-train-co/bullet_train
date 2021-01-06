@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/andrewculver/nice_partials.git
-  revision: f2317e6792a1c6212292c56499d77aad5518fc17
+  revision: c1b26169798afc2f79c47d2dfa50e5c4aadfdde8
   branch: bt
   specs:
     nice_partials (0.1.2)

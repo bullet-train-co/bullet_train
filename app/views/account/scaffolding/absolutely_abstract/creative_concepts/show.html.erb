@@ -8,6 +8,40 @@
       <% p.content_for :body do %>
         <%= render 'shared/attributes/text', object: @creative_concept, attribute: :name %>
         <%= render 'shared/attributes/html', object: @creative_concept, attribute: :description %>
+
+        <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-3">
+          <div class="sm:col-span-1">
+            <%= render 'shared/attributes/base' do |p| %>
+              <% p.content_for :heading, t(".fields.admins.heading") %>
+              <% p.content_for :body do %>
+                <%= render 'account/shared/memberships/photos', memberships: (@team.admin_memberships + @creative_concept.admins).uniq %>
+              <% end %>
+            <% end %>
+          </div>
+
+          <% if @creative_concept.editors.any? %>
+            <div class="sm:col-span-1">
+              <%= render 'shared/attributes/base' do |p| %>
+                <% p.content_for :heading, t(".fields.editors.heading") %>
+                <% p.content_for :body do %>
+                  <%= render 'account/shared/memberships/photos', memberships: @creative_concept.editors %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <% if @creative_concept.viewers.any? %>
+            <div class="sm:col-span-1">
+              <%= render 'shared/attributes/base' do |p| %>
+                <% p.content_for :heading, t(".fields.viewers.heading") %>
+                <% p.content_for :body do %>
+                  <%= render 'account/shared/memberships/photos', memberships: @creative_concept.viewers %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
         <%# 🚅 super scaffolding will insert new fields above this line. %>
       <% end %>
 
@@ -18,7 +52,12 @@
       <% end %>
     <% end %>
 
-    <%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @creative_concept.completely_concrete_tangible_things, hide_back: true %>
+    <%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @creative_concept.completely_concrete_tangible_things.accessible_by(current_ability), hide_back: true %>
+
+    <% if can? :read, Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator.new(creative_concept: @creative_concept) %>
+      <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/collaborators/index', collaborators: @creative_concept.collaborators, hide_back: true %>
+    <% end %>
+
     <%# 🚅 super scaffolding will insert new children above this line. %>
   <% end %>
 <% end %>

@@ -1,0 +1,6 @@
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'index', collaborators: @collaborators %>
+  <% end %>
+<% end %>

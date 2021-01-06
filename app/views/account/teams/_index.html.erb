@@ -11,9 +11,7 @@
             </div>
             <div class="mt-4 flex-shrink-0 sm:mt-0">
               <div class="flex overflow-hidden">
-                <% team.memberships.current_and_invited.first(10).each_with_index do |membership, index| %>
-                  <%= image_tag membership_profile_photo_url(membership), class: "#{'-ml-1' if index > 0} inline-block h-12 w-12 rounded-full ring-2 ring-white" %>
-                <% end %>
+                <%= render 'account/shared/memberships/photos', memberships: team.memberships.current_and_invited.first(10) %>
               </div>
             </div>
           </div>

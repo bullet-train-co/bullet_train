@@ -3,7 +3,10 @@
   <% p.content_for :body do %>
     <%= render 'account/shared/box', divider: true do |p| %>
       <% p.content_for :title, t('.header') %>
-      <% p.content_for :description, t('.description') %>
+      <% p.content_for :description do %>
+        <%= t('.description') %>
+        <%= t('.manage_description') if can? :manage, @tangible_thing %>
+      <% end %>
 
       <% p.content_for :body do %>
         <%# 🚅 skip this section when scaffolding. %>
@@ -28,7 +31,6 @@
         <%= link_to t('.buttons.destroy'), [:account, @tangible_thing], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@tangible_thing)) } if can? :destroy, @tangible_thing %>
         <%= link_to t('global.buttons.back'), [:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things], class: first_button_primary %>
       <% end %>
-
     <% end %>
 
     <%# 🚅 super scaffolding will insert new children above this line. %>
