@@ -15,7 +15,7 @@ class Account::UsersController < Account::ApplicationController
   end
 
   def updating_password?
-    params[:user][:password].present?
+    params[:user].key?(:password)
   end
 
   # PATCH/PUT /account/users/1
