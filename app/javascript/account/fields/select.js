@@ -26,6 +26,7 @@ function enableSelects($scope) {
 
     options.templateResult = formatState;
     options.templateSelection = formatState;
+    options.width = 'style';
 
     $select.select2(options);
   });
