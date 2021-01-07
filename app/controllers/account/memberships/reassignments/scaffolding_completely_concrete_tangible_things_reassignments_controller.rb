@@ -30,7 +30,7 @@ class Account::Memberships::Reassignments::ScaffoldingCompletelyConcreteTangible
         format.json { render :show, status: :created, location: [:account, @scaffolding_completely_concrete_tangible_things_reassignment] }
       else
         raise @scaffolding_completely_concrete_tangible_things_reassignment.inspect
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @scaffolding_completely_concrete_tangible_things_reassignment.errors, status: :unprocessable_entity }
       end
     end
@@ -44,7 +44,7 @@ class Account::Memberships::Reassignments::ScaffoldingCompletelyConcreteTangible
         format.html { redirect_to [:account, @scaffolding_completely_concrete_tangible_things_reassignment], notice: I18n.t('memberships/reassignments/scaffolding_completely_concrete_tangible_things_reassignments.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @scaffolding_completely_concrete_tangible_things_reassignment] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @scaffolding_completely_concrete_tangible_things_reassignment.errors, status: :unprocessable_entity }
       end
     end

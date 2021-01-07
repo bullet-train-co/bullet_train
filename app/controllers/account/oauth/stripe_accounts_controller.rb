@@ -28,7 +28,7 @@ class Account::Oauth::StripeAccountsController < Account::ApplicationController
         format.html { redirect_to [:account, @stripe_account], notice: I18n.t('oauth/stripe_accounts.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @stripe_account] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @stripe_account.errors, status: :unprocessable_entity }
       end
     end

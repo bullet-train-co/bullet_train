@@ -40,7 +40,7 @@ class Account::Onboarding::UserEmailController < Account::ApplicationController
         # address is already taken.
         @email_taken = @user.errors.details[:email].select { |error| error[:error] == :taken }.any? rescue false
 
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

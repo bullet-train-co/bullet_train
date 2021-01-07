@@ -66,30 +66,28 @@
         </div>
 
         <div class="flex flex-col w-0 flex-1 overflow-hidden bg-gray-100">
-          <turbo-frame id="main">
-            <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
-              <div class="flex flex-row items-center shadow-sm">
-                <button class="lg:hidden h-12 w-12 ml-1 flex-none inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue" @click.stop="menuOpen = true">
-                  <span class="sr-only">Open Application Menu</span>
-                  <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                </button>
+          <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
+            <div class="flex flex-row items-center shadow-sm">
+              <button class="lg:hidden h-12 w-12 ml-1 flex-none inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue" @click.stop="menuOpen = true">
+                <span class="sr-only">Open Application Menu</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
 
-                <nav class="flex px-1 lg:px-4 py-3 overflow-y-auto" aria-label="Breadcrumb">
-                  <ol class="breadcrumb whitespace-nowrap flex items-center space-x-3 pr-3">
-                    <%= render('breadcrumbs').strip.html_safe %>
-                  </ol>
-                </nav>
-              </div>
+              <nav class="flex px-1 lg:px-4 py-3 overflow-y-auto" aria-label="Breadcrumb">
+                <ol class="breadcrumb whitespace-nowrap flex items-center space-x-3 pr-3">
+                  <%= render('breadcrumbs').strip.html_safe %>
+                </ol>
+              </nav>
+            </div>
 
-              <div class="py-2 px-1">
-                <div class="mx-auto px-4 sm:px-6 py-4">
-                  <%= yield %>
-                </div>
+            <div class="py-2 px-1">
+              <div class="mx-auto px-4 sm:px-6 py-4">
+                <%= yield %>
               </div>
-            </main>
-          </turbo-frame>
+            </div>
+          </main>
         </div>
       </div>
     </div>

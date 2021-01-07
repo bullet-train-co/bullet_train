@@ -18,7 +18,7 @@ class Account::ApiKeysController < Account::ApplicationController
         format.html { redirect_to account_user_api_keys_path(@user), notice: I18n.t('api_keys.notifications.created') }
         format.json { render :show, status: :created, location: [:account, @user, @api_key] }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @api_key.errors, status: :unprocessable_entity }
       end
     end
@@ -32,7 +32,7 @@ class Account::ApiKeysController < Account::ApplicationController
         format.html { redirect_to [:account, @api_key], notice: I18n.t('api_keys.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @api_key] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @api_key.errors, status: :unprocessable_entity }
       end
     end

@@ -83,7 +83,7 @@ class Account::TeamsController < Account::ApplicationController
         format.html { redirect_to [:account, @team], notice: I18n.t('teams.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @team] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end

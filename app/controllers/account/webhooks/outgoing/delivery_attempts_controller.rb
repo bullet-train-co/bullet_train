@@ -30,7 +30,7 @@ class Account::Webhooks::Outgoing::DeliveryAttemptsController < Account::Applica
         format.html { redirect_to [:account, @delivery, :delivery_attempts], notice: I18n.t('webhooks/outgoing/delivery_attempts.notifications.created') }
         format.json { render :show, status: :created, location: [:account, @delivery, @delivery_attempt] }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @delivery_attempt.errors, status: :unprocessable_entity }
       end
     end
@@ -44,7 +44,7 @@ class Account::Webhooks::Outgoing::DeliveryAttemptsController < Account::Applica
         format.html { redirect_to [:account, @delivery_attempt], notice: I18n.t('webhooks/outgoing/delivery_attempts.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @delivery_attempt] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @delivery_attempt.errors, status: :unprocessable_entity }
       end
     end

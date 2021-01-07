@@ -27,7 +27,7 @@ class Account::Webhooks::Outgoing::EndpointsController < Account::ApplicationCon
         format.html { redirect_to [:account, @team, :webhooks_outgoing_endpoints], notice: I18n.t('webhooks/outgoing/endpoints.notifications.created') }
         format.json { render :show, status: :created, location: [:account, @team, @endpoint] }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @endpoint.errors, status: :unprocessable_entity }
       end
     end
@@ -41,7 +41,7 @@ class Account::Webhooks::Outgoing::EndpointsController < Account::ApplicationCon
         format.html { redirect_to [:account, @endpoint], notice: I18n.t('webhooks/outgoing/endpoints.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @endpoint] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @endpoint.errors, status: :unprocessable_entity }
       end
     end
