@@ -77,6 +77,17 @@
     @apply border-gray-300 rounded-md shadow-sm bg-white text-gray-500 hover:bg-gray-50 no-underline hover:no-underline;
   }
 
+  .btn-toggle {
+    input[type=checkbox], input[type=radio] {
+      display: none;
+      &:checked {
+        & + button {
+          @extend .button;
+        }
+      }
+    }
+  }
+
   .full {
     @apply w-full flex justify-center;
   }
