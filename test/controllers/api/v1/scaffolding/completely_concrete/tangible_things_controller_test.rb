@@ -51,7 +51,8 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     assert_equal tangible_thing_attributes['select-value'], tangible_thing.select_value
     assert_equal tangible_thing_attributes['super-select-value'], tangible_thing.super_select_value
     assert_equal tangible_thing_attributes['text-area-value'], tangible_thing.text_area_value
-    assert_equal tangible_thing_attributes['trix-editor-value'], tangible_thing.action_text_value
+    # remove the HTML tags below
+    assert_equal tangible_thing_attributes['action-text-value']["body"].gsub(/<\/?[^>]+>/, '').strip, tangible_thing.action_text_value.to_plain_text.strip
     assert_equal tangible_thing_attributes['ckeditor-value'], tangible_thing.ckeditor_value
     # 🚅 stop any skipping we're doing now.
     # 🚅 super scaffolding will insert new fields above this line.
