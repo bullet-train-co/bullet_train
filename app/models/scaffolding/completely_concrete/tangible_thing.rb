@@ -22,6 +22,8 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
   delegate :team, to: :absolutely_abstract_creative_concept
   # 🚅 add delegations above.
 
+  has_rich_text :action_text_value
+
   def collection
     absolutely_abstract_creative_concept.completely_concrete_tangible_things
   end
