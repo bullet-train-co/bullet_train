@@ -1,44 +1,48 @@
-.select2-container {
-  width: 100%;
-}
+@tailwind components;
 
-.select2-container.select2-container--focus .select2-selection,
-.select2-container.select2-container--open .select2-selection,
-.select2-container.select2-container--focus .select2-selection:focus,
-.select2-container.select2-container--open .select2-selection:focus {
-  --tw-ring-opacity: 1;
-  --tw-ring-color: #047bf8;
-  --tw-border-opacity: 1;
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
-  border-color: var(--tw-ring-color);
-  border-width: 1px;
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
+@layer components {
+  .select2-container {
+    @apply w-full;
+  }
 
-.select2-container .select2-dropdown {
-  --tw-border-opacity: 1;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  border-color: #047bf8;
-  overflow-x: hidden;
-  margin-top: -1px;
-  border-width: 2px;
-}
+  .select2-selection--single {
+    @apply border-gray-300 rounded-md shadow-sm #{!important};
+    outline-color: #5897fb;
+    padding-top: 2px;
+    height: 36px !important;
 
-.select2-container .select2-dropdown--above {
-  -webkit-box-shadow: 0px -6px 12px rgba(0, 0, 0, 0.175);
-  box-shadow: 0px -6px 12px rgba(0, 0, 0, 0.175);
-  margin-top: 1px;
-}
+    .select2-selection__arrow {
+      height: 32px !important;
+    }
 
-.select2-container--default .select2-results__option[aria-selected=true] {
-  background-color: #5897fb !important;
-  color: white;
-}
+    .select2-selection__rendered {
+      @apply text-gray-500 #{!important};
+    }
+  }
 
-.select2-container--default .select2-results__option--highlighted[aria-selected] {
-  --tw-border-opacity: 1;
-  background-color: #047bf8 !important;
+  .select2-container--open {
+    .select2-selection--single {
+      @apply border-2 #{!important};
+      border-color: #5897fb !important;
+      padding-top: 1px;
+    }
+  }
+
+  .select2-container .select2-dropdown {
+    @apply border-2 border-gray-300 shadow-sm overflow-hidden -mt-px #{!important};
+    border-color: #5897fb !important;
+  }
+
+  .select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: #047bf8 !important;
+    color: white;
+  }
+
+  .select2-search__field {
+    @apply border-gray-300 rounded-md #{!important};
+
+    &:focus {
+      border-color: #5897fb !important;
+    }
+  }
 }
