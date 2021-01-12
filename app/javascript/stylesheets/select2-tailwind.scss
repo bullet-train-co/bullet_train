@@ -8,7 +8,6 @@
   .select2-selection--single {
     @apply border-gray-300 rounded-md shadow-sm #{!important};
     outline-color: #5897fb;
-    padding-top: 2px;
     height: 36px !important;
 
     .select2-selection__arrow {
@@ -16,7 +15,8 @@
     }
 
     .select2-selection__rendered {
-      @apply text-gray-500 #{!important};
+      @apply text-gray-500 pl-3 #{!important};
+      line-height: 35px !important;
     }
   }
 
