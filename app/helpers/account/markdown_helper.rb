@@ -1,6 +1,5 @@
 module Account::MarkdownHelper
   def markdown(string)
-    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, extensions = {})
-    @markdown.render(string).html_safe
+    CommonMarker.render_html(string, :UNSAFE).html_safe
   end
 end

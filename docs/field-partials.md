@@ -1,4 +1,4 @@
-# Field partials
+# Field Partials
 
 Bullet Train includes a collection of view partials that are intended to [DRY up](https://en.wikipedia.org/wiki/Don't_repeat_yourself) as much redundant presentation logic as possible for different types of form fields without taking on a third-party dependency like Formtastic.
 
