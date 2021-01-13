@@ -6,12 +6,11 @@
   }
 
   .select2-selection--single {
-    @apply border-gray-300 rounded-md shadow-sm #{!important};
-    outline-color: #5897fb;
-    height: 36px !important;
+    @apply border-gray-300 rounded-md shadow-sm pt-0 #{!important};
+    height: 38px !important;
 
     .select2-selection__arrow {
-      height: 32px !important;
+      height: 34px !important;
     }
 
     .select2-selection__rendered {
@@ -23,13 +22,19 @@
   .select2-container--open {
     .select2-selection--single {
       @apply border-2 #{!important};
+      outline: 2px solid transparent;
       border-color: #5897fb !important;
       padding-top: 1px;
+    }
+
+    .select2-selection__rendered {
+      line-height: 34px !important;
+      padding-left: calc(0.75rem - 1px) !important;
     }
   }
 
   .select2-container .select2-dropdown {
-    @apply border-2 border-gray-300 shadow-sm overflow-hidden -mt-px #{!important};
+    @apply border-2 border-gray-300 shadow-sm overflow-hidden #{!important};
     border-color: #5897fb !important;
   }
 
