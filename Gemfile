@@ -113,7 +113,7 @@ gem 'stripe'
 
 # allow users to supply content with markdown formatting.
 # powers our markdown() view helper.
-gem 'redcarpet'
+gem 'commonmarker'
 
 # we use this to detect the size of the logo assets.
 gem 'fastimage'

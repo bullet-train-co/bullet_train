@@ -10,26 +10,8 @@ class Public::HomeController < ApplicationController
 
   def docs
     raise 'docs are not available in production mode' if Rails.env.production?
-
-    valid_files = [
-      'field-partials',
-      'field-partials/buttons',
-      'field-partials/select',
-      'field-partials/super-select',
-    ]
-
-    if params[:page].present?
-      if valid_files.include?(params[:page])
-        @file = params[:page]
-      else
-        raise 'invalid file'
-      end
-    else
-      @file = 'index'
-    end
-
-    @hide_menus = true
-    render :docs, layout: 'account'
+    @file = params[:page].presence || 'index'
+    render :docs, layout: 'docs'
   end
 
   def api
