@@ -28,6 +28,7 @@
     "alpinejs": "^2.8.0",
     "autoprefixer": "^9",
     "copy-webpack-plugin": "^6.2.1",
+    "daterangepicker": "^3.1.0",
     "dragula": "^3.7.3",
     "intl-tel-input": "^17.0.8",
     "jquery": "^3.5.1",
