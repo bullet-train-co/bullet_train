@@ -1,59 +1,12 @@
-.date-input {
-  position: relative;
-  padding-right: 40px;
-  button.clear {
-    position: absolute;
-    right: 0;
-    top: 0;
-    display: block;
-    font-size: 24px;
-    color: darken(#dde2ec, 10%);
-    background: transparent;
-    border: 0;
-    vertical-align: -7px;
-    &:focus, &:active {
-      i {
-        color: #047bf8;
-      }
-    }
-  }
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  .daterangepicker {
-    th {
-      border-bottom: none;
-    }
-    box-shadow: 0 5px 50px rgba(4,123,248,0.3) !important;
-    padding: 0;
-    border-radius: 6px;
-    .calendar-table {
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-    &:before {
-      // top: -9px;
-      border-bottom-color: transparent !important;
-    }
-    .calendar.single.left {
-      margin-right: 10px !important;
-    }
-
-    &.single {
-      min-width: 0;
-
-      thead tr {
-        margin-right: -8px;
-        margin-left: -8px;
-      }
-
-      .drp-calendar {
-        padding-right: 8px;
-      }
-
-      .ranges {
-        display: none;
-      }
+@layer components {
+  .date-input {
+    .single-daterange {
+      @apply border-gray-300 rounded-md shadow-sm focus:ring-blue focus:border-blue font-light text-sm;
+      @apply border-gray-300;
     }
   }
 }

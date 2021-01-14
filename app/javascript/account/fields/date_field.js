@@ -1,4 +1,5 @@
 require("daterangepicker/daterangepicker.css");
+require("../../stylesheets/account/fields/date_field.scss");
 
 import 'daterangepicker';
 
