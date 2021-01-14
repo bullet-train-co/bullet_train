@@ -1,0 +1,16 @@
+:root {
+  --ck-focus-ring: 1px solid rgb(4, 123, 248);
+  --ck-inner-shadow: 0;
+  --ck-border-radius: 0.375rem;
+  --ck-color-base-border: rgb(209, 213, 219);
+  --ck-spacing-standard: 0.75rem;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+  @apply shadow-sm;
+
+  &.ck-focused {
+    outline: 1px solid rgb(4, 123, 248);
+    outline-offset: -2px;
+  }
+}
