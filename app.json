@@ -23,7 +23,7 @@
   },
   "addons": [
     "heroku-postgresql:standard-0",
-    "redistogo:micro",
+    "heroku-redis:standard-0",
     "honeybadger:free",
     "sentry:f1",
     "cloudinary:starter"
