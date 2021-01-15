@@ -70,3 +70,11 @@ end
 def invitation_keys
   ENV['INVITATION_KEYS'].split(',').map(&:strip)
 end
+
+def show_developer_documentation?
+  if Rails.env.production?
+    return ENV['ENABLE_DOCS'].present?
+  else
+    true
+  end
+end

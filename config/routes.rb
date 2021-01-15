@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     root to: "home#index"
     get 'invitation' => 'home#invitation', as: 'invitation'
     get 'api' => 'home#api'
-    unless Rails.env.production? || ENV['ENABLE_DOCS'].present?
+    if show_developer_documentation?
       get 'docs', to: 'home#docs'
       get 'docs/*page', to: 'home#docs'
     end
