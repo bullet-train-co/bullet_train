@@ -11,6 +11,7 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
 
   # 🚅 add oauth providers above.
 
+  has_one_attached :file_field_value
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
