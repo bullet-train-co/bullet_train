@@ -2,7 +2,7 @@
   "name": "New Bullet Train App",
   "description": "The Ruby on Rails SaaS-in-a-Box",
   "repository": "https://github.com/bullet-train-co/bullet-train-tailwind-css",
-  "logo": "https://bullettrain.co/assets/logo/logo-square-bg.png",
+  "logo": "https://bullet-train-tailwind-css.herokuapp.com/heroku-logo.png",
   "keywords": ["ruby", "rails"],
   "formation": {
     "web": {
@@ -19,11 +19,11 @@
     "heroku-redis:standard-0",
     "honeybadger:free",
     "sentry:free",
-    "cloudinary:starter",
+    "cloudinary:starter"
   ],
   "env": {
     "BASE_URL": {
-      "description": "Supply the fully-qualified URL for this Heroku app, e.g. `https://your-app.herokuapp.com`. You'll update this later after configuring a custom domain."
+      "description": "Supply the fully-qualified URL for this Heroku app, e.g. `https://your-app.herokuapp.com`. You'll update this later after configuring a custom domain.",
       "value": "https://ENTER_YOUR_APP_NAME_HERE.herokuapp.com"
     },
     "FONTAWESOME_NPM_AUTH_TOKEN": {
@@ -31,6 +31,6 @@
     },
     "POSTMARK_API_TOKEN": {
       "description": "We recommend using Postmark for email delivery. To use it, add and configure a new server at `https://account.postmarkapp.com/servers`, fetch the API token from the \"API Tokens\" tab, and enter it here."
-    },
-  },
+    }
+  }
 }
