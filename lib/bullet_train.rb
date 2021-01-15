@@ -72,9 +72,5 @@ def invitation_keys
 end
 
 def show_developer_documentation?
-  if Rails.env.production?
-    return ENV['ENABLE_DOCS'].present?
-  else
-    true
-  end
+  Rails.env.production? ? ENV['ENABLE_DOCS'].present? : true
 end
