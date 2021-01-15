@@ -1,0 +1,69 @@
+name: Tests (CI)
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    services:
+      # Setup a PostgreSQL data for us to test against
+      postgres:
+        image: postgres:13.1
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: postgres
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      # Checkout the commit we'd like to test
+      - uses: actions/checkout@v1
+
+      # Setup Ruby
+      # https://github.com/ruby/setup-ruby#single-job
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.7.2
+          bundler-cache: true
+
+      # Setup Yarn
+      # https://github.com/actions/cache/blob/main/examples.md#node---yarn
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Restoring Yarn Cache
+        uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-yarn_modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install Yarn Dependencies
+        run: yarn install --prefer-offline --check-files
+
+      # Prepare Database
+      - name: Prepare Database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/
+        run: |
+          bundle exec rake db:create
+          bundle exec rake db:schema:load
+
+      # Run the tests
+      - name: Running The Tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/
+        run: bundle exec rails test
