@@ -9,7 +9,6 @@ class Public::HomeController < ApplicationController
   end
 
   def docs
-    raise 'docs are not available in production mode' if Rails.env.production?
     @file = params[:page].presence || 'index'
     render :docs, layout: 'docs'
   end
