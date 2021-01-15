@@ -81,7 +81,7 @@ en:
         label: *trix_editor_value
         heading: *trix_editor_value
       ckeditor_value:
-        name: &ckeditor_value Ckeditor Value
+        name: &ckeditor_value CKEditor Value
         label: *ckeditor_value
         heading: *ckeditor_value
       # 🚅 stop any skipping we're doing now.
