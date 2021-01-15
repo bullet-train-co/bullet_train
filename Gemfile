@@ -163,6 +163,10 @@ gem 'colorize'
 
 gem 'nice_partials', github: 'andrewculver/nice_partials', branch: 'bt'
 
+group :production do
+  gem 'postmark-rails'
+end
+
 # YOUR GEMS
 # you can add any gems you need below. by keeping them separate from
 # our gems above, you avoid the likelihood that we'll have a merge

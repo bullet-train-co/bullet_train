@@ -199,6 +199,7 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
+    json (2.5.1)
     jsonapi-renderer (0.2.2)
     jwt (2.2.2)
     kaminari (1.2.1)
@@ -274,6 +275,11 @@ GEM
     phonelib (0.6.46)
     popper_js (1.16.0)
     possessive (1.0.1)
+    postmark (1.21.3)
+      json
+    postmark-rails (0.20.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.15)
     premailer (1.14.2)
       addressable
       css_parser (>= 1.6.0)
@@ -479,6 +485,7 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   phonelib
   possessive
+  postmark-rails
   premailer-rails
   pry
   puma (~> 5.0)
