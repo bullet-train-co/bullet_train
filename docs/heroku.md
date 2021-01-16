@@ -16,7 +16,7 @@ We've decided not to configure the application to automatically run database mig
 
 ```
 heroku run rake db:migrate
-heroku run rake db:seeds
+heroku run rake db:seed
 ```
 
 ### Enabling Runtime Dyno Metadata
