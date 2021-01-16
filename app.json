@@ -23,7 +23,7 @@
   },
   "addons": [
     "heroku-postgresql:standard-0",
-    "heroku-redis:standard-0",
+    "heroku-redis:premium-0",
     "memcachier:100",
     "rails-autoscale:bronze-std",
     "honeybadger:free",
