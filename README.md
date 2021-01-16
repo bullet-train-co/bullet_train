@@ -1,1 +1,5 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=http://github.com/bullet-train-co/bullet-train-tailwind-css)
+
+
+---
+
+This application has been built with Bullet Train. A copy of the [Bullet Train Developer Documentation](/docs/index.md) is included in this repository to ensure it stays in sync with how things work on this specific application.
