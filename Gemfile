@@ -121,9 +121,6 @@ gem 'fastimage'
 # we use this to add "'s" as appropriate in certain headings.
 gem 'possessive'
 
-# an error tracking service with a generous free tier.
-gem 'sentry-raven'
-
 # background jobs.
 gem 'sidekiq'
 
@@ -143,9 +140,6 @@ gem 'figaro'
 # inline all css for emails.
 gem 'premailer-rails'
 
-# use s3 for active storage by default.
-gem 'aws-sdk-s3', require: false
-
 # parse natural language dates.
 gem 'chronic'
 
@@ -164,8 +158,22 @@ gem 'colorize'
 gem 'nice_partials', github: 'andrewculver/nice_partials', branch: 'bt'
 
 group :production do
+  # we suggest using postmark for email deliverability.
   gem 'postmark-rails'
+
+  # if you're hosting on heroku, this service is highly recommended for autoscaling of dynos.
+  gem 'rails_autoscale_agent'
+
+  # exception tracking and uptime monitoring service with a generous free tier.
+  gem 'honeybadger'
+
+  # another exception tracking service.
+  gem 'sentry-raven'
+
+  # use s3 for active storage by default.
+  gem 'aws-sdk-s3', require: false
 end
+
 
 # YOUR GEMS
 # you can add any gems you need below. by keeping them separate from

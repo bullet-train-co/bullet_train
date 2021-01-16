@@ -184,6 +184,7 @@ GEM
       temple (>= 0.8.0)
       tilt
     hashie (4.1.0)
+    honeybadger (4.7.2)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.3)
@@ -343,6 +344,7 @@ GEM
       rails (>= 5.0, < 7)
       remotipart (~> 1.3)
       sassc-rails (>= 1.3, < 3)
+    rails_autoscale_agent (0.10.2)
     railties (6.1.1)
       actionpack (= 6.1.1)
       activesupport (= 6.1.1)
@@ -467,6 +469,7 @@ DEPENDENCIES
   fastimage
   figaro
   font-awesome-rails
+  honeybadger
   jbuilder (~> 2.7)
   letter_opener
   listen (~> 3.3)
@@ -488,6 +491,7 @@ DEPENDENCIES
   rails (~> 6.1.1)
   rails-controller-testing
   rails_admin
+  rails_autoscale_agent
   redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver

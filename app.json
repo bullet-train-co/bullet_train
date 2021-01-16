@@ -25,10 +25,11 @@
     "heroku-postgresql:standard-0",
     "heroku-redis:premium-0",
     "memcachier:100",
+    "hdrive:starter-s3",
+    "cloudinary:starter",
     "rails-autoscale:bronze-std",
     "honeybadger:free",
-    "sentry:f1",
-    "cloudinary:starter"
+    "sentry:f1"
   ],
   "env": {
     "BASE_URL": {
