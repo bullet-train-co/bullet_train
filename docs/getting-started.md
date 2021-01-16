@@ -40,7 +40,23 @@ In those steps you've renamed the original Bullet Train repository to be referre
 Using GitHub's "Fork" feature is only for developers when they want to submit a Pull Request to the Bullet Train codebase. It's _not_ the correct way to get started building a new project with Bullet Train.
 
 ## 3. Run Bundler and Yarn
-As with any Rails app, you'll need to run `bundle install` and `yarn install`.
+As with any Rails app, you'll need to run `bundle install` and `yarn install`, although at the moment by default you'll need to prepend `yarn install` with your Font Awesome Pro key, like so:
+
+```
+FONTAWESOME_NPM_AUTH_TOKEN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX yarn install
+```
+
+We're trying to figure out a good way around this, but `.npmrc` is configured this way for production deploys on Heroku.
+
+### 3.1. If You Don't Want to Use Font Awesome Pro
+
+You can do the following on your shell:
+
+```
+rm .npmrc
+yarn remove @fortawesome/fontawesome-pro
+yarn install
+```
 
 ## 4. Name Your Application
 Run `bin/set-name "Whatever Your App Name Is"` to properly configure your database name, session store, and application class name. This tool will spit out some additional instructions as well.

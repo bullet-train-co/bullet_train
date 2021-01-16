@@ -10,7 +10,7 @@
 
         <% menu = capture do %>
           <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker md:rounded-tl-lg">
-            <%= image_tag image_path('logo/logo.png'), class: 'h-5 w-auto mx-auto' %>
+            <%= image_tag asset_pack_path('media/images/logo/logo.png'), class: 'h-5 w-auto mx-auto' %>
 
             <div class="lg:hidden absolute right-0">
               <button class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" @click.stop="menuOpen = false">
