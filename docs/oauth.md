@@ -6,7 +6,7 @@ bin/super-scaffold oauth-provider
 ```
 
 ## Stripe Connect Example
-Similar to the `TangibleThings` template for [Super Scaffolding CRUD workflows](/docs/super-scaffolding), Bullet Train includes a Stripe Connect integration by default and this example also serves as a template for Super Scaffolding to implement other providers you might want to add.
+Similar to the `TangibleThings` template for [Super Scaffolding CRUD workflows](/docs/super-scaffolding.md), Bullet Train includes a Stripe Connect integration by default and this example also serves as a template for Super Scaffolding to implement other providers you might want to add.
 
 ## Relevant Files
 
@@ -29,4 +29,4 @@ You should be able to add third-party OAuth providers with Super Scaffolding wit
  - Controller: `app/controllers/account/oauth/stripe_accounts_controller.rb`
  - Views: `app/views/account/oauth/stripe_accounts/*`
  - Translations: `config/locales/en/oauth/stripe_accounts.en.yml`
- - See [Incoming Webhooks](/docs/webhooks/incoming) also.
+ - See [Incoming Webhooks](/docs/webhooks/incoming.md) also.

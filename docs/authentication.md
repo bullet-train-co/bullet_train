@@ -22,4 +22,4 @@ Devise is very well documented elsewhere, so we'll simply direct you to the plac
  - Additional views:  `app/views/devise/*`
 
 ## Related Topics
- - [Authentication with Third-Party OAuth Providers](/docs/oauth)
+ - [Authentication with Third-Party OAuth Providers](/docs/oauth.md)

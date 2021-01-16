@@ -7,25 +7,25 @@ Not only does Bullet Train do all the things it says on the box with [a test sui
 Bullet Train is designed to be customized and extended by the development teams that use it. For that reason, this documentation lives in the same repository as your own application code. It's our intention that anytime developers on your team modify or customize Bullet Train in some way, they can also include updates to the documentation at the same time.
 
 ## Introduction
- - [Getting Started](/docs/getting-started)
- - [Philosophy](/docs/philosophy)
- - [Upgrades](/docs/upgrades)
+ - [Getting Started](/docs/getting-started.md)
+ - [Philosophy](/docs/philosophy.md)
+ - [Upgrades](/docs/upgrades.md)
 
 ## Developer Tools
- - [Super Scaffolding](/docs/super-scaffolding)
- - [Field Partials](/docs/field-partials)
- - [Test Suite](/docs/testing)
+ - [Super Scaffolding](/docs/super-scaffolding.md)
+ - [Field Partials](/docs/field-partials.md)
+ - [Test Suite](/docs/testing.md)
 
 ## Accounts & Teams
- - [Authentication](/docs/authentication)
- - [Teams](/docs/teams)
- - [Permissions](/docs/permissions)
- - [Onboarding](/docs/onboarding)
- - [Subscriptions](/docs/subscriptions)
- - [Namespacing](/docs/namespacing)
+ - [Authentication](/docs/authentication.md)
+ - [Teams](/docs/teams.md)
+ - [Permissions](/docs/permissions.md)
+ - [Onboarding](/docs/onboarding.md)
+ - [Subscriptions](/docs/subscriptions.md)
+ - [Namespacing](/docs/namespacing.md)
 
 ## Integration
- - [OAuth Providers](/docs/oauth)
+ - [OAuth Providers](/docs/oauth.md)
 
 ## Production
- - [Heroku](/docs/heroku)
+ - [Heroku](/docs/heroku.md)

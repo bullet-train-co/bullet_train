@@ -5,4 +5,4 @@ Please read the article providing [an overview of organizational teams in Bullet
 Rather than simplying duplicating the content of that blog article here, we'll focus on keeping that article up-to-date so it can benefit not only incoming Bullet Train developers, but also the broader developer ecosystem.
 
 ## Related Topics
- - [Permissions](/docs/permissions)
+ - [Permissions](/docs/permissions.md)

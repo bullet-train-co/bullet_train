@@ -1,6 +1,6 @@
 # Examples for the `super_select` Field Partial
 
-The vast majority of behavior is inherited from the [`select`](/docs/field-partials/select) field partial, so start there. In addition to all that behavior, the `super_select` partials also invokes the [Select2](https://select2.org) to provide powerful search and multi-select functionality out-of-the-box.
+The vast majority of behavior is inherited from the [`select`](/docs/field-partials/select.md) field partial, so start there. In addition to all that behavior, the `super_select` partials also invokes the [Select2](https://select2.org) to provide powerful search and multi-select functionality out-of-the-box.
 
 ## Allowing Multiple Button Selections
 

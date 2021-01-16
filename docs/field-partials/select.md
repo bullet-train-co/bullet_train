@@ -37,4 +37,4 @@ You can generate the available buttons using a collection of database objects by
 
 ## Allowing Multiple Button Selections
 
-If you're looking to allow users to select multiple items, definitely use the [`super_select`](/docs/field-partials/super-select) field partial, which leverages the Select2 JavaScript library to provide a really great user experience for this (in contrast to the vanilla browser experience for this, which is horrible).
+If you're looking to allow users to select multiple items, definitely use the [`super_select`](/docs/field-partials/super-select.md) field partial, which leverages the Select2 JavaScript library to provide a really great user experience for this (in contrast to the vanilla browser experience for this, which is horrible).
