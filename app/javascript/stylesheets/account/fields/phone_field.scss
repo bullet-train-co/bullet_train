@@ -1,0 +1,7 @@
+input[type=tel] {
+  line-height: 21px;
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+}
