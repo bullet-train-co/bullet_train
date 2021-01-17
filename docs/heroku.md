@@ -64,7 +64,8 @@ heroku config:set MARKETING_SITE_URL=https://YOURDOMAIN.COM
 You'll also need to enable Heroku's Automated Certificate Management to have them handle provisioning and renewing your Let's Encrypt SSL certificates:
 
 ```
-heroku certs:auto:wait
+heroku certs:auto:enable
+heroku certs:auto
 ```
 
 You should be done now and your app should be available at `https://app.YOURDOMAIN.COM/account` and any hits to `https://app.YOURDOMAIN.COM` (e.g. when users sign out, etc.) will be redirected to your marketing site.
