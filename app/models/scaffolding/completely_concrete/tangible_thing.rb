@@ -16,6 +16,7 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
 
   # 🚅 add scopes above.
 
+  validates :text_field_value, presence: true
   # 🚅 add validations above.
 
   # 🚅 add callbacks above.
