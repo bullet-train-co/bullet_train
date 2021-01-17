@@ -27,9 +27,11 @@
     "memcachier:100",
     "hdrive:starter-s3",
     "cloudinary:starter",
+    "scheduler:standard",
     "rails-autoscale:bronze-std",
     "honeybadger:free",
-    "sentry:f1"
+    "sentry:f1",
+    "realemail:free"
   ],
   "env": {
     "BASE_URL": {
