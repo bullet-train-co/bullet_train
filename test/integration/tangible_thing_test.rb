@@ -26,9 +26,7 @@ class AccountTest < ActionDispatch::IntegrationTest
       click_on 'Add New Tangible Thing'
       fill_in 'Text Field Value', with: 'My value for this text field'
       click_on 'Three'
-      fill_in 'Date Field Value', with: '01/17/2021'
       fill_in 'Email Field Value', with: 'me@acme.com'
-
       fill_in 'Password Field Value', with: 'secure-password'
       fill_in 'Phone Field Value', with: '(201) 551-8321'
       page.select 'Two', from: 'Select Value'
@@ -46,6 +44,7 @@ class AccountTest < ActionDispatch::IntegrationTest
       assert page.has_content?('My value for this text field')
       assert page.has_content?('three')
       assert page.has_content?('me@acme.com')
+      assert page.has_content?('secure-password')
       assert page.has_content?('+12015518321')
       assert page.has_content?('two')
       assert page.has_content?('three')
@@ -69,6 +68,7 @@ class AccountTest < ActionDispatch::IntegrationTest
       assert page.has_content?('My new value for this text field')
       assert page.has_content?('one')
       assert page.has_content?('not-me@acme.com')
+      assert page.has_content?('insecure-password')
       assert page.has_content?('+12318325512')
       assert page.has_content?('three')
       assert page.has_content?('two')
