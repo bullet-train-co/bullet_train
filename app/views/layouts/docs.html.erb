@@ -64,6 +64,12 @@
                   <% end %>
                 <% end %>
 
+                <%= render 'account/shared/menu/item', url: '/docs/seeds', label: 'Database Seeds' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-seedling"></i>
+                  <% end %>
+                <% end %>
+
                 <%= render 'account/shared/menu/item', url: '/docs/testing', label: 'Test Suite' do |p| %>
                   <% p.content_for :icon do %>
                     <i class="fal fa-check"></i>

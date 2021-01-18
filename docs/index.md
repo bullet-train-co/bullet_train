@@ -14,6 +14,7 @@ Bullet Train is designed to be customized and extended by the development teams 
 ## Developer Tools
  - [Super Scaffolding](/docs/super-scaffolding.md)
  - [Field Partials](/docs/field-partials.md)
+ - [Database Seeds](/docs/seeds.md)
  - [Test Suite](/docs/testing.md)
 
 ## Accounts & Teams

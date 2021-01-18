@@ -5,3 +5,9 @@
     <%= yield %>
   </h3>
 </div>
+
+<% # we have to list out the evaluations we want possible above so purgecss includes them in production. %>
+<% if false %>
+  <div class="bg-yellow-light border-yellow text-yellow-darker"></div>
+  <div class="bg-red-light border-red text-red-darker"></div>
+<% end %>

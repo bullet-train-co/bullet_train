@@ -5,11 +5,11 @@
   "logo": "https://bullet-train-tailwind-css.herokuapp.com/heroku-logo.png",
   "keywords": ["ruby", "rails"],
   "buildpacks": [
-    { "url": "https://github.com/carwow/heroku-buildpack-cacheload" },
+    { "url": "https://github.com/bullet-train-co/heroku-buildpack-cacheload" },
     { "url": "heroku/nodejs" },
     { "url": "heroku/ruby" },
-    { "url": "https://github.com/carwow/heroku-buildpack-cachesave" },
-    { "url": "https://github.com/carwow/heroku-buildpack-cleanup" }
+    { "url": "https://github.com/bullet-train-co/heroku-buildpack-cachesave" },
+    { "url": "https://github.com/bullet-train-co/heroku-buildpack-cleanup" }
   ],
   "formation": {
     "web": {

@@ -41,7 +41,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
           select_value: @tangible_thing.select_value,
           super_select_value: @tangible_thing.super_select_value,
           text_area_value: 'Alternative String Value',
-          trix_editor_value: @tangible_thing.trix_editor_value,
+          action_text_value: @tangible_thing.action_text_value,
           ckeditor_value: @tangible_thing.ckeditor_value,
           # 🚅 stop any skipping we're doing now.
           # 🚅 super scaffolding will insert new fields above this line.
@@ -76,7 +76,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
         select_value: @tangible_thing.select_value,
         super_select_value: @tangible_thing.super_select_value,
         text_area_value: @tangible_thing.text_area_value,
-        trix_editor_value: @tangible_thing.trix_editor_value,
+        action_text_value: @tangible_thing.action_text_value,
         ckeditor_value: @tangible_thing.ckeditor_value,
         # 🚅 stop any skipping we're doing now.
         # 🚅 super scaffolding will also insert new fields above this line.

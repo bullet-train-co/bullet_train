@@ -16,12 +16,15 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
 
   # 🚅 add scopes above.
 
+  validates :text_field_value, presence: true
   # 🚅 add validations above.
 
   # 🚅 add callbacks above.
 
   delegate :team, to: :absolutely_abstract_creative_concept
   # 🚅 add delegations above.
+
+  has_rich_text :action_text_value
 
   def collection
     absolutely_abstract_creative_concept.completely_concrete_tangible_things

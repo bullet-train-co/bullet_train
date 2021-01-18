@@ -6,7 +6,6 @@
   .date-input {
     .single-daterange {
       @apply border-gray-300 rounded-md shadow-sm focus:ring-blue focus:border-blue font-light text-sm;
-      @apply border-gray-300;
     }
   }
 }

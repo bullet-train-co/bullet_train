@@ -11,6 +11,7 @@
       <% p.content_for :body do %>
         <%# 🚅 skip this section when scaffolding. %>
         <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :text_field_value %>
+        <%= render 'shared/attributes/html', object: @tangible_thing, attribute: :action_text_value %>
         <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :button_value %>
         <%= render 'shared/attributes/html', object: @tangible_thing, attribute: :ckeditor_value %>
         <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :cloudinary_image_value %>

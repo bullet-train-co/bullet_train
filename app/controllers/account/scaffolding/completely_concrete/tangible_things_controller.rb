@@ -65,7 +65,9 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       strong_params = params.require(:scaffolding_completely_concrete_tangible_thing).permit(
         # 🚅 skip this section when scaffolding.
         :text_field_value,
+        :action_text_value,
         :button_value,
+        :ckeditor_value,
         :cloudinary_image_value,
         :date_field_value,
         :email_field_value,
@@ -75,7 +77,6 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
         :select_value,
         :super_select_value,
         :text_area_value,
-        :ckeditor_value,
         # 🚅 stop any skipping we're doing now.
         # 🚅 super scaffolding will insert new fields above this line.
         # 🚅 super scaffolding will insert new arrays above this line.
