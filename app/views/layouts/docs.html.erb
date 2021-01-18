@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <%= render 'layouts/head' %>
+  </head>
+  <body class="bg-light-blue-gradient text-gray-700 text-sm font-normal">
+    <div class="md:p-5">
+      <div class="h-screen md:h-auto overflow-hidden md:rounded-lg flex shadow" x-data="{ menuOpen: false }" @keydown.window.escape="menuOpen = false">
+
+        <% menu = capture do %>
+          <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker md:rounded-tl-lg">
+            <%= image_tag asset_pack_path('media/images/logo/logo.png'), class: 'h-5 w-auto mx-auto' %>
+
+            <div class="lg:hidden absolute right-0">
+              <button class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" @click.stop="menuOpen = false">
+                <span class="sr-only">Close Application Menu</span>
+                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <nav class="flex-1 space-y-1">
+            <div class="px-5 py-4" id="menu">
+
+              <%= render 'account/shared/menu/section', title: 'Introduction' do %>
+                <%= render 'account/shared/menu/item', url: '/docs', label: 'Table of Contents' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-home-lg-alt"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/getting-started', label: 'Getting Started' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-terminal"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/philosophy', label: 'Philosophy' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-lightbulb-on"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/upgrades', label: 'Upgrades' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-sparkles"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <%= render 'account/shared/menu/section', title: 'Developer Tools' do %>
+                <%= render 'account/shared/menu/item', url: '/docs/super-scaffolding', label: 'Super Scaffolding' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-magic"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/field-partials', label: 'Field Partials' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-i-cursor"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/seeds', label: 'Database Seeds' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-seedling"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/testing', label: 'Test Suite' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-check"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <%= render 'account/shared/menu/section', title: 'Accounts & Teams' do %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/authentication', label: 'Authentication' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-fingerprint"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/teams', label: 'Teams' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-users"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/permissions', label: 'Permissions' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-lock-alt"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/onboarding', label: 'Onboarding' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-snowboarding"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/subscriptions', label: 'Subscriptions' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-money-bill-wave"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/namespacing', label: 'Namespacing' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-object-group"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <%= render 'account/shared/menu/section', title: 'Integration' do %>
+                <%= render 'account/shared/menu/item', url: '/docs/oauth', label: 'OAuth Providers' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-at"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/api', label: 'REST API' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-brackets-curly"></i>
+                  <% end %>
+                <% end if false %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/webhooks/outgoing', label: 'Outgoing Webhooks' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-outlet"></i>
+                  <% end %>
+                <% end if false %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/webhooks/incoming', label: 'Incoming Webhooks' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-plug"></i>
+                  <% end %>
+                <% end if false %>
+              <% end %>
+
+              <%= render 'account/shared/menu/section', title: 'Internationalization' do %>
+                <%= render 'account/shared/menu/item', url: '/docs/i18n', label: 'Translations' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-language"></i>
+                  <% end %>
+                <% end %>
+              <% end if false %>
+
+              <%= render 'account/shared/menu/section', title: 'Production' do %>
+                <%= render 'account/shared/menu/item', url: '/docs/heroku', label: 'Heroku' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-cloud"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+            </div>
+          </nav>
+        <% end %>
+
+        <div class="lg:hidden" x-show="menuOpen">
+          <div class="fixed inset-0 flex z-40">
+            <div @click="menuOpen = false" x-show="menuOpen" x-transition:enter="transition-opacity ease-linear duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0" aria-hidden="true">
+              <div class="absolute inset-0 bg-light-blue-gradient opacity-75"></div>
+            </div>
+            <div x-show="menuOpen" x-transition:enter="transition ease-in-out duration-200 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-200 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="relative flex-1 flex flex-col max-w-xs w-full pb-4 bg-dark-blue-gradient shadow-xl">
+              <%= menu %>
+            </div>
+            <div class="flex-shrink-0 w-14" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="hidden bg-dark-blue-gradient lg:flex lg:flex-shrink-0 bg-gray-100">
+          <div class="w-64">
+            <%= menu %>
+          </div>
+        </div>
+
+        <div class="flex flex-col w-0 flex-1 overflow-hidden bg-gray-100">
+          <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none" tabindex="0">
+
+            <button class="lg:hidden h-12 w-12 ml-1 flex-none inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue" @click.stop="menuOpen = true">
+              <span class="sr-only">Open Application Menu</span>
+              <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+
+            <div class="py-2 px-1">
+              <div class="mx-auto px-4 sm:px-6 py-4">
+                <div class="bg-white rounded-md shadow py-14 px-12">
+                  <div class="prose" style="max-width: none;">
+                    <%= yield %>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

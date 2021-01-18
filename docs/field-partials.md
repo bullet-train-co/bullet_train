@@ -1,6 +1,6 @@
-# Field partials
+# Field Partials
 
-Bullet Train includes a collection of view partials that are intended to [DRY up](https://en.wikipedia.org/wiki/Don't_repeat_yourself) as much redundant presentation logic as possible for different types of form fields without taking on a third-party dependency like Formtastic.
+Bullet Train includes a collection of view partials that are intended to [DRY-up](https://en.wikipedia.org/wiki/Don't_repeat_yourself) as much redundant presentation logic as possible for different types of form fields without taking on a third-party dependency like Formtastic.
 
 These form field partials standardize and centralize the following behavior across all form fields that use them:
 
@@ -84,6 +84,6 @@ Certain form field partials like `buttons`, `select`, and `super_select` can als
 
 ## Specific Field Partials
 
- - [`buttons`](/docs/field-partials/buttons)
- - [`select`](/docs/field-partials/select)
- - [`super_select`](/docs/field-partials/super-select)
+ - [`buttons`](/docs/field-partials/buttons.md)
+ - [`select`](/docs/field-partials/select.md)
+ - [`super_select`](/docs/field-partials/super-select.md)

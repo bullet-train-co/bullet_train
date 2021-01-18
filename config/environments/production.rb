@@ -140,21 +140,26 @@ Rails.application.configure do
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_options = {from: "noreply@#{ENV['MAILGUN_DOMAIN']}"}
 
   # generate full urls using the base url configuration setting.
   Rails.application.routes.default_url_options = default_url_options_from_base_url
   config.action_mailer.default_url_options = default_url_options_from_base_url
 
-  # by default we provide wiring for the mailgun add-on on heroku.
-  # i don't plan on having mailgun as the default for much longer.
   # if you want to use some other smtp configuration, please don't
   # modify this configuration, as it will cause merge conflicts
   # in the future if we update this built-in configuration.
   # instead, you should add yours after the comment toward the
-  # end of this file. ✌️
-  if ENV['MAILGUN_SMTP_SERVER'].present?
+  # end of this file. 🚫 ✌️
+
+  if ENV['POSTMARK_API_TOKEN'].present?
+    config.action_mailer.delivery_method = :postmark
+    config.action_mailer.postmark_settings = {
+      api_token: ENV['POSTMARK_API_TOKEN']
+    }
+
+  elsif ENV['MAILGUN_SMTP_SERVER'].present?
     config.action_mailer.delivery_method = :smtp
+    config.action_mailer.default_options = {from: "noreply@#{ENV['MAILGUN_DOMAIN']}"}
     config.action_mailer.smtp_settings = {
       # double warning: please don't modify this configuration.
       # if you want to provide your own smtp configuration,

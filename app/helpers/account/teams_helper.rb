@@ -3,6 +3,11 @@ module Account::TeamsHelper
     current_user&.current_team
   end
 
+  def other_teams
+    return [] unless current_user
+    current_user.teams.reject { |team| team == current_user.current_team }
+  end
+
   def users_as_select_options(users, values = [])
     values = [values] unless values.is_a?(Array)
     users.map { |user|

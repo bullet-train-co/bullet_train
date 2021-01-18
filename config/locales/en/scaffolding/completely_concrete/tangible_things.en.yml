@@ -44,6 +44,10 @@ en:
         name: &email_field_value Email Field Value
         label: *email_field_value
         heading: *email_field_value
+      file_field_value:
+        name: &file_field_value File Field Value
+        label: *file_field_value
+        heading: *file_field_value
       password_field_value:
         name: &password_field_value Password Field Value
         label: *password_field_value
@@ -77,7 +81,7 @@ en:
         label: *action_text_value
         heading: *action_text_value
       ckeditor_value:
-        name: &ckeditor_value Ckeditor Value
+        name: &ckeditor_value CKEditor Value
         label: *ckeditor_value
         heading: *ckeditor_value
       # 🚅 stop any skipping we're doing now.
@@ -139,6 +143,7 @@ en:
         cloudinary_image_value: *cloudinary_image_value
         date_field_value: *date_field_value
         email_field_value: *email_field_value
+        file_field_value: *file_field_value
         password_field_value: *password_field_value
         phone_field_value: *phone_field_value
         select_value: *select_value

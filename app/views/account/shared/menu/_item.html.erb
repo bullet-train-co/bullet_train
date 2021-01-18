@@ -1,7 +1,7 @@
 <% yield p = np %>
 
-<% method ||= :get %>
-<% active ||= false %>
+<% method ||= false %>
+<% active ||= request.path == url %>
 
 <%= link_to url, method: method, class: "block group hover:text-white hover:no-underline hover-indent-child #{'bg-blue-darker' if active} text-white px-2 py-2 rounded-md" do %>
   <div class="inline-block indent-child flex items-center">

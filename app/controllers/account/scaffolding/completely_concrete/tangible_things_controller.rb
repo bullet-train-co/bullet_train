@@ -69,6 +69,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
         :cloudinary_image_value,
         :date_field_value,
         :email_field_value,
+        :file_field_value,
         :password_field_value,
         :phone_field_value,
         :select_value,
