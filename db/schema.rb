@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2021_01_14_200646) do
     t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
   end
 
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.string "name", null: false
+    t.text "body"
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -182,7 +192,6 @@ ActiveRecord::Schema.define(version: 2021_01_14_200646) do
     t.string "select_value"
     t.string "super_select_value"
     t.text "text_area_value"
-    t.text "trix_editor_value"
     t.text "ckeditor_value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

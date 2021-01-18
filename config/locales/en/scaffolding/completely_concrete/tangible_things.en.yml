@@ -76,10 +76,10 @@ en:
         name: &text_area_value Text Area Value
         label: *text_area_value
         heading: *text_area_value
-      trix_editor_value:
-        name: &trix_editor_value Trix Editor Value
-        label: *trix_editor_value
-        heading: *trix_editor_value
+      action_text_value:
+        name: &action_text_value Trix Editor Value
+        label: *action_text_value
+        heading: *action_text_value
       ckeditor_value:
         name: &ckeditor_value CKEditor Value
         label: *ckeditor_value
@@ -149,7 +149,7 @@ en:
         select_value: *select_value
         super_select_value: *super_select_value
         text_area_value: *text_area_value
-        trix_editor_value: *trix_editor_value
+        action_text_value: *action_text_value
         ckeditor_value: *ckeditor_value
         # 🚅 stop any skipping we're doing now.
         # 🚅 super scaffolding will insert new activerecord attributes above this line.

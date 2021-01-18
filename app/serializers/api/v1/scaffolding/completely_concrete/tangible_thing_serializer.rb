@@ -12,7 +12,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingSerializer < Active
   :select_value,
   :super_select_value,
   :text_area_value,
-  :trix_editor_value,
+  :action_text_value,
   :ckeditor_value,
   # 🚅 stop any skipping we're doing now.
   # 🚅 super scaffolding will insert new fields above this line.

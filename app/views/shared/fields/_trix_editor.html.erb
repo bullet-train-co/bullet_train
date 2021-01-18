@@ -21,8 +21,7 @@ other_options ||= {}
 <div class="<%= 'trix-hide-toolbar' if other_options[:hide_toolbar] %>">
 <%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
   <% content_for :field do %>
-    <%= form.hidden_field method, id: id_for(form, method) %>
-    <%= tag.trix_editor options.merge(input: id_for(form, method)) %>
+    <%= form.rich_text_area method, options %>
   <% end %>
 <% end %>
 </div>
