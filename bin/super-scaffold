@@ -129,7 +129,7 @@ if scaffolding_type == 'crud'
     puts "  rails g model Page site:references name:string path:text"
     puts "  bin/super-scaffold Page Site,Team name:text path:text --sortable"
     puts ""
-    puts "Protip: Commit your other changes before running super scaffolding so it's easy to undo if you (or we) make any mistakes."
+    puts "🏆 Protip: Commit your other changes before running Super Scaffolding so it's easy to undo if you (or we) make any mistakes."
     puts "If you do that, you can reset to your last commit state by using `git checkout .` and `git clean -d -f` ."
     puts ""
     puts "Give it a shot! Let us know if you have any trouble with it! ✌️"
