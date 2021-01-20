@@ -7,8 +7,9 @@ module.exports = {
     content: [
       "./app/**/*.html.erb",
       "./app/**/*.js",
-      "./app/**/*.css"
-    ],
+      "./app/**/*.css",
+      "./app/**/*.scss"
+    ]
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
