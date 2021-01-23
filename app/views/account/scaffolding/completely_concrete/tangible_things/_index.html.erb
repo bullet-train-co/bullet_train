@@ -17,19 +17,9 @@
           <tr>
             <%# 🚅 skip this section when scaffolding. %>
             <th><%= t('.fields.text_field_value.heading') %></th>
-            <% if false %>
             <th><%= t('.fields.button_value.heading') %></th>
-            <th><%= t('.fields.cloudinary_image_value.heading') %></th>
-            <th><%= t('.fields.date_field_value.heading') %></th>
             <th><%= t('.fields.email_field_value.heading') %></th>
-            <th><%= t('.fields.password_field_value.heading') %></th>
             <th><%= t('.fields.phone_field_value.heading') %></th>
-            <th><%= t('.fields.select_value.heading') %></th>
-            <th><%= t('.fields.super_select_value.heading') %></th>
-            <th><%= t('.fields.text_area_value.heading') %></th>
-            <th><%= t('.fields.action_text_value.heading') %></th>
-            <th><%= t('.fields.ckeditor_value.heading') %></th>
-            <% end %>
             <%# 🚅 stop any skipping we're doing now. %>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
             <th><%= t('.fields.created_at.heading') %></th>
@@ -38,36 +28,28 @@
         </thead>
         <tbody>
           <% tangible_things.each do |tangible_thing| %>
-            <tr data-id="<%= tangible_thing.id %>">
-              <%# 🚅 skip this section when scaffolding. %>
-              <td><%= link_to tangible_thing.text_field_value, [:account, tangible_thing] %></td>
-              <% if false %>
-              <td><%= tangible_thing.button_value %></td>
-              <td><%= tangible_thing.cloudinary_image_value %></td>
-              <td><%= tangible_thing.date_field_value %></td>
-              <td><%= tangible_thing.email_field_value %></td>
-              <td><%= tangible_thing.password_field_value %></td>
-              <td><%= tangible_thing.phone_field_value %></td>
-              <td><%= tangible_thing.select_value %></td>
-              <td><%= tangible_thing.super_select_value %></td>
-              <td><%= tangible_thing.text_area_value %></td>
-              <td><%= tangible_thing.action_text_value %></td>
-              <td><%= tangible_thing.ckeditor_value %></td>
-              <% end %>
-              <%# 🚅 stop any skipping we're doing now. %>
-              <%# 🚅 super scaffolding will insert new fields above this line. %>
-              <td><%= display_date_and_time(tangible_thing.created_at) %></td>
-              <td class="buttons">
-                <% unless hide_actions %>
-                  <% if can? :edit, tangible_thing %>
-                    <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, tangible_thing], class: 'button-secondary button-smaller' %>
+            <% with_attribute_settings object: tangible_thing do %>
+              <tr data-id="<%= tangible_thing.id %>">
+                <%# 🚅 skip this section when scaffolding. %>
+                <td><%= render 'shared/attributes/text', attribute: :text_field_value, url: [:account, tangible_thing] %></td>
+                <td><%= render 'shared/attributes/option', attribute: :button_value %></td>
+                <td><%= render 'shared/attributes/email', attribute: :email_field_value %></td>
+                <td><%= render 'shared/attributes/phone_number', attribute: :phone_field_value %></td>
+                <%# 🚅 stop any skipping we're doing now. %>
+                <%# 🚅 super scaffolding will insert new fields above this line. %>
+                <td><%= display_date_and_time(tangible_thing.created_at) %></td>
+                <td class="buttons">
+                  <% unless hide_actions %>
+                    <% if can? :edit, tangible_thing %>
+                      <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, tangible_thing], class: 'button-secondary button-smaller' %>
+                    <% end %>
+                    <% if can? :destroy, tangible_thing %>
+                      <%= link_to t('.buttons.shorthand.destroy'), [:account, tangible_thing], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(tangible_thing)) }, class: 'button-secondary button-smaller' %>
+                    <% end %>
                   <% end %>
-                  <% if can? :destroy, tangible_thing %>
-                    <%= link_to t('.buttons.shorthand.destroy'), [:account, tangible_thing], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(tangible_thing)) }, class: 'button-secondary button-smaller' %>
-                  <% end %>
-                <% end %>
-              </td>
-            </tr>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>

@@ -1,22 +1,24 @@
 <%= form_with model: tangible_thing, url: (tangible_thing.persisted? ? [:account, tangible_thing] : [:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things]), local: true, class: 'form' do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
-  <%# 🚅 skip this section when scaffolding. %>
-  <%= render 'shared/fields/text_field', form: form, method: :text_field_value, options: {autofocus: true} %>
-  <%= render 'shared/fields/buttons', form: form, method: :button_value %>
-  <%= render 'shared/fields/cloudinary_image', form: form, method: :cloudinary_image_value %>
-  <%= render 'shared/fields/date_field', form: form, method: :date_field_value %>
-  <%= render 'shared/fields/email_field', form: form, method: :email_field_value %>
-  <%= render 'shared/fields/file_field', form: form, method: :file_field_value %>
-  <%= render 'shared/fields/password_field', form: form, method: :password_field_value %>
-  <%= render 'shared/fields/phone_field', form: form, method: :phone_field_value %>
-  <%= render 'shared/fields/select', form: form, method: :select_value %>
-  <%= render 'shared/fields/super_select', form: form, method: :super_select_value %>
-  <%= render 'shared/fields/text_area', form: form, method: :text_area_value %>
-  <%= render 'shared/fields/trix_editor', form: form, method: :action_text_value %>
-  <%= render 'shared/fields/ckeditor', form: form, method: :ckeditor_value %>
-  <%# 🚅 stop any skipping we're doing now. %>
-  <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% with_field_settings form: form do %>
+    <%# 🚅 skip this section when scaffolding. %>
+    <%= render 'shared/fields/text_field', method: :text_field_value, options: {autofocus: true} %>
+    <%= render 'shared/fields/buttons', method: :button_value %>
+    <%= render 'shared/fields/cloudinary_image', method: :cloudinary_image_value %>
+    <%= render 'shared/fields/date_field', method: :date_field_value %>
+    <%= render 'shared/fields/email_field', method: :email_field_value %>
+    <%= render 'shared/fields/file_field', method: :file_field_value %>
+    <%= render 'shared/fields/password_field', method: :password_field_value %>
+    <%= render 'shared/fields/phone_field', method: :phone_field_value %>
+    <%= render 'shared/fields/select', method: :select_value %>
+    <%= render 'shared/fields/super_select', method: :super_select_value %>
+    <%= render 'shared/fields/text_area', method: :text_area_value %>
+    <%= render 'shared/fields/trix_editor', method: :action_text_value %>
+    <%= render 'shared/fields/ckeditor', method: :ckeditor_value %>
+    <%# 🚅 stop any skipping we're doing now. %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% end %>
 
   <div class="buttons">
     <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>

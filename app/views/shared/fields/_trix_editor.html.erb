@@ -1,6 +1,7 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 labels = labels_for(form, method)
 options ||= {}
 options[:class] = "formatted_content trix-content #{options[:class]}"

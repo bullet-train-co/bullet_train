@@ -1,10 +1,28 @@
 <% yield p = np %>
+<% url ||= nil %>
 
-<div>
-  <label class="block text-2xs font-semibold py-2">
-    <%= p.content_for :heading %>
-  </label>
-  <div>
+<% body = capture do %>
+  <% if url.present? %>
+    <% link_to url do %>
+      <%= p.content_for :body %>
+    <% end %>
+  <% else %>
     <%= p.content_for :body %>
+  <% end %>
+<% end %>
+
+<% case strategy %>
+<% when :label %>
+  <div>
+    <label class="block text-2xs font-semibold py-2">
+      <%= p.content_for :heading %>
+    </label>
+    <div>
+      <%= body %>
+    </div>
   </div>
-</div>
+
+<% else %>
+  <%= body %>
+
+<% end %>

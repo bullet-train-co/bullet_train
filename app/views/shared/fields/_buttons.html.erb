@@ -1,6 +1,7 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 html_options ||= {}
 html_options[:id] ||= id_for(form, method)
 multiple ||= false

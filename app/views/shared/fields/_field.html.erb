@@ -1,6 +1,7 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 # returns a struct with `label`, `placeholder`, and `help` methods.
 labels = labels_for(form, method)
 options ||= {}

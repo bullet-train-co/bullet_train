@@ -1,6 +1,7 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 options ||= {}
 options[:class] = [options[:class], 'ckeditor'].compact.join(' ')
 other_options ||= {}

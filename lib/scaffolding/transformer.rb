@@ -523,7 +523,7 @@ RUBY
         options_need_defining = name.match?(/_id$/) || name.match?(/_ids$/)
       end
       field_options = []
-      if (local_options[:type] == :crud && index == 0)
+      if local_options[:type] == :crud && index == 0
         field_options << 'autofocus: true'
       end
       if name.match?(/_id$/) && ['select', 'super_select'].include?(type)
@@ -561,7 +561,6 @@ RUBY
       end
 
       field_attributes = {
-        form: "form",
         method: ":#{name}"
       }
 
@@ -612,114 +611,40 @@ ERB
 ERB
       end
 
+      # field on the show view.
+      attribute_partial ||= case type
+      when 'trix_editor', 'ckeditor'
+        'html'
+      when 'buttons', 'select', 'super_select'
+        if boolean_buttons
+          'boolean'
+        else
+          'option'
+        end
+      when 'cloudinary_image'
+        'image'
+      when 'phone_field'
+        'phone_number'
+      when 'date_field'
+        'date'
+      when 'date_and_time_field'
+        'date_and_time'
+      when 'email_field'
+        'email'
+      else
+        'text'
+      end
 
-# field on the show view.
-field_content ||= case type
-when 'trix_editor', 'ckeditor'
-<<-ERB
-<% if strip_tags(@tangible_thing.#{name}).present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= #{type == 'trix_editor' ? 'trix_sanitize' : 'html_sanitize'}(@tangible_thing.#{name}) %>
-          </div>
-        </div>
-      <% end %>
-ERB
-when 'buttons', 'select', 'super_select'
-  if boolean_buttons
-<<-ERB
-<div class="form-group">
-        <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-        <div>
-          <%= t(".fields.#{name}.options.#\{@tangible_thing.#{name}\}") %>
-        </div>
-      </div>
-ERB
-  else
-<<-ERB
-<% if @tangible_thing.#{name}.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= t(".fields.#{name}.options.#\{@tangible_thing.#{name}\}") %>
-          </div>
-        </div>
-      <% end %>
-ERB
-  end
-when 'cloudinary_image'
-<<-ERB
-<% if @tangible_thing.#{name}.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= cloudinary_image_tag @tangible_thing.#{name}, height: 200 %>
-          </div>
-        </div>
-      <% end %>
-ERB
-when 'phone_field'
-  <<-ERB
-<% if @tangible_thing.#{name}.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= display_phone_number(@tangible_thing.#{name}) %>
-          </div>
-        </div>
-      <% end %>
-ERB
-when 'date_field'
-  <<-ERB
-<% if @tangible_thing.#{name}.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= display_date(@tangible_thing.#{name}) %>
-          </div>
-        </div>
-      <% end %>
-ERB
-when 'date_and_time_field'
-  <<-ERB
-<% if @tangible_thing.#{name}.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= display_date_and_time(@tangible_thing.#{name}) %>
-          </div>
-        </div>
-      <% end %>
-ERB
-when 'email_field'
-  <<-ERB
-<% if @tangible_thing.#{name}.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= link_to @tangible_thing.#{name}, "mailto:#\{@tangible_thing.#{name}\}" %>
-          </div>
-        </div>
-      <% end %>
-ERB
-else
-<<-ERB
-<% if @tangible_thing.#{name}.present? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= @tangible_thing.#{name} %>
-          </div>
-        </div>
-      <% end %>
-ERB
-end
+      # this gets stripped and is one line, so indentation isn't a problem.
+      field_content = <<-ERB
+        <%= render 'shared/attributes/#{attribute_partial}', attribute: :#{name} %>
+      ERB
 
-      scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/show.html.erb", field_content, ERB_NEW_FIELDS_HOOK, prepend: true)
+      scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/show.html.erb", field_content.strip, ERB_NEW_FIELDS_HOOK, prepend: true)
 
+      # field on the index table.
       unless options['skip-table']
-        unless ['trix_editor', 'ckeditor', 'text_area'].include?(type) || name.match?(/_ids$/)
+        unless ['trix_editor', 'ckeditor', 'text_area'].include?(type)
 
           # table header.
           cell_attributes = boolean_buttons ? ' class="text-center"' : nil
@@ -729,76 +654,25 @@ end
             scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb", field_content, "<%# 🚅 super scaffolding will insert new field headers above this line. %>", prepend: true)
           end
 
-          inline_ruby = nil
-          nested_html = nil
-          presence_check = nil
-
-case type
-when 'cloudinary_image'
-  inline_ruby = "cloudinary_image_tag tangible_thing.#{name}, height: 200 if tangible_thing.#{name}.present?"
-when 'phone_field'
-  inline_ruby = "display_phone_number(tangible_thing.#{name})"
-when 'date_field'
-  inline_ruby = "display_date(tangible_thing.#{name})"
-when 'date_and_time_field'
-  inline_ruby = "display_date_and_time(tangible_thing.#{name})"
-when 'buttons', 'select', 'super_select'
-  if boolean_buttons
-    nested_html = "<div class=\"status-pill <%= tangible_thing.#{name}? ? 'green' : 'yellow' %>\"></div>"
-  else
-    inline_ruby = "t(\".fields.#{name}.options.#\{tangible_thing.#{name}\}\")"
-    presence_check = "tangible_thing.#{name}.present?"
-  end
-else
-  inline_ruby = "tangible_thing.#{name}"
-end
-
-          field_content = if name.match?(/_id$/)
-            name_without_id = name.gsub(/_id$/, '')
-            "<td#{cell_attributes}><%= link_to tangible_thing.#{name_without_id}.#{attribute_options[:label]}, [:account, tangible_thing.#{name_without_id}] if tangible_thing.#{name_without_id} %></td>"
-          end
-
           # table cell.
-          field_content ||= if first_table_cell
-            # we don't use presence_check here because the first column should be required by definition.
-            if nested_html.present?
-<<-ERB
-<td#{cell_attributes}>
-              <%= link_to [:account, tangible_thing] do %>
-                #{nested_html}
-              <% end %>
-            </td>
-ERB
-            else
-<<-ERB
-<td#{cell_attributes}><%= link_to #{inline_ruby}, [:account, tangible_thing] %></td>
-ERB
-            end
-          elsif presence_check
-            if inline_ruby
-<<-ERB
-<td#{cell_attributes}><%= #{inline_ruby} if #{presence_check} %></td>
-ERB
-            else
-<<-ERB
-<td#{cell_attributes}>
-              <% if #{presence_check} %>
-                #{nested_html}
-              <% end %>
-            </td>
-ERB
-            end
-          elsif nested_html
-            <<-ERB
-<td#{cell_attributes}>
-              #{nested_html}
-            </td>
-            ERB
-          else
-<<-ERB
-<td#{cell_attributes}><%= #{inline_ruby} %></td>
-ERB
+          options = []
+
+          # are there any special options to pass into the attribute partial because we're displaying this in a table?
+          case type
+          when 'cloudinary_image'
+            options << "height: 200"
           end
+
+          if first_table_cell
+            options << "url: [:account, tangible_thing]"
+          end
+
+          name_without_id = name.gsub(/_id$/, '')
+
+          # this gets stripped and is one line, so indentation isn't a problem.
+          field_content = <<-ERB
+            <td#{cell_attributes}><%= render 'shared/attributes/#{attribute_partial}', attribute: :#{name_without_id}#{", #{options.join(', ')}" if options.any?} %></td>
+          ERB
 
           unless ['Team', 'User'].include?(child)
             scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb", field_content.strip, ERB_NEW_FIELDS_HOOK, prepend: true)
