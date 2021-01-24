@@ -22,7 +22,7 @@
             </div>
           </div>
 
-          <nav class="flex-1 space-y-1">
+          <nav class="flex-1 space-y-1 overflow-y-auto">
             <div class="px-5 py-4" id="menu">
 
               <%= render 'account/shared/menu/section', title: 'Introduction' do %>
@@ -167,7 +167,7 @@
             <div @click="menuOpen = false" x-show="menuOpen" x-transition:enter="transition-opacity ease-linear duration-200" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0" aria-hidden="true">
               <div class="absolute inset-0 bg-light-blue-gradient opacity-75"></div>
             </div>
-            <div x-show="menuOpen" x-transition:enter="transition ease-in-out duration-200 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-200 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="relative flex-1 flex flex-col max-w-xs w-full pb-4 bg-dark-blue-gradient shadow-xl">
+            <div x-show="menuOpen" x-transition:enter="transition ease-in-out duration-200 transform" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in-out duration-200 transform" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="relative flex-1 flex flex-col max-w-xs w-full bg-dark-blue-gradient shadow-xl">
               <%= menu %>
             </div>
             <div class="flex-shrink-0 w-14" aria-hidden="true"></div>
