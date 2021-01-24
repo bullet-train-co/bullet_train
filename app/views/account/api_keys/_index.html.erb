@@ -22,8 +22,8 @@
         <tbody>
           <% api_keys.each do |api_key| %>
           <tr data-id="<%= api_key.id %>">
-            <td><%= api_key.token %></td>
-            <td><%= link_to t(".buttons.reveal"), "#", onclick: "$(this).parent().text('#{api_key.secret}'); return false;" %></td>
+            <td><code><%= api_key.token %></code></td>
+            <td><%= link_to t(".buttons.reveal"), "#", onclick: "$(this).parent().html('<code>#{api_key.secret}</code>'); return false;" %></td>
             <td><%= time_ago_in_words(api_key.last_used_at) %> ago</td>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
             <td class="buttons">
