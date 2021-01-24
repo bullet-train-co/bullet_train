@@ -1,5 +1,7 @@
 <% yield p = np %>
+
 <% url ||= nil %>
+<% strategy ||= current_attributes_strategy || :none %>
 
 <% body = capture do %>
   <% if url.present? %>

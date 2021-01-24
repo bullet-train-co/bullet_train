@@ -1,9 +1,11 @@
 <%= form_with model: [:account, (@team unless creative_concept.persisted?), creative_concept], local: true, class: 'form' do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
-  <%= render 'shared/fields/text_field', form: form, method: :name, options: {autofocus: true} %>
-  <%= render 'shared/fields/text_area', form: form, method: :description %>
-  <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% with_field_settings form: form do %>
+    <%= render 'shared/fields/text_field', method: :name, options: {autofocus: true} %>
+    <%= render 'shared/fields/text_area', method: :description %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% end %>
 
   <div class="buttons">
     <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
