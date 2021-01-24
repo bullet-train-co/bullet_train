@@ -42,12 +42,12 @@ class AccountTest < ActionDispatch::IntegrationTest
       visit account_scaffolding_completely_concrete_tangible_thing_path(tangible_thing)
 
       assert page.has_content?('My value for this text field')
-      assert page.has_content?('three')
+      assert page.has_content?('Three')
       assert page.has_content?('me@acme.com')
       assert page.has_content?('secure-password')
-      assert page.has_content?('+12015518321')
-      assert page.has_content?('two')
-      assert page.has_content?('three')
+      assert page.has_content?('+1 201-551-8321')
+      assert page.has_content?('Two')
+      assert page.has_content?('Three')
       assert page.has_content?('Long text for this text area field')
 
       click_on 'Edit Tangible Thing'
@@ -66,12 +66,12 @@ class AccountTest < ActionDispatch::IntegrationTest
       click_on 'Update Tangible Thing'
 
       assert page.has_content?('My new value for this text field')
-      assert page.has_content?('one')
+      assert page.has_content?('One')
       assert page.has_content?('not-me@acme.com')
       assert page.has_content?('insecure-password')
-      assert page.has_content?('+12318325512')
-      assert page.has_content?('three')
-      assert page.has_content?('two')
+      assert page.has_content?('+1 231-832-5512')
+      assert page.has_content?('Three')
+      assert page.has_content?('Two')
       assert page.has_content?('New long text for this text area field')
     end
   end
