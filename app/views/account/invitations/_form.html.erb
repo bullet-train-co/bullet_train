@@ -16,14 +16,14 @@
   <% end %>
 
   <% if can? :manage, @team %>
-    <%= form.fields_for :membership do |f| %>
-      <%= f.hidden_field :team_id, value: @team.id %>
+    <%= form.fields_for :membership do |fields| %>
+      <%= fields.hidden_field :team_id, value: @team.id %>
       <div class="space-y-3">
         <% Role.order(:display_order).each do |role| %>
           <% if current_membership.can_manage_role?(role) %>
             <div class="flex items-top">
-              <%= form.check_box :role_ids, {multiple: true, class: "h-4 w-4 text-blue focus:ring-blue-dark border-gray-300 rounded mt-0.5"}, role.id, nil %>
-              <label for="invitation_role_ids_<%= role.id %>" class="ml-2 block select-none">
+              <%= fields.check_box :role_ids, {multiple: true, class: "h-4 w-4 text-blue focus:ring-blue-dark border-gray-300 rounded mt-0.5"}, role.id, nil %>
+              <label for="invitation_membership_attributes_role_ids_<%= role.id %>" class="ml-2 block select-none">
                 <span><%= t('invitations.form.invite_as', role_name: t("roles.labels.#{role.key}")) %></span>
                 <div class="mt-0.5 text-gray-400 font-light leading-normal">
                   <%= t("roles.descriptions.#{role.key}") %>

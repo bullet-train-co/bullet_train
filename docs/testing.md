@@ -11,21 +11,13 @@ rails test
 
 ### 1. Run Chrome in Non-Headless Mode
 
-When debugging tests, it's important to be able to see what Capybara is seeing. You can disable the headless browser mode by finding the following lines of `test/test_helper.rb`:
+When debugging tests, it's important to be able to see what Capybara is seeing. You can disable the headless browser mode by prefixing `rails test` like so:
 
 ```
-Capybara.javascript_driver = :selenium_chrome_headless
-Capybara.default_driver = :selenium_chrome_headless
+SHOW_TESTS=1 rails test
 ```
 
-Once you've found them, replace them with this:
-
-```
-Capybara.javascript_driver = :selenium_chrome
-Capybara.default_driver = :selenium_chrome
-```
-
-Now when you run tests, the browser will appear on your screen. Be careful not to interact with the window when it appears, as sometimes your interactions can cause the test to fail needlessly.
+When you run the test suite with `SHOW_TESTS` set in your environment like this, the browser will appear on your screen after the first Capybara test starts. (This may not be the first test that runs.) Be careful not to interact with the window when it appears, as sometimes your interactions can cause the test to fail needlessly.
 
 ### 2. Insert `binding.pry`.
 
