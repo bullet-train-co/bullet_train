@@ -1,4 +1,4 @@
-# Getting Started with Bullet Train
+# Getting Started
 
 This guide specifically covers the process of getting Bullet Train up and running on your local machine so you can start developing your application. If you've just purchased Bullet Train, be sure to see the [overview of first steps as a new Bullet Train customer](https://blog.bullettrain.co/so-youve-bought-bullet-train-whats-next/).
 

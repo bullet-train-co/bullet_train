@@ -1,4 +1,4 @@
-# Database Seeds in Bullet Train
+# Database Seeds
 
 Bullet Train introduces a new, slightly different expectation for Rails seed data: **It should be possible to run `rake db:seed` multiple times without creating duplicate data.**
 

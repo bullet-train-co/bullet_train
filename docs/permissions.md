@@ -1,4 +1,4 @@
-# Roles, Permissions, Abilities, and Authorization in Bullet Train
+# Roles, Permissions, Abilities, and Authorization
 
 ## Domain Model Overview
 

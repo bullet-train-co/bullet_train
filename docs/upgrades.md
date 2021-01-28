@@ -1,4 +1,4 @@
-# Pulling Bullet Train Updates Into Your Application
+# Pulling Updates Into Your Application
 
 ## Overview
 

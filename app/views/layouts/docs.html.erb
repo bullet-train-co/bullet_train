@@ -14,7 +14,7 @@
     %>
 
     <% content_for :title do %>
-      <title><%= title.truncate(70) %> | <%= site_name %></title>
+      <title><%= [site_name, title, t('application.tagline')].select(&:present?).uniq.first(2).reverse.join(' — ') %></title>
     <% end %>
 
     <%= render 'layouts/head' %>
