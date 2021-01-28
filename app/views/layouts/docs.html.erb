@@ -2,7 +2,6 @@
 
 <html>
   <head>
-    <%= render 'layouts/head' %>
     <%
     # we're going to use the
     body = Nokogiri::HTML(@body)
@@ -11,7 +10,14 @@
     preceding_heading = first_paragraph&.xpath("preceding-sibling::h2")
     description = [preceding_heading&.text, first_paragraph&.text].select(&:present?).join(" — ") || t('application.description')
     image_url = "https://avatars.githubusercontent.com/u/5976880?s=280&amp;v=4"
+    site_name = "Bullet Train Developer Documentation"
     %>
+
+    <% content_for :title do %>
+      <title><%= title.truncate(70) %> | <%= site_name %></title>
+    <% end %>
+
+    <%= render 'layouts/head' %>
     <meta content="<%= t('application.keywords') %>" name="keywords" />
     <meta content="<%= description.truncate(200) %>" name="description" />
     <meta name="twitter:image:src" content="<%= image_url %>" />
@@ -20,7 +26,7 @@
     <meta name="twitter:title" content="<%= title.truncate(70) %>" />
     <meta name="twitter:description" content="<%= description.truncate(160) %>" />
     <meta property="og:image" content="<%= image_url %>" />
-    <meta property="og:site_name" content="<%= t('application.name') %>: <%= t('application.tagline') %>" />
+    <meta property="og:site_name" content="<%= site_name %>: <%= t('application.tagline') %>" />
     <meta property="og:type" content="object" />
     <meta property="og:title" content="<%= title.truncate(95) %>" />
     <meta property="og:url" content="<%= request.base_url + request.path %>" />
