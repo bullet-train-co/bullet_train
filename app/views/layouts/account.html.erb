@@ -5,11 +5,11 @@
     <%= render 'layouts/head' %>
   </head>
   <body class="bg-light-blue-gradient text-gray-700 text-sm font-normal">
-    <div class="md:p-5">
+    <div class="md:p-5 main-container">
       <div class="h-screen md:h-auto overflow-hidden md:rounded-lg flex shadow" x-data="{ menuOpen: false }" @keydown.window.escape="menuOpen = false">
 
         <% menu = capture do %>
-          <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker md:rounded-tl-lg">
+          <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker md:rounded-tl-lg app-logo">
             <%= image_tag asset_pack_path('media/images/logo/logo.png'), class: 'h-5 w-auto mx-auto' %>
 
             <div class="lg:hidden absolute right-0">
