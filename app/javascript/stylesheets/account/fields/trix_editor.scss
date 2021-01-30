@@ -74,8 +74,7 @@ trix-editor [data-trix-cursor-target] {
 trix-editor {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
-  border-radius: 4px;
-  @apply shadow-sm border-gray-300 font-light;
+  @apply shadow-sm border-gray-300 font-light rounded-md;
   &:focus, &:active {
     border-color: #047bf8;
     box-shadow: inset 0 0 0 1px #047bf8;
