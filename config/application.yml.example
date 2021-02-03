@@ -1,2 +1,5 @@
 BASE_URL: http://localhost:3000
 MARKETING_SITE_URL: /users/sign_in
+
+# Required for webpack, unless you remove Font Awesome Pro. See /docs/getting-started
+FONTAWESOME_NPM_AUTH_TOKEN: 
