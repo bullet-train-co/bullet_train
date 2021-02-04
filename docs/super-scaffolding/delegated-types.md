@@ -161,7 +161,7 @@ accepts_nested_attributes_for :entryable
 Also in `app/models/entry.rb`, [Rails will be expecting us](https://stackoverflow.com/questions/45295202/cannot-build-nested-polymorphic-associations-are-you-trying-to-build-a-polymor) to define the following method on the model:
 
 ```
-def build_entryable(params)
+def build_entryable(params = [])
   raise 'invalid entryable type' unless entryable_type_valid?
   self.entryable = entryable_type.constantize.new(params)
 end
