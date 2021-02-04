@@ -1,4 +1,5 @@
-<% strategy ||= :none %>
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
 <% url ||= nil %>
 
 <% if object.send(attribute).present? %>
