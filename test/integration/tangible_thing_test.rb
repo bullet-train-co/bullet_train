@@ -34,12 +34,10 @@ class AccountTest < ActionDispatch::IntegrationTest
       fill_in 'Text Area Value', with: 'Long text for this text area field'
 
       click_on 'Create Tangible Thing'
-
       assert page.has_content?('Tangible Thing was successfully created.')
 
-      tangible_thing = Scaffolding::CompletelyConcrete::TangibleThing.last
-
-      visit account_scaffolding_completely_concrete_tangible_thing_path(tangible_thing)
+      click_on 'My value for this text field'
+      assert page.has_content?('Tangible Thing Details')
 
       assert page.has_content?('My value for this text field')
       assert page.has_content?('Three')

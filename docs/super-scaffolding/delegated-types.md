@@ -121,12 +121,14 @@ new:
 
 ### 6. Add Appropriate Validations in `entry.rb`
 
-In `app/models/entry.rb`, we want to update the validation of `entryable_type` like so:
+In `app/models/entry.rb`, we want to replace the default validation of `entryable_type` like so:
 
 ```
-  validates :entryable_type, presence: true, inclusion: {
-    in: I18n.t('entries.fields.entryable_type.options').keys.map(&:to_s)
-  }
+ENTRYABLE_TYPES = I18n.t('entries.fields.entryable_type.options').keys.map(&:to_s)
+
+validates :entryable_type, inclusion: {
+  in: ENTRYABLE_TYPES, allow_blank: false, message: I18n.t('errors.messages.empty')
+}
 ```
 
 This makes the locale file, where we define the options to present to the user, the single source of truth for what the valid options are.
@@ -137,12 +139,7 @@ Also, to make it easy to check the state of this validation, we'll add `entryabl
 
 ```
 def entryable_type_valid?
-  if entryable_type.present?
-    valid?
-    result = errors[:entryable_type].empty?
-    errors.clear
-    return result
-  end
+  ENTRYABLE_TYPES.include?(entryable_type)
 end
 ```
 
@@ -161,7 +158,7 @@ accepts_nested_attributes_for :entryable
 Also in `app/models/entry.rb`, [Rails will be expecting us](https://stackoverflow.com/questions/45295202/cannot-build-nested-polymorphic-associations-are-you-trying-to-build-a-polymor) to define the following method on the model:
 
 ```
-def build_entryable(params)
+def build_entryable(params = {})
   raise 'invalid entryable type' unless entryable_type_valid?
   self.entryable = entryable_type.constantize.new(params)
 end
@@ -195,7 +192,11 @@ Before we can present the second step to users, we need to react to the user's i
 
 ```
 def new
-  @entry.build_entryable if @entry.entryable_type_valid?
+  if @entry.entryable_type_valid?
+    @entry.build_entryable
+  elsif params[:commit]
+    @entry.valid?
+  end
 end
 ```
 
@@ -216,14 +217,14 @@ But we need to keep track of which entry type they selected, so we replace it wi
 Also, below that (and below the Super Scaffolding hook), we want to add the `Message` and `Comment` fields as [nested forms](https://guides.rubyonrails.org/form_helpers.html#nested-forms) like so:
 
 ```
-<%= form.fields_for entry.entryable do |entryable_form| %>
+<%= form.fields_for :entryable, entry.entryable do |entryable_form| %>
   <%= entryable_form.hidden_field :id %>
   <% with_field_settings form: entryable_form do %>
     <% case entryable_form.object %>
     <% when Message %>
-      <%= render 'shared/fields/text_field', method: :subject, options: {autofocus: true} %>
+      <%= render 'shared/fields/text_field', method: :subject %>
     <% when Comment %>
-      <%= render 'shared/fields/ckeditor', method: :content, options: {autofocus: true} %>
+      <%= render 'shared/fields/ckeditor', method: :content %>
     <% end %>
   <% end %>
 <% end %>
