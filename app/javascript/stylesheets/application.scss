@@ -19,3 +19,6 @@
     }
   }
 }
+
+// hide the first breadcrumb chevron
+ol.breadcrumb li:first-child svg { display: none; }
