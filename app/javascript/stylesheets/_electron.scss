@@ -1,10 +1,38 @@
-.electron {
-  .main-container {
+.electron, .todesktop {
+  .app-logo {
+    // make window dragable by this element.
+    -webkit-app-region: drag;
+    user-select: none;
+
+    // override `md:rounded-lg`
+    border-top-right-radius: 0;
+
+    // hide logo because it doesn't fit into the ui well.
+    img { display: none; }
+    min-height: 36px;
+  }
+
+  .main-container-padding {
     padding: 0;
   }
 
-  .app-logo {
+  .main-container {
+    // override `md:rounded-lg`
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+    // override `md:h-auto`
+    height: 100vh;
+  }
+
+  .top-bar {
+    // make window dragable by this element.
     -webkit-app-region: drag;
     user-select: none;
   }
+
+  // hide profiler results because they don't fit into the ui well.
+  .profiler-results { display: none; }
 }
