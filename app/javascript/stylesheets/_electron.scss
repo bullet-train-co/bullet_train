@@ -1,15 +1,30 @@
-.electron, .todesktop {
-
-  .app-logo {
+@layer utilities {
+  .electron-draggable {
     // make window dragable by this element.
     -webkit-app-region: drag;
     user-select: none;
+  }
 
+  .electron-undraggable {
+    // make window dragable by this element.
+    -webkit-app-region: no-drag;
+  }
+}
+
+
+.electron, .todesktop {
+
+  .electron-mobile-only {
+    @apply block lg:hidden;
+  }
+
+  .electron-title-bar {
     // override `md:rounded-lg`
     border-top-left-radius: 0;
 
     // hide logo because it doesn't fit into the ui well.
     img { display: none; }
+
     min-height: 36px;
   }
 
@@ -28,16 +43,9 @@
     height: 100vh;
   }
 
-  .top-bar {
-    // make window dragable by this element.
-    -webkit-app-region: drag;
-    user-select: none;
-  }
-
   // hide profiler results because they don't fit into the ui well.
   .profiler-results { display: none; }
 
   // touch up the padding of the breadcrumbs.
   ol.breadcrumb { padding-top: 3px; }
-
 }
