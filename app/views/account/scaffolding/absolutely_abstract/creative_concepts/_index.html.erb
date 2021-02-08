@@ -24,7 +24,7 @@
             <% with_attribute_settings object: creative_concept do %>
               <tr data-id="<%= creative_concept.id %>">
                 <td><%= render 'shared/attributes/text', attribute: :name, url: [:account, creative_concept] %></td>
-                <td><%= render 'account/shared/memberships/photos', memberships: creative_concept.all_collaborators, size: 9 %></td>
+                <td><%= render 'account/shared/memberships/photos', memberships: creative_concept.all_collaborators, size: 9, align: :center %></td>
                 <%# 🚅 super scaffolding will insert new fields above this line. %>
                 <td><%= display_date_and_time(creative_concept.created_at) %></td>
                 <td class="buttons">
