@@ -5,6 +5,7 @@
 @import "./tailwind-components";
 @import "./tailwind-utilities";
 
+@import "./electron";
 @import "./select2-tailwind";
 
 // TODO there is probably a better way to do this.
@@ -18,3 +19,6 @@
     }
   }
 }
+
+// hide the first breadcrumb chevron
+ol.breadcrumb li:first-child svg { display: none; }

@@ -178,10 +178,16 @@
                 <% end %>
               <% end if false %>
 
-              <%= render 'account/shared/menu/section', title: 'Production' do %>
+              <%= render 'account/shared/menu/section', title: 'Deployment' do %>
                 <%= render 'account/shared/menu/item', url: '/docs/heroku', label: 'Heroku' do |p| %>
                   <% p.content_for :icon do %>
                     <i class="fal fa-cloud"></i>
+                  <% end %>
+                <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/desktop', label: 'Desktop Applications' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-window-restore"></i>
                   <% end %>
                 <% end %>
               <% end %>
