@@ -156,7 +156,7 @@ gem 'colorize'
 gem 'nice_partials', github: 'andrewculver/nice_partials', branch: 'bt'
 
 # turbo is in early development, so we're not waiting for releases.
-gem 'turbo-rails', github: 'hotwired/turbo-rails'
+gem 'turbo-rails', github: 'hotwired/turbo-rails', branch: 'main'
 
 group :production do
   # we suggest using postmark for email deliverability.

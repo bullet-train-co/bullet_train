@@ -12,6 +12,14 @@ GIT
     trix (0.11.1)
       rails (> 4.1, <= 7.0)
 
+GIT
+  remote: https://github.com/hotwired/turbo-rails.git
+  revision: a5ab3772b11b122cd88e5c9c04f3be9b40b7f9ae
+  branch: main
+  specs:
+    turbo-rails (0.5.9)
+      rails (>= 6.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -407,8 +415,6 @@ GEM
     thor (1.0.1)
     tilt (2.0.10)
     time_ago_in_words (0.1.1)
-    turbo-rails (0.5.9)
-      rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -501,7 +507,7 @@ DEPENDENCIES
   stripe
   time_ago_in_words
   trix!
-  turbo-rails
+  turbo-rails!
   tzinfo-data
   valid_email
   web-console (>= 4.1.0)
