@@ -1,4 +1,5 @@
 import 'intl-tel-input/build/css/intlTelInput.css';
+import '../../stylesheets/account/fields/phone_field.scss';
 import intlTelInput from 'intl-tel-input';
 
 function enablePhoneFields($scope) {

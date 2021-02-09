@@ -1,6 +1,7 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 options ||= {}
 options = options.merge({type: 'tel', data: {method: method}})
 other_options ||= {}

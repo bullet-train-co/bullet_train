@@ -1,5 +1,5 @@
 <% if content_for? :title %>
-  <% yield :title %>
+  <%= yield :title %>
 <% elsif @title.present? %>
   <title><%= @title %> | <%= t('application.name') %></title>
 <% else %>
@@ -12,8 +12,8 @@
 <meta content="<%= t('application.description') %>" name="description" />
 <meta content="width=device-width, initial-scale=1" name="viewport" />
 <meta name="turbo-cache-control" content="no-cache">
-<link href="<%= image_path('logo/favicon.png') %>" rel="shortcut icon" />
-<link href="<%= image_path('logo/logo-square-bg.png') %>" rel="apple-touch-icon" />
+<link href="<%= asset_pack_path('media/images/logo/favicon.png') %>" rel="shortcut icon" />
+<link href="<%= asset_pack_path('media/images/logo/logo-square-bg.png') %>" rel="apple-touch-icon" />
 
 <%= csrf_meta_tags %>
 

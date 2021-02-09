@@ -6,8 +6,9 @@ function enableButtons($scope) {
     event.preventDefault();
 
     // then we need to manually click the hidden checkbox ourselves.
-    $(event.target).closest('.btn-toggle').find('input[type=radio], input[type=checkbox]').click();
+    const inputEl = $(event.target).closest('.btn-toggle').find('input[type=radio], input[type=checkbox]');
 
+    inputEl.trigger('click');
   });
 }
 

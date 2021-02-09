@@ -1,7 +1,7 @@
-# Field partials
+# Field Partials
+Bullet Train includes a collection of view partials that are intended to [DRY-up](https://en.wikipedia.org/wiki/Don't_repeat_yourself) as much redundant presentation logic as possible for different types of form fields without taking on a third-party dependency like Formtastic.
 
-Bullet Train includes a collection of view partials that are intended to [DRY up](https://en.wikipedia.org/wiki/Don't_repeat_yourself) as much redundant presentation logic as possible for different types of form fields without taking on a third-party dependency like Formtastic.
-
+## Responsibilities
 These form field partials standardize and centralize the following behavior across all form fields that use them:
 
  - Apply theme styling and classes.
@@ -12,15 +12,26 @@ These form field partials standardize and centralize the following behavior acro
 
 It's a simple set of responsibilities, but putting them all together in one place cleans up a lot of form view code. One of the most compelling features of this "field partials" approach is that they're just HTML in ERB templates using standard Rails form field helpers within the standard Rails `form_with` method. That means there are no "last mile" issues if you need to customize the markup being generated. There's no library to fork or classes to override.
 
-## Basic Usage
+## The Complete Package
+Each field partial can optionally include whichever of the following are required to fully support it:
 
+ - **Controller assignment helper** to be used alongside Strong Parameters to convert whatever is submitted in the form to the appropriate ActiveRecord attribute value.
+ - **Turbo-compatible JavaScript invocation** of any third-party library that helps support the field partial.
+ - **Theme-compatible styling** to ensure any third-party libraries "fit in".
+ - **Capybara testing helper** to ensure it's easy to inject values into a field partial in headless browser tests.
+
+## Basic Usage
 The form field partials are designed to be a 1:1 match for [the native Rails form field helpers](https://guides.rubyonrails.org/form_helpers.html) developers are already used to using. For example, consider the following basic Rails form field helper invocation:
 
-<pre><code><%= form.text_field :text_field_value, autofocus: true %></code></pre>
+```
+<%= form.text_field :text_field_value, autofocus: true %>
+```
 
 Using the field partials, the same field would be implemented as follows:
 
-<pre><code><%= render 'shared/fields/text_field', form: form, method: :text_field_value, options: {autofocus: true} %></code></pre>
+```
+<%= render 'shared/fields/text_field', form: form, method: :text_field_value, options: {autofocus: true} %>
+```
 
 At first blush it might look like a more verbose invocation, but that doesn't take into account that the first vanilla Rails example doesn't handle the field label or any other related functionality.
 
@@ -35,10 +46,19 @@ The 1:1 relationship between these field partials and their underlying Rails for
 
 Individual field partials might have additional options available based on the underlying Rails form field helper. Links to the documentation for individual form field partials are listed at the end of this page.
 
+## Reducing Repetition
+When you're including multiple fields, you can DRY up redundant settings (e.g. `form: form`) like so:
+
+```
+<% with_field_settings form: form do %>
+  <%= render 'shared/fields/text_field', method: :text_field_value, options: {autofocus: true} %>
+  <%= render 'shared/fields/buttons', method: :button_value %>
+  <%= render 'shared/fields/cloudinary_image', method: :cloudinary_image_value %>
+<% end %>
+```
 
 ## Enhanced field partials that invoke supporting JavaScript libraries
-
-Some of the form field partials lean on specific JavaScript libraries to provide functionality beyond what's available from standard HTML fields.
+Some of the form field partials lean on specific JavaScript libraries to provide functionality beyond what's available from standard HTML fields. For example:
 
  - `date_field` and `date_and_time_field` use the [Date Range Picker](https://www.daterangepicker.com) library and provide another ~45 lines of JavaScript to polish up the user experience interacting with the fields in the context of a Bullet Train application.
  - `super_select` field partial uses [Select2](https://select2.org) to provide powerful option search and multi-select functionality out-of-the-box.
@@ -46,14 +66,10 @@ Some of the form field partials lean on specific JavaScript libraries to provide
  - `ckeditor` invokes [CKEditor 5](https://ckeditor.com/ckeditor-5/). Bullet Train has already tackled the work involved in getting CKEditor 5 building from source in the context of a Rails application, so you can easily mix-in any of the powerful add-ons available.
  - `trix_editor` invokes [Trix](https://github.com/basecamp/trix) to provide basic HTML-powered formatting features as well as support for at-mentions amongst team members.
 
-
 ## Field partials that integrate with third-party service providers
-
  - `cloudinary` makes it trivial to upload photos and images to [Cloudinary](https://cloudinary.com) and store their resulting Cloudinary ID as an attribute of the model backing the form.
 
-
 ## Yaml Configuration
-
 The localization Yaml file (where you configure label and option values for a field) is automatically generated when you run Super Scaffolding for a model. If you haven't done this yet, the localization Yaml file for `Scaffolding::CompletelyConcrete::TangibleThing` serves as a good example. Under `en.scaffolding/completely_concrete/tangible_things.fields` you'll see definitions like this:
 
 <pre><code>text_field_value:
@@ -83,7 +99,6 @@ You can also configure some placeholder text (displayed in the field when in an 
 Certain form field partials like `buttons`, `select`, and `super_select` can also have their selectable options configured in this Yaml file. See their respective documentation for details, as usage varies slightly.
 
 ## Specific Field Partials
-
- - [`buttons`](/docs/field-partials/buttons)
- - [`select`](/docs/field-partials/select)
- - [`super_select`](/docs/field-partials/super-select)
+ - [`buttons`](/docs/field-partials/buttons.md)
+ - [`select`](/docs/field-partials/select.md)
+ - [`super_select`](/docs/field-partials/super-select.md)

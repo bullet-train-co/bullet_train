@@ -11,6 +11,7 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
 
   # 🚅 add oauth providers above.
 
+  has_one_attached :file_field_value
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
@@ -22,6 +23,8 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
 
   delegate :team, to: :absolutely_abstract_creative_concept
   # 🚅 add delegations above.
+
+  has_rich_text :action_text_value
 
   def collection
     absolutely_abstract_creative_concept.completely_concrete_tangible_things

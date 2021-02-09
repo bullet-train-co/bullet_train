@@ -3,6 +3,7 @@
 <% if cloudinary_enabled? %>
 
 <%
+form ||= current_fields_form
 options ||= {}
 options[:id] ||= id_for(form, method)
 options[:width] ||= nil

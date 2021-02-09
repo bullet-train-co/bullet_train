@@ -1,6 +1,7 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 html_options ||= {}
 html_options[:id] ||= id_for(form, method)
 multiple ||= false
@@ -10,7 +11,7 @@ options ||= options_for(form, method)
 
 <%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
   <% content_for :field do %>
-    <div>
+    <div class="space-x-1">
       <% options.each do |value, label| %>
         <label class="btn-toggle">
           <% if multiple %>
@@ -18,7 +19,7 @@ options ||= options_for(form, method)
           <% else %>
             <%= form.radio_button method, value %>
           <% end %>
-          <button type="button" class="btn">
+          <button type="button" class="button-alternative">
             <%= label %>
           </button>
         </label>

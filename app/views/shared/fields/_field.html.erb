@@ -1,6 +1,7 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 # returns a struct with `label`, `placeholder`, and `help` methods.
 labels = labels_for(form, method)
 options ||= {}
@@ -13,15 +14,13 @@ other_options[:help] = [other_options[:help], labels.help].compact.join(" ")
 errors = [method, method.to_s.gsub(/_id$/, '').to_sym].uniq.map { |attribute| form.object.errors.full_messages_for(attribute) }.flatten
 has_errors = errors.any? || content_for(:error).present? || other_options[:error].present?
 
-options[:class] = "block w-full rounded-md shadow-sm font-light text-sm"
+options[:class] = "#{options[:class]} block w-full rounded-md shadow-sm font-light text-sm"
 
 options[:class] += if has_errors
   " pr-10 border-red text-red-darker placeholder-red focus:outline-none focus:ring-red focus:border-red"
 else
   " focus:ring-blue focus:border-blue border-gray-300"
 end
-
-options[:class] += " #{options[:class]}"
 
 %>
 

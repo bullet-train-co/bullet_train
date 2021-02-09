@@ -33,7 +33,7 @@
 
         <div class="buttons">
           <%= f.submit t('.buttons.next'), class: first_button_primary %>
-          <% if current_user.teams.any? %>
+          <% if other_teams.any? %>
             <%= link_to t('global.buttons.back'), main_app.account_teams_path, class: first_button_primary %>
           <% else %>
             <%= link_to t('menus.main.labels.logout'), main_app.destroy_user_session_path, class: first_button_primary, method: 'delete' %>

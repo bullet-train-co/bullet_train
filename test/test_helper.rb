@@ -15,9 +15,9 @@ Minitest::Retry.use!(retry_count: 3, verbose: true, exceptions_to_retry: [Net::R
 
 OmniAuth.config.test_mode = true
 
-Capybara.default_max_wait_time = 15
-Capybara.javascript_driver = :selenium_chrome_headless
-Capybara.default_driver = :selenium_chrome_headless
+Capybara.default_max_wait_time = ENV.fetch("CAPYBARA_DEFAULT_MAX_WAIT_TIME", 15)
+Capybara.javascript_driver = ENV['SHOW_TESTS'].present? ? :selenium_chrome : :selenium_chrome_headless
+Capybara.default_driver = ENV['SHOW_TESTS'].present? ? :selenium_chrome : :selenium_chrome_headless
 
 Capybara.register_server :puma do |app, port, host|
   require 'rack/handler/puma'

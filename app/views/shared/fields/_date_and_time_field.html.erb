@@ -1,6 +1,7 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 options ||= {}
 options[:id] ||= id_for(form, method)
 options[:class] = "form-control single-daterange-with-time #{options[:class]}".strip

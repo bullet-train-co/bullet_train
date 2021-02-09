@@ -1,3 +1,5 @@
+require("../../stylesheets/account/fields/ckeditor.scss");
+
 import 'regenerator-runtime/runtime'
 
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
@@ -68,7 +70,11 @@ ClassicEditor.defaultConfig = {
 
 function enableCKEditors($scope) {
   $scope.find('textarea.ckeditor').each(function(_, element) {
-    ClassicEditor.create(element);
+    ClassicEditor.create(element).then((editor) => {
+      if (element.getAttribute('autofocus')) {
+        editor.editing.view.focus();
+      }
+    });
   });
 }
 

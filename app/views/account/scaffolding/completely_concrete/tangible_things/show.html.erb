@@ -9,21 +9,23 @@
       <% end %>
 
       <% p.content_for :body do %>
-        <%# 🚅 skip this section when scaffolding. %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :text_field_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :button_value %>
-        <%= render 'shared/attributes/html', object: @tangible_thing, attribute: :ckeditor_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :cloudinary_image_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :date_field_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :email_field_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :password_field_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :phone_field_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :select_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :super_select_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :text_area_value %>
-        <%= render 'shared/attributes/text', object: @tangible_thing, attribute: :trix_editor_value %>
-        <%# 🚅 stop any skipping we're doing now. %>
-        <%# 🚅 super scaffolding will insert new fields above this line. %>
+        <% with_attribute_settings object: @tangible_thing, strategy: :label do %>
+          <%# 🚅 skip this section when scaffolding. %>
+          <%= render 'shared/attributes/text', attribute: :text_field_value %>
+          <%= render 'shared/attributes/option', attribute: :button_value %>
+          <%= render 'shared/attributes/html', attribute: :ckeditor_value %>
+          <%= render 'shared/attributes/text', attribute: :cloudinary_image_value %>
+          <%= render 'shared/attributes/date', attribute: :date_field_value %>
+          <%= render 'shared/attributes/email', attribute: :email_field_value %>
+          <%= render 'shared/attributes/text', attribute: :password_field_value %>
+          <%= render 'shared/attributes/phone_number', attribute: :phone_field_value %>
+          <%= render 'shared/attributes/option', attribute: :select_value %>
+          <%= render 'shared/attributes/option', attribute: :super_select_value %>
+          <%= render 'shared/attributes/block', attribute: :text_area_value %>
+          <%= render 'shared/attributes/html', attribute: :action_text_value %>
+          <%# 🚅 stop any skipping we're doing now. %>
+          <%# 🚅 super scaffolding will insert new fields above this line. %>
+        <% end %>
       <% end %>
 
       <% p.content_for :actions do %>
@@ -34,6 +36,5 @@
     <% end %>
 
     <%# 🚅 super scaffolding will insert new children above this line. %>
-
   <% end %>
 <% end %>

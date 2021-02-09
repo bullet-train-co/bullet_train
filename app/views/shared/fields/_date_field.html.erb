@@ -1,20 +1,21 @@
 <% yield %>
 
 <%
+form ||= current_fields_form
 options ||= {}
 options[:id] ||= id_for(form, method)
-options[:class] = "form-control single-daterange #{options[:class]}".strip
+options[:class] = "form-control single-daterange w-full #{options[:class]}".strip
 options[:value] = form.object.send(method)&.strftime('%m/%d/%Y')
 other_options ||= {}
 %>
 
 <%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
   <% content_for :field do %>
-    <div class="date-input">
+    <div class="date-input relative">
       <%= form.text_field method, options %>
       <% unless options[:disabled] %>
-      <button class="clear">
-        <i class="ti-trash"></i>
+      <button class="clear py-2 px-3 border border-transparent inline-flex items-center whitespace-nowrap absolute rounded-md" style="top: 2px; right: 2px;">
+        <i class="leading-4 text-lg ti ti-trash"></i>
       </button>
       <% end %>
     </div>

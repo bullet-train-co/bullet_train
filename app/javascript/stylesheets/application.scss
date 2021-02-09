@@ -2,124 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .text-2xs {
-    @apply uppercase;
-    font-size: 0.65rem;
-    line-height: 0.9rem;
-    letter-spacing: 1px;
-  }
+@import "./tailwind-components";
+@import "./tailwind-utilities";
 
-  .space-y {
-    @apply space-y-5;
-  }
-
-  .space-x {
-    @apply space-x-3;
-  }
-
-  .gap-y {
-    @apply gap-y-5;
-  }
-
-  .gap-x {
-    @apply gap-x-4;
-  }
-
-  .bg-dark-blue-gradient {
-    background-image: linear-gradient(to bottom, #1c4cc3 0%, #0e369a 100%);
-  }
-
-  .bg-light-blue-gradient {
-    &:before {
-      content: "";
-      position: fixed;
-      z-index: -1;
-      background: linear-gradient(to bottom right, #D7BBEA, #65A8F1);
-      top: 0px;
-      left: 0px;
-      bottom: 0px;
-      right: 0px;
-    }
-  }
-}
-
-@layer components {
-  a {
-    @apply text-blue hover:text-blue-dark hover:underline;
-  }
-
-  b, strong {
-    @apply font-medium;
-  }
-
-  .buttons {
-    @apply space-x;
-  }
-
-  form.button_to {
-    @apply inline;
-  }
-
-  .button {
-    @apply shadow-sm text-white hover:text-white bg-blue hover:bg-blue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-dark hover:no-underline;
-  }
-
-  .button-secondary {
-    @apply text-blue bg-transparent hover:text-blue-dark hover:underline;
-  }
-
-  .button, .button-secondary, .button-alternative {
-    @apply py-2 px-4 border border-transparent rounded-md;
-    @apply inline-flex items-center whitespace-nowrap;
-    &.button-smaller {
-      @apply py-1 px-3 text-xs;
-    }
-  }
-
-  .button-alternative {
-    @apply border-gray-300 rounded-md shadow-sm bg-white text-gray-500 hover:bg-gray-50 no-underline hover:no-underline;
-  }
-
-  .full {
-    @apply w-full flex justify-center;
-  }
-
-  form.form {
-    @apply space-y;
-    .buttons {
-      @apply pt-3;
-    }
-  }
-
-  .table {
-    @apply w-full divide-y divide-gray-300 text-left;
-
-    & thead {
-      @apply text-2xs;
-    }
-
-    & th {
-      @apply px-3 py-3 font-semibold;
-    }
-
-    & tbody {
-      @apply divide-y divide-gray-200;
-    }
-
-    & td {
-      @apply px-3 py-3.5;
-      &.buttons {
-        @apply text-right pr-0 space-x-2;
-
-        // just having a cell with buttons shouldn't expand the height of a table row.
-        & > * {
-          @apply -mt-5 -mb-5;
-        }
-      }
-    }
-  }
-}
+@import "./electron";
+@import "./select2-tailwind";
 
 // TODO there is probably a better way to do this.
 .hover-indent-child {
@@ -132,3 +19,10 @@
     }
   }
 }
+
+form.button_to {
+  @apply inline-block;
+}
+
+// hide the first breadcrumb chevron
+ol.breadcrumb li:first-child svg { display: none; }

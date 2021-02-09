@@ -4,45 +4,45 @@
     <%= render 'account/shared/box', divider: true do |p| %>
       <% p.content_for :title, t('.header') %>
       <% p.content_for :description, t('.description') %>
-
       <% p.content_for :body do %>
-        <%= render 'shared/attributes/text', object: @creative_concept, attribute: :name %>
-        <%= render 'shared/attributes/html', object: @creative_concept, attribute: :description %>
+        <% with_attribute_settings object: @creative_concept, strategy: :label do %>
+          <%= render 'shared/attributes/text', attribute: :name %>
+          <%= render 'shared/attributes/html', attribute: :description %>
+          <%# 🚅 super scaffolding will insert new fields above this line. %>
 
-        <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-3">
-          <div class="sm:col-span-1">
-            <%= render 'shared/attributes/base' do |p| %>
-              <% p.content_for :heading, t(".fields.admins.heading") %>
-              <% p.content_for :body do %>
-                <%= render 'account/shared/memberships/photos', memberships: (@team.admin_memberships + @creative_concept.admins).uniq %>
+          <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-3">
+            <div class="sm:col-span-1">
+              <%= render 'shared/attributes/base' do |p| %>
+                <% p.content_for :heading, t(".fields.admins.heading") %>
+                <% p.content_for :body do %>
+                  <%= render 'account/shared/memberships/photos', memberships: (@team.admin_memberships + @creative_concept.admins).uniq %>
+                <% end %>
               <% end %>
+            </div>
+
+            <% if @creative_concept.editors.any? %>
+              <div class="sm:col-span-1">
+                <%= render 'shared/attributes/base' do |p| %>
+                  <% p.content_for :heading, t(".fields.editors.heading") %>
+                  <% p.content_for :body do %>
+                    <%= render 'account/shared/memberships/photos', memberships: @creative_concept.editors %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+
+            <% if @creative_concept.viewers.any? %>
+              <div class="sm:col-span-1">
+                <%= render 'shared/attributes/base' do |p| %>
+                  <% p.content_for :heading, t(".fields.viewers.heading") %>
+                  <% p.content_for :body do %>
+                    <%= render 'account/shared/memberships/photos', memberships: @creative_concept.viewers %>
+                  <% end %>
+                <% end %>
+              </div>
             <% end %>
           </div>
-
-          <% if @creative_concept.editors.any? %>
-            <div class="sm:col-span-1">
-              <%= render 'shared/attributes/base' do |p| %>
-                <% p.content_for :heading, t(".fields.editors.heading") %>
-                <% p.content_for :body do %>
-                  <%= render 'account/shared/memberships/photos', memberships: @creative_concept.editors %>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-
-          <% if @creative_concept.viewers.any? %>
-            <div class="sm:col-span-1">
-              <%= render 'shared/attributes/base' do |p| %>
-                <% p.content_for :heading, t(".fields.viewers.heading") %>
-                <% p.content_for :body do %>
-                  <%= render 'account/shared/memberships/photos', memberships: @creative_concept.viewers %>
-                <% end %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-
-        <%# 🚅 super scaffolding will insert new fields above this line. %>
+        <% end %>
       <% end %>
 
       <% p.content_for :actions do %>

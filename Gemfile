@@ -9,13 +9,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~> 6.1.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5'
+gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -111,16 +111,13 @@ gem 'stripe'
 
 # allow users to supply content with markdown formatting.
 # powers our markdown() view helper.
-gem 'redcarpet'
+gem 'commonmarker'
 
 # we use this to detect the size of the logo assets.
 gem 'fastimage'
 
 # we use this to add "'s" as appropriate in certain headings.
 gem 'possessive'
-
-# an error tracking service with a generous free tier.
-gem 'sentry-raven'
 
 # background jobs.
 gem 'sidekiq'
@@ -141,9 +138,6 @@ gem 'figaro'
 # inline all css for emails.
 gem 'premailer-rails'
 
-# use s3 for active storage by default.
-gem 'aws-sdk-s3', require: false
-
 # parse natural language dates.
 gem 'chronic'
 
@@ -161,7 +155,25 @@ gem 'colorize'
 
 gem 'nice_partials', github: 'andrewculver/nice_partials', branch: 'bt'
 
-gem 'turbo-rails'
+# turbo is in early development, so we're not waiting for releases.
+gem 'turbo-rails', github: 'hotwired/turbo-rails'
+
+group :production do
+  # we suggest using postmark for email deliverability.
+  gem 'postmark-rails'
+
+  # if you're hosting on heroku, this service is highly recommended for autoscaling of dynos.
+  gem 'rails_autoscale_agent'
+
+  # exception tracking and uptime monitoring service with a generous free tier.
+  gem 'honeybadger'
+
+  # another exception tracking service.
+  gem 'sentry-raven'
+
+  # use s3 for active storage by default.
+  gem 'aws-sdk-s3', require: false
+end
 
 # YOUR GEMS
 # you can add any gems you need below. by keeping them separate from
