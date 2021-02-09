@@ -14,6 +14,12 @@
 
 .electron, .todesktop {
 
+  a {
+    outline-color: var(--tw-ring-color);
+    --tw-ring-color: rgba(3, 98, 198, var(--tw-ring-opacity));
+    --tw-ring-opacity: 1;
+  }
+
   .electron-mobile-only {
     @apply block lg:hidden;
   }
