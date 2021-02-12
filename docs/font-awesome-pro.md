@@ -40,3 +40,11 @@ yarn add @fortawesome/fontawesome-pro
 ```
 
 No, that's not a typo. [That's the name of their company.](https://fortawesome.com) If you receive an error at this point, be sure you restarted your terminal, and reach out for help!
+
+### 4. Add Font Awesome Pro to Webpacker
+
+In `app/javascript/packs/application.js`, below `require("@icon/themify-icons/themify-icons.css")`, add:
+
+```
+require("@fortawesome/fontawesome-pro/css/all.css")
+```
