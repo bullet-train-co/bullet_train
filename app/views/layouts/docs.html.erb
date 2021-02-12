@@ -178,6 +178,14 @@
                 <% end %>
               <% end if false %>
 
+              <%= render 'account/shared/menu/section', title: 'Add-Ons' do %>
+                <%= render 'account/shared/menu/item', url: '/docs/font-awesome-pro', label: 'Font Awesome Pro' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-flag ti ti-flag"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+
               <%= render 'account/shared/menu/section', title: 'Deployment' do %>
                 <%= render 'account/shared/menu/item', url: '/docs/heroku', label: 'Heroku' do |p| %>
                   <% p.content_for :icon do %>

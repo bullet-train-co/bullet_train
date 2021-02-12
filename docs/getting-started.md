@@ -51,8 +51,5 @@ Run `rake db:create`, `rake db:migrate`, and `rake db:seed` to get your database
 ## 6. Create Local Environment Configuration
 Copy `config/application.yml.example` to `config/application.yml` as a baseline for your application configuration.
 
-## 7. Configure Font Awesome Pro (Optional)
-The Tailwind port of Bullet Train currently uses Font Awesome Pro's light icons by default. If you have a license for Font Awesome Pro, you can [follow their instructions](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers) for adding your license key to your environment. After that, you can run `yarn add @fortawesome/fontawesome-pro`.
-
-## 8. Start the Server
+## 7. Start the Server
 Start the server with `rails s` and visit `http://localhost:3000/`. The first time you render the sign-in page the stylesheets will take a few seconds to compile. Don't worry, it'll cache them going forward. Your application is now up and running and you can test the sign-up process.
