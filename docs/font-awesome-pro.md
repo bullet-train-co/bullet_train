@@ -6,19 +6,32 @@ In our experience, there is no better resource than Font Awesome Pro for finding
 
 ## Configuring Font Awesome Pro
 
+### Step 1: Set Authentication Token Environment Variable
+
 Once you buy a license for Font Awesome Pro, set `FONTAWESOME_NPM_AUTH_TOKEN` in your shell environment to be equal to your key as presented [on their instructions page](https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers). Unfortunately, it's not enough to simply set `FONTAWESOME_NPM_AUTH_TOKEN` in `config/application.yml` like you might be thinking, because that value won't be picked up when you run `yarn install`.
 
-### If you're using **Bash**:
+#### If you're using **Bash**:
 - Add `export FONTAWESOME_NPM_AUTH_TOKEN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX` in `~/.bashrc`.
 - Restart your terminal.
 
-### If you're using **zsh**:
+#### If you're using **zsh**:
 - Add `export FONTAWESOME_NPM_AUTH_TOKEN=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX` in `~/.zshrc`.
 - Restart your terminal.
 
 If you're configuring this in another type of shell, please let us know what the steps are [in a new GitHub issue](http://github.com/bullet-train-co/bullet-train-tailwind-css/issues/new) and we'll add them here for others.
 
-We already have `.npmrc` configured to pull that environment variable in, and this is compatible with the way we need to supply this value when deploying to Heroku.
+### Step 2: Add `.npmrc` Configuration
+
+Create a `.npmrc` file in the root of your project if you don't already have one, and add the following to it:
+
+```
+@fortawesome:registry=https://npm.fontawesome.com/
+//npm.fontawesome.com/:_authToken=${FONTAWESOME_NPM_AUTH_TOKEN}
+```
+
+This will pull the environment variable in, but also be compatible with the way we need to supply this value when deploying to Heroku.
+
+### Step 3: Add npm Package
 
 Once you've got your Font Awesome Pro authentication token configured, you can run:
 
