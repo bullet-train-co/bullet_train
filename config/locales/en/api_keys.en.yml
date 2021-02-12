@@ -5,7 +5,7 @@ en:
       label: *label
     navigation:
       label: *label
-      icon: fal fa-key
+      icon: fal fa-key ti ti-key
     notifications:
       created: API Key was successfully created.
       destroyed: API Key was successfully revoked.

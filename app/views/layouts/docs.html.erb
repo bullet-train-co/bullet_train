@@ -56,25 +56,25 @@
               <%= render 'account/shared/menu/section', title: 'Introduction' do %>
                 <%= render 'account/shared/menu/item', url: '/docs', label: 'Table of Contents' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-home-lg-alt"></i>
+                    <i class="fal fa-home-lg-alt ti ti-list"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/getting-started', label: 'Getting Started' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-terminal"></i>
+                    <i class="fal fa-terminal ti ti-flag"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/philosophy', label: 'Philosophy' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-lightbulb-on"></i>
+                    <i class="fal fa-lightbulb-on ti ti-light-bulb"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/upgrades', label: 'Upgrades' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-sparkles"></i>
+                    <i class="fal fa-sparkles ti ti-arrow-up"></i>
                   <% end %>
                 <% end %>
               <% end %>
@@ -82,25 +82,25 @@
               <%= render 'account/shared/menu/section', title: 'Developer Tools' do %>
                 <%= render 'account/shared/menu/item', url: '/docs/super-scaffolding', label: 'Super Scaffolding' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-magic"></i>
+                    <i class="fal fa-magic ti ti-wand"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/field-partials', label: 'Field Partials' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-i-cursor"></i>
+                    <i class="fal fa-i-cursor ti ti-text"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/seeds', label: 'Database Seeds' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-seedling"></i>
+                    <i class="fal fa-seedling ti ti-server"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/testing', label: 'Test Suite' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-check"></i>
+                    <i class="fal fa-check ti ti-check"></i>
                   <% end %>
                 <% end %>
               <% end %>
@@ -109,37 +109,37 @@
 
                 <%= render 'account/shared/menu/item', url: '/docs/authentication', label: 'Authentication' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-fingerprint"></i>
+                    <i class="fal fa-fingerprint ti ti-id-badge"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/teams', label: 'Teams' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-users"></i>
+                    <i class="fal fa-users ti ti-user"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/permissions', label: 'Permissions' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-lock-alt"></i>
+                    <i class="fal fa-lock-alt ti ti-lock"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/onboarding', label: 'Onboarding' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-snowboarding"></i>
+                    <i class="fal fa-snowboarding ti ti-direction"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/subscriptions', label: 'Subscriptions' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-money-bill-wave"></i>
+                    <i class="fal fa-money-bill-wave ti ti-money"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/namespacing', label: 'Namespacing' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-object-group"></i>
+                    <i class="fal fa-object-group ti ti-widgetized"></i>
                   <% end %>
                 <% end %>
               <% end %>
@@ -147,25 +147,25 @@
               <%= render 'account/shared/menu/section', title: 'Integration' do %>
                 <%= render 'account/shared/menu/item', url: '/docs/oauth', label: 'OAuth Providers' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-at"></i>
+                    <i class="fal fa-at ti ti-reload"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/api', label: 'REST API' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-brackets-curly"></i>
+                    <i class="fal fa-brackets-curly ti ti-settings"></i>
                   <% end %>
-                <% end if false %>
+                <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/webhooks/outgoing', label: 'Outgoing Webhooks' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-outlet"></i>
+                    <i class="fal fa-outlet ti ti-pulse"></i>
                   <% end %>
                 <% end if false %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/webhooks/incoming', label: 'Incoming Webhooks' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-plug"></i>
+                    <i class="fal fa-plug ti ti-plug"></i>
                   <% end %>
                 <% end if false %>
               <% end %>
@@ -173,7 +173,7 @@
               <%= render 'account/shared/menu/section', title: 'Internationalization' do %>
                 <%= render 'account/shared/menu/item', url: '/docs/i18n', label: 'Translations' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-language"></i>
+                    <i class="fal fa-language ti ti-world"></i>
                   <% end %>
                 <% end %>
               <% end if false %>
@@ -181,13 +181,13 @@
               <%= render 'account/shared/menu/section', title: 'Deployment' do %>
                 <%= render 'account/shared/menu/item', url: '/docs/heroku', label: 'Heroku' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-cloud"></i>
+                    <i class="fal fa-cloud ti ti-cloud-up"></i>
                   <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/desktop', label: 'Desktop Applications' do |p| %>
                   <% p.content_for :icon do %>
-                    <i class="fal fa-window-restore"></i>
+                    <i class="fal fa-window-restore ti ti-desktop"></i>
                   <% end %>
                 <% end %>
               <% end %>

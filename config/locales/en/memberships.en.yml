@@ -4,7 +4,7 @@ en:
     singular: Team Member
     navigation:
       label: *label
-      icon: fal fa-users
+      icon: fal fa-users ti ti-flag-alt
     breadcrumbs:
       label: *label
     buttons: &buttons

@@ -22,7 +22,7 @@
 
   <%= render 'account/shared/menu/item', url: main_app.edit_account_user_path(current_user.id), label: t('menus.main.labels.edit_account_details') do |p| %>
     <% p.content_for :icon do %>
-      <i class="fal fa-user-cog"></i>
+      <i class="fal fa-user-cog ti ti-user"></i>
     <% end %>
   <% end %>
 
@@ -38,7 +38,7 @@
 
     <%= render 'account/shared/menu/item', url: main_app.new_account_team_path, label: t('menus.main.labels.add_new_team') do |p| %>
       <% p.content_for :icon do %>
-        <i class="ti ti-home"></i>
+        <i class="ti ti-plus"></i>
       <% end %>
     <% end %>
 
@@ -46,7 +46,7 @@
 
   <%= render 'account/shared/menu/item', url: main_app.destroy_user_session_path, method: :delete, label: t('menus.main.labels.logout') do |p| %>
     <% p.content_for :icon do %>
-      <i class="fal fa-sign-out"></i>
+      <i class="fal fa-sign-out ti ti-close"></i>
     <% end %>
   <% end %>
 </div>
