@@ -20,7 +20,17 @@ Once you buy a license for Font Awesome Pro, set `FONTAWESOME_NPM_AUTH_TOKEN` in
 
 If you're configuring this in another type of shell, please let us know what the steps are [in a new GitHub issue](http://github.com/bullet-train-co/bullet-train-tailwind-css/issues/new) and we'll add them here for others.
 
-### 2. Add `.npmrc` Configuration
+### 2. Merge the Font Awesome Pro Mix-In (Optional)
+
+We've pushed up [a branch with the remaining steps already done](https://github.com/bullet-train-co/bullet-train-tailwind-css/compare/mixins/font-awesome-pro). You can merge it into your project like so:
+
+```
+git merge bullet-train/mixins/font-awesome-pro
+````
+
+If that worked for you, you can stop now. 🛑
+
+### 3. Add `.npmrc` Configuration
 
 Create a `.npmrc` file in the root of your project if you don't already have one, and add the following to it:
 
@@ -31,7 +41,7 @@ Create a `.npmrc` file in the root of your project if you don't already have one
 
 This will pull the environment variable in, but also be compatible with the way we need to supply this value when deploying to Heroku.
 
-### 3. Add Font Awesome Pro npm Package
+### 4. Add Font Awesome Pro npm Package
 
 Once you've got your Font Awesome Pro authentication token configured, you can run:
 
@@ -41,7 +51,7 @@ yarn add @fortawesome/fontawesome-pro
 
 No, that's not a typo. [That's the name of their company.](https://fortawesome.com) If you receive an error at this point, be sure you restarted your terminal, and reach out for help!
 
-### 4. Add Font Awesome Pro to Webpacker
+### 5. Add Font Awesome Pro to Webpacker
 
 In `app/javascript/packs/application.js`, below `require("@icon/themify-icons/themify-icons.css")`, add:
 
