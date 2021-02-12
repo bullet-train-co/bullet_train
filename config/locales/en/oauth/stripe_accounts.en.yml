@@ -5,7 +5,7 @@ en:
       label: *label
     navigation:
       label: *label
-      icon: fab fa-stripe-s
+      icon: fab fa-stripe-s ti ti-money
     buttons: &buttons
       new: Connect New Stripe Account
       edit: Settings
