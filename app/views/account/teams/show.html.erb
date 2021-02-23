@@ -1,9 +1,3 @@
-<% # TODO this is working around a nasty bug in nice partials. %>
-<% body = capture do %>
-  <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts.accessible_by(current_ability) unless scaffolding_things_disabled? %>
-  <%# 🚅 super scaffolding will insert new children above this line. %>
-<% end %>
-
 <%= render 'account/shared/page' do |p| %>
   <% p.content_for :title, t('.header', teams_possessive: possessive_string(@team.name)) %>
 
@@ -13,5 +7,8 @@
     <% end if can? :edit, @team %>
   <% end %>
 
-  <% p.content_for :body, body %>
+  <% p.content_for :body do %>
+    <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts.accessible_by(current_ability) unless scaffolding_things_disabled? %>
+    <%# 🚅 super scaffolding will insert new children above this line. %>
+  <% end %>
 <% end %>
