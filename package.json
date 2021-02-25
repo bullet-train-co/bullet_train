@@ -16,7 +16,6 @@
     "@ckeditor/ckeditor5-list": "^23.1.0",
     "@ckeditor/ckeditor5-paragraph": "^23.1.0",
     "@ckeditor/ckeditor5-theme-lark": "^23.1.0",
-    "@fortawesome/fontawesome-pro": "^5.15.1",
     "@hotwired/turbo": "^7.0.0-beta.2",
     "@hotwired/turbo-rails": "^7.0.0-beta.3",
     "@icon/themify-icons": "^1.0.1-alpha.3",

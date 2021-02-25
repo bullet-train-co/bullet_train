@@ -5,7 +5,7 @@ en:
       label: *label
     navigation:
       label: *label
-      icon: fal fa-dice-d6
+      icon: fal fa-dice-d6 ti ti-thought
     buttons: &buttons
       new: Add New Creative Concept
       create: Create Creative Concept
