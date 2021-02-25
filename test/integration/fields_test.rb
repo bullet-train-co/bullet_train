@@ -1,0 +1,75 @@
+require 'test_helper'
+
+class AccountTest < ActionDispatch::IntegrationTest
+  @@test_devices.each do |device_name, display_details|
+    test "simulate restoring behavior of form fields on page restore on #{device_name}" do
+      resize_for(display_details)
+
+      visit root_path
+
+      click_on "Don't have an account?"
+      fill_in 'Your Email Address', with: 'me@acme.com'
+      fill_in 'Set Password', with: 'password123'
+      fill_in 'Confirm Password', with: 'password123'
+      click_on 'Sign Up'
+      fill_in 'Your First Name', with: 'John'
+      fill_in 'Your Last Name', with: 'Doe'
+      fill_in 'Your Team Name', with: 'My Super Team'
+      page.select 'Brisbane', from: 'Your Time Zone'
+      click_on 'Next'
+
+      click_on 'Add New Creative Concept'
+      fill_in 'Name', with: 'My Generic Creative Concept'
+      fill_in 'Description', with: 'Dummy description for my creative concept'
+      click_on 'Create Creative Concept'
+
+      click_on 'Add New Tangible Thing'
+      
+      select2_select "Super Select Multiple Value", ["Six", "Seven"]
+      super_select = find_stimulus_controller_for_label "Super Select Multiple Value", 'fields--super-select'
+      assert_no_js_errors do 
+        disconnect_stimulus_controller_on super_select
+        reconnect_stimulus_controller_on super_select
+        improperly_disconnect_and_reconnect_stimulus_controller_on super_select
+        select2_select "Super Select Multiple Value", ["Two"]
+        assert super_select.has_css?('.select2-container--default', count: 1)
+      end
+      
+      button = find_stimulus_controller_for_label "Button Value", 'fields--button-toggle'
+      click_on 'One'
+      assert_no_js_errors do 
+        disconnect_stimulus_controller_on button
+        reconnect_stimulus_controller_on button
+        assert button.find('input[type="radio"]', visible: false)['checked'] == "true"
+        improperly_disconnect_and_reconnect_stimulus_controller_on button # the radio button won't be checked because we're using innerHTML
+      end
+      
+      phone_field_wrapper = find_stimulus_controller_for_label "Phone Field Value", 'fields--phone', wrapper: true
+      phone_field = phone_field_wrapper.first('input')
+      "+1 613".split(//).each do |digit|
+        phone_field.send_keys(digit)
+      end
+      assert_no_js_errors do
+        disconnect_stimulus_controller_on phone_field_wrapper
+        reconnect_stimulus_controller_on phone_field_wrapper
+        improperly_disconnect_and_reconnect_stimulus_controller_on phone_field_wrapper
+        assert phone_field_wrapper.first('.iti__selected-flag')['title'] == "Canada: +1"
+      end
+      
+      date_field = find_stimulus_controller_for_label "Date Field Value", 'fields--date'
+      assert_no_js_errors do
+        disconnect_stimulus_controller_on date_field
+        reconnect_stimulus_controller_on date_field
+        improperly_disconnect_and_reconnect_stimulus_controller_on date_field
+      end
+      
+      ckeditor = find_stimulus_controller_for_label "CKEditor Value", 'fields--ckeditor'
+      assert_no_js_errors do
+        disconnect_stimulus_controller_on ckeditor
+        reconnect_stimulus_controller_on ckeditor
+        improperly_disconnect_and_reconnect_stimulus_controller_on ckeditor
+        assert ckeditor.has_css?('.ck-editor', count: 1)
+      end
+    end
+  end
+end

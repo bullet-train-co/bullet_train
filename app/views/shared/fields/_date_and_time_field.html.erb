@@ -4,18 +4,23 @@
 form ||= current_fields_form
 options ||= {}
 options[:id] ||= id_for(form, method)
-options[:class] = "form-control single-daterange-with-time #{options[:class]}".strip
-options[:value] = form.object.send(method)&.strftime('%m/%d/%Y')
+options[:class] = "form-control single-daterange w-full #{options[:class]}".strip
+options[:value] = form.object.send(method)&.strftime('%m/%d/%Y %I:%M %p')
+options = options.merge({ data: {'fields--date-target': 'field' }})
 other_options ||= {}
 %>
 
 <%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
   <% content_for :field do %>
-    <div class="date-input">
+    <div class="date-input relative" data-controller="fields--date" data-fields--date-include-time-value="true">
       <%= form.text_field method, options %>
       <% unless options[:disabled] %>
-      <button class="clear">
-        <i class="ti-trash"></i>
+      <button class="clear py-2 px-3 border border-transparent inline-flex items-center whitespace-nowrap absolute rounded-md"
+        style="top: 2px; right: 2px;"
+        data-fields--date-target="clearButton"
+        data-action="fields--date#clearDate"
+      >
+        <i class="leading-4 text-lg ti ti-trash"></i>
       </button>
       <% end %>
     </div>

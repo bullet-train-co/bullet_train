@@ -1,10 +1,19 @@
 <% yield %>
 
 <%
+stimulus_controller = 'fields--ckeditor'
+
 form ||= current_fields_form
 options ||= {}
-options[:class] = [options[:class], 'ckeditor'].compact.join(' ')
+options = options.merge({ data: {"#{stimulus_controller}-target": 'field' }})
 other_options ||= {}
+
 %>
 
-<%= render 'shared/fields/field', form: form, method: method, helper: :text_area, options: options, other_options: other_options %>
+<%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div data-controller="<%= stimulus_controller %>">
+      <%= form.text_area method, options %>
+    </div>
+  <% end %>
+<% end %>

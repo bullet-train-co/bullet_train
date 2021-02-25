@@ -26,11 +26,14 @@ class AccountTest < ActionDispatch::IntegrationTest
       click_on 'Add New Tangible Thing'
       fill_in 'Text Field Value', with: 'My value for this text field'
       click_on 'Three'
+      click_on 'Four'
+      click_on 'Five'
       fill_in 'Email Field Value', with: 'me@acme.com'
       fill_in 'Password Field Value', with: 'secure-password'
       fill_in 'Phone Field Value', with: '(201) 551-8321'
       page.select 'Two', from: 'Select Value'
       page.select 'Three', from: 'Super Select Value'
+      select2_select "Super Select Multiple Value", ["Six", "Seven"]
       fill_in 'Text Area Value', with: 'Long text for this text area field'
 
       click_on 'Create Tangible Thing'
@@ -41,11 +44,13 @@ class AccountTest < ActionDispatch::IntegrationTest
 
       assert page.has_content?('My value for this text field')
       assert page.has_content?('Three')
+      assert page.has_content?('Four, Five')
       assert page.has_content?('me@acme.com')
       assert page.has_content?('secure-password')
       assert page.has_content?('+1 201-551-8321')
       assert page.has_content?('Two')
       assert page.has_content?('Three')
+      assert page.has_content?('Six, Seven')
       assert page.has_content?('Long text for this text area field')
 
       click_on 'Edit Tangible Thing'

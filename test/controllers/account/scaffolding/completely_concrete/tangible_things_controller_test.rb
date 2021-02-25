@@ -38,7 +38,6 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
           email_field_value: 'another.email@test.com',
           password_field_value: 'Alternative String Value',
           phone_field_value: '+19053871234',
-          select_value: @tangible_thing.select_value,
           super_select_value: @tangible_thing.super_select_value,
           text_area_value: 'Alternative String Value',
           action_text_value: @tangible_thing.action_text_value,

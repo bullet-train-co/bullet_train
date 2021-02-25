@@ -701,7 +701,7 @@ if name.match?(/_id$/) &&
 
       field_content = <<-YAML
 #{name}:
-        name: &#{name} #{title_case}
+        _: &#{name} #{title_case}
         label: *#{name}
         heading: *#{name}
         placeholder: #{placeholder_text}
@@ -723,7 +723,7 @@ YAML
 
       field_content = <<-YAML
 #{name}:
-        name: &#{name} #{title_case}
+        _: &#{name} #{title_case}
         label: *#{name}
         heading: *#{name}
         options:
@@ -734,7 +734,7 @@ end
 
 field_content ||= <<-YAML
 #{name}:
-        name: &#{name} #{title_case}
+        _: &#{name} #{title_case}
         label: *#{name}
         heading: *#{name}
 YAML

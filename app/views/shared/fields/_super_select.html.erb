@@ -1,17 +1,27 @@
 <% yield %>
 
 <%
+stimulus_controller = 'fields--super-select'
+
 form ||= current_fields_form
 options ||= {}
+other_options ||= {}
 html_options ||= {}
 html_options[:id] ||= id_for(form, method)
 html_options[:class] = "form-control select2 #{html_options[:class]}".strip
-other_options ||= {}
 choices ||= options_for(form, method)&.invert
+
+wrapper_options = { data: { controller: stimulus_controller }}
+wrapper_options[:data]["#{stimulus_controller}-enable-search-value"] = true if other_options[:search]
+wrapper_options[:data]["#{stimulus_controller}-accepts-new-value"] = true if other_options[:accepts_new]
+html_options[:data] = { "#{stimulus_controller}-target": 'select' }
+
 %>
 
 <%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
   <% content_for :field do %>
-    <%= form.select method, choices, options, html_options %>
+    <%= content_tag :div, data: wrapper_options[:data] do %>
+      <%= form.select method, choices, options, html_options %>
+    <% end %>
   <% end %>
 <% end %>

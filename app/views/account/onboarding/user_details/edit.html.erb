@@ -27,7 +27,7 @@
           </div>
 
           <div class="sm:col-span-2">
-            <%= render 'shared/fields/select', form: f, method: :time_zone, choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone) %>
+            <%= render 'shared/fields/super_select', form: f, method: :time_zone, choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone) %>
           </div>
         </div>
 

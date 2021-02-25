@@ -9,7 +9,6 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingSerializer < Active
   :email_field_value,
   :password_field_value,
   :phone_field_value,
-  :select_value,
   :super_select_value,
   :text_area_value,
   :action_text_value,

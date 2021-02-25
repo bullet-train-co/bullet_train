@@ -8,7 +8,6 @@ FactoryBot.define do
     email_field_value { "MyString" }
     password_field_value { "MyString" }
     phone_field_value { "MyString" }
-    select_value { "two" }
     super_select_value { "three" }
     text_area_value { "MyText" }
     action_text_value { "MyText" }

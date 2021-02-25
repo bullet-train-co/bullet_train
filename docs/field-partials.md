@@ -96,9 +96,8 @@ You can also configure some placeholder text (displayed in the field when in an 
   help: "The value can be anything you want it to be!"
 </code></pre>
 
-Certain form field partials like `buttons`, `select`, and `super_select` can also have their selectable options configured in this Yaml file. See their respective documentation for details, as usage varies slightly.
+Certain form field partials like `buttons` and `super_select` can also have their selectable options configured in this Yaml file. See their respective documentation for details, as usage varies slightly.
 
 ## Specific Field Partials
  - [`buttons`](/docs/field-partials/buttons.md)
- - [`select`](/docs/field-partials/select.md)
  - [`super_select`](/docs/field-partials/super-select.md)

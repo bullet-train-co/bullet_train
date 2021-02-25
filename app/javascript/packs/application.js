@@ -13,6 +13,7 @@ import Rails from "@rails/ujs"
 import Turbo from "@hotwired/turbo"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import "controllers" // stimulus
 
 Rails.start()
 ActiveStorage.start()
@@ -38,16 +39,6 @@ require("alpinejs")
 // For inline use in `app/views/account/onboarding/user_details/edit.html.erb`.
 import jstz from 'jstz';
 global.jstz = require("jstz");
-
-// https://stimulus.hotwire.dev/handbook/installing#controller-filenames-map-to-identifiers
-import { Application } from "stimulus"
-import { definitionsFromContext } from "stimulus/webpack-helpers"
-
-const application = Application.start()
-const context = require.context("../controllers", true, /\.js$/)
-application.load(definitionsFromContext(context))
-
-import "controllers"
 
 // ✅ YOUR APPLICATION'S INCLUDES
 // If you need to customize your application's includes, this is the place to do it. This helps avoid merge

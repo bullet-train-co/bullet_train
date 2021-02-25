@@ -21,77 +21,97 @@ en:
     fields: &fields
       # 🚅 skip this section when scaffolding.
       text_field_value:
-        name: &text_field_value Text Field Value
+        _: &text_field_value Text Field Value
         label: *text_field_value
         heading: *text_field_value
       button_value:
-        name: &button_value Button Value
+        _: &button_value Button Value
         label: *button_value
         heading: *button_value
         options:
           one: One
           two: Two
           three: Three
-      cloudinary_image_value:
-        name: &cloudinary_image_value Cloudinary Image Value
-        label: *cloudinary_image_value
-        heading: *cloudinary_image_value
-      date_field_value:
-        name: &date_field_value Date Field Value
-        label: *date_field_value
-        heading: *date_field_value
-      email_field_value:
-        name: &email_field_value Email Field Value
-        label: *email_field_value
-        heading: *email_field_value
-      file_field_value:
-        name: &file_field_value File Field Value
-        label: *file_field_value
-        heading: *file_field_value
-      password_field_value:
-        name: &password_field_value Password Field Value
-        label: *password_field_value
-        heading: *password_field_value
-      phone_field_value:
-        name: &phone_field_value Phone Field Value
-        label: *phone_field_value
-        heading: *phone_field_value
-      select_value:
-        name: &select_value Select Value
-        label: *select_value
-        heading: *select_value
+          four: Four
+          five: Five
+      multiple_button_values:
+        _: &multiple_button_values Multiple Button Values
+        label: *multiple_button_values
+        heading: *multiple_button_values
         options:
           one: One
           two: Two
           three: Three
+          four: Four
+          five: Five
+      cloudinary_image_value:
+        _: &cloudinary_image_value Cloudinary Image Value
+        label: *cloudinary_image_value
+        heading: *cloudinary_image_value
+      date_field_value:
+        _: &date_field_value Date Field Value
+        label: *date_field_value
+        heading: *date_field_value
+      date_and_time_field_value:
+        _: &date_and_time_field_value Date and Time Field Value
+        label: *date_and_time_field_value
+        heading: *date_and_time_field_value
+      email_field_value:
+        _: &email_field_value Email Field Value
+        label: *email_field_value
+        heading: *email_field_value
+      file_field_value:
+        _: &file_field_value File Field Value
+        label: *file_field_value
+        heading: *file_field_value
+      password_field_value:
+        _: &password_field_value Password Field Value
+        label: *password_field_value
+        heading: *password_field_value
+      phone_field_value:
+        _: &phone_field_value Phone Field Value
+        label: *phone_field_value
+        heading: *phone_field_value
       super_select_value:
-        name: &super_select_value Super Select Value
+        _: &super_select_value Super Select Value
         label: *super_select_value
         heading: *super_select_value
         options:
           one: One
           two: Two
           three: Three
+          four: Four
+          five: Five
+      multiple_super_select_values:
+        _: &multiple_super_select_values Multiple Super Select Values
+        label: *multiple_super_select_values
+        heading: *multiple_super_select_values
+        options:
+          one: One
+          two: Two
+          three: Three
+          four: Four
+          five: Five
       text_area_value:
-        name: &text_area_value Text Area Value
+        _: &text_area_value Text Area Value
         label: *text_area_value
         heading: *text_area_value
       action_text_value:
-        name: &action_text_value Trix Editor Value
+        _: &action_text_value Trix Editor Value
         label: *action_text_value
         heading: *action_text_value
       ckeditor_value:
-        name: &ckeditor_value CKEditor Value
+        _: &ckeditor_value CKEditor Value
         label: *ckeditor_value
         heading: *ckeditor_value
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
-        name: &created_at Added
+        _: &created_at Added
         label: *created_at
         heading: *created_at
       updated_at:
-        name: &updated_at Updated
+        _: &updated_at Updated
         label: *updated_at
         heading: *updated_at
     index:
@@ -146,7 +166,6 @@ en:
         file_field_value: *file_field_value
         password_field_value: *password_field_value
         phone_field_value: *phone_field_value
-        select_value: *select_value
         super_select_value: *super_select_value
         text_area_value: *text_area_value
         action_text_value: *action_text_value

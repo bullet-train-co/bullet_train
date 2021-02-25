@@ -48,7 +48,6 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     assert_equal tangible_thing_attributes['email-field-value'], tangible_thing.email_field_value
     assert_equal tangible_thing_attributes['password-field-value'], tangible_thing.password_field_value
     assert_equal tangible_thing_attributes['phone-field-value'], tangible_thing.phone_field_value
-    assert_equal tangible_thing_attributes['select-value'], tangible_thing.select_value
     assert_equal tangible_thing_attributes['super-select-value'], tangible_thing.super_select_value
     assert_equal tangible_thing_attributes['text-area-value'], tangible_thing.text_area_value
     # remove the HTML tags below
@@ -127,7 +126,6 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
         email_field_value: 'another.email@test.com',
         password_field_value: 'Alternative String Value',
         phone_field_value: '+19053871234',
-        select_value: @tangible_thing.select_value,
         super_select_value: @tangible_thing.super_select_value,
         text_area_value: 'Alternative String Value',
         action_text_value: @tangible_thing.action_text_value,
