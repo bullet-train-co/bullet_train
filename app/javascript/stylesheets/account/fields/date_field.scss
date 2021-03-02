@@ -11,5 +11,9 @@
       @apply border-gray-300 focus:border-blue bg-white #{!important};
       text-align-last: center;
     }
+
+    .calendar-table .active {
+      @apply bg-blue #{!important};
+    }
   }
 }
