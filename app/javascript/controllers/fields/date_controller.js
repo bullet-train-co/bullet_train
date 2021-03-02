@@ -33,6 +33,7 @@ export default class extends Controller {
     $(this.fieldTarget).daterangepicker({
       singleDatePicker: true,
       timePicker: this.includeTimeValue,
+      timePickerIncrement: 5,
       autoUpdateInput: true,
       locale: {
         cancelLabel: 'Clear'
