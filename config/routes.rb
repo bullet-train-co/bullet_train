@@ -9,7 +9,6 @@ Rails.application.routes.draw do
     end
   end
 
-  api_actions = [:index, :create, :show, :update, :destroy]
   collection_actions = [:index, :new, :create]
 
   devise_for :users, controllers: {
@@ -20,7 +19,6 @@ Rails.application.routes.draw do
   scope module: 'public' do
     root to: "home#index"
     get 'invitation' => 'home#invitation', as: 'invitation'
-    get 'api' => 'home#api'
     if show_developer_documentation?
       get 'docs', to: 'home#docs'
       get 'docs/*page', to: 'home#docs'
@@ -46,48 +44,6 @@ Rails.application.routes.draw do
       resources :stripe_webhooks
       namespace :oauth do
         resources :stripe_account_webhooks
-      end
-    end
-  end
-
-  namespace :api do
-    shallow do
-      namespace :v1 do
-        get 'user' => 'user#user'
-        resources :teams do
-
-          unless scaffolding_things_disabled?
-            namespace :scaffolding do
-              namespace :absolutely_abstract do
-                resources :creative_concepts, only: api_actions do
-                  scope module: 'creative_concepts' do
-                    resources :collaborators, only: collection_actions
-                  end
-
-                  namespace :creative_concepts do
-                    resources :collaborators, except: collection_actions
-                  end
-                end
-              end
-              resources :absolutely_abstract_creative_concepts, path: 'absolutely_abstract/creative_concepts' do
-                namespace :completely_concrete do
-                  resources :tangible_things, only: api_actions
-                end
-              end
-            end
-          end
-
-        end
-      end
-      namespace :webhooks do
-        namespace :outgoing do
-          resources :events
-          resources :endpoints do
-            resources :deliveries, only: [:index, :show] do
-              resources :delivery_attempts, only: [:index, :show]
-            end
-          end
-        end
       end
     end
   end

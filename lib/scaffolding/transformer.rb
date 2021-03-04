@@ -747,7 +747,7 @@ YAML
       # add attributes to strong params.
       [
         "./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb",
-        "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller.rb",
+        # "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller.rb",
       ].each do |file|
         if name.match?(/_ids$/)
           scaffold_add_line_to_file(file, "#{name}: [],", RUBY_NEW_ARRAYS_HOOK, prepend: true)
@@ -774,7 +774,7 @@ YAML
         scaffold_add_line_to_file(file, ":#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
       end
 
-      scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "assert_equal tangible_thing_attributes['#{name.gsub('_', '-')}'], tangible_thing.#{name}", RUBY_NEW_FIELDS_HOOK, prepend: true)
+      # scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "assert_equal tangible_thing_attributes['#{name.gsub('_', '-')}'], tangible_thing.#{name}", RUBY_NEW_FIELDS_HOOK, prepend: true)
 
       attribute_assignment = case type
       when 'text_field', 'password_field', 'text_area'
@@ -788,8 +788,8 @@ YAML
       end
 
       if attribute_assignment
-        scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "#{name}: #{attribute_assignment},", RUBY_ADDITIONAL_NEW_FIELDS_HOOK, prepend: true)
-        scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "assert_equal @tangible_thing.#{name}, #{attribute_assignment}", RUBY_EVEN_MORE_NEW_FIELDS_HOOK, prepend: true)
+        # scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "#{name}: #{attribute_assignment},", RUBY_ADDITIONAL_NEW_FIELDS_HOOK, prepend: true)
+        # scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "assert_equal @tangible_thing.#{name}, #{attribute_assignment}", RUBY_EVEN_MORE_NEW_FIELDS_HOOK, prepend: true)
       end
 
       scaffold_add_line_to_file("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb", "#{name}: @tangible_thing.#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
@@ -908,10 +908,10 @@ YAML
       "./app/views/account/scaffolding/completely_concrete/tangible_things",
       "./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb",
       "./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml",
-      "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller.rb",
-      "./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb",
+      # "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller.rb",
+      # "./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb",
       "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb",
-      "./app/views/public/home/api/scaffolding/completely_concrete/_tangible_things.html.erb",
+      # "./app/views/public/home/api/scaffolding/completely_concrete/_tangible_things.html.erb",
     ].each do |name|
       if File.directory?(name)
         scaffold_directory(name)
@@ -958,7 +958,7 @@ YAML
     end
 
     scaffold_replace_line_in_file("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
-    scaffold_replace_line_in_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
+    # scaffold_replace_line_in_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
 
     # add children to the show page of their parent.
     unless parent == 'None'
@@ -1021,7 +1021,7 @@ RUBY
     end
 
     begin
-      routes_manipulator.apply(['api', 'v1'])
+      # routes_manipulator.apply(['api', 'v1'])
     rescue
       add_additional_step :yellow, "We weren't able to automatically add your `api/v1` routes for you. In theory this should be rare, (unless you're adding a resource under another resource that specifically don't have API routes,) so if you could reach out on Slack, you could probably provide context that will help us fix whatever the problem was. In the meantime, to add the routes manually, we've got a guide at https://blog.bullettrain.co/nested-namespaced-rails-routing-examples/ ."
     end

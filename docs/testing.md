@@ -14,10 +14,10 @@ rails test
 When debugging tests, it's important to be able to see what Capybara is seeing. You can disable the headless browser mode by prefixing `rails test` like so:
 
 ```
-SHOW_TESTS=1 rails test
+MAGIC_TEST=1 rails test
 ```
 
-When you run the test suite with `SHOW_TESTS` set in your environment like this, the browser will appear on your screen after the first Capybara test starts. (This may not be the first test that runs.) Be careful not to interact with the window when it appears, as sometimes your interactions can cause the test to fail needlessly.
+When you run the test suite with `MAGIC_TEST` set in your environment like this, the browser will appear on your screen after the first Capybara test starts. (This may not be the first test that runs.) Be careful not to interact with the window when it appears, as sometimes your interactions can cause the test to fail needlessly.
 
 ### 2. Insert `binding.pry`.
 

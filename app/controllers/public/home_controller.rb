@@ -13,25 +13,6 @@ class Public::HomeController < ApplicationController
     render :docs, layout: 'docs'
   end
 
-  def api
-    api_key = current_user.try { |cu| cu.api_keys.active.first }
-    if api_key
-      @live_token = true
-      @token = api_key.token
-      @secret = "<span>#{helpers.link_to "{{click to reveal}}", "#", onclick: "$(this).parent().text('#{api_key.secret}'); return false;"}</span>".html_safe
-    else
-      @token = "{{your token}}"
-      @secret = "{{your secret}}"
-    end
-    if user_signed_in?
-      @team_id = current_user.current_team.id
-    else
-      @team_id = "{{team_id}}"
-    end
-    @hide_menus = true
-    render :api, layout: 'account'
-  end
-
   def invitation
     return not_found unless invitation_only?
     return not_found unless params[:key].present?
