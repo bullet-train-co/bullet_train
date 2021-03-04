@@ -1,0 +1,11 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+
+<%= render 'shared/attributes/attribute', object: object, attribute: attribute, strategy: strategy, url: url do %>
+  <% if object.send(attribute) %>
+    <%= time_ago_in_words(object.send(attribute)) %> ago
+  <% else %>
+    Never
+  <% end %>
+<% end %>

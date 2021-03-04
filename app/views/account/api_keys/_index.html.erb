@@ -14,7 +14,7 @@
           <tr>
             <th><%= t('.fields.token.heading') %></th>
             <th><%= t('.fields.secret.heading') %></th>
-            <th><%= t('.fields.last_used.heading') %></th>
+            <th><%= t('.fields.last_used_at.heading') %></th>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
             <th></th>
           </tr>
@@ -23,8 +23,14 @@
           <% api_keys.each do |api_key| %>
           <tr data-id="<%= api_key.id %>">
             <td><code><%= api_key.token %></code></td>
-            <td><%= link_to t(".buttons.reveal"), "#", onclick: "$(this).parent().html('<code>#{api_key.secret}</code>'); return false;" %></td>
-            <td><%= time_ago_in_words(api_key.last_used_at) %> ago</td>
+            <td>
+              <% if @generated_api_key_secrets[api_key.id] %>
+                <code><%= @generated_api_key_secrets[api_key.id] %></code>
+              <% else %>
+                &mdash;
+              <% end %>
+            </td>
+            <td><%= render 'shared/attributes/days_ago', object: api_key, attribute: :last_used_at %></td>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
             <td class="buttons">
               <% unless hide_actions %>

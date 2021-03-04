@@ -7,7 +7,7 @@ en:
       label: *label
       icon: fal fa-key ti ti-key
     notifications:
-      created: API Key was successfully created.
+      created: An API Key was successfully generated. Please be sure to make a copy from the table below. The secret token will not be displayed again.
       destroyed: API Key was successfully revoked.
     buttons: &buttons
       reveal: Click to Reveal
@@ -24,10 +24,10 @@ en:
         name: &secret Secret Token
         label: *secret
         heading: *secret
-      last_used:
-        name: &last_used Last Used
-        label: *last_used
-        heading: *last_used
+      last_used_at:
+        name: &last_used_at Last Used
+        label: *last_used_at
+        heading: *last_used_at
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
         name: &created_at Generated
@@ -48,5 +48,6 @@ en:
       api_key:
         token: *token
         secret: *secret
+        last_used_at: *last_used_at
         # 🚅 super scaffolding will insert new activerecord attributes above this line.
         created_at: *created_at

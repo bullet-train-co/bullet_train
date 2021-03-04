@@ -8,6 +8,9 @@ class Account::ApiKeysController < Account::ApplicationController
   # GET /account/users/:user_id/api_keys
   # GET /account/users/:user_id/api_keys.json
   def index
+    @generated_api_key_secrets = @api_keys.where(encrypted_secret: nil).map do |api_key|
+      [api_key.id, api_key.generate_encrypted_secret]
+    end.to_h
   end
 
   # POST /account/users/:user_id/api_keys
