@@ -27,8 +27,6 @@
     "@tailwindcss/forms": "^0.2.1",
     "@tailwindcss/postcss7-compat": "^2.0.1",
     "@tailwindcss/typography": "^0.3.1",
-    "alpine-turbo-drive-adapter": "^1.0.1",
-    "alpinejs": "^2.8.1",
     "autoprefixer": "^9",
     "copy-webpack-plugin": "^6.2.1",
     "daterangepicker": "^3.1.0",

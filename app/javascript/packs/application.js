@@ -32,10 +32,6 @@ require.context('../images', true)
 // Custom JavaScript for Bullet Train
 require("../index")
 
-// import 'alpine-turbo-drive-adapter'
-// import 'alpinejs'
-// require("alpinejs")
-
 // For inline use in `app/views/account/onboarding/user_details/edit.html.erb`.
 import jstz from 'jstz';
 global.jstz = require("jstz");

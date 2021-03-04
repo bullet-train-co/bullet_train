@@ -8,9 +8,6 @@
     <div class="p-4 bg-blue-darker electron-draggable electron-title-bar hidden electron-mobile-only"></div>
     <div class="md:p-5 main-container-padding">
       <div class="h-screen md:h-auto overflow-hidden md:rounded-lg flex shadow main-container"
-        x-data="{ menuOpen: false }"
-        @keydown.window.escape="menuOpen = false"
-        
         data-controller="mobile-menu"
         data-mobile-menu-hidden-class="hidden"
         data-mobile-menu-show-event-name-value="mobile-menu:show"
@@ -23,7 +20,6 @@
 
             <div class="lg:hidden absolute right-0">
               <button class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                @click.stop="menuOpen = false"
                 data-action="reveal#hide"
               >
                 <span class="sr-only">Close Application Menu</span>
@@ -60,8 +56,6 @@
         <% end %>
 
         <div class="lg:hidden hidden"
-          x-show="menuOpen"
-          
           data-mobile-menu-target="wrapper"
           
           data-controller="reveal"
@@ -72,15 +66,6 @@
         >
           <div class="fixed inset-0 flex z-40">
             <button 
-              @click="menuOpen = false"
-              x-show="menuOpen"
-              x-transition:enter="transition-opacity ease-linear duration-200"
-              x-transition:enter-start="opacity-0"
-              x-transition:enter-end="opacity-100"
-              x-transition:leave="transition-opacity ease-linear duration-200"
-              x-transition:leave-start="opacity-100"
-              x-transition:leave-end="opacity-0"
-              
               data-action="reveal#hide"
               
               hidden
@@ -98,14 +83,6 @@
               <div class="absolute inset-0 bg-light-blue-gradient opacity-75"></div>
             </button>
             <div
-              x-show="menuOpen"
-              x-transition:enter="transition ease-in-out duration-200 transform"
-              x-transition:enter-start="-translate-x-full"
-              x-transition:enter-end="translate-x-0"
-              x-transition:leave="transition ease-in-out duration-200 transform"
-              x-transition:leave-start="translate-x-0"
-              x-transition:leave-end="-translate-x-full"
-              
               hidden
               data-reveal
               data-transition
@@ -134,8 +111,6 @@
           <main class="flex-1 relative z-0 focus:outline-none" tabindex="0">
             <div class="flex flex-row items-center shadow-sm electron-draggable">
               <button class="lg:hidden h-12 w-12 ml-1 flex-none inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue"
-                @click.stop="menuOpen = true"
-                
                 data-action="mobile-menu#toggle"
               >
                 <span class="sr-only">Open Application Menu</span>
