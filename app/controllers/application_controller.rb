@@ -88,6 +88,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def assign_select_options(strong_params, attribute)
+    attribute = attribute.to_s
+    if strong_params.keys.include?(attribute)
+      # filter out the placeholder inputs that arrive along with the form submission.
+      strong_params[attribute] = strong_params[attribute].select(&:present?)
+    end
+  end
+
   rescue_from CanCan::AccessDenied do |exception|
     if current_user.nil?
       respond_to do |format|

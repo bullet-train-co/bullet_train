@@ -29,7 +29,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
         format.html { redirect_to [:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things], notice: I18n.t('scaffolding/completely_concrete/tangible_things.notifications.created') }
         format.json { render :show, status: :created, location: [:account, @tangible_thing] }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @tangible_thing.errors, status: :unprocessable_entity }
       end
     end
@@ -43,7 +43,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
         format.html { redirect_to [:account, @tangible_thing], notice: I18n.t('scaffolding/completely_concrete/tangible_things.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @tangible_thing] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @tangible_thing.errors, status: :unprocessable_entity }
       end
     end
@@ -70,18 +70,22 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
         :ckeditor_value,
         :cloudinary_image_value,
         :date_field_value,
+        :date_and_time_field_value,
         :email_field_value,
         :file_field_value,
         :password_field_value,
         :phone_field_value,
-        :select_value,
         :super_select_value,
         :text_area_value,
         # 🚅 stop any skipping we're doing now.
         # 🚅 super scaffolding will insert new fields above this line.
+        multiple_button_values: [],
+        multiple_super_select_values: [],
         # 🚅 super scaffolding will insert new arrays above this line.
       )
 
+      assign_checkboxes(strong_params, :multiple_button_values)
+      assign_select_options(strong_params, :multiple_super_select_values)
       # 🚅 super scaffolding will insert processing for new fields above this line.
 
       strong_params

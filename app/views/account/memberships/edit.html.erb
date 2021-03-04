@@ -8,5 +8,15 @@
         <%= render 'form', membership: @membership %>
       <% end %>
     <% end %>
+
+    <% if can? :destroy, @membership %>
+      <%= render 'account/shared/box', divider: true do |p| %>
+        <% p.content_for :title, t('.remove_header') %>
+        <% p.content_for :description, t('.remove_description') %>
+        <% p.content_for :body do %>
+          <%= button_to t('.buttons.destroy'), [:account, @membership], method: :delete, data: { confirm: t('.buttons.confirmations.destroy') }, class: 'button' %>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

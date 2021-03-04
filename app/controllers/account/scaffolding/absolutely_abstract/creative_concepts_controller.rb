@@ -36,7 +36,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
         format.html { redirect_to [:account, @creative_concept], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts.notifications.created') }
         format.json { render :show, status: :created, location: [:account, @team, @creative_concept] }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @creative_concept.errors, status: :unprocessable_entity }
       end
     end
@@ -50,7 +50,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
         format.html { redirect_to [:account, @creative_concept], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @creative_concept] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @creative_concept.errors, status: :unprocessable_entity }
       end
     end

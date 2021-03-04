@@ -30,7 +30,7 @@
                 <td class="buttons">
                   <% unless hide_actions %>
                     <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, creative_concept], class: 'button-secondary button-smaller' if can? :edit, creative_concept %>
-                    <%= link_to t('.buttons.shorthand.destroy'), [:account, creative_concept], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(creative_concept)) }, class: 'button-secondary button-smaller' if can? :destroy, creative_concept %>
+                    <%= button_to t('.buttons.shorthand.destroy'), [:account, creative_concept], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(creative_concept)) }, class: 'button-secondary button-smaller' if can? :destroy, creative_concept %>
                   <% end %>
                 </td>
               </tr>

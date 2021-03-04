@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_14_200646) do
+ActiveRecord::Schema.define(version: 2021_02_24_234445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -189,13 +189,15 @@ ActiveRecord::Schema.define(version: 2021_01_14_200646) do
     t.string "email_field_value"
     t.string "password_field_value"
     t.string "phone_field_value"
-    t.string "select_value"
     t.string "super_select_value"
     t.text "text_area_value"
     t.text "ckeditor_value"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "sort_order"
+    t.datetime "date_and_time_field_value"
+    t.jsonb "multiple_button_values", default: []
+    t.jsonb "multiple_super_select_values", default: []
     t.index ["absolutely_abstract_creative_concept_id"], name: "index_tangible_things_on_creative_concept_id"
   end
 

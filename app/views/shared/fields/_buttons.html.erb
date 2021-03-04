@@ -1,6 +1,8 @@
 <% yield %>
 
 <%
+stimulus_controller = 'fields--button-toggle'
+
 form ||= current_fields_form
 html_options ||= {}
 html_options[:id] ||= id_for(form, method)
@@ -13,13 +15,13 @@ options ||= options_for(form, method)
   <% content_for :field do %>
     <div class="space-x-1">
       <% options.each do |value, label| %>
-        <label class="btn-toggle">
+        <label class="btn-toggle" data-controller="<%= stimulus_controller %>">
           <% if multiple %>
-            <%= form.check_box method, {multiple: multiple, checked: form.object.send(method).map(&:to_s).include?(value.to_s)}, value %>
+            <%= form.check_box method, {multiple: multiple, checked: form.object.send(method).map(&:to_s).include?(value.to_s), data: { "#{stimulus_controller}-target": 'shadowField' }}, value %>
           <% else %>
-            <%= form.radio_button method, value %>
+            <%= form.radio_button method, value, { data: { "#{stimulus_controller}-target": 'shadowField' }} %>
           <% end %>
-          <button type="button" class="button-alternative">
+          <button type="button" class="button-alternative" data-action="<%= stimulus_controller %>#clickShadowField">
             <%= label %>
           </button>
         </label>

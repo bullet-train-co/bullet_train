@@ -213,7 +213,7 @@ function subscribeToCollections() {
   subscriptions = renewedSubscriptions;
 }
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   subscribeToCollections();
 })
 

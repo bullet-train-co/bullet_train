@@ -22,7 +22,7 @@ class Account::MembershipsController < Account::ApplicationController
           format.html { redirect_to [:account, @membership], notice: I18n.t('memberships.notifications.updated') }
           format.json { render :show, status: :ok, location: [:account, @membership] }
         else
-          format.html { render :edit }
+          format.html { render :edit, status: :unprocessable_entity }
           format.json { render json: @membership.errors, status: :unprocessable_entity }
         end
       rescue RemovingLastTeamAdminException => exception

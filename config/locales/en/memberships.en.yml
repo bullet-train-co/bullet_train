@@ -54,6 +54,9 @@ en:
       header: Update Membership Settings
       description: You can edit the settings for %{memberships_possessive} membership on %{team_name} below.
       grant_privileges_of: Grant Privileges of %{role_name}
+      remove_header: Remove Team Member
+      remove_description: Removing %{membership_name} won't remove any resource assignments. Instead, you'll have the option of reassigning resources to another team member. You'll also be able to re-invite %{membership_name} back to the team in the future.
+      buttons: *buttons
     show:
       section: "%{memberships_possessive} Membership on %{team_name}"
       header: Membership Details

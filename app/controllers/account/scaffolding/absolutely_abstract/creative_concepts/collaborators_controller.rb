@@ -29,7 +29,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
         format.html { redirect_to [:account, @creative_concept, :collaborators], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts/collaborators.notifications.created') }
         format.json { render :show, status: :created, location: [:account, @collaborator] }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @collaborator.errors, status: :unprocessable_entity }
       end
     end
@@ -43,7 +43,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
         format.html { redirect_to [:account, @collaborator], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts/collaborators.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @collaborator] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @collaborator.errors, status: :unprocessable_entity }
       end
     end

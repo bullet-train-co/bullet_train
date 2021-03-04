@@ -35,7 +35,7 @@
 
       <div class="form-buttons-w">
         <%= link_to t('.buttons.edit'), [:edit, :account, @endpoint], class: "btn #{first_btn_primary}" if can? :edit, @endpoint %>
-        <%= link_to t('.buttons.destroy'), [:account, @endpoint], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@endpoint)) }, class: "btn #{first_btn_primary}" if can? :destroy, @endpoint %>
+        <%= button_to t('.buttons.destroy'), [:account, @endpoint], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@endpoint)) }, class: "btn #{first_btn_primary}" if can? :destroy, @endpoint %>
         <%= link_to t('global.buttons.back'), [:account, @team, :webhooks, :outgoing, :endpoints], class: "btn #{first_btn_primary}" %>
       </div>
 

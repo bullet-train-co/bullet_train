@@ -28,7 +28,7 @@
             <%# 🚅 super scaffolding will insert new fields above this line. %>
             <td class="buttons">
               <% unless hide_actions %>
-                <%= link_to t('.buttons.destroy'), [:account, api_key], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(api_key)) }, class: 'button-secondary button-smaller' if can? :destroy, api_key %>
+                <%= button_to t('.buttons.destroy'), [:account, api_key], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(api_key)) }, class: 'button-secondary button-smaller' if can? :destroy, api_key %>
               <% end %>
             </td>
           </tr>

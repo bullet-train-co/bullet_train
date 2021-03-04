@@ -18,8 +18,6 @@ gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -158,6 +156,9 @@ gem 'colorize'
 
 gem 'nice_partials', github: 'andrewculver/nice_partials', branch: 'bt'
 
+# turbo is in early development, so we're not waiting for releases.
+gem 'turbo-rails', github: 'hotwired/turbo-rails', branch: 'main'
+
 group :production do
   # we suggest using postmark for email deliverability.
   gem 'postmark-rails'
@@ -174,7 +175,6 @@ group :production do
   # use s3 for active storage by default.
   gem 'aws-sdk-s3', require: false
 end
-
 
 # YOUR GEMS
 # you can add any gems you need below. by keeping them separate from

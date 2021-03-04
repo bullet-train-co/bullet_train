@@ -11,17 +11,17 @@
 <meta content="<%= t('application.keywords') %>" name="keywords" />
 <meta content="<%= t('application.description') %>" name="description" />
 <meta content="width=device-width, initial-scale=1" name="viewport" />
-<meta name="turbolinks-cache-control" content="no-cache">
+<meta name="turbo-cache-control" content="no-cache">
 <link href="<%= asset_pack_path('media/images/logo/favicon.png') %>" rel="shortcut icon" />
 <link href="<%= asset_pack_path('media/images/logo/logo-square-bg.png') %>" rel="apple-touch-icon" />
 
 <%= csrf_meta_tags %>
 
-<%= stylesheet_link_tag 'https://rsms.me/inter/inter.css', media: 'all', 'data-turbolinks-track': 'reload' %>
-<%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Rubik:300,400,500', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= stylesheet_link_tag 'https://rsms.me/inter/inter.css', media: 'all', 'data-turbo-track': 'reload' %>
+<%= stylesheet_link_tag 'https://fonts.googleapis.com/css?family=Rubik:300,400,500', media: 'all', 'data-turbo-track': 'reload' %>
 
-<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+<%= javascript_pack_tag 'application', 'data-turbo-track': 'reload' %>
+<%= stylesheet_pack_tag 'application', media: 'all', 'data-turbo-track': 'reload' %>
 
 <% if cloudinary_enabled? %>
 <script src="//widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>

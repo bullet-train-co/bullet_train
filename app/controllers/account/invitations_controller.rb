@@ -92,7 +92,7 @@ class Account::InvitationsController < Account::ApplicationController
         format.html { redirect_to account_team_invitations_path(@team), notice: I18n.t('invitations.notifications.created') }
         format.json { render :show, status: :created, location: [:account, @team, @invitation] }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @invitation.errors, status: :unprocessable_entity }
       end
     end

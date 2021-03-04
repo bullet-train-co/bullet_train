@@ -51,6 +51,7 @@ module Sprinkles::ControllerSupport
       url = make_url_layoutless(url)
 
       # Disable Turbolinks from sending it's own headers. (We love you Turbolinks ❤️, but we've got this! 💪)
+      # Not sure what this will be under hotwire/turbo
       options[:turbolinks] = false
     end
 

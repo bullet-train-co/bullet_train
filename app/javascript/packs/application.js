@@ -8,13 +8,14 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
+import 'regenerator-runtime/runtime'
 import Rails from "@rails/ujs"
-import Turbolinks from "turbolinks"
+import Turbo from "@hotwired/turbo"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import "controllers" // stimulus
 
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
 
 // 🚫 DEFAULT BULLET TRAIN INCLUDES
@@ -31,10 +32,9 @@ require.context('../images', true)
 // Custom JavaScript for Bullet Train
 require("../index")
 
-require("alpinejs")
-
 // For inline use in `app/views/account/onboarding/user_details/edit.html.erb`.
-// global.jstz = require("jstz");
+import jstz from 'jstz';
+global.jstz = require("jstz");
 
 // ✅ YOUR APPLICATION'S INCLUDES
 // If you need to customize your application's includes, this is the place to do it. This helps avoid merge

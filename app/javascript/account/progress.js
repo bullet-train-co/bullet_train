@@ -59,7 +59,7 @@ var scheduleCheckForProgressUpdatesIfNeeded = function() {
 
 }
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbo:load', function() {
   if (timeout) {
     console.log("🏚 progress polling: canceling an existing timer.")
     clearTimeout(timeout);

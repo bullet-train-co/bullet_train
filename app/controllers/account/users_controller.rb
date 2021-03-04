@@ -15,7 +15,7 @@ class Account::UsersController < Account::ApplicationController
   end
 
   def updating_password?
-    params[:user][:password].present?
+    params[:user].key?(:password)
   end
 
   # PATCH/PUT /account/users/1
@@ -28,7 +28,7 @@ class Account::UsersController < Account::ApplicationController
         format.html { redirect_to [:edit, :account, @user], notice: t('users.notifications.updated') }
         format.json { render :show, status: :ok, location: [:account, @user] }
       else
-        format.html { render :edit }
+        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end

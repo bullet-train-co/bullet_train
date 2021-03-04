@@ -53,7 +53,7 @@ class InvitationsTest < ActionDispatch::IntegrationTest
     within "tbody[data-model='Membership'] tr[data-id='#{membership.id}']" do
       click_link 'Details'
     end
-    click_link 'Remove from Team'
+    click_on 'Remove from Team'
     page.driver.browser.switch_to.alert.accept
     assert page.has_content?('That user has been successfully removed from the team.')
     within "tbody[data-model='Membership'][data-scope='current']" do

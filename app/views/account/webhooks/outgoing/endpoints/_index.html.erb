@@ -20,7 +20,7 @@
             <%# 🚅 super scaffolding will insert new fields above this line. %>
             <td class="text-right">
               <%= link_to t('global.buttons.details'), [:account, endpoint], class: 'btn btn-link btn-sm' if can? :edit, endpoint %>
-              <%= link_to t('.buttons.shorthand.destroy'), [:account, endpoint], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(endpoint)) }, class: 'btn btn-link btn-sm' if can? :destroy, endpoint %>
+              <%= button_to t('.buttons.shorthand.destroy'), [:account, endpoint], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(endpoint)) }, class: 'btn btn-link btn-sm' if can? :destroy, endpoint %>
             </td>
           </tr>
           <% end %>
