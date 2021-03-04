@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   static targets = [ "wrapper"]
-  static classes = [ "hidden" ]
+  static classes = [ "hidden" ] // necessary because stimulus-reveal will mess with the [hidden] attribute on the wrapper
   static values = {
     showEventName: String,
     hideEventName: String,
