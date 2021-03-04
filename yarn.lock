@@ -7790,7 +7790,14 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
-stimulus@^2.0.0:
+stimulus-reveal@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/stimulus-reveal/-/stimulus-reveal-1.2.1.tgz#7fb9d0697ed98c5c7004ab45748ed8d48ba91b23"
+  integrity sha512-b0vF4HTxyVbAekmWyaFaszgPgZ+5bCg0O5Ov2nRUAeWg3fn/ZUUQQb9POHm4TQpZkWfnEOq1LrmKkycu+hxbqQ==
+  dependencies:
+    stimulus "~2.0"
+
+stimulus@^2.0.0, stimulus@~2.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/stimulus/-/stimulus-2.0.0.tgz#713c8b91a72ef90914b90955f0e705f004403047"
   integrity sha512-xipy7BS5TVpg4fX6S8LhrYZp7cmHGjmk09WSAiVx1gF5S5g43IWsuetfUhIk8HfHUG+4MQ9nY0FQz4dRFLs/8w==
