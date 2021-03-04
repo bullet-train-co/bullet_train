@@ -72,6 +72,7 @@ group :test do
   gem 'minitest-matchers_vaccine'
   gem 'database_cleaner'
   gem 'mocha', '1.4.0'
+  gem 'magic_test'
 end
 
 # we use factories not just for testing, but also for generating example API payloads.
