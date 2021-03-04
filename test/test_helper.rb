@@ -15,7 +15,7 @@ Minitest::Retry.use!(retry_count: 3, verbose: true, exceptions_to_retry: [Net::R
 
 OmniAuth.config.test_mode = true
 
-Capybara.default_max_wait_time = ENV.fetch("CAPYBARA_DEFAULT_MAX_WAIT_TIME", 15)
+Capybara.default_max_wait_time = ENV.fetch("CAPYBARA_DEFAULT_MAX_WAIT_TIME", ENV['MAGIC_TEST'].present? ? 5 : 15)
 Capybara.javascript_driver = ENV['MAGIC_TEST'].present? ? :selenium_chrome : :selenium_chrome_headless
 Capybara.default_driver = ENV['MAGIC_TEST'].present? ? :selenium_chrome : :selenium_chrome_headless
 
@@ -162,6 +162,7 @@ class Minitest::Test
 end
 
 class ActionDispatch::IntegrationTest
+  include MagicTest::Support
   include Capybara::DSL
   include Capybara::Email::DSL
   include Capybara::Minitest::Assertions

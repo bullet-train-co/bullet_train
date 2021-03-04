@@ -24,6 +24,9 @@ form.button_to {
   @apply inline-block;
   input[type=submit] {
     @apply bg-transparent;
+    &.button {
+      @apply bg-blue hover:bg-blue-dark;
+    }
   }
 }
 

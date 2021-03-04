@@ -99,8 +99,10 @@ class MembershipSystemTest < ActionDispatch::IntegrationTest
       end
     end
 
+    assert page.has_content? 'Invitation Details'
     click_on 'Settings'
 
+    assert page.has_content? 'Update Membership Settings'
     fill_in 'First Name', with: 'Yuto'
     fill_in 'Last Name', with: 'Nishiyama'
     # this is removing their admin privileges.
