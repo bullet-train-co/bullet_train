@@ -8,7 +8,7 @@ class ApiKey < ApplicationRecord
 
   belongs_to :user
 
-  scope :active, -> { where(revoked_at: nil).not(encrypted_secret: nil) }
+  scope :active, -> { where(revoked_at: nil).where.not(encrypted_secret: nil) }
 
   before_create do
     self.token = "p" + SecureRandom.hex
