@@ -86,7 +86,7 @@ class Minitest::Test
 
   def select2_select(label, string)
     string = string.join("\n") if string.is_a?(Array)
-    field = find("label", :text => label)
+    field = find('label', :text => /\A#{label}\z/)
     field.click
     "#{string}\n".split(//).each do |digit|
       within(field.find(:xpath, '..')) do
@@ -94,7 +94,7 @@ class Minitest::Test
       end
     end
   end
-  
+
   # https://stackoverflow.com/a/50794401/2414273
   def assert_no_js_errors
     last_timestamp = page.driver.browser.manage.logs.get(:browser)
@@ -109,20 +109,20 @@ class Minitest::Test
 
     assert errors.length.zero?, "Expected no js errors, but these errors where found: #{errors.join(', ')}"
   end
-  
+
   def find_stimulus_controller_for_label(label, stimulus_controller)
-    find('label', :text => label).first(:xpath, './/..').first('[data-controller="' + stimulus_controller + '"]')
+    find('label', :text => /\A#{label}\z/).first(:xpath, './/..').first('[data-controller="' + stimulus_controller + '"]')
   end
-  
+
   def find_stimulus_controller_for_label(label, stimulus_controller, wrapper = false)
     unless wrapper
-      find('label', :text => label).first(:xpath, './/..').first('[data-controller="' + stimulus_controller + '"]')
+      find('label', :text => /\A#{label}\z/).first(:xpath, './/..').first('[data-controller="' + stimulus_controller + '"]')
     else
-      wrapper_el = find('label', :text => label).first(:xpath, './/..//..')
+      wrapper_el = find('label', :text => /\A#{label}\z/).first(:xpath, './/..//..')
       wrapper_el if wrapper_el['data-controller'] == stimulus_controller
     end
   end
-  
+
   def set_element_attribute(element, attribute, value)
     page.evaluate_script(<<~JS, element, attribute, value)
       (function(element, attribute, value){
@@ -130,30 +130,30 @@ class Minitest::Test
       })(arguments[0], arguments[1], arguments[2])
     JS
   end
-  
+
   def disconnect_stimulus_controller_on(element)
     set_element_attribute(element, 'data-former-controller', element['data-controller'])
     set_element_attribute(element, 'data-controller', '')
   end
-  
+
   def reconnect_stimulus_controller_on(element)
     set_element_attribute(element, 'data-controller', element['data-former-controller'])
   end
-  
+
   def improperly_disconnect_and_reconnect_stimulus_controller_on(element)
     inner_html_before_disconnect = element['innerHTML']
-    
+
     disconnect_stimulus_controller_on(element)
-    
+
     page.evaluate_script(<<~JS, element, inner_html_before_disconnect)
       (function(element, innerHTML){
         element.innerHTML = innerHTML
       })(arguments[0], arguments[1])
     JS
-    
+
     reconnect_stimulus_controller_on(element)
   end
-  
+
   def calculate_resolution(display_details)
     # cut the display's pixel count in half if we're mimicking a high dpi display.
     display_details[:resolution].map { |pixel_count| pixel_count / (display_details[:high_dpi] ? 2 : 1) }
@@ -221,6 +221,10 @@ class ActionDispatch::IntegrationTest
         click_on "Logout"
       end
     end
+
+    # make sure we're actually signed out.
+    # (this will vary depending on where you send people when they sign out.)
+    assert page.has_content? 'Sign In'
   end
 
   def sign_in_from_homepage_for(display_details)

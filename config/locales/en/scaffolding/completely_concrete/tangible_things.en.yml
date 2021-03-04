@@ -32,18 +32,14 @@ en:
           one: One
           two: Two
           three: Three
-          four: Four
-          five: Five
       multiple_button_values:
         _: &multiple_button_values Multiple Button Values
         label: *multiple_button_values
         heading: *multiple_button_values
         options:
-          one: One
-          two: Two
-          three: Three
           four: Four
           five: Five
+          six: Six
       cloudinary_image_value:
         _: &cloudinary_image_value Cloudinary Image Value
         label: *cloudinary_image_value
@@ -80,18 +76,14 @@ en:
           one: One
           two: Two
           three: Three
-          four: Four
-          five: Five
       multiple_super_select_values:
         _: &multiple_super_select_values Multiple Super Select Values
         label: *multiple_super_select_values
         heading: *multiple_super_select_values
         options:
-          one: One
-          two: Two
-          three: Three
           four: Four
           five: Five
+          six: Six
       text_area_value:
         _: &text_area_value Text Area Value
         label: *text_area_value

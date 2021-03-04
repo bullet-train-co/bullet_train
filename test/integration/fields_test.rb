@@ -24,26 +24,26 @@ class AccountTest < ActionDispatch::IntegrationTest
       click_on 'Create Creative Concept'
 
       click_on 'Add New Tangible Thing'
-      
-      select2_select "Super Select Multiple Value", ["Six", "Seven"]
-      super_select = find_stimulus_controller_for_label "Super Select Multiple Value", 'fields--super-select'
-      assert_no_js_errors do 
+
+      select2_select "Multiple Super Select Values", ["Five", "Six"]
+      super_select = find_stimulus_controller_for_label "Multiple Super Select Values", 'fields--super-select'
+      assert_no_js_errors do
         disconnect_stimulus_controller_on super_select
         reconnect_stimulus_controller_on super_select
         improperly_disconnect_and_reconnect_stimulus_controller_on super_select
-        select2_select "Super Select Multiple Value", ["Two"]
+        select2_select "Multiple Super Select Values", ["Four"]
         assert super_select.has_css?('.select2-container--default', count: 1)
       end
-      
+
       button = find_stimulus_controller_for_label "Button Value", 'fields--button-toggle'
       click_on 'One'
-      assert_no_js_errors do 
+      assert_no_js_errors do
         disconnect_stimulus_controller_on button
         reconnect_stimulus_controller_on button
         assert button.find('input[type="radio"]', visible: false)['checked'] == "true"
         improperly_disconnect_and_reconnect_stimulus_controller_on button # the radio button won't be checked because we're using innerHTML
       end
-      
+
       phone_field_wrapper = find_stimulus_controller_for_label "Phone Field Value", 'fields--phone', wrapper: true
       phone_field = phone_field_wrapper.first('input')
       "+1 613".split(//).each do |digit|
@@ -55,14 +55,14 @@ class AccountTest < ActionDispatch::IntegrationTest
         improperly_disconnect_and_reconnect_stimulus_controller_on phone_field_wrapper
         assert phone_field_wrapper.first('.iti__selected-flag')['title'] == "Canada: +1"
       end
-      
+
       date_field = find_stimulus_controller_for_label "Date Field Value", 'fields--date'
       assert_no_js_errors do
         disconnect_stimulus_controller_on date_field
         reconnect_stimulus_controller_on date_field
         improperly_disconnect_and_reconnect_stimulus_controller_on date_field
       end
-      
+
       ckeditor = find_stimulus_controller_for_label "CKEditor Value", 'fields--ckeditor'
       assert_no_js_errors do
         disconnect_stimulus_controller_on ckeditor
