@@ -181,6 +181,7 @@ module LoadsAndAuthorizesResource
         load_and_authorize_resource through_as_symbols[index], options.merge(class: through_class_name, only: collection_actions, prepend: true, shallow: true)
       end
 
+      # TODO is this still required now that we've removed the API controllers?
       # 0. this is required for the api controllers. is this because we haven't
       # called `current_user` yet?
       prepend_before_action :authenticate_user!
