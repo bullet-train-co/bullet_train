@@ -1,3 +1,5 @@
+require 'bcrypt'
+
 class ApiKey < ApplicationRecord
 
   # 🚫 DEFAULT BULLET TRAIN API KEY FUNCTIONALITY
@@ -5,11 +7,28 @@ class ApiKey < ApplicationRecord
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
 
   belongs_to :user
-  scope :active, -> { where(revoked_at: nil) }
+
+  scope :active, -> { where(revoked_at: nil).where.not(encrypted_secret: nil) }
+
   before_create do
     self.token = "p" + SecureRandom.hex
-    self.secret = "s" + SecureRandom.hex
-    self.last_used_at = Time.zone.now
+    self.last_used_at = nil
+  end
+
+  def generate_encrypted_secret(supplied_secret = nil)
+    raise 'secret is already set' if encrypted_secret.present?
+    supplied_secret ||= "s" + SecureRandom.hex
+    update(encrypted_secret: BCrypt::Password.create(supplied_secret, cost: Devise.stretches))
+    return supplied_secret
+  end
+
+  def self.find_by_credentials(token, secret)
+    api_key = find_by(token: token)
+    api_key&.valid_secret?(secret) ? api_key : nil
+  end
+
+  def valid_secret?(supplied_secret)
+    BCrypt::Password.new(encrypted_secret) == supplied_secret
   end
 
 

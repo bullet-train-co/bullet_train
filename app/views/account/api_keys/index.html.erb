@@ -2,6 +2,6 @@
   <% p.content_for :title, t('.section', users_possessive: @user.name.possessive) %>
 
   <% p.content_for :body do %>
-    <%= render 'index', api_keys: @api_keys %>
+    <%= render 'index', api_keys: @api_keys.order('created_at DESC') %>
   <% end %>
 <% end %>

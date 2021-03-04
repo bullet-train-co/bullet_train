@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_24_234445) do
+ActiveRecord::Schema.define(version: 2021_03_04_203705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,11 +65,11 @@ ActiveRecord::Schema.define(version: 2021_02_24_234445) do
   create_table "api_keys", force: :cascade do |t|
     t.bigint "user_id"
     t.string "token"
-    t.string "secret"
     t.datetime "last_used_at"
     t.datetime "revoked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "encrypted_secret"
     t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
@@ -216,6 +216,7 @@ ActiveRecord::Schema.define(version: 2021_02_24_234445) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "being_destroyed"
+    t.string "time_zone"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
