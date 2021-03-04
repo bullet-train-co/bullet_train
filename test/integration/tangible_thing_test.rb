@@ -36,9 +36,6 @@ class AccountTest < ActionDispatch::IntegrationTest
       select2_select "Multiple Super Select Values", ["Five", "Six"]
       fill_in 'Text Area Value', with: 'Long text for this text area field'
 
-      # the submit button might be off the page right now.
-      scroll_to find('input[type=submit]')
-
       click_on 'Create Tangible Thing'
       assert page.has_content? 'Tangible Thing was successfully created.'
 
