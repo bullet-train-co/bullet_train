@@ -1117,17 +1117,17 @@
     purgecss "^3.0.0"
 
 "@hotwired/turbo-rails@^7.0.0-beta.3":
-  version "7.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.0.0-beta.3.tgz#478aa47682465713d0b2e48858be9dfcd43a0e8e"
-  integrity sha512-hoYEawFwkr1MdrkqRTivAnXPDHZ+Hk4m1FrjmbO3eMBUs8Xw3L+a3U7aeH8RPtUBo4k93qc9CivlR9yTxZsZkA==
+  version "7.0.0-beta.5"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.0.0-beta.5.tgz#a0efdb7a20613845c43afe6f376b353e62f7e68d"
+  integrity sha512-zj+ZYbs2IHeJHtLavcLX5K0oW/3K8s3zjok4lpujxqLactp3OpuqBZxKBr+tgODnAX/WYFoKLpzivyx3xVRfTw==
   dependencies:
-    "@hotwired/turbo" "^7.0.0-beta.2"
+    "@hotwired/turbo" "^7.0.0-beta.4"
     "@rails/actioncable" "^6.1.0"
 
-"@hotwired/turbo@^7.0.0-beta.2":
-  version "7.0.0-beta.2"
-  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.0.0-beta.2.tgz#0f20c1f5b67fe07472a5f1eda2e3f79146324512"
-  integrity sha512-3YyWDaImtkU8MJ+//qV8nmV8KeFInN/nptqwJo1Bl5UjROmixPr3w9tPHyA499Mo1mBJOur8jiXVowbX6VWLUg==
+"@hotwired/turbo@^7.0.0-beta.2", "@hotwired/turbo@^7.0.0-beta.4":
+  version "7.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo/-/turbo-7.0.0-beta.4.tgz#be6d7014902d45121f56358d360e0810bad4c19e"
+  integrity sha512-koox7UeA2Na0tLBPesxNO3nk/gtezRxF33NHKbAx+zv5s2k1Xh/orB5xNr5dAckoUj3Pdpytnw41WH4QB1jYBg==
 
 "@icon/themify-icons@^1.0.1-alpha.3":
   version "1.0.1-alpha.3"
@@ -1575,10 +1575,10 @@ alpine-turbo-drive-adapter@^1.0.1:
   resolved "https://registry.yarnpkg.com/alpine-turbo-drive-adapter/-/alpine-turbo-drive-adapter-1.0.1.tgz#c771a8674f827eee9066bacea6ecc31c27d634a0"
   integrity sha512-TbfpwD3r3ce/zyeh3Ojg6Hk6FHVGSiQNlGMSpjfjBlO2IDAbNG03TCuIqRwrnYP5KO7B8h8jSu7rBi59Sja7Ow==
 
-alpinejs@^2.8.0:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-2.8.0.tgz#d0de7309dd642e9198aef7c14acb9243246549f0"
-  integrity sha512-UHvE71BBYHJa6+RxjMwM0g4eokq+5yG1QO5C6VieUu0MVPlsUSlwvrh19VVZQApNIlQsgcvQUhIalzAIgoAPoA==
+alpinejs@^2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/alpinejs/-/alpinejs-2.8.1.tgz#22703776639b0b2f68d619856907de9fbbd727be"
+  integrity sha512-ETJ/k0fbiBeP+OSd5Fhj70c+zb+YRzcVbyh5DVeLT3FBWMUeUvjOSWLi53IVLPSehaT2SKmB7w08WGF2jYTqNA==
 
 amdefine@>=0.0.4:
   version "1.0.1"
