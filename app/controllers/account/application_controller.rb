@@ -18,7 +18,7 @@ class Account::ApplicationController < ApplicationController
   # layout entirely for polling updates.
   layout :calculate_layout
   def calculate_layout
-    params['layoutless'] ? false : 'account'
+    params["layoutless"] ? false : "account"
   end
 
   before_action :authenticate_user!
@@ -30,7 +30,6 @@ class Account::ApplicationController < ApplicationController
   # where the instance variable won't be already set, so we have some other methods
   # for populating it.
   def load_team
-
     # if account_load_and_authorize_resource couldn't load the team.
     unless @team
 
@@ -48,29 +47,27 @@ class Account::ApplicationController < ApplicationController
     if @team.try(:persisted?)
       current_user.update_column(:current_team_id, @team.id)
     end
-
   end
 
   def adding_user_email?
-    self.is_a?(Account::Onboarding::UserEmailController)
+    is_a?(Account::Onboarding::UserEmailController)
   end
 
   def adding_user_details?
-    self.is_a?(Account::Onboarding::UserDetailsController)
+    is_a?(Account::Onboarding::UserDetailsController)
   end
 
   def adding_team?
     return true if request.get? && request.path == new_account_team_path
     return true if request.post? && request.path == account_teams_path
-    return false
+    false
   end
 
   def accepting_invitation?
-    (params[:controller] == 'account/invitations') && (params[:action] == 'show' || params[:action] == 'accept')
+    (params[:controller] == "account/invitations") && (params[:action] == "show" || params[:action] == "accept")
   end
 
   def ensure_onboarding_is_complete
-
     # since the onboarding controllers are child classes of this class,
     # we actually have to check to make sure we're not currently on that
     # step otherwise we'll end up in an endless redirection loop.
@@ -119,8 +116,7 @@ class Account::ApplicationController < ApplicationController
 
     end
 
-    return true
-
+    true
   end
 
   def set_last_seen_at

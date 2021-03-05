@@ -1,7 +1,7 @@
 class CreateScaffoldingCompletelyConcreteTangibleThings < ActiveRecord::Migration[6.0]
   def change
     create_table :scaffolding_completely_concrete_tangible_things do |t|
-      t.references :absolutely_abstract_creative_concept, null: false, foreign_key: {to_table: 'scaffolding_absolutely_abstract_creative_concepts'}, index: {name: 'index_tangible_things_on_creative_concept_id'}
+      t.references :absolutely_abstract_creative_concept, null: false, foreign_key: {to_table: "scaffolding_absolutely_abstract_creative_concepts"}, index: {name: "index_tangible_things_on_creative_concept_id"}
       t.string :text_field_value
       t.string :button_value
       t.string :cloudinary_image_value

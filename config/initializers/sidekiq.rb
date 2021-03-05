@@ -1,9 +1,9 @@
 redis_conn = proc {
-   Redis.new(
-     url: ENV["REDIS_URL"] || 'redis://localhost:6379',
-     driver: :ruby,
-     ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
-   )
+  Redis.new(
+    url: ENV["REDIS_URL"] || "redis://localhost:6379",
+    driver: :ruby,
+    ssl_params: {verify_mode: OpenSSL::SSL::VERIFY_NONE}
+  )
 }
 
 Sidekiq.configure_client do |config|

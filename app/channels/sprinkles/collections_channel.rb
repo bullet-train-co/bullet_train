@@ -10,8 +10,7 @@ class Sprinkles::CollectionsChannel < ApplicationCable::Channel
 
   def allowed_collections
     {
-      User => [
-      ],
+      User => [],
       Team => [
         :scaffolding_things,
       ],
@@ -23,7 +22,7 @@ class Sprinkles::CollectionsChannel < ApplicationCable::Channel
   end
 
   def validated_parent_class
-    allowed_parent_classes.select { |klass| klass.name == params[:parent_name] }.first ||
+    allowed_parent_classes.find { |klass| klass.name == params[:parent_name] } ||
       connection.reject_unauthorized_connection
   end
 

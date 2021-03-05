@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 describe Team do
   subject { Team.new }
@@ -11,7 +11,7 @@ describe Team do
     it { must have_many(:scaffolding_absolutely_abstract_creative_concepts) }
   end
 
-  it 'validates name presence if persisted' do
+  it "validates name presence if persisted" do
     subject.save
     must validate_presence_of(:name)
   end

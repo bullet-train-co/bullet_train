@@ -18,7 +18,7 @@ class Account::ApiKeysController < Account::ApplicationController
   def create
     respond_to do |format|
       if @api_key.save
-        format.html { redirect_to account_user_api_keys_path(@user), notice: I18n.t('api_keys.notifications.created') }
+        format.html { redirect_to account_user_api_keys_path(@user), notice: I18n.t("api_keys.notifications.created") }
         format.json { render :show, status: :created, location: [:account, @user, @api_key] }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -32,7 +32,7 @@ class Account::ApiKeysController < Account::ApplicationController
   def update
     respond_to do |format|
       if @api_key.update(api_key_params)
-        format.html { redirect_to [:account, @api_key], notice: I18n.t('api_keys.notifications.updated') }
+        format.html { redirect_to [:account, @api_key], notice: I18n.t("api_keys.notifications.updated") }
         format.json { render :show, status: :ok, location: [:account, @api_key] }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -46,14 +46,15 @@ class Account::ApiKeysController < Account::ApplicationController
   def destroy
     @api_key.revoke
     respond_to do |format|
-      format.html { redirect_to [:account, @user, :api_keys], notice: I18n.t('api_keys.notifications.destroyed') }
+      format.html { redirect_to [:account, @user, :api_keys], notice: I18n.t("api_keys.notifications.destroyed") }
       format.json { head :no_content }
     end
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def api_key_params
-      {}
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def api_key_params
+    {}
+  end
 end

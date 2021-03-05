@@ -6,7 +6,6 @@ require "active_support/core_ext/integer/time"
 # and recreated between test runs. Don't rely on the data there!
 
 Rails.application.configure do
-
   # 🚫 DEFAULT RAILS CONFIGURATION
   # This section represents the default settings for a Rails 6.0.0-rc1 application. Bullet Train's configuration and
   # your own should be specified at the end of the file, not in this section, even if the value you're configuring
@@ -24,11 +23,11 @@ Rails.application.configure do
   # Configure public file server for tests with Cache-Control for performance.
   config.public_file_server.enabled = true
   config.public_file_server.headers = {
-    'Cache-Control' => "public, max-age=#{1.hour.to_i}"
+    "Cache-Control" => "public, max-age=#{1.hour.to_i}"
   }
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
 
@@ -69,7 +68,7 @@ Rails.application.configure do
   # if you want to change a default value specified here. Instead, simply re-specify the value in the section that
   # follows this section.
 
-  config.action_mailer.default_url_options = {host: 'localhost', port: 3001}
+  config.action_mailer.default_url_options = {host: "localhost", port: 3001}
   config.action_view.raise_on_missing_translations = true
 
   # TODO There are too many deprecation warnings after upgrading to Rails 6.
@@ -81,6 +80,4 @@ Rails.application.configure do
   # ✅ YOUR APPLICATION'S CONFIGURATION
   # If you need to customize your application's configuration, this is the place to do it. This helps avoid merge
   # conflicts in the future when Rails or Bullet Train update their own default settings.
-
-
 end

@@ -32,7 +32,7 @@ class Sprinkles::Broadcaster
     # no need to send the same broadcast signal twice.
     @queue.uniq!
 
-    while item = @queue.shift
+    while (item = @queue.shift)
       Rails.logger.info "🍩 Flushing #{item[:key]} from the broadcast queue."
       ActionCable.server.broadcast(item[:key], item[:params])
     end

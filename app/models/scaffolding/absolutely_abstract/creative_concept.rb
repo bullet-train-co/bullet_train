@@ -4,8 +4,8 @@ class Scaffolding::AbsolutelyAbstract::CreativeConcept < ApplicationRecord
   belongs_to :team
   # 🚅 add belongs_to associations above.
 
-  has_many :completely_concrete_tangible_things, class_name: 'Scaffolding::CompletelyConcrete::TangibleThing', foreign_key: :absolutely_abstract_creative_concept_id, dependent: :destroy
-  has_many :collaborators, class_name: 'Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator', dependent: :destroy, foreign_key: :creative_concept_id
+  has_many :completely_concrete_tangible_things, class_name: "Scaffolding::CompletelyConcrete::TangibleThing", foreign_key: :absolutely_abstract_creative_concept_id, dependent: :destroy
+  has_many :collaborators, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator", dependent: :destroy, foreign_key: :creative_concept_id
   # 🚅 add has_many associations above.
 
   # 🚅 add oauth providers above.

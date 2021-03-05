@@ -1,0 +1,10 @@
+ignore:
+  - 'app/controllers/concerns/loads_and_authorizes_resource.rb':
+    - Security/Eval # TODO we should have this audited.
+    - Style/EvalWithLocation # TODO we should have this audited.
+  - 'app/models/webhooks/outgoing/delivery_attempt.rb':
+    - Lint/RescueException # TODO would it be okay to rescue `StandardError`?
+  - 'app/**/*':
+    - Style/TrailingCommaInArguments
+    - Style/TrailingCommaInArrayLiteral
+    - Style/TrailingCommaInHashLiteral

@@ -25,7 +25,7 @@ class Account::Oauth::StripeAccountsController < Account::ApplicationController
   def update
     respond_to do |format|
       if @stripe_account.update(stripe_account_params)
-        format.html { redirect_to [:account, @stripe_account], notice: I18n.t('oauth/stripe_accounts.notifications.updated') }
+        format.html { redirect_to [:account, @stripe_account], notice: I18n.t("oauth/stripe_accounts.notifications.updated") }
         format.json { render :show, status: :ok, location: [:account, @stripe_account] }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -43,21 +43,19 @@ class Account::Oauth::StripeAccountsController < Account::ApplicationController
       @stripe_account.destroy
     end
     respond_to do |format|
-      format.html { redirect_to [:account, @team, :oauth, :stripe_accounts], notice: I18n.t('oauth/stripe_accounts.notifications.destroyed') }
+      format.html { redirect_to [:account, @team, :oauth, :stripe_accounts], notice: I18n.t("oauth/stripe_accounts.notifications.destroyed") }
       format.json { head :no_content }
     end
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def stripe_account_params
-      strong_params = params.require(:oauth_stripe_account).permit(
-        # 🚅 super scaffolding will insert new fields above this line.
-        # 🚅 super scaffolding will insert new arrays above this line.
-      )
 
-      # 🚅 super scaffolding will insert processing for new fields above this line.
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def stripe_account_params
+    params.require(:oauth_stripe_account).permit
+    # 🚅 super scaffolding will insert new fields above this line.
+    # 🚅 super scaffolding will insert new arrays above this line.
 
-      strong_params
-    end
+    # 🚅 super scaffolding will insert processing for new fields above this line.
+  end
 end

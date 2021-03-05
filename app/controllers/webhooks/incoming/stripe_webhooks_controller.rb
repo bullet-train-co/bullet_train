@@ -7,8 +7,8 @@ class Webhooks::Incoming::StripeWebhooksController < Webhooks::Incoming::Webhook
     # this throws an exception if the signature is invalid.
     Stripe::Webhook.construct_event(
       payload,
-      request.env['HTTP_STRIPE_SIGNATURE'],
-      ENV['STRIPE_WEBHOOKS_ENDPOINT_SECRET']
+      request.env["HTTP_STRIPE_SIGNATURE"],
+      ENV["STRIPE_WEBHOOKS_ENDPOINT_SECRET"]
     )
 
     Webhooks::Incoming::StripeWebhook.create(
@@ -17,6 +17,6 @@ class Webhooks::Incoming::StripeWebhooksController < Webhooks::Incoming::Webhook
       verified_at: Time.zone.now
     ).process_async
 
-    render json: {status: 'OK'}, status: :created
+    render json: {status: "OK"}, status: :created
   end
 end

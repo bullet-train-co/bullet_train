@@ -4,9 +4,9 @@ module Account::ButtonsHelper
 
     if !@global[context]
       @global[context] = true
-      return 'button'
+      "button"
     else
-      return 'button-secondary'
+      "button-secondary"
     end
   end
 end

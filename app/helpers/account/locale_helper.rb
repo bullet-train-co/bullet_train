@@ -1,5 +1,4 @@
 module Account::LocaleHelper
-
   # as of now, we only calculate a possessive version of nouns in english.
   # if you're aware of another language where we can do this, please don't hesitate to reach out!
   def possessive_string(string)
@@ -11,7 +10,7 @@ module Account::LocaleHelper
     return {} unless name
 
     hash = {}
-    prefix = model.class.name.split('::').last.underscore
+    prefix = model.class.name.split("::").last.underscore
     hash[:"#{prefix}_name"] = name
     hash[:"#{prefix.pluralize}_possessive"] = possessive_string(name)
 
@@ -28,7 +27,7 @@ module Account::LocaleHelper
 
   # this is a bit scary, no?
   def account_controller?
-    controller.class.name.match /^Account::/
+    controller.class.name.match(/^Account::/)
   end
 
   def t(key, options = {})
@@ -41,10 +40,8 @@ module Account::LocaleHelper
 
   # like 't', but if the key isn't found, it returns nil.
   def ot(key, options = {})
-    begin
-      t(key, options)
-    rescue I18n::MissingTranslationData => exception
-      return nil
-    end
+    t(key, options)
+  rescue I18n::MissingTranslationData => _
+    nil
   end
 end

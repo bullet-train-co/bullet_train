@@ -1,7 +1,6 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-
   # 🚫 DEFAULT RAILS CONFIGURATION
   # This section represents the default settings for a Rails 6.0.0-rc1 application. Bullet Train's configuration and
   # your own should be specified at the end of the file, not in this section, even if the value you're configuring
@@ -19,7 +18,7 @@ Rails.application.configure do
   config.eager_load = true
 
   # Full error reports are disabled and caching is turned on.
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
@@ -28,7 +27,7 @@ Rails.application.configure do
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
-  config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
 
   # Compress CSS using a preprocessor.
   # config.assets.css_compressor = :sass
@@ -59,7 +58,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -95,9 +94,9 @@ Rails.application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
   if ENV["RAILS_LOG_TO_STDOUT"].present?
-    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
   # Do not dump schema after migrations.
@@ -134,7 +133,7 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :sidekiq
 
-  if ENV['AWS_S3_BUCKET'].present?
+  if ENV["AWS_S3_BUCKET"].present?
     config.active_storage.service = :amazon
   end
 
@@ -151,25 +150,25 @@ Rails.application.configure do
   # instead, you should add yours after the comment toward the
   # end of this file. 🚫 ✌️
 
-  if ENV['POSTMARK_API_TOKEN'].present?
+  if ENV["POSTMARK_API_TOKEN"].present?
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = {
-      api_token: ENV['POSTMARK_API_TOKEN']
+      api_token: ENV["POSTMARK_API_TOKEN"]
     }
 
-  elsif ENV['MAILGUN_SMTP_SERVER'].present?
+  elsif ENV["MAILGUN_SMTP_SERVER"].present?
     config.action_mailer.delivery_method = :smtp
-    config.action_mailer.default_options = {from: "noreply@#{ENV['MAILGUN_DOMAIN']}"}
+    config.action_mailer.default_options = {from: "noreply@#{ENV["MAILGUN_DOMAIN"]}"}
     config.action_mailer.smtp_settings = {
       # double warning: please don't modify this configuration.
       # if you want to provide your own smtp configuration,
       # please add it after the comment at the end of this file.
-      address:              ENV['MAILGUN_SMTP_SERVER'],
-      port:                 ENV['MAILGUN_SMTP_PORT'],
-      domain:               ENV['MAILGUN_DOMAIN'],
-      user_name:            ENV['MAILGUN_SMTP_LOGIN'],
-      password:             ENV['MAILGUN_SMTP_PASSWORD'],
-      authentication:       'plain',
+      address: ENV["MAILGUN_SMTP_SERVER"],
+      port: ENV["MAILGUN_SMTP_PORT"],
+      domain: ENV["MAILGUN_DOMAIN"],
+      user_name: ENV["MAILGUN_SMTP_LOGIN"],
+      password: ENV["MAILGUN_SMTP_PASSWORD"],
+      authentication: "plain",
       enable_starttls_auto: true
     }
 
@@ -182,5 +181,4 @@ Rails.application.configure do
   # ✅ YOUR APPLICATION'S CONFIGURATION
   # If you need to customize your application's configuration, this is the place to do it. This helps avoid merge
   # conflicts in the future when Rails or Bullet Train update their own default settings.
-
 end

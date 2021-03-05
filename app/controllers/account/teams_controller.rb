@@ -1,8 +1,8 @@
 class Account::TeamsController < Account::ApplicationController
-  load_and_authorize_resource :team, class: 'Team', prepend: true
+  load_and_authorize_resource :team, class: "Team", prepend: true
 
   prepend_before_action do
-    if params['action'] == 'new'
+    if params["action"] == "new"
       current_user.current_team = nil
     end
   end
@@ -44,7 +44,7 @@ class Account::TeamsController < Account::ApplicationController
 
   # GET /teams/new
   def new
-    render :new, layout: 'devise'
+    render :new, layout: "devise"
   end
 
   # GET /teams/1/edit
@@ -66,10 +66,10 @@ class Account::TeamsController < Account::ApplicationController
         current_user.former_user = false
         current_user.save
 
-        format.html { redirect_to [:account, @team], notice: I18n.t('teams.notifications.created') }
+        format.html { redirect_to [:account, @team], notice: I18n.t("teams.notifications.created") }
         format.json { render :show, status: :created, location: [:account, @team] }
       else
-        format.html { render :new, layout: 'devise' }
+        format.html { render :new, layout: "devise" }
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
@@ -80,7 +80,7 @@ class Account::TeamsController < Account::ApplicationController
   def update
     respond_to do |format|
       if @team.update(team_params)
-        format.html { redirect_to [:account, @team], notice: I18n.t('teams.notifications.updated') }
+        format.html { redirect_to [:account, @team], notice: I18n.t("teams.notifications.updated") }
         format.json { render :show, status: :ok, location: [:account, @team] }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -101,16 +101,14 @@ class Account::TeamsController < Account::ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def team_params
-      strong_params = params.require(:team).permit(
-        :name,
-        # 🚅 super scaffolding will insert new fields above this line.
-        # 🚅 super scaffolding will insert new arrays above this line.
-      )
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def team_params
+    params.require(:team).permit(
+      :name,
+      # 🚅 super scaffolding will insert new fields above this line.
+      # 🚅 super scaffolding will insert new arrays above this line.
+    )
 
-      # 🚅 super scaffolding will insert processing for new fields above this line.
-
-      strong_params
-    end
+    # 🚅 super scaffolding will insert processing for new fields above this line.
+  end
 end

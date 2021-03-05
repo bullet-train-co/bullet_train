@@ -15,8 +15,9 @@ class Account::Webhooks::Outgoing::DeliveriesController < Account::ApplicationCo
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def delivery_params
-      params.require(:webhooks_outgoing_delivery).permit()
-    end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def delivery_params
+    params.require(:webhooks_outgoing_delivery).permit
+  end
 end

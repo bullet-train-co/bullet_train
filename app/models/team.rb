@@ -1,5 +1,4 @@
 class Team < ApplicationRecord
-
   # 🚫 DEFAULT BULLET TRAIN TEAM FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
@@ -8,12 +7,12 @@ class Team < ApplicationRecord
 
   # super scaffolding
   unless scaffolding_things_disabled?
-    has_many :scaffolding_absolutely_abstract_creative_concepts, class_name: 'Scaffolding::AbsolutelyAbstract::CreativeConcept', dependent: :destroy
+    has_many :scaffolding_absolutely_abstract_creative_concepts, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcept", dependent: :destroy
   end
 
   # webhooks
-  has_many :webhooks_outgoing_endpoints, class_name: 'Webhooks::Outgoing::Endpoint', dependent: :destroy
-  has_many :webhooks_outgoing_events, class_name: 'Webhooks::Outgoing::Event', dependent: :destroy
+  has_many :webhooks_outgoing_endpoints, class_name: "Webhooks::Outgoing::Endpoint", dependent: :destroy
+  has_many :webhooks_outgoing_events, class_name: "Webhooks::Outgoing::Event", dependent: :destroy
 
   # memberships and invitations
   has_many :memberships, dependent: :destroy
@@ -21,7 +20,7 @@ class Team < ApplicationRecord
   has_many :invitations
 
   # oauth providers
-  has_many :oauth_stripe_accounts, class_name: 'Oauth::StripeAccount', dependent: :destroy if stripe_enabled?
+  has_many :oauth_stripe_accounts, class_name: "Oauth::StripeAccount", dependent: :destroy if stripe_enabled?
 
   # validations
   validates :name, presence: true
@@ -52,7 +51,6 @@ class Team < ApplicationRecord
 
   # 🚅 add methods above.
 
-
   # 🚫 DEFAULT BULLET TRAIN TEAM FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
 
@@ -66,7 +64,7 @@ class Team < ApplicationRecord
   end
 
   def primary_contact
-    admin_users.sort { |user| user.created_at }.first
+    admin_users.min { |user| user.created_at }
   end
 
   def formatted_email_address

@@ -14,7 +14,8 @@ module HasUuid
 
   # define object methods.
   def short_uuid
-    self.uuid.first(7) rescue 'nil'
+    self.uuid.first(7)
+  rescue
+    "nil"
   end
-
 end

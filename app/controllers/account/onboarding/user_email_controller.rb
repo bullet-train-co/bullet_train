@@ -1,6 +1,6 @@
 class Account::Onboarding::UserEmailController < Account::ApplicationController
-  layout 'devise'
-  load_and_authorize_resource :class => "User"
+  layout "devise"
+  load_and_authorize_resource class: "User"
 
   # this is because cancancan doesn't let us set the instance variable name above.
   before_action do
@@ -25,11 +25,11 @@ class Account::Onboarding::UserEmailController < Account::ApplicationController
 
         if !@user.email_is_oauth_placeholder?
           @user.send_welcome_email
-          format.html { redirect_to account_team_path(@user.teams.first), notice: '' }
+          format.html { redirect_to account_team_path(@user.teams.first), notice: "" }
         else
           format.html {
-            flash[:error] = I18n.t('global.notifications.all_fields_required')
-            redirect_to edit_account_onboarding_user_detail_path (@user)
+            flash[:error] = I18n.t("global.notifications.all_fields_required")
+            redirect_to edit_account_onboarding_user_detail_path(@user)
           }
         end
 
@@ -38,7 +38,11 @@ class Account::Onboarding::UserEmailController < Account::ApplicationController
 
         # this is just checking whether the error on the email field is taking the email
         # address is already taken.
-        @email_taken = @user.errors.details[:email].select { |error| error[:error] == :taken }.any? rescue false
+        @email_taken = begin
+          @user.errors.details[:email].select { |error| error[:error] == :taken }.any?
+        rescue
+          false
+        end
 
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -48,16 +52,14 @@ class Account::Onboarding::UserEmailController < Account::ApplicationController
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      strong_params = params.require(:user).permit(
-        :email,
-        # 🚅 super scaffolding will insert new fields above this line.
-        # 🚅 super scaffolding will insert new arrays above this line.
-      )
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(
+      :email,
+      # 🚅 super scaffolding will insert new fields above this line.
+      # 🚅 super scaffolding will insert new arrays above this line.
+    )
 
-      # 🚅 super scaffolding will insert processing for new fields above this line.
-
-      strong_params
-    end
+    # 🚅 super scaffolding will insert processing for new fields above this line.
+  end
 end

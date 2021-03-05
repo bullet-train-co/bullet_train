@@ -17,7 +17,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-
     # do all the regular devise stuff first.
     super
 
@@ -34,10 +33,8 @@ class RegistrationsController < Devise::RegistrationsController
         # try to find the invitation, if it still exists.
         invitation = Invitation.find_by_uuid(session[:invitation_uuid])
 
-        if invitation
-          # if the invitation was found, claim it for this user.
-          invitation.accept_for(current_user)
-        end
+        # if the invitation was found, claim it for this user.
+        invitation&.accept_for(current_user)
 
         # remove the uuid from the session.
         session.delete(:invitation_uuid)
@@ -53,7 +50,5 @@ class RegistrationsController < Devise::RegistrationsController
       current_user.send_welcome_email unless current_user.email_is_oauth_placeholder?
 
     end
-
   end
-
 end

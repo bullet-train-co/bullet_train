@@ -1,5 +1,4 @@
 RailsAdmin.config do |config|
-
   ### Popular gems integration
 
   ## == Devise ==
@@ -15,7 +14,7 @@ RailsAdmin.config do |config|
   # config.authorize_with :pundit
 
   ## == PaperTrail ==
-  config.audit_with :paper_trail, 'User', 'PaperTrail::Version'
+  config.audit_with :paper_trail, "User", "PaperTrail::Version"
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
@@ -24,8 +23,8 @@ RailsAdmin.config do |config|
   config.show_gravatar = true
 
   config.actions do
-    dashboard                     # mandatory
-    index                         # mandatory
+    dashboard # mandatory
+    index # mandatory
     new
     export
     bulk_delete
@@ -52,7 +51,6 @@ RailsAdmin.config do |config|
     "Membership",
     "Role",
     "Team",
-    "User",
+    "User"
   ]
-
 end

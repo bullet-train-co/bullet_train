@@ -3,7 +3,7 @@ module Fields::SuperSelectSupport
 
   def create_model_if_new(id)
     if id.present?
-      unless id.match(/^\d+$/)
+      unless /^\d+$/.match?(id)
         id = yield(id).id.to_s
       end
     end
@@ -17,5 +17,4 @@ module Fields::SuperSelectSupport
       end
     end
   end
-
 end

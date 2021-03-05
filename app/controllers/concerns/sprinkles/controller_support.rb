@@ -6,8 +6,8 @@ module Sprinkles::ControllerSupport
   end
 
   def add_request_metadata
-    response.headers['X-Sprinkles-Request-URL'] = remove_layoutless_from_url(request.url)
-    response.headers['X-Sprinkles-Request-Method'] = request.method
+    response.headers["X-Sprinkles-Request-URL"] = remove_layoutless_from_url(request.url)
+    response.headers["X-Sprinkles-Request-Method"] = request.method
   end
 
   def remove_layoutless_from_url(url)
@@ -18,7 +18,7 @@ module Sprinkles::ControllerSupport
     else
       uri = URI.parse(url)
       query = Rack::Utils.parse_query(uri.query)
-      query.delete('layoutless')
+      query.delete("layoutless")
       uri.query = query.to_query
       uri.query = nil if uri.query.empty?
       url = uri.to_s
@@ -46,7 +46,7 @@ module Sprinkles::ControllerSupport
   # TODO Why is `url` optional? I'm just copying this from Turbolinks.
   def redirect_to(url = {}, options = {})
     # If we're redirecting from a request where we were asked to respond "layoutless" ..
-    if params[:layoutless] == 'true'
+    if params[:layoutless] == "true"
       # Make sure the URL we're redirecting to is "layoutless".
       url = make_url_layoutless(url)
 

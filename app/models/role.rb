@@ -1,9 +1,7 @@
 class Role < ApplicationRecord
-
   # 🚫 DEFAULT BULLET TRAIN MEMBERSHIP FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
-
 
   # ✅ YOUR APPLICATION'S MEMBERSHIP FUNCTIONALITY
   # This is the place where you should implement your own features on top of Bullet Train's functionality. There
@@ -15,8 +13,7 @@ class Role < ApplicationRecord
       :admin,
     ],
 
-    another_role_key: [
-    ],
+    another_role_key: [],
 
     # this isn't an actual role in the database, it represents the roles that can be assigned by any user.
     all: [
@@ -49,7 +46,6 @@ class Role < ApplicationRecord
   # 🚅 add delegations above.
 
   # 🚅 add methods above.
-
 
   # 🚫 DEFAULT BULLET TRAIN MEMBERSHIP FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
