@@ -27,68 +27,68 @@ class Scaffolding::Transformer
   METHODS_HOOK = "# 🚅 add methods above."
 
   def encode_double_replacement_fix(string)
-    string.split('').join('~!@BT@!~')
+    string.split("").join("~!@BT@!~")
   end
 
   def decode_double_replacement_fix(string)
-    string.gsub('~!@BT@!~', '')
+    string.gsub("~!@BT@!~", "")
   end
 
   def transform_string(string)
     [
 
       # full class name plural.
-      'Scaffolding::AbsolutelyAbstract::CreativeConcepts',
-      'Scaffolding::CompletelyConcrete::TangibleThings',
-      'scaffolding/absolutely_abstract/creative_concepts',
-      'scaffolding/completely_concrete/tangible_things',
-      'scaffolding/completely_concrete/_tangible_things',
-      'scaffolding_absolutely_abstract_creative_concepts',
-      'scaffolding_completely_concrete_tangible_things',
-      'scaffolding-absolutely-abstract-creative-concepts',
-      'scaffolding-completely-concrete-tangible-things',
+      "Scaffolding::AbsolutelyAbstract::CreativeConcepts",
+      "Scaffolding::CompletelyConcrete::TangibleThings",
+      "scaffolding/absolutely_abstract/creative_concepts",
+      "scaffolding/completely_concrete/tangible_things",
+      "scaffolding/completely_concrete/_tangible_things",
+      "scaffolding_absolutely_abstract_creative_concepts",
+      "scaffolding_completely_concrete_tangible_things",
+      "scaffolding-absolutely-abstract-creative-concepts",
+      "scaffolding-completely-concrete-tangible-things",
 
       # full class name singular.
-      'Scaffolding::AbsolutelyAbstract::CreativeConcept',
-      'Scaffolding::CompletelyConcrete::TangibleThing',
-      'scaffolding/absolutely_abstract/creative_concept',
-      'scaffolding/completely_concrete/tangible_thing',
-      'scaffolding_absolutely_abstract_creative_concept',
-      'scaffolding_completely_concrete_tangible_thing',
-      'scaffolding-absolutely-abstract-creative-concept',
-      'scaffolding-completely-concrete-tangible-thing',
+      "Scaffolding::AbsolutelyAbstract::CreativeConcept",
+      "Scaffolding::CompletelyConcrete::TangibleThing",
+      "scaffolding/absolutely_abstract/creative_concept",
+      "scaffolding/completely_concrete/tangible_thing",
+      "scaffolding_absolutely_abstract_creative_concept",
+      "scaffolding_completely_concrete_tangible_thing",
+      "scaffolding-absolutely-abstract-creative-concept",
+      "scaffolding-completely-concrete-tangible-thing",
 
       # class name in context plural.
-      'absolutely_abstract_creative_concepts',
-      'completely_concrete_tangible_things',
-      'absolutely_abstract/creative_concepts',
-      'completely_concrete/tangible_things',
-      'absolutely-abstract-creative-concepts',
-      'completely-concrete-tangible-things',
+      "absolutely_abstract_creative_concepts",
+      "completely_concrete_tangible_things",
+      "absolutely_abstract/creative_concepts",
+      "completely_concrete/tangible_things",
+      "absolutely-abstract-creative-concepts",
+      "completely-concrete-tangible-things",
 
       # class name in context singular.
-      'absolutely_abstract_creative_concept',
-      'completely_concrete_tangible_thing',
-      'absolutely_abstract/creative_concept',
-      'completely_concrete/tangible_thing',
-      'absolutely-abstract-creative-concept',
-      'completely-concrete-tangible-thing',
+      "absolutely_abstract_creative_concept",
+      "completely_concrete_tangible_thing",
+      "absolutely_abstract/creative_concept",
+      "completely_concrete/tangible_thing",
+      "absolutely-abstract-creative-concept",
+      "completely-concrete-tangible-thing",
 
       # just class name singular.
-      'creative_concepts',
-      'tangible_things',
-      'creative-concepts',
-      'tangible-things',
-      'Creative Concepts',
-      'Tangible Things',
+      "creative_concepts",
+      "tangible_things",
+      "creative-concepts",
+      "tangible-things",
+      "Creative Concepts",
+      "Tangible Things",
 
       # just class name plural.
-      'creative_concept',
-      'tangible_thing',
-      'creative-concept',
-      'tangible-thing',
-      'Creative Concept',
-      'Tangible Thing',
+      "creative_concept",
+      "tangible_thing",
+      "creative-concept",
+      "tangible-thing",
+      "Creative Concept",
+      "Tangible Thing"
 
     ].each do |needle|
       string = string.gsub(needle, encode_double_replacement_fix(class_names_transformer.replacement_for(needle)))
@@ -109,13 +109,12 @@ class Scaffolding::Transformer
     gathered_lines_for_repeating = nil
 
     File.open(file).each_line do |line|
-
       if line.include?("# 🚅 skip when scaffolding.")
         next
       end
 
       if line.include?("# 🚅 skip this section if resource is nested directly under team.")
-        skipping = true if parent == 'Team'
+        skipping = true if parent == "Team"
         next
       end
 
@@ -165,7 +164,7 @@ class Scaffolding::Transformer
         # only transform it if it doesn't have the lock emoji.
         if line.include?("🔒")
           # remove any comments that start with a lock.
-          line.gsub!(/\s+?#\s+🔒.*/, '')
+          line.gsub!(/\s+?#\s+🔒.*/, "")
         else
           line = transform_string(line)
         end
@@ -173,10 +172,9 @@ class Scaffolding::Transformer
         transformed_file_content << line
 
       end
-
     end
 
-    return transformed_file_content.join
+    transformed_file_content.join
   end
 
   def scaffold_file(file)
@@ -197,7 +195,11 @@ class Scaffolding::Transformer
 
   def scaffold_directory(directory)
     # TODO rescue whatever the actual error is here.
-    Dir.mkdir(transform_string(directory)) rescue nil
+    begin
+      Dir.mkdir(transform_string(directory))
+    rescue
+      nil
+    end
     Dir.foreach(directory) do |file|
       file = "#{directory}/#{file}"
       unless File.directory?(file)
@@ -207,7 +209,6 @@ class Scaffolding::Transformer
   end
 
   def add_line_to_file(file, content, after, options = {})
-
     increase_indent = options[:increase_indent]
     add_before = options[:add_before]
     add_after = options[:add_after]
@@ -226,7 +227,7 @@ class Scaffolding::Transformer
       new_target_file_content = []
 
       target_file_content.split("\n").each do |line|
-        if (options[:exact_match] ? line == transformed_after : line.match(/#{Regexp.escape(transformed_after)}\s*$/))
+        if options[:exact_match] ? line == transformed_after : line.match(/#{Regexp.escape(transformed_after)}\s*$/)
 
           if add_before
             new_target_file_content << "#{line} #{add_before}"
@@ -237,7 +238,7 @@ class Scaffolding::Transformer
           end
 
           # get leading whitespace.
-          line.match(/^(\s*).*#{Regexp.escape(transformed_after)}.*/)
+          line =~ /^(\s*).*#{Regexp.escape(transformed_after)}.*/
           leading_whitespace = $1
           new_target_file_content << "#{leading_whitespace}#{"  " if increase_indent}#{transformed_content}"
 
@@ -252,7 +253,6 @@ class Scaffolding::Transformer
           new_target_file_content << line
 
         end
-
       end
 
       puts "Updating '#{transformed_file_name}'."
@@ -262,7 +262,6 @@ class Scaffolding::Transformer
       end
 
     end
-
   end
 
   def scaffold_add_line_to_file(file, content, after, options = {})
@@ -299,7 +298,6 @@ class Scaffolding::Transformer
   # the abilities for admins only. (this happens when building an ability line for a resources that doesn't ultimately
   # belong to a Team or a User.)
   def build_ability_line(class_names = nil)
-
     # e.g. ['Conversations::Message', 'Conversation']
     if class_names
       # e.g. 'Conversations::Message'
@@ -316,10 +314,10 @@ class Scaffolding::Transformer
     admin_ability_line = false
 
     case working_parents.last
-    when 'User'
+    when "User"
       working_parents.pop
       ability_line = "user_id: user.id"
-    when 'Team'
+    when "Team"
       working_parents.pop
       ability_line = "team_id: user.team_ids"
     else
@@ -335,11 +333,11 @@ class Scaffolding::Transformer
     end
 
     # e.g. "can :manage, Deliverable, phase: {project: {team_id: user.team_ids}}"
-    return ["can :manage, #{class_name}, #{ability_line}", false]
+    ["can :manage, #{class_name}, #{ability_line}", false]
   end
 
   def build_conversation_ability_line
-    build_ability_line(['Conversations::Message', 'Conversation'])
+    build_ability_line(["Conversations::Message", "Conversation"])
   end
 
   def build_factory_setup
@@ -350,7 +348,7 @@ class Scaffolding::Transformer
 
     setup_lines = []
 
-    unless current_parent == 'Team' || current_parent == 'User'
+    unless current_parent == "Team" || current_parent == "User"
       setup_lines << current_transformer.transform_string("@absolutely_abstract_creative_concept = create(:scaffolding_absolutely_abstract_creative_concept)")
     end
 
@@ -372,7 +370,7 @@ class Scaffolding::Transformer
 
     setup_lines << current_transformer.transform_string("@tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, #{previous_assignment})")
 
-    return setup_lines
+    setup_lines
   end
 
   def replace_in_file(file, before, after)
@@ -395,11 +393,11 @@ class Scaffolding::Transformer
 
     spacer = "  "
     indentation = spacer * 3
-    namespace_elements = child.underscore.pluralize.split('/')
+    namespace_elements = child.underscore.pluralize.split("/")
     last_element = namespace_elements.shift
-    lines_to_add = [last_element + ':']
+    lines_to_add = [last_element + ":"]
     namespace_elements.map do |namespace_element|
-      lines_to_add << indentation + namespace_element + ':'
+      lines_to_add << indentation + namespace_element + ":"
       last_element = namespace_element
       indentation += spacer
     end
@@ -419,20 +417,19 @@ class Scaffolding::Transformer
   end
 
   def add_attributes_to_various_views(attributes, local_options = {})
-
     sql_type_to_field_type_mapping = {
       # 'binary' => '',
-      'boolean' => 'buttons',
-      'date' => 'date_field',
-      'datetime' => 'date_and_time_field',
-      'decimal' => 'text_field',
-      'float' => 'text_field',
-      'integer' => 'text_field',
-      'bigint' => 'text_field',
+      "boolean" => "buttons",
+      "date" => "date_field",
+      "datetime" => "date_and_time_field",
+      "decimal" => "text_field",
+      "float" => "text_field",
+      "integer" => "text_field",
+      "bigint" => "text_field",
       # 'primary_key' => '',
       # 'references' => '',
-      'string' => 'text_field',
-      'text' => 'text_area',
+      "string" => "text_field",
+      "text" => "text_area"
       # 'time' => '',
       # 'timestamp' => '',
     }
@@ -441,24 +438,24 @@ class Scaffolding::Transformer
     attributes.each_with_index do |attribute, index|
       first_table_cell = index == 0 && local_options[:type] == :crud
 
-      parts = attribute.split(':')
+      parts = attribute.split(":")
       name = parts.shift
-      type = parts.join(':')
+      type = parts.join(":")
 
       # extract any options they passed in with the field.
       type, attribute_options = type.scan(/^(.*)\[(.*)\]/).first || type
 
       # create a hash of the options.
       attribute_options = if attribute_options
-        attribute_options.split(',').map do |s|
-          option_name, option_value = s.split('=')
+        attribute_options.split(",").map do |s|
+          option_name, option_value = s.split("=")
           [option_name.to_sym, option_value || true]
         end.to_h
       else
         {}
       end
 
-      attribute_options[:label] ||= 'label_string'
+      attribute_options[:label] ||= "label_string"
 
       # if this is the first attribute of a newly scaffolded model, that field is required.
       if local_options[:type] == :crud && index == 0
@@ -466,35 +463,35 @@ class Scaffolding::Transformer
       end
 
       if sql_type_to_field_type_mapping[type]
-        if type == 'boolean'
+        if type == "boolean"
           boolean_buttons = true
           buttons_options = {
-            'true' => '"Yes"',
-            'false' => '"No"',
+            "true" => '"Yes"',
+            "false" => '"No"'
           }
         end
         type = sql_type_to_field_type_mapping[type]
       end
 
       if name.match?(/_id$/) && !attribute_options&.key(:vanilla)
-        name_without_id = name.gsub(/_id$/, '')
-        field_content = <<-RUBY
-def valid_#{name_without_id.pluralize}
-    raise "please review and implement `valid_#{name_without_id.pluralize}` in `app/models/scaffolding/completely_concrete/tangible_thing.rb`."
-    # please specify what objects should be considered valid for assigning to `#{name_without_id}`.
-    # this will be used to populate any form field options and for validation below.
-    # the resulting code should probably look something like `team.collection_name`.
-  end
-
-  def validate_#{name_without_id}
-    if #{name}.present?
-      # don't allow users to assign the ids of other teams' or users' resources to this attribute.
-      unless valid_#{name_without_id.pluralize}.ids.include?(#{name})
-        errors.add(:#{name}, :invalid)
-      end
-    end
-  end
-RUBY
+        name_without_id = name.gsub(/_id$/, "")
+        field_content = <<~RUBY
+          def valid_#{name_without_id.pluralize}
+              raise "please review and implement `valid_#{name_without_id.pluralize}` in `app/models/scaffolding/completely_concrete/tangible_thing.rb`."
+              # please specify what objects should be considered valid for assigning to `#{name_without_id}`.
+              # this will be used to populate any form field options and for validation below.
+              # the resulting code should probably look something like `team.collection_name`.
+            end
+          
+            def validate_#{name_without_id}
+              if #{name}.present?
+                # don't allow users to assign the ids of other teams' or users' resources to this attribute.
+                unless valid_#{name_without_id.pluralize}.ids.include?(#{name})
+                  errors.add(:#{name}, :invalid)
+                end
+              end
+            end
+        RUBY
 
         file_name = "./app/models/scaffolding/completely_concrete/tangible_thing.rb"
         scaffold_add_line_to_file(file_name, field_content, METHODS_HOOK, prepend: true)
@@ -502,15 +499,15 @@ RUBY
         add_additional_step :yellow, transform_string("You'll need to implement the `valid_#{name_without_id.pluralize}` method of `Scaffolding::CompletelyConcrete::TangibleThing` in `./app/models/scaffolding/completely_concrete/tangible_thing.rb`. This is the method that will be used to populate the `#{type}` field and also validate that users aren't trying to exploit multitenancy.")
 
       elsif name.match?(/_ids$/) && !attribute_options&.key(:vanilla)
-        collection_name = name.gsub(/_ids$/, '').pluralize
-        field_content = <<-RUBY
-def valid_#{collection_name}
-    raise "please review and implement `valid_#{collection_name}` in `scaffolding/completely_concrete/tangible_thing.rb`."
-    # please specify what objects should be considered valid for assigning to `#{collection_name}`.
-    # this will be used to any form field options. the resulting code should probably look something
-    # like `team.collection_name`.
-  end
-RUBY
+        collection_name = name.gsub(/_ids$/, "").pluralize
+        field_content = <<~RUBY
+          def valid_#{collection_name}
+              raise "please review and implement `valid_#{collection_name}` in `scaffolding/completely_concrete/tangible_thing.rb`."
+              # please specify what objects should be considered valid for assigning to `#{collection_name}`.
+              # this will be used to any form field options. the resulting code should probably look something
+              # like `team.collection_name`.
+            end
+        RUBY
 
         file_name = "./app/models/scaffolding/completely_concrete/tangible_thing.rb"
         scaffold_add_line_to_file(file_name, field_content, METHODS_HOOK, prepend: true)
@@ -524,9 +521,9 @@ RUBY
       end
       field_options = []
       if local_options[:type] == :crud && index == 0
-        field_options << 'autofocus: true'
+        field_options << "autofocus: true"
       end
-      if name.match?(/_id$/) && ['select', 'super_select'].include?(type)
+      if name.match?(/_id$/) && ["select", "super_select"].include?(type)
         field_options << "include_blank: t('.fields.#{name}.placeholder')"
         add_additional_step :yellow, transform_string("We've added a reference to a `placeholder` to the form for the select or super_select field, but unfortunately earlier versions of the scaffolded locales Yaml don't include a reference to `fields: *fields` under `form`. Please add it, otherwise your form won't be able to locate the appropriate placeholder label.")
       end
@@ -545,13 +542,13 @@ RUBY
         end
       end
 
-      short = attribute_options[:class_name].underscore.split('/').last if options_need_defining
+      short = attribute_options[:class_name].underscore.split("/").last if options_need_defining
 
       choices = case type
-      when 'select', 'super_select'
-        'choices'
-      when 'buttons'
-        'options'
+      when "select", "super_select"
+        "choices"
+      when "buttons"
+        "options"
       end
 
       valid_values = if name.match?(/_id$/)
@@ -569,7 +566,7 @@ RUBY
       end
 
       if field_options.any?
-        field_attributes[:options] = "{#{field_options.join(', ')}}"
+        field_attributes[:options] = "{#{field_options.join(", ")}}"
       end
 
       if options_need_defining
@@ -581,58 +578,58 @@ RUBY
         end
       end
 
-      field_content = "<%= render 'shared/fields/#{type}', #{field_attributes.map { |key, value| "#{key}: #{value}" }.join(", ") } %>"
+      field_content = "<%= render 'shared/fields/#{type}', #{field_attributes.map { |key, value| "#{key}: #{value}" }.join(", ")} %>"
 
       scaffold_add_line_to_file(file_name, field_content, ERB_NEW_FIELDS_HOOK, prepend: true)
 
       field_content = if name.match?(/_id$/)
-        name_without_id = name.gsub(/_id$/, '')
-        <<-ERB
-<% if @tangible_thing.#{name_without_id} %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= link_to @tangible_thing.#{name_without_id}.#{attribute_options[:label]}, [:account, @tangible_thing.#{name_without_id}] %>
-          </div>
-        </div>
-      <% end %>
-ERB
+        name_without_id = name.gsub(/_id$/, "")
+        <<~ERB
+          <% if @tangible_thing.#{name_without_id} %>
+                  <div class="form-group">
+                    <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
+                    <div>
+                      <%= link_to @tangible_thing.#{name_without_id}.#{attribute_options[:label]}, [:account, @tangible_thing.#{name_without_id}] %>
+                    </div>
+                  </div>
+                <% end %>
+        ERB
       elsif name.match?(/_ids$/)
-        name_without_ids = name.gsub('_ids', '')
-        <<-ERB
-<% if @tangible_thing.#{name_without_ids.pluralize}.any? %>
-        <div class="form-group">
-          <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
-          <div>
-            <%= @tangible_thing.#{name_without_ids.pluralize}.map { |#{name_without_ids}| link_to #{name_without_ids}.#{attribute_options[:label]}, [:account, #{name_without_ids}] }.to_sentence.html_safe %>
-          </div>
-        </div>
-      <% end %>
-ERB
+        name_without_ids = name.gsub("_ids", "")
+        <<~ERB
+          <% if @tangible_thing.#{name_without_ids.pluralize}.any? %>
+                  <div class="form-group">
+                    <label class="col-form-label"><%= t('.fields.#{name}.heading') %></label>
+                    <div>
+                      <%= @tangible_thing.#{name_without_ids.pluralize}.map { |#{name_without_ids}| link_to #{name_without_ids}.#{attribute_options[:label]}, [:account, #{name_without_ids}] }.to_sentence.html_safe %>
+                    </div>
+                  </div>
+                <% end %>
+        ERB
       end
 
       # field on the show view.
       attribute_partial ||= case type
-      when 'trix_editor', 'ckeditor'
-        'html'
-      when 'buttons', 'select', 'super_select'
+      when "trix_editor", "ckeditor"
+        "html"
+      when "buttons", "select", "super_select"
         if boolean_buttons
-          'boolean'
+          "boolean"
         else
-          'option'
+          "option"
         end
-      when 'cloudinary_image'
-        'image'
-      when 'phone_field'
-        'phone_number'
-      when 'date_field'
-        'date'
-      when 'date_and_time_field'
-        'date_and_time'
-      when 'email_field'
-        'email'
+      when "cloudinary_image"
+        "image"
+      when "phone_field"
+        "phone_number"
+      when "date_field"
+        "date"
+      when "date_and_time_field"
+        "date_and_time"
+      when "email_field"
+        "email"
       else
-        'text'
+        "text"
       end
 
       # this gets stripped and is one line, so indentation isn't a problem.
@@ -643,14 +640,14 @@ ERB
       scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/show.html.erb", field_content.strip, ERB_NEW_FIELDS_HOOK, prepend: true)
 
       # field on the index table.
-      unless options['skip-table']
-        unless ['trix_editor', 'ckeditor', 'text_area'].include?(type)
+      unless options["skip-table"]
+        unless ["trix_editor", "ckeditor", "text_area"].include?(type)
 
           # table header.
           cell_attributes = boolean_buttons ? ' class="text-center"' : nil
           field_content = "<th#{cell_attributes}><%= t('.fields.#{name}.heading') %></th>"
 
-          unless ['Team', 'User'].include?(child)
+          unless ["Team", "User"].include?(child)
             scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb", field_content, "<%# 🚅 super scaffolding will insert new field headers above this line. %>", prepend: true)
           end
 
@@ -659,7 +656,7 @@ ERB
 
           # are there any special options to pass into the attribute partial because we're displaying this in a table?
           case type
-          when 'cloudinary_image'
+          when "cloudinary_image"
             options << "height: 200"
           end
 
@@ -667,14 +664,14 @@ ERB
             options << "url: [:account, tangible_thing]"
           end
 
-          name_without_id = name.gsub(/_id$/, '')
+          name_without_id = name.gsub(/_id$/, "")
 
           # this gets stripped and is one line, so indentation isn't a problem.
           field_content = <<-ERB
-            <td#{cell_attributes}><%= render 'shared/attributes/#{attribute_partial}', attribute: :#{name_without_id}#{", #{options.join(', ')}" if options.any?} %></td>
+            <td#{cell_attributes}><%= render 'shared/attributes/#{attribute_partial}', attribute: :#{name_without_id}#{", #{options.join(", ")}" if options.any?} %></td>
           ERB
 
-          unless ['Team', 'User'].include?(child)
+          unless ["Team", "User"].include?(child)
             scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb", field_content.strip, ERB_NEW_FIELDS_HOOK, prepend: true)
           end
         end
@@ -682,62 +679,62 @@ ERB
 
       title_case = if name.match?(/_ids$/)
         # user_ids should be 'Users'
-        name.gsub(/_ids$/, '').humanize.titlecase.pluralize
+        name.gsub(/_ids$/, "").humanize.titlecase.pluralize
       else
         name.humanize.titlecase
       end
 
-# localizations for this field.
+      # localizations for this field.
 
-field_content = nil
+      field_content = nil
 
-if name.match?(/_id$/) &&
-  if ['select', 'super_select'].include?(type)
-      placeholder_text = if attribute_options[:required]
-        "Select a #{attribute_options[:class_name].split('::').last.titlecase}"
-      else
-        "None"
+      if name.match?(/_id$/) &&
+          if ["select", "super_select"].include?(type)
+            placeholder_text = if attribute_options[:required]
+              "Select a #{attribute_options[:class_name].split("::").last.titlecase}"
+            else
+              "None"
+            end
+
+            field_content = <<~YAML
+              #{name}:
+                      _: &#{name} #{title_case}
+                      label: *#{name}
+                      heading: *#{name}
+                      placeholder: #{placeholder_text}
+            YAML
+          end
+      elsif !name.match?(/_ids$/)
+        if ["buttons", "select", "super_select"].include?(type)
+
+          yaml_options = if boolean_buttons
+            # this does the same output as the yaml right below.
+            buttons_options.map { |key, value| "#{key}: #{value}" }.join("\n          ")
+          else
+            <<~YAML
+              one: One
+                        two: Two
+                        three: Three
+            YAML
+          end
+
+          field_content = <<~YAML
+            #{name}:
+                    _: &#{name} #{title_case}
+                    label: *#{name}
+                    heading: *#{name}
+                    options:
+                      #{yaml_options}
+          YAML
+        end
       end
 
-      field_content = <<-YAML
-#{name}:
-        _: &#{name} #{title_case}
-        label: *#{name}
-        heading: *#{name}
-        placeholder: #{placeholder_text}
-YAML
-  end
-elsif !name.match?(/_ids$/)
-  if ['buttons', 'select', 'super_select'].include?(type)
-
-      yaml_options = if boolean_buttons
-        # this does the same output as the yaml right below.
-        buttons_options.map { |key, value| "#{key}: #{value}" }.join("\n          ")
-      else
-        <<-YAML
-one: One
-          two: Two
-          three: Three
-YAML
-      end
-
-      field_content = <<-YAML
-#{name}:
-        _: &#{name} #{title_case}
-        label: *#{name}
-        heading: *#{name}
-        options:
-          #{yaml_options}
-YAML
-  end
-end
-
-field_content ||= <<-YAML
-#{name}:
-        _: &#{name} #{title_case}
-        label: *#{name}
-        heading: *#{name}
-YAML
+      field_content ||= <<~YAML
+        #{name}:
+                _: &#{name} #{title_case}
+                label: *#{name}
+                heading: *#{name}
+      YAML
 
       scaffold_add_line_to_file("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml", field_content, RUBY_NEW_FIELDS_HOOK, prepend: true)
 
@@ -746,7 +743,7 @@ YAML
 
       # add attributes to strong params.
       [
-        "./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb",
+        "./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb"
         # "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller.rb",
       ].each do |file|
         if name.match?(/_ids$/)
@@ -757,11 +754,11 @@ YAML
       end
 
       case type
-      when 'date_field'
+      when "date_field"
         scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", "assign_date(strong_params, :#{name})", RUBY_NEW_FIELDS_PROCESSING_HOOK, prepend: true)
-      when 'date_and_time_field'
+      when "date_and_time_field"
         scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", "assign_date_and_time(strong_params, :#{name})", RUBY_NEW_FIELDS_PROCESSING_HOOK, prepend: true)
-      when 'buttons'
+      when "buttons"
         if boolean_buttons
           scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", "assign_boolean(strong_params, :#{name})", RUBY_NEW_FIELDS_PROCESSING_HOOK, prepend: true)
         end
@@ -769,7 +766,7 @@ YAML
 
       [
         "./app/views/account/scaffolding/completely_concrete/tangible_things/_tangible_thing.json.jbuilder",
-        "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb",
+        "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb"
       ].each do |file|
         scaffold_add_line_to_file(file, ":#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
       end
@@ -777,14 +774,12 @@ YAML
       # scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "assert_equal tangible_thing_attributes['#{name.gsub('_', '-')}'], tangible_thing.#{name}", RUBY_NEW_FIELDS_HOOK, prepend: true)
 
       attribute_assignment = case type
-      when 'text_field', 'password_field', 'text_area'
+      when "text_field", "password_field", "text_area"
         "'Alternative String Value'"
-      when 'email_field'
+      when "email_field"
         "'another.email@test.com'"
-      when 'phone_field'
+      when "phone_field"
         "'+19053871234'"
-      else
-        nil
       end
 
       if attribute_assignment
@@ -798,13 +793,13 @@ YAML
       replace_in_file(transform_string("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb"), " # this can be removed after scaffolding.", "")
 
       if name.match?(/_id$/) && !attribute_options&.key(:vanilla)
-        name_without_id = name.gsub(/_id$/, '')
+        name_without_id = name.gsub(/_id$/, "")
         unless attribute_options[:class_name]
           attribute_options[:class_name] = name_without_id.classify
         end
 
         file_name = "app/models/#{attribute_options[:class_name].underscore}.rb"
-        unless File.exists?(file_name)
+        unless File.exist?(file_name)
           raise "You'll need to specify a `class_name` option for `#{name}` because there is no `#{attribute_options[:class_name].classify}` model defined in `#{file_name}`. Try again with `#{name}:#{type}[class_name=SomeClassName]`."
         end
 
@@ -817,7 +812,7 @@ YAML
         unless attribute_options[:required]
 
           if migration_file_name
-            replace_in_file(migration_file_name, 'null: false', 'null: true')
+            replace_in_file(migration_file_name, "null: false", "null: true")
             modified_migration = true
           else
             add_additional_step :yellow, "We would have expected there to be a migration that defined `#{expected_reference}`, but we didn't find one. Where was the reference added to this model? It's _probably_ the original creation of the table. Either way, you need to rollback, change 'null: false' to 'null: true' for this column, and re-run the migration (unless, of course, that attribute _is_ required, then you need to add a validation on the model)."
@@ -825,17 +820,17 @@ YAML
 
         end
 
-        class_name_matches = name_without_id.tableize == attribute_options[:class_name].tableize.gsub('/', '_')
+        class_name_matches = name_without_id.tableize == attribute_options[:class_name].tableize.tr("/", "_")
 
         # unless the table name matches the association name.
         unless class_name_matches
 
           if migration_file_name
-            replace_in_file(migration_file_name, 'foreign_key: true', "foreign_key: {to_table: '#{attribute_options[:class_name].tableize.gsub('/', '_')}'}")
+            replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}")
             # TODO also solve the 60 character long index limitation.
             modified_migration = true
           else
-            add_additional_step :yellow, "We would have expected there to be a migration that defined `#{expected_reference}`, but we didn't find one. Where was the reference added to this model? It's _probably_ the original creation of the table. Either way, you need to rollback, change \"foreign_key: true\" to \"foreign_key: {to_table: '#{attribute_options[:class_name].tableize.gsub('/', '_')}'}\" for this column, and re-run the migration."
+            add_additional_step :yellow, "We would have expected there to be a migration that defined `#{expected_reference}`, but we didn't find one. Where was the reference added to this model? It's _probably_ the original creation of the table. Either way, you need to rollback, change \"foreign_key: true\" to \"foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}\" for this column, and re-run the migration."
           end
 
         end
@@ -854,17 +849,13 @@ YAML
         if modified_migration
           add_additional_step :yellow, "If you've already run the migration in `#{migration_file_name}`, you'll need to roll back and run it again."
         end
-      else
+      elsif attribute_options[:required]
 
         # if it's not a reference, then we need to add a validation for required fields specifically.
-        if attribute_options[:required]
-          scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "validates :#{name}, presence: true", VALIDATIONS_HOOK, prepend: true)
-        end
+        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "validates :#{name}, presence: true", VALIDATIONS_HOOK, prepend: true)
 
       end
-
     end
-
   end
 
   def add_additional_step(color, message)
@@ -910,7 +901,7 @@ YAML
       "./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml",
       # "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller.rb",
       # "./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb",
-      "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb",
+      "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb"
       # "./app/views/public/home/api/scaffolding/completely_concrete/_tangible_things.html.erb",
     ].each do |name|
       if File.directory?(name)
@@ -931,7 +922,7 @@ YAML
         raise "No migration file seems to exist for creating the table `#{class_names_transformer.table_name}`"
       end
 
-      replace_in_file(migration_file_name, 'foreign_key: true', "foreign_key: {to_table: '#{current_transformer.parent_table_name}'}")
+      replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{current_transformer.parent_table_name}'}")
       modified_migration = true
     end
 
@@ -961,15 +952,15 @@ YAML
     # scaffold_replace_line_in_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
 
     # add children to the show page of their parent.
-    unless parent == 'None'
-      scaffold_add_line_to_file("./app/views/account/scaffolding/absolutely_abstract/creative_concepts/show.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @creative_concept.completely_concrete_tangible_things#{'.in_sort_order' if options['sortable']}, hide_back: true %>", "<%# 🚅 super scaffolding will insert new children above this line. %>", prepend: true)
+    unless parent == "None"
+      scaffold_add_line_to_file("./app/views/account/scaffolding/absolutely_abstract/creative_concepts/show.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @creative_concept.completely_concrete_tangible_things#{".in_sort_order" if options["sortable"]}, hide_back: true %>", "<%# 🚅 super scaffolding will insert new children above this line. %>", prepend: true)
     end
 
-before_scaffolding_hooks = <<-RUBY
-# 🚅 add concerns above.
-RUBY
+    before_scaffolding_hooks = <<~RUBY
+      # 🚅 add concerns above.
+    RUBY
 
-after_scaffolding_hooks = <<-RUBY
+    after_scaffolding_hooks = <<-RUBY
   #{BELONGS_TO_HOOK}
 
   #{HAS_MANY_HOOK}
@@ -985,7 +976,7 @@ after_scaffolding_hooks = <<-RUBY
   # 🚅 add delegations above.
 
   #{METHODS_HOOK}
-RUBY
+    RUBY
 
     # add scaffolding hooks to the model.
     unless File.readlines(transform_string("./app/models/scaffolding/completely_concrete/tangible_thing.rb")).join.include?(CONCERNS_HOOK)
@@ -999,7 +990,7 @@ RUBY
     add_locale_helper_export_fix
 
     # add sortability.
-    if options['sortable']
+    if options["sortable"]
       scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "def collection\n    absolutely_abstract_creative_concept.completely_concrete_tangible_things\n  end\n", METHODS_HOOK, prepend: true)
       scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "include Sprinkles::Sortable\n", CONCERNS_HOOK, prepend: true)
       scaffold_replace_line_in_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb", transform_string("<tbody data-reorder=\"<%= url_for [:reorder, :account, context, collection] %>\">"), "<tbody>")
@@ -1013,9 +1004,9 @@ RUBY
     # scaffold_replace_line_in_file("./test/factories/scaffolding/completely_concrete/tangible_things.rb", transform_string("association :team"), transform_string("team nil"))
 
     # apply routes.
-    routes_manipulator = Scaffolding::RoutesFileManipulator.new('config/routes.rb', child, parent)
+    routes_manipulator = Scaffolding::RoutesFileManipulator.new("config/routes.rb", child, parent)
     begin
-      routes_manipulator.apply(['account'])
+      routes_manipulator.apply(["account"])
     rescue
       add_additional_step :yellow, "We weren't able to automatically add your `account` routes for you. In theory this should be very rare, so if you could reach out on Slack, you could probably provide context that will help us fix whatever the problem was. In the meantime, to add the routes manually, we've got a guide at https://blog.bullettrain.co/nested-namespaced-rails-routing-examples/ ."
     end
@@ -1028,10 +1019,10 @@ RUBY
 
     routes_manipulator.write
 
-    if parent == 'Team' || parent == 'None'
+    if parent == "Team" || parent == "None"
       icon_name = nil
-      if options['sidebar'].present?
-        icon_name = options['sidebar']
+      if options["sidebar"].present?
+        icon_name = options["sidebar"]
       else
         puts ""
         puts "Hey, models that are scoped directly off of a Team (or nothing) are eligible to be added to the sidebar. Do you want to add this resource to the sidebar menu? (y/N)"
@@ -1046,13 +1037,13 @@ RUBY
           puts "Did you find an icon you wanted to use? Enter the name here or hit enter to just use the puzzle piece:"
           icon_name = STDIN.gets.chomp
           puts ""
-          unless icon_name.length > 0 || icon_name.downcase == 'y'
-            icon_name = 'fal fa-puzzle-piece'
+          unless icon_name.length > 0 || icon_name.downcase == "y"
+            icon_name = "fal fa-puzzle-piece"
           end
         end
       end
       if icon_name.present?
-        replace_in_file(transform_string("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml"), 'fal fa-puzzle-piece', icon_name)
+        replace_in_file(transform_string("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml"), "fal fa-puzzle-piece", icon_name)
         scaffold_add_line_to_file("./app/views/account/shared/_menu.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/menu_item' %>", "<% # added by super scaffolding. %>")
       end
     end
@@ -1134,5 +1125,4 @@ RUBY
     #   end
     # end
   end
-
 end

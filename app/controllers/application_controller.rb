@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
 
   protect_from_forgery with: :exception
-  skip_before_action :verify_authenticity_token, if: -> { controller_name == 'sessions' && action_name == 'create' }
+  skip_before_action :verify_authenticity_token, if: -> { controller_name == "sessions" && action_name == "create" }
 
   # this is an ugly hack, but it's what is recommended at
   # https://github.com/plataformatec/devise/wiki/How-To:-Create-custom-layouts
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_raven_context
-    if ENV['SENTRY_DSN']
+    if ENV["SENTRY_DSN"]
       Raven.user_context(id: current_user.id, email: current_user.email) if current_user.present?
       Raven.extra_context(params: params.to_unsafe_h, url: request.url)
     end
@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   def enforce_invitation_only
     if invitation_only?
       unless helpers.invited?
-        redirect_to [:account, :teams], notice: t('teams.notifications.invitation_only')
+        redirect_to [:account, :teams], notice: t("teams.notifications.invitation_only")
       end
     end
   end
@@ -84,7 +84,7 @@ class ApplicationController < ActionController::Base
     attribute = attribute.to_s
     if strong_params.keys.include?(attribute)
       # filter out the placeholder inputs that arrive along with the form submission.
-      strong_params[attribute] = strong_params[attribute].reject { |value| value == '0' }
+      strong_params[attribute] = strong_params[attribute].reject { |value| value == "0" }
     end
   end
 
@@ -114,5 +114,4 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
 end

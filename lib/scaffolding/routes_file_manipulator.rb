@@ -9,11 +9,11 @@ class Scaffolding::RoutesFileManipulator
   end
 
   def child_parts
-    @child_parts ||= child.underscore.pluralize.split('/')
+    @child_parts ||= child.underscore.pluralize.split("/")
   end
 
   def parent_parts
-    @parent_parts ||= parent.underscore.pluralize.split('/')
+    @parent_parts ||= parent.underscore.pluralize.split("/")
   end
 
   def common_namespaces
@@ -79,7 +79,9 @@ class Scaffolding::RoutesFileManipulator
   end
 
   def indentation_of(line_number)
-    lines[line_number].match(/^( +)/)[1] rescue nil
+    lines[line_number].match(/^( +)/)[1]
+  rescue
+    nil
   end
 
   def find_block_parent(starting_line_number)
@@ -98,7 +100,7 @@ class Scaffolding::RoutesFileManipulator
     return nil unless indentation_of(starting_line_number)
     lines.each_with_index do |line, line_number|
       next unless line_number > starting_line_number
-      if line.match(/^#{indentation_of(starting_line_number)}end\s+/)
+      if /^#{indentation_of(starting_line_number)}end\s+/.match?(line)
         return line_number
       end
     end
@@ -115,7 +117,7 @@ class Scaffolding::RoutesFileManipulator
 
   def insert_after(new_lines, line_number, options = {})
     options[:indent] ||= false
-    before = lines[0..(line_number)]
+    before = lines[0..line_number]
     new_lines = new_lines.map { |line| (indentation_of(line_number) + (options[:indent] ? "  " : "") + line).gsub(/\s+$/, "") + "\n" }
     after = lines[(line_number + 1)..-1]
     self.lines = before + new_lines + (options[:append_newline] ? ["\n"] : []) + after
@@ -128,7 +130,7 @@ class Scaffolding::RoutesFileManipulator
       insertion_point = find_block_end(block_start)
       insert_before(new_lines, insertion_point, indent: true, prepend_newline: (insertion_point > block_start + 1))
     else
-      raise "we weren't able to insert the following lines into the namespace block for #{namespaces.join(' -> ')}:\n\n#{new_lines.join("\n")}"
+      raise "we weren't able to insert the following lines into the namespace block for #{namespaces.join(" -> ")}:\n\n#{new_lines.join("\n")}"
     end
   end
 
@@ -224,7 +226,7 @@ class Scaffolding::RoutesFileManipulator
 
     # update the block of code we're working within.
     unless within = find_resource_block([parent_resource], options)
-      raise 'tried to convert the parent resource to a block, but failed?'
+      raise "tried to convert the parent resource to a block, but failed?"
     end
 
     within
@@ -235,7 +237,7 @@ class Scaffolding::RoutesFileManipulator
     result_line = insertion_line
     unless insertion_line == within + 1
       # only put the extra space if we're adding this line after a block
-      if lines[insertion_line - 1].match(/^\s*end\s*$/)
+      if /^\s*end\s*$/.match?(lines[insertion_line - 1])
         lines_to_add.unshift("")
         result_line += 1
       end
@@ -298,7 +300,7 @@ class Scaffolding::RoutesFileManipulator
       top_parent_namespace = find_namespaces(parent_namespaces, within)[parent_namespaces.first]
       block_parent_within = find_block_parent(top_parent_namespace)
       parent_namespaces_and_resource = (parent_namespaces + [parent_resource]).join("_")
-      parent_within = find_or_create_resource_block([parent_namespaces_and_resource], options: "path: '#{parent_namespaces_and_resource.gsub('_', '/')}'", within: block_parent_within)
+      parent_within = find_or_create_resource_block([parent_namespaces_and_resource], options: "path: '#{parent_namespaces_and_resource.tr("_", "/")}'", within: block_parent_within)
       find_or_create_resource(child_namespaces + [child_resource], within: parent_within)
 
     else

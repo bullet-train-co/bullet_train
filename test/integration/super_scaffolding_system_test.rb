@@ -1,9 +1,9 @@
-require 'test_helper'
+require "test_helper"
 
 class SuperScaffoldingSystemTest < ActionDispatch::IntegrationTest
   def setup
     super
-    @jane = create :onboarded_user, first_name: 'Jane', last_name: 'Smith'
+    @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
   end
 
   # NOTE: the setup for this test really requires a clean git workspace.
@@ -22,112 +22,120 @@ class SuperScaffoldingSystemTest < ActionDispatch::IntegrationTest
   #   git clean -d -f
 
   # force autoload.
-  TestSite rescue nil
-  TestPage rescue nil
+  begin
+    TestSite
+  rescue
+    nil
+  end
+  begin
+    TestPage
+  rescue
+    nil
+  end
 
   if defined?(TestSite) && defined?(TestPage)
 
     test "developers can generate a site and a nested page model" do
       resize_for(@@test_devices[:macbook_pro_15_inch])
 
-      login_as(@jane, :scope => :user)
+      login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
       assert page.has_content?("Test Sites")
-      click_on 'Add New Test Site'
+      click_on "Add New Test Site"
 
       assert page.has_content?("New Test Site Details")
-      fill_in 'Name', with: 'Some New Example Site'
-      fill_in 'Url', with: 'http://example.org/test'
-      click_on 'Create Test Site'
+      fill_in "Name", with: "Some New Example Site"
+      fill_in "Url", with: "http://example.org/test"
+      click_on "Create Test Site"
 
       # make sure the content is being displayed on the index partial.
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("http://example.org/test")
 
       # we're now looking at the index on the team dashboard.
-      click_on 'Some New Example Site'
+      click_on "Some New Example Site"
       assert page.has_content?("Test Site Details")
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("http://example.org/test")
 
       assert page.has_content?("Test Pages")
-      click_on 'Add New Test Page'
+      click_on "Add New Test Page"
 
       assert page.has_content?("New Test Page Details")
-      fill_in 'Name', with: 'Some New Example Site'
-      fill_in 'Path', with: '/test'
-      click_on 'Create Test Page'
+      fill_in "Name", with: "Some New Example Site"
+      fill_in "Path", with: "/test"
+      click_on "Create Test Page"
 
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("/test")
 
       within "#menu" do
-        click_on 'Dashboard'
+        click_on "Dashboard"
       end
 
-      click_on 'Add New Project'
-      click_on 'Create Project'
+      click_on "Add New Project"
+      click_on "Create Project"
       assert page.has_content?("Name can't be blank.")
-      fill_in 'Name', with: 'Some New Example Project'
+      fill_in "Name", with: "Some New Example Project"
       # TODO figure out how to interact with trix editor fields in capybara tests.
-      click_on 'Create Project'
+      click_on "Create Project"
 
       assert page.has_content?("Project was successfully created.")
-      click_on 'Some New Example Project'
+      click_on "Some New Example Project"
 
-      click_on 'Add New Deliverable'
-      click_on 'Create Deliverable'
+      click_on "Add New Deliverable"
+      click_on "Create Deliverable"
       assert page.has_content?("Name can't be blank.")
-      fill_in 'Name', with: 'Some New Example Deliverable'
-      click_on 'Create Deliverable'
+      fill_in "Name", with: "Some New Example Deliverable"
+      click_on "Create Deliverable"
       assert page.has_content?("Deliverable was successfully created.")
-      click_on 'Some New Example Deliverable'
+      click_on "Some New Example Deliverable"
 
-      click_on 'Add New Objective'
-      click_on 'Create Objective'
+      click_on "Add New Objective"
+      click_on "Create Objective"
       assert page.has_content?("Name can't be blank.")
-      fill_in 'Name', with: 'Some New Example Objective'
-      click_on 'Create Objective'
+      fill_in "Name", with: "Some New Example Objective"
+      click_on "Create Objective"
       assert page.has_content?("Objective was successfully created.")
-      click_on 'Some New Example Objective'
+      click_on "Some New Example Objective"
 
-      click_on 'Add New Character Trait'
-      click_on 'Create Character Trait'
+      click_on "Add New Character Trait"
+      click_on "Create Character Trait"
       assert page.has_content?("Name can't be blank.")
-      fill_in 'Name', with: 'Some New Example Character Trait'
-      click_on 'Create Character Trait'
+      fill_in "Name", with: "Some New Example Character Trait"
+      click_on "Create Character Trait"
       assert page.has_content?("Character Trait was successfully created.")
-      click_on 'Some New Example Character Trait'
+      click_on "Some New Example Character Trait"
 
-      click_on 'Add New Note'
-      click_on 'Create Note'
+      click_on "Add New Note"
+      click_on "Create Note"
       assert page.has_content?("Name can't be blank.")
-      fill_in 'Name', with: 'Some New Example Note'
-      click_on 'Create Note'
+      fill_in "Name", with: "Some New Example Note"
+      click_on "Create Note"
       assert page.has_content?("Note was successfully created.")
-      click_on 'Some New Example Note'
+      click_on "Some New Example Note"
 
-      click_on 'Add New Response'
-      click_on 'Create Response'
+      click_on "Add New Response"
+      click_on "Create Response"
       assert page.has_content?("Name can't be blank.")
-      fill_in 'Name', with: 'Some New Example Response'
-      click_on 'Create Response'
+      fill_in "Name", with: "Some New Example Response"
+      click_on "Create Response"
       assert page.has_content?("Response was successfully created.")
-      click_on 'Some New Example Response'
+      click_on "Some New Example Response"
 
       within "ol.breadcrumb" do
-        click_on 'Projects'
+        click_on "Projects"
       end
 
-      assert page.has_content?('Your Team’s Projects')
+      assert page.has_content?("Your Team’s Projects")
 
       # this is ensuring cascading deletes generate properly.
       accept_alert do
-        click_on 'Delete'
+        click_on "Delete"
       end
 
-      assert page.has_content?('Project was successfully destroyed.')
+      assert page.has_content?("Project was successfully destroyed.")
     end
   end
 end

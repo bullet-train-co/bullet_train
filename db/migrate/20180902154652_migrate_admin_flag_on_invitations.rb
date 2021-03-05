@@ -5,6 +5,7 @@ class MigrateAdminFlagOnInvitations < ActiveRecord::Migration[5.2]
       invitation.save
     end
   end
+
   def down
     InvitationRole.where(role: Role.admin).each do |invitation_role|
       invitation_role.invitation.update_column(:admin, true)

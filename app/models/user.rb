@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   # 🚫 DEFAULT BULLET TRAIN USER FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
@@ -15,15 +14,15 @@ class User < ApplicationRecord
   # teams
   has_many :memberships, dependent: :destroy
   has_many :teams, through: :memberships
-  belongs_to :current_team, class_name: 'Team', optional: true
+  belongs_to :current_team, class_name: "Team", optional: true
   accepts_nested_attributes_for :current_team
 
   # oauth providers
-  has_many :oauth_stripe_accounts, class_name: 'Oauth::StripeAccount' if stripe_enabled?
+  has_many :oauth_stripe_accounts, class_name: "Oauth::StripeAccount" if stripe_enabled?
 
   # validations
   validate :real_emails_only
-  validates :time_zone, :inclusion => { :in => ActiveSupport::TimeZone.all.map(&:name) }, :allow_nil => true
+  validates :time_zone, inclusion: {in: ActiveSupport::TimeZone.all.map(&:name)}, allow_nil: true
 
   # ✅ YOUR APPLICATION'S USER FUNCTIONALITY
   # This is the place where you should implement your own features on top of Bullet Train's user functionality. There
@@ -48,7 +47,6 @@ class User < ApplicationRecord
   # 🚅 add delegations above.
 
   # 🚅 add methods above.
-
 
   # 🚫 DEFAULT BULLET TRAIN USER FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
@@ -78,7 +76,7 @@ class User < ApplicationRecord
   end
 
   def full_name
-    [first_name_was, last_name_was].select(&:present?).join(' ')
+    [first_name_was, last_name_was].select(&:present?).join(" ")
   end
 
   def details_provided?
@@ -90,30 +88,30 @@ class User < ApplicationRecord
   end
 
   def create_default_team
-    self.current_team = teams.create(name: 'Your Team')
-    self.memberships.first.roles = [Role.admin]
+    self.current_team = teams.create(name: "Your Team")
+    memberships.first.roles = [Role.admin]
     save
   end
 
   def real_emails_only
     if ENV["REALEMAIL_API_KEY"] && !Rails.env.test?
-      uri = URI('https://realemail.expeditedaddons.com')
+      uri = URI("https://realemail.expeditedaddons.com")
 
       # Change the input parameters here
       uri.query = URI.encode_www_form({
-      	api_key: ENV["REAL_EMAIL_KEY"],
-      	email: email,
-      	fix_typos: false
+        api_key: ENV["REAL_EMAIL_KEY"],
+        email: email,
+        fix_typos: false
       })
 
       # Results are returned as a JSON object
       result = JSON.parse(Net::HTTP.get_response(uri).body)
 
-      if result['syntax_error']
+      if result["syntax_error"]
         errors.add(:email, "is not a valid email address")
-      elsif result['domain_error'] || (result.keys.include?('mx_records_found') && !result['mx_records_found'])
+      elsif result["domain_error"] || (result.keys.include?("mx_records_found") && !result["mx_records_found"])
         errors.add(:email, "can't actually receive emails")
-      elsif result['is_disposable']
+      elsif result["is_disposable"]
         errors.add(:email, "is a disposable email address")
       end
     end
@@ -169,9 +167,9 @@ class User < ApplicationRecord
   end
 
   def developer?
-    return false unless ENV['DEVELOPER_EMAILS']
+    return false unless ENV["DEVELOPER_EMAILS"]
     # we use email_was so they can't try setting their email to the email of an admin.
-    return false unless self.email_was
-    ENV['DEVELOPER_EMAILS'].split(',').include?(self.email_was)
+    return false unless email_was
+    ENV["DEVELOPER_EMAILS"].split(",").include?(email_was)
   end
 end

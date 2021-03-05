@@ -1,4 +1,4 @@
-class RemovingLastTeamAdminException < Exception
+class RemovingLastTeamAdminException < RuntimeError
 end
 
 class MembershipRole < ApplicationRecord

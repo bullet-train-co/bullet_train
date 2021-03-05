@@ -1,5 +1,4 @@
 class Membership < ApplicationRecord
-
   # 🚫 DEFAULT BULLET TRAIN MEMBERSHIP FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
@@ -10,15 +9,15 @@ class Membership < ApplicationRecord
   belongs_to :team
   belongs_to :invitation, optional: true, dependent: :destroy
   # TODO is this really optional?
-  belongs_to :added_by, class_name: 'Membership', optional: true
+  belongs_to :added_by, class_name: "Membership", optional: true
   has_many :membership_roles, dependent: :destroy
   has_many :roles, through: :membership_roles
 
-  has_many :scaffolding_completely_concrete_tangible_things_assignments, class_name: 'Scaffolding::CompletelyConcrete::TangibleThings::Assignment', dependent: :destroy
+  has_many :scaffolding_completely_concrete_tangible_things_assignments, class_name: "Scaffolding::CompletelyConcrete::TangibleThings::Assignment", dependent: :destroy
   has_many :scaffolding_completely_concrete_tangible_things, through: :scaffolding_completely_concrete_tangible_things_assignments, source: :tangible_thing
-  has_many :reassignments_scaffolding_completely_concrete_tangible_things_reassignments, class_name: 'Memberships::Reassignments::ScaffoldingCompletelyConcreteTangibleThingsReassignment', dependent: :destroy, foreign_key: :membership_id
+  has_many :reassignments_scaffolding_completely_concrete_tangible_things_reassignments, class_name: "Memberships::Reassignments::ScaffoldingCompletelyConcreteTangibleThingsReassignment", dependent: :destroy, foreign_key: :membership_id
 
-  has_many :scaffolding_absolutely_abstract_creative_concepts_collaborators, class_name: 'Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator', dependent: :destroy
+  has_many :scaffolding_absolutely_abstract_creative_concepts_collaborators, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator", dependent: :destroy
 
   after_save :invalidate_caches
   after_destroy :invalidate_caches
@@ -32,10 +31,9 @@ class Membership < ApplicationRecord
     end
   end
 
-  scope :current_and_invited, -> { includes(:invitation).where('user_id IS NOT NULL OR invitations.id IS NOT NULL').references(:invitation) }
-  scope :current, -> { where('user_id IS NOT NULL') }
-  scope :tombstones, -> { includes(:invitation).where('user_id IS NULL AND invitations.id IS NULL').references(:invitation) }
-
+  scope :current_and_invited, -> { includes(:invitation).where("user_id IS NOT NULL OR invitations.id IS NOT NULL").references(:invitation) }
+  scope :current, -> { where("user_id IS NOT NULL") }
+  scope :tombstones, -> { includes(:invitation).where("user_id IS NULL AND invitations.id IS NULL").references(:invitation) }
 
   # ✅ YOUR APPLICATION'S MEMBERSHIP FUNCTIONALITY
   # This is the place where you should implement your own features on top of Bullet Train's functionality. There
@@ -61,7 +59,6 @@ class Membership < ApplicationRecord
 
   # 🚅 add methods above.
 
-
   # 🚫 DEFAULT BULLET TRAIN TEAM FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
 
@@ -82,7 +79,6 @@ class Membership < ApplicationRecord
   # associated with a membership, admins can never remove the last admin
   # of a team.
   def role_ids=(ids)
-
     # if this membership was an admin, and the new list of role ids don't include admin.
     if admin? && !ids.include?(Role.admin.id)
       unless team.admin_memberships.count > 1
@@ -91,7 +87,6 @@ class Membership < ApplicationRecord
     end
 
     super(ids)
-
   end
 
   def manageable_roles
@@ -163,7 +158,6 @@ class Membership < ApplicationRecord
 
     # we do this here just in case by some weird chance an active membership had an invitation attached.
     invitation&.destroy
-
   end
 
   def email
@@ -171,7 +165,7 @@ class Membership < ApplicationRecord
   end
 
   def full_name
-    user&.full_name || [first_name.presence, last_name.presence].join(' ').presence || email
+    user&.full_name || [first_name.presence, last_name.presence].join(" ").presence || email
   end
 
   def first_name
@@ -188,7 +182,7 @@ class Membership < ApplicationRecord
   end
 
   def first_name_last_initial
-    [first_name, last_initial].map(&:present?).join(' ')
+    [first_name, last_initial].map(&:present?).join(" ")
   end
 
   # TODO utilize this.

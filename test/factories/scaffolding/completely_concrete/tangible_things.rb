@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :scaffolding_completely_concrete_tangible_thing, class: 'Scaffolding::CompletelyConcrete::TangibleThing' do
+  factory :scaffolding_completely_concrete_tangible_thing, class: "Scaffolding::CompletelyConcrete::TangibleThing" do
     association :absolutely_abstract_creative_concept, factory: :scaffolding_absolutely_abstract_creative_concept
     text_field_value { "MyString" }
     button_value { "one" }

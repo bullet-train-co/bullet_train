@@ -11,21 +11,21 @@ module Account::TeamsHelper
   def users_as_select_options(users, values = [])
     values = [values] unless values.is_a?(Array)
     users.map { |user|
-      "<option value=\"#{user.id}\" data-image=\"#{ user_profile_photo_url(user) }\" #{"selected=\"selected\"" if values.include?(user.id)}>#{user.name}</option>"
+      "<option value=\"#{user.id}\" data-image=\"#{user_profile_photo_url(user)}\" #{"selected=\"selected\"" if values.include?(user.id)}>#{user.name}</option>"
     }.join.html_safe
   end
 
   def memberships_as_select_options(memberships, values = [])
     values = [values] unless values.is_a?(Array)
     memberships.map { |membership|
-      "<option value=\"#{membership.id}\" data-image=\"#{ membership_profile_photo_url(membership) }\" #{"selected=\"selected\"" if values.include?(membership.id)}>#{membership.name}</option>"
+      "<option value=\"#{membership.id}\" data-image=\"#{membership_profile_photo_url(membership)}\" #{"selected=\"selected\"" if values.include?(membership.id)}>#{membership.name}</option>"
     }.join.html_safe
   end
 
   def photo_for(object)
-    background_color = Colorizer.colorize_similarly((object.name.to_s + object.created_at.to_s).to_s, 0.5, 0.6).gsub('#', '')
+    background_color = Colorizer.colorize_similarly((object.name.to_s + object.created_at.to_s).to_s, 0.5, 0.6).delete("#")
     photo = "https://ui-avatars.com/api/?" + {
-      color: 'ffffff',
+      color: "ffffff",
       background: background_color,
       bold: true,
       name: "#{object.name.first}#{object.name.split.one? ? "" : object.name.split.first(2).last.first}",

@@ -1,8 +1,7 @@
 class ApplicationMailer < ActionMailer::Base
-
   # you can make this whatever you want.
-  default from: "#{I18n.t('application.name')} <#{I18n.t('application.support_email')}>"
-  layout 'mailer'
+  default from: "#{I18n.t("application.name")} <#{I18n.t("application.support_email")}>"
+  layout "mailer"
 
   helper :email
   helper :application
@@ -11,5 +10,4 @@ class ApplicationMailer < ActionMailer::Base
   helper "account/users"
   helper "account/locale"
   helper "fields/trix_editor"
-
 end

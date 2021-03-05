@@ -17,7 +17,6 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-
     # do all the regular devise stuff first.
     super
 
@@ -53,7 +52,5 @@ class RegistrationsController < Devise::RegistrationsController
       current_user.send_welcome_email unless current_user.email_is_oauth_placeholder?
 
     end
-
   end
-
 end

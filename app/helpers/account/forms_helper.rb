@@ -10,13 +10,13 @@ module Account::FormsHelper
   end
 
   def flush_content_for(name)
-    content_for name, flush: true do '' end
+    content_for name, flush: true do "" end
   end
 
   def options_with_labels(options, namespace)
     hash = {}
     options.each do |option|
-      hash[option] = t([namespace, option].join('.'))
+      hash[option] = t([namespace, option].join("."))
     end
     hash
   end
@@ -26,7 +26,7 @@ module Account::FormsHelper
   end
 
   def id_for(form, method)
-    [form.object.class.name, form.index, method].compact.join('_').underscore
+    [form.object.class.name, form.index, method].compact.join("_").underscore
   end
 
   def model_key(form)
@@ -36,19 +36,19 @@ module Account::FormsHelper
   def labels_for(form, method)
     keys = [:placeholder, :label, :help]
     path = [model_key(form), (current_fields_namespace || :fields), method].compact
-    Struct.new(*keys).new(*keys.map { |key| t((path + [key]).join('.'), default: '').presence })
+    Struct.new(*keys).new(*keys.map { |key| t((path + [key]).join("."), default: "").presence })
   end
 
   def options_for(form, method)
     path = [model_key(form), (current_fields_namespace || :fields), method, :options]
-    t(path.compact.join('.'))
+    t(path.compact.join("."))
   end
 
   def legacy_label_for(form, method)
     # e.g. 'scaffolding/things.labels.name'
     key = "#{model_key(form)}.labels.#{method}"
     #  e.g. 'scaffolding/things.labels.name' or 'scaffolding.things.labels.name' or nil
-    t(key, default: '').presence || t(key.gsub('/', '.'), default: '').presence
+    t(key, default: "").presence || t(key.tr("/", "."), default: "").presence
   end
 
   def within_fields_namespace(namespace)

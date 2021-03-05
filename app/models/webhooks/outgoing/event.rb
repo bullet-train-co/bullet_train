@@ -20,9 +20,9 @@ class Webhooks::Outgoing::Event < ApplicationRecord
   end
 
   def endpoints
-    team.webhooks_outgoing_endpoints.
-      joins("LEFT JOIN webhooks_outgoing_endpoint_event_types ON webhooks_outgoing_endpoint_event_types.endpoint_id = webhooks_outgoing_endpoints.id").
-      where("webhooks_outgoing_endpoint_event_types.event_type_id = ? OR webhooks_outgoing_endpoint_event_types.id IS NULL", event_type.id)
+    team.webhooks_outgoing_endpoints
+      .joins("LEFT JOIN webhooks_outgoing_endpoint_event_types ON webhooks_outgoing_endpoint_event_types.endpoint_id = webhooks_outgoing_endpoints.id")
+      .where("webhooks_outgoing_endpoint_event_types.event_type_id = ? OR webhooks_outgoing_endpoint_event_types.id IS NULL", event_type.id)
   end
 
   def deliver
@@ -36,5 +36,4 @@ class Webhooks::Outgoing::Event < ApplicationRecord
   def name
     uuid
   end
-
 end

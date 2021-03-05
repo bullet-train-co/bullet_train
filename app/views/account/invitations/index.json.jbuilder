@@ -1,1 +1,1 @@
-json.array! @invitations, partial: 'invitations/invitation', as: :invitation
+json.array! @invitations, partial: "invitations/invitation", as: :invitation

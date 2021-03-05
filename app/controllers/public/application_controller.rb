@@ -1,3 +1,3 @@
 class Public::ApplicationController < ApplicationController
-  layout 'public'
+  layout "public"
 end

@@ -17,9 +17,9 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
   def attempt
     uri = URI.parse(delivery.endpoint_url)
     http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true if uri.scheme == 'https'
+    http.use_ssl = true if uri.scheme == "https"
     request = Net::HTTP::Post.new(uri.path)
-    request.add_field('Content-Type', 'application/json')
+    request.add_field("Content-Type", "application/json")
     request.body = delivery.event.payload.to_json
 
     begin
@@ -32,11 +32,10 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
     end
 
     save
-    return response_code == 200
+    response_code == 200
   end
 
   def name
     "#{attempt_number.ordinalize} Attempt"
   end
-
 end

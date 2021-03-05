@@ -33,7 +33,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
         # any user adding a creative concept should be able to manage it.
         ensure_current_user_can_manage_creative_concept @creative_concept
 
-        format.html { redirect_to [:account, @creative_concept], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts.notifications.created') }
+        format.html { redirect_to [:account, @creative_concept], notice: I18n.t("scaffolding/absolutely_abstract/creative_concepts.notifications.created") }
         format.json { render :show, status: :created, location: [:account, @team, @creative_concept] }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
   def update
     respond_to do |format|
       if @creative_concept.update(creative_concept_params)
-        format.html { redirect_to [:account, @creative_concept], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts.notifications.updated') }
+        format.html { redirect_to [:account, @creative_concept], notice: I18n.t("scaffolding/absolutely_abstract/creative_concepts.notifications.updated") }
         format.json { render :show, status: :ok, location: [:account, @creative_concept] }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,23 +61,22 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
   def destroy
     @creative_concept.destroy
     respond_to do |format|
-      format.html { redirect_to [:account, @team, :scaffolding, :absolutely_abstract, :creative_concepts], notice: I18n.t('scaffolding/absolutely_abstract/creative_concepts.notifications.destroyed') }
+      format.html { redirect_to [:account, @team, :scaffolding, :absolutely_abstract, :creative_concepts], notice: I18n.t("scaffolding/absolutely_abstract/creative_concepts.notifications.destroyed") }
       format.json { head :no_content }
     end
   end
 
   private
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def creative_concept_params
-      strong_params = params.require(:scaffolding_absolutely_abstract_creative_concept).permit(
-        :name,
-        :description,
-        # 🚅 super scaffolding will insert new fields above this line.
-        # 🚅 super scaffolding will insert new arrays above this line.
-      )
 
-      # 🚅 super scaffolding will insert processing for new fields above this line.
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def creative_concept_params
+    params.require(:scaffolding_absolutely_abstract_creative_concept).permit(
+      :name,
+      :description,
+      # 🚅 super scaffolding will insert new fields above this line.
+      # 🚅 super scaffolding will insert new arrays above this line.
+    )
 
-      strong_params
-    end
+    # 🚅 super scaffolding will insert processing for new fields above this line.
+  end
 end

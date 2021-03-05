@@ -1,6 +1,6 @@
 class Account::Onboarding::UserDetailsController < Account::ApplicationController
-  layout 'devise'
-  load_and_authorize_resource :class => "User"
+  layout "devise"
+  load_and_authorize_resource class: "User"
 
   # this is because cancancan doesn't let us set the instance variable name above.
   before_action do
@@ -21,11 +21,11 @@ class Account::Onboarding::UserDetailsController < Account::ApplicationControlle
         bypass_sign_in current_user.reload
 
         if @user.details_provided?
-          format.html { redirect_to account_team_path(@user.teams.first), notice: '' }
+          format.html { redirect_to account_team_path(@user.teams.first), notice: "" }
         else
           format.html {
-            flash[:error] = I18n.t('global.notifications.all_fields_required')
-            redirect_to edit_account_onboarding_user_detail_path (@user)
+            flash[:error] = I18n.t("global.notifications.all_fields_required")
+            redirect_to edit_account_onboarding_user_detail_path(@user)
           }
         end
 
@@ -39,29 +39,25 @@ class Account::Onboarding::UserDetailsController < Account::ApplicationControlle
 
   private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    permitted_attributes = [
+      :first_name,
+      :last_name,
+      :time_zone,
+      # 🚅 super scaffolding will insert new fields above this line.
+    ]
 
-      permitted_attributes = [
-        :first_name,
-        :last_name,
-        :time_zone,
-        # 🚅 super scaffolding will insert new fields above this line.
-      ]
+    permitted_hash = {
+      # 🚅 super scaffolding will insert new arrays above this line.
+    }
 
-      permitted_hash = {
-        # 🚅 super scaffolding will insert new arrays above this line.
-      }
-
-      if can? :edit, @user.current_team
-        permitted_hash[:current_team_attributes] = [:id, :name]
-      end
-
-      strong_params = params.require(:user).permit(permitted_attributes, permitted_hash)
-
-      # 🚅 super scaffolding will insert processing for new fields above this line.
-
-      strong_params
+    if can? :edit, @user.current_team
+      permitted_hash[:current_team_attributes] = [:id, :name]
     end
 
+    params.require(:user).permit(permitted_attributes, permitted_hash)
+
+    # 🚅 super scaffolding will insert processing for new fields above this line.
+  end
 end

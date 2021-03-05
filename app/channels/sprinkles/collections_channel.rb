@@ -10,8 +10,7 @@ class Sprinkles::CollectionsChannel < ApplicationCable::Channel
 
   def allowed_collections
     {
-      User => [
-      ],
+      User => [],
       Team => [
         :scaffolding_things,
       ],

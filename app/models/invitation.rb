@@ -1,10 +1,9 @@
 class Invitation < ApplicationRecord
-
   # 🚫 DEFAULT BULLET TRAIN INVITATION FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
 
-  belongs_to :from_membership, class_name: 'Membership'
+  belongs_to :from_membership, class_name: "Membership"
   has_one :membership, dependent: :nullify
   belongs_to :team
   has_many :roles, through: :membership
@@ -16,7 +15,6 @@ class Invitation < ApplicationRecord
   before_create :generate_uuid
   after_create :set_added_by_membership
   after_create :send_invitation_email
-
 
   # ✅ YOUR APPLICATION'S INVITATION FUNCTIONALITY
   # This is the place where you should implement your own features on top of Bullet Train's functionality. There
@@ -42,7 +40,6 @@ class Invitation < ApplicationRecord
 
   # 🚅 add methods above.
 
-
   # 🚫 DEFAULT BULLET TRAIN INVITATION FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
 
@@ -51,7 +48,7 @@ class Invitation < ApplicationRecord
   end
 
   def send_invitation_email
-    UserMailer.invited(self.uuid).deliver_later
+    UserMailer.invited(uuid).deliver_later
   end
 
   def generate_uuid
@@ -63,7 +60,7 @@ class Invitation < ApplicationRecord
     user.current_team = team
     user.former_user = false
     user.save
-    self.destroy
+    destroy
   end
 
   def name

@@ -23,10 +23,10 @@ module Railsdiff
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.default_locale = :en
 
     # this actually doesn't appear to work.
-    config.action_view.sanitized_allowed_protocols = ['http', 'bullettrain']
+    config.action_view.sanitized_allowed_protocols = ["http", "bullettrain"]
   end
 end

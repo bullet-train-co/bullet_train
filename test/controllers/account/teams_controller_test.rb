@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class Account::TeamsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
@@ -28,8 +28,8 @@ class Account::TeamsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create team" do
     skip if invitation_only?
-    assert_difference('Team.count') do
-      post account_teams_url, params: { team: { name: @team.name } }
+    assert_difference("Team.count") do
+      post account_teams_url, params: {team: {name: @team.name}}
     end
     assert_redirected_to account_team_url(Team.last)
   end
@@ -45,8 +45,7 @@ class Account::TeamsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update team" do
-    patch account_team_url(@team), params: { team: { name: @team.name } }
+    patch account_team_url(@team), params: {team: {name: @team.name}}
     assert_redirected_to account_team_url(@team)
   end
-
 end

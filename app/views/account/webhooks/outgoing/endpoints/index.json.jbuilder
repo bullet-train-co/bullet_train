@@ -1,1 +1,1 @@
-json.array! @endpoints, partial: 'webhooks/outgoing/endpoints/endpoint', as: :endpoint
+json.array! @endpoints, partial: "webhooks/outgoing/endpoints/endpoint", as: :endpoint

@@ -15,7 +15,6 @@ module Sprinkles::Sortable
 
   # define object methods.
   def collection
-    raise 'you must define `collection` in sortable models.'
+    raise "you must define `collection` in sortable models."
   end
-
 end

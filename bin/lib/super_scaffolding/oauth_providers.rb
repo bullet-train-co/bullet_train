@@ -1,13 +1,17 @@
 def encode_double_replacement_fix(string)
-  string.split('').join('~!@BT@!~')
+  string.split("").join("~!@BT@!~")
 end
 
 def decode_double_replacement_fix(string)
-  string.gsub('~!@BT@!~', '')
+  string.gsub("~!@BT@!~", "")
 end
 
 def oauth_scaffold_directory(directory, options)
-  Dir.mkdir(oauth_transform_string(directory, options)) rescue nil
+  begin
+    Dir.mkdir(oauth_transform_string(directory, options))
+  rescue
+    nil
+  end
   Dir.foreach(directory) do |file|
     file = "#{directory}/#{file}"
     unless File.directory?(file)
@@ -23,7 +27,6 @@ def oauth_scaffold_file(file, options)
 
   skipping = false
   File.open(file).each_line do |line|
-
     if line.include?("# 🚅 skip when scaffolding.")
       next
     end
@@ -48,7 +51,7 @@ def oauth_scaffold_file(file, options)
       # only transform it if it doesn't have the lock emoji.
       if line.include?("🔒")
         # remove any comments that start with a lock.
-        line.gsub!(/\s+?#\s+🔒.*/, '')
+        line.gsub!(/\s+?#\s+🔒.*/, "")
       else
         line = oauth_transform_string(line, options)
       end
@@ -56,7 +59,6 @@ def oauth_scaffold_file(file, options)
       transformed_file_content << line
 
     end
-
   end
   transformed_file_content = transformed_file_content.join
 
@@ -84,12 +86,12 @@ def oauth_transform_string(string, options)
   string = string.gsub("STRIPE_SECRET_KEY", encode_double_replacement_fix(options[:api_secret]))
 
   # then try for some matches that give us a little more context on what they're looking for.
-  string = string.gsub("stripe-account", encode_double_replacement_fix(name.underscore.dasherize + '_account'))
-  string = string.gsub("stripe_account", encode_double_replacement_fix(name.underscore + '_account'))
-  string = string.gsub("StripeAccount", encode_double_replacement_fix(name + 'Account'))
-  string = string.gsub("Stripe Account", encode_double_replacement_fix(name.titleize + ' Account'))
-  string = string.gsub("Stripe account", encode_double_replacement_fix(name.titleize + ' account'))
-  string = string.gsub("with Stripe", encode_double_replacement_fix('with ' + name.titleize))
+  string = string.gsub("stripe-account", encode_double_replacement_fix(name.underscore.dasherize + "_account"))
+  string = string.gsub("stripe_account", encode_double_replacement_fix(name.underscore + "_account"))
+  string = string.gsub("StripeAccount", encode_double_replacement_fix(name + "Account"))
+  string = string.gsub("Stripe Account", encode_double_replacement_fix(name.titleize + " Account"))
+  string = string.gsub("Stripe account", encode_double_replacement_fix(name.titleize + " account"))
+  string = string.gsub("with Stripe", encode_double_replacement_fix("with " + name.titleize))
 
   # finally, just do the simplest string replace. it's possible this can produce weird results.
   # if they do, try adding more context aware replacements above, e.g. what i did with 'with'.

@@ -2,9 +2,8 @@ module LoadsAndAuthorizesResource
   extend ActiveSupport::Concern
 
   included do
-
     def regex_to_remove_controller_namespace
-      raise 'This is a template method that needs to be implemented by controllers including LoadsAndAuthorizesResource.'
+      raise "This is a template method that needs to be implemented by controllers including LoadsAndAuthorizesResource."
     end
 
     # this is a template method, but it's implementation is optional.
@@ -15,14 +14,14 @@ module LoadsAndAuthorizesResource
     # this is the only place i use this commenting style. let me know if you hate it.
     def self.model_namespace_from_controller_namespace
       controller_class_name = if regex_to_remove_controller_namespace
-        self.name.gsub(regex_to_remove_controller_namespace, '')
+        name.gsub(regex_to_remove_controller_namespace, "")
       else
-        self.name
+        name
       end
 
       namespace = controller_class_name.split("::")
-      namespace.pop     # remove "::ThingsController"
-      namespace         # return whatever is left.
+      namespace.pop # remove "::ThingsController"
+      namespace # return whatever is left.
     end
 
     # this is one of the few pieces of 'magical' functionality that bullet train implements
@@ -77,7 +76,7 @@ module LoadsAndAuthorizesResource
           namespace.pop
           retry
         else
-          raise "Oh no, it looks like your call to 'account_load_and_authorize_resource' is broken. We tried #{tried.join(' and ')}, but didn't find a valid class name."
+          raise "Oh no, it looks like your call to 'account_load_and_authorize_resource' is broken. We tried #{tried.join(" and ")}, but didn't find a valid class name."
         end
       end
 
@@ -185,9 +184,6 @@ module LoadsAndAuthorizesResource
       # 0. this is required for the api controllers. is this because we haven't
       # called `current_user` yet?
       prepend_before_action :authenticate_user!
-
     end
-
   end
-
 end

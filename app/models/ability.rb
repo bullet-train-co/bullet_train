@@ -40,7 +40,6 @@ class Ability
   end
 
   def initialize(user)
-
     if user.present?
 
       # we've implemented some caching of abilities to improve response times.

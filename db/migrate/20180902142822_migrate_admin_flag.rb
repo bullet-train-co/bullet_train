@@ -5,6 +5,7 @@ class MigrateAdminFlag < ActiveRecord::Migration[5.2]
       membership.save
     end
   end
+
   def down
     MembershipRole.where(role: Role.admin).each do |membership_role|
       membership_role.membership.update_column(:admin, true)

@@ -1,5 +1,4 @@
 module Webhooks::Incoming::Webhook
-
   def verify_authenticity
     raise "you must either implement `verify_authenticity` in #{self.class.name} or perform verification and set `verified_at` in #{self.class.name}sController."
   end

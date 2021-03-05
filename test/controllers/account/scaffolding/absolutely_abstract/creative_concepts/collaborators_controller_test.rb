@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
@@ -23,11 +23,11 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
   end
 
   test "should create collaborator" do
-    assert_difference('Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator.count') do
+    assert_difference("Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator.count") do
       post url_for([:account, @creative_concept, :collaborators]), params: {
         scaffolding_absolutely_abstract_creative_concepts_collaborator: {
           membership_id: @collaborator.membership_id,
-          roles: @collaborator.roles,
+          roles: @collaborator.roles
           # 🚅 super scaffolding will insert new fields above this line.
         }
       }
@@ -50,7 +50,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
     patch url_for([:account, @collaborator]), params: {
       scaffolding_absolutely_abstract_creative_concepts_collaborator: {
         membership_id: @collaborator.membership_id,
-        roles: @collaborator.roles,
+        roles: @collaborator.roles
         # 🚅 super scaffolding will also insert new fields above this line.
       }
     }
@@ -58,7 +58,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
   end
 
   test "should destroy collaborator" do
-    assert_difference('Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator.count', -1) do
+    assert_difference("Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator.count", -1) do
       delete url_for([:account, @collaborator])
     end
 

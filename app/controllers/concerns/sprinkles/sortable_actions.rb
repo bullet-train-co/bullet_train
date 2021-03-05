@@ -10,5 +10,4 @@ module Sprinkles::SortableActions
     end
     render json: true, status: :ok
   end
-
 end

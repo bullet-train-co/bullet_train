@@ -3,6 +3,7 @@ class Account::Cloudinary::UploadSignaturesController < Account::ApplicationCont
   def new
     render plain: Cloudinary::Utils.api_sign_request(upload_signature_params.to_h, Cloudinary.config.api_secret)
   end
+
   def upload_signature_params
     params.require(:data).permit(:timestamp, :source)
   end

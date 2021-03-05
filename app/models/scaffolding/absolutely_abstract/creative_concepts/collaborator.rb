@@ -9,7 +9,7 @@ class Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator < Applicat
 
   # 🚅 add has_one associations above.
 
-  scope :with_role, -> (role) { where("roles @> ?", role.to_json) }
+  scope :with_role, ->(role) { where("roles @> ?", role.to_json) }
   scope :admins, -> { with_role(:admin) }
   scope :editors, -> { with_role(:editor) }
   scope :viewers, -> { where("roles = ?", [].to_json) }
@@ -42,7 +42,7 @@ class Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator < Applicat
   end
 
   def valid_roles
-    I18n.t('scaffolding/absolutely_abstract/creative_concepts/collaborators.fields.roles.options').keys.map(&:to_s)
+    I18n.t("scaffolding/absolutely_abstract/creative_concepts/collaborators.fields.roles.options").keys.map(&:to_s)
   end
 
   def validate_roles
