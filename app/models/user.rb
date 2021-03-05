@@ -109,7 +109,7 @@ class User < ApplicationRecord
 
       if result["syntax_error"]
         errors.add(:email, "is not a valid email address")
-      elsif result["domain_error"] || (result.keys.include?("mx_records_found") && !result["mx_records_found"])
+      elsif result["domain_error"] || (result.key?("mx_records_found") && !result["mx_records_found"])
         errors.add(:email, "can't actually receive emails")
       elsif result["is_disposable"]
         errors.add(:email, "is a disposable email address")

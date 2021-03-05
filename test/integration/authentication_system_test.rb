@@ -113,7 +113,7 @@ class AuthenticationSystemTest < ActionDispatch::IntegrationTest
 
       # generate a reset password token that we have access to the public version of.
       user = User.find_by_email("andrew.culver@gmail.com")
-      token = user.send_reset_password_instructions
+      user.send_reset_password_instructions
 
       # try to update with an invalid token.
       visit edit_user_password_path(reset_password_token: "invalid-token")

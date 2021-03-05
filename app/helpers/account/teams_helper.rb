@@ -24,7 +24,7 @@ module Account::TeamsHelper
 
   def photo_for(object)
     background_color = Colorizer.colorize_similarly((object.name.to_s + object.created_at.to_s).to_s, 0.5, 0.6).delete("#")
-    photo = "https://ui-avatars.com/api/?" + {
+    "https://ui-avatars.com/api/?" + {
       color: "ffffff",
       background: background_color,
       bold: true,

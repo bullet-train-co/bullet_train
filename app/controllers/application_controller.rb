@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   # TODO i think we'll need to account for a user's time formats here.
   def assign_date(strong_params, attribute)
     attribute = attribute.to_s
-    if strong_params.keys.include?(attribute)
+    if strong_params.key?(attribute)
       parsed_value = Chronic.parse(strong_params[attribute])
       return nil unless parsed_value
       strong_params[attribute] = parsed_value.to_date
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   # TODO i think we'll need to account for a user's time formats here.
   def assign_date_and_time(strong_params, attribute)
     attribute = attribute.to_s
-    if strong_params.keys.include?(attribute)
+    if strong_params.key?(attribute)
       parsed_value = Chronic.parse(strong_params[attribute])
       return nil unless parsed_value
       strong_params[attribute] = parsed_value
@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
 
   def assign_boolean(strong_params, attribute)
     attribute = attribute.to_s
-    if strong_params.keys.include?(attribute)
+    if strong_params.key?(attribute)
       # TODO i _think_ only the string values are required here. can we confirm and remove the others if so?
       strong_params[attribute] = (["1", 1, "true", true].include?(strong_params[attribute]) ? true : false)
     end
@@ -82,7 +82,7 @@ class ApplicationController < ActionController::Base
 
   def assign_checkboxes(strong_params, attribute)
     attribute = attribute.to_s
-    if strong_params.keys.include?(attribute)
+    if strong_params.key?(attribute)
       # filter out the placeholder inputs that arrive along with the form submission.
       strong_params[attribute] = strong_params[attribute].reject { |value| value == "0" }
     end
@@ -90,7 +90,7 @@ class ApplicationController < ActionController::Base
 
   def assign_select_options(strong_params, attribute)
     attribute = attribute.to_s
-    if strong_params.keys.include?(attribute)
+    if strong_params.key?(attribute)
       # filter out the placeholder inputs that arrive along with the form submission.
       strong_params[attribute] = strong_params[attribute].select(&:present?)
     end

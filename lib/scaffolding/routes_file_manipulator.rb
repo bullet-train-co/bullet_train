@@ -111,7 +111,7 @@ class Scaffolding::RoutesFileManipulator
     options[:indent] ||= false
     before = lines[0..(line_number - 1)]
     new_lines = new_lines.map { |line| (indentation_of(line_number) + (options[:indent] ? "  " : "") + line).gsub(/\s+$/, "") + "\n" }
-    after = lines[line_number..-1]
+    after = lines[line_number..]
     self.lines = before + (options[:prepend_newline] ? ["\n"] : []) + new_lines + after
   end
 
@@ -119,7 +119,7 @@ class Scaffolding::RoutesFileManipulator
     options[:indent] ||= false
     before = lines[0..line_number]
     new_lines = new_lines.map { |line| (indentation_of(line_number) + (options[:indent] ? "  " : "") + line).gsub(/\s+$/, "") + "\n" }
-    after = lines[(line_number + 1)..-1]
+    after = lines[(line_number + 1)..]
     self.lines = before + new_lines + (options[:append_newline] ? ["\n"] : []) + after
   end
 
@@ -137,7 +137,6 @@ class Scaffolding::RoutesFileManipulator
   def find_or_create_namespaces(namespaces, within = nil)
     namespaces = namespaces.dup
     created_namespaces = []
-    namespace_lines = nil
     current_namespace = nil
     while namespaces.any?
       current_namespace = namespaces.shift
@@ -196,7 +195,7 @@ class Scaffolding::RoutesFileManipulator
     resource = parts.pop
     namespaces = parts
     namespace_within = find_or_create_namespaces(namespaces, options[:within])
-    unless result = find_resource([resource], options)
+    unless (result = find_resource([resource], options))
       result = insert(["resources :#{resource}" + (options[:options] ? ", #{options[:options]}" : "")], namespace_within || options[:within])
     end
     result
@@ -213,9 +212,8 @@ class Scaffolding::RoutesFileManipulator
   end
 
   def find_or_convert_resource_block(parent_resource, options = {})
-    within = options[:within]
     unless find_resource_block([parent_resource], options)
-      if resource_line_number = find_resource([parent_resource], options)
+      if (resource_line_number = find_resource([parent_resource], options))
         # convert it.
         lines[resource_line_number].gsub!("\n", " do\n")
         insert_after(["end"], resource_line_number)
@@ -225,7 +223,7 @@ class Scaffolding::RoutesFileManipulator
     end
 
     # update the block of code we're working within.
-    unless within = find_resource_block([parent_resource], options)
+    unless (within = find_resource_block([parent_resource], options))
       raise "tried to convert the parent resource to a block, but failed?"
     end
 
@@ -266,7 +264,7 @@ class Scaffolding::RoutesFileManipulator
       # add the new resource within that namespace.
       line = "scope module: '#{parent_resource}' do"
       # TODO you haven't tested this yet.
-      unless scope_within = find(/#{line}/, parent_within)
+      unless (scope_within = find(/#{line}/, parent_within))
         scope_within = insert([line, "end"], parent_within)
       end
 

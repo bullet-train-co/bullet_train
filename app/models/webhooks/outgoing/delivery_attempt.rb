@@ -27,7 +27,7 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
       self.response_message = response.message
       self.response_code = response.code
       self.response_body = response.body
-    rescue Exception => exception
+    rescue Exception => _
       self.error_message = exception.message
     end
 

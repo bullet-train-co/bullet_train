@@ -97,13 +97,10 @@ class Scaffolding::Transformer
   end
 
   def get_transformed_file_content(file)
-    transformed_file_name = transform_string(file)
-
     transformed_file_content = []
 
     skipping = false
     gathering_lines_to_repeat = false
-    repeat_for_each_parent = false
 
     parents_to_repeat_for = []
     gathered_lines_for_repeating = nil
@@ -311,8 +308,6 @@ class Scaffolding::Transformer
       working_parents = parents.dup
     end
 
-    admin_ability_line = false
-
     case working_parents.last
     when "User"
       working_parents.pop
@@ -354,8 +349,6 @@ class Scaffolding::Transformer
 
     previous_assignment = current_transformer.transform_string("absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept")
 
-    last_parent = current_parent
-    last_transformer = current_transformer
     current_parent = working_parents.pop
 
     while current_parent
@@ -363,8 +356,6 @@ class Scaffolding::Transformer
       setup_lines << current_transformer.transform_string("@absolutely_abstract_creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, #{previous_assignment})")
       previous_assignment = current_transformer.transform_string("absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept")
 
-      last_parent = current_parent
-      last_transformer = current_transformer
       current_parent = working_parents.pop
     end
 
@@ -409,8 +400,7 @@ class Scaffolding::Transformer
   def scaffold_new_breadcrumbs(child, parents)
     scaffold_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_breadcrumbs.html.erb")
     puts
-    puts ("Heads up! We're only able to generated the new breadcrumb views, so you'll have to edit `#{transform_string("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml")}` and add the label. " +
-      "You can look at `./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml` for an example of how to do this, but here's an example of what it should look like:").yellow
+    puts "Heads up! We're only able to generated the new breadcrumb views, so you'll have to edit `#{transform_string("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml")}` and add the label. You can look at `./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml` for an example of how to do this, but here's an example of what it should look like:".yellow
     puts
     puts transform_string("en:\n  scaffolding/completely_concrete/tangible_things: &tangible_things\n    label: &label Things\n    breadcrumbs:\n      label: *label").yellow
     puts
@@ -482,7 +472,7 @@ class Scaffolding::Transformer
               # this will be used to populate any form field options and for validation below.
               # the resulting code should probably look something like `team.collection_name`.
             end
-          
+
             def validate_#{name_without_id}
               if #{name}.present?
                 # don't allow users to assign the ids of other teams' or users' resources to this attribute.
@@ -544,12 +534,12 @@ class Scaffolding::Transformer
 
       short = attribute_options[:class_name].underscore.split("/").last if options_need_defining
 
-      choices = case type
-      when "select", "super_select"
-        "choices"
-      when "buttons"
-        "options"
-      end
+      # choices = case type
+      # when "select", "super_select"
+      #   "choices"
+      # when "buttons"
+      #   "options"
+      # end
 
       valid_values = if name.match?(/_id$/)
         "valid_#{name_without_id.pluralize}"
@@ -582,7 +572,7 @@ class Scaffolding::Transformer
 
       scaffold_add_line_to_file(file_name, field_content, ERB_NEW_FIELDS_HOOK, prepend: true)
 
-      field_content = if name.match?(/_id$/)
+      if name.match?(/_id$/)
         name_without_id = name.gsub(/_id$/, "")
         <<~ERB
           <% if @tangible_thing.#{name_without_id} %>
@@ -688,22 +678,22 @@ class Scaffolding::Transformer
 
       field_content = nil
 
-      if name.match?(/_id$/) &&
-          if ["select", "super_select"].include?(type)
-            placeholder_text = if attribute_options[:required]
-              "Select a #{attribute_options[:class_name].split("::").last.titlecase}"
-            else
-              "None"
-            end
-
-            field_content = <<~YAML
-              #{name}:
-                      _: &#{name} #{title_case}
-                      label: *#{name}
-                      heading: *#{name}
-                      placeholder: #{placeholder_text}
-            YAML
+      if name.match?(/_id$/)
+        if ["select", "super_select"].include?(type)
+          placeholder_text = if attribute_options[:required]
+            "Select a #{attribute_options[:class_name].split("::").last.titlecase}"
+          else
+            "None"
           end
+
+          field_content = <<~YAML
+            #{name}:
+              _: &#{name} #{title_case}
+              label: *#{name}
+              heading: *#{name}
+              placeholder: #{placeholder_text}
+          YAML
+        end
       elsif !name.match?(/_ids$/)
         if ["buttons", "select", "super_select"].include?(type)
 
@@ -912,7 +902,6 @@ class Scaffolding::Transformer
     end
 
     # if needed, update the reference to the parent class name in the create_table migration.
-    modified_migration = false
     current_transformer = Scaffolding::ClassNamesTransformer.new(child, parent)
     unless current_transformer.parent_variable_name_in_context.pluralize == current_transformer.parent_table_name
 
@@ -923,7 +912,6 @@ class Scaffolding::Transformer
       end
 
       replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{current_transformer.parent_table_name}'}")
-      modified_migration = true
     end
 
     # TODO remove the class_name if not needed.
@@ -1026,16 +1014,16 @@ class Scaffolding::Transformer
       else
         puts ""
         puts "Hey, models that are scoped directly off of a Team (or nothing) are eligible to be added to the sidebar. Do you want to add this resource to the sidebar menu? (y/N)"
-        response = STDIN.gets.chomp
+        response = $stdin.gets.chomp
         if response.downcase[0] == "y"
           puts ""
           puts "OK, great! Let's do this! By default these menu items appear with a puzzle piece, but after you hit enter I'll open two different pages where you can view other icon options. When you find one you like, hover your mouse over it and then come back here and and enter the name of the icon you want to use. (Or hit enter to skip this step.)"
-          response = STDIN.gets.chomp
+          $stdin.gets.chomp
           `open https://themify.me/themify-icons`
           `open https://fontawesome.com/icons?d=gallery&s=light`
           puts ""
           puts "Did you find an icon you wanted to use? Enter the name here or hit enter to just use the puzzle piece:"
-          icon_name = STDIN.gets.chomp
+          icon_name = $stdin.gets.chomp
           puts ""
           unless icon_name.length > 0 || icon_name.downcase == "y"
             icon_name = "fal fa-puzzle-piece"

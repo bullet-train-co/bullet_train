@@ -10,7 +10,9 @@ module Account::FormsHelper
   end
 
   def flush_content_for(name)
-    content_for name, flush: true do "" end
+    content_for name, flush: true do
+      ""
+    end
   end
 
   def options_with_labels(options, namespace)

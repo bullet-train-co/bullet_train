@@ -66,7 +66,7 @@ class InvitationSystemTest < ActionDispatch::IntegrationTest
 
       # we need the id of the membership that's created so we can address it's row in the table specifically.
       invited_membership = Membership.order(:id).last
-      invitation = invited_membership.invitation
+      invited_membership.invitation
 
       within_current_memberships_table do
         assert page.has_content?("Takashi Yamaguchi")

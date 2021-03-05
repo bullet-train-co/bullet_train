@@ -110,10 +110,6 @@ class Minitest::Test
     assert errors.length.zero?, "Expected no js errors, but these errors where found: #{errors.join(", ")}"
   end
 
-  def find_stimulus_controller_for_label(label, stimulus_controller)
-    find("label", text: /\A#{label}\z/).first(:xpath, ".//..").first('[data-controller="' + stimulus_controller + '"]')
-  end
-
   def find_stimulus_controller_for_label(label, stimulus_controller, wrapper = false)
     if wrapper
       wrapper_el = find("label", text: /\A#{label}\z/).first(:xpath, ".//..//..")
@@ -178,7 +174,7 @@ class ActionDispatch::IntegrationTest
 
   if ENV["TEST_DEVICE"]
     key = ENV["TEST_DEVICE"].to_sym
-    if @@test_devices.keys.include?(key)
+    if @@test_devices.key?(key)
       puts "Running tests with the `#{ENV["TEST_DEVICE"]}` device profile specifically.".green
       @@test_devices = {key => @@test_devices[key]}
     else
@@ -192,20 +188,11 @@ class ActionDispatch::IntegrationTest
 
   def within_team_menu_for(display_details)
     within_primary_menu_for(display_details) do
-      return yield
-
-      # these menus haven't been properly implemented yet.
-      if display_details[:mobile]
-        click_on "Team"
-      else
-        first(".icon-people").hover
-      end
       yield
     end
   end
 
   def open_mobile_menu
-    raise "We haven't implemented mobile menus in the Tailwind CSS port of Bullet Train yet."
     find(".mobile-menu-trigger").click
   end
 
@@ -215,7 +202,7 @@ class ActionDispatch::IntegrationTest
       open_mobile_menu
       click_on "Logout"
     else
-      within "#menu" do
+      within ".menu" do
         # first(".logged-user-i").hover
         click_on "Logout"
       end
@@ -247,22 +234,14 @@ class ActionDispatch::IntegrationTest
   def within_homepage_navigation_for(display_details)
     if display_details[:mobile]
       open_mobile_menu
-      yield
-    else
-      yield
     end
+    yield
   end
 
   def within_primary_menu_for(display_details)
-    if display_details[:mobile]
-      open_mobile_menu
-      within ".menu-mobile .menu-and-user" do
-        yield
-      end
-    else
-      within "#menu" do
-        yield
-      end
+    open_mobile_menu if display_details[:mobile]
+    within ".menu" do
+      yield
     end
   end
 

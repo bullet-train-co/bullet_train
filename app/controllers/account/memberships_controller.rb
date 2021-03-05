@@ -24,7 +24,7 @@ class Account::MembershipsController < Account::ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @membership.errors, status: :unprocessable_entity }
       end
-    rescue RemovingLastTeamAdminException => exception
+    rescue RemovingLastTeamAdminException => _
       format.html { redirect_to [:account, @team, :memberships], alert: I18n.t("memberships.notifications.cant_demote") }
       format.json { render json: {exception: I18n.t("memberships.notifications.cant_demote")}, status: :unprocessable_entity }
     end
@@ -33,7 +33,7 @@ class Account::MembershipsController < Account::ApplicationController
   def demote
     @membership.membership_roles.find_by(role: Role.admin).try(:destroy)
     redirect_to account_team_memberships_path(@team)
-  rescue RemovingLastTeamAdminException => exception
+  rescue RemovingLastTeamAdminException => _
     redirect_to account_team_memberships_path(@team), alert: I18n.t("memberships.notifications.cant_demote")
   end
 

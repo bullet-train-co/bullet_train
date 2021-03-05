@@ -29,13 +29,17 @@ class Ability
       update_column(:ability_cache, generate_ability_cache)
     end
 
-    def method_missing(m, *args, &block)
-      if CACHEABLE_METHODS.include?(m)
-        populate_ability_cache unless ability_cache && ability_cache.keys.include?(m.to_s)
-        ability_cache[m.to_s]
+    def method_missing(method_name, *args, &block)
+      if CACHEABLE_METHODS.include?(method_name)
+        populate_ability_cache unless ability_cache&.key?(method_name.to_s)
+        ability_cache[method_name.to_s]
       else
-        super(m, *args, &block)
+        super(method_name, *args, &block)
       end
+    end
+
+    def respond_to_missing?(method_name, include_private = false)
+      CACHEABLE_METHODS.include?(method_name) || super
     end
   end
 

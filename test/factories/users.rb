@@ -14,7 +14,6 @@ FactoryBot.define do
       last_name { "Last Name" }
       after(:create) do |user|
         user.create_default_team
-        team = user.current_team
       end
     end
   end

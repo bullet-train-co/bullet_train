@@ -21,13 +21,13 @@ class Account::Oauth::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
       authenticate_user!
 
       # first we check whether they are even a member of the team they're trying to add this account to.
-      if team = current_user.teams.find_by(id: team_id)
+      if (team = current_user.teams.find_by(id: team_id))
 
         # if the user didn't click "authorize" on the providers confirmation page, just show them an error.
         if params[:denied]
           message = "Permission to connect to #{t(auth.provider)} was not granted. Not a problem! You can try again if you want to."
 
-        elsif oauth_account = team.send(oauth_accounts_collection).find_by(uid: auth.uid)
+        elsif (oauth_account = team.send(oauth_accounts_collection).find_by(uid: auth.uid))
 
           # if the oauth account is already present for the team ..
           oauth_account.update_from_oauth(auth)
@@ -55,7 +55,7 @@ class Account::Oauth::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
       end
 
     # if they're not trying to add it to a team, they're trying to sign in or sign up.
-    elsif oauth_account = oauth_account_class.find_by(team: nil, uid: auth.uid)
+    elsif (oauth_account = oauth_account_class.find_by(team: nil, uid: auth.uid))
 
       # check whether this oauth account exists in the database.
       # note: we don't want to pull records that are associated with teams.

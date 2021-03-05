@@ -70,7 +70,7 @@ class SuperScaffoldingSystemTest < ActionDispatch::IntegrationTest
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("/test")
 
-      within "#menu" do
+      within_primary_menu_for(display_details) do
         click_on "Dashboard"
       end
 

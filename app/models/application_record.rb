@@ -25,13 +25,13 @@ class ApplicationRecord < ActiveRecord::Base
 
   # by default we represent methods by their first string attribute.
   def self.label_attribute
-    columns_hash.values.select { |column| column.sql_type_metadata.type == :string }.first&.name
+    columns_hash.values.find { |column| column.sql_type_metadata.type == :string }&.name
   end
 
   # this is a template method you can override in activerecord models if we shouldn't just use their first string to
   # identify them.
   def label_string
-    if label_attribute = self.class.label_attribute
+    if (label_attribute = self.class.label_attribute)
       send("#{label_attribute}_was")
     else
       self.class.name.underscore.split("/").last.titleize

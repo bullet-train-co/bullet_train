@@ -8,7 +8,7 @@ class Webhooks::Incoming::Oauth::StripeAccountWebhook < ApplicationRecord
     if data["account"]
 
       # if we're able to find an account in our system that this webhook should be routed to ..
-      if self.oauth_stripe_account = Oauth::StripeAccount.find_by(uid: data["account"])
+      if (self.oauth_stripe_account = Oauth::StripeAccount.find_by(uid: data["account"]))
 
         # save the reference to the account.
         save

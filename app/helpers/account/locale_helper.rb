@@ -41,7 +41,7 @@ module Account::LocaleHelper
   # like 't', but if the key isn't found, it returns nil.
   def ot(key, options = {})
     t(key, options)
-  rescue I18n::MissingTranslationData => exception
+  rescue I18n::MissingTranslationData => _
     nil
   end
 end

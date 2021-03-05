@@ -120,7 +120,7 @@ class Membership < ApplicationRecord
       raise RemovingLastTeamAdminException.new("You can't remove the last team admin.")
     end
 
-    if user_was = user
+    if (user_was = user)
       unless user_first_name.present?
         self.user_first_name = user.first_name
       end

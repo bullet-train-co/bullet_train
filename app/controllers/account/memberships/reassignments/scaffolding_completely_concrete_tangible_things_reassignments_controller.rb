@@ -29,7 +29,6 @@ class Account::Memberships::Reassignments::ScaffoldingCompletelyConcreteTangible
         format.html { redirect_to [:account, @membership, :reassignments_scaffolding_completely_concrete_tangible_things_reassignments], notice: I18n.t("memberships/reassignments/scaffolding_completely_concrete_tangible_things_reassignments.notifications.created") }
         format.json { render :show, status: :created, location: [:account, @scaffolding_completely_concrete_tangible_things_reassignment] }
       else
-        raise @scaffolding_completely_concrete_tangible_things_reassignment.inspect
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @scaffolding_completely_concrete_tangible_things_reassignment.errors, status: :unprocessable_entity }
       end
@@ -73,7 +72,7 @@ class Account::Memberships::Reassignments::ScaffoldingCompletelyConcreteTangible
     strong_params[:membership_ids] = create_models_if_new(strong_params[:membership_ids]) do |email|
       # stub out a new membership and invitation with no special permissions.
       membership = current_team.memberships.create(user_email: email, added_by: current_membership)
-      invitation = current_team.invitations.create(email: email, from_membership: current_membership, membership: membership)
+      current_team.invitations.create(email: email, from_membership: current_membership, membership: membership)
       membership
     end
 
