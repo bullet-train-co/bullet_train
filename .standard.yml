@@ -1,0 +1,5 @@
+ignore:
+  - 'app/**/*':
+    - Style/TrailingCommaInArguments
+    - Style/TrailingCommaInArrayLiteral
+    - Style/TrailingCommaInHashLiteral
