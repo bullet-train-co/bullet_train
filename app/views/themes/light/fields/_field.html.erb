@@ -1,0 +1,79 @@
+<% yield %>
+
+<%
+form ||= current_fields_form
+# returns a struct with `label`, `placeholder`, and `help` methods.
+labels = labels_for(form, method)
+options ||= {}
+options[:id] ||= id_for(form, method)
+# options[:disabled] ||= !field_editable?(form.object, method) if user_signed_in?
+options[:placeholder] ||= labels.placeholder if labels.placeholder
+other_options ||= {}
+other_options[:help] = [other_options[:help], labels.help].compact.join(" ")
+
+errors = [method, method.to_s.gsub(/_id$/, '').to_sym].uniq.map { |attribute| form.object.errors.full_messages_for(attribute) }.flatten
+has_errors = errors.any? || content_for(:error).present? || other_options[:error].present?
+
+options[:class] = "#{options[:class]} block w-full rounded-md shadow-sm font-light text-sm"
+
+options[:class] += if has_errors
+  " pr-10 border-red text-red-darker placeholder-red focus:outline-none focus:ring-red focus:border-red"
+else
+  " focus:ring-blue focus:border-blue border-gray-300"
+end
+
+%>
+
+<div class="<%= 'required' if presence_validated?(form.object, method) %>">
+
+  <% # the label. %>
+  <% unless other_options[:hide_label] == true %>
+    <% if content_for? :label %>
+      <%= yield :label %>
+      <% flush_content_for :label %>
+    <% else %>
+      <% # allow the label to be defined via an inline option or else one of the locale yaml definitions. %>
+      <% label = (other_options[:label].presence || labels.label || legacy_label_for(form, method)) %>
+      <%= form.label method, label&.html_safe, class: 'block', for: options[:id] %>
+    <% end %>
+  <% end %>
+
+  <div class="mt-1.5">
+
+    <% # the actual field. %>
+    <% if content_for? :field %>
+      <%= yield :field %>
+      <% flush_content_for :field %>
+    <% else %>
+      <% # e.g. form.text_field(method, options) %>
+      <%= form.send(helper, method, options) %>
+    <% end %>
+
+  </div>
+
+  <% # any error messages. %>
+  <% if has_errors %>
+    <p class="mt-1.5 text-xs text-red">
+      <%= errors.map { |error| error + ". " }.join %>
+      <%= yield :error %>
+      <% flush_content_for :error %>
+      <%= other_options[:error]&.html_safe %>
+    </p>
+  <% end %>
+
+  <% # any help text. %>
+  <% if content_for?(:help) || other_options[:help] || content_for?(:after_help) %>
+    <p class="mt-1.5 text-xs text-gray-500">
+      <%= yield :help %>
+      <% flush_content_for :help %>
+      <%= other_options[:help]&.html_safe %>
+      <%= yield :after_help %>
+      <% flush_content_for :after_help %>
+    </p>
+  <% end %>
+
+  <% if other_options[:icon] %>
+  <div class="pre-icon os-icon <%= other_options[:icon] %>"></div>
+  <% end %>
+
+</div>

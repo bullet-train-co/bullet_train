@@ -1,6 +1,6 @@
 <% if can? :read, Oauth::StripeAccount.new(team: current_team) %>
   <%= render 'account/shared/menu/item', {
-    url: main_app.polymorphic_url([:account, current_team, :oauth_stripe_accounts]),
+    url: main_app.polymorphic_path([:account, current_team, :oauth_stripe_accounts]),
     label: t('oauth/stripe_accounts.navigation.label'),
   } do |p| %>
     <% p.content_for :icon do %>

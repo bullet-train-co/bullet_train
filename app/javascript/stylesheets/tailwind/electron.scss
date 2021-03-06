@@ -1,0 +1,11 @@
+@layer utilities {
+  .electron-draggable {
+    // make window dragable by this element.
+    -webkit-app-region: drag;
+  }
+
+  .electron-undraggable {
+    // make window dragable by this element.
+    -webkit-app-region: no-drag;
+  }
+}

@@ -1,0 +1,5 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+
+<%= cloudinary_image_tag @tangible_thing.send(attribute), height: 200 %>

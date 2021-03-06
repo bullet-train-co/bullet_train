@@ -16,7 +16,9 @@ end
       <% if current_user.former_user? && current_user.teams.none? %>
 
         <%= render 'account/shared/alert' do %>
-          <%= raw t('.alert', user_email: current_user.email) %>
+          <% # TODO this is a nice partials issue that needs resolving! %>
+          <% # = raw t('.alert', user_email: current_user.email) %>
+          <%= raw t('account.teams.new.alert', user_email: current_user.email) %>
         <% end %>
 
         <p><%= t('.you_can') %></p>

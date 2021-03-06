@@ -1,5 +1,5 @@
 <%= render 'account/shared/menu/item', {
-  url: main_app.polymorphic_url([:account, current_team, :memberships]),
+  url: main_app.polymorphic_path([:account, current_team, :memberships]),
   label: t('memberships.navigation.label'),
 } do |p| %>
   <% p.content_for :icon do %>

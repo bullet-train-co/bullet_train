@@ -1,19 +1,18 @@
 import { Controller } from "stimulus"
 import 'intl-tel-input/build/css/intlTelInput.css';
-import '../../stylesheets/account/fields/phone_field.scss';
 import intlTelInput from 'intl-tel-input';
 
 export default class extends Controller {
   static targets = [ "field" ]
-  
+
   connect() {
     this.initPluginInstance()
   }
-  
+
   disconnect() {
     this.teardownPluginInstance()
   }
-  
+
   initPluginInstance() {
     this.plugin = intlTelInput(this.fieldTarget, {
       hiddenInput: this.fieldTarget.dataset.method,
@@ -23,10 +22,10 @@ export default class extends Controller {
       customContainer: "w-full"
     });
   }
-  
+
   teardownPluginInstance() {
     if (this.plugin === undefined) { return }
-    
+
     // revert to original markup, remove any event listeners
     this.plugin.destroy()
   }

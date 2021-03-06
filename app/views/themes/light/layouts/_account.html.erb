@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <%= stylesheet_link_tag 'https://rsms.me/inter/inter.css', media: 'all', 'data-turbo-track': 'reload' %>
+    <link href="<%= asset_pack_path('media/images/light/logo/favicon.png') %>" rel="shortcut icon" />
+    <link href="<%= asset_pack_path('media/images/light/logo/logo-square-bg.png') %>" rel="apple-touch-icon" />
+    <%= render 'layouts/head' %>
+  </head>
+  <body class="bg-light-blue-gradient text-gray-700 text-sm font-normal">
+    <div class="p-4 bg-blue-darker electron-draggable electron-title-bar hidden electron-mobile-only"></div>
+    <div class="md:p-5 main-container-padding">
+      <div class="h-screen md:h-auto overflow-hidden md:rounded-lg flex shadow main-container"
+        data-controller="mobile-menu"
+        data-mobile-menu-hidden-class="hidden"
+        data-mobile-menu-show-event-name-value="mobile-menu:show"
+        data-mobile-menu-hide-event-name-value="mobile-menu:hide"
+      >
+
+        <% menu = capture do %>
+          <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker md:rounded-tl-lg electron-draggable electron-title-bar">
+            <%= image_tag asset_pack_path('media/images/light/logo/logo.png'), class: 'h-5 w-auto mx-auto' %>
+
+            <div class="lg:hidden absolute right-0">
+              <button class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                data-action="reveal#hide"
+              >
+                <span class="sr-only">Close Application Menu</span>
+                <svg class="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <nav class="flex-1 space-y-1 overflow-y-auto select-none">
+            <div class="flex-shrink-0 flex shadow px-5 py-4">
+              <div class="flex-shrink-0 w-full group block no-underline">
+                <div class="flex items-center">
+                  <div class="inline-block rounded-full border border-white p-1">
+                    <%= image_tag membership_profile_photo_url(current_membership), class: 'h-9 w-9 rounded-full', alt: current_user.name %>
+                  </div>
+                  <div class="ml-3">
+                    <div class="text-white">
+                      <%= current_user.name %>
+                    </div>
+                    <div class="text-2xs tracking-widest uppercase text-blue-light group-hover:text-white">
+                      <%= current_team.name %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="px-5 py-4 menu">
+              <%= render 'account/shared/menu' %>
+            </div>
+          </nav>
+        <% end %>
+
+        <div class="lg:hidden hidden"
+          data-mobile-menu-target="wrapper"
+
+          data-controller="reveal"
+          data-reveal-away-value="true"
+          data-reveal-hide-keys-value="escape"
+
+          data-action="mobile-menu:show->reveal#show mobile-menu:hide->reveal#hide mobile-menu-toggle->reveal#toggle reveal:hidden->mobile-menu#hideWrapper"
+        >
+          <div class="fixed inset-0 flex z-40">
+            <button
+              data-action="reveal#hide"
+
+              hidden
+              data-reveal
+              data-transition
+              data-transition-enter="transition-opacity ease-linear duration-200"
+              data-transition-enter-start="opacity-0"
+              data-transition-enter-end="opacity-100"
+              data-transition-leave="transition-opacity ease-linear duration-200"
+              data-transition-leave-start="opacity-100"
+              data-transition-leave-end="opacity-0"
+
+              class="fixed inset-0" aria-hidden="true"
+            >
+              <div class="absolute inset-0 bg-light-blue-gradient opacity-75"></div>
+            </button>
+            <div
+              hidden
+              data-reveal
+              data-transition
+              data-transition-enter="transition ease-in-out duration-200 transform"
+              data-transition-enter-start="-translate-x-full"
+              data-transition-enter-end="translate-x-0"
+              data-transition-leave="transition ease-in-out duration-200 transform"
+              data-transition-leave-start="translate-x-0"
+              data-transition-leave-end="-translate-x-full"
+
+              class="relative flex-1 flex flex-col max-w-xs w-full pb-4 bg-dark-blue-gradient shadow-xl"
+            >
+              <%= menu %>
+            </div>
+            <div class="flex-shrink-0 w-14" aria-hidden="true"></div>
+          </div>
+        </div>
+
+        <div class="hidden bg-dark-blue-gradient lg:flex lg:flex-shrink-0 overflow-y-auto">
+          <div class="w-64">
+            <%= menu %>
+          </div>
+        </div>
+
+        <div class="flex flex-col w-0 flex-1 overflow-y-auto bg-gray-100">
+          <main class="flex-1 relative z-0 focus:outline-none" tabindex="0">
+            <div class="flex flex-row items-center shadow-sm electron-draggable">
+              <button class="mobile-menu-trigger lg:hidden h-12 w-12 ml-1 flex-none inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue"
+                data-action="mobile-menu#toggle"
+              >
+                <span class="sr-only">Open Application Menu</span>
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+
+              <nav class="flex px-1 lg:px-4 py-2 overflow-x-auto select-none" aria-label="Breadcrumb">
+                <ol class="breadcrumb whitespace-nowrap flex items-center space-x-3 py-0.5 pr-3">
+                  <%= render('breadcrumbs').strip.html_safe %>
+                </ol>
+              </nav>
+            </div>
+
+            <div class="py-2 px-1">
+              <div class="mx-auto px-4 sm:px-6 py-4">
+                <%= yield %>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

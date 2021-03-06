@@ -9,22 +9,22 @@ export default class extends Controller {
     acceptsNew: Boolean,
     enableSearch: Boolean
   }
-  
+
   connect() {
     this.initPluginInstance()
   }
-  
+
   disconnect() {
     this.teardownPluginInstance()
   }
-  
+
   cleanupBeforeInit() {
     $(this.element).find('.select2-container--default').remove()
   }
-  
+
   initPluginInstance() {
     let options = {};
-    
+
     if (!this.enableSearchValue) {
       options.minimumResultsForSearch = -1;
     }
@@ -39,14 +39,14 @@ export default class extends Controller {
     this.pluginMainEl = this.selectTarget // required because this.selectTarget is unavailable on disconnect()
     $(this.pluginMainEl).select2(options);
   }
-  
+
   teardownPluginInstance() {
     if (this.pluginMainEl === undefined) { return }
-    
+
     // revert to original markup, remove any event listeners
     $(this.pluginMainEl).select2('destroy');
   }
-  
+
   // https://stackoverflow.com/questions/29290389/select2-add-image-icon-to-option-dynamically
   formatState(opt) {
     var imageUrl = $(opt.element).attr('data-image');

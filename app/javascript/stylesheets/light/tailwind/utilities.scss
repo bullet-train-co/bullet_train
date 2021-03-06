@@ -1,0 +1,49 @@
+@layer utilities {
+  .text-2xs {
+    @apply uppercase;
+    font-size: 0.65rem;
+    line-height: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .space-y {
+    @apply space-y-5;
+  }
+
+  .space-x {
+    @apply space-x-3;
+  }
+
+  .gap-y {
+    @apply gap-y-5;
+  }
+
+  .gap-x {
+    @apply gap-x-4;
+  }
+
+  .bg-dark-blue-gradient {
+    background-image: linear-gradient(to bottom, #1c4cc3 0%, #0e369a 100%);
+  }
+
+  .bg-dark-awesome-gradient {
+    background-image: linear-gradient(to bottom right, darken(#D7BBEA, 45%) 10%, #0e369a 100%);
+  }
+
+  .bg-light-blue-gradient {
+    &:before {
+      content: "";
+      position: fixed;
+      z-index: -1;
+      background: linear-gradient(to bottom right, #D7BBEA, #65A8F1);
+      top: 0px;
+      left: 0px;
+      bottom: 0px;
+      right: 0px;
+    }
+  }
+  
+  [hidden] {
+    display: none !important;
+  }
+}

@@ -1,7 +1,5 @@
 import { Controller } from "stimulus"
 
-require("../../stylesheets/account/fields/ckeditor.scss")
-
 import 'regenerator-runtime/runtime'
 
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor'
@@ -72,38 +70,37 @@ ClassicEditor.defaultConfig = {
 
 export default class extends Controller {
   static targets = [ "field" ]
-  
+
   connect() {
     this.initPluginInstance()
   }
-  
+
   disconnect() {
     this.teardownPluginInstance()
   }
-  
+
   cleanupBeforeInit() {
     $(this.element).find('.ck').remove()
   }
-  
+
   initPluginInstance() {
     if (!this.hasFieldTarget) { return }
-    
+
     this.cleanupBeforeInit() // in case improperly torn down
-    
+
     ClassicEditor.create(this.fieldTarget).then((editor) => {
       if (this.fieldTarget.getAttribute('autofocus')) {
         editor.editing.view.focus();
       }
-      
+
       this.plugin = editor
     });
   }
-  
+
   teardownPluginInstance() {
     if (this.plugin === undefined) { return }
-    
+
     // revert to original markup, remove any event listeners
     this.plugin.destroy()
   }
 }
-

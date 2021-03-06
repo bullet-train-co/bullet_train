@@ -3,9 +3,6 @@ import Tribute from 'tributejs'
 require("trix")
 require("@rails/actiontext")
 
-require("../../stylesheets/actiontext.scss")
-require("../../stylesheets/account/fields/trix_editor.scss")
-
 // only show the editor tool bar when the user is editing the field.
 // inspired by https://github.com/basecamp/trix/issues/343 and `app/assets/stylesheets/account/fields/trix_editor.scss`
 

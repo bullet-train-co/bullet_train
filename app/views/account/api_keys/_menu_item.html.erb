@@ -1,6 +1,6 @@
 <% if can? :read, ApiKey.new(user: current_user) %>
   <%= render 'account/shared/menu/item', {
-    url: main_app.polymorphic_url([:account, current_user, :api_keys]),
+    url: main_app.polymorphic_path([:account, current_user, :api_keys]),
     label: t('api_keys.navigation.label'),
   } do |p| %>
     <% p.content_for :icon do %>

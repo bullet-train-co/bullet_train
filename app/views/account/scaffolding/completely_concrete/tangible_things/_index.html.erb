@@ -60,12 +60,12 @@
     <% unless hide_actions %>
       <% if context == absolutely_abstract_creative_concept %>
         <% if can? :create, Scaffolding::CompletelyConcrete::TangibleThing.new(absolutely_abstract_creative_concept: absolutely_abstract_creative_concept) %>
-          <%= link_to t('.buttons.new'), [:new, :account, absolutely_abstract_creative_concept, :completely_concrete_tangible_thing], class: first_button_primary(:completely_concrete_tangible_thing) %>
+          <%= link_to t('.buttons.new'), [:new, :account, absolutely_abstract_creative_concept, :completely_concrete_tangible_thing], class: "#{first_button_primary(:completely_concrete_tangible_thing)} new" %>
         <% end %>
       <% end %>
 
       <% unless hide_back %>
-        <%= link_to t('global.buttons.back'), [:account, context], class: first_button_primary(:completely_concrete_tangible_thing) %>
+        <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:completely_concrete_tangible_thing)} back" %>
       <% end %>
     <% end %>
   <% end %>

@@ -43,7 +43,7 @@
 
         <% menu = capture do %>
           <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker md:rounded-tl-lg">
-            <%= image_tag asset_pack_path('media/images/logo/logo.png'), class: 'h-5 w-auto mx-auto' %>
+            <%= image_tag asset_pack_path("media/images/#{current_theme}/logo/logo.png"), class: 'h-5 w-auto mx-auto' %>
 
             <div class="lg:hidden absolute right-0">
               <button class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -213,17 +213,17 @@
 
         <div class="lg:hidden hidden"
           data-mobile-menu-target="wrapper"
-          
+
           data-controller="reveal"
           data-reveal-away-value="true"
           data-reveal-hide-keys-value="escape"
-          
+
           data-action="mobile-menu:show->reveal#show mobile-menu:hide->reveal#hide mobile-menu-toggle->reveal#toggle reveal:hidden->mobile-menu#hideWrapper"
         >
           <div class="fixed inset-0 flex z-40">
             <button
               data-action="reveal#hide"
-              
+
               hidden
               data-reveal
               data-transition
@@ -233,7 +233,7 @@
               data-transition-leave="transition-opacity ease-linear duration-200"
               data-transition-leave-start="opacity-100"
               data-transition-leave-end="opacity-0"
-              
+
               class="fixed inset-0" aria-hidden="true"
             >
               <div class="absolute inset-0 bg-light-blue-gradient opacity-75"></div>
@@ -248,7 +248,7 @@
               data-transition-leave="transition ease-in-out duration-200 transform"
               data-transition-leave-start="translate-x-0"
               data-transition-leave-end="-translate-x-full"
-              
+
               class="relative flex-1 flex flex-col max-w-xs w-full bg-dark-blue-gradient shadow-xl"
             >
               <%= menu %>
