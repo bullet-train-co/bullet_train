@@ -14,6 +14,7 @@ Bullet Train is designed to be customized and extended by the development teams 
 ## Developer Tools
  - [Super Scaffolding](/docs/super-scaffolding.md)
  - [Field Partials](/docs/field-partials.md)
+ - [Themes](/docs/themes.md)
  - [Database Seeds](/docs/seeds.md)
  - [Test Suite](/docs/testing.md)
 
@@ -28,5 +29,9 @@ Bullet Train is designed to be customized and extended by the development teams 
 ## Integration
  - [OAuth Providers](/docs/oauth.md)
 
+## Add-Ons
+ - [Font Awesome Pro](/docs/font-awesome-pro.md)
+
 ## Production
  - [Heroku](/docs/heroku.md)
+ - [Desktop Applications](/docs/desktop.md)

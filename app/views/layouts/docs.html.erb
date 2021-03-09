@@ -17,7 +17,7 @@
       <title><%= [site_name, title, t('application.tagline')].select(&:present?).uniq.first(2).reverse.join(' — ') %></title>
     <% end %>
 
-    <%= render 'layouts/head' %>
+    <%= render 'themes/light/layouts/head' %>
     <meta content="<%= t('application.keywords') %>" name="keywords" />
     <meta content="<%= description.truncate(200) %>" name="description" />
     <meta name="twitter:image:src" content="<%= image_url %>" />
@@ -99,6 +99,12 @@
                   <% end %>
                 <% end %>
 
+                <%= render 'account/shared/menu/item', url: '/docs/themes', label: 'Themes' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-swatchbook ti ti-palette"></i>
+                  <% end %>
+                <% end %>
+
                 <%= render 'account/shared/menu/item', url: '/docs/seeds', label: 'Database Seeds' do |p| %>
                   <% p.content_for :icon do %>
                     <i class="fal fa-seedling ti ti-server"></i>
@@ -158,10 +164,12 @@
                   <% end %>
                 <% end %>
 
+                <% if false %>
                 <%= render 'account/shared/menu/item', url: '/docs/api', label: 'REST API' do |p| %>
                   <% p.content_for :icon do %>
                     <i class="fal fa-brackets-curly ti ti-settings"></i>
                   <% end %>
+                <% end %>
                 <% end %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/webhooks/outgoing', label: 'Outgoing Webhooks' do |p| %>

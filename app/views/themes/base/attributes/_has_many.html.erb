@@ -1,0 +1,11 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+
+<% if object.send(attribute).any? %>
+  <%= render 'shared/attributes/attribute', object: object, attribute: attribute, strategy: strategy do %>
+    <%= object.send(attribute).map do |child_object| %>
+      <% link_to child_object.label_string, [:account, child_object] %>
+    <% end.to_sentence.html_safe %>
+  <% end %>
+<% end %>

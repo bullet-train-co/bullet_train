@@ -6,12 +6,15 @@ module ThemeHelper
   ]
 
   INCLUDE_TARGETS = [
-    'account/shared',
-    'shared'
+    # ❌ This path is included for legacy purposes, but you shouldn't reference partials like this in new code.
+    "account/shared",
+
+    # ✅ This is the correct path to generically reference theme component partials with.
+    "shared"
   ]
 
   def current_theme
-    'light'
+    THEME_DIRECTORY_ORDER.first
   end
 
   def render(options={}, locals={}, &block)
