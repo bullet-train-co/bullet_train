@@ -1,0 +1,10 @@
+<% if can? :read, Integrations::StripeInstallation.new(team: current_team) %>
+  <%= render 'account/shared/menu/item', {
+    url: main_app.polymorphic_path([:account, current_team, :integrations_stripe_installations]),
+    label: t('integrations/stripe_installations.navigation.label'),
+  } do |p| %>
+    <% p.content_for :icon do %>
+      <i class="<%= t('integrations/stripe_installations.navigation.icon') %>"></i>
+    <% end %>
+  <% end %>
+<% end %>

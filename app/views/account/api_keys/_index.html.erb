@@ -7,7 +7,7 @@
     <%= raw t(".contexts.#{context.class.name.underscore}.#{api_keys.any? ? 'description' : 'description_empty'}") %>
   <% end %>
 
-  <% p.content_for :body do %>
+  <% p.content_for :table do %>
     <% if api_keys.any? %>
       <table class="table">
         <thead>

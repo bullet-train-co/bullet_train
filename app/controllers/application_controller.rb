@@ -1,6 +1,10 @@
 class ApplicationController < ActionController::Base
   include Sprinkles::ControllerSupport
 
+  # these are common for authentication workflows.
+  include InvitationOnlyHelper
+  include InvitationsHelper
+
   protect_from_forgery with: :exception, prepend: true
 
   before_action :set_raven_context
@@ -110,7 +114,8 @@ class ApplicationController < ActionController::Base
       end
     else
       respond_to do |format|
-        format.html { redirect_to [:account, :teams], alert: exception.message }
+        # TODO we do this for now because it ensures `current_team` doesn't remain set in an invalid state.
+        format.html { redirect_to [:account, current_user.teams.first], alert: exception.message }
       end
     end
   end

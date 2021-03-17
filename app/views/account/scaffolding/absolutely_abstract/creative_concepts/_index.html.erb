@@ -8,8 +8,8 @@
     <%= raw t(".contexts.#{context.class.name.underscore}.#{creative_concepts.any? ? 'description' : 'description_empty'}") %>
   <% end %>
 
-  <% p.content_for :body do %>
-    <% if creative_concepts.any? %>
+  <% if creative_concepts.any? %>
+    <% p.content_for :table do %>
       <table class="table">
         <thead>
           <tr>

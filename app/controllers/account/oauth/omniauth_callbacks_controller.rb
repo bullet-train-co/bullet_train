@@ -1,82 +1,118 @@
 class Account::Oauth::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def stripe_connect
-    team_id = request.env["omniauth.params"]["team_id"]
-    callback(::Oauth::StripeAccount, :oauth_stripe_accounts, team_id ? team_id.to_i : nil)
+    callback("Stripe", team_id_from_env)
   end
 
   # 🚅 super scaffolding will insert new oauth providers above this line.
+
+  def team_id_from_env
+    request.env.dig("omniauth.params", "team_id")&.to_i
+  end
 
   def failure
     flash[:danger] = "Failed to sign in"
     redirect_to root_path
   end
 
-  def callback(oauth_account_class, oauth_accounts_collection, team_id)
+  def callback(class_name, team_id)
+    oauth_account_class = "Oauth::#{class_name}Account".constantize
+    oauth_accounts_collection = "oauth_#{class_name.underscore}_accounts".to_sym
+    oauth_accounts_attribute = "oauth_#{class_name.underscore}_account".to_sym
+    integrations_installations_class = "::Integrations::#{class_name}Installation".constantize
+    integrations_installations_collection = "integrations_#{class_name.underscore}_installations".to_sym
+
     auth = request.env["omniauth.auth"]
 
-    # if they're adding this account to a team.
+    # if the user didn't click "authorize" on the providers confirmation page, just show them an error.
+    if params[:denied]
+      message = t("omniauth.team.denied", provider: t(auth.provider))
+
+      # redirect them to either the integrations page or the registration page.
+      path = if team_id
+        [:account, team, integrations_installations_collection]
+      elsif current_user
+        [:account, current_user]
+      else
+        new_user_registration_path
+      end
+
+      redirect_to path, notice: message
+    end
+
+    # first, keep a record of the oauth account.
+    # this belongs to the system, and sometimes becomes associated with a user.
+    begin
+      oauth_account = oauth_account_class.find_or_create_by(uid: auth.uid)
+      oauth_account.update_from_oauth(auth)
+    rescue PG::UniqueViolation
+      retry
+    end
+
+    # if they're trying to use this account to add an integration to a team.
     if team_id
 
       # they must be signed in.
       authenticate_user!
 
-      # first we check whether they are even a member of the team they're trying to add this account to.
-      if (team = current_user.teams.find_by(id: team_id))
+      unless (team = current_user.teams.find_by(id: team_id))
+        raise "user is adding an integration to a team they don't belong to?"
+      end
 
-        # if the user didn't click "authorize" on the providers confirmation page, just show them an error.
-        if params[:denied]
-          message = "Permission to connect to #{t(auth.provider)} was not granted. Not a problem! You can try again if you want to."
+      # now we check whether they're able to install new integrations for this team.
+      if can? :create, integrations_installations_class.new(:team => team, oauth_accounts_attribute => oauth_account)
 
-        elsif (oauth_account = team.send(oauth_accounts_collection).find_by(uid: auth.uid))
-
-          # if the oauth account is already present for the team ..
-          oauth_account.update_from_oauth(auth)
-          message = "That #{t(auth.provider)} account is already present for this team!"
-
-        # update the information we have on file.
+        # if the oauth account is already present for the team ..
+        if team.send(integrations_installations_collection).find_by(oauth_accounts_attribute => oauth_account)
+          message = t("omniauth.team.already_present", provider: t(auth.provider))
 
         else
-
-          # otherwise, create a new oauth account for this team.
-          oauth_account = team.send(oauth_accounts_collection).create(uid: auth.uid)
-          oauth_account.update_from_oauth(auth)
-          message = "Great! We've added that #{t(auth.provider)} account to your team!"
+          # otherwise, create a new integration for this team.
+          team.send(integrations_installations_collection).create(:name => oauth_account.name, oauth_accounts_attribute => oauth_account)
+          message = t("omniauth.team.connected", provider: t(auth.provider))
 
         end
 
-        # in all of these situations, we take them back to the team's oauth accounts index page for this provider.
-        redirect_to [:account, team, oauth_accounts_collection], notice: message
       else
 
-        # unless they don't have access to the team.
-        # in that case, we show them an error.
-        redirect_to [:account, :dashboard], notice: "You're not allowed to add a #{t(auth.provider)} account to a team you don't have access to."
+        # if they don't have access to add integrations to the team, show them an error.
+        message = t("omniauth.team.not_allowed", provider: t(auth.provider))
 
       end
 
-    # if they're not trying to add it to a team, they're trying to sign in or sign up.
-    elsif (oauth_account = oauth_account_class.find_by(team: nil, uid: auth.uid))
+      # in all of these situations, we take them back to the team's oauth accounts index page for this provider.
+      redirect_to [:account, team, integrations_installations_collection], notice: message
 
-      # check whether this oauth account exists in the database.
-      # note: we don't want to pull records that are associated with teams.
-      # all the oauth accounts live in the same table, but we don't reuse the records
-      # across teams or between a user and the team. this might seem counter-intuitive,
-      # but it's a bundle of hurt trying to manage them the other way.
-      oauth_account.update_from_oauth(auth)
+    # if they're already signed in, they're trying to add it to their account.
+    elsif current_user
+
+      # if the account is already connected to a user, we can't connect it again.
+      # this would potentially lock someone else out of their account.
+      if oauth_account.user
+        message_key = oauth_account.user == current_user ? "omniauth.user.reconnected" : "omniauth.user.already_registered"
+        redirect_to edit_account_user_path(current_user), notice: t(message_key, provider: t(auth.provider))
+      else
+        oauth_account.update(user: current_user)
+        redirect_to edit_account_user_path(current_user), notice: t("omniauth.user.connected", provider: t(auth.provider))
+      end
+
+    # if they're not trying to add it to a team, they're trying to sign in or sign up.
+    # if they're already associated with a user record, just sign them in.
+    elsif oauth_account.user
+
       sign_in oauth_account.user
+      handle_outstanding_invitation
       redirect_to account_dashboard_path
 
-    # if it exists, update their info and sign them in.
+    # if they're not associated with a user and they're allowed to sign up.
+    elsif show_sign_up_options?
 
-    else
-
-      # otherwise, we're going to try to create a new user account.
+      # we're going to try to create a new user account.
       # if the oauth provider gave us an email address, use that, otherwise use a
       # temporary email placeholder. (we'll never show the temporary to the user.)
-
-      # TODO we need to update this to some sort of invalid email address or something
-      # people know to ignore. it would be a security problem to have this pointing
-      # at anybody's real email address.
+      # this has to be a "real" email address so we don't trip up any email validators.
+      # however, this is secure because even if someone controlled `bullettrain.co`,
+      # they would never be able to guess the hex code to reset the password.
+      # even that is a rare edge case, because we force people to update this in onboarding.
       email = auth.info.email.present? ? auth.info.email : "noreply+#{SecureRandom.hex}@bullettrain.co"
 
       # if the user already exists with the email address on the account ..
@@ -96,10 +132,10 @@ class Account::Oauth::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
         password = Devise.friendly_token[0, 20]
         user = User.create(email: email, password: password, password_confirmation: password)
 
-        oauth_account = user.send(oauth_accounts_collection).create(uid: auth.uid)
-        oauth_account.update_from_oauth(auth)
+        oauth_account.update(user: user)
 
         sign_in user
+        handle_outstanding_invitation
 
         # if the user doesn't have a team at this point, create one.
         unless user.teams.any?
@@ -110,6 +146,8 @@ class Account::Oauth::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
 
       end
 
+    else
+      redirect_to new_user_session_path, notice: t("omniauth.user.account_not_found", provider: t(auth.provider))
     end
   end
 end

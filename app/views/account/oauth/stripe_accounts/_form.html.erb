@@ -1,10 +1,8 @@
-<%= form_with(model: [:account, (@team unless stripe_account.persisted?), stripe_account], local: true) do |form| %>
+<%= form_with model: [:account, (@user unless stripe_account.persisted?), stripe_account], local: true, class: 'form' do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
   <%= render 'account/shared/alert' do %>
-    There are no configurable settings for this Stripe Account by default. Because there are no form fields by default,
-    clicking the button below will raise an exception and you'll see an error page. This isn't a bug. The error will go
-    away when you add your first field here.
+    There are no configurable settings for this Stripe accounts by default, but you might want to add some!
   <% end %>
 
   <%# 🚅 super scaffolding will insert new fields above this line. %>

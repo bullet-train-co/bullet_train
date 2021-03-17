@@ -1,3 +1,15 @@
 en:
   stripe_connect: Stripe
   # 🚅 super scaffolding will insert new oauth providers above this line.
+  omniauth:
+    team:
+      connected: "We've successfully added that %{provider} account to your team!"
+      denied: "Permission to connect to %{provider} was not granted. Not a problem! You can try again if you want to."
+      already_present: "That %{provider} account is already present for this team!"
+      not_allowed: "You're not allowed to add a %{provider} account to a team you don't have access to."
+    user:
+      connected: "We've successfully connected that %{provider} account to your user account."
+      reconnected: "That %{provider} account is already connected to your user account."
+      already_registered: "That %{provider} account is already connected to another user. Before you can connect that %{provider} account with your user account, you'll need to sign out and sign back in using that account and remove it from that user account profile."
+      email_already_registered: "Sorry, there is already a user registered with the email address %{email}, but this %{provider} account isn't configured for login with that account. Please sign in using your password and then add this account."
+      account_not_found: "Sorry, no existing account was found for that %{provider} account. In order to create a new account, please click the link in the invitation you received via email."

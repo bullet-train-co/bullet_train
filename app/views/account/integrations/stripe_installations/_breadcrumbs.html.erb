@@ -1,0 +1,8 @@
+<% stripe_installation ||= @stripe_installation %>
+<% team ||= @team || stripe_installation&.team %>
+<%= render 'account/teams/breadcrumbs', team: team %>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, team, :integrations_stripe_installations] %>
+<% if stripe_installation&.persisted? %>
+  <%= render 'account/shared/breadcrumb', label: stripe_installation.label_string, url: [:account, stripe_installation] %>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'integrations/stripe_installations' %>

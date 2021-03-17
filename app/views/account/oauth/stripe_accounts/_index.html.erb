@@ -1,7 +1,7 @@
-<% context ||= @team %>
+<% context ||= @user %>
 <% hide_actions ||= false %>
 
-<%= render 'account/shared/box' do |p| %>
+<%= render 'account/shared/box', divider: stripe_accounts.any? do |p| %>
   <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
   <% p.content_for :description do %>
     <%= raw t(".contexts.#{context.class.name.underscore}.#{stripe_accounts.any? ? 'description' : 'description_empty'}") %>
@@ -9,37 +9,40 @@
 
   <% p.content_for :body do %>
     <% if stripe_accounts.any? %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th><%= t('.fields.name.heading') %></th>
-            <%# 🚅 super scaffolding will insert new field headers above this line. %>
-            <th><%= t('.fields.created_at.heading') %></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% stripe_accounts.each do |stripe_account| %>
-          <tr data-id="<%= stripe_account.id %>">
-            <td><%= link_to stripe_account.name, [:account, stripe_account] %></td>
-            <%# 🚅 super scaffolding will insert new fields above this line. %>
-            <td><%= display_date_and_time(stripe_account.created_at) %></td>
-            <td class="buttons">
-              <% unless hide_actions %>
-                <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, stripe_account], class: 'button-secondary button-smaller' if can? :edit, stripe_account %>
-                <%= button_to t('.buttons.shorthand.destroy'), [:account, stripe_account], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(stripe_account)) }, class: 'button-secondary button-smaller' if can? :destroy, stripe_account %>
+      <div class="space-y-0 border border-gray-200 shadow-sm rounded-md divide-y divide-gray-200">
+        <% stripe_accounts.each do |stripe_account| %>
+          <div class="flex py-1.5 px-3 items-center">
+            <div class="flex-1 min-w-0">
+              <% if stripe_account.integrations_stripe_installations.any? %>
+                <%= link_to stripe_account.name, [:account, stripe_account] %>
+              <% else %>
+                <%= stripe_account.name %>
               <% end %>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+            </div>
+            <div class="flex-0 min-w-0 space-x-2 text-lg">
+              <% if can? :destroy, stripe_account %>
+                <%= link_to [:account, stripe_account], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(stripe_account)) }, class: 'inline-block text-gray-300 hover:text-gray-400 hover:no-underline' do %>
+                  <i class="ti ti-close"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 
   <% p.content_for :actions do %>
     <% unless hide_actions %>
-      <%= link_to t('.buttons.new'), [:new, :account, @team, :oauth_stripe_account], class: 'button' if can? :create, @team.oauth_stripe_accounts.new %>
+      <% if can? :create, Oauth::StripeAccount.new(user: @user) %>
+        <%= link_to stripe_accounts.empty? ? t('.buttons.new') : t('.buttons.another'), [:new, :account, @user, :oauth_stripe_account], class: 'button' %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% p.content_for :footer do %>
+    <% if current_team %>
+      <%= raw t(".contexts.user.integration_note", integration_url: url_for([:account, current_team, :integrations_stripe_installations])) %>
     <% end %>
   <% end %>
 <% end %>

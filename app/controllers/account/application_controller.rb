@@ -45,7 +45,9 @@ class Account::ApplicationController < ApplicationController
     # if the currently loaded team is saved to the database, make that the
     # user's new current team.
     if @team.try(:persisted?)
-      current_user.update_column(:current_team_id, @team.id)
+      if can? :show, @teams
+        current_user.update_column(:current_team_id, @team.id)
+      end
     end
   end
 

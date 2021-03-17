@@ -26,20 +26,7 @@ class RegistrationsController < Devise::RegistrationsController
       # TODO i think this might be redundant. we've added a hook into `session["user_return_to"]` in the
       # `invitations#accept` action and that might be enough to get them where they're supposed to be after
       # either creating a new account or signing into an existing account.
-
-      # was this user registering to claim an invitation?
-      if session[:invitation_uuid].present?
-
-        # try to find the invitation, if it still exists.
-        invitation = Invitation.find_by_uuid(session[:invitation_uuid])
-
-        # if the invitation was found, claim it for this user.
-        invitation&.accept_for(current_user)
-
-        # remove the uuid from the session.
-        session.delete(:invitation_uuid)
-
-      end
+      handle_outstanding_invitation
 
       # if the user doesn't have a team at this point, create one.
       unless current_user.teams.any?

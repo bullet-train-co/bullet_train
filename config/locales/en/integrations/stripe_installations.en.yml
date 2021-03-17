@@ -1,0 +1,90 @@
+en:
+  integrations/stripe_installations: &stripe_installations
+    label: &label Stripe Installations
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fab fa-stripe-s ti ti-money
+    buttons: &buttons
+      new: Add New Stripe Installation
+      create: Create Stripe Installation
+      edit: Edit Stripe Installation
+      update: Update Stripe Installation
+      destroy: Remove Stripe Installation
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to disconnect %{stripe_installation_name} from %{team_name}? This won't remove this Stripe account from any connections it has to a user account for single sign-on. This will remove any data associated with this installation on %{team_name}. This can't be undone.
+        destroy_from_user: Are you sure you want to disconnect this Stripe account from %{team_name}? This will remove any data associated with this installation on %{team_name}. This can't be undone.
+    fields: &fields
+      name:
+        _: &name Name
+        label: *name
+        heading: *name
+
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    list:
+      section: "Stripe Installations"
+      contexts:
+        user:
+          header: Integration Installations
+          description: Since you are the registered owner of this Stripe account, you have the ability to disconnect it from any Teams where it's currently installed as an integration.
+          description_empty: This Stripe account hasn't been installed as an integration on any Teams.
+          authentication_note: "You can also <a href=\"%{authentication_url}\">connect and manage Stripe accounts for single sign-on authentication</a>."
+      fields: *fields
+      buttons: *buttons
+    index:
+      section: "%{teams_possessive} Stripe Installations"
+      contexts:
+        team:
+          header: Stripe Installations
+          description: Below is a list of Stripe Installations that have been added for %{team_name}.
+          description_empty: No Stripe Installations have been added for %{team_name}.
+          authentication_note: "You can also <a href=\"%{authentication_url}\">connect and manage Stripe accounts for single sign-on authentication</a>."
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{stripe_installation_name}"
+      header: Stripe Installation Details
+      description: Below are the details we have for %{stripe_installation_name}.
+      manage_description: You'll also find options for updating these details or removing %{stripe_installation_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Stripe Installation for %{team_name}"
+      header: New Stripe Installation Details
+      description: Please provide the details of the new Stripe Installation you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{stripe_installation_name}"
+      header: Edit Stripe Installation Details
+      description: You can update the details or settings for %{stripe_installation_name} below.
+      form: *form
+    notifications:
+      created: Stripe Installation was successfully created.
+      updated: Stripe Installation was successfully updated.
+      destroyed: Stripe Installation was successfully removed.
+  account:
+    integrations:
+      stripe_installations: *stripe_installations
+  activerecord:
+    attributes:
+      integrations/stripe_installation:
+        name: *name
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

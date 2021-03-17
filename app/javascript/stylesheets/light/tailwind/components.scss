@@ -47,17 +47,17 @@
   }
 
   form.form {
-    @apply space-y-5;
+    @apply -mt-5 space-y-5;
     .buttons {
-      @apply pt-3 space-x;
+      @apply pt-1 space-x;
     }
   }
 
   .table {
-    @apply w-full divide-y divide-gray-900 divide-opacity-10 text-left;
+    @apply w-full divide-y divide-gray-900 divide-opacity-5 text-left;
 
     & th {
-      @apply px-3 py-3 text-2xs text-white text-opacity-60 font-normal;
+      @apply px-3 py-3 text-2xs font-semibold font-normal;
 
       &:first-child {
         @apply pl-5;
@@ -69,7 +69,7 @@
     }
 
     & tbody {
-      @apply divide-y divide-gray-900 divide-opacity-10;
+      @apply divide-y divide-gray-900 divide-opacity-5;
     }
 
     & td {
@@ -90,6 +90,20 @@
         // just having a cell with buttons shouldn't expand the height of a table row.
         & > * {
           @apply -mt-5 -mb-5;
+        }
+      }
+    }
+  }
+
+  .box-table {
+    .table {
+      & th, & td {
+        &:first-child {
+          @apply pl-8;
+        }
+
+        &:last-child {
+          @apply pr-8;
         }
       }
     }

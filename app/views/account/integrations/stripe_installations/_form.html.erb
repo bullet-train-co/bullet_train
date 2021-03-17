@@ -1,0 +1,18 @@
+<%= form_with model: stripe_installation, url: (stripe_installation.persisted? ? [:account, stripe_installation] : [:account, @team, :integrations_stripe_installations]), local: true, class: 'form' do |form| %>
+  <%= render 'account/shared/forms/errors', form: form %>
+
+  <% with_field_settings form: form do %>
+    <%= render 'shared/fields/text_field', method: :name, options: {autofocus: true} %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% end %>
+
+  <div class="buttons">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:account, stripe_installation], class: "button-secondary" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:account, @team, :integrations_stripe_installations], class: "button-secondary" %>
+    <% end %>
+  </div>
+
+<% end %>
