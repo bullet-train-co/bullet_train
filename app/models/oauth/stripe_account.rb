@@ -1,7 +1,6 @@
 class Oauth::StripeAccount < ApplicationRecord
   # 🚅 add concerns above.
 
-  belongs_to :team, optional: true
   belongs_to :user, optional: true
   # 🚅 add belongs_to associations above.
 

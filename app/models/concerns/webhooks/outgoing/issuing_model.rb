@@ -14,6 +14,9 @@ module Webhooks::Outgoing::IssuingModel
   end
 
   def generate_webhook(action)
+    # we can only generate webhooks for objects that return their team.
+    return unless respond_to? :team
+
     # we only generate a webhook for event types that are defined in the database.
     # this is what allows users to filter which webhooks they receive, if they want to.
     # however, even if they're not filtering, we only deliver webhooks that are
