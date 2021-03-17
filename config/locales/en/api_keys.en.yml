@@ -7,7 +7,7 @@ en:
       label: *label
       icon: fal fa-key ti ti-key
     notifications:
-      created: An API Key was successfully generated. Please be sure to make a copy from the table below. The secret token will not be displayed again.
+      created: A new API Key was successfully generated. The secret token will not be displayed again, so please be sure to make a copy now from the table below.
       destroyed: API Key was successfully revoked.
     buttons: &buttons
       reveal: Click to Reveal
@@ -38,7 +38,7 @@ en:
         user:
           header: API Keys
           description: It's okay if other people see the public token below, but you should keep the secret token completely secure.
-          description_empty: No API Keys have been generated for %{user_name} yet. To get started, use the button below!
+          description_empty: No API Keys have been generated for your user account yet. To get started, use the button below!
       fields: *fields
       buttons: *buttons
   account:

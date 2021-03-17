@@ -1,19 +1,23 @@
 class Account::Oauth::StripeAccountsController < Account::ApplicationController
-  account_load_and_authorize_resource :stripe_account, through: :team, through_association: :oauth_stripe_accounts
+  account_load_and_authorize_resource :stripe_account, through: :user, through_association: :oauth_stripe_accounts
 
-  # GET /account/teams/:team_id/oauth/stripe_accounts
-  # GET /account/teams/:team_id/oauth/stripe_accounts.json
+  # GET /account/users/:user_id/oauth/stripe_accounts
+  # GET /account/users/:user_id/oauth/stripe_accounts.json
   def index
+    redirect_to [:edit, :account, @user]
   end
 
   # GET /account/oauth/stripe_accounts/:id
   # GET /account/oauth/stripe_accounts/:id.json
   def show
+    unless @stripe_account.integrations_stripe_installations.any?
+      redirect_to [:edit, :account, @user]
+    end
   end
 
-  # GET /account/teams/:team_id/oauth/stripe_accounts/new
+  # GET /account/users/:user_id/oauth/stripe_accounts/new
   def new
-    redirect_to user_stripe_connect_omniauth_authorize_path(team_id: @team.id)
+    redirect_to user_stripe_connect_omniauth_authorize_path
   end
 
   # GET /account/oauth/stripe_accounts/:id/edit
@@ -37,13 +41,9 @@ class Account::Oauth::StripeAccountsController < Account::ApplicationController
   # DELETE /account/oauth/stripe_accounts/:id
   # DELETE /account/oauth/stripe_accounts/:id.json
   def destroy
-    if @stripe_account.user_id.present?
-      @stripe_account.update_column(:team_id, nil)
-    else
-      @stripe_account.destroy
-    end
+    @stripe_account.update(user: nil)
     respond_to do |format|
-      format.html { redirect_to [:account, @team, :oauth, :stripe_accounts], notice: I18n.t("oauth/stripe_accounts.notifications.destroyed") }
+      format.html { redirect_to [:account, @user, :oauth, :stripe_accounts], notice: I18n.t("oauth/stripe_accounts.notifications.destroyed") }
       format.json { head :no_content }
     end
   end

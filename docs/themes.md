@@ -24,7 +24,39 @@ At run-time, this means:
 - However, when `_text_field.html.erb` references `_field.html.erb`, that renders from “Light”.
 - If you extend “Light” and override `_field.html.erb`, rendering `_text_field.html.erb` will now use your theme’s `_field.html.erb`.
 
-It’s powerful stuff.
+## Theme Component Usage
+
+To use a theme component, simply include it from "within" `shared` like so:
+
+```
+<%= render 'shared/fields/text_field', method: :text_field_value %>
+```
+
+We say "within" because while a `shared` view partial directory does exist, the referenced `shared/fields/_text_field.html.erb` doesn't actually exist within it. Instead, the theme engine picks up on `shared` and also works its way through the theme directories to find the appropriate match.
+
+### Tools for Indirection
+
+This small bit of indirection does buy us an incredible amount of power in building and extending themes. But indirection also comes at a small cognitive cost. Here are two ways to offset that cost:
+
+#### 1. Xray
+
+We include [Xray](https://github.com/brentd/xray-rails) in Bullet Train by default to ensure it's always crystal clear when viewing the page source where any series of partials are being rendered from. This is an invaluable tool when working with theme component partials.
+
+For example, our earlier example renders the following comments into the page's HTML source in the development environment:
+
+```
+<!--XRAY START 192 .../app/views/themes/base/fields/_text_field.html.erb-->
+<!--XRAY START 191 .../app/views/themes/light/fields/_field.html.erb-->
+...
+<!--XRAY END 191-->
+<!--XRAY END 192-->
+```
+
+This doesn't only help you understand which smaller components a higher-level component is composed of, but it also allows you to quickly identify where in the theme inheritance structure each of those smaller components are being pulled in from.
+
+#### 2. IDE Fuzzy Search
+
+If you don't already, you'll want to use a fuzzy search in your IDE to drill down into `shared` view partials. For example, to drill down into the view partial in the example above, you would search for `fields/text_field`, and choose the appropriate instance of that file from within the themes directory.
 
 ## Theme Configuration
 
@@ -70,7 +102,7 @@ On the other hand, if you decide to try to build a theme from the ground up, you
 <% end %>
 ```
 
-#### ✅ Instead, do this:
+#### ✅ Instead, always do this:
 
 ```
 <%= render "shared/box" do |p| %>

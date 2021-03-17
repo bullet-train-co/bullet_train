@@ -1,5 +1,6 @@
 <% context ||= @team %>
 <% hide_actions ||= false %>
+<% hide_back ||= false %>
 
 <%= render 'account/shared/box' do |p| %>
   <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
@@ -7,7 +8,7 @@
     <%= raw t(".contexts.#{context.class.name.underscore}.#{memberships.any? ? 'description' : 'description_empty'}") %>
   <% end %>
 
-  <% p.content_for :body do %>
+  <% p.content_for :table do %>
     <% if memberships.any? %>
       <table class="table">
         <thead>
@@ -58,7 +59,8 @@
 
   <% unless hide_actions %>
     <% p.content_for :actions do %>
-      <%= link_to t('invitations.buttons.new'), new_account_team_invitation_path(@team, cancel_path: account_team_memberships_path(@team)), class: 'button' %>
+      <%= link_to t('invitations.buttons.new'), new_account_team_invitation_path(@team, cancel_path: account_team_memberships_path(@team)), class: "#{first_button_primary}" %>
+      <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary} back" unless hide_back %>
     <% end %>
   <% end %>
 <% end %>

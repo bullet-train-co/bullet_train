@@ -1,21 +1,18 @@
 <%= render 'account/shared/page' do |p| %>
   <% p.content_for :title, t('.section') %>
   <% p.content_for :body do %>
-    <%= render 'account/shared/box', divider: true do |p| %>
+    <%= render 'account/shared/box' do |p| %>
       <% p.content_for :title, t('.header') %>
       <% p.content_for :description, t('.description') %>
-      <% p.content_for :body do %>
-        <%= render 'shared/attributes/text', object: @stripe_account, attribute: :name %>
-        <%# 🚅 super scaffolding will insert new fields above this line. %>
-      <% end %>
 
       <% p.content_for :actions do %>
         <%= link_to t('.buttons.edit'), [:edit, :account, @stripe_account], class: first_button_primary if can? :edit, @stripe_account %>
         <%= button_to t('.buttons.destroy'), [:account, @stripe_account], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@stripe_account)) } if can? :destroy, @stripe_account %>
-        <%= link_to t('global.buttons.back'), [:account, @team, :oauth_stripe_accounts], class: first_button_primary %>
+        <%= link_to t('global.buttons.back'), [:account, @user, :oauth_stripe_accounts], class: first_button_primary %>
       <% end %>
     <% end %>
 
+    <%= render 'account/integrations/stripe_installations/list', context: @user, stripe_installations: @stripe_account.integrations_stripe_installations %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
 
   <% end %>

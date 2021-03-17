@@ -114,8 +114,9 @@ class Ability
       # statement below the appropriate oauth models.
 
       if stripe_enabled?
-        can :manage, Oauth::StripeAccount, team_id: user.team_ids
-        # cannot :update, Oauth::StripeAccount
+        can [:read, :create, :destroy], Oauth::StripeAccount, user_id: user.id
+        can :manage, Integrations::StripeInstallation, team_id: user.team_ids
+        can :destroy, Integrations::StripeInstallation, oauth_stripe_account: {user_id: user.id}
       end
 
       # 🚅 super scaffolding will insert any new oauth providers above.

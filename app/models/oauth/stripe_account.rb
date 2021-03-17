@@ -1,10 +1,24 @@
 class Oauth::StripeAccount < ApplicationRecord
+  # 🚅 add concerns above.
+
   belongs_to :team, optional: true
   belongs_to :user, optional: true
-  has_many :webhooks_incoming_stripe_webhooks, class_name: "Webhooks::Incoming::StripeWebhook",
-                                               foreign_key: "oauth_stripe_account_id"
+  # 🚅 add belongs_to associations above.
+
+  has_many :webhooks_incoming_oauth_stripe_account_webhooks, class_name: "Webhooks::Incoming::Oauth::StripeAccountWebhook", foreign_key: "oauth_stripe_account_id"
+  has_many :integrations_stripe_installations, class_name: "Integrations::StripeInstallation", foreign_key: "oauth_stripe_account_id"
+  # 🚅 add has_many associations above.
+
+  # 🚅 add has_one associations above.
+
+  # 🚅 add scopes above.
 
   validates :uid, presence: true
+  # 🚅 add validations above.
+
+  # 🚅 add callbacks above.
+
+  # 🚅 add delegations above.
 
   def label_string
     name
@@ -28,9 +42,11 @@ class Oauth::StripeAccount < ApplicationRecord
 
   # webhooks received for this account will be routed here asynchronously for processing on a worker.
   def process_webhook(webhook)
-    # consider using transactions here. if an error occurs in the processing of a webhook, it's not like user-facing
-    # errors on the web where they see a red screen of death. instead, sidekiq will reattempt the processing of the
-    # entire webhook, which means that earlier portions of your logic will be run more than once unless you're careful
-    # to avoid it.
+    # we delegate processing to any active installations.
+    integrations_stripe_installations.order(:id).each do |installation|
+      installation.process_webhook(webhook)
+    end
   end
+
+  # 🚅 add methods above.
 end

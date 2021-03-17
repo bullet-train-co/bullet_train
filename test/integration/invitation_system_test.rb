@@ -288,7 +288,7 @@ class InvitationSystemTest < ActionDispatch::IntegrationTest
 
       # TODO why isn't this showing anymore?
       # assert page.has_content?("You've successfully removed yourself from The Testing Team.")
-      
+
       assert page.has_content?("Join a Team")
       assert page.has_content?("The account hanako.tanaka@gmail.com is not currently a member of any teams.")
       assert page.has_content?("Accept an invitation")

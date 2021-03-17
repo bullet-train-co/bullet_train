@@ -32,7 +32,9 @@
                 <% end %>
 
                 <div class="sm:col-span-2">
-                  <%= render 'shared/fields/super_select', form: f, method: :time_zone, choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone) %>
+                  <%= render 'shared/fields/super_select', form: f, method: :time_zone,
+                    choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone),
+                    other_options: {search: true} %>
                 </div>
               </div>
 
@@ -44,7 +46,10 @@
         <% end %>
       </div>
 
-      <div class="xl:col-span-1">
+      <div class="xl:col-span-1 space-y-8">
+        <%= render 'account/oauth/stripe_accounts/index', context: @user, stripe_accounts: @user.oauth_stripe_accounts %>
+        <% # 🚅 super scaffolding will insert new oauth providers above this line. %>
+
         <%= render 'account/shared/box', divider: true do |p| %>
           <% p.content_for :title, t('.password.header') %>
           <% p.content_for :body do %>

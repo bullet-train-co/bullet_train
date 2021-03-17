@@ -10,7 +10,7 @@
     <%= t(".contexts.#{context.class.name.underscore}.description") %>
   <% end %>
 
-  <% p.content_for :body do %>
+  <% p.content_for :table do %>
     <% if tangible_things.any? %>
       <table class="table">
         <thead>
@@ -18,8 +18,7 @@
             <%# 🚅 skip this section when scaffolding. %>
             <th><%= t('.fields.text_field_value.heading') %></th>
             <th><%= t('.fields.button_value.heading') %></th>
-            <th><%= t('.fields.email_field_value.heading') %></th>
-            <th><%= t('.fields.phone_field_value.heading') %></th>
+            <th><%= t('.fields.multiple_button_values.heading') %></th>
             <%# 🚅 stop any skipping we're doing now. %>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
             <th><%= t('.fields.created_at.heading') %></th>
@@ -33,8 +32,7 @@
                 <%# 🚅 skip this section when scaffolding. %>
                 <td><%= render 'shared/attributes/text', attribute: :text_field_value, url: [:account, tangible_thing] %></td>
                 <td><%= render 'shared/attributes/option', attribute: :button_value %></td>
-                <td><%= render 'shared/attributes/email', attribute: :email_field_value %></td>
-                <td><%= render 'shared/attributes/phone_number', attribute: :phone_field_value %></td>
+                <td><%= render 'shared/attributes/options', attribute: :multiple_button_values %></td>
                 <%# 🚅 stop any skipping we're doing now. %>
                 <%# 🚅 super scaffolding will insert new fields above this line. %>
                 <td><%= display_date_and_time(tangible_thing.created_at) %></td>

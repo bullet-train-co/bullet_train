@@ -1,0 +1,64 @@
+<% team = @team || @team %>
+<% context ||= team %>
+<% collection ||= :integrations_stripe_installations %>
+<% hide_actions ||= false %>
+<% hide_back ||= false %>
+
+<%= render 'account/shared/box' do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= t(".contexts.#{context.class.name.underscore}.description") %>
+  <% end %>
+
+  <% p.content_for :table do %>
+    <% if stripe_installations.any? %>
+      <table class="table">
+        <thead>
+          <tr>
+            <th><%= t('.fields.name.heading') %></th>
+            <%# 🚅 super scaffolding will insert new field headers above this line. %>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% stripe_installations.each do |stripe_installation| %>
+            <% with_attribute_settings object: stripe_installation do %>
+              <tr data-id="<%= stripe_installation.id %>">
+                <td><%= render 'shared/attributes/text', attribute: :name, url: [:account, stripe_installation] %></td>
+                <%# 🚅 super scaffolding will insert new fields above this line. %>
+                <td class="buttons">
+                  <% unless hide_actions %>
+                    <% if can? :edit, stripe_installation %>
+                      <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, stripe_installation], class: 'button-secondary button-smaller' %>
+                    <% end %>
+                    <% if can? :destroy, stripe_installation %>
+                      <%= button_to t('.buttons.shorthand.destroy'), [:account, stripe_installation], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(stripe_installation)) }, class: 'button-secondary button-smaller' %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
+
+  <% p.content_for :actions do %>
+    <% unless hide_actions %>
+      <% if context == team %>
+        <% if can? :create, Integrations::StripeInstallation.new(team: team) %>
+          <%= link_to t('.buttons.new'), [:new, :account, team, :integrations_stripe_installation], class: "#{first_button_primary(:integrations_stripe_installation)} new" %>
+        <% end %>
+      <% end %>
+
+      <% unless hide_back %>
+        <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:integrations_stripe_installation)} back" %>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <% p.content_for :footer do %>
+    <%= raw t(".contexts.team.authentication_note", authentication_url: url_for([:edit, :account, current_user])) %>
+  <% end %>
+<% end %>

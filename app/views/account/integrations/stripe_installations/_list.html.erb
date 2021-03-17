@@ -1,0 +1,34 @@
+<% context ||= @user %>
+<% collection ||= :integrations_stripe_installations %>
+
+<%= render 'account/shared/box', divider: true do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= t(".contexts.#{context.class.name.underscore}.description") %>
+  <% end %>
+
+  <% p.content_for :body do %>
+    <% if stripe_installations.any? %>
+      <div class="space-y-0 border border-gray-200 shadow-sm rounded-md divide-y divide-gray-200">
+        <% stripe_installations.each do |stripe_installation| %>
+          <div class="flex py-1.5 px-3 items-center">
+            <div class="flex-1 min-w-0">
+              <% if can? :show, stripe_installation.team %>
+                <%= link_to stripe_installation.team.name, [:account, stripe_installation.team, :integrations, :stripe_installations] %>
+              <% else %>
+                <%= stripe_installation.team.name %>
+              <% end %>
+            </div>
+            <div class="flex-0 min-w-0 space-x-2 text-lg">
+              <% if can? :destroy, stripe_installation %>
+                <%= link_to [:account, stripe_installation, return_to: request.path], method: :delete, data: { confirm: t('.buttons.confirmations.destroy_from_user', team_name: stripe_installation.team.label_string) }, class: 'inline-block text-gray-300 hover:text-gray-400 hover:no-underline' do %>
+                  <i class="ti ti-close"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

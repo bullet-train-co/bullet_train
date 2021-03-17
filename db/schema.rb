@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_04_203705) do
+ActiveRecord::Schema.define(version: 2021_03_17_150916) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,16 @@ ActiveRecord::Schema.define(version: 2021_03_04_203705) do
     t.index ["team_id"], name: "index_imports_csv_imports_on_team_id"
   end
 
+  create_table "integrations_stripe_installations", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.bigint "oauth_stripe_account_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["oauth_stripe_account_id"], name: "index_stripe_installations_on_stripe_account_id"
+    t.index ["team_id"], name: "index_integrations_stripe_installations_on_team_id"
+  end
+
   create_table "invitations", id: :serial, force: :cascade do |t|
     t.string "email"
     t.string "uuid"
@@ -146,11 +156,10 @@ ActiveRecord::Schema.define(version: 2021_03_04_203705) do
   create_table "oauth_stripe_accounts", force: :cascade do |t|
     t.string "uid"
     t.jsonb "data"
-    t.bigint "team_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_oauth_stripe_accounts_on_team_id"
+    t.index ["uid"], name: "index_oauth_stripe_accounts_on_uid", unique: true
     t.index ["user_id"], name: "index_oauth_stripe_accounts_on_user_id"
   end
 
@@ -216,7 +225,6 @@ ActiveRecord::Schema.define(version: 2021_03_04_203705) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "being_destroyed"
-    t.string "time_zone"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -340,6 +348,8 @@ ActiveRecord::Schema.define(version: 2021_03_04_203705) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "api_keys", "users"
   add_foreign_key "imports_csv_imports", "teams"
+  add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"
+  add_foreign_key "integrations_stripe_installations", "teams"
   add_foreign_key "invitations", "teams"
   add_foreign_key "membership_roles", "memberships"
   add_foreign_key "membership_roles", "roles"
@@ -350,7 +360,6 @@ ActiveRecord::Schema.define(version: 2021_03_04_203705) do
   add_foreign_key "memberships_reassignments_assignments", "memberships"
   add_foreign_key "memberships_reassignments_assignments", "memberships_reassignments_scaffolding_completely_concrete_tangi", column: "scaffolding_completely_concrete_tangible_things_reassignments_i"
   add_foreign_key "memberships_reassignments_scaffolding_completely_concrete_tangi", "memberships"
-  add_foreign_key "oauth_stripe_accounts", "teams"
   add_foreign_key "oauth_stripe_accounts", "users"
   add_foreign_key "scaffolding_absolutely_abstract_creative_concepts", "teams"
   add_foreign_key "scaffolding_absolutely_abstract_creative_concepts_collaborators", "memberships"

@@ -2,8 +2,8 @@
 
 <% divider ||= nil %>
 
-<div class="bg-white rounded-md shadow py-7 px-8 space-y-4">
-  <div class="space-y-2 <%= 'border-b pb-5' if divider %>">
+<div class="bg-white rounded-md shadow overflow-hidden">
+  <div class="py-6 px-8 space-y-2 <%= 'border-b shadow-sm' if divider %>">
     <% if p.content_for? :title %>
       <h2 class="text-xl font-semibold">
         <%= p.content_for :title %>
@@ -17,15 +17,33 @@
     <% end %>
   </div>
 
-  <% if p.content_for? :body %>
-    <div class="space-y">
-      <%= p.content_for :body %>
-    </div>
-  <% end %>
+  <div class="space-y-4">
+    <% if p.content_for? :table %>
+      <div class="box-table <%= divider ? 'mt-4' : '-mt-1' %>">
+        <%= p.content_for :table %>
+      </div>
+    <% end %>
 
-  <% if p.content_for? :actions %>
-    <div class="pt-2 space-x">
-      <%= p.content_for :actions %>
+    <% if p.content_for?(:body) || p.content_for?(:actions) %>
+      <div class="<%= p.content_for?(:body) ? 'py-7' : 'pb-7' %> px-8 space-y-7">
+        <% if p.content_for? :body %>
+          <div class="space-y-4 <%= '-mt-4' unless divider %>">
+            <%= p.content_for :body %>
+          </div>
+        <% end %>
+
+        <% if p.content_for? :actions %>
+          <div class="space-x">
+            <%= p.content_for :actions %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if p.content_for? :footer %>
+    <div class="py-4 px-8 bg-gray-50 border-t">
+      <%= p.content_for :footer %>
     </div>
   <% end %>
 </div>

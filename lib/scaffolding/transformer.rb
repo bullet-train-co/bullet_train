@@ -556,7 +556,12 @@ class Scaffolding::Transformer
       end
 
       if field_options.any?
-        field_attributes[:options] = "{#{field_options.join(", ")}}"
+        # we have to pass these differently for some fields.
+        if ["buttons"].include?(type)
+          field_attributes[:html_options] = "{#{field_options.join(", ")}}"
+        else
+          field_attributes[:options] = "{#{field_options.join(", ")}}"
+        end
       end
 
       if options_need_defining
