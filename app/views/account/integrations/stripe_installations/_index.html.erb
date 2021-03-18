@@ -10,37 +10,30 @@
     <%= t(".contexts.#{context.class.name.underscore}.description") %>
   <% end %>
 
-  <% p.content_for :table do %>
+  <% p.content_for :body do %>
     <% if stripe_installations.any? %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th><%= t('.fields.name.heading') %></th>
-            <%# 🚅 super scaffolding will insert new field headers above this line. %>
-            <th class="text-right"></th>
-          </tr>
-        </thead>
-        <tbody>
+      <% stripe_installations.each do |stripe_installation| %>
+        <div class="space-y-0 border border-gray-200 shadow-sm rounded-md divide-y divide-gray-200">
           <% stripe_installations.each do |stripe_installation| %>
-            <% with_attribute_settings object: stripe_installation do %>
-              <tr data-id="<%= stripe_installation.id %>">
-                <td><%= render 'shared/attributes/text', attribute: :name, url: [:account, stripe_installation] %></td>
-                <%# 🚅 super scaffolding will insert new fields above this line. %>
-                <td class="buttons">
-                  <% unless hide_actions %>
-                    <% if can? :edit, stripe_installation %>
-                      <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, stripe_installation], class: 'button-secondary button-smaller' %>
-                    <% end %>
-                    <% if can? :destroy, stripe_installation %>
-                      <%= button_to t('.buttons.shorthand.destroy'), [:account, stripe_installation], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(stripe_installation)) }, class: 'button-secondary button-smaller' %>
-                    <% end %>
+            <div class="flex py-1.5 px-3 items-center">
+              <div class="flex-1 min-w-0">
+                <%= stripe_installation.name %>
+              </div>
+              <div class="flex flex-0 min-w-0 space-x-2 items-center">
+                <% if can? :edit, stripe_installation %>
+                  <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, stripe_installation], class: 'button-secondary button-smaller' %>
+                <% end %>
+
+                <% if can? :destroy, stripe_installation %>
+                  <%= link_to [:account, stripe_installation, return_to: request.path], method: :delete, data: { confirm: t('.buttons.confirmations.destroy_from_user', team_name: stripe_installation.team.label_string) }, class: 'inline-block text-gray-300 hover:text-gray-400 hover:no-underline text-lg' do %>
+                    <i class="ti ti-close"></i>
                   <% end %>
-                </td>
-              </tr>
-            <% end %>
+                <% end %>
+              </div>
+            </div>
           <% end %>
-        </tbody>
-      </table>
+        </div>
+      <% end %>
     <% end %>
   <% end %>
 

@@ -1,7 +1,7 @@
 <% context ||= @user %>
 <% hide_actions ||= false %>
 
-<%= render 'account/shared/box', divider: stripe_accounts.any? do |p| %>
+<%= render 'account/shared/box' do |p| %>
   <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
   <% p.content_for :description do %>
     <%= raw t(".contexts.#{context.class.name.underscore}.#{stripe_accounts.any? ? 'description' : 'description_empty'}") %>
@@ -32,8 +32,8 @@
     <% end %>
   <% end %>
 
-  <% p.content_for :actions do %>
-    <% unless hide_actions %>
+  <% unless hide_actions %>
+    <% p.content_for :actions do %>
       <% if can? :create, Oauth::StripeAccount.new(user: @user) %>
         <%= link_to stripe_accounts.empty? ? t('.buttons.new') : t('.buttons.another'), [:new, :account, @user, :oauth_stripe_account], class: 'button' %>
       <% end %>

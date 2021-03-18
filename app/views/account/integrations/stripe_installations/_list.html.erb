@@ -1,7 +1,7 @@
 <% context ||= @user %>
 <% collection ||= :integrations_stripe_installations %>
 
-<%= render 'account/shared/box', divider: true do |p| %>
+<%= render 'account/shared/box' do |p| %>
   <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
   <% p.content_for :description do %>
     <%= t(".contexts.#{context.class.name.underscore}.description") %>

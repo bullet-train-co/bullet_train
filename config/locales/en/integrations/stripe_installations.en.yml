@@ -9,11 +9,11 @@ en:
     buttons: &buttons
       new: Add New Stripe Installation
       create: Create Stripe Installation
-      edit: Edit Stripe Installation
-      update: Update Stripe Installation
+      edit: Edit Stripe Settings
+      update: Update Installation Settings
       destroy: Remove Stripe Installation
       shorthand:
-        edit: Edit
+        edit: Settings
         destroy: Delete
       confirmations:
         # TODO customize for your use-case.

@@ -7,8 +7,8 @@ en:
       label: *label
       icon: fab fa-stripe-s ti ti-money
     buttons: &buttons
-      new: Connect Stripe Account for Sign In
-      another: Connect Another Stripe Account for Sign In
+      new: Connect Stripe Account
+      another: Connect Another Stripe Account
       edit: Settings
       update: Save Settings
       destroy: Disconnect

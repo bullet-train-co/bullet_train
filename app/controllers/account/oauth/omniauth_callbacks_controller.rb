@@ -140,10 +140,13 @@ class Account::Oauth::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
         # if the user doesn't have a team at this point, create one.
         unless user.teams.any?
           user.create_default_team
+
+          # if a user is signing up for the first time *and* creating their own team,
+          # this is a ux shortcut that makes sense: automatically install their oauth account as an integration.
+          user.teams.first.send(integrations_installations_collection).create(:name => oauth_account.name, oauth_accounts_attribute => oauth_account)
         end
 
         redirect_to account_dashboard_path
-
       end
 
     else
