@@ -89,6 +89,8 @@ end
 gem "devise"
 gem "omniauth"
 gem "omniauth-stripe-connect"
+gem "devise-two-factor"
+gem "rqrcode"
 
 # authorization.
 gem "cancancan"

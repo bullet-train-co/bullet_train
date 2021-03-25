@@ -1,12 +1,19 @@
 class User < ApplicationRecord
+
   # 🚫 DEFAULT BULLET TRAIN USER FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
 
   include Sprinkles::Broadcasted
 
-  # other devise modules available are :confirmable, :lockable, :timeoutable and :omniauthable.
-  devise :omniauthable, :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
+  if two_factor_authentication_enabled?
+    devise :two_factor_authenticatable, :two_factor_backupable, :omniauthable,
+           :registerable, :recoverable, :rememberable, :trackable, :validatable,
+           otp_secret_encryption_key: ENV['OTP_ENCRYPTION_KEY']
+  else
+    devise :omniauthable, :database_authenticatable, :registerable,
+           :recoverable, :rememberable, :trackable, :validatable
+  end
 
   # api
   has_many :api_keys
@@ -148,6 +155,12 @@ class User < ApplicationRecord
 
   def invalidate_ability_cache
     update_column(:ability_cache, nil) if ability_cache
+  end
+
+  def otp_qr_code
+    issuer = I18n.t('application.name')
+    label = "#{issuer}:#{email}"
+    RQRCode::QRCode.new(otp_provisioning_uri(label, issuer: issuer))
   end
 
   def scaffolding_absolutely_abstract_creative_concepts_collaborators

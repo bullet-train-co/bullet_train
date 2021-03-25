@@ -1,0 +1,42 @@
+<%= render 'account/shared/box', divider: @backup_codes do |p| %>
+  <% p.content_for :title, t("users.edit.two_factor.header") %>
+  <% p.content_for :description, t("users.edit.two_factor.description_#{@user.otp_required_for_login? ? 'enabled' : 'disabled'}") %>
+  <% p.content_for :body do %>
+    <% if current_user.otp_required_for_login? %>
+      <% if @backup_codes %>
+
+        <%= render 'account/shared/alert' do %>
+          <%= t('users.edit.two_factor.warning').html_safe %>
+        <% end %>
+
+        <p><%= t('users.edit.two_factor.instructions').html_safe %></p>
+
+        <center class="py-4">
+          <%= current_user.otp_qr_code.as_svg(
+            offset: 0,
+            color: '000',
+            shape_rendering: 'crispEdges',
+            module_size: 4,
+            standalone: true
+          ).html_safe %>
+        </center>
+
+        <p><%= t('users.edit.two_factor.recovery_codes').html_safe %></p>
+
+        <center>
+          <% @backup_codes.each do |code| %>
+            <p><code><%= code %></code></p>
+          <% end %>
+        </center>
+
+      <% end %>
+    <% end %>
+  <% end %>
+  <% p.content_for :actions do %>
+    <% if current_user.otp_required_for_login? %>
+      <%= link_to t('users.edit.two_factor.buttons.disable'), account_two_factor_path, method: :delete, remote: true, class: "button" %>
+    <% else %>
+      <%= link_to t('users.edit.two_factor.buttons.enable'), account_two_factor_path, method: :post, remote: true, class: "button" %>
+    <% end %>
+  <% end %>
+<% end %>

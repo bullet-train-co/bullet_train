@@ -1,37 +1,59 @@
+
+
 <%= render 'account/shared/workflow/box' do |p| %>
   <% p.content_for :title, t('devise.headers.sign_in') %>
   <% p.content_for :body do %>
     <% within_fields_namespace(:self) do %>
-      <%= form_for resource, as: resource_name, url: session_path(resource_name), html: {class: 'form'} do |f| %>
+      <%= form_for resource, as: resource_name, url: two_factor_authentication_enabled? ? users_pre_otp_path : session_path(resource_name), remote: two_factor_authentication_enabled?, html: {class: 'form'}, authenticity_token: true do |form| %>
+        <% with_field_settings form: form do %>
+          <%= render 'account/shared/notices', form: form %>
+          <%= render 'account/shared/forms/errors', form: form %>
 
-        <%= render 'account/shared/notices', form: f %>
-        <%= render 'account/shared/forms/errors', form: f %>
-
-        <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true} do %>
-          <% if show_sign_up_options? %>
-            <% content_for :help do %>
-              <%= link_to t('devise.links.account'), new_user_registration_path %>
+          <% email_field = capture do %>
+            <%= render 'shared/fields/email_field', method: :email, options: {autofocus: true} do %>
+              <% if show_sign_up_options? %>
+                <% content_for :help do %>
+                  <%= link_to t('devise.links.account'), new_user_registration_path %>
+                <% end %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
 
-        <%= render 'shared/fields/password_field', form: f, method: :password, other_options: {icon: 'os-icon-fingerprint'} do %>
-          <% content_for :help do %>
-            <%= link_to t('devise.links.forgot_password'), new_user_password_path %>
+          <% if two_factor_authentication_enabled? %>
+            <div id="step-1" class="space-y">
+              <%= email_field %>
+              <%= form.submit t('global.buttons.next'), class: 'button full' %>
+            </div>
+          <% else %>
+            <%= email_field %>
           <% end %>
+
+          <div id="step-2" class="<%= 'hidden' if two_factor_authentication_enabled? %> space-y">
+            <%= render 'shared/fields/password_field', method: :password do %>
+              <% content_for :help do %>
+                <%= link_to t('devise.links.forgot_password'), new_user_password_path %>
+              <% end %>
+            <% end %>
+
+            <% if two_factor_authentication_enabled? %>
+              <div id="step-2-otp" class="hidden">
+                <%= render 'shared/fields/text_field', method: :otp_attempt %>
+              </div>
+            <% end %>
+
+            <%= form.submit t('global.buttons.sign_in'), class: 'button full' %>
+          </div>
+
+          <div class="flex items-center">
+            <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-blue focus:ring-blue-dark border-gray-300 rounded">
+            <label for="remember_me" class="ml-2 block">
+              Remember me
+            </label>
+          </div>
+
+          <%= render 'devise/shared/oauth' %>
+
         <% end %>
-
-        <%= f.submit t('global.buttons.sign_in'), class: 'button full' %>
-
-        <div class="flex items-center">
-          <input id="remember_me" name="remember_me" type="checkbox" class="h-4 w-4 text-blue focus:ring-blue-dark border-gray-300 rounded">
-          <label for="remember_me" class="ml-2 block">
-            Remember me
-          </label>
-        </div>
-
-        <%= render 'devise/shared/oauth' %>
-
       <% end %>
     <% end %>
   <% end %>

@@ -56,6 +56,10 @@ def cloudinary_enabled?
   ENV["CLOUDINARY_URL"].present?
 end
 
+def two_factor_authentication_enabled?
+  ENV['OTP_ENCRYPTION_KEY'].present?
+end
+
 def any_oauth_enabled?
   [
     stripe_enabled?

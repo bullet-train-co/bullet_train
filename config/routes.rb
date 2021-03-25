@@ -13,8 +13,15 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     registrations: "registrations",
+    sessions: "sessions",
     omniauth_callbacks: "account/oauth/omniauth_callbacks"
   }
+
+  devise_scope :user do
+    scope :users, as: :users do
+      post "pre_otp", to: "sessions#pre_otp"
+    end
+  end
 
   scope module: "public" do
     root to: "home#index"
@@ -52,6 +59,8 @@ Rails.application.routes.draw do
     shallow do
       # TODO we need to either implement a dashboard or deprecate this.
       root to: "dashboard#index", as: "dashboard"
+
+      resource :two_factor, only: [:create, :destroy]
 
       # this is the route the cloudinary field hits.
       namespace :cloudinary do

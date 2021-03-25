@@ -2,8 +2,14 @@
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
   config.omniauth :stripe_connect, ENV["STRIPE_CLIENT_ID"], ENV["STRIPE_SECRET_KEY"]
-
   # 🚅 super scaffolding will insert new oauth providers above this line.
+
+  if two_factor_authentication_enabled?
+    config.warden do |manager|
+      manager.default_strategies(:scope => :user).unshift :two_factor_authenticatable
+      manager.default_strategies(:scope => :user).unshift :two_factor_backupable
+    end
+  end
 
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing

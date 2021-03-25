@@ -249,6 +249,12 @@ ActiveRecord::Schema.define(version: 2021_03_17_150916) do
     t.jsonb "ability_cache"
     t.datetime "last_notification_email_sent_at"
     t.boolean "former_user", default: false, null: false
+    t.string "encrypted_otp_secret"
+    t.string "encrypted_otp_secret_iv"
+    t.string "encrypted_otp_secret_salt"
+    t.integer "consumed_timestep"
+    t.boolean "otp_required_for_login"
+    t.string "otp_backup_codes", array: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,11 @@
+<% if @email %>
+  $("#step-1").addClass("hidden");
+  $("#step-2").removeClass("hidden");
+  <% if @user&.otp_required_for_login %>
+  $("#step-2-otp").removeClass("hidden");
+  <% end %>
+  setTimeout(function() {
+    $("#user_password").focus();
+    $("#new_user").attr('action', '/users/sign_in').attr('data-remote', 'false');
+  }, 1);
+<% end %>

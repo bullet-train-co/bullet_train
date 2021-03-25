@@ -15,6 +15,10 @@ FactoryBot.define do
       after(:create) do |user|
         user.create_default_team
       end
+      factory :two_factor_user do
+        otp_secret { User.generate_otp_secret }
+        otp_required_for_login { true }
+      end
     end
   end
 end

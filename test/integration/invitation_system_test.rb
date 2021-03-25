@@ -214,6 +214,7 @@ class InvitationSystemTest < ActionDispatch::IntegrationTest
 
       assert page.has_content?("Sign In")
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
+      click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: "password123"
       click_on "Sign In"
 

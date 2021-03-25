@@ -13,6 +13,16 @@ en:
         description: You can update the email address where you'll receive notifications and also update the way your name is displayed.
       password:
         header: Update Your Password
+      two_factor:
+        header: Two-Factor Authentication
+        description_enabled: 2FA is currently enabled for your account.
+        description_disabled: You can increase the security of your account by enabling two-factor authentication.
+        warning: "In order to complete set up, you <strong>must</strong> complete the steps below. <strong>The information below will not be shown again.</strong> If you don't complete setting up now, you must disable two-factor authentication to avoid being locked out of your account."
+        instructions: "Install <a href='https://authy.com/download/' target='_blank'>Authy</a> or <a href='https://support.google.com/accounts/answer/1066447'>Google Authentication</a> on your phone and scan the barcode displayed below."
+        recovery_codes: "You can also make a copy of the following recovery codes. Each one can help you get back into your account once should you lose access to the device you're using for two-factor authentication."
+        buttons:
+          enable: Enable
+          disable: Disable
       buttons: *buttons
     notifications:
       updated: User was successfully updated.
@@ -61,6 +71,9 @@ en:
         label: Your First Name
       last_name:
         label: Your Last Name
+      otp_attempt:
+        label: Two-Factor Authentication Code
+        help: You can find this in the authenticator application you configured when adding 2FA to your account.
     self:
       <<: [*self, *fields]
     _: &sign_up

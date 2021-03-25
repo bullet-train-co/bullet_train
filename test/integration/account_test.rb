@@ -34,6 +34,7 @@ class AccountTest < ActionDispatch::IntegrationTest
       sign_out_for(display_details)
       visit new_user_session_path
       fill_in "Email", with: @jane.email
+      click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: "new_password"
       click_on "Sign In"
       assert page.has_content?("Signed in successfully.")
@@ -52,6 +53,7 @@ class AccountTest < ActionDispatch::IntegrationTest
       sign_out_for(display_details)
       visit new_user_session_path
       fill_in "Email", with: @jane.email
+      click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: "new_password"
       click_on "Sign In"
       assert page.has_content?("Invalid Email Address or Password.")

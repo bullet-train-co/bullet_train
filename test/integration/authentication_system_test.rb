@@ -65,6 +65,7 @@ class AuthenticationSystemTest < ActionDispatch::IntegrationTest
 
       # try to sign in with an invalid password.
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"
+      click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: "notpassword1234"
       check "Remember me"
       click_on "Sign In"
@@ -72,6 +73,7 @@ class AuthenticationSystemTest < ActionDispatch::IntegrationTest
 
       # try signing in with the valid credentials.
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"
+      click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: "password123"
       click_on "Sign In"
 
@@ -84,6 +86,8 @@ class AuthenticationSystemTest < ActionDispatch::IntegrationTest
       # click the now-visible sign-up link.
       sign_in_from_homepage_for(display_details)
 
+      fill_in "Your Email Address", with: "andrew.culver@gmail.com"
+      click_on "Next" if two_factor_authentication_enabled?
       click_on "Forgot your password?"
       assert page.has_content?("Reset Your Password")
 
