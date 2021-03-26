@@ -9,7 +9,7 @@ class User < ApplicationRecord
   if two_factor_authentication_enabled?
     devise :two_factor_authenticatable, :two_factor_backupable, :omniauthable,
            :registerable, :recoverable, :rememberable, :trackable, :validatable,
-           otp_secret_encryption_key: ENV['OTP_ENCRYPTION_KEY']
+           otp_secret_encryption_key: ENV['TWO_FACTOR_ENCRYPTION_KEY']
   else
     devise :omniauthable, :database_authenticatable, :registerable,
            :recoverable, :rememberable, :trackable, :validatable
