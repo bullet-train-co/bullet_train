@@ -45,6 +45,10 @@ en:
         _: &name Team Name
         label: *name
         heading: Team
+      time_zone:
+        _: &time_zone Primary Time Zone
+        label: "Team's Primary Time Zone"
+        heading: *time_zone
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
         _: &created_at Created
@@ -60,5 +64,6 @@ en:
     attributes:
       user:
         name: *name
+        time_zone: *time_zone
         # 🚅 super scaffolding will insert new activerecord attributes above this line.
         created_at: *created_at

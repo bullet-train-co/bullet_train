@@ -19,16 +19,25 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
   validates :text_field_value, presence: true
   # 🚅 add validations above.
 
+  after_validation :remove_file_field_value, if: :file_field_value_removal?
   # 🚅 add callbacks above.
 
   delegate :team, to: :absolutely_abstract_creative_concept
   # 🚅 add delegations above.
 
   has_rich_text :action_text_value
+  attr_accessor :file_field_value_removal
 
   def collection
     absolutely_abstract_creative_concept.completely_concrete_tangible_things
   end
 
+  def file_field_value_removal?
+    file_field_value_removal.present?
+  end
+
+  def remove_file_field_value
+    file_field_value.purge
+  end
   # 🚅 add methods above.
 end

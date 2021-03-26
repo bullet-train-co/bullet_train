@@ -5,14 +5,14 @@ form ||= current_fields_form
 options ||= {}
 options[:id] ||= id_for(form, method)
 options[:class] = "form-control single-daterange w-full #{options[:class]}".strip
-options[:value] = form.object.send(method)&.strftime('%m/%d/%Y %I:%M %p')
+options[:value] = form.object.send(method)&.in_time_zone(current_team.time_zone)&.strftime('%m/%d/%Y %l:%M %p')
 options = options.merge({ data: {'fields--date-target': 'field' }})
 other_options ||= {}
 %>
 
 <%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
   <% content_for :field do %>
-    <div class="date-input relative" data-controller="fields--date" data-fields--date-include-time-value="true">
+    <div class="date-input relative" data-controller="fields--date" data-fields--date-include-time-value="true" data-fields--date-default-time-zones-value="<%= "[\"#{current_user.current_team.time_zone}\",\"#{current_user.time_zone}\"]" %>">
       <%= form.text_field method, options %>
       <% unless options[:disabled] %>
       <button class="clear py-2 px-3 border border-transparent inline-flex items-center whitespace-nowrap absolute rounded-md"
@@ -22,6 +22,27 @@ other_options ||= {}
       >
         <i class="leading-4 text-lg ti ti-trash"></i>
       </button>
+      <% end %>
+      <% if current_user.time_zone != current_user.current_team.time_zone %>
+        <div class="mt-1.5 text-xs text-gray-500">
+          <%= form.hidden_field "#{method}_time_zone".to_sym, value: current_user.current_team.time_zone, data: {'fields--date-target': 'timeZoneField'} %>
+          <div data-fields--date-target="currentTimeZoneWrapper">
+            <%= link_to current_user.current_team.time_zone, '#', data: {action: 'fields--date#showTimeZoneButtons'} %>
+          </div>
+          <div class="space-x-1 hidden" data-fields--date-target="timeZoneButtons">
+            <%= link_to '', '#', hidden: true, class: 'time-zone-button button-alternative button-smaller selected-option-time-zone-button hidden', data: {action: 'fields--date#setTimeZone', value: ''} %>
+            <%= link_to current_user.current_team.time_zone, '#', class: 'time-zone-button button button-smaller', data: {action: 'fields--date#setTimeZone', value: current_user.current_team.time_zone} %>
+            <%= link_to current_user.time_zone, '#', class: 'time-zone-button button-alternative button-smaller', data: {action: 'fields--date#setTimeZone', value: current_user.time_zone} %>
+            <%= link_to t('global.buttons.other'), '#', class: 'button-alternative button-smaller', data: {action: 'fields--date#showTimeZoneSelectWrapper'} %>
+            <%= link_to t('global.buttons.cancel'), '#', class: 'button-secondary button-smaller', data: {action: 'fields--date#resetTimeZoneUI'} %>
+          </div>
+          <div class="hidden flex flex-row items-center mt-3 text-sm" data-fields--date-target="timeZoneSelectWrapper">
+            <div class="flex-grow">
+              <%= select_tag :time_zone, options_from_collection_for_select(ActiveSupport::TimeZone.all, "name", "to_s", current_user.current_team.time_zone), {class: 'form-control select2'} %>
+            </div>
+            <%= link_to t('global.buttons.cancel'), '#', class: 'button-secondary ml-1.5', data: {action: 'fields--date#resetTimeZoneUI'} %>
+          </div>
+        </div>
       <% end %>
     </div>
   <% end %>

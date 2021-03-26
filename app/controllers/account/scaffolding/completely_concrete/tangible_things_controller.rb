@@ -72,8 +72,10 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       :cloudinary_image_value,
       :date_field_value,
       :date_and_time_field_value,
+      :date_and_time_field_value_time_zone,
       :email_field_value,
       :file_field_value,
+      :file_field_value_removal,
       :password_field_value,
       :phone_field_value,
       :super_select_value,
@@ -85,6 +87,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       # 🚅 super scaffolding will insert new arrays above this line.
     )
 
+    assign_date_and_time(strong_params, :date_and_time_field_value)
     assign_checkboxes(strong_params, :multiple_button_values)
     assign_select_options(strong_params, :multiple_super_select_values)
     # 🚅 super scaffolding will insert processing for new fields above this line.

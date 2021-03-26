@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 2021_03_17_150916) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "being_destroyed"
+    t.string "time_zone"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|

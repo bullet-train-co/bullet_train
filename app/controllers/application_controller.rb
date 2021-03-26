@@ -66,21 +66,23 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # TODO i think we'll need to account for a user's time formats here.
-  def assign_date_and_time(strong_params, attribute)
-    attribute = attribute.to_s
-    if strong_params.key?(attribute)
-      parsed_value = Chronic.parse(strong_params[attribute])
-      return nil unless parsed_value
-      strong_params[attribute] = parsed_value
-    end
-  end
-
   def assign_boolean(strong_params, attribute)
     attribute = attribute.to_s
     if strong_params.key?(attribute)
       # TODO i _think_ only the string values are required here. can we confirm and remove the others if so?
       strong_params[attribute] = (["1", 1, "true", true].include?(strong_params[attribute]) ? true : false)
+    end
+  end
+
+  def assign_date_and_time(strong_params, attribute)
+    attribute = attribute.to_s
+    time_zone_attribute = "#{attribute.to_s}_time_zone"
+    if strong_params[attribute].present?
+      time_zone = ActiveSupport::TimeZone.new(strong_params[time_zone_attribute] || current_team.time_zone)
+      strong_params.delete(time_zone_attribute)
+
+      # TODO make this work with other time and date formats.
+      strong_params[attribute] = time_zone.strptime(strong_params[attribute], "%m/%d/%Y %l:%M %p")
     end
   end
 

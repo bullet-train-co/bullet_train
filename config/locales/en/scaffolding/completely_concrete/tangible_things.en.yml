@@ -52,6 +52,7 @@ en:
         _: &date_and_time_field_value Date and Time Field Value
         label: *date_and_time_field_value
         heading: *date_and_time_field_value
+        other_time_zone: Other
       email_field_value:
         _: &email_field_value Email Field Value
         label: *email_field_value

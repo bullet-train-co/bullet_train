@@ -31,6 +31,9 @@ class User < ApplicationRecord
   validate :real_emails_only
   validates :time_zone, inclusion: {in: ActiveSupport::TimeZone.all.map(&:name)}, allow_nil: true
 
+  # callbacks
+  after_update :set_teams_time_zone
+
   # ✅ YOUR APPLICATION'S USER FUNCTIONALITY
   # This is the place where you should implement your own features on top of Bullet Train's user functionality. There
   # are a bunch of Super Scaffolding hooks here by default to try and help keep generated code logically organized.
@@ -95,7 +98,7 @@ class User < ApplicationRecord
   end
 
   def create_default_team
-    self.current_team = teams.create(name: "Your Team")
+    self.current_team = teams.create(name: "Your Team", time_zone: time_zone)
     memberships.first.roles = [Role.admin]
     save
   end
@@ -184,5 +187,11 @@ class User < ApplicationRecord
     # we use email_was so they can't try setting their email to the email of an admin.
     return false unless email_was
     ENV["DEVELOPER_EMAILS"].split(",").include?(email_was)
+  end
+
+  def set_teams_time_zone
+    teams.where(time_zone: nil).each do |team|
+      team.update(time_zone: time_zone) if team.users.count == 1
+    end
   end
 end

@@ -32,6 +32,7 @@ en:
     sidebar: Sidebar
     creator: Bullet Train, Inc.
     buttons:
+      other: Other
       debug: Debug
       details: Details
       revoke: Revoke

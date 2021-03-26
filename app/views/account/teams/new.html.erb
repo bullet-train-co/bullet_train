@@ -48,6 +48,7 @@ end
       <% if invited? || !invitation_only? %>
 
         <%= render 'shared/fields/text_field', form: form, method: :name, options: {autofocus: true} %>
+        <%= render 'shared/fields/super_select', form: form, method: :time_zone, choices: time_zone_options_for_select(current_user.time_zone, nil, ActiveSupport::TimeZone) %>
         <%# 🚅 super scaffolding will insert new fields above this line. %>
 
         <div class="buttons">
