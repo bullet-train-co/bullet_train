@@ -53,7 +53,7 @@
       </div>
 
       <div class="xl:col-span-1 space-y-8">
-        <%= render 'account/oauth/stripe_accounts/index', context: @user, stripe_accounts: @user.oauth_stripe_accounts %>
+        <%= render 'account/oauth/stripe_accounts/index', context: @user, stripe_accounts: @user.oauth_stripe_accounts if stripe_enabled? %>
         <% # 🚅 super scaffolding will insert new oauth providers above this line. %>
 
         <%= render 'account/shared/box', divider: true do |p| %>
