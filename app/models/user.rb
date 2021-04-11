@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-
   # 🚫 DEFAULT BULLET TRAIN USER FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
@@ -8,11 +7,11 @@ class User < ApplicationRecord
 
   if two_factor_authentication_enabled?
     devise :two_factor_authenticatable, :two_factor_backupable, :omniauthable,
-           :registerable, :recoverable, :rememberable, :trackable, :validatable,
-           otp_secret_encryption_key: ENV['TWO_FACTOR_ENCRYPTION_KEY']
+      :registerable, :recoverable, :rememberable, :trackable, :validatable,
+      otp_secret_encryption_key: ENV["TWO_FACTOR_ENCRYPTION_KEY"]
   else
     devise :omniauthable, :database_authenticatable, :registerable,
-           :recoverable, :rememberable, :trackable, :validatable
+      :recoverable, :rememberable, :trackable, :validatable
   end
 
   # api
@@ -161,7 +160,7 @@ class User < ApplicationRecord
   end
 
   def otp_qr_code
-    issuer = I18n.t('application.name')
+    issuer = I18n.t("application.name")
     label = "#{issuer}:#{email}"
     RQRCode::QRCode.new(otp_provisioning_uri(label, issuer: issuer))
   end

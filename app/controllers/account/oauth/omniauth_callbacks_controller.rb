@@ -16,7 +16,7 @@ class Account::Oauth::OmniauthCallbacksController < Devise::OmniauthCallbacksCon
 
   def callback(class_name, team_id)
     oauth_account_class = "Oauth::#{class_name}Account".constantize
-    oauth_accounts_collection = "oauth_#{class_name.underscore}_accounts".to_sym
+    # oauth_accounts_collection = "oauth_#{class_name.underscore}_accounts".to_sym
     oauth_accounts_attribute = "oauth_#{class_name.underscore}_account".to_sym
     integrations_installations_class = "::Integrations::#{class_name}Installation".constantize
     integrations_installations_collection = "integrations_#{class_name.underscore}_installations".to_sym

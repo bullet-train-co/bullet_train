@@ -27,7 +27,7 @@ class Team < ApplicationRecord
 
   # validations
   validates :name, presence: true
-  validates :time_zone, :inclusion => { :in => ActiveSupport::TimeZone.all.map(&:name) }, :allow_nil => true
+  validates :time_zone, inclusion: {in: ActiveSupport::TimeZone.all.map(&:name)}, allow_nil: true
 
   before_destroy :mark_for_destruction, prepend: true
 

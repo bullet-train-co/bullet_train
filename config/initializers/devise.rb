@@ -6,8 +6,8 @@ Devise.setup do |config|
 
   if two_factor_authentication_enabled?
     config.warden do |manager|
-      manager.default_strategies(:scope => :user).unshift :two_factor_authenticatable
-      manager.default_strategies(:scope => :user).unshift :two_factor_backupable
+      manager.default_strategies(scope: :user).unshift :two_factor_authenticatable
+      manager.default_strategies(scope: :user).unshift :two_factor_backupable
     end
   end
 

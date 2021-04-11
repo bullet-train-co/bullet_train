@@ -76,7 +76,7 @@ class ApplicationController < ActionController::Base
 
   def assign_date_and_time(strong_params, attribute)
     attribute = attribute.to_s
-    time_zone_attribute = "#{attribute.to_s}_time_zone"
+    time_zone_attribute = "#{attribute}_time_zone"
     if strong_params[attribute].present?
       time_zone = ActiveSupport::TimeZone.new(strong_params[time_zone_attribute] || current_team.time_zone)
       strong_params.delete(time_zone_attribute)
@@ -121,5 +121,4 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
 end
