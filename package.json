@@ -38,7 +38,7 @@
     "raw-loader": "^4.0.2",
     "select2": "^4.0.13",
     "stimulus": "^2.0.0",
-    "stimulus-reveal": "^1.2.1",
+    "stimulus-reveal": "bullet-train-co/stimulus-reveal#main",
     "tailwindcss": "^2.0.1-compat",
     "tributejs": "^5.1.3",
     "trix": "^1.3.0"

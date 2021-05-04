@@ -7780,10 +7780,9 @@ stdout-stream@^1.4.0:
   dependencies:
     readable-stream "^2.0.1"
 
-stimulus-reveal@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/stimulus-reveal/-/stimulus-reveal-1.2.1.tgz#7fb9d0697ed98c5c7004ab45748ed8d48ba91b23"
-  integrity sha512-b0vF4HTxyVbAekmWyaFaszgPgZ+5bCg0O5Ov2nRUAeWg3fn/ZUUQQb9POHm4TQpZkWfnEOq1LrmKkycu+hxbqQ==
+stimulus-reveal@bullet-train-co/stimulus-reveal#main:
+  version "1.2.6"
+  resolved "https://codeload.github.com/bullet-train-co/stimulus-reveal/tar.gz/52acb9b150648efba7ed1226975f22d1bc8612f9"
   dependencies:
     stimulus "~2.0"
 

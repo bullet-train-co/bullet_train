@@ -28,6 +28,4 @@ export default class extends Controller {
   hideWrapper() {
     this.wrapperTarget.classList.add(this.hiddenClass)
   }
-  
-  show
 }
