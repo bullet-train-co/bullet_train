@@ -19,11 +19,8 @@ class Team < ApplicationRecord
   has_many :users, through: :memberships
   has_many :invitations
 
-  # oauth providers
-  has_many :oauth_stripe_accounts, class_name: "Oauth::StripeAccount", dependent: :destroy
-
   # integrations
-  has_many :integrations_stripe_installations, class_name: "Integrations::StripeInstallation", dependent: :destroy
+  has_many :integrations_stripe_installations, class_name: "Integrations::StripeInstallation", dependent: :destroy if stripe_enabled?
 
   # validations
   validates :name, presence: true

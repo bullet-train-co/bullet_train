@@ -8,3 +8,7 @@ ignore:
     - Style/TrailingCommaInArguments
     - Style/TrailingCommaInArrayLiteral
     - Style/TrailingCommaInHashLiteral
+  - 'lib/bullet_train.rb':
+    - Style/TrailingCommaInArguments
+    - Style/TrailingCommaInArrayLiteral
+    - Style/TrailingCommaInHashLiteral

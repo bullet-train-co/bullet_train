@@ -275,11 +275,9 @@ elsif scaffolding_type == 'oauth-provider'
     puts "🚅  usage: bin/super-scaffold oauth-provider <omniauth_gem> <gems_provider_name> <our_provider_name> <PROVIDER_API_KEY_IN_ENV> <PROVIDER_API_SECRET_IN_ENV> [options]"
     puts ""
     puts "E.g. what we'd do to start Stripe off (if we didn't already do it):"
-    puts "  rails g model Oauth::StripeAccount uid:string data:jsonb team:references{optional} user:references{optional}"
     puts "  bin/super-scaffold oauth-provider omniauth-stripe-connect stripe_connect Oauth::StripeAccount STRIPE_CLIENT_ID STRIPE_SECRET_KEY --icon=ti-money"
     puts ""
     puts "E.g. what we actually did to start Shopify off:"
-    puts "  rails g model Oauth::ShopifyAccount uid:string data:jsonb team:references{optional} user:references{optional}"
     puts "  bin/super-scaffold oauth-provider omniauth-shopify-oauth2 shopify Oauth::ShopifyAccount SHOPIFY_API_KEY SHOPIFY_API_SECRET_KEY --icon=ti-shopping-cart"
     puts ""
     puts "Options:"
@@ -304,13 +302,17 @@ elsif scaffolding_type == 'oauth-provider'
     api_secret: api_secret,
   }
 
-  unless File.exists?(oauth_transform_string("./app/models/oauth/stripe_account.rb", options))
+  unless File.exists?(oauth_transform_string("./app/models/oauth/stripe_account.rb", options)) &&
+      File.exists?(oauth_transform_string("./app/models/integrations/stripe_installation.rb", options)) &&
+      File.exists?(oauth_transform_string("./app/models/webhooks/incoming/oauth/stripe_account_webhook.rb", options))
     puts ""
-    puts oauth_transform_string("🚨 Before doing the actual Super Scaffolding, you'll need to generate the model like so:", options).red
+    puts oauth_transform_string("🚨 Before doing the actual Super Scaffolding, you'll need to generate the models like so:", options).red
     puts ""
-    puts oauth_transform_string("  rails g model Oauth::StripeAccount uid:string data:jsonb team:references user:references", options).red
+    puts oauth_transform_string("  rails g model Oauth::StripeAccount uid:string data:jsonb user:references", options).red
+    puts oauth_transform_string("  rails g model Integrations::StripeInstallation team:references oauth_stripe_account:references name:string", options).red
+    puts oauth_transform_string("  rails g model Webhooks::Incoming::Oauth::StripeAccountWebhook data:jsonb processed_at:datetime verified_at:datetime oauth_stripe_account:references", options).red
     puts ""
-    puts "However, don't do the `rake db:migrate` until after you re-run Super Scaffolding, as it will need to update some settings in that migration.".red
+    puts "However, don't do the `rake db:migrate` until after you re-run Super Scaffolding, as it will need to update some settings in those migrations.".red
     puts ""
     return
   end
@@ -338,12 +340,31 @@ elsif scaffolding_type == 'oauth-provider'
   options[:icon] = icon_name
 
   [
-    './app/views/account/oauth/stripe_accounts',
-    './app/controllers/account/oauth/stripe_accounts_controller.rb',
-    './app/views/layouts/account/menus/oauth/_stripe_accounts.html.erb',
-    './config/locales/en/oauth/stripe_accounts.en.yml',
+
+    # User OAuth.
     './app/models/oauth/stripe_account.rb',
+    './app/models/webhooks/incoming/oauth/stripe_account_webhook.rb',
+    './app/controllers/account/oauth/stripe_accounts_controller.rb',
+    './app/controllers/webhooks/incoming/oauth/stripe_account_webhooks_controller.rb',
+    './app/views/account/oauth/stripe_accounts',
+    './test/models/oauth/stripe_account_test.rb',
+    './test/factories/oauth/stripe_accounts.rb',
+    './config/locales/en/oauth/stripe_accounts.en.yml',
     './app/views/devise/shared/oauth/_stripe.html.erb',
+
+    # Team Integration.
+    './app/models/integrations/stripe_installation.rb',
+    './app/serializers/api/v1/integrations/stripe_installation_serializer.rb',
+    './app/controllers/account/integrations/stripe_installations_controller.rb',
+    './app/views/account/integrations/stripe_installations',
+    './test/models/integrations/stripe_installation_test.rb',
+    './test/factories/integrations/stripe_installations.rb',
+    './config/locales/en/integrations/stripe_installations.en.yml',
+
+    # Webhook.
+    './app/models/webhooks/incoming/oauth/stripe_account_webhook.rb',
+    './app/controllers/webhooks/incoming/oauth/stripe_account_webhooks_controller.rb',
+
   ].each do |name|
     if File.directory?(name)
       oauth_scaffold_directory(name, options)
@@ -353,25 +374,41 @@ elsif scaffolding_type == 'oauth-provider'
   end
 
   oauth_scaffold_add_line_to_file("./app/views/devise/shared/_oauth.html.erb", "<%= render 'devise/shared/oauth/stripe', verb: verb if stripe_enabled? %>", "<%# 🚅 super scaffolding will insert new oauth providers above this line. %>", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/views/account/users/edit.html.erb", "<%= render 'account/oauth/stripe_accounts/index', context: @user, stripe_accounts: @user.oauth_stripe_accounts if stripe_enabled? %>", "<% # 🚅 super scaffolding will insert new oauth providers above this line. %>", options, prepend: true)
   oauth_scaffold_add_line_to_file("./config/initializers/devise.rb", "config.omniauth :stripe_connect, ENV['STRIPE_CLIENT_ID'], ENV['STRIPE_SECRET_KEY'], {\n    ## specify options for your oauth provider here, e.g.:\n    # scope: 'read_products,read_orders,write_content',\n  }\n", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./app/controllers/account/oauth/omniauth_callbacks_controller.rb", "def stripe_connect\n    team_id = request.env['omniauth.params']['team_id']\n    callback(::Oauth::StripeAccount, :oauth_stripe_accounts, team_id ? team_id.to_i : nil)\n  end\n", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
-  oauth_scaffold_add_line_to_file("./app/models/team.rb", "has_many :oauth_stripe_accounts, class_name: 'Oauth::StripeAccount', dependent: :destroy if stripe_enabled?", "# 🚅 add oauth providers above.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/models/team.rb", "has_many :integrations_stripe_installations, class_name: 'Integrations::StripeInstallation', dependent: :destroy if linkedin_enabled?", "# 🚅 add oauth providers above.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./app/models/user.rb", "has_many :oauth_stripe_accounts, class_name: 'Oauth::StripeAccount' if stripe_enabled?", "# 🚅 add oauth providers above.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./config/locales/en/oauth.en.yml", "stripe_connect: Stripe", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
-  oauth_scaffold_add_line_to_file("./app/views/account/shared/_menu.html.erb", "<%= render 'account/oauth/stripe_accounts/menu_item' if stripe_enabled? %>", "<%# 🚅 super scaffolding will insert new oauth providers above this line. %>", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./app/views/account/shared/_menu.html.erb", "<%= render 'account/integrations/stripe_installations/menu_item' if stripe_enabled? %>", "<%# 🚅 super scaffolding will insert new oauth providers above this line. %>", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./config/routes.rb", "resources :stripe_account_webhooks if stripe_enabled?", "# 🚅 super scaffolding will insert new oauth provider webhooks above this line.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./config/routes.rb", "resources :stripe_accounts if stripe_enabled?", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
+  oauth_scaffold_add_line_to_file("./config/routes.rb", "resources :stripe_installations if stripe_enabled?", "# 🚅 super scaffolding will insert new integration installations above this line.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./Gemfile", "gem 'omniauth-stripe-connect'", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./lib/bullet_train.rb", "def stripe_enabled?\n  ENV['STRIPE_CLIENT_ID'].present? && ENV['STRIPE_SECRET_KEY'].present?\nend\n", "# 🚅 super scaffolding will insert new oauth providers above this line.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./lib/bullet_train.rb", "stripe_enabled?,", "# 🚅 super scaffolding will insert new oauth provider checks above this line.", options, prepend: true)
   oauth_scaffold_add_line_to_file("./app/models/ability.rb", "if stripe_enabled?
-        can :manage, Oauth::StripeAccount, team_id: user.team_ids
-        cannot :edit, Oauth::StripeAccount
+        can [:read, :create, :destroy], Oauth::StripeAccount, user_id: user.id
+        can :manage, Integrations::StripeInstallation, team_id: user.team_ids
+        can :destroy, Integrations::StripeInstallation, oauth_stripe_account: {user_id: user.id}
       end
 ", "# 🚅 super scaffolding will insert any new oauth providers above.", options, prepend: true)
 
   # find the database migration that defines this relationship.
   migration_file_name = `grep "create_table #{oauth_transform_string(':oauth_stripe_accounts', options)}" db/migrate/*`.split(":").first
   legacy_replace_in_file(migration_file_name, 'null: false', 'null: true')
+
+  migration_file_name = `grep "create_table #{oauth_transform_string(':integrations_stripe_installations', options)}" db/migrate/*`.split(":").first
+  legacy_replace_in_file(migration_file_name,
+    oauth_transform_string('t.references :oauth_stripe_account, null: false, foreign_key: true', options),
+    oauth_transform_string('t.references :oauth_stripe_account, null: false, foreign_key: true, index: {name: "index_stripe_installations_on_oauth_stripe_account_id"}', options),
+  )
+
+  migration_file_name = `grep "create_table #{oauth_transform_string(':webhooks_incoming_oauth_stripe_account_webhooks', options)}" db/migrate/*`.split(":").first
+  legacy_replace_in_file(migration_file_name, 'null: false', 'null: true')
+  legacy_replace_in_file(migration_file_name, 'foreign_key: true', 'foreign_key: true, index: {name: "index_stripe_webhooks_on_oauth_stripe_account_id"}')
+
+
 
   puts ""
   puts "🎉"
@@ -380,9 +417,18 @@ elsif scaffolding_type == 'oauth-provider'
   puts ""
   puts "If the OAuth provider asks you for some whitelisted callback URLs, the URL structure for those is as so:"
   puts ""
-  puts oauth_transform_string("  https://yourdomain.co/users/auth/stripe_connect/callback", options)
-  puts oauth_transform_string("  https://yourtunnel.ngrok.io/users/auth/linkedin/callback", options)
-  puts oauth_transform_string("  http://localhost:3000/users/auth/stripe_connect/callback", options)
+  path = "users/auth/stripe_connect/callback"
+  puts oauth_transform_string("  https://yourdomain.co/#{path}", options)
+  puts oauth_transform_string("  https://yourtunnel.ngrok.io/#{path}", options)
+  puts oauth_transform_string("  http://localhost:3000/#{path}", options)
+  puts ""
+  puts "If you're able to specify an endpoint to receive webhooks from this provider, use this URL:"
+  puts ""
+  path = "webhooks/incoming/oauth/stripe_account_webhooks"
+  puts oauth_transform_string("  https://yourdomain.co/#{path}", options)
+  puts oauth_transform_string("  https://yourtunnel.ngrok.io/#{path}", options)
+  puts oauth_transform_string("  http://localhost:3000/#{path}", options)
+  puts ""
   puts ""
   puts "If you'd like to edit how your Bullet Train application refers to this provider, just edit the locale file at `config/locales/en/oauth.en.yml`."
   puts ""
