@@ -23,8 +23,10 @@ class Oauth::StripeAccount < ApplicationRecord
     name
   end
 
+  # TODO You should update this with an implementation appropriate for the provider you're integrating with.
+  # This must return _something_, otherwise new installations won't save.
   def name
-    data["info"]["name"]
+    data.dig("info", "name").presence || "Stripe Account"
   rescue
     "Stripe Account"
   end
