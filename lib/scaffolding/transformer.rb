@@ -15,6 +15,7 @@ class Scaffolding::Transformer
   RUBY_NEW_FIELDS_HOOK = "# 🚅 super scaffolding will insert new fields above this line."
   RUBY_ADDITIONAL_NEW_FIELDS_HOOK = "# 🚅 super scaffolding will also insert new fields above this line."
   RUBY_EVEN_MORE_NEW_FIELDS_HOOK = "# 🚅 super scaffolding will additionally insert new fields above this line."
+  ENDPOINTS_HOOK = "# 🚅 super scaffolding will mount new endpoints above this line."
   ERB_NEW_FIELDS_HOOK = "<%#{RUBY_NEW_FIELDS_HOOK} %>"
   CONCERNS_HOOK = "# 🚅 add concerns above."
   BELONGS_TO_HOOK = "# 🚅 add belongs_to associations above."
@@ -187,6 +188,11 @@ class Scaffolding::Transformer
 
     File.open(transformed_file_name, "w+") do |f|
       f.write(transformed_file_content.strip + "\n")
+    end
+
+    if transformed_file_name.split(".").last == "rb"
+      puts "Fixing Standard Ruby on '#{transformed_file_name}'."
+      # `standardrb --fix #{transformed_file_name} 2> /dev/null`
     end
   end
 
@@ -504,6 +510,12 @@ class Scaffolding::Transformer
         add_additional_step :yellow, transform_string("You'll need to implement the `valid_#{collection_name}` method of `Scaffolding::CompletelyConcrete::TangibleThing` in `./app/models/scaffolding/completely_concrete/tangible_thing.rb`. This is the method that will be used to populate the `#{type}` field and also validate that users aren't trying to exploit multitenancy.")
       end
 
+      # add `has_rich_text` for trix editor fields.
+      if type == "trix_editor"
+        file_name = "./app/models/scaffolding/completely_concrete/tangible_thing.rb"
+        scaffold_add_line_to_file(file_name, "has_rich_text :#{name}", HAS_ONE_HOOK, prepend: true)
+      end
+
       # field on the form.
       file_name = "./app/views/account/scaffolding/completely_concrete/tangible_things/_form.html.erb"
       unless attribute_options&.key(:vanilla)
@@ -737,15 +749,30 @@ class Scaffolding::Transformer
       scaffold_add_line_to_file("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml", "#{name}: *#{name}", "# 🚅 super scaffolding will insert new activerecord attributes above this line.", prepend: true)
 
       # add attributes to strong params.
-      [
-        "./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb"
-        # "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller.rb",
-      ].each do |file|
-        if name.match?(/_ids$/)
-          scaffold_add_line_to_file(file, "#{name}: [],", RUBY_NEW_ARRAYS_HOOK, prepend: true)
+      if name.match?(/_ids$/)
+        scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", "#{name}: [],", RUBY_NEW_ARRAYS_HOOK, prepend: true)
+      else
+        scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", ":#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
+      end
+
+      # add attributes to endpoint.
+      if name.match?(/_ids$/)
+        scaffold_add_line_to_file("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb", "optional :#{name}, type: Array, desc: gth(:#{name})", RUBY_NEW_ARRAYS_HOOK, prepend: true)
+      else
+        api_type = case type
+        when "date_field"
+          "Date"
+        when "date_and_time_field"
+          "DateTime"
+        when "buttons"
+          "Boolean"
+        when "file_field"
+          "File"
         else
-          scaffold_add_line_to_file(file, ":#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
+          "String"
         end
+
+        scaffold_add_line_to_file("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb", "optional :#{name}, type: #{api_type}, desc: gth(:#{name})", RUBY_NEW_FIELDS_HOOK, prepend: true)
       end
 
       case type
@@ -759,14 +786,16 @@ class Scaffolding::Transformer
         end
       end
 
-      [
-        "./app/views/account/scaffolding/completely_concrete/tangible_things/_tangible_thing.json.jbuilder",
-        "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb"
-      ].each do |file|
-        scaffold_add_line_to_file(file, ":#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
-      end
+      unless type == "trix_editor"
+        [
+          "./app/views/account/scaffolding/completely_concrete/tangible_things/_tangible_thing.json.jbuilder",
+          "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb"
+        ].each do |file|
+          scaffold_add_line_to_file(file, ":#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
+        end
 
-      # scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "assert_equal tangible_thing_attributes['#{name.gsub('_', '-')}'], tangible_thing.#{name}", RUBY_NEW_FIELDS_HOOK, prepend: true)
+        scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", "assert_equal tangible_thing_data['#{name}'], tangible_thing.#{name}", RUBY_NEW_FIELDS_HOOK, prepend: true)
+      end
 
       attribute_assignment = case type
       when "text_field", "password_field", "text_area"
@@ -778,14 +807,14 @@ class Scaffolding::Transformer
       end
 
       if attribute_assignment
-        # scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "#{name}: #{attribute_assignment},", RUBY_ADDITIONAL_NEW_FIELDS_HOOK, prepend: true)
-        # scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "assert_equal @tangible_thing.#{name}, #{attribute_assignment}", RUBY_EVEN_MORE_NEW_FIELDS_HOOK, prepend: true)
+        scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", "#{name}: #{attribute_assignment},", RUBY_ADDITIONAL_NEW_FIELDS_HOOK, prepend: true)
+        scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", "assert_equal @tangible_thing.#{name}, #{attribute_assignment}", RUBY_EVEN_MORE_NEW_FIELDS_HOOK, prepend: true)
       end
 
-      scaffold_add_line_to_file("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb", "#{name}: @tangible_thing.#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
-      # because we're inserting the same content into the file twice, we have to do both of these steps.
-      scaffold_add_line_to_file("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb", "#{name}: @tangible_thing.#{name}, # this can be removed after scaffolding.", RUBY_ADDITIONAL_NEW_FIELDS_HOOK, prepend: true)
-      replace_in_file(transform_string("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb"), " # this can be removed after scaffolding.", "")
+      # scaffold_add_line_to_file("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb", "#{name}: @tangible_thing.#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
+      # # because we're inserting the same content into the file twice, we have to do both of these steps.
+      # scaffold_add_line_to_file("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb", "#{name}: @tangible_thing.#{name}, # this can be removed after scaffolding.", RUBY_ADDITIONAL_NEW_FIELDS_HOOK, prepend: true)
+      # replace_in_file(transform_string("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb"), " # this can be removed after scaffolding.", "")
 
       if name.match?(/_id$/) && !attribute_options&.key(:vanilla)
         name_without_id = name.gsub(/_id$/, "")
@@ -892,12 +921,11 @@ class Scaffolding::Transformer
     [
       "./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb",
       "./app/views/account/scaffolding/completely_concrete/tangible_things",
-      "./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb",
+      # "./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb",
       "./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml",
-      # "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller.rb",
-      # "./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb",
+      "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb",
+      "./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb",
       "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb"
-      # "./app/views/public/home/api/scaffolding/completely_concrete/_tangible_things.html.erb",
     ].each do |name|
       if File.directory?(name)
         scaffold_directory(name)
@@ -905,6 +933,17 @@ class Scaffolding::Transformer
         scaffold_file(name)
       end
     end
+
+    # add endpoint to the api.
+    scaffold_add_line_to_file("./app/controllers/api/v1/root.rb", "mount Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpoint", ENDPOINTS_HOOK, prepend: true)
+
+    # update the factory generated by `rails g`.
+    content = if transform_string(":absolutely_abstract_creative_concept") == transform_string(":scaffolding_absolutely_abstract_creative_concept")
+      transform_string("association :absolutely_abstract_creative_concept")
+    else
+      transform_string("association :absolutely_abstract_creative_concept, factory: :scaffolding_absolutely_abstract_creative_concept")
+    end
+    scaffold_replace_line_in_file("./test/factories/scaffolding/completely_concrete/tangible_things.rb", content, "absolutely_abstract_creative_concept { nil }")
 
     # if needed, update the reference to the parent class name in the create_table migration.
     current_transformer = Scaffolding::ClassNamesTransformer.new(child, parent)
@@ -941,8 +980,8 @@ class Scaffolding::Transformer
       add_line_to_file("./app/models/ability.rb", ability_line, "# the following abilities were added by super scaffolding.")
     end
 
-    scaffold_replace_line_in_file("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
-    # scaffold_replace_line_in_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
+    # scaffold_replace_line_in_file("./test/controllers/account/scaffolding/completely_concrete/tangible_things_controller_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
+    scaffold_replace_line_in_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
 
     # add children to the show page of their parent.
     unless parent == "None"

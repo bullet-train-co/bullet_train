@@ -1,0 +1,98 @@
+en:
+  doorkeeper/applications: &applications
+    label: &label Applications
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-window ti ti-server
+    buttons: &buttons
+      new: Add New Application
+      create: Create Application
+      edit: Edit Application
+      update: Update Application
+      destroy: Remove Application
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{application_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      name:
+        _: &name Name
+        label: *name
+        heading: Application Name
+
+      scopes:
+        _: &scopes Scopes
+        label: *scopes
+        heading: *scopes
+        help: Scopes are like permissions. An OAuth application can have read, write, and/or delete access. Separate scopes with spaces. Leave this field blank to use the default scope, e.g. "read". Optional scopes are "write" and "delete".
+
+      redirect_uri:
+        _: &redirect_uri Redirect URI
+        label: *redirect_uri
+        heading: *redirect_uri
+        help: You can leave this field blank.
+
+      uid:
+        heading: Client UID
+
+      secret:
+        heading: Client Secret
+
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    index:
+      section: "%{teams_possessive} Applications"
+      contexts:
+        team:
+          header: Applications
+          description: Below is a list of Applications that have been added for %{team_name}.
+          description_empty: No Applications have been added for %{team_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{application_name}"
+      header: Application Details
+      description: Below are the details we have for %{application_name}.
+      manage_description: You'll also find options for updating these details or removing %{application_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Application for %{team_name}"
+      header: New Application Details
+      description: Please provide the details of the new Application you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{application_name}"
+      header: Edit Application Details
+      description: You can update the details or settings for %{application_name} below.
+      form: *form
+    notifications:
+      created: Application was successfully created.
+      updated: Application was successfully updated.
+      destroyed: Application was successfully destroyed.
+  account:
+    doorkeeper:
+      applications: *applications
+  activerecord:
+    attributes:
+      doorkeeper/application:
+        name: *name
+        scopes: *scopes
+        redirect_uri: *redirect_uri
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

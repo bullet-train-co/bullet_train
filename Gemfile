@@ -87,6 +87,7 @@ end
 
 # authentication.
 gem "devise"
+gem "doorkeeper", "~> 5.4.0"
 gem "omniauth"
 gem "omniauth-stripe-connect"
 gem "devise-two-factor"
@@ -94,9 +95,18 @@ gem "rqrcode"
 
 # authorization.
 gem "cancancan"
+gem "grape-cancan"
 
 # api.
-gem "active_model_serializers"
+gem "jsonapi-serializer"
+gem "grape", "~> 1.5.1"
+gem "grape-jsonapi", require: "grape_jsonapi"
+gem "grape-swagger"
+gem "grape_on_rails_routes"
+gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
+gem "kaminari"
+gem "api-pagination"
+gem "rack-cors", require: "rack/cors"
 
 # administrative functionality.
 gem "rails_admin"
@@ -131,6 +141,7 @@ gem "time_ago_in_words"
 
 # enables `binding.pry` for debugging.
 gem "pry"
+gem "pry-stack_explorer"
 gem "awesome_print"
 
 # define ENV values in `config/application.yml`.

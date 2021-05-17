@@ -1,4 +1,4 @@
-class Api::V1::TeamSerializer < ActiveModel::Serializer
+class Api::V1::TeamSerializer < Api::V1::ApplicationSerializer
   attributes :id,
     :name,
     :time_zone,

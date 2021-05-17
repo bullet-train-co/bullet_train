@@ -1,4 +1,6 @@
-class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingSerializer < ActiveModel::Serializer
+class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingSerializer < Api::V1::ApplicationSerializer
+  set_type "scaffolding/completely_concrete/tangible_thing"
+
   attributes :id,
     :absolutely_abstract_creative_concept_id,
     # 🚅 skip this section when scaffolding.

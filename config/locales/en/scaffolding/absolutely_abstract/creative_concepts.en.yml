@@ -44,6 +44,17 @@ en:
         name: &updated_at Updated
         label: *updated_at
         heading: *updated_at
+    api:
+      id: Creative Concept ID
+      team_id: Team ID
+      collection_actions: "Collection Actions for Creative Concepts"
+      index: "List Creative Concepts"
+      create: "Add a New Creative Concept"
+      member_actions: "Actions for an Individual Creative Concept"
+      show: "Retrieve a Creative Concept"
+      update: "Update a Creative Concept"
+      destroy: "Delete a Creative Concept"
+      fields: *fields
     index:
       section: "%{teams_possessive} Creative Concepts"
       contexts:

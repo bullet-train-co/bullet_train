@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
+  use_doorkeeper do
+    skip_controllers :authorizations, :applications, :authorized_applications
+  end
+
+  # Grape API
+  mount Api::Base, at: "/api"
+
   # TODO 🍩 figure out how to extract this for the sprinkles gem.
   # e.g. `resources :things, concerns: [:sortable]`
   concern :sortable do
@@ -165,6 +172,10 @@ Rails.application.routes.draw do
         namespace :integrations do
           resources :stripe_installations if stripe_enabled?
           # 🚅 super scaffolding will insert new integration installations above this line.
+        end
+
+        namespace :doorkeeper do
+          resources :applications
         end
       end
     end

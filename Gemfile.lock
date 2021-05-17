@@ -13,6 +13,14 @@ GIT
       rails (> 4.1, <= 7.0)
 
 GIT
+  remote: https://github.com/bullet-train-co/wine_bouncer.git
+  revision: 4d890815b921249380e852cdb7241f1f2f82b042
+  specs:
+    wine_bouncer (1.0.4)
+      doorkeeper (>= 1.4, < 6.0)
+      grape (>= 0.10)
+
+GIT
   remote: https://github.com/hotwired/turbo-rails.git
   revision: 2945dcb7c5fc634ad7d459e0872cf04cf8a3576d
   branch: main
@@ -61,11 +69,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_model_serializers (0.10.12)
-      actionpack (>= 4.1, < 6.2)
-      activemodel (>= 4.1, < 6.2)
-      case_transform (>= 0.2)
-      jsonapi-renderer (>= 0.1.1.beta1, < 0.3)
     activejob (6.1.3.1)
       activesupport (= 6.1.3.1)
       globalid (>= 0.3.6)
@@ -93,6 +96,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
+    api-pagination (4.8.2)
     ast (2.4.2)
     attr_encrypted (3.1.0)
       encryptor (~> 3.0.0)
@@ -143,8 +147,6 @@ GEM
     capybara-screenshot (1.0.25)
       capybara (>= 1.0, < 4)
       launchy
-    case_transform (0.2)
-      activesupport
     charlock_holmes (0.7.7)
     childprocess (3.0.0)
     chronic (0.10.2)
@@ -182,6 +184,26 @@ GEM
       rotp (~> 6.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
+    doorkeeper (5.4.0)
+      railties (>= 5)
+    dry-configurable (0.12.1)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.5, >= 0.5.0)
+    dry-container (0.7.2)
+      concurrent-ruby (~> 1.0)
+      dry-configurable (~> 0.1, >= 0.1.3)
+    dry-core (0.5.0)
+      concurrent-ruby (~> 1.0)
+    dry-inflector (0.2.0)
+    dry-logic (1.1.0)
+      concurrent-ruby (~> 1.0)
+      dry-core (~> 0.5, >= 0.5)
+    dry-types (1.5.1)
+      concurrent-ruby (~> 1.0)
+      dry-container (~> 0.3)
+      dry-core (~> 0.5, >= 0.5)
+      dry-inflector (~> 0.1, >= 0.1.2)
+      dry-logic (~> 1.0, >= 1.0.2)
     email_reply_parser (0.5.10)
     encryptor (3.0.0)
     erubi (1.10.0)
@@ -213,6 +235,23 @@ GEM
       railties (>= 3.2, < 7)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    grape (1.5.3)
+      activesupport
+      builder
+      dry-types (>= 1.1)
+      mustermann-grape (~> 1.0.0)
+      rack (>= 1.3.0)
+      rack-accept
+    grape-cancan (0.0.3)
+      cancancan
+      grape (~> 1.2)
+    grape-jsonapi (1.0.0)
+      grape
+      jsonapi-serializer
+    grape-swagger (1.3.1)
+      grape (~> 1.3)
+    grape_on_rails_routes (0.3.2)
+      rails (>= 3.1.1)
     haml (5.2.1)
       temple (>= 0.8.0)
       tilt
@@ -234,7 +273,8 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.5.1)
-    jsonapi-renderer (0.2.2)
+    jsonapi-serializer (2.2.0)
+      activesupport (>= 4.2)
     jwt (2.2.3)
     kaminari (1.2.1)
       activesupport (>= 4.1.0)
@@ -284,6 +324,10 @@ GEM
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
+    mustermann-grape (1.0.1)
+      mustermann (>= 1.0.0)
     nested_form (0.3.2)
     netrc (0.11.0)
     nio4r (2.5.7)
@@ -341,6 +385,10 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-mini-profiler (2.3.2)
       rack (>= 1.2.0)
     rack-pjax (1.1.0)
@@ -510,10 +558,11 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-19
   x86_64-darwin-20
 
 DEPENDENCIES
-  active_model_serializers
+  api-pagination
   awesome_print
   aws-sdk-s3
   bootsnap (>= 1.4.4)
@@ -530,13 +579,21 @@ DEPENDENCIES
   database_cleaner
   devise
   devise-two-factor
+  doorkeeper (~> 5.4.0)
   extended_email_reply_parser
   factory_bot_rails
   fastimage
   figaro
   font-awesome-rails
+  grape (~> 1.5.1)
+  grape-cancan
+  grape-jsonapi
+  grape-swagger
+  grape_on_rails_routes
   honeybadger
   jbuilder (~> 2.7)
+  jsonapi-serializer
+  kaminari
   letter_opener
   listen (~> 3.3)
   magic_test
@@ -553,7 +610,9 @@ DEPENDENCIES
   postmark-rails
   premailer-rails
   pry
+  pry-stack_explorer
   puma (~> 5.0)
+  rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.1)
   rails-controller-testing
@@ -577,6 +636,7 @@ DEPENDENCIES
   web-console (>= 4.1.0)
   webdrivers
   webpacker (~> 5.0)
+  wine_bouncer!
   xray-rails
 
 RUBY VERSION

@@ -354,7 +354,7 @@ elsif scaffolding_type == 'oauth-provider'
 
     # Team Integration.
     './app/models/integrations/stripe_installation.rb',
-    './app/serializers/api/v1/integrations/stripe_installation_serializer.rb',
+    # './app/serializers/api/v1/integrations/stripe_installation_serializer.rb',
     './app/controllers/account/integrations/stripe_installations_controller.rb',
     './app/views/account/integrations/stripe_installations',
     './test/models/integrations/stripe_installation_test.rb',

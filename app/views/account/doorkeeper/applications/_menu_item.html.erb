@@ -1,0 +1,10 @@
+<% if can? :read, Doorkeeper::Application.new(team: current_team) %>
+  <%= render 'account/shared/menu/item', {
+    url: main_app.polymorphic_path([:account, current_team, :doorkeeper_applications]),
+    label: t('doorkeeper/applications.navigation.label'),
+  } do |p| %>
+    <% p.content_for :icon do %>
+      <i class="<%= t('doorkeeper/applications.navigation.icon') %>"></i>
+    <% end %>
+  <% end %>
+<% end %>

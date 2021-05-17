@@ -1,4 +1,4 @@
-class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConceptSerializer < ActiveModel::Serializer
+class Api::V1::Scaffolding::AbsolutelyAbstract::CreativeConceptSerializer < Api::V1::ApplicationSerializer
   attributes :id,
     :team_id,
     :name,

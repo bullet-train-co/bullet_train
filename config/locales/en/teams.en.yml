@@ -58,6 +58,14 @@ en:
         label: Your Team Name
     self:
       <<: [*self, *fields]
+    api:
+      id: Team ID
+      actions: "Actions for Teams"
+      index: "List Teams"
+      create: "Add a New Team"
+      show: "Retrieve a Team"
+      update: "Update a Team"
+      fields: *fields
   account:
     teams: *teams
   activerecord:

@@ -19,6 +19,9 @@ class Team < ApplicationRecord
   has_many :users, through: :memberships
   has_many :invitations
 
+  # oauth for grape api
+  has_many :doorkeeper_applications, class_name: "Doorkeeper::Application", dependent: :destroy, foreign_key: :team_id
+
   # integrations
   has_many :integrations_stripe_installations, class_name: "Integrations::StripeInstallation", dependent: :destroy if stripe_enabled?
 

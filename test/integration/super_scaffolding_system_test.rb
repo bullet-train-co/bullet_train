@@ -36,7 +36,8 @@ class SuperScaffoldingSystemTest < ActionDispatch::IntegrationTest
   if defined?(TestSite) && defined?(TestPage)
 
     test "developers can generate a site and a nested page model" do
-      resize_for(@@test_devices[:macbook_pro_15_inch])
+      display_details = @@test_devices[:macbook_pro_15_inch]
+      resize_for(display_details)
 
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
@@ -46,6 +47,7 @@ class SuperScaffoldingSystemTest < ActionDispatch::IntegrationTest
 
       assert page.has_content?("New Test Site Details")
       fill_in "Name", with: "Some New Example Site"
+      fill_in "Other Attribute", with: "Some Other Value"
       fill_in "Url", with: "http://example.org/test"
       click_on "Create Test Site"
 

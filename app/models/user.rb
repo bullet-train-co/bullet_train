@@ -68,7 +68,7 @@ class User < ApplicationRecord
   end
 
   def self.authenticate_by_api_key(token, secret)
-    api_key = ApiKey.find_by(token: token, secret: secret)
+    api_key = ApiKey.find_by_credentials(token, secret)
     if api_key
       api_key.last_used_at = Time.zone.now
       api_key.save
