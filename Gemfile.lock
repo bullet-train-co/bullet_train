@@ -255,6 +255,7 @@ GEM
     haml (5.2.1)
       temple (>= 0.8.0)
       tilt
+    hashids (1.0.5)
     hashie (4.1.0)
     honeybadger (4.8.0)
     htmlentities (4.3.4)
@@ -590,6 +591,7 @@ DEPENDENCIES
   grape-jsonapi
   grape-swagger
   grape_on_rails_routes
+  hashids
   honeybadger
   jbuilder (~> 2.7)
   jsonapi-serializer

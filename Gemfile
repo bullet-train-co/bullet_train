@@ -173,6 +173,9 @@ gem "turbo-rails", github: "hotwired/turbo-rails", branch: "main"
 # `standardrb --fix`
 gem "standard"
 
+# for obfuscating ids in urls
+gem "hashids"
+
 group :production do
   # we suggest using postmark for email deliverability.
   gem "postmark-rails"

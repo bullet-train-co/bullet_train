@@ -6,6 +6,7 @@ class ApplicationRecord < ActiveRecord::Base
   # specified at the end of the file.
 
   include Webhooks::Outgoing::IssuingModel
+  include ObfuscatesId
 
   # 🏚 i'd like to deprecate these. they're not descriptive enough.
   scope :newest, -> { order("created_at DESC") }

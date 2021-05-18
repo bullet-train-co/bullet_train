@@ -21,7 +21,7 @@
     Account
   <% end %>
 
-  <%= render 'account/shared/menu/item', url: main_app.edit_account_user_path(current_user.id), label: t('menus.main.labels.edit_account_details') do |p| %>
+  <%= render 'account/shared/menu/item', url: main_app.edit_account_user_path(current_user), label: t('menus.main.labels.edit_account_details') do |p| %>
     <% p.content_for :icon do %>
       <i class="fal fa-user-cog ti ti-user"></i>
     <% end %>
