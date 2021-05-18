@@ -31,12 +31,27 @@
     @apply border-gray-300 rounded-md shadow-sm bg-white text-gray-500 hover:bg-gray-50 no-underline hover:no-underline;
   }
 
+  .button-color {
+    @extend .button;
+    @apply rounded-full;
+  }
+
   .btn-toggle {
     input[type=checkbox], input[type=radio] {
       display: none;
       &:checked {
         & + button {
           @extend .button;
+        }
+      }
+    }
+
+    &.btn-color-picker {
+      input[type=checkbox], input[type=radio] {
+        &:checked {
+          & + button {
+            @apply ring ring-offset-2 rounded-full;
+          }
         }
       }
     }

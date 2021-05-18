@@ -6,6 +6,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingSerializer < Api::V
     # 🚅 skip this section when scaffolding.
     :text_field_value,
     :button_value,
+    :color_picker_value,
     :cloudinary_image_value,
     :date_field_value,
     :email_field_value,

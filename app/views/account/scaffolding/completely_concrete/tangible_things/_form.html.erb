@@ -15,6 +15,7 @@
       </div>
     </div>
 
+    <%= render 'shared/fields/color_picker', method: :color_picker_value, options: t('scaffolding/completely_concrete/tangible_things.fields.color_picker_value.options') %>
     <%= render 'shared/fields/cloudinary_image', method: :cloudinary_image_value %>
     <%= render 'shared/fields/date_field', method: :date_field_value %>
     <%= render 'shared/fields/date_and_time_field', method: :date_and_time_field_value %>

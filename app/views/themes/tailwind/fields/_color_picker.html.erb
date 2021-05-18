@@ -1,0 +1,25 @@
+<% yield %>
+
+<%
+stimulus_controller = 'fields--button-toggle'
+
+form ||= current_fields_form
+html_options ||= {}
+html_options[:id] ||= id_for(form, method)
+multiple ||= false
+other_options ||= {}
+options ||= options_for(form, method)
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div class="space-x-1">
+      <% options.each do |color| %>
+        <label class="btn-toggle btn-color-picker" data-controller="<%= stimulus_controller %>">
+          <%= form.radio_button method, color, { data: { "#{stimulus_controller}-target": 'shadowField' }} %>
+          <button type="button" class="button-color" style="background-color: <%= color %>; --tw-ring-color: <%= color %>" data-action="<%= stimulus_controller %>#clickShadowField">&nbsp;</button>
+        </label>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

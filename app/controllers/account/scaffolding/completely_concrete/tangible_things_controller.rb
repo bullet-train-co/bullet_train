@@ -68,6 +68,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       :text_field_value,
       :action_text_value,
       :button_value,
+      :color_picker_value,
       :ckeditor_value,
       :cloudinary_image_value,
       :date_field_value,

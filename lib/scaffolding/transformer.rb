@@ -635,6 +635,8 @@ class Scaffolding::Transformer
         "date_and_time"
       when "email_field"
         "email"
+      when "color_picker"
+        "code"
       else
         "text"
       end
