@@ -88,9 +88,11 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       # 🚅 super scaffolding will insert new arrays above this line.
     )
 
+    # 🚅 skip this section when scaffolding.
     assign_date_and_time(strong_params, :date_and_time_field_value)
     assign_checkboxes(strong_params, :multiple_button_values)
     assign_select_options(strong_params, :multiple_super_select_values)
+    # 🚅 stop any skipping we're doing now.
     # 🚅 super scaffolding will insert processing for new fields above this line.
 
     strong_params
