@@ -69,8 +69,7 @@ class ApplicationController < ActionController::Base
   def assign_boolean(strong_params, attribute)
     attribute = attribute.to_s
     if strong_params.key?(attribute)
-      # TODO i _think_ only the string values are required here. can we confirm and remove the others if so?
-      strong_params[attribute] = (["1", 1, "true", true].include?(strong_params[attribute]) ? true : false)
+      strong_params[attribute] = ActiveModel::Type::Boolean.new.cast(strong_params[attribute])
     end
   end
 
