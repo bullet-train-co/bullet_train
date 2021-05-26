@@ -1065,8 +1065,16 @@ class Scaffolding::Transformer
           puts ""
           puts "OK, great! Let's do this! By default these menu items appear with a puzzle piece, but after you hit enter I'll open two different pages where you can view other icon options. When you find one you like, hover your mouse over it and then come back here and and enter the name of the icon you want to use. (Or hit enter to skip this step.)"
           $stdin.gets.chomp
-          `open https://themify.me/themify-icons`
-          `open https://fontawesome.com/icons?d=gallery&s=light`
+          if `which open`.present?
+            `open https://themify.me/themify-icons`
+            `open https://fontawesome.com/icons?d=gallery&s=light`
+          else
+            puts "Sorry! We can't open these URLs automatically on your platform, but you can visit them manually:"
+            puts ""
+            puts "  https://themify.me/themify-icons"
+            puts "  https://fontawesome.com/icons?d=gallery&s=light"
+            puts ""
+          end
           puts ""
           puts "Did you find an icon you wanted to use? Enter the name here or hit enter to just use the puzzle piece:"
           icon_name = $stdin.gets.chomp
