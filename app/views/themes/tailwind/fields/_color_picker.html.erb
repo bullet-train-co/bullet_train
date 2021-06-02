@@ -1,7 +1,7 @@
 <% yield %>
 
 <%
-stimulus_controller = 'fields--button-toggle'
+stimulus_controller = 'fields--color-picker'
 
 form ||= current_fields_form
 html_options ||= {}
@@ -9,17 +9,37 @@ html_options[:id] ||= id_for(form, method)
 multiple ||= false
 other_options ||= {}
 options ||= options_for(form, method)
+value = form.object.color_picker_value
 %>
 
 <%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
   <% content_for :field do %>
-    <div class="space-x-1">
-      <% options.each do |color| %>
-        <label class="btn-toggle btn-color-picker" data-controller="<%= stimulus_controller %>">
-          <%= form.radio_button method, color, { data: { "#{stimulus_controller}-target": 'shadowField' }} %>
-          <button type="button" class="button-color" style="background-color: <%= color %>; --tw-ring-color: <%= color %>" data-action="<%= stimulus_controller %>#clickShadowField">&nbsp;</button>
-        </label>
-      <% end %>
+    <div class="space-x-1" data-controller="<%= stimulus_controller %>" data-<%= stimulus_controller %>-initial-color-value="<%= form.object.color_picker_value %>">
+      <%= form.hidden_field method, value: value, data: {"#{stimulus_controller}-target": "colorPickerValue"} %>
+      <div class="inline space-x-1" data-<%= stimulus_controller %>-target="colorOptions">
+        <% options.each do |color| %>
+          <label class="btn-toggle btn-color-picker">
+            <button type="button" class="button-color <%= color == value ? 'ring-2 ring-offset-2' : '' %>" style="background-color: <%= color %>; --tw-ring-color: <%= color %>" data-action="<%= stimulus_controller %>#pickColor" data-color="<%= color %>">&nbsp;</button>
+          </label>
+        <% end %>
+      </div>
+      <label class="btn-toggle btn-color-picker">
+        <button type="button" class="button-color mr-1 <%= value.blank? || options.include?(value) ? 'hidden' : 'ring-2 ring-offset-2' %>" data-action="<%= stimulus_controller %>#pickColor" data-<%= stimulus_controller %>-target="userSelectedColor" data-color="<%= value %>" style="background-color: <%= value %>; --tw-ring-color: <%= value %>">&nbsp;</button>
+      </label>
+      <span class="relative">
+        <input type="text" disabled="disabled" class="rounded-md shadow-sm font-light font-mono text-sm focus:ring-blue focus:border-blue border-gray-300 w-48" value="<%= value %>" data-<%= stimulus_controller %>-target="colorInput"/>
+        <span class="absolute right-0">
+          <button class="py-2 px-1 border border-transparent inline-flex items-center whitespace-nowrap rounded-md text-lg" data-action="<%= stimulus_controller %>#pickRandomColor">
+            <i class="leading-5 ti ti-reload"></i>
+          </button>
+          <button class="py-2 px-1 border border-transparent inline-flex items-center whitespace-nowrap rounded-md btn-pickr text-lg" data-action="<%= stimulus_controller %>#togglePickr">
+            <i class="leading-5 ti ti-pencil"></i>
+          </button>
+          <button class="py-2 px-1 pr-3.5 border border-transparent inline-flex items-center whitespace-nowrap rounded-md text-lg" data-action="<%= stimulus_controller %>#unpickColor">
+            <i class="leading-5 ti ti-trash"></i>
+          </button>
+        </span>
+      </span>
     </div>
   <% end %>
 <% end %>

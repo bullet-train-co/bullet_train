@@ -45,13 +45,13 @@ en:
         label: *color_picker_value
         heading: *color_picker_value
         options:
-         - '#9c73d2'
-         - '#48cdfe'
-         - '#53f3ed'
-         - '#47e37f'
-         - '#f2593d'
-         - '#f68421'
-         - '#f9de00'
+         - '#9C73D2'
+         - '#48CDFE'
+         - '#53F3ED'
+         - '#47E37F'
+         - '#F2593D'
+         - '#F68421'
+         - '#F9DE00'
          - '#929292'
       cloudinary_image_value:
         _: &cloudinary_image_value Cloudinary Image Value
