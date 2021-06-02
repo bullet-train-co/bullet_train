@@ -18,7 +18,7 @@ other_options ||= {}
     <div class="date-input relative" data-controller="<%= stimulus_controller %>">
       <%= form.text_field method, options %>
       <% unless options[:disabled] %>
-      <button class="clear py-2 px-3 border border-transparent inline-flex items-center whitespace-nowrap absolute rounded-md"
+      <button type="button" class="clear py-2 px-3 border border-transparent inline-flex items-center whitespace-nowrap absolute rounded-md"
         style="top: 2px; right: 2px;"
         data-<%= stimulus_controller %>-target="clearButton"
         data-action="<%= stimulus_controller %>#clearDate"

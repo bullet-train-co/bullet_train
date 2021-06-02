@@ -29,13 +29,13 @@ value = form.object.color_picker_value
       <span class="relative">
         <input type="text" disabled="disabled" class="rounded-md shadow-sm font-light font-mono text-sm focus:ring-blue focus:border-blue border-gray-300 w-48" value="<%= value %>" data-<%= stimulus_controller %>-target="colorInput"/>
         <span class="absolute right-0">
-          <button class="py-2 px-1 border border-transparent inline-flex items-center whitespace-nowrap rounded-md text-lg" data-action="<%= stimulus_controller %>#pickRandomColor">
+          <button type="button" class="py-2 px-1 border border-transparent inline-flex items-center whitespace-nowrap rounded-md text-lg" data-action="<%= stimulus_controller %>#pickRandomColor">
             <i class="leading-5 ti ti-reload"></i>
           </button>
-          <button class="py-2 px-1 border border-transparent inline-flex items-center whitespace-nowrap rounded-md btn-pickr text-lg" data-action="<%= stimulus_controller %>#togglePickr">
+          <button type="button" class="py-2 px-1 border border-transparent inline-flex items-center whitespace-nowrap rounded-md btn-pickr text-lg" data-action="<%= stimulus_controller %>#togglePickr">
             <i class="leading-5 ti ti-pencil"></i>
           </button>
-          <button class="py-2 px-1 pr-3.5 border border-transparent inline-flex items-center whitespace-nowrap rounded-md text-lg" data-action="<%= stimulus_controller %>#unpickColor">
+          <button type="button" class="py-2 px-1 pr-3.5 border border-transparent inline-flex items-center whitespace-nowrap rounded-md text-lg" data-action="<%= stimulus_controller %>#unpickColor">
             <i class="leading-5 ti ti-trash"></i>
           </button>
         </span>
