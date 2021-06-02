@@ -11,9 +11,9 @@ other_options ||= {}
 options ||= options_for(form, method)
 %>
 
-<%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
+<% content = render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
   <% content_for :field do %>
-    <div class="space-x-1">
+    <div>
       <% options.each do |value, label| %>
         <label class="btn-toggle" data-controller="<%= stimulus_controller %>">
           <% if multiple %>
@@ -21,7 +21,7 @@ options ||= options_for(form, method)
           <% else %>
             <%= form.radio_button method, value, { data: { "#{stimulus_controller}-target": 'shadowField' }} %>
           <% end %>
-          <button type="button" class="button-alternative" data-action="<%= stimulus_controller %>#clickShadowField">
+          <button type="button" class="button-alternative mb-1.5 mr-1" data-action="<%= stimulus_controller %>#clickShadowField">
             <%= label %>
           </button>
         </label>
@@ -29,3 +29,6 @@ options ||= options_for(form, method)
     </div>
   <% end %>
 <% end %>
+
+<%# The `-mb-1.5` is making up for the `mb-1.5` on each of the buttons. This allows them to wrap with appropriate vertical spacing. %>
+<div class="-mb-1.5"><%= content %></div>

@@ -12,14 +12,14 @@ options ||= options_for(form, method)
 value = form.object.color_picker_value
 %>
 
-<%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
+<% content = render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
   <% content_for :field do %>
     <div class="space-x-1" data-controller="<%= stimulus_controller %>" data-<%= stimulus_controller %>-initial-color-value="<%= form.object.color_picker_value %>">
       <%= form.hidden_field method, value: value, data: {"#{stimulus_controller}-target": "colorPickerValue"} %>
       <div class="inline space-x-1" data-<%= stimulus_controller %>-target="colorOptions">
         <% options.each do |color| %>
           <label class="btn-toggle btn-color-picker">
-            <button type="button" class="button-color <%= color == value ? 'ring-2 ring-offset-2' : '' %>" style="background-color: <%= color %>; --tw-ring-color: <%= color %>" data-action="<%= stimulus_controller %>#pickColor" data-color="<%= color %>">&nbsp;</button>
+            <button type="button" class="button-color mb-1.5 <%= color == value ? 'ring-2 ring-offset-2' : '' %>" style="background-color: <%= color %>; --tw-ring-color: <%= color %>" data-action="<%= stimulus_controller %>#pickColor" data-color="<%= color %>">&nbsp;</button>
           </label>
         <% end %>
       </div>
@@ -43,3 +43,6 @@ value = form.object.color_picker_value
     </div>
   <% end %>
 <% end %>
+
+<%# The `-mb-1` is making up for the `mb-1` on each of the buttons. This allows them to wrap with appropriate vertical spacing. %>
+<div class="-mb-1.5"><%= content %></div>
