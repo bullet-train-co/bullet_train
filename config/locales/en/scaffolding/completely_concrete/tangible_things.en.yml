@@ -82,6 +82,30 @@ en:
         _: &phone_field_value Phone Field Value
         label: *phone_field_value
         heading: *phone_field_value
+      option_value:
+        _: &option_value Option Value
+        label: *option_value
+        heading: *option_value
+        options:
+          one: One
+          two: Two
+          three: Three
+        options_help:
+          one: Lorem ipsum dolor sit amet, consectetur adipiscing elit. sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          two: Ut enim ad minim veniam, quis nostrud exercitation. ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          three: Duis aute irure dolor in reprehenderit in voluptate. velit esse cillum dolore eu fugiat nulla pariatur.
+      multiple_option_values:
+        _: &multiple_option_values Multiple Option Values
+        label: *multiple_option_values
+        heading: *multiple_option_values
+        options:
+          four: Four
+          five: Five
+          six: Six
+        options_help:
+          four: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium quis nostrud exercitation. ullamco laboris.
+          five: Quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo ex ea commodo consequat.
+          six: Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, fugiat nulla pariatur.
       super_select_value:
         _: &super_select_value Super Select Value
         label: *super_select_value
@@ -183,6 +207,8 @@ en:
         file_field_value: *file_field_value
         password_field_value: *password_field_value
         phone_field_value: *phone_field_value
+        option_value: *option_value
+        multiple_option_values: *multiple_option_values
         super_select_value: *super_select_value
         text_area_value: *text_area_value
         action_text_value: *action_text_value

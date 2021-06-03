@@ -31,6 +31,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_equal tangible_thing_data["email_field_value"], tangible_thing.email_field_value
       assert_equal tangible_thing_data["password_field_value"], tangible_thing.password_field_value
       assert_equal tangible_thing_data["phone_field_value"], tangible_thing.phone_field_value
+      assert_equal tangible_thing_data["option_value"], tangible_thing.option_value
       assert_equal tangible_thing_data["super_select_value"], tangible_thing.super_select_value
       assert_equal tangible_thing_data["text_area_value"], tangible_thing.text_area_value
       assert_equal tangible_thing_data["ckeditor_value"], tangible_thing.ckeditor_value

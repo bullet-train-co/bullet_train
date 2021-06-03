@@ -89,7 +89,7 @@ class ApplicationController < ActionController::Base
     attribute = attribute.to_s
     if strong_params.key?(attribute)
       # filter out the placeholder inputs that arrive along with the form submission.
-      strong_params[attribute] = strong_params[attribute].reject { |value| value == "0" }
+      strong_params[attribute] = strong_params[attribute].select(&:present?)
     end
   end
 

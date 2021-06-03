@@ -578,7 +578,7 @@ class Scaffolding::Transformer
 
       if options_need_defining
         case type
-        when "buttons"
+        when "buttons", "options"
           field_attributes["\n    options"] = "@tangible_thing.#{valid_values}.map { |#{short}| [#{short}.id, #{short}.#{attribute_options[:label]}] }"
         when "select", "super_select"
           field_attributes["\n    choices"] = "@tangible_thing.#{valid_values}.map { |#{short}| [#{short}.#{attribute_options[:label]}, #{short}.id] }"
@@ -619,7 +619,7 @@ class Scaffolding::Transformer
       attribute_partial ||= case type
       when "trix_editor", "ckeditor"
         "html"
-      when "buttons", "select", "super_select"
+      when "buttons", "select", "super_select", "options"
         if boolean_buttons
           "boolean"
         else
@@ -714,7 +714,7 @@ class Scaffolding::Transformer
           YAML
         end
       elsif !name.match?(/_ids$/)
-        if ["buttons", "select", "super_select"].include?(type)
+        if ["buttons", "select", "super_select", "options"].include?(type)
 
           yaml_options = if boolean_buttons
             # this does the same output as the yaml right below.
@@ -767,7 +767,11 @@ class Scaffolding::Transformer
         when "date_and_time_field"
           "DateTime"
         when "buttons"
-          "Boolean"
+          if boolean_buttons
+            "Boolean"
+          else
+            "String"
+          end
         when "file_field"
           "File"
         else

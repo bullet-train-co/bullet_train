@@ -17,7 +17,7 @@ options ||= options_for(form, method)
       <% options.each do |value, label| %>
         <label class="btn-toggle" data-controller="<%= stimulus_controller %>">
           <% if multiple %>
-            <%= form.check_box method, {multiple: multiple, checked: form.object.send(method).map(&:to_s).include?(value.to_s), data: { "#{stimulus_controller}-target": 'shadowField' }}, value %>
+            <%= form.check_box method, {multiple: multiple, checked: form.object.send(method).map(&:to_s).include?(value.to_s), data: { "#{stimulus_controller}-target": 'shadowField' }}, value, "" %>
           <% else %>
             <%= form.radio_button method, value, { data: { "#{stimulus_controller}-target": 'shadowField' }} %>
           <% end %>

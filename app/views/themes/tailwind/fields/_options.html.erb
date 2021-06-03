@@ -1,0 +1,45 @@
+<% yield %>
+
+<%
+form ||= current_fields_form
+html_options ||= {}
+html_options[:id] ||= id_for(form, method)
+multiple ||= false
+other_options ||= {}
+options ||= options_for(form, method)
+labels = labels_for(form, method)
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div class="pt-1.5 pb-1 sm:col-span-2">
+      <div class="max-w-lg space-y-3">
+
+        <% options.each do |value, label| %>
+
+          <label class="relative flex items-start">
+            <div class="flex items-center h-5">
+
+              <% if multiple %>
+                <%= form.check_box method, {multiple: multiple, checked: form.object.send(method).map(&:to_s).include?(value.to_s), class: "focus:ring-blue h-4 w-4 text-blue border-gray-300 rounded"}, value, "" %>
+              <% else %>
+                <%= form.radio_button method, value, {class: "focus:ring-blue h-4 w-4 text-blue border-gray-300"} %>
+              <% end %>
+
+            </div>
+            <div class="ml-2.5 text-sm">
+              <div class="select-none"><%= label %></div>
+              <% if labels.options_help&.dig(value)&.present? %>
+                <p class="mt-0.5 text-xs text-gray-500">
+                  <%= labels.options_help.dig(value) %>
+                </p>
+              <% end %>
+            </div>
+          </label>
+
+        <% end %>
+
+      </div>
+    </div>
+  <% end %>
+<% end %>

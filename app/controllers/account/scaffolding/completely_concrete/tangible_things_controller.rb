@@ -77,6 +77,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       :email_field_value,
       :file_field_value,
       :file_field_value_removal,
+      :option_value,
       :password_field_value,
       :phone_field_value,
       :super_select_value,
@@ -84,6 +85,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert new fields above this line.
       multiple_button_values: [],
+      multiple_option_values: [],
       multiple_super_select_values: [],
       # 🚅 super scaffolding will insert new arrays above this line.
     )
@@ -91,6 +93,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
     # 🚅 skip this section when scaffolding.
     assign_date_and_time(strong_params, :date_and_time_field_value)
     assign_checkboxes(strong_params, :multiple_button_values)
+    assign_checkboxes(strong_params, :multiple_option_values)
     assign_select_options(strong_params, :multiple_super_select_values)
     # 🚅 stop any skipping we're doing now.
     # 🚅 super scaffolding will insert processing for new fields above this line.

@@ -21,6 +21,17 @@
     <%= render 'shared/fields/date_and_time_field', method: :date_and_time_field_value %>
     <%= render 'shared/fields/email_field', method: :email_field_value %>
     <%= render 'shared/fields/file_field', method: :file_field_value %>
+
+    <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-2">
+      <div class="sm:col-span-1 pr-0 sm:pr-10">
+        <%= render 'shared/fields/options', method: :option_value %>
+      </div>
+
+      <div class="sm:col-span-1 pr-0 sm:pr-10">
+        <%= render 'shared/fields/options', method: :multiple_option_values, multiple: true %>
+      </div>
+    </div>
+
     <%= render 'shared/fields/password_field', method: :password_field_value %>
     <%= render 'shared/fields/phone_field', method: :phone_field_value %>
 

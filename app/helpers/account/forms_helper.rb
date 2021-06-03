@@ -36,7 +36,7 @@ module Account::FormsHelper
   end
 
   def labels_for(form, method)
-    keys = [:placeholder, :label, :help]
+    keys = [:placeholder, :label, :help, :options_help]
     path = [model_key(form), (current_fields_namespace || :fields), method].compact
     Struct.new(*keys).new(*keys.map { |key| t((path + [key]).join("."), default: "").presence })
   end

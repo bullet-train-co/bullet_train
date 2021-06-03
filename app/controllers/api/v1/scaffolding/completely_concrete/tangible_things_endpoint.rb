@@ -21,6 +21,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpoint < Api::V1
       optional :email_field_value, type: String, desc: gth(:email_field_value)
       optional :password_field_value, type: String, desc: gth(:password_field_value)
       optional :phone_field_value, type: String, desc: gth(:phone_field_value)
+      optional :option_value, type: String, desc: gth(:option_value)
       optional :select_value, type: String, desc: gth(:select_value)
       optional :super_select_value, type: String, desc: gth(:super_select_value)
       optional :text_area_value, type: String, desc: gth(:text_area_value)
@@ -30,6 +31,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpoint < Api::V1
       # 🚅 super scaffolding will insert new fields above this line.
       # 🚅 skip this section when scaffolding.
       optional :multiple_button_values, type: Array, desc: gth(:multiple_button_values)
+      optional :multiple_option_values, type: Array, desc: gth(:multiple_option_values)
       optional :multiple_super_select_values, type: Array, desc: gth(:multiple_super_select_values)
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert new arrays above this line.
