@@ -147,13 +147,6 @@ class Membership < ApplicationRecord
         current_team: user_was.teams.first,
         former_user: user_was.teams.empty?
       )
-
-    elsif invitation
-      # TODO do we need this? currently the membership and invitation both store the email address in question.
-      unless user_email.present?
-        self.user_email = invitation.email
-      end
-
     end
 
     # we do this here just in case by some weird chance an active membership had an invitation attached.

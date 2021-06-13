@@ -122,6 +122,13 @@ class MembershipSystemTest < ActionDispatch::IntegrationTest
         assert page.has_no_content?("Yuto Nishiyama")
       end
 
+      # We assume all of the membership information is still there, even if the user never registered.
+      unregistered_membership = Membership.find_by(user_first_name: "Yuto", user_last_name: "Nishiyama")
+      assert unregistered_membership.user_id.nil?
+      assert unregistered_membership.invitation.nil?
+      assert unregistered_membership.tombstone?
+      assert unregistered_membership.user_email.present?
+
       within_former_memberships_table do
         assert page.has_content?("Yuto Nishiyama")
         assert page.has_content?("Another Role")
