@@ -91,6 +91,12 @@ en:
       edit: 'Edit'
       new: 'New'
 
+  fields:
+    # TODO When these values are updated, it doesn't trigger a rebuild in `bin/webpack-dev-server`.
+    date_field:
+      apply: Apply
+      cancel: Clear
+
   layouts:
 
     application:

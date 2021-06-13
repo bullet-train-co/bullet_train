@@ -1,4 +1,5 @@
 const { environment } = require('@rails/webpacker')
+const erb = require('./loaders/erb')
 const CopyPlugin = require("copy-webpack-plugin");
 
 const webpack = require('webpack')
@@ -40,4 +41,5 @@ environment.loaders.append('CKEditorCSSLoader', require('./loaders/ckeditor/css'
 environment.loaders.get('css').exclude = /(\.module\.[a-z]+$)|(ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css)/
 environment.loaders.get('file').exclude = /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/
 
+environment.loaders.prepend('erb', erb)
 module.exports = environment
