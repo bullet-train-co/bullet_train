@@ -224,8 +224,7 @@ class InvitationSystemTest < ActionDispatch::IntegrationTest
       assert page.has_content?("but you're currently signed in as hanako.tanaka@gmail.com")
       click_on "Join Another Team"
 
-      # TODO figure out why this isn't displaying anymore.
-      # assert page.has_content?("Welcome to Another Team")
+      assert page.has_content?("Welcome to Another Team!")
 
       within_team_menu_for(display_details) do
         click_on "Team Members"
@@ -287,8 +286,7 @@ class InvitationSystemTest < ActionDispatch::IntegrationTest
       # if this is happening, it shouldn't be.
       assert page.has_no_content?("You are not authorized to access this page.")
 
-      # TODO why isn't this showing anymore?
-      # assert page.has_content?("You've successfully removed yourself from The Testing Team.")
+      assert page.has_content?("You've successfully removed yourself from The Testing Team.")
 
       assert page.has_content?("Join a Team")
       assert page.has_content?("The account hanako.tanaka@gmail.com is not currently a member of any teams.")
