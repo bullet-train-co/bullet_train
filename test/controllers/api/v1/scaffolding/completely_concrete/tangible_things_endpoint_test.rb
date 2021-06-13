@@ -47,14 +47,14 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_response :success
 
       # Make sure it's returning our resources.
-      tangible_thing_ids_returned = parsed_body.dig("data").map { |tangible_thing| tangible_thing.dig("attributes", "id") }
+      tangible_thing_ids_returned = response.parsed_body.dig("data").map { |tangible_thing| tangible_thing.dig("attributes", "id") }
       assert_includes(tangible_thing_ids_returned, @tangible_thing.id)
 
       # But not returning other people's resources.
       assert_not_includes(tangible_thing_ids_returned, @other_tangible_things[0].id)
 
       # And that the object structure is correct.
-      assert_proper_object_serialization parsed_body.dig("data").first.dig("attributes")
+      assert_proper_object_serialization response.parsed_body.dig("data").first.dig("attributes")
     end
 
     test "show" do
@@ -63,7 +63,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_response :success
 
       # Ensure all the required data is returned properly.
-      assert_proper_object_serialization parsed_body.dig("data", "attributes")
+      assert_proper_object_serialization response.parsed_body.dig("data", "attributes")
 
       # Also ensure we can't do that same action as another user.
       get "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {access_token: another_access_token}
@@ -81,7 +81,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_response :success
 
       # Ensure all the required data is returned properly.
-      assert_proper_object_serialization parsed_body.dig("data", "attributes")
+      assert_proper_object_serialization response.parsed_body.dig("data", "attributes")
 
       # Also ensure we can't do that same action as another user.
       post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things",
@@ -112,7 +112,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_response :success
 
       # Ensure all the required data is returned properly.
-      assert_proper_object_serialization parsed_body.dig("data", "attributes")
+      assert_proper_object_serialization response.parsed_body.dig("data", "attributes")
 
       # But we have to manually assert the value was properly updated.
       @tangible_thing.reload

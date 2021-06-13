@@ -1,8 +1,8 @@
 class Api::Test < ActionDispatch::IntegrationTest
-  # TODO Why can't we do `response.parsed_body`? Is it because of the `application/vnd.api+json`?
-  def parsed_body
-    JSON.parse(response.body)
-  end
+  # Since response.parsed_body only works with :json out of the box,
+  # we register this encoder so rails knows how to parse a JSON:API response.
+  ActionDispatch::IntegrationTest.register_encoder :jsonapi,
+    response_parser: ->(body) { JSON.parse(body) }
 
   def access_token
     params = {
@@ -38,7 +38,7 @@ class Api::Test < ActionDispatch::IntegrationTest
     assert_response :not_found
     # Some invalid token errors also return 404, so it's important that we assert for the actual error message,
     # otherwise we're not testing the right thing.
-    assert parsed_body["error"].include?("could not be found")
+    assert response.parsed_body["error"].include?("could not be found")
   end
 
   def setup
