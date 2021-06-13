@@ -41,7 +41,10 @@ export default class extends Controller {
     event.preventDefault()
 
     $(this.timeZoneButtonsTarget).toggleClass('hidden')
-    $(this.timeZoneSelectWrapperTarget).toggleClass('hidden')
+
+    if (this.hasTimeZoneSelectWrapperTarget) {
+      $(this.timeZoneSelectWrapperTarget).toggleClass('hidden')
+    }
   }
 
   resetTimeZoneUI(e) {
@@ -49,7 +52,10 @@ export default class extends Controller {
 
     $(this.currentTimeZoneWrapperTarget).removeClass('hidden')
     $(this.timeZoneButtonsTarget).addClass('hidden')
-    $(this.timeZoneSelectWrapperTarget).addClass('hidden')
+
+    if (this.hasTimeZoneSelectWrapperTarget) {
+      $(this.timeZoneSelectWrapperTarget).addClass('hidden')
+    }
   }
 
   setTimeZone(event) {
@@ -88,7 +94,7 @@ export default class extends Controller {
     this.plugin = $(this.pluginMainEl).data('daterangepicker') // weird
 
     // Init time zone select
-    if (this.includeTimeValue) {
+    if (this.includeTimeValue && this.hasTimeZoneSelectWrapperTarget) {
       this.timeZoneSelect = this.timeZoneSelectWrapperTarget.querySelector('select.select2')
 
       $(this.timeZoneSelect).select2({
