@@ -97,9 +97,11 @@ class User < ApplicationRecord
   end
 
   def create_default_team
-    self.current_team = teams.create(name: "Your Team", time_zone: time_zone)
-    memberships.first.roles = [Role.admin]
-    save
+    # This creates a `Membership`, because `User` `has_many :teams, through: :memberships`
+    # TODO The team name should take into account the user's current locale.
+    default_team = teams.create(name: "Your Team", time_zone: time_zone)
+    memberships.find_by(team: default_team).roles = [Role.admin]
+    update(current_team: default_team)
   end
 
   def real_emails_only
