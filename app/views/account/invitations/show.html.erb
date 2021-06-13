@@ -6,9 +6,7 @@
         <p><%= raw t('.has_invited', user_name: @invitation.from_membership.name) %></p>
 
         <%= render 'account/shared/alert' do %>
-          <% # TODO this is a nice partials issue that needs resolving! %>
-          <% # = raw t('.alert', invitation_email: @invitation.email, user_email: current_user.email) %>
-          <%= raw t('account.invitations.show.alert', invitation_email: @invitation.email, user_email: current_user.email) %>
+          <%= raw t('.alert', invitation_email: @invitation.email, user_email: current_user.email) %>
         <% end %>
 
         <p><%= t('.you_can') %></p>
