@@ -99,6 +99,14 @@ export default class extends Controller {
       }
       this.pickr.hide();
     });
+
+    const that = this
+
+    $('input[type="text"].pcr-result').on('keydown', function (e) {
+      if (e.key === 'Enter') {
+        that.pickr.applyColor(false)
+      }
+    })
   }
 
   teardownPluginInstance() {
