@@ -158,32 +158,28 @@ if scaffolding_type == 'crud'
 
 elsif scaffolding_type == 'crud-field'
 
-  unless argv.count >= 3
+  unless argv.count >= 2
     puts ""
-    puts "🚅  usage: bin/super-scaffold crud-field <Model> <ParentModels> <attribute:type> <attribute:type> ... [options]"
+    puts "🚅  usage: bin/super-scaffold crud-field <Model> <attribute:type> <attribute:type> ... [options]"
     puts ""
     puts "E.g. add a description and body to Pages:"
     puts "  rails g migration add_description_etc_to_pages description:text body:text"
-    puts "  bin/super-scaffold crud-field Page Site,Team description:text body:text"
+    puts "  bin/super-scaffold crud-field Page description:text body:text"
     puts ""
     puts "Options:"
     puts ""
     puts "  --skip-table: Only add to the new/edit form and show view."
     puts ""
-    # TODO make this go away.
-    puts "(Sorry to ask for the parent model again. We don't actually need it. It will go away at some point.)"
-    puts ""
     exit
   end
 
+  # We pass this value to parents to create a new Scaffolding::Transformer because
+  # we don't actually need knowledge of the parent to add the new field.
+  parents = [""]
   child = argv[0]
-  parents = argv[1] ? argv[1].split(',') : []
-  parents += ['Team']
-  parents = parents.map(&:classify).uniq
-  parent = parents.first
 
   # get all the attributes.
-  attributes = argv[2..-1]
+  attributes = argv[1..-1]
 
   # check that attributes have required options.
   attributes.each do |attribute|
@@ -220,11 +216,11 @@ elsif scaffolding_type == 'crud-field'
           puts ""
           puts "Attributes that end with `_id` or `_ids` trigger awesome, powerful magic in Super Scaffolding. However, because no `#{attribute_options[:class_name]}` class was found defined in `#{file_name}`, you'll need to specify a `class_name` that exists to let us know what model class is on the other side of the association, like so:".red
           puts ""
-          puts "  bin/super-scaffold crud-field #{child} #{parents.join(',')} #{name}:#{type}[class_name=#{name.gsub(/_ids?$/, '').classify}]".red
+          puts "  bin/super-scaffold crud-field #{child} #{name}:#{type}[class_name=#{name.gsub(/_ids?$/, '').classify}]".red
           puts ""
           puts "If `#{name}` is just a regular field and isn't backed by an ActiveRecord association, you can skip all this with the `[vanilla]` option, e.g.:".red
           puts ""
-          puts "  bin/super-scaffold crud-field #{child} #{parents.join(',')} #{name}:#{type}[vanilla]".red
+          puts "  bin/super-scaffold crud-field #{child} #{name}:#{type}[vanilla]".red
           puts ""
           exit
         end

@@ -25,7 +25,7 @@ class Scaffolding::ClassNamesTransformer
   end
 
   def parent_parts
-    parent.split("::")
+    parent.empty? ? [""] : parent.split("::")
   end
 
   def parent_in_namespace_class_name
