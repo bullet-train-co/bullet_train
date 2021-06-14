@@ -67,6 +67,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       # 🚅 skip this section when scaffolding.
       :text_field_value,
       :action_text_value,
+      :boolean_button_value,
       :button_value,
       :color_picker_value,
       :ckeditor_value,
@@ -91,6 +92,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
     )
 
     # 🚅 skip this section when scaffolding.
+    assign_boolean(strong_params, :boolean_button_value)
     assign_date_and_time(strong_params, :date_and_time_field_value)
     assign_checkboxes(strong_params, :multiple_button_values)
     assign_checkboxes(strong_params, :multiple_option_values)

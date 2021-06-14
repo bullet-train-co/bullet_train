@@ -5,6 +5,8 @@
     <%# 🚅 skip this section when scaffolding. %>
     <%= render 'shared/fields/text_field', method: :text_field_value, options: {autofocus: true} %>
 
+    <%= render 'shared/fields/buttons', method: :boolean_button_value %>
+
     <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-2">
       <div class="sm:col-span-1">
         <%= render 'shared/fields/buttons', method: :button_value %>

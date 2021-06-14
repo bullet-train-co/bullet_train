@@ -25,6 +25,7 @@ class AccountTest < ActionDispatch::IntegrationTest
 
       click_on "Add New Tangible Thing"
       fill_in "Text Field Value", with: "My value for this text field"
+      click_on "Yes"
       click_on "Two" # this should never make it to the database, because of what comes next.
       click_on "Three"
       click_on "Four"
@@ -43,6 +44,7 @@ class AccountTest < ActionDispatch::IntegrationTest
       assert page.has_content? "Tangible Thing Details"
 
       assert page.has_content? "My value for this text field"
+      assert page.has_content? "Yes"
       assert page.has_no_content? "Two"
       assert page.has_content? "Three"
       assert page.has_content? "Four and Five"
@@ -56,6 +58,7 @@ class AccountTest < ActionDispatch::IntegrationTest
       click_on "Edit Tangible Thing"
 
       fill_in "Text Field Value", with: "My new value for this text field"
+      click_on "No"
       click_on "One"
       fill_in "Date Field Value", with: "02/17/2021"
       fill_in "Email Field Value", with: "not-me@acme.com"
@@ -68,6 +71,7 @@ class AccountTest < ActionDispatch::IntegrationTest
       click_on "Update Tangible Thing"
 
       assert page.has_content? "My new value for this text field"
+      assert page.has_content? "No"
       assert page.has_content? "One"
       assert page.has_content? "not-me@acme.com"
       assert page.has_content? "insecure-password"

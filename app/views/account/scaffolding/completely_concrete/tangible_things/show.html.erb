@@ -12,6 +12,7 @@
         <% with_attribute_settings object: @tangible_thing, strategy: :label do %>
           <%# 🚅 skip this section when scaffolding. %>
           <%= render 'shared/attributes/text', attribute: :text_field_value %>
+          <%= render 'shared/attributes/boolean', attribute: :boolean_button_value %>
           <%= render 'shared/attributes/option', attribute: :button_value %>
           <%= render 'shared/attributes/options', attribute: :multiple_button_values %>
           <%= render 'shared/attributes/html', attribute: :ckeditor_value %>

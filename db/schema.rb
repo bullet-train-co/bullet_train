@@ -244,6 +244,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_230736) do
     t.jsonb "multiple_button_values", default: []
     t.jsonb "multiple_super_select_values", default: []
     t.string "color_picker_value"
+    t.boolean "boolean_button_value"
     t.string "option_value"
     t.jsonb "multiple_option_values", default: []
     t.index ["absolutely_abstract_creative_concept_id"], name: "index_tangible_things_on_creative_concept_id"

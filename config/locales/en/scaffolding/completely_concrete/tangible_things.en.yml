@@ -40,6 +40,13 @@ en:
           four: Four
           five: Five
           six: Six
+      boolean_button_value:
+        _: &boolean_button_value Boolean Button Value
+        label: *boolean_button_value
+        heading: *boolean_button_value
+        options:
+          true: "Yes"
+          false: "No"
       color_picker_value:
         _: &color_picker_value Color Picker Value
         label: *color_picker_value
@@ -201,6 +208,7 @@ en:
         # 🚅 skip this section when scaffolding.
         text_field_value: *text_field_value
         button_value: *button_value
+        boolean_button_value: *boolean_button_value
         cloudinary_image_value: *cloudinary_image_value
         date_field_value: *date_field_value
         email_field_value: *email_field_value

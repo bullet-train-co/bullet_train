@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
   def assign_boolean(strong_params, attribute)
     attribute = attribute.to_s
     if strong_params.key?(attribute)
-      strong_params[attribute] = ActiveModel::Type::Boolean.new.cast(strong_params[attribute])
+      strong_params[attribute] = ActiveModel::Type::Boolean.new.cast(strong_params[attribute]) || false
     end
   end
 
