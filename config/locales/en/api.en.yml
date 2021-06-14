@@ -1,0 +1,13 @@
+en:
+  api:
+    statuses:
+      200: "Success" # okay
+      201: "Success" # created
+      400: "Missing or Bad Parameters" # bad request
+      401: "Not Authorized" # unauthorized
+      403: "Permission Denied" # forbidden
+      404: "Record Not Found" # not found
+      406: "Validation Errors" # not acceptable
+      422: "Record Not Saved" # unprocessable entity
+      429: "API Rate Limit Exceeded" # too many requests
+      500: "Internal Server Error" # internal server error

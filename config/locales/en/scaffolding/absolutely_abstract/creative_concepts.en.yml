@@ -19,6 +19,10 @@ en:
         # TODO customize for your use-case.
         destroy: Are you sure you want to remove %{creative_concept_name}? This will also remove it's associated data. This can't be undone.
     fields: &fields
+      id:
+        _: &id Creative Concept ID
+        label: *id
+        heading: *id
       name:
         name: &name Name
         label: *name
@@ -45,7 +49,6 @@ en:
         label: *updated_at
         heading: *updated_at
     api:
-      id: Creative Concept ID
       team_id: Team ID
       collection_actions: "Collection Actions for Creative Concepts"
       index: "List Creative Concepts"

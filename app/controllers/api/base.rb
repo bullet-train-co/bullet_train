@@ -1,4 +1,5 @@
 require "grape-swagger"
+require_relative "../api"
 
 class Api::Base < Grape::API
   content_type :jsonapi, "application/vnd.api+json"
@@ -15,6 +16,7 @@ class Api::Base < Grape::API
   # Swagger docs are available at `/api/swagger_doc.json`.
   add_swagger_documentation \
     hide_documentation_path: true,
+    array_use_braces: true,
     api_version: "v1",
     info: {
       title: I18n.t("application.name"),

@@ -19,6 +19,10 @@ en:
         # TODO customize for your use-case.
         destroy: Are you sure you want to remove %{tangible_thing_name}? This will also remove it's associated data. This can't be undone.
     fields: &fields
+      id:
+        _: &id Tangible Thing ID
+        label: *id
+        heading: *id
       # 🚅 skip this section when scaffolding.
       text_field_value:
         _: &text_field_value Text Field Value
@@ -152,7 +156,6 @@ en:
         label: *updated_at
         heading: *updated_at
     api:
-      id: Tangible Thing ID
       absolutely_abstract_creative_concept_id: Absolutely Abstract Creative Concept ID
       collection_actions: "Collection Actions for Tangible Things"
       index: "List Tangible Things"

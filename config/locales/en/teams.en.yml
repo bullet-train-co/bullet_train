@@ -41,6 +41,10 @@ en:
     form:
       buttons: *buttons
     fields: &fields
+      id:
+        _: &id Team ID
+        label: *id
+        heading: *id
       name:
         _: &name Team Name
         label: *name
@@ -59,7 +63,6 @@ en:
     self:
       <<: [*self, *fields]
     api:
-      id: Team ID
       actions: "Actions for Teams"
       index: "List Teams"
       create: "Add a New Team"

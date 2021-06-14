@@ -1,5 +1,4 @@
 require "active_support/core_ext/string"
-require_relative "bullet_train/api"
 
 def default_url_options_from_base_url
   unless ENV["BASE_URL"].present?
