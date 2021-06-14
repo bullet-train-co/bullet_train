@@ -12,7 +12,7 @@ class MembershipRole < ApplicationRecord
 
   before_destroy do
     if role.admin?
-      unless membership.team.admin_memberships.count > 1
+      unless membership.team.admins.count > 1
         unless membership.team.being_destroyed?
           raise RemovingLastTeamAdminException.new("You can't remove the last team admin.")
         end

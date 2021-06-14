@@ -15,7 +15,7 @@
               <%= render 'shared/attributes/base' do |p| %>
                 <% p.content_for :heading, t(".fields.admins.heading") %>
                 <% p.content_for :body do %>
-                  <%= render 'account/shared/memberships/photos', memberships: (@team.admin_memberships + @creative_concept.admins).uniq %>
+                  <%= render 'account/shared/memberships/photos', memberships: (@team.admins + @creative_concept.admins).uniq %>
                 <% end %>
               <% end %>
             </div>

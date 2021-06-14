@@ -5,6 +5,7 @@ class TeamsTest < ActionDispatch::IntegrationTest
     super
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
     @john = create :onboarded_user, first_name: "John", last_name: "Smith"
+    @jack = create :user, first_name: "Jack", last_name: "Smith"
   end
 
   @@test_devices.each do |device_name, display_details|
@@ -69,6 +70,57 @@ class TeamsTest < ActionDispatch::IntegrationTest
 
       assert page.has_content?("Please correct the errors below.")
       assert page.has_content?("Name can't be blank.")
+    end
+
+    test "#admins shows current and invited admins only on a #{device_name}" do
+      resize_for(display_details)
+      login_as(@jane, scope: :user)
+      team = @jane.current_team
+
+      assert team.admins.include?(@jane.memberships.first)
+
+      # Shows invited admins
+      assert_difference "team.admins.size" do
+        visit new_account_team_invitation_path(team)
+        fill_in "Email Address", with: "admin@user.com"
+        fill_in "First Name", with: "Admin"
+        fill_in "Last Name", with: "User"
+        check "Invite as Team Administrator"
+        click_on "Create Invitation"
+        visit root_path
+      end
+      assert team.admins.include?(Membership.find_by(user_email: "admin@user.com"))
+
+      # Does not show invited non-admins
+      assert_no_difference "team.admins.size" do
+        visit new_account_team_invitation_path(team)
+        fill_in "Email Address", with: "non-admin@user.com"
+        fill_in "First Name", with: "Non"
+        fill_in "Last Name", with: "Admin"
+        click_on "Create Invitation"
+        visit root_path
+      end
+      assert team.admins.exclude?(Membership.find_by(user_email: "non-admin@user.com"))
+
+      # Shows admins after invitation is accepted
+      assert_no_difference "team.admins.size" do
+        team_admin_invite = Invitation.find_by(email: "admin@user.com")
+        team_admin_invite.accept_for(@jack)
+        assert team_admin_invite.destroyed?
+      end
+      assert team.admins.include?(@jack.memberships.first)
+
+      # Does not show admins who left the team
+      assert_difference "team.admins.size", -1 do
+        visit account_membership_path(@jack.memberships.first)
+        accept_confirm do
+          click_on "Remove from Team"
+        end
+        assert page.has_content?("That user has been successfully removed from the team.")
+        tombstoned_membership = Membership.find_by(user_email: "admin@user.com")
+        assert tombstoned_membership.tombstone?
+      end
+      assert team.admins.exclude?(@jack.memberships.first)
     end
   end
 end

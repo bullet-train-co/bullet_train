@@ -58,13 +58,12 @@ class Team < ApplicationRecord
   # 🚫 DEFAULT BULLET TRAIN TEAM FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
 
-  # TODO rename this to admins.
-  def admin_memberships
+  def admins
     memberships.current_and_invited.select(&:admin?)
   end
 
   def admin_users
-    admin_memberships.map(&:user).compact
+    admins.map(&:user).compact
   end
 
   def primary_contact

@@ -81,7 +81,7 @@ class Membership < ApplicationRecord
   def role_ids=(ids)
     # if this membership was an admin, and the new list of role ids don't include admin.
     if admin? && !ids.include?(Role.admin.id)
-      unless team.admin_memberships.count > 1
+      unless team.admins.count > 1
         raise RemovingLastTeamAdminException.new("You can't remove the last team admin.")
       end
     end

@@ -34,7 +34,7 @@ class Scaffolding::AbsolutelyAbstract::CreativeConcept < ApplicationRecord
   end
 
   def all_collaborators
-    (team.admin_memberships + collaborators.map(&:membership)).uniq
+    (team.admins + collaborators.map(&:membership)).uniq
   end
 
   # 🚅 add methods above.
