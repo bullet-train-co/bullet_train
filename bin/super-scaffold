@@ -280,6 +280,8 @@ elsif scaffolding_type == 'oauth-provider'
     puts ""
     puts "  --icon={ti-*}: Specify an icon."
     puts ""
+    puts "For a list of readily available provider strategies, see https://github.com/omniauth/omniauth/wiki/List-of-Strategies ."
+    puts ""
     exit
   end
 
