@@ -759,7 +759,7 @@ class Scaffolding::Transformer
 
       # add attributes to endpoint.
       if name.match?(/_ids$/)
-        scaffold_add_line_to_file("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb", "optional :#{name}, type: Array, desc: gth(:#{name})", RUBY_NEW_ARRAYS_HOOK, prepend: true)
+        scaffold_add_line_to_file("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb", "optional :#{name}, type: Array, desc: Api.heading(:#{name})", RUBY_NEW_ARRAYS_HOOK, prepend: true)
       else
         api_type = case type
         when "date_field"
@@ -778,7 +778,7 @@ class Scaffolding::Transformer
           "String"
         end
 
-        scaffold_add_line_to_file("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb", "optional :#{name}, type: #{api_type}, desc: gth(:#{name})", RUBY_NEW_FIELDS_HOOK, prepend: true)
+        scaffold_add_line_to_file("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb", "optional :#{name}, type: #{api_type}, desc: Api.heading(:#{name})", RUBY_NEW_FIELDS_HOOK, prepend: true)
       end
 
       case type
