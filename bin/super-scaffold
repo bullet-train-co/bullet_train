@@ -120,7 +120,7 @@ if scaffolding_type == 'crud'
     puts ""
     puts "E.g. a Section belongs to a Page, which belongs to a Site, which belongs to a Team:"
     puts "  rails g model Section page:references title:text body:text"
-    puts "  bin/super-scaffold Section Page,Site,Team page:references title:text body:text"
+    puts "  bin/super-scaffold Section Page,Site,Team title:text body:text"
     puts ""
     puts "E.g. an Image belongs to either a Page or a Site:"
     puts "  Doable! See https://bit.ly/2NvO8El for a step by step guide."
