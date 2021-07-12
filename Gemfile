@@ -6,7 +6,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.2"
+ruby "2.7.4"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.1.1"
@@ -92,6 +92,9 @@ gem "devise"
 gem "doorkeeper", "~> 5.4.0"
 gem "omniauth"
 gem "omniauth-stripe-connect"
+# TODO Remove when we're able to properly upgrade Omniauth.
+# https://github.com/omniauth/omniauth/wiki/Resolving-CVE-2015-9284
+gem "omniauth-rails_csrf_protection"
 gem "devise-two-factor"
 gem "rqrcode"
 

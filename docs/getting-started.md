@@ -10,16 +10,18 @@ Before you can get started with Bullet Train, you must have the following depend
  - Ruby 2.7
  - Redis 6.0
  - PostgreSQL 13
+ - Node 15
  - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
 
-Internally, Bullet Train is developed on macOS and these dependencies (other than Chrome) are installed using [RVM](https://rvm.io/) and [Homebrew](https://brew.sh) like so:
+Internally, Bullet Train is developed on macOS and these dependencies (other than Chrome) are installed using [Ruby Version Manager](https://rvm.io/), [Homebrew](https://brew.sh), and [Node Version Manager](https://github.com/nvm-sh/nvm) like so:
 
 ```
 brew install postgresql
 brew services start postgresql
 brew install redis
 brew services start redis
-rvm install ruby-2.7.2
+nvm install 15
+rvm install ruby-2.7.4
 ```
 
 ## 2. Clone (Don't Fork) The Repository
