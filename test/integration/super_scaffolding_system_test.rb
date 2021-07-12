@@ -138,6 +138,34 @@ class SuperScaffoldingSystemTest < ActionDispatch::IntegrationTest
       end
 
       assert page.has_content?("Project was successfully destroyed.")
+
+      click_on "Add New Project"
+      assert page.has_content? "New Project Details"
+      fill_in "Name", with: "Example Project"
+      click_on "Create Project"
+      assert page.has_content? "Project was successfully created."
+
+      within "ol.breadcrumb" do
+        click_on "Dashboard"
+      end
+
+      assert page.has_content? "Below is a list of Test Sites that have been added for Your Team."
+
+      # Edit the first test site.
+      within "table", match: :first do
+        click_on "Edit", match: :first
+      end
+
+      assert page.has_content? "Edit Test Site Details"
+
+      # Select the project we created.
+      find("#select2-test_site_project_id-container").click
+      find("li.select2-results__option span", text: "Example Project").click
+      click_on "Update Test Site"
+
+      assert page.has_content? "Test Site was successfully updated."
+      click_on "Example Project"
+      assert page.has_content? "Below are the details we have for Example Project"
     end
   end
 end

@@ -18,7 +18,6 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpoint < Api::V1
       optional :password_field_value, type: String, allow_blank: true, desc: Api.heading(:password_field_value)
       optional :phone_field_value, type: String, allow_blank: true, desc: Api.heading(:phone_field_value)
       optional :option_value, type: String, allow_blank: true, desc: Api.heading(:option_value)
-      optional :select_value, type: String, allow_blank: true, desc: Api.heading(:select_value)
       optional :super_select_value, type: String, allow_blank: true, desc: Api.heading(:super_select_value)
       optional :text_area_value, type: String, allow_blank: true, desc: Api.heading(:text_area_value)
       optional :action_text_value, type: String, allow_blank: true, desc: Api.heading(:action_text_value)

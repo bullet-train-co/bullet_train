@@ -12,3 +12,7 @@ ignore:
     - Style/TrailingCommaInArrayLiteral
     - Style/TrailingCommaInHashLiteral
     - Style/CommentedKeyword
+  - 'app/controllers/**/*':
+    - Style/RedundantAssignment
+  - 'lib/scaffolding/transformer.rb':
+    - Layout/EndAlignment # TODO this causes an endless loop!

@@ -175,6 +175,9 @@ gem "turbo-rails", github: "hotwired/turbo-rails", branch: "main"
 # `standardrb --fix`
 gem "standard"
 
+# for super scaffolding: "select *a* team member" vs. "select *an* option".
+gem "indefinite_article"
+
 # for obfuscating ids in urls
 gem "hashids"
 

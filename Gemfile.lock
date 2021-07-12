@@ -266,6 +266,8 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n-js (3.8.3)
       i18n (>= 0.6.6)
+    indefinite_article (0.2.4)
+      activesupport
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
@@ -599,6 +601,7 @@ DEPENDENCIES
   hashids
   honeybadger
   i18n-js
+  indefinite_article
   jbuilder (~> 2.7)
   jsonapi-serializer
   kaminari

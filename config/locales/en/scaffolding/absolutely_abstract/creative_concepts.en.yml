@@ -20,9 +20,9 @@ en:
         destroy: Are you sure you want to remove %{creative_concept_name}? This will also remove it's associated data. This can't be undone.
     fields: &fields
       id:
-        _: &id Creative Concept ID
-        label: *id
-        heading: *id
+        heading: Creative Concept ID
+      team_id:
+        heading: Team ID
       name:
         name: &name Name
         label: *name
