@@ -485,10 +485,10 @@ class Scaffolding::Transformer
       is_ids = name.match?(/_ids$/)
       # if this is the first attribute of a newly scaffolded model, that field is required.
       is_required = attribute_options[:required] || (local_options[:type] == :crud && index == 0)
-      is_vanilla = attribute_options&.key(:vanilla)
+      is_vanilla = attribute_options&.key?(:vanilla)
       is_belongs_to = is_id && !is_vanilla
       is_has_many = is_ids && !is_vanilla
-      is_multiple = attribute_options&.key(:multiple) || is_has_many
+      is_multiple = attribute_options&.key?(:multiple) || is_has_many
       is_association = is_belongs_to || is_has_many
 
       name_without_id = name.gsub(/_id$/, "")
