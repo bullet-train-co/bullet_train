@@ -719,7 +719,7 @@ class Scaffolding::Transformer
       unless cli_options["skip-table"]
 
         # table header.
-        field_content = "<th #{cell_attributes}><%= t('.fields.#{attribute_name}.heading') %></th>"
+        field_content = "<th#{cell_attributes.present? ? " " + cell_attributes : ""}><%= t('.fields.#{attribute_name}.heading') %></th>"
 
         unless ["Team", "User"].include?(child)
           scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb", field_content, "<%# 🚅 super scaffolding will insert new field headers above this line. %>", prepend: true)
