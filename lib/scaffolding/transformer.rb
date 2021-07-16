@@ -1103,7 +1103,7 @@ class Scaffolding::Transformer
 
     # add children to the show page of their parent.
     unless options["skip-parent"] || parent == "None"
-      scaffold_add_line_to_file("./app/views/account/scaffolding/absolutely_abstract/creative_concepts/show.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @creative_concept.completely_concrete_tangible_things#{".in_sort_order" if options["sortable"]}, hide_back: true %>", "<%# 🚅 super scaffolding will insert new children above this line. %>", prepend: true)
+      scaffold_add_line_to_file("./app/views/account/scaffolding/absolutely_abstract/creative_concepts/show.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @creative_concept.completely_concrete_tangible_things, hide_back: true %>", "<%# 🚅 super scaffolding will insert new children above this line. %>", prepend: true)
     end
 
     unless options["skip-model"]
@@ -1172,7 +1172,7 @@ class Scaffolding::Transformer
       end
 
       unless options["skip-controller"]
-        scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", "include Sprinkles::SortableActions\n", "Account::ApplicationController", increase_indent: true)
+        scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", "include SortableActions\n", "Account::ApplicationController", increase_indent: true)
       end
     end
 

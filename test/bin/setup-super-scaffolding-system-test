@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rails g model TestSite team:references name:string other_attribute:string url:text
+rails g model TestSite team:references name:string other_attribute:string url:text sort_order:integer
 rails g model TestPage test_site:references name:string path:text
 rails g model Project team:references name:string
 rails g model Projects::Deliverable project:references name:string
@@ -9,7 +9,7 @@ rails g model Personality::CharacterTrait objective:references name:string
 rails g model Personality::Note character_trait:references name:string
 rails g model Personality::Reactions::Response note:references name:string
 
-bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="fal fa-globe-stand"
+bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="fal fa-globe-stand" --sortable
 bin/super-scaffold crud TestPage TestSite name:text_field path:text_field
 bin/super-scaffold crud Project Team name:text_field description:trix_editor --sidebar="fal fa-cogs"
 bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor

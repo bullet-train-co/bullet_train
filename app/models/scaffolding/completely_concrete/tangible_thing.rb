@@ -1,5 +1,4 @@
 class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
-  include Sprinkles::Sortable
   # 🚅 add concerns above.
 
   belongs_to :absolutely_abstract_creative_concept, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcept"

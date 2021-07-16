@@ -38,4 +38,10 @@ class ApplicationRecord < ActiveRecord::Base
       self.class.name.underscore.split("/").last.titleize
     end
   end
+
+  def parent_collection
+    # TODO Make this error message use reflection to try to guess which model is the parent (it's usually the first
+    # `belongs_to`) andalso try to suggest what the entire method definition should actually be.
+    raise "You're trying to use a feature that requires #{self.class.name} to have a `collection` method defined that returns the Active Record association that this model belongs to within its parent object."
+  end
 end

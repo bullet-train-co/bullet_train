@@ -1,4 +1,4 @@
-module Sprinkles::SortableActions
+module SortableActions
   extend ActiveSupport::Concern
 
   def reorder

@@ -31,6 +31,7 @@ require.context('images', true)
 
 require("account")
 require("sprinkles")
+require("concerns")
 require("electron")
 
 // For inline use in `app/views/account/onboarding/user_details/edit.html.erb`.
