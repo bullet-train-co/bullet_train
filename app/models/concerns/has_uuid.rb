@@ -3,7 +3,7 @@ module HasUuid
 
   # define relationships.
   included do
-    before_create do
+    after_initialize do
       self.uuid ||= SecureRandom.hex
     end
   end
