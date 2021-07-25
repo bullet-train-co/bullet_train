@@ -23,7 +23,7 @@
     "@rails/actiontext": "^6.1.0",
     "@rails/activestorage": "^6.1.0",
     "@rails/ujs": "^6.1.0",
-    "@rails/webpacker": "4.3.0",
+    "@rails/webpacker": "^5.4.0",
     "@simonwep/pickr": "^1.8.1",
     "@tailwindcss/forms": "^0.2.1",
     "@tailwindcss/postcss7-compat": "^2.0.1",
