@@ -224,7 +224,12 @@ class Scaffolding::Transformer
     transformed_content = content
     transformed_after = after
 
-    target_file_content = File.open(transformed_file_name).read
+    begin
+      target_file_content = File.open(transformed_file_name).read
+    rescue Errno::ENOENT => _
+      puts "Couldn't find '#{transformed_file_name}'".red
+      return false
+    end
 
     if target_file_content.include?(transformed_content)
       puts "No need to update '#{transformed_file_name}'. It already has '#{transformed_content}'."
@@ -656,7 +661,12 @@ class Scaffolding::Transformer
 
         # https://stackoverflow.com/questions/21582464/is-there-a-ruby-hashto-s-equivalent-for-the-new-hash-syntax
         if field_options.any?
-          field_attributes[type == "buttons" ? :html_options : :options] = "{" + field_options.map { |key, value| "#{key}: #{value}" }.join(", ") + "}"
+          field_options_key = if ["buttons", "super_select", "options"].include?(type)
+            :html_options
+          else
+            :options
+          end
+          field_attributes[field_options_key] = "{" + field_options.map { |key, value| "#{key}: #{value}" }.join(", ") + "}"
         end
 
         if is_association

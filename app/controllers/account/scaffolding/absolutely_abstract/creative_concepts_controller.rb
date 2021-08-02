@@ -70,7 +70,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def creative_concept_params
-    params.require(:scaffolding_absolutely_abstract_creative_concept).permit(
+    strong_params = params.require(:scaffolding_absolutely_abstract_creative_concept).permit(
       :name,
       :description,
       # 🚅 super scaffolding will insert new fields above this line.
@@ -78,5 +78,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsController < Acc
     )
 
     # 🚅 super scaffolding will insert processing for new fields above this line.
+
+    strong_params
   end
 end
