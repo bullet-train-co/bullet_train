@@ -1,0 +1,21 @@
+<%= form_with model: delivery, url: (delivery.persisted? ? [:account, delivery] : [:account, @endpoint, :deliveries]), local: true, class: 'form' do |form| %>
+  <%= render 'account/shared/forms/errors', form: form %>
+
+  <% with_field_settings form: form do %>
+    <%= render 'shared/fields/super_select', method: :event_id, options: {autofocus: true, include_blank: t('.fields.event_id.placeholder')}, 
+    choices: @delivery.valid_events.map { |event| [event.label_string, event.id] } %>
+    <%= render 'shared/fields/text_field', method: :endpoint_url %>
+    <%= render 'shared/fields/date_and_time_field', method: :delivered_at %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% end %>
+
+  <div class="buttons">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:account, delivery], class: "button-secondary" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:account, @endpoint, :deliveries], class: "button-secondary" %>
+    <% end %>
+  </div>
+
+<% end %>

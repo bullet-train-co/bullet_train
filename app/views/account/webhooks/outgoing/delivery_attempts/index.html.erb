@@ -1,7 +1,6 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('webhooks/outgoing/delivery_attempts.delivery_header', delivery_name: possessive_string(@delivery.name)) %></h6>
-  <div class="padded-lg">
-    <%= render 'account/shared/notices' %>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
     <%= render 'index', delivery_attempts: @delivery_attempts %>
-  </div>
-</div>
+  <% end %>
+<% end %>

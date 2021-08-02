@@ -1,11 +1,12 @@
-<div class="element-wrapper">
-  <h6 class="element-header"><%= t('webhooks/outgoing/delivery_attempts.new.header') %></h6>
-  <%= render 'account/shared/notices' %>
-  <div class="padded-lg">
-    <div class="element-box">
-      <h5 class="form-header"><%= t('webhooks/outgoing/delivery_attempts.new.form_header') %></h5>
-      <div class="form-desc"><%= t('webhooks/outgoing/delivery_attempts.new.description') %></div>
-      <%= render 'form', delivery_attempt: @delivery_attempt %>
-    </div>
-  </div>
-</div>
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'account/shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description, t('.description') %>
+      <% p.content_for :body do %>
+        <%= render 'form', delivery_attempt: @delivery_attempt %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

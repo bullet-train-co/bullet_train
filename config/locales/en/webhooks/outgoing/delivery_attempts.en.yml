@@ -1,29 +1,122 @@
 en:
-  breadcrumbs:
-    delivery_attempts: Delivery Attempts
-    webhooks_outgoing_delivery_attempts: Delivery Attempts
-  webhooks/outgoing/delivery_attempts:
+  webhooks/outgoing/delivery_attempts: &delivery_attempts
     label: &label Delivery Attempts
     breadcrumbs:
       label: *label
-    header: Delivery Attempts
-    delivery_header: '%{delivery_name} Delivery Attempts'
-    description: Below is a list of individual attempts to deliver this webhook event.
-    show:
-      header: Delivery Attempt Details
-      description: Below are all the available details for this individual attempt to deliver the webhook event.
-    fields:
-      attempt_number:
-        heading: Attempt Number
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Delivery Attempt
+      create: Create Delivery Attempt
+      edit: Edit Delivery Attempt
+      update: Update Delivery Attempt
+      destroy: Remove Delivery Attempt
+      shorthand:
+        show: Details
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{delivery_attempt_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      id:
+        _: &id Delivery Attempt ID
+        label: *id
+        heading: *id
+
       response_code:
-        heading: HTTP Response Code
+        _: &response_code Response Code
+        label: *response_code
+        heading: *response_code
+
       response_body:
-        heading: Response Body
+        _: &response_body Response Body
+        label: *response_body
+        heading: *response_body
+
       response_message:
-        heading: Response Message
+        _: &response_message Response Message
+        label: *response_message
+        heading: *response_message
+
       error_message:
-        heading: Error Message
+        _: &error_message Error Message
+        label: *error_message
+        heading: *error_message
+
+      attempt_number:
+        _: &attempt_number Attempt Number
+        label: *attempt_number
+        heading: *attempt_number
+
+      status:
+        heading: Status
+
+      # 🚅 super scaffolding will insert new fields above this line.
       created_at:
-        heading: Attempted At
-      successful:
-        heading: Successful?
+        _: &created_at Attempted At
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      delivery_id: Absolutely Abstract Delivery ID
+      collection_actions: "Collection Actions for Delivery Attempts"
+      index: "List Delivery Attempts"
+      create: "Add a New Delivery Attempt"
+      member_actions: "Actions for an Individual Delivery Attempt"
+      show: "Retrieve a Delivery Attempt"
+      update: "Update a Delivery Attempt"
+      destroy: "Delete a Delivery Attempt"
+      fields: *fields
+    index:
+      section: "%{deliveries_possessive} Delivery Attempts"
+      contexts:
+        webhooks/outgoing/delivery:
+          header: Delivery Attempts
+          description: Below is an overview of individual attempts to deliver this event.
+          description_empty: We haven't attempted to deliver this event.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{delivery_attempt_name} to Deliver <code>%{delivery_name}</code>"
+      header: Delivery Attempt Details
+      description: Below are the details we have for %{delivery_attempt_name}.
+      manage_description: You'll also find options for updating these details or removing %{delivery_attempt_name} from %{delivery_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Delivery Attempt for %{delivery_name}"
+      header: New Delivery Attempt Details
+      description: Please provide the details of the new Delivery Attempt you'd like to add to %{delivery_name}.
+      form: *form
+    edit:
+      section: "%{delivery_attempt_name}"
+      header: Edit Delivery Attempt Details
+      description: You can update the details or settings for %{delivery_attempt_name} below.
+      form: *form
+    notifications:
+      created: Delivery Attempt was successfully created.
+      updated: Delivery Attempt was successfully updated.
+      destroyed: Delivery Attempt was successfully destroyed.
+  account:
+    webhooks:
+      outgoing:
+        delivery_attempts: *delivery_attempts
+  activerecord:
+    attributes:
+      webhooks/outgoing/delivery_attempt:
+        response_code: *response_code
+        response_body: *response_body
+        response_message: *response_message
+        error_message: *error_message
+        attempt_number: *attempt_number
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

@@ -1,0 +1,10 @@
+en:
+  webhooks/outgoing/events:
+    fields:
+      uuid: &uuid
+        heading: Event UUID
+      short_uuid: *uuid
+      event_type_name:
+        heading: Event Type
+      payload:
+        heading: JSON Payload

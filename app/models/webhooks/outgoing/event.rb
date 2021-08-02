@@ -15,8 +15,12 @@ class Webhooks::Outgoing::Event < ApplicationRecord
       event_type: event_type.try(:name),
       subject_id: subject_id,
       subject_type: subject_type,
-      body: body
+      data: data
     }
+  end
+
+  def event_type_name
+    payload.dig("event_type")
   end
 
   def endpoints
@@ -33,7 +37,7 @@ class Webhooks::Outgoing::Event < ApplicationRecord
     end
   end
 
-  def name
-    uuid
+  def label_string
+    short_uuid
   end
 end

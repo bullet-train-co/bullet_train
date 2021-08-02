@@ -1,28 +1,112 @@
 en:
-  webhooks/outgoing/deliveries:
+  webhooks/outgoing/deliveries: &deliveries
     label: &label Deliveries
     breadcrumbs:
       label: *label
-    header: Webhook Deliveries
-    endpoint_header: '%{endpoint_name} Deliveries'
-    description: Below is a list of webhooks we've recently issued to this endpoint.
-    show:
-      header: Webhook Delivery Details
-      description: Below are all the available details for the webhook event we attempted to deliver.
-    fields:
-      name:
-        heading: Description
-      event:
-        heading: Event
-      json_payload:
-        heading: JSON Payload
-      endpoint:
-        heading: Webhooks Endpoint
-      event_type:
-        heading: Event Type
-      created_at:
-        heading: Issued
-      delivered:
-        heading: Status
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Delivery
+      create: Create Delivery
+      edit: Edit Delivery
+      update: Update Delivery
+      destroy: Remove Delivery
+      shorthand:
+        show: Details
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{delivery_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      id:
+        _: &id Delivery ID
+        label: *id
+        heading: *id
+
+      event_id: &event
+        _: &event_id Event
+        label: *event_id
+        heading: *event_id
+        placeholder: Select a Event
+      event: *event
+
       endpoint_url:
-        heading: Endpoint URL (at Time of Issue)
+        _: &endpoint_url Endpoint URL
+        label: *endpoint_url
+        heading: *endpoint_url
+
+      delivered_at:
+        _: &delivered_at Delivered At
+        label: *delivered_at
+        heading: *delivered_at
+
+      status:
+        heading: Status
+
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Issued At
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      endpoint_id: Absolutely Abstract Endpoint ID
+      collection_actions: "Collection Actions for Deliveries"
+      index: "List Deliveries"
+      create: "Add a New Delivery"
+      member_actions: "Actions for an Individual Delivery"
+      show: "Retrieve a Delivery"
+      update: "Update a Delivery"
+      destroy: "Delete a Delivery"
+      fields: *fields
+    index:
+      section: "%{endpoints_possessive} Deliveries"
+      contexts:
+        webhooks/outgoing/endpoint:
+          header: Deliveries
+          description: Below is a list of webhook deliveries that have been attempted for %{endpoint_name}.
+          description_empty: No Deliveries have been added for %{endpoint_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "Delivery of Event <code>%{delivery_name}</code> to %{endpoint_name}"
+      header: Webhook Delivery Details
+      description: Below are the available details for the event we've attempted to deliver.
+      manage_description: You'll also find options for updating these details or removing %{delivery_name} from %{endpoint_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Delivery for %{endpoint_name}"
+      header: New Delivery Details
+      description: Please provide the details of the new Delivery you'd like to add to %{endpoint_name}.
+      form: *form
+    edit:
+      section: "%{delivery_name}"
+      header: Edit Delivery Details
+      description: You can update the details or settings for %{delivery_name} below.
+      form: *form
+    notifications:
+      created: Delivery was successfully created.
+      updated: Delivery was successfully updated.
+      destroyed: Delivery was successfully destroyed.
+  account:
+    webhooks:
+      outgoing:
+        deliveries: *deliveries
+  activerecord:
+    attributes:
+      webhooks/outgoing/delivery:
+        event_id: *event_id
+        endpoint_url: *endpoint_url
+        delivered_at: *delivered_at
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

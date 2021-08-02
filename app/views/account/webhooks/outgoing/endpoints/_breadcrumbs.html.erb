@@ -1,11 +1,8 @@
 <% endpoint ||= @endpoint %>
 <% team ||= @team || endpoint&.team %>
 <%= render 'account/teams/breadcrumbs', team: team %>
-<li class="breadcrumb-item">Webhooks</li>
-<li class="breadcrumb-item">
-  <%= link_to t('.label'), [:account, team, :webhooks, :outgoing, :endpoints] %>
-</li>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, team, :webhooks_outgoing_endpoints] %>
 <% if endpoint&.persisted? %>
-  <li class="breadcrumb-item"><%= link_to endpoint.name, [:account, endpoint] %></li>
+  <%= render 'account/shared/breadcrumb', label: endpoint.label_string, url: [:account, endpoint] %>
 <% end %>
 <%= render 'account/shared/breadcrumbs/actions', only_for: 'webhooks/outgoing/endpoints' %>

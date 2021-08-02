@@ -63,17 +63,6 @@ class Minitest::Test
 
     ENV["BASE_URL"] = "http://localhost:3001"
 
-    @roles = [Role.admin, Role.create(key: :another_role_key, display_order: 1)]
-
-    [
-      Scaffolding::AbsolutelyAbstract::CreativeConcept,
-      Scaffolding::CompletelyConcrete::TangibleThing
-    ].each do |model_class|
-      ["created", "updated", "deleted"].each do |action|
-        Webhooks::Outgoing::EventType.find_or_create_by(name: "#{model_class.name.underscore}.#{action}")
-      end
-    end
-
     Capybara.use_default_driver
     Capybara.reset_sessions!
   end

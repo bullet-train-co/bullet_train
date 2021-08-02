@@ -1,22 +1,20 @@
-<%= form_with(model: [:account, (@team unless endpoint.persisted?), endpoint], local: true) do |form| %>
+<%= form_with model: endpoint, url: (endpoint.persisted? ? [:account, endpoint] : [:account, @team, :webhooks_outgoing_endpoints]), local: true, class: 'form' do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
-  <%= render 'shared/forms/field', form: form, attribute: :name, field_type: :text_field, field_attributes: {autofocus: true} %>
-  <%= render 'shared/forms/field', form: form, attribute: :url, field_type: :text_field, field_attributes: {} %>
-  <%= render 'shared/forms/has_many_through', form: form, attribute: :event_type_ids, options: Webhooks::Outgoing::EventType.all.collect { |event_type| [event_type.name, event_type.id] } do %>
-    <% content_for :help do %>
-      If you don't select any specific event types, all event types will be delivered.
-    <% end %>
+  <% with_field_settings form: form do %>
+    <%= render 'shared/fields/text_field', method: :name, options: {autofocus: true} %>
+    <%= render 'shared/fields/text_field', method: :url %>
+    <%= render 'shared/fields/super_select', method: :event_type_ids, html_options: {multiple: true}, 
+    choices: @endpoint.valid_event_types.map { |event_type| [event_type.label_string, event_type.id] } %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
   <% end %>
 
-  <%# 🚅 super scaffolding will insert new fields above this line. %>
-
-  <div class="form-buttons-w">
-    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "btn btn-primary" %>
+  <div class="buttons">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
     <% if form.object.persisted? %>
-    <%= link_to t('global.buttons.cancel'), [:account, endpoint], class: "btn btn-link" %>
+    <%= link_to t('global.buttons.cancel'), [:account, endpoint], class: "button-secondary" %>
     <% else %>
-    <%= link_to t('global.buttons.cancel'), [:account, @team, :webhooks, :outgoing, :endpoints], class: "btn btn-link" %>
+    <%= link_to t('global.buttons.cancel'), [:account, @team, :webhooks_outgoing_endpoints], class: "button-secondary" %>
     <% end %>
   </div>
 

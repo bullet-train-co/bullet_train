@@ -1,39 +1,69 @@
-<div class="element-box">
-  <h5 class="form-header"><%= t('webhooks/outgoing/delivery_attempts.header') %></h5>
-  <div class="form-desc"><%= raw t('webhooks/outgoing/delivery_attempts.description') %></div>
-  <div class="table-responsive">
-    <% if delivery_attempts.count > 0 %>
-      <table class="table table-lightborder" data-class="Webhooks::Outgoing::DeliveryAttempt">
+<% delivery = @delivery || @delivery %>
+<% context ||= delivery %>
+<% collection ||= :delivery_attempts %>
+<% hide_actions ||= false %>
+<% hide_back ||= false %>
+
+<%= render 'account/shared/box' do |p| %>
+  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+  <% p.content_for :description do %>
+    <%= t(".contexts.#{context.class.name.underscore}.description") %>
+  <% end %>
+
+  <% p.content_for :table do %>
+    <% if delivery_attempts.any? %>
+      <table class="table">
         <thead>
           <tr>
-            <th><%= t('webhooks/outgoing/delivery_attempts.fields.attempt_number.heading') %></th>
-            <th><%= t('webhooks/outgoing/delivery_attempts.fields.created_at.heading') %></th>
-            <th class="text-center"><%= t('webhooks/outgoing/delivery_attempts.fields.successful.heading') %></th>
-            <th><%= t('webhooks/outgoing/delivery_attempts.fields.response_code.heading') %></th>
+            <th><%= t('.fields.attempt_number.heading') %></th>
+            <th><%= t('.fields.created_at.heading') %></th>
+            <th class="text-center"><%= t('.fields.status.heading') %></th>
+            <th class="text-center"><%= t('.fields.response_code.heading') %></th>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
             <th class="text-right"></th>
           </tr>
         </thead>
         <tbody>
           <% delivery_attempts.each do |delivery_attempt| %>
-          <tr data-id="<%= delivery_attempt.id %>">
-            <td><%= link_to delivery_attempt.attempt_number, [:account, delivery_attempt] %></td>
-            <td><%= display_date_and_time(delivery_attempt.created_at) %></td>
-            <td class="text-center">
-              <%= render 'account/webhooks/outgoing/delivery_attempts/success_indicator', delivery_attempt: delivery_attempt %>
-            </td>
-            <td><code><%= delivery_attempt.response_code %></code></td>
-            <%# 🚅 super scaffolding will insert new fields above this line. %>
-            <td class="text-right">
-              <%= link_to t('global.buttons.debug'), [:account, delivery_attempt], class: 'btn btn-link btn-sm' if can? :show, delivery_attempt %>
-            </td>
-          </tr>
+            <% with_attribute_settings object: delivery_attempt do %>
+              <tr data-id="<%= delivery_attempt.id %>">
+                <td><%= render 'shared/attributes/text', attribute: :attempt_number, url: [:account, delivery_attempt] %></td>
+                <td><%= render 'shared/attributes/date_and_time', attribute: :created_at %></td>
+                <td class="text-center"><%= render 'shared/attributes/attempt', attribute: :status, success_method: :successful?, attempting_method: :still_attempting? %></td>
+                <td class="text-center"><%= render 'shared/attributes/code', attribute: :response_code %></td>
+                <%# 🚅 super scaffolding will insert new fields above this line. %>
+                <td class="buttons">
+                  <% unless hide_actions %>
+                    <% if can? :show, delivery_attempt %>
+                      <%= link_to t('.buttons.shorthand.show'), [:account, delivery_attempt], class: 'button-secondary button-smaller' %>
+                    <% end %>
+                    <% if can? :edit, delivery_attempt %>
+                      <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, delivery_attempt], class: 'button-secondary button-smaller' %>
+                    <% end %>
+                    <% if can? :destroy, delivery_attempt %>
+                      <%= button_to t('.buttons.shorthand.destroy'), [:account, delivery_attempt], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(delivery_attempt)) }, class: 'button-secondary button-smaller' %>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
           <% end %>
         </tbody>
       </table>
     <% end %>
+  <% end %>
 
-    <%= link_to t('webhooks/outgoing/delivery_attempts.buttons.new'), [:new, :account, @delivery, :delivery_attempt], class: 'btn btn-primary' if can? :create, @delivery.delivery_attempts.new %>
+  <% p.content_for :actions do %>
+    <% unless hide_actions %>
+      <% if context == delivery %>
+        <% if can? :create, Webhooks::Outgoing::DeliveryAttempt.new(delivery: delivery) %>
+          <%= link_to t('.buttons.new'), [:new, :account, delivery, :delivery_attempt], class: "#{first_button_primary(:delivery_attempt)} new" %>
+        <% end %>
+      <% end %>
 
-  </div>
-</div>
+      <% unless hide_back %>
+        <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:delivery_attempt)} back" %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

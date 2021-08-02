@@ -42,6 +42,8 @@ class Api::Test < ActionDispatch::IntegrationTest
   end
 
   def setup
+    super
+
     @user = create(:onboarded_user)
     @team = @user.current_team
     @api_key = build(:api_key, user: @user)

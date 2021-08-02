@@ -382,7 +382,7 @@ ActiveRecord::Schema.define(version: 2021_06_02_230736) do
     t.integer "event_type_id"
     t.integer "subject_id"
     t.string "subject_type"
-    t.jsonb "body"
+    t.jsonb "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "team_id"

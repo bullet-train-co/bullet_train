@@ -1,6 +1,9 @@
 json.extract! delivery,
   :id,
-  :name,
+  :endpoint_id,
+  :event_id,
+  :endpoint_url,
+  :delivered_at,
   # 🚅 super scaffolding will insert new fields above this line.
   :created_at,
   :updated_at

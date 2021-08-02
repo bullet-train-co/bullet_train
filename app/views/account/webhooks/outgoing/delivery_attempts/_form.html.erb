@@ -1,17 +1,21 @@
-<%= form_with(model: [:account, (@delivery unless delivery_attempt.persisted?), delivery_attempt], url: (delivery_attempt.persisted? ? account_webhooks_delivery_attempt_path(delivery_attempt) : account_webhooks_delivery_delivery_attempts_path(@delivery)), local: true) do |form| %>
+<%= form_with model: delivery_attempt, url: (delivery_attempt.persisted? ? [:account, delivery_attempt] : [:account, @delivery, :delivery_attempts]), local: true, class: 'form' do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
-  <%= render 'shared/forms/field', form: form, attribute: :name, field_type: :text_field, field_attributes: {autofocus: true} %>
-  <%= render 'shared/forms/field', form: form, attribute: :response_code, field_type: :text_field, field_attributes: {} %>
+  <% with_field_settings form: form do %>
+    <%= render 'shared/fields/text_field', method: :response_code, options: {autofocus: true} %>
+    <%= render 'shared/fields/text_area', method: :response_body %>
+    <%= render 'shared/fields/text_area', method: :response_message %>
+    <%= render 'shared/fields/text_area', method: :error_message %>
+    <%= render 'shared/fields/text_field', method: :attempt_number %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% end %>
 
-  <%# 🚅 super scaffolding will insert new fields above this line. %>
-
-  <div class="form-buttons-w">
-    <%= form.submit (form.object.persisted? ? t('webhooks/outgoing/delivery_attempts.buttons.update') : t('webhooks/outgoing/delivery_attempts.buttons.create')), class: "btn btn-primary" %>
+  <div class="buttons">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
     <% if form.object.persisted? %>
-    <%= link_to t('global.buttons.cancel'), [:account, delivery_attempt], class: "btn btn-link" %>
+    <%= link_to t('global.buttons.cancel'), [:account, delivery_attempt], class: "button-secondary" %>
     <% else %>
-    <%= link_to t('global.buttons.cancel'), [:account, @delivery, :delivery_attempts], class: "btn btn-link" %>
+    <%= link_to t('global.buttons.cancel'), [:account, @delivery, :delivery_attempts], class: "button-secondary" %>
     <% end %>
   </div>
 

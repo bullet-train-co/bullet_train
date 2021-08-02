@@ -85,9 +85,11 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsController < Accou
       :text_area_value,
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert new fields above this line.
+      # 🚅 skip this section when scaffolding.
       multiple_button_values: [],
       multiple_option_values: [],
       multiple_super_select_values: [],
+      # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert new arrays above this line.
     )
 

@@ -3,9 +3,9 @@ class Invitation < ApplicationRecord
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
 
+  belongs_to :team
   belongs_to :from_membership, class_name: "Membership"
   has_one :membership, dependent: :nullify
-  belongs_to :team
   has_many :roles, through: :membership
 
   accepts_nested_attributes_for :membership

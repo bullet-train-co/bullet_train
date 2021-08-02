@@ -1,16 +1,40 @@
 class Webhooks::Outgoing::Delivery < ApplicationRecord
-  has_many :delivery_attempts, dependent: :destroy
-  belongs_to :endpoint
-  belongs_to :event
-  @@reattempt_schedule = {
+  # 🚅 add concerns above.
+
+  belongs_to :endpoint, class_name: "Webhooks::Outgoing::Endpoint"
+  belongs_to :event, class_name: "Webhooks::Outgoing::Event"
+
+  ATTEMPT_SCHEDULE = {
     1 => 15.seconds,
     2 => 1.minute,
     3 => 5.minutes,
     4 => 15.minutes,
     5 => 1.hour,
   }
+
+  belongs_to :event, class_name: "Webhooks::Outgoing::Event"
+  # 🚅 add belongs_to associations above.
+
+  has_many :delivery_attempts, dependent: :destroy
+  has_many :delivery_attempts, class_name: "Webhooks::Outgoing::DeliveryAttempt", dependent: :destroy, foreign_key: :delivery_id
+  # 🚅 add has_many associations above.
+
+  # 🚅 add has_one associations above.
+
+  # 🚅 add scopes above.
+
+  # 🚅 add validations above.
+
+  # 🚅 add callbacks above.
+
+  # 🚅 add delegations above.
+
+  def label_string
+    event.short_uuid
+  end
+
   def next_reattempt_delay
-    @@reattempt_schedule[attempt_count]
+    ATTEMPT_SCHEDULE[attempt_count]
   end
 
   def deliver_async
@@ -45,6 +69,8 @@ class Webhooks::Outgoing::Delivery < ApplicationRecord
   end
 
   def max_attempts
-    @@reattempt_schedule.keys.max
+    ATTEMPT_SCHEDULE.keys.max
   end
+
+  # 🚅 add methods above.
 end

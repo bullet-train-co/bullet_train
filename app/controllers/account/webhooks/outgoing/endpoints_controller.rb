@@ -4,6 +4,8 @@ class Account::Webhooks::Outgoing::EndpointsController < Account::ApplicationCon
   # GET /account/teams/:team_id/webhooks/outgoing/endpoints
   # GET /account/teams/:team_id/webhooks/outgoing/endpoints.json
   def index
+    # if you only want these objects shown on their parent's show page, uncomment this:
+    # redirect_to [:account, @team]
   end
 
   # GET /account/webhooks/outgoing/endpoints/:id
@@ -25,7 +27,7 @@ class Account::Webhooks::Outgoing::EndpointsController < Account::ApplicationCon
     respond_to do |format|
       if @endpoint.save
         format.html { redirect_to [:account, @team, :webhooks_outgoing_endpoints], notice: I18n.t("webhooks/outgoing/endpoints.notifications.created") }
-        format.json { render :show, status: :created, location: [:account, @team, @endpoint] }
+        format.json { render :show, status: :created, location: [:account, @endpoint] }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @endpoint.errors, status: :unprocessable_entity }
@@ -52,7 +54,7 @@ class Account::Webhooks::Outgoing::EndpointsController < Account::ApplicationCon
   def destroy
     @endpoint.destroy
     respond_to do |format|
-      format.html { redirect_to [:account, @team, :webhooks, :outgoing, :endpoints], notice: I18n.t("webhooks/outgoing/endpoints.notifications.destroyed") }
+      format.html { redirect_to [:account, @team, :webhooks_outgoing_endpoints], notice: I18n.t("webhooks/outgoing/endpoints.notifications.destroyed") }
       format.json { head :no_content }
     end
   end
@@ -61,7 +63,7 @@ class Account::Webhooks::Outgoing::EndpointsController < Account::ApplicationCon
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def endpoint_params
-    params.require(:webhooks_outgoing_endpoint).permit(
+    strong_params = params.require(:webhooks_outgoing_endpoint).permit(
       :name,
       :url,
       # 🚅 super scaffolding will insert new fields above this line.
@@ -70,5 +72,7 @@ class Account::Webhooks::Outgoing::EndpointsController < Account::ApplicationCon
     )
 
     # 🚅 super scaffolding will insert processing for new fields above this line.
+
+    strong_params
   end
 end

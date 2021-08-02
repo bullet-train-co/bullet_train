@@ -15,6 +15,9 @@ class Api::V1::Root < Api::Base
   end
 
   mount Api::V1::TeamsEndpoint
+  mount Api::V1::Webhooks::Outgoing::EndpointsEndpoint
+  mount Api::V1::Webhooks::Outgoing::DeliveriesEndpoint
+  mount Api::V1::Webhooks::Outgoing::DeliveryAttemptsEndpoint
   # 🚅 super scaffolding will mount new endpoints above this line.
 
   route :any, "*path" do

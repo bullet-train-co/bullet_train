@@ -1,5 +1,5 @@
 <% object ||= current_attributes_object %>
-<% strategy ||= :none %>
+<% strategy ||= current_attributes_strategy || :none %>
 <% url ||= nil %>
 
 <%= render 'shared/attributes/base', strategy: strategy, url: url do |p| %>

@@ -1,4 +1,6 @@
 class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
+  # 🚅 add concerns above.
+
   belongs_to :delivery
   scope :successful, -> { where(response_code: 200) }
 
@@ -27,7 +29,8 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
       self.response_message = response.message
       self.response_code = response.code
       self.response_body = response.body
-    rescue Exception => _
+    rescue Exception => exception
+      self.response_code = 0
       self.error_message = exception.message
     end
 
@@ -35,7 +38,23 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
     response_code == 200
   end
 
-  def name
+  def label_string
     "#{attempt_number.ordinalize} Attempt"
   end
+  # 🚅 add belongs_to associations above.
+
+  # 🚅 add has_many associations above.
+
+  # 🚅 add has_one associations above.
+
+  # 🚅 add scopes above.
+
+  validates :response_code, presence: true
+  # 🚅 add validations above.
+
+  # 🚅 add callbacks above.
+
+  # 🚅 add delegations above.
+
+  # 🚅 add methods above.
 end
