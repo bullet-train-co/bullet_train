@@ -311,7 +311,6 @@ GEM
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.1)
-    metaclass (0.0.4)
     method_source (1.0.0)
     mime-types (3.3.1)
       mime-types-data (~> 3.2015)
@@ -323,8 +322,7 @@ GEM
       minitest (~> 5.0)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
-    mocha (1.4.0)
-      metaclass (~> 0.0.1)
+    mocha (1.13.0)
     msgpack (1.4.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -338,6 +336,8 @@ GEM
     nio4r (2.5.7)
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
+    nokogiri (1.11.7-x86_64-darwin)
       racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -506,8 +506,8 @@ GEM
     semantic_range (3.0.0)
     sentry-raven (3.1.2)
       faraday (>= 1.0)
-    shoulda-matchers (4.5.1)
-      activesupport (>= 4.2.0)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
     sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -564,6 +564,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-19
 
 DEPENDENCIES
   api-pagination
@@ -606,7 +607,7 @@ DEPENDENCIES
   magic_test
   minitest-matchers_vaccine
   minitest-retry
-  mocha (= 1.4.0)
+  mocha
   nice_partials!
   omniauth
   omniauth-rails_csrf_protection

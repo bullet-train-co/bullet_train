@@ -71,7 +71,7 @@ group :test do
   gem "rails-controller-testing"
   gem "minitest-matchers_vaccine"
   gem "database_cleaner"
-  gem "mocha", "1.4.0"
+  gem "mocha"
   gem "magic_test"
 end
 

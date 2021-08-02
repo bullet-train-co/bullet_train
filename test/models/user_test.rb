@@ -1,5 +1,5 @@
 require "test_helper"
-require "mocha/test_unit"
+require "mocha/minitest"
 
 describe User do
   subject { User.new(email: "bart@bullettrain.co") }
