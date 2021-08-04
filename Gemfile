@@ -117,9 +117,7 @@ gem "rack-cors", require: "rack/cors"
 gem "rails_admin"
 gem "paper_trail"
 
-# bootstrap and other ui stuff.
-gem "bootstrap", "~> 4.3.1"
-gem "font-awesome-rails"
+# ui stuff.
 gem "trix", github: "bullet-train-co/trix"
 
 # subscriptions and/or oauth examples.
