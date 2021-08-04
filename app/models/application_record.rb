@@ -18,6 +18,10 @@ class ApplicationRecord < ActiveRecord::Base
   scope :newest_updated, -> { order("updated_at DESC") }
   scope :oldest_updated, -> { order("updated_at ASC") }
 
+  # Microscope adds useful scopes targeting ActiveRecord `boolean`, `date` and `datetime` attributes.
+  # https://github.com/mirego/microscope
+  acts_as_microscope
+
   # ✅ YOUR APPLICATION'S CONFIGURATION
   # If you want to customize your application's default model behaviors, this is the place to do it. This helps avoid
   # merge conflicts in the future when Rails or Bullet Train update their own default settings.

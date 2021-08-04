@@ -182,6 +182,9 @@ gem "indefinite_article"
 # for obfuscating ids in urls
 gem "hashids"
 
+# Add helpful scopes automatically on booleans and date/time attributes.
+gem "microscope"
+
 group :production do
   # we suggest using postmark for email deliverability.
   gem "postmark-rails"
