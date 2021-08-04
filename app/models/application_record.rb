@@ -7,6 +7,7 @@ class ApplicationRecord < ActiveRecord::Base
 
   include Webhooks::Outgoing::IssuingModel
   include ObfuscatesId
+  include QuestionMethodsFromScopes
 
   # 🏚 i'd like to deprecate these. they're not descriptive enough.
   scope :newest, -> { order("created_at DESC") }
