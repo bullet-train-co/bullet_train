@@ -4,7 +4,7 @@ class CreateWebhooksOutgoingEvents < ActiveRecord::Migration[5.2]
       t.integer :event_type_id
       t.integer :subject_id
       t.string :subject_type
-      t.jsonb :data
+      t.jsonb :body
 
       t.timestamps
     end
