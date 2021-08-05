@@ -2,13 +2,14 @@
 require "indefinite_article"
 
 class Scaffolding::Transformer
-  attr_accessor :child, :parent, :parents, :class_names_transformer, :options, :additional_steps
+  attr_accessor :child, :parent, :parents, :class_names_transformer, :options, :additional_steps, :namespace
 
   def initialize(child, parents, options = {})
     self.child = child
     self.parent = parents.first
     self.parents = parents
-    self.class_names_transformer = Scaffolding::ClassNamesTransformer.new(child, parent)
+    self.namespace = options["namespace"] || "account"
+    self.class_names_transformer = Scaffolding::ClassNamesTransformer.new(child, parent, namespace)
     self.options = options
     self.additional_steps = []
   end
@@ -93,7 +94,11 @@ class Scaffolding::Transformer
       "creative-concept",
       "tangible-thing",
       "Creative Concept",
-      "Tangible Thing"
+      "Tangible Thing",
+
+      # Account namespace vs. others.
+      ":account",
+      "/account/",
 
     ].each do |needle|
       string = string.gsub(needle, encode_double_replacement_fix(class_names_transformer.replacement_for(needle)))
@@ -355,7 +360,7 @@ class Scaffolding::Transformer
     # e.g. ['Phase', 'Project']
     while working_parents.any?
       current_parent = working_parents.pop
-      current_transformer = Scaffolding::ClassNamesTransformer.new(working_parents.last || class_name, current_parent)
+      current_transformer = Scaffolding::ClassNamesTransformer.new(working_parents.last || class_name, current_parent, namespace)
       ability_line = "#{current_transformer.parent_variable_name_in_context}: {#{ability_line}}"
     end
 
@@ -1036,6 +1041,12 @@ class Scaffolding::Transformer
       options["skip-routes"] = true
     end
 
+    if options["namespace"]
+      options["skip-api"] = true
+      options["skip-model"] = true
+      options["skip-locales"] = true
+    end
+
     # TODO fix this. we can do this better.
     files = if options["only-index"]
       [
@@ -1047,12 +1058,12 @@ class Scaffolding::Transformer
       [
         "./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb",
         "./app/views/account/scaffolding/completely_concrete/tangible_things",
-        "./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml",
-        "./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb",
-        "./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb",
-        "./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb",
+        ("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml" unless options["skip-locales"]),
+        ("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb" unless options["skip-api"]),
+        ("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb" unless options["skip-api"]),
+        ("./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb" unless options["skip-api"]),
         # "./app/filters/scaffolding/completely_concrete/tangible_things_filter.rb"
-      ]
+      ].compact
     end
 
     files.each do |name|
@@ -1081,7 +1092,7 @@ class Scaffolding::Transformer
       scaffold_replace_line_in_file("./test/factories/scaffolding/completely_concrete/tangible_things.rb", content, "absolutely_abstract_creative_concept { nil }")
 
       # if needed, update the reference to the parent class name in the create_table migration.
-      current_transformer = Scaffolding::ClassNamesTransformer.new(child, parent)
+      current_transformer = Scaffolding::ClassNamesTransformer.new(child, parent, namespace)
       unless current_transformer.parent_variable_name_in_context.pluralize == current_transformer.parent_table_name
 
         # find the database migration that defines this relationship.
@@ -1109,7 +1120,9 @@ class Scaffolding::Transformer
       end
     end
 
-    scaffold_replace_line_in_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
+    unless options["skip-api"]
+      scaffold_replace_line_in_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
+    end
 
     # add children to the show page of their parent.
     unless options["skip-parent"] || parent == "None"
@@ -1174,7 +1187,7 @@ class Scaffolding::Transformer
     if options["sortable"]
       unless options["skip-model"]
         scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "def collection\n    absolutely_abstract_creative_concept.completely_concrete_tangible_things\n  end\n", METHODS_HOOK, prepend: true)
-        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "include Sprinkles::Sortable\n", CONCERNS_HOOK, prepend: true)
+        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "include Sortable\n", CONCERNS_HOOK, prepend: true)
       end
 
       unless options["skip-table"]
@@ -1193,18 +1206,46 @@ class Scaffolding::Transformer
 
     # apply routes.
     unless options["skip-routes"]
-      routes_manipulator = Scaffolding::RoutesFileManipulator.new("config/routes.rb", child, parent)
+      routes_namespace = @options["namespace"] || "account"
+
       begin
-        routes_manipulator.apply(["account"])
-      rescue
-        add_additional_step :yellow, "We weren't able to automatically add your `account` routes for you. In theory this should be very rare, so if you could reach out on Slack, you could probably provide context that will help us fix whatever the problem was. In the meantime, to add the routes manually, we've got a guide at https://blog.bullettrain.co/nested-namespaced-rails-routing-examples/ ."
+        routes_path = if routes_namespace == "account"
+          "config/routes.rb"
+        else
+          "config/routes/#{routes_namespace}.rb"
+        end
+        routes_manipulator = Scaffolding::RoutesFileManipulator.new(routes_path, child, parent)
+      rescue Errno::ENOENT => _
+        puts "Creating '#{routes_path}'.".green
+
+        unless File.directory?("config/routes")
+          FileUtils.mkdir_p("config/routes")
+        end
+
+        File.open(routes_path, "w+") do |file|
+          file.write <<~RUBY
+            collection_actions = [:index, :new, :create]
+
+            # 🚅 Don't remove this block, it will break Super Scaffolding.
+            begin do
+              namespace :#{routes_namespace} do
+                shallow do
+                  resources :teams do
+                  end
+                end
+              end
+            end
+          RUBY
+        end
+
+        retry
       end
 
-      # begin
-      #   routes_manipulator.apply(['api', 'v1'])
-      # rescue
-      #   add_additional_step :yellow, "We weren't able to automatically add your `api/v1` routes for you. In theory this should be rare, (unless you're adding a resource under another resource that specifically don't have API routes,) so if you could reach out on Slack, you could probably provide context that will help us fix whatever the problem was. In the meantime, to add the routes manually, we've got a guide at https://blog.bullettrain.co/nested-namespaced-rails-routing-examples/ ."
-      # end
+      begin
+        routes_manipulator.apply([routes_namespace])
+      rescue
+        add_additional_step :yellow, "We weren't able to automatically add your `#{routes_namespace}` routes for you. In theory this should be very rare, so if you could reach out on Slack, you could probably provide context that will help us fix whatever the problem was. In the meantime, to add the routes manually, we've got a guide at https://blog.bullettrain.co/nested-namespaced-rails-routing-examples/ ."
+      end
 
       routes_manipulator.write
     end

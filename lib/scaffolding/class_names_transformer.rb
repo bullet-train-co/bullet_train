@@ -1,9 +1,10 @@
 class Scaffolding::ClassNamesTransformer
-  attr_accessor :child, :parent
+  attr_accessor :child, :parent, :namespace
 
-  def initialize(child, parent)
+  def initialize(child, parent, namespace = "account")
     self.child = child
     self.parent = parent
+    self.namespace = namespace
   end
 
   def belongs_to_needs_class_definition?
@@ -176,6 +177,11 @@ class Scaffolding::ClassNamesTransformer
       parent_in_namespace_class_name.underscore.gsub(/[\/_]/, "-")
     when "tangible-thing"
       in_namespace_class_name.underscore.gsub(/[\/_]/, "-")
+
+    when ":account"
+      ":#{namespace}"
+    when "/account/"
+      "/#{namespace}/"
 
     else
       "🛑"
