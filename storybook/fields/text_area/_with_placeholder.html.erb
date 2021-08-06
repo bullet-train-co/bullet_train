@@ -1,0 +1,11 @@
+<% content_for :story do %>
+  <% @tangible_thing = Scaffolding::CompletelyConcrete::TangibleThing.new(text_area_value: story_params[:text_area_value]) %>
+
+  <%= form_with model: [@tangible_thing], url: "#", local: true do |form| %>
+    <%= render 'shared/fields/text_area', form: form, method: :text_area_value, options: {autofocus: true, placeholder: story_params[:placeholder_text]} %>
+  <% end %>
+<% end %>
+
+<% content_for :source do %>
+  <%= storybook_auto_source %>
+<% end %>

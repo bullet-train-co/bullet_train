@@ -1,0 +1,17 @@
+<% content_for :story do %>
+  <%= render 'shared/box', divider: params[:divider] do |p| %>
+    <% p.content_for :title do %>
+      <%= params[:title] %>
+    <% end %>
+    <% p.content_for :description do %>
+      <%= params[:description] %>
+    <% end %>
+    <% p.content_for :body do %>
+      <%= params[:body] %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :source do %>
+  <%= storybook_auto_source %>
+<% end %>

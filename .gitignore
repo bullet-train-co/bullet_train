@@ -44,4 +44,8 @@ yarn-debug.log*
 # Ignore Active Storage
 /storage
 
+# Storybook
+/public/_storybook
+storybook/**/*.stories.json
+
 # 🚅 add your files to ignore here.

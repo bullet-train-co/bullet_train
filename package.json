@@ -29,6 +29,7 @@
     "@tailwindcss/postcss7-compat": "^2.0.1",
     "@tailwindcss/typography": "^0.3.1",
     "autoprefixer": "^9",
+    "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^6.2.1",
     "daterangepicker": "^3.1.0",
     "dragula": "^3.7.3",
@@ -37,6 +38,7 @@
     "jquery": "^3.5.1",
     "jstz": "^2.1.1",
     "postcss": "^7",
+    "postcss-scss": "^3.0.5",
     "rails-erb-loader": "^5.5.2",
     "raw-loader": "^4.0.2",
     "select2": "^4.0.13",
@@ -48,6 +50,17 @@
   },
   "version": "0.1.0",
   "devDependencies": {
-    "webpack-dev-server": "^4.0.0-rc.0"
+    "@storybook/addon-controls": "^6.2.9",
+    "@storybook/server": "^6.2.9",
+    "chokidar-cli": "^2.1.0",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^5.7.3"
+  },
+  "scripts": {
+    "storybook:build": "build-storybook -o public/_storybook",
+    "storybook:clean": "find ./storybook -name '*.stories.json' -delete && rm -rf node_modules/.cache/storybook",
+    "storybook:start": "yarn storybook:clean && yarn storybook:write-json && start-storybook -p 8081",
+    "storybook:write-json": "bundle exec rake storybook_rails:write_stories_json",
+    "storybook:watch": "chokidar '**/*_stories.rb' -c 'yarn storybook:write-json'"
   }
 }

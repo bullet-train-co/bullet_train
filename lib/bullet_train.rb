@@ -82,3 +82,8 @@ end
 def font_awesome?
   ENV["FONTAWESOME_NPM_AUTH_TOKEN"].present?
 end
+
+def storybook_auto_source
+  file = caller.find { |s| s.include?("storybook/") }.split(":").first
+  File.read(file).split("content_for :source").first.split("content_for :story").last.lines[1...-3].join.strip
+end

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<% syntax_language = @story.parameters.present? ? @story.parameters.dig(:lang) : "erb" %>
+
+<html>
+  <head>
+    <%= render 'themes/light/layouts/head' %>
+  </head>
+  <body>
+    <div>
+      <div id="story" class="mb-10 p-5 border-dashed border-2 bg-gray-100 border-gray-200 rounded-lg">
+        <%= yield :story %>
+      </div>
+
+      <%= render 'shared/box' do |p| %>
+        <% p.content_for :title, "Source Code" %>
+        <% p.content_for :description, "What is shown above was generated with the following code:" %>
+        <% p.content_for :body do %>
+          <div data-controller="clipboard" class="relative border border-gray-200 bg-gray-50 h-full w-full rounded-md overflow-x-auto">
+            <button class="bg-white border border-gray-200 hover:border-gray-400 hover:cursor-pointer rounded-full p-3 text-gray-600 mt-2 top-0 right-4 absolute shadow" data-action="clipboard#copy" data-clipboard-target="button"><i class="far fa-copy w-4 h-4 block"></i></button>
+            <textarea data-clipboard-target="input" class="sr-only"></textarea>
+            <pre class="py-5"><code data-clipboard-target="source" class="language-<%= syntax_language %>"><%= yield :source %></code></pre>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </body>
+</html>

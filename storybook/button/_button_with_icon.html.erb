@@ -1,0 +1,10 @@
+<% content_for :story do %>
+  <button class="button">
+    <i class="ti ti-world mr-2"></i>
+    <%= params[:label] %>
+  </button>
+<% end %>
+
+<% content_for :source do %>
+  <%= storybook_auto_source %>
+<% end %>

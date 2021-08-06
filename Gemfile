@@ -169,6 +169,7 @@ gem "extended_email_reply_parser"
 gem "colorize"
 
 gem "nice_partials", github: "andrewculver/nice_partials", branch: "bt"
+gem "storybook_rails", "~> 1.0"
 
 # turbo is in early development, so we're not waiting for releases.
 gem "turbo-rails", github: "hotwired/turbo-rails", branch: "main"

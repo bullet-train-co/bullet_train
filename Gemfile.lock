@@ -514,6 +514,7 @@ GEM
     standard (1.0.5)
       rubocop (= 1.12.1)
       rubocop-performance (= 1.10.1)
+    storybook_rails (1.1.0)
     stripe (5.32.1)
     temple (0.8.2)
     thor (1.1.0)
@@ -625,6 +626,7 @@ DEPENDENCIES
   sidekiq
   spring
   standard
+  storybook_rails (~> 1.0)
   stripe
   time_ago_in_words
   trix!

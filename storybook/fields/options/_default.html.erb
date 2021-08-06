@@ -1,0 +1,12 @@
+<% content_for :story do %>
+  <% @tangible_thing = Scaffolding::CompletelyConcrete::TangibleThing.new %>
+  <%= form_with model: [@tangible_thing], url: "#", local: true do |form| %>
+    <% with_field_settings form: form do %>
+      <%= render 'shared/fields/options', method: :multiple_option_values, multiple: true %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% content_for :source do %>
+  <%= storybook_auto_source %>
+<% end %>
