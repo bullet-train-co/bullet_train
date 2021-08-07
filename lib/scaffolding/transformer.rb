@@ -1214,7 +1214,7 @@ class Scaffolding::Transformer
         else
           "config/routes/#{routes_namespace}.rb"
         end
-        routes_manipulator = Scaffolding::RoutesFileManipulator.new(routes_path, child, parent)
+        routes_manipulator = Scaffolding::RoutesFileManipulator.new(routes_path, child, parent, options)
       rescue Errno::ENOENT => _
         puts "Creating '#{routes_path}'.".green
 

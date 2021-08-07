@@ -174,5 +174,10 @@ describe Scaffolding::RoutesFileManipulator do
       manipulator.apply(["account"])
       assert_equal File.readlines("test/lib/scaffolding/examples/result_5._rb"), manipulator.lines
     end
+    it "adds the sortable concern properly" do
+      manipulator = subject.new(example_file, "Example", "Team", {"sortable" => true})
+      manipulator.apply(["account"])
+      assert_equal File.readlines("test/lib/scaffolding/examples/result_7._rb"), manipulator.lines
+    end
   end
 end

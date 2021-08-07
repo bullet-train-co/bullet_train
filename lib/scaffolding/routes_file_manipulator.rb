@@ -1,11 +1,12 @@
 class Scaffolding::RoutesFileManipulator
-  attr_accessor :child, :parent, :lines
+  attr_accessor :child, :parent, :lines, :transformer_options
 
-  def initialize(filename, child, parent)
+  def initialize(filename, child, parent, transformer_options = {})
     self.child = child
     self.parent = parent
     @filename = filename
     self.lines = File.readlines(@filename)
+    self.transformer_options = transformer_options
   end
 
   def child_parts
@@ -181,13 +182,13 @@ class Scaffolding::RoutesFileManipulator
     parts = parts.dup
     resource = parts.pop
     # TODO this doesn't take into account any options like we do in `find_resource`.
-    find_in_namespace(/resources :#{resource}#{options[:options] ? ", #{options[:options]}" : ""}(,?\s.*)? do(\s.*)?$/, parts, within)
+    find_in_namespace(/resources :#{resource}#{options[:options] ? ", #{options[:options].gsub(/(\[)(.*)(\])/, '\[\2\]')}" : ""}(,?\s.*)? do(\s.*)?$/, parts, within)
   end
 
   def find_resource(parts, options = {})
     parts = parts.dup
     resource = parts.pop
-    find_in_namespace(/resources :#{resource}#{options[:options] ? ", #{options[:options]}" : ""}(,?\s.*)?$/, parts, options[:within])
+    find_in_namespace(/resources :#{resource}#{options[:options] ? ", #{options[:options].gsub(/(\[)(.*)(\])/, '\[\2\]')}" : ""}(,?\s.*)?$/, parts, options[:within])
   end
 
   def find_or_create_resource(parts, options = {})
@@ -309,9 +310,18 @@ class Scaffolding::RoutesFileManipulator
         within = find_or_convert_resource_block(parent_resource, options: "except: collection_actions", within: within)
       end
 
-      find_or_create_resource(child_namespaces + [child_resource], within: within)
+      find_or_create_resource(child_namespaces + [child_resource], options: define_concerns, within: within)
 
     end
+  end
+
+  # Pushing custom concerns here will add them to the routes file when Super Scaffolding.
+  def define_concerns
+    concerns = []
+    concerns.push(:sortable) if transformer_options["sortable"]
+
+    return if concerns.empty?
+    "concerns: #{concerns}"
   end
 
   def write
