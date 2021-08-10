@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class WebhooksSystemTest < ActionDispatch::IntegrationTest
+class WebhooksSystemTest < ApplicationSystemTestCase
   def setup
     super
     @user = create :onboarded_user, first_name: "Andrew", last_name: "Culver"

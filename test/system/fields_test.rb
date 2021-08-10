@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class AccountTest < ActionDispatch::IntegrationTest
+class AccountTest < ApplicationSystemTestCase
   @@test_devices.each do |device_name, display_details|
     test "simulate restoring behavior of form fields on page restore on #{device_name}" do
       resize_for(display_details)

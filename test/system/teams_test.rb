@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class TeamsTest < ActionDispatch::IntegrationTest
+class TeamsTest < ApplicationSystemTestCase
   def setup
     super
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"

@@ -1,17 +1,17 @@
 require "test_helper"
 
-describe ApiKey do
-  subject { create(:api_key) }
+class ApiKeyTest < ActiveSupport::TestCase
+  def setup
+    @api_key = create(:api_key)
+  end
 
-  it { must belong_to(:user) }
-
-  it "#active" do
+  test "#active" do
     assert_respond_to(ApiKey, :active)
-    assert_includes ApiKey.active, subject
+    assert_includes ApiKey.active, @api_key
     refute_includes ApiKey.active, create(:inactive_api_key)
   end
 
-  it "must be valid" do
-    value(subject).must_be :valid?
+  test "must be valid" do
+    assert @api_key.valid?
   end
 end

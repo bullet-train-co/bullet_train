@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class AccountTest < ActionDispatch::IntegrationTest
+class AccountTest < ApplicationSystemTestCase
   @@test_devices.each do |device_name, display_details|
     test "create a new tangible thing on a #{device_name} and update it" do
       resize_for(display_details)

@@ -1,4 +1,6 @@
 require "test_helper"
+require "minitest/spec"
+
 require_relative "../../../lib/scaffolding"
 
 describe Scaffolding::Transformer do

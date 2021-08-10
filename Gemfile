@@ -67,11 +67,6 @@ group :test do
   gem "minitest-retry"
   gem "capybara-screenshot"
   gem "capybara-email"
-  gem "shoulda-matchers"
-  gem "rails-controller-testing"
-  gem "minitest-matchers_vaccine"
-  gem "database_cleaner"
-  gem "mocha"
   gem "magic_test"
 end
 

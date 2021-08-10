@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class TwoFactorAuthentication < ActionDispatch::IntegrationTest
+class TwoFactorAuthentication < ApplicationSystemTestCase
   if two_factor_authentication_enabled?
     def setup
       @jane = FactoryBot.create :two_factor_user, first_name: "Jane", last_name: "Smith"

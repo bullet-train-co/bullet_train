@@ -1,38 +1,27 @@
 require "test_helper"
 
-describe Invitation do
-  subject do
-    user = create(:onboarded_user)
-    membership = Membership.new(team: user.current_team)
-    Invitation.create(team: user.current_team, email: "test@user.com", from_membership: user.memberships.first, membership: membership)
+class InvitationTest < ActiveSupport::TestCase
+  def setup
+    @user = create(:onboarded_user)
+    @membership = Membership.new(team: @user.current_team)
+    @invitation = Invitation.create(team: @user.current_team, email: "test@user.com", from_membership: @user.memberships.first, membership: @membership)
   end
 
-  it { must belong_to(:team) }
-  it { must belong_to(:from_membership) }
-  it { must validate_presence_of(:email) }
-
-  describe "#before_create" do
-    it "must set uuid" do
-      assert subject.uuid.present?
-    end
+  test "must set uuid" do
+    assert @invitation.uuid.present?
   end
 
-  describe "#accept_for" do
-    it "must set team" do
-      user = create :onboarded_user
-      assert_difference("user.current_team.id") do
-        subject.accept_for(user)
-      end
-    end
-
-    it "must destroy invitation" do
-      user = create :user
-      subject.accept_for(user)
-      assert subject.destroyed?
-    end
+  test "accept_for must set team" do
+    @invitation.accept_for(@user)
+    assert_equal @user.current_team, @invitation.team
   end
 
-  it "must be valid" do
-    value(subject).must_be :valid?
+  test "accept_for must destroy invitation" do
+    @invitation.accept_for(@user)
+    assert @invitation.destroyed?
+  end
+
+  test "must be valid" do
+    assert @invitation.valid?
   end
 end

@@ -157,12 +157,6 @@ GEM
     crass (1.0.6)
     css_parser (1.9.0)
       addressable
-    database_cleaner (2.0.1)
-      database_cleaner-active_record (~> 2.0.0)
-    database_cleaner-active_record (2.0.0)
-      activerecord (>= 5.a)
-      database_cleaner-core (~> 2.0.0)
-    database_cleaner-core (2.0.1)
     debug_inspector (1.1.0)
     devise (4.8.0)
       bcrypt (~> 3.0)
@@ -312,11 +306,8 @@ GEM
     mini_mime (1.1.0)
     mini_portile2 (2.5.3)
     minitest (5.14.4)
-    minitest-matchers_vaccine (1.0.4)
-      minitest (~> 5.0)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
-    mocha (1.13.0)
     msgpack (1.4.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
@@ -410,10 +401,6 @@ GEM
       bundler (>= 1.15.0)
       railties (= 6.1.4)
       sprockets-rails (>= 2.0.0)
-    rails-controller-testing (1.0.5)
-      actionpack (>= 5.0.1.rc1)
-      actionview (>= 5.0.1.rc1)
-      activesupport (>= 5.0.1.rc1)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -497,8 +484,6 @@ GEM
     semantic_range (3.0.0)
     sentry-raven (3.1.2)
       faraday (>= 1.0)
-    shoulda-matchers (5.0.0)
-      activesupport (>= 5.2.0)
     sidekiq (6.2.1)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
@@ -571,7 +556,6 @@ DEPENDENCIES
   cloudinary
   colorize
   commonmarker
-  database_cleaner
   devise
   devise-two-factor
   doorkeeper (~> 5.4.0)
@@ -595,9 +579,7 @@ DEPENDENCIES
   listen (~> 3.3)
   magic_test
   microscope
-  minitest-matchers_vaccine
   minitest-retry
-  mocha
   nice_partials!
   omniauth
   omniauth-rails_csrf_protection
@@ -614,7 +596,6 @@ DEPENDENCIES
   rack-cors
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.1)
-  rails-controller-testing
   rails_admin
   rails_autoscale_agent
   redis (~> 4.0)
@@ -622,7 +603,6 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   sentry-raven
-  shoulda-matchers
   sidekiq
   spring
   standard

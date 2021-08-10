@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class AuthenticationSystemTest < ActionDispatch::IntegrationTest
+class AuthenticationSystemTest < ApplicationSystemTestCase
   @@test_devices.each do |device_name, display_details|
     test "visitors can sign-up, sign-out, sign-in, reset passwords, etc. with subscriptions #{subscriptions_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
       resize_for(display_details)

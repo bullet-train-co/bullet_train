@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class InvitationSystemTest < ActionDispatch::IntegrationTest
+class InvitationDetailsTest < ApplicationSystemTestCase
   def within_membership_row(membership)
     within "tr[data-id='#{membership.id}']" do
       yield

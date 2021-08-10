@@ -1,6 +1,6 @@
-require "test_helper"
+require "application_system_test_case"
 
-class AccountManagementSystemTest < ActionDispatch::IntegrationTest
+class AccountManagementSystemTest < ApplicationSystemTestCase
   @@test_devices.each do |device_name, display_details|
     test "user can edit their account and change account settings during registration on a #{device_name}" do
       resize_for(display_details)
