@@ -1,0 +1,5 @@
+<%= render "sprinkles/model", model: parent do %>
+  <sprinkles-collection data-collection="<%= collection %>">
+    <%= yield %>
+  </sprinkles-collection>
+<% end %>

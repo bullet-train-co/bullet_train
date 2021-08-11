@@ -19,19 +19,19 @@ function htmlIsEqual(first, second) {
   return stripXray(first) == stripXray(second);
 }
 
-function refreshCollectionBase(parentName, parentId, collectionName) {
-  var selector = '[data-model="' + parentName + '"][data-id="' + parentId + '"] [data-collection="' + collectionName + '"]';
+function refreshModelBase(modelName, modelId) {
+  var selector = '[data-model="' + modelName + '"][data-id="' + modelId + '"]';
 
   $(selector).each(function(_, element) {
-    console.log('Refreshing collection base for ' + parentName + ":" + parentId + ":" + collectionName);
+    console.log('Refreshing model base for ' + modelName + ":" + modelId);
 
-    var $existingCollectionBase = $(element);
+    var $existingModelBase = $(element);
 
     // we support restoring the scroll position of overflowed divs that are being redrawn.
     // we also support restoring a scroll position that was at the bottom of the scroll area.
-    var $scrollBase = $existingCollectionBase.closest(".modal.chat-style-scrolling");
+    var $scrollBase = $existingModelBase.closest(".modal.chat-style-scrolling");
     if (!$scrollBase.length) {
-      $scrollBase = $existingCollectionBase.closest(".chat-style-scrolling");
+      $scrollBase = $existingModelBase.closest(".chat-style-scrolling");
     }
     if ($scrollBase.length > 0) {
       var existingScroll = $scrollBase.scrollTop();
@@ -39,28 +39,28 @@ function refreshCollectionBase(parentName, parentId, collectionName) {
       var scrollMaxed = existingScroll > (existingMaxScrollTop - 20);
     }
 
-    // if we're in a modal with a current url, use that to redraw the collection.
-    var modalUrl = $existingCollectionBase.closest('.modal[data-url]').attr('data-url');
+    // if we're in a modal with a current url, use that to redraw the model.
+    var modalUrl = $existingModelBase.closest('.modal[data-url]').attr('data-url');
 
-    // if our content was presented inline, use the url we were fetched from to redraw the collection.
-    var inlineUrl = $existingCollectionBase.closest('.inline[data-url]').attr('data-url');
+    // if our content was presented inline, use the url we were fetched from to redraw the model.
+    var inlineUrl = $existingModelBase.closest('.inline[data-url]').attr('data-url');
 
     var url = modalUrl || inlineUrl || document.location.href;
 
     function applyUpdatedView(data) {
-      var $collectionBase = $(data).find(selector).addBack(selector);
+      var $modelBase = $(data).find(selector).addBack(selector);
 
       // TODO we should implement _something_ like this... but it has to work. probably needs an html linter.
-      if (htmlIsEqual($collectionBase.html(), $existingCollectionBase.html())) {
+      if (htmlIsEqual($modelBase.html(), $existingModelBase.html())) {
         return;
       }
 
-      var $elementsWithPersistentClasses = $existingCollectionBase.find('[data-persistent-classes]');
+      var $elementsWithPersistentClasses = $existingModelBase.find('[data-persistent-classes]');
 
-      $existingCollectionBase.empty();
-      $existingCollectionBase.append($collectionBase.children());
+      $existingModelBase.empty();
+      $existingModelBase.append($modelBase.children());
 
-      $existingCollectionBase.find('[data-persistent-classes]').each(function(_, element) {
+      $existingModelBase.find('[data-persistent-classes]').each(function(_, element) {
         var $element = $(element);
         var subselector = '[data-persistent-classes][data-model="' + $element.attr('data-model') + '"][data-id="' + $element.attr('data-id') + '"]';
         var $oldElement = $elementsWithPersistentClasses.find(subselector).addBack(subselector);
@@ -79,11 +79,11 @@ function refreshCollectionBase(parentName, parentId, collectionName) {
         }
       }
 
-      // allow developers to be notified when the contents of a collection have been updated.
+      // allow developers to be notified when the contents of a model have been updated.
       // if js was applied to these elements, they'll need to reapply it.
-      console.log("triggering sprinkles:collection:repopulated");
-      $existingCollectionBase.trigger('sprinkles:collection:repopulated');
-      $existingCollectionBase.trigger('sprinkles:update');
+      console.log("triggering sprinkles:model:repopulated");
+      $existingModelBase.trigger('sprinkles:model:repopulated');
+      $existingModelBase.trigger('sprinkles:update');
     };
 
     // if there is already a pending request to this url ..
@@ -131,7 +131,7 @@ function refreshCollectionBase(parentName, parentId, collectionName) {
             // specifically warned us not to. they may want to withhold these updates from being presented to the
             // user on views that are heavy in multiple-step client-side manipulation, like dragging and dropping
             // on the kanban board.
-            if ($existingCollectionBase.attr('data-suppress-outdated-view-updates') === undefined) {
+            if ($existingModelBase.attr('data-suppress-outdated-view-updates') === undefined) {
               $.each(processedRequests, function(_, scopedApplyUpdatedView) {
                 console.log("temporarily applying update view #" + _);
                 scopedApplyUpdatedView(data);
@@ -162,18 +162,17 @@ function refreshCollectionBase(parentName, parentId, collectionName) {
   });
 }
 
-function subscribeToCollections() {
+function subscribeToModels() {
   var renewedSubscriptions = {};
-  $("[data-collection]").each(function(_, element) {
+  $("[data-model]").each(function(_, element) {
     var $element = $(element);
-    var $parent = $element.closest('[data-model]');
-    var parentName = $parent.attr('data-model');
-    var parentId = $parent.attr('data-id');
-    var collectionName = $element.attr('data-collection');
+    var $model = $element;
+    var modelName = $model.attr('data-model');
+    var modelId = $model.attr('data-id');
 
-    var key = parentName + ":" + parentId + ":" + collectionName;
+    var key = modelName + ":" + modelId;
 
-    console.log("🍩 Collections: Subscribing for updates from " + key);
+    console.log("🍩 Models: Subscribing for updates from " + key);
 
     if (subscriptions[key]) {
       renewedSubscriptions[key] = subscriptions[key];
@@ -181,10 +180,9 @@ function subscribeToCollections() {
     } else {
       var timer;
       renewedSubscriptions[key] = consumer.subscriptions.create({
-        channel: 'Sprinkles::CollectionsChannel',
-        parent_name: parentName,
-        parent_id: parentId,
-        collection_name: collectionName
+        channel: 'Sprinkles::ModelsChannel',
+        model_name: modelName,
+        model_id: modelId
       }, {
         received(data) {
           if (timer) {
@@ -193,8 +191,8 @@ function subscribeToCollections() {
           }
 
           timer = setTimeout(function() {
-            console.log("received " + parentName + "_" + parentId + "_" + collectionName);
-            refreshCollectionBase(parentName, parentId, collectionName);
+            console.log("received " + modelName + "_" + modelId);
+            refreshModelBase(modelName, modelId);
           }, 100);
 
         },
@@ -213,12 +211,12 @@ function subscribeToCollections() {
 }
 
 $(document).on('turbo:load', function() {
-  subscribeToCollections();
+  subscribeToModels();
 })
 
 $(document).on('sprinkles:update', function(event) {
-  console.log("🍩 collections received sprinkles:update");
-  subscribeToCollections();
+  console.log("🍩 models received sprinkles:update");
+  subscribeToModels();
 })
 
 // TODO keep track of connections and each time the page changes, see whether you need to unsubscribe from any.

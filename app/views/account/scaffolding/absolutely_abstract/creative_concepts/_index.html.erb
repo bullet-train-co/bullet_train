@@ -2,53 +2,55 @@
 <% hide_actions ||= false %>
 <% hide_back ||= false %>
 
-<%= render 'account/shared/box' do |p| %>
-  <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
-  <% p.content_for :description do %>
-    <%= raw t(".contexts.#{context.class.name.underscore}.#{creative_concepts.any? ? 'description' : 'description_empty'}") %>
-  <% end %>
-
-  <% if creative_concepts.any? %>
-    <% p.content_for :table do %>
-      <table class="table">
-        <thead>
-          <tr>
-            <th><%= t('.fields.name.heading') %></th>
-            <th class="text-center"><%= t('.fields.all_collaborators.heading') %></th>
-            <%# 🚅 super scaffolding will insert new field headers above this line. %>
-            <th><%= t('.fields.created_at.heading') %></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% creative_concepts.each do |creative_concept| %>
-            <% with_attribute_settings object: creative_concept do %>
-              <tr data-id="<%= creative_concept.id %>">
-                <td><%= render 'shared/attributes/text', attribute: :name, url: [:account, creative_concept] %></td>
-                <td><%= render 'account/shared/memberships/photos', memberships: creative_concept.all_collaborators, size: 9, align: :center %></td>
-                <%# 🚅 super scaffolding will insert new fields above this line. %>
-                <td><%= display_date_and_time(creative_concept.created_at) %></td>
-                <td class="buttons">
-                  <% unless hide_actions %>
-                    <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, creative_concept], class: 'button-secondary button-smaller' if can? :edit, creative_concept %>
-                    <%= button_to t('.buttons.shorthand.destroy'), [:account, creative_concept], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(creative_concept)) }, class: 'button-secondary button-smaller' if can? :destroy, creative_concept %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-          <% end %>
-        </tbody>
-      </table>
+<%= render "sprinkles/collection", parent: context, collection: :scaffolding_absolutely_abstract_creative_concepts do %>
+  <%= render 'account/shared/box' do |p| %>
+    <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+    <% p.content_for :description do %>
+      <%= raw t(".contexts.#{context.class.name.underscore}.#{creative_concepts.any? ? 'description' : 'description_empty'}") %>
     <% end %>
-  <% end %>
 
-  <% p.content_for :actions do %>
-    <% unless hide_actions %>
-      <% if can? :create, Scaffolding::AbsolutelyAbstract::CreativeConcept.new(team: @team) %>
-        <%= link_to t('.buttons.new'), [:new, :account, @team, :scaffolding_absolutely_abstract_creative_concept], class: "#{first_button_primary(:absolutely_abstract_creative_concept)} new" %>
+    <% if creative_concepts.any? %>
+      <% p.content_for :table do %>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><%= t('.fields.name.heading') %></th>
+              <th class="text-center"><%= t('.fields.all_collaborators.heading') %></th>
+              <%# 🚅 super scaffolding will insert new field headers above this line. %>
+              <th><%= t('.fields.created_at.heading') %></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% creative_concepts.each do |creative_concept| %>
+              <% with_attribute_settings object: creative_concept do %>
+                <tr data-id="<%= creative_concept.id %>">
+                  <td><%= render 'shared/attributes/text', attribute: :name, url: [:account, creative_concept] %></td>
+                  <td><%= render 'account/shared/memberships/photos', memberships: creative_concept.all_collaborators, size: 9, align: :center %></td>
+                  <%# 🚅 super scaffolding will insert new fields above this line. %>
+                  <td><%= display_date_and_time(creative_concept.created_at) %></td>
+                  <td class="buttons">
+                    <% unless hide_actions %>
+                      <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, creative_concept], class: 'button-secondary button-smaller' if can? :edit, creative_concept %>
+                      <%= button_to t('.buttons.shorthand.destroy'), [:account, creative_concept], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(creative_concept)) }, class: 'button-secondary button-smaller' if can? :destroy, creative_concept %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
       <% end %>
+    <% end %>
 
-      <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:absolutely_abstract_creative_concept)} back" unless hide_back %>
+    <% p.content_for :actions do %>
+      <% unless hide_actions %>
+        <% if can? :create, Scaffolding::AbsolutelyAbstract::CreativeConcept.new(team: @team) %>
+          <%= link_to t('.buttons.new'), [:new, :account, @team, :scaffolding_absolutely_abstract_creative_concept], class: "#{first_button_primary(:absolutely_abstract_creative_concept)} new" %>
+        <% end %>
+
+        <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:absolutely_abstract_creative_concept)} back" unless hide_back %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

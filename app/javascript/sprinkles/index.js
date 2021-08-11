@@ -1,3 +1,2 @@
 require("./collections")
-require("./forms")
-require("./modals")
+require("./models")

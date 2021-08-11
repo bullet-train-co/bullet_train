@@ -9,16 +9,15 @@ class Sprinkles::CollectionsChannel < ApplicationCable::Channel
   end
 
   def allowed_collections
-    {
-      User => [],
+    @allowed_collections ||= {
       Team => [
-        :scaffolding_things,
+        :scaffolding_absolutely_abstract_creative_concepts,
       ],
     }
   end
 
   def allowed_parent_classes
-    allowed_collections.keys
+    @allowed_parent_classes ||= allowed_collections.keys
   end
 
   def validated_parent_class

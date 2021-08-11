@@ -3,8 +3,6 @@ class User < ApplicationRecord
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
 
-  include Sprinkles::Broadcasted
-
   if two_factor_authentication_enabled?
     devise :two_factor_authenticatable, :two_factor_backupable, :omniauthable,
       :registerable, :recoverable, :rememberable, :trackable, :validatable,
