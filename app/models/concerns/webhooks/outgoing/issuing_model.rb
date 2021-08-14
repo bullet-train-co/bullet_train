@@ -23,8 +23,7 @@ module Webhooks::Outgoing::IssuingModel
     # defined in this table.
     event_type = Webhooks::Outgoing::EventType.find_by(name: "#{self.class.name.underscore}.#{action}")
     if event_type && team
-      # TODO Is there anyway to just get a hash from the serializer, or does it only output JSON?
-      data = JSON.parse("Api::V1::#{self.class.name}Serializer".constantize.new(self).to_json).dig("data")
+      data = "Api::V1::#{self.class.name}Serializer".constantize.new(self).serializable_hash[:data]
       webhook = team.webhooks_outgoing_events.create(event_type: event_type, subject: self, data: data)
       webhook.deliver
     end
