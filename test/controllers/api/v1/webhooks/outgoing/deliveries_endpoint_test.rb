@@ -21,8 +21,7 @@ class Api::V1::Webhooks::Outgoing::DeliveriesEndpointTest < Api::Test
 
     assert_equal delivery_data["event_id"], delivery.event_id
     assert_nil delivery_data["endpoint_url"]
-    # TODO Fix the formatting of what we're looking for here.
-    # assert_equal delivery_data['delivered_at'], delivery.delivered_at
+    assert_equal DateTime.parse(delivery_data["delivered_at"]), delivery.delivered_at
     # 🚅 super scaffolding will insert new fields above this line.
 
     assert_equal delivery_data["endpoint_id"], delivery.endpoint_id
