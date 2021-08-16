@@ -35,7 +35,7 @@ Although it's recommended to define any static list of choices in the localizati
 You can generate the available buttons using a collection of database objects by passing the `options` option like so:
 
 <pre><code><%= render 'shared/fields/super_select', form: form, method: :category_id,
-  choices: Category.all.map { |category| [category.id, category.label_string] } %></code></pre>
+  choices: Category.all.map { |category| [category.label_string, category.id] } %></code></pre>
 
 ## Allowing Multiple Button Selections
 
