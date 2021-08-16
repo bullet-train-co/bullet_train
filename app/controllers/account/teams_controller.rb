@@ -106,6 +106,7 @@ class Account::TeamsController < Account::ApplicationController
     params.require(:team).permit(
       :name,
       :time_zone,
+      :locale,
       # 🚅 super scaffolding will insert new fields above this line.
       # 🚅 super scaffolding will insert new arrays above this line.
     )

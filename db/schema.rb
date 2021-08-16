@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_05_060451) do
+ActiveRecord::Schema.define(version: 2021_08_16_072509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -266,6 +266,7 @@ ActiveRecord::Schema.define(version: 2021_08_05_060451) do
     t.datetime "updated_at", null: false
     t.boolean "being_destroyed"
     t.string "time_zone"
+    t.string "locale"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -296,6 +297,7 @@ ActiveRecord::Schema.define(version: 2021_08_05_060451) do
     t.integer "consumed_timestep"
     t.boolean "otp_required_for_login"
     t.string "otp_backup_codes", array: true
+    t.string "locale"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

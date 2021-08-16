@@ -57,6 +57,10 @@ en:
       password_confirmation:
         _: &password_confirmation Password Confirmation
         label: Confirm Password
+      locale:
+        _: &locale Locale
+        label: *locale
+        heading: *locale
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
         _: &created_at Signed Up
@@ -96,6 +100,7 @@ en:
         email: *email
         profile_photo_id: *profile_photo_id
         time_zone: *time_zone
+        locale: *locale
         # 🚅 super scaffolding will insert new activerecord attributes above this line.
         created_at: *created_at
         password: *password

@@ -5,6 +5,7 @@
   <%= render 'shared/fields/super_select', form: form, method: :time_zone,
     choices: time_zone_options_for_select(@team.time_zone, nil, ActiveSupport::TimeZone),
     other_options: {search: true} %>
+  <%= render 'shared/fields/text_field', method: :locale %>
   <%# 🚅 super scaffolding will insert new fields above this line. %>
 
   <div class="buttons">

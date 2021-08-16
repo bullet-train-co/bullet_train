@@ -48,6 +48,7 @@ class Account::UsersController < Account::ApplicationController
       :password,
       :password_confirmation,
       :profile_photo_id,
+      :locale,
       # 🚅 super scaffolding will insert new fields above this line.
       current_team_attributes: [:name],
       # 🚅 super scaffolding will insert new arrays above this line.

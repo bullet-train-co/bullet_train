@@ -6,6 +6,7 @@ class Api::V1::TeamsEndpoint < Api::V1::Root
 
     params :team do
       optional :name, type: String, allow_blank: false, desc: Api.heading(:name)
+      optional :locale, type: String, desc: Api.heading(:locale)
       # 🚅 super scaffolding will insert new fields above this line.
       # 🚅 super scaffolding will insert new arrays above this line.
 
