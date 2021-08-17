@@ -1,0 +1,39 @@
+<%= form_for [:account, user], html: {id: dom_id(user, :details), class: 'form'} do |form| %>
+  <% with_field_settings form: form do %>
+    <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-2">
+      <div class="sm:col-span-2">
+        <%= render 'shared/fields/email_field', method: :email, options: {autofocus: true} %>
+      </div>
+
+      <div class="sm:col-span-1">
+        <%= render 'shared/fields/text_field', method: :first_name %>
+      </div>
+
+      <div class="sm:col-span-1">
+        <%= render 'shared/fields/text_field', method: :last_name %>
+      </div>
+
+      <% if cloudinary_enabled? %>
+        <div class="sm:col-span-2">
+          <%= render 'shared/fields/cloudinary_image', method: :profile_photo_id %>
+        </div>
+      <% end %>
+
+      <div class="sm:col-span-2">
+        <%= render 'shared/fields/super_select', method: :time_zone,
+          choices: time_zone_options_for_select(user.time_zone, nil, ActiveSupport::TimeZone),
+          other_options: {search: true} %>
+      </div>
+
+      <% if multiple_locales? %>
+        <div class="sm:col-span-2">
+          <%= render 'shared/fields/buttons', method: :locale, options: {"": t("locale.default")}.merge(t("locale.locales")) %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="buttons">
+    <%= form.submit t('.buttons.update_profile'), class: "button" %>
+  </div>
+<% end %>

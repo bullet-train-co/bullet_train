@@ -1,0 +1,14 @@
+locales: &locales
+  en: English
+  # ja: 日本語
+
+# Those strings should be the same across all locales.
+en:
+  locale:
+    default: Default
+    locales: *locales
+
+ja:
+  locale:
+    default: デフォルト
+    locales: *locales

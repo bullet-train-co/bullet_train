@@ -51,11 +51,11 @@ en:
         heading: Team
       time_zone:
         _: &time_zone Primary Time Zone
-        label: "Team's Primary Time Zone"
+        label: "Primary Time Zone"
         heading: *time_zone
       locale:
-        _: &locale Locale
-        label: *locale
+        _: &locale Language
+        label: "Primary Language"
         heading: *locale
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:

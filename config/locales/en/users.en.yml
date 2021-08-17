@@ -58,9 +58,10 @@ en:
         _: &password_confirmation Password Confirmation
         label: Confirm Password
       locale:
-        _: &locale Locale
+        _: &locale Language
         label: *locale
         heading: *locale
+        help: By default the interface language will adjust based on each team's language setting, but you can set a global personal preference for your account here.
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
         _: &created_at Signed Up
@@ -90,6 +91,8 @@ en:
         label: New Password
     update_self:
       <<: [*update_self, *self, *fields]
+    form:
+      buttons: *buttons
   account:
     users: *users
   activerecord:

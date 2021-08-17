@@ -63,6 +63,11 @@
 
   form.form {
     @apply space-y-5;
+
+    // This is the best way I know how to solve the problem of Tailwind's `space-y-5` creating extra space at the top
+    // because Rails injects hidden fields at the top of our forms.
+    @apply -mt-5;
+
     .buttons {
       @apply pt-1 space-x;
     }

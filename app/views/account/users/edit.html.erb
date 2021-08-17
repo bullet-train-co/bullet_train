@@ -11,37 +11,7 @@
           <% p.content_for :title, t('.profile.header') %>
           <% p.content_for :description, t('.profile.description') %>
           <% p.content_for :body do %>
-            <%= form_for [:account, @user], html: {id: dom_id(@user, :details), class: 'form'} do |f| %>
-              <div class="grid grid-cols-1 gap-y gap-x sm:grid-cols-2">
-                <div class="sm:col-span-2">
-                  <%= render 'shared/fields/email_field', form: f, method: :email, options: {autofocus: true} %>
-                </div>
-
-                <div class="sm:col-span-1">
-                  <%= render 'shared/fields/text_field', form: f, method: :first_name %>
-                </div>
-
-                <div class="sm:col-span-1">
-                  <%= render 'shared/fields/text_field', form: f, method: :last_name %>
-                </div>
-
-                <% if cloudinary_enabled? %>
-                  <div class="sm:col-span-2">
-                    <%= render 'shared/fields/cloudinary_image', form: f, method: :profile_photo_id %>
-                  </div>
-                <% end %>
-
-                <div class="sm:col-span-2">
-                  <%= render 'shared/fields/super_select', form: f, method: :time_zone,
-                    choices: time_zone_options_for_select(@user.time_zone, nil, ActiveSupport::TimeZone),
-                    other_options: {search: true} %>
-                </div>
-              </div>
-
-              <div class="buttons">
-                <%= f.submit t('.buttons.update_profile'), class: "button" %>
-              </div>
-            <% end %>
+            <%= render "account/users/form", user: @user %>
           <% end %>
         <% end %>
 
@@ -60,13 +30,15 @@
           <% p.content_for :title, t('.password.header') %>
           <% p.content_for :body do %>
             <% within_fields_namespace(:update_self) do %>
-              <%= form_for [:account, @user], html: {id: dom_id(@user, :password), class: 'form'} do |f| %>
-                <%= render 'shared/fields/password_field', form: f, method: :current_password %>
-                <%= render 'shared/fields/password_field', form: f, method: :password %>
-                <%= render 'shared/fields/password_field', form: f, method: :password_confirmation %>
+              <%= form_for [:account, @user], html: {id: dom_id(@user, :password), class: 'form'} do |form| %>
+                <% with_field_settings form: form do %>
+                  <%= render 'shared/fields/password_field', method: :current_password %>
+                  <%= render 'shared/fields/password_field', method: :password %>
+                  <%= render 'shared/fields/password_field', method: :password_confirmation %>
+                <% end %>
 
                 <div class="buttons">
-                  <%= f.submit t('.buttons.update_password'), class: "button" %>
+                  <%= form.submit t('.buttons.update_password'), class: "button" %>
                 </div>
               <% end %>
             <% end %>

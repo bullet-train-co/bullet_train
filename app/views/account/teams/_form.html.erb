@@ -1,12 +1,19 @@
 <%= form_with model: [:account, team], local: true, class: 'form' do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
-  <%= render 'shared/fields/text_field', form: form, method: :name, options: {autofocus: true} %>
-  <%= render 'shared/fields/super_select', form: form, method: :time_zone,
-    choices: time_zone_options_for_select(@team.time_zone, nil, ActiveSupport::TimeZone),
-    other_options: {search: true} %>
-  <%= render 'shared/fields/text_field', method: :locale %>
-  <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% with_field_settings form: form do %>
+    <%= render 'shared/fields/text_field', method: :name, options: {autofocus: true} %>
+
+    <%= render 'shared/fields/super_select', method: :time_zone,
+      choices: time_zone_options_for_select(team.time_zone, nil, ActiveSupport::TimeZone),
+      other_options: {search: true} %>
+
+    <% if multiple_locales? %>
+      <%= render 'shared/fields/buttons', method: :locale, options: t("locale.locales") %>
+    <% end %>
+
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% end %>
 
   <div class="buttons">
     <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
