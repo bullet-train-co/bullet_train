@@ -126,6 +126,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = [
       current_user&.locale,
       current_user&.current_team&.locale,
+      http_accept_language.compatible_language_from(I18n.available_locales),
       I18n.default_locale.to_s
     ].compact.find { |potential_locale| I18n.available_locales.include?(potential_locale.to_sym) }
     yield

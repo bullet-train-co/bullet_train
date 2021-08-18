@@ -36,6 +36,14 @@ class ApplicationControllerTest < ActionController::TestCase
     assert_equal I18n.default_locale.to_s, response.body
   end
 
+  test "team locale is nil, user locale is nil, HTTP_ACCEPT_LANGUAGE equals es" do
+    @request.headers["HTTP_ACCEPT_LANGUAGE"] = "es"
+    sign_in @user
+
+    get :any_action
+    assert_equal "es", response.body
+  end
+
   test "team locale is es, user locale is nil" do
     sign_in @user
     @user.current_team.update!(locale: "es")
@@ -71,6 +79,20 @@ class ApplicationControllerTest < ActionController::TestCase
   end
 
   test "user not signed in" do
+    get :any_action
+    assert_equal I18n.default_locale.to_s, response.body
+  end
+
+  test "user not signed in and browser sends HTTP_ACCEPT_LANGUAGE" do
+    @request.headers["HTTP_ACCEPT_LANGUAGE"] = "de"
+
+    get :any_action
+    assert_equal "de", response.body
+  end
+
+  test "user not signed in and browser sends HTTP_ACCEPT_LANGUAGE with unknown value" do
+    @request.headers["HTTP_ACCEPT_LANGUAGE"] = "this-language-does-not-really-exist"
+
     get :any_action
     assert_equal I18n.default_locale.to_s, response.body
   end

@@ -181,6 +181,9 @@ gem "hashids"
 # Add helpful scopes automatically on booleans and date/time attributes.
 gem "microscope"
 
+# serving language based on browser settings
+gem "http_accept_language"
+
 group :production do
   # we suggest using postmark for email deliverability.
   gem "postmark-rails"

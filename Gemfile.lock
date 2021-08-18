@@ -247,6 +247,7 @@ GEM
     http-accept (1.7.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    http_accept_language (2.1.1)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     i18n-js (3.8.3)
@@ -570,6 +571,7 @@ DEPENDENCIES
   grape_on_rails_routes
   hashids
   honeybadger
+  http_accept_language
   i18n-js
   indefinite_article
   jbuilder (~> 2.7)
