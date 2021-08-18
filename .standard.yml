@@ -17,4 +17,4 @@ ignore:
   - 'app/controllers/**/*':
     - Style/RedundantAssignment
   - 'lib/scaffolding/transformer.rb':
-    - Layout/EndAlignment # TODO this causes an endless loop!
+    - Layout/EndAlignment

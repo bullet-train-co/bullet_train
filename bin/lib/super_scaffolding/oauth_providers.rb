@@ -1,5 +1,5 @@
 def encode_double_replacement_fix(string)
-  string.split("").join("~!@BT@!~")
+  string.chars.join("~!@BT@!~")
 end
 
 def decode_double_replacement_fix(string)

@@ -46,7 +46,7 @@ class AccountTest < ApplicationSystemTestCase
 
       phone_field_wrapper = find_stimulus_controller_for_label "Phone Field Value", "fields--phone", wrapper: true
       phone_field = phone_field_wrapper.first("input")
-      "+1 613".split(//).each do |digit|
+      "+1 613".chars.each do |digit|
         phone_field.send_keys(digit)
       end
       assert_no_js_errors do

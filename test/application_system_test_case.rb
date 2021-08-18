@@ -133,7 +133,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     string = string.join("\n") if string.is_a?(Array)
     field = find("label", text: /\A#{label}\z/)
     field.click
-    "#{string}\n".split(//).each do |digit|
+    "#{string}\n".chars.each do |digit|
       within(field.find(:xpath, "..")) do
         find(".select2-search__field").send_keys(digit)
       end
