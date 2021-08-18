@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception, prepend: true
 
+  around_action :set_locale
   before_action :set_raven_context
   layout :layout_by_resource
 
@@ -119,5 +120,15 @@ class ApplicationController < ActionController::Base
         format.html { redirect_to [:account, current_user.teams.first], alert: exception.message }
       end
     end
+  end
+
+  def set_locale
+    I18n.locale = [
+      current_user&.locale,
+      current_user&.current_team&.locale,
+      I18n.default_locale.to_s
+    ].compact.find { |potential_locale| I18n.available_locales.include?(potential_locale.to_sym) }
+    yield
+    I18n.locale = I18n.default_locale
   end
 end
