@@ -18,8 +18,15 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
-      - run: gem update --system
-      - run: gem install bundler:2.2.0
+      - run:
+          name: Install Redis
+          command: sudo apt-get install redis-server
+      - run:
+          name: Start Redis server
+          command: sudo redis-server --daemonize yes
+      - run:
+          name: Install bundler
+          command: gem install bundler:2.2.0
       - run:
           name: Which bundler?
           command: bundle -v
@@ -33,5 +40,8 @@ jobs:
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
-          name: Run Bullet Train test suite
-          command: bundle exec rails test && bundle exec rails test:system
+          name: Run unit tests
+          command: bundle exec rails test
+      - run:
+          name: Run system tests
+          command: bundle exec rails test:system
