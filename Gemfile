@@ -80,6 +80,9 @@ group :development do
 
   # xray makes it easy to find which view or partial file an element is in when inspecting a page's source.
   gem "xray-rails"
+
+  # add color to some console output.
+  gem "colorize"
 end
 
 # authentication.
@@ -159,9 +162,6 @@ gem "valid_email"
 
 # extract the body from emails received using action inbox.
 gem "extended_email_reply_parser"
-
-# add color to some console output.
-gem "colorize"
 
 gem "nice_partials", github: "andrewculver/nice_partials", branch: "bt"
 gem "storybook_rails", "~> 1.0"
