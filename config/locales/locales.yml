@@ -1,8 +1,9 @@
 locales: &locales
+  # This is the canonical list of available languages.
   en: English
   # ja: 日本語
 
-# Those strings should be the same across all locales.
+# The language labels should be the same across all locales.
 en:
   locale:
     default: Default

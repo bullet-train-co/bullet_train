@@ -89,5 +89,5 @@ def storybook_auto_source
 end
 
 def multiple_locales?
-  @multiple_locales ||= I18n.t("locale.locales").many?
+  @multiple_locales ||= I18n.available_locales.many?
 end

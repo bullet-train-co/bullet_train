@@ -24,8 +24,10 @@ module Railsdiff
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    # See `config/locales/locales.yml` for a list of available locales.
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
-    config.i18n.default_locale = :en
+    config.i18n.available_locales = YAML.load(File.read("config/locales/locales.yml")).with_indifferent_access.dig(:locales).keys.map(&:to_sym)
+    config.i18n.default_locale = config.i18n.available_locales.first
 
     # this actually doesn't appear to work.
     config.action_view.sanitized_allowed_protocols = ["http", "bullettrain"]
