@@ -26,7 +26,7 @@ module Railsdiff
 
     # See `config/locales/locales.yml` for a list of available locales.
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
-    config.i18n.available_locales = YAML.load(File.read("config/locales/locales.yml")).with_indifferent_access.dig(:locales).keys.map(&:to_sym)
+    config.i18n.available_locales = YAML.safe_load(File.read("config/locales/locales.yml"), aliases: true).with_indifferent_access.dig(:locales).keys.map(&:to_sym)
     config.i18n.default_locale = config.i18n.available_locales.first
 
     # this actually doesn't appear to work.
