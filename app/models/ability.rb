@@ -73,10 +73,10 @@ class Ability
       can [:read, :create, :destroy], Invitation, team_id: user.team_ids
 
       # outgoing webhooks.
-      can :manage, Webhooks::Outgoing::Endpoint, team: {id: user.team_ids}
-      can :read, Webhooks::Outgoing::Delivery, endpoint: {team: {id: user.team_ids}}
-      can :read, Webhooks::Outgoing::DeliveryAttempt, delivery: {endpoint: {team: {id: user.team_ids}}}
-      can :read, Webhooks::Outgoing::Event, team: {id: user.team_ids}
+      can :manage, Webhooks::Outgoing::Endpoint, team_id: user.team_ids
+      can :read, Webhooks::Outgoing::Delivery, endpoint: {team_id: user.team_ids}
+      can :read, Webhooks::Outgoing::DeliveryAttempt, delivery: {endpoint: {team_id: user.team_ids}}
+      can :read, Webhooks::Outgoing::Event, team_id: user.team_ids
 
       # the super scaffolding objects.
 
