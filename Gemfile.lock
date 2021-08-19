@@ -279,6 +279,8 @@ GEM
       activerecord
       kaminari-core (= 1.2.1)
     kaminari-core (1.2.1)
+    knapsack_pro (3.1.0)
+      rake
     launchy (2.5.0)
       addressable (~> 2.7)
     letter_opener (1.7.0)
@@ -322,6 +324,8 @@ GEM
     nio4r (2.5.7)
     nokogiri (1.11.7)
       mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
+    nokogiri (1.11.7-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
@@ -542,6 +546,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   api-pagination
@@ -577,6 +582,7 @@ DEPENDENCIES
   jbuilder (~> 2.7)
   jsonapi-serializer
   kaminari
+  knapsack_pro
   letter_opener
   listen (~> 3.3)
   magic_test
