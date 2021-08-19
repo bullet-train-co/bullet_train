@@ -56,11 +56,11 @@ class Invitation < ApplicationRecord
   end
 
   def accept_for(user)
-    user.memberships << membership
-    user.current_team = team
-    user.former_user = false
-    user.save
-    destroy
+    User.transaction do
+      user.memberships << membership
+      user.update(current_team: team, former_user: false)
+      destroy
+    end
   end
 
   def name
