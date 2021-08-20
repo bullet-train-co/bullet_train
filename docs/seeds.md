@@ -34,5 +34,15 @@ We do this so Bullet Train applications can re-use the logic in `db/seeds.rb` fo
 
 This makes `db/seeds.rb` a single source of truth for this sort of baseline data, instead of having this concern spread and sometimes duplicated across `db/seeds.rb`, `db/migrations/*`, and `test/fixtures`.
 
+## Seeds for Different Environments
+In some cases, you may have core seed data like roles that needs to exist in every environment, but you also have development data to populate in your non-production environments. Bullet Train makes this easy by supporting per-environment seed files in the `db/seeds` folder like `db/seeds/test.rb` and `db/seeds/development.rb`.
+
+Then in `db/seeds.rb`, you can load all of the shared core seed data at the beginning of `db/seeds.rb` and then load the environment-specific seeds only when you've specified one of those environments.
+
+```
+load "#{Rails.root}/db/seeds/development.rb" if Rails.env.development?
+load "#{Rails.root}/db/seeds/test.rb" if Rails.env.test?
+```
+
 ## Feedback
 We're always very hesitant to stray from Rails defaults, so it must be said that our commitment to this approach isn't set in stone. It's worked very well for us in a number of applications, so we've standardized on it, but the approach is certainly open to discussion.
