@@ -8,9 +8,9 @@ As an optional prerequisite, please read our blog article describing [how and wh
 Before you can get started with Bullet Train, you must have the following dependencies installed:
 
  - Ruby 2.7
- - Redis 6.0
  - PostgreSQL 13
- - Node 15
+ - Redis 6.0
+ - Node 14
  - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
 
 Internally, Bullet Train is developed on macOS and these dependencies (other than Chrome) are installed using [Ruby Version Manager](https://rvm.io/), [Homebrew](https://brew.sh), and [Node Version Manager](https://github.com/nvm-sh/nvm) like so:
@@ -20,7 +20,7 @@ brew install postgresql
 brew services start postgresql
 brew install redis
 brew services start redis
-nvm install 15
+nvm install 14
 rvm install ruby-2.7.4
 ```
 
@@ -50,8 +50,14 @@ Run `bin/set-name "Whatever Your App Name Is"` to properly configure your databa
 ## 5. Set Up Your Database
 Run `rake db:create`, `rake db:migrate`, and `rake db:seed` to get your database into working condition. If you install PostgreSQL the way described above, this should work automatically. If it fails to connect, you'll need to configure your database in whatever way you normally do for Rails development.
 
-## 6. Create Local Environment Configuration
-Copy `config/application.yml.example` to `config/application.yml` as a baseline for your application configuration.
+## 6. Copy the Local Environment Configuration Template into Place (Required)
+Copy `config/application.yml.example` to `config/application.yml` as a baseline for your local application configuration. Going forward you can edit that file however you need to and it will be ignored by Git.
 
-## 7. Start the Server
-Start the server with `rails s` and visit `http://localhost:3000/`. The first time you render the sign-in page the stylesheets will take a few seconds to compile. Don't worry, it'll cache them going forward. Your application is now up and running and you can test the sign-up process.
+## 7. Start Sidekiq
+In a terminal, run `bundle exec sidekiq -t 25` and leave it running. Sidekiq will handle executing any background jobs that are delegated by the web server process (which we'll start below).
+
+## 8. Start Webpack Dev Server
+In another terminal, run `bin/webpack-dev-server` and leave it running. This process handles compiling and recompiling any JavaScript and stylesheets.
+
+## 9. Start the Web Server
+Start the server with `rails s` and visit `http://localhost:3000/`. Your application should now be up and running and you can test the sign-up process.
