@@ -17,6 +17,7 @@ Bullet Train is designed to be customized and extended by the development teams 
  - [Themes](/docs/themes.md)
  - [Database Seeds](/docs/seeds.md)
  - [Test Suite](/docs/testing.md)
+ - [Automated Question Methods from Scopes](/docs/magic/scope-questions.md)
 
 ## Accounts & Teams
  - [Authentication](/docs/authentication.md)

@@ -1,5 +1,3 @@
-# TODO Add documentation for this feature.
-# In the meantime, https://twitter.com/andrewculver/status/1422665236562153473?s=20
 module QuestionMethodsFromScopes
   extend ActiveSupport::Concern
 
