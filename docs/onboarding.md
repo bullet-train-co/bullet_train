@@ -1,5 +1,5 @@
 # Onboarding
-Bullet Train provides an easy to understand and modifiable structure for defining required onboarding steps and forms. This system makes it easy for users to complete required steps before seeing your applications full account interface. The code for this feature is well documented in the code with comments, so rather than duplicating that document here, we'll simply direct you to the relevant files.
+Bullet Train provides an easy to understand and modifiable structure for defining required onboarding steps and forms. This system makes it easy for users to complete required steps before seeing your application's full account interface. The code for this feature is well documented in the code with comments, so rather than duplicating that document here, we'll simply direct you to the relevant files.
 
 ## Included Onboarding Steps
 
