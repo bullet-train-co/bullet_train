@@ -2,7 +2,7 @@
 <% hide_actions ||= false %>
 <% hide_back ||= false %>
 
-<%= render "sprinkles/collection", parent: context, collection: :scaffolding_absolutely_abstract_creative_concepts do %>
+<%= broadcast_from context, :scaffolding_absolutely_abstract_creative_concepts do %>
   <%= render 'account/shared/box' do |p| %>
     <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
     <% p.content_for :description do %>

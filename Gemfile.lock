@@ -1,4 +1,13 @@
 GIT
+  remote: https://github.com/andrewculver/cable_ready.git
+  revision: 4a6c5f02e23744b414543f41ba035ade79307ed0
+  branch: stream_updates
+  specs:
+    cable_ready (5.0.0.pre2)
+      rails (>= 5.2)
+      thread-local (>= 1.1.0)
+
+GIT
   remote: https://github.com/andrewculver/nice_partials.git
   revision: c1b26169798afc2f79c47d2dfa50e5c4aadfdde8
   branch: bt
@@ -234,6 +243,7 @@ GEM
       tilt
     hashids (1.0.5)
     hashie (4.1.0)
+    hiredis (0.6.3)
     honeybadger (4.8.0)
     htmlentities (4.3.4)
     http-accept (1.7.0)
@@ -498,9 +508,10 @@ GEM
     stripe (5.32.1)
     temple (0.8.2)
     thor (1.1.0)
+    thread-local (1.1.0)
     tilt (2.0.10)
     time_ago_in_words (0.1.1)
-    turbo-rails (0.7.3)
+    turbo-rails (0.7.2)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -545,6 +556,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap (>= 1.4.4)
   byebug
+  cable_ready!
   cancancan
   capybara (>= 3.26)
   capybara-email
@@ -566,6 +578,7 @@ DEPENDENCIES
   grape-swagger
   grape_on_rails_routes
   hashids
+  hiredis
   honeybadger
   http_accept_language
   i18n-js

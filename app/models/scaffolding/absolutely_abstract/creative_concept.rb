@@ -1,5 +1,5 @@
 class Scaffolding::AbsolutelyAbstract::CreativeConcept < ApplicationRecord
-  include Sprinkles::Broadcasted
+  enable_broadcasts
   # 🚅 add concerns above.
 
   belongs_to :team
@@ -36,10 +36,6 @@ class Scaffolding::AbsolutelyAbstract::CreativeConcept < ApplicationRecord
 
   def all_collaborators
     (team.admins + collaborators.map(&:membership)).uniq
-  end
-
-  def broadcast
-    Team.broadcast_collection(team_id, :scaffolding_absolutely_abstract_creative_concepts)
   end
 
   # 🚅 add methods above.
