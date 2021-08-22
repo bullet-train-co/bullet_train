@@ -1,5 +1,4 @@
 class Scaffolding::AbsolutelyAbstract::CreativeConcept < ApplicationRecord
-  enable_broadcasts
   # 🚅 add concerns above.
 
   belongs_to :team

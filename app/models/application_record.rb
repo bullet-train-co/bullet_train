@@ -9,6 +9,7 @@ class ApplicationRecord < ActiveRecord::Base
   include ObfuscatesId
   include QuestionMethodsFromScopes
   include CableReady::Broadcaster
+  enable_broadcasts
 
   # 🏚 i'd like to deprecate these. they're not descriptive enough.
   scope :newest, -> { order("created_at DESC") }

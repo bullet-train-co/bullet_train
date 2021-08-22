@@ -33,7 +33,7 @@
     "@tailwindcss/typography": "^0.3.1",
     "autoprefixer": "^9",
     "babel-loader": "^8.2.2",
-    "cable_ready": "andrewculver/cable_ready#stream_updates",
+    "cable_ready": "bullet-train-co/cable_ready#stream_updates",
     "copy-webpack-plugin": "^6.2.1",
     "daterangepicker": "^3.1.0",
     "dragula": "^3.7.3",

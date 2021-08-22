@@ -3,8 +3,6 @@ class Team < ApplicationRecord
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
 
-  enable_broadcasts
-
   # super scaffolding
   unless scaffolding_things_disabled?
     has_many :scaffolding_absolutely_abstract_creative_concepts, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcept", dependent: :destroy, broadcast: true
