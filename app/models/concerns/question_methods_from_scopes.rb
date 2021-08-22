@@ -8,12 +8,14 @@ module QuestionMethodsFromScopes
       # If a `current` scope is defined on `Membership`, `membership.current?` should be generated automatically.
       # If a `tombstones` scope is defined on `Membership`, `membership.tombstone?` should be generated automatically.
       method_name = "#{scope_name.to_s.singularize}?"
-      define_method(method_name) do
-        unless persisted?
-          raise "You can't call scope-generated `?` methods on objects that aren't persisted. Perhaps you need to define `#{self.class.name}##{method_name}` in Ruby?"
-        end
+      unless method_defined?(method_name)
+        define_method(method_name) do
+          unless persisted?
+            raise "You can't call scope-generated `?` methods on objects that aren't persisted. Perhaps you need to define `#{self.class.name}##{method_name}` in Ruby?"
+          end
 
-        self_scope.send(scope_name).any?
+          self_scope.send(scope_name).any?
+        end
       end
     end
   end
