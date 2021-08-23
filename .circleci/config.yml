@@ -35,13 +35,20 @@ jobs:
       # Restore dependency caches
       - restore_cache:
           name: Restore gems cache
-          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          keys:
+            - gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ .Branch }}-
+            - gem-cache-v1-
       - restore_cache:
           name: Restore yarn cache
-          key: yarn-packages-v1-{{ checksum "yarn.lock" }}
+          keys:
+            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-v1-{{ .Branch }}-
+            - yarn-packages-
 
       # Install dependencies
       - ruby/bundle-install
+      - run: bundle clean --force
       - run:
           name: Install packages
           command: yarn install
@@ -49,12 +56,12 @@ jobs:
       # Save dependency caches
       - save_cache:
           name: Save gem cache
-          key: gem-cache-v1-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
       - save_cache:
           name: Save yarn cache
-          key: yarn-packages-v1-{{ checksum "yarn.lock" }}
+          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
           paths:
             - node_modules
 
@@ -69,7 +76,7 @@ jobs:
             bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
           environment:
             KNAPSACK_PRO_CI_NODE_TOTAL: 16
-      
+
       # If you don't want to use Knapsack Pro, then use this configuration:
       #
       # - run:

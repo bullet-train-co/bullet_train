@@ -173,6 +173,9 @@ gem "turbo-rails"
 # `standardrb --fix`
 gem "standard"
 
+# Similar to standard for correcting format
+gem "rails_best_practices"
+
 # for super scaffolding: "select *a* team member" vs. "select *an* option".
 gem "indefinite_article"
 
