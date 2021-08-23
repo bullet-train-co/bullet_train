@@ -27,5 +27,3 @@ sed -i "" "s/raise .*/team\.projects/g" app/models/test_site.rb
 
 rake db:migrate
 rake db:test:prepare
-
-spring stop
