@@ -1,83 +1,85 @@
 require "application_system_test_case"
 
-class TangibleThingTest < ApplicationSystemTestCase
-  @@test_devices.each do |device_name, display_details|
-    test "create a new tangible thing on a #{device_name} and update it" do
-      resize_for(display_details)
+unless scaffolding_things_disabled?
+  class TangibleThingTest < ApplicationSystemTestCase
+    @@test_devices.each do |device_name, display_details|
+      test "create a new tangible thing on a #{device_name} and update it" do
+        resize_for(display_details)
 
-      visit root_path
+        visit root_path
 
-      click_on "Don't have an account?"
-      fill_in "Your Email Address", with: "me@acme.com"
-      fill_in "Set Password", with: "password123"
-      fill_in "Confirm Password", with: "password123"
-      click_on "Sign Up"
-      fill_in "Your First Name", with: "John"
-      fill_in "Your Last Name", with: "Doe"
-      fill_in "Your Team Name", with: "My Super Team"
-      page.select "Brisbane", from: "Your Time Zone"
-      click_on "Next"
+        click_on "Don't have an account?"
+        fill_in "Your Email Address", with: "me@acme.com"
+        fill_in "Set Password", with: "password123"
+        fill_in "Confirm Password", with: "password123"
+        click_on "Sign Up"
+        fill_in "Your First Name", with: "John"
+        fill_in "Your Last Name", with: "Doe"
+        fill_in "Your Team Name", with: "My Super Team"
+        page.select "Brisbane", from: "Your Time Zone"
+        click_on "Next"
 
-      click_on "Add New Creative Concept"
-      fill_in "Name", with: "My Generic Creative Concept"
-      fill_in "Description", with: "Dummy description for my creative concept"
-      click_on "Create Creative Concept"
+        click_on "Add New Creative Concept"
+        fill_in "Name", with: "My Generic Creative Concept"
+        fill_in "Description", with: "Dummy description for my creative concept"
+        click_on "Create Creative Concept"
 
-      click_on "Add New Tangible Thing"
-      fill_in "Text Field Value", with: "My value for this text field"
-      click_on "Yes"
-      click_on "Two" # this should never make it to the database, because of what comes next.
-      click_on "Three"
-      click_on "Four"
-      click_on "Five"
-      fill_in "Email Field Value", with: "me@acme.com"
-      fill_in "Password Field Value", with: "secure-password"
-      fill_in "Phone Field Value", with: "(201) 551-8321"
-      select "One", from: "Super Select Value"
-      select2_select "Multiple Super Select Values", ["Five", "Six"]
-      fill_in "Text Area Value", with: "Long text for this text area field"
+        click_on "Add New Tangible Thing"
+        fill_in "Text Field Value", with: "My value for this text field"
+        click_on "Yes"
+        click_on "Two" # this should never make it to the database, because of what comes next.
+        click_on "Three"
+        click_on "Four"
+        click_on "Five"
+        fill_in "Email Field Value", with: "me@acme.com"
+        fill_in "Password Field Value", with: "secure-password"
+        fill_in "Phone Field Value", with: "(201) 551-8321"
+        select "One", from: "Super Select Value"
+        select2_select "Multiple Super Select Values", ["Five", "Six"]
+        fill_in "Text Area Value", with: "Long text for this text area field"
 
-      click_on "Create Tangible Thing"
-      assert page.has_content? "Tangible Thing was successfully created."
+        click_on "Create Tangible Thing"
+        assert page.has_content? "Tangible Thing was successfully created."
 
-      click_on "My value for this text field"
-      assert page.has_content? "Tangible Thing Details"
+        click_on "My value for this text field"
+        assert page.has_content? "Tangible Thing Details"
 
-      assert page.has_content? "My value for this text field"
-      assert page.has_content? "Yes"
-      assert page.has_no_content? "Two"
-      assert page.has_content? "Three"
-      assert page.has_content? "Four and Five"
-      assert page.has_content? "me@acme.com"
-      assert page.has_content? "secure-password"
-      assert page.has_content? "+1 201-551-8321"
-      assert page.has_content? "One"
-      assert page.has_content? "Five and Six"
-      assert page.has_content? "Long text for this text area field"
+        assert page.has_content? "My value for this text field"
+        assert page.has_content? "Yes"
+        assert page.has_no_content? "Two"
+        assert page.has_content? "Three"
+        assert page.has_content? "Four and Five"
+        assert page.has_content? "me@acme.com"
+        assert page.has_content? "secure-password"
+        assert page.has_content? "+1 201-551-8321"
+        assert page.has_content? "One"
+        assert page.has_content? "Five and Six"
+        assert page.has_content? "Long text for this text area field"
 
-      click_on "Edit Tangible Thing"
+        click_on "Edit Tangible Thing"
 
-      fill_in "Text Field Value", with: "My new value for this text field"
-      click_on "No"
-      click_on "One"
-      fill_in "Date Field Value", with: "02/17/2021"
-      fill_in "Email Field Value", with: "not-me@acme.com"
+        fill_in "Text Field Value", with: "My new value for this text field"
+        click_on "No"
+        click_on "One"
+        fill_in "Date Field Value", with: "02/17/2021"
+        fill_in "Email Field Value", with: "not-me@acme.com"
 
-      fill_in "Password Field Value", with: "insecure-password"
-      fill_in "Phone Field Value", with: "(231) 832-5512"
-      page.select "Two", from: "Super Select Value"
-      fill_in "Text Area Value", with: "New long text for this text area field"
+        fill_in "Password Field Value", with: "insecure-password"
+        fill_in "Phone Field Value", with: "(231) 832-5512"
+        page.select "Two", from: "Super Select Value"
+        fill_in "Text Area Value", with: "New long text for this text area field"
 
-      click_on "Update Tangible Thing"
+        click_on "Update Tangible Thing"
 
-      assert page.has_content? "My new value for this text field"
-      assert page.has_content? "No"
-      assert page.has_content? "One"
-      assert page.has_content? "not-me@acme.com"
-      assert page.has_content? "insecure-password"
-      assert page.has_content? "+1 231-832-5512"
-      assert page.has_content? "Two"
-      assert page.has_content? "New long text for this text area field"
+        assert page.has_content? "My new value for this text field"
+        assert page.has_content? "No"
+        assert page.has_content? "One"
+        assert page.has_content? "not-me@acme.com"
+        assert page.has_content? "insecure-password"
+        assert page.has_content? "+1 231-832-5512"
+        assert page.has_content? "Two"
+        assert page.has_content? "New long text for this text area field"
+      end
     end
   end
 end

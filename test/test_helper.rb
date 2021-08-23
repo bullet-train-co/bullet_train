@@ -9,7 +9,7 @@ require File.expand_path("../../lib/bullet_train", __FILE__)
 # of setup for things like the plans available for subscriptions and which outgoing webhooks are available to users.
 require File.expand_path("../../db/seeds", __FILE__)
 
-require 'knapsack_pro'
+require "knapsack_pro"
 knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
 knapsack_pro_adapter.set_test_helper_path(__FILE__)
 
