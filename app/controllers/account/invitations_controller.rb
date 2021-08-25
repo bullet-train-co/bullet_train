@@ -75,6 +75,7 @@ class Account::InvitationsController < Account::ApplicationController
   # GET /invitations/new
   def new
     @invitation.build_membership
+    @cancel_path = only_allow_path(params[:cancel_path])
   end
 
   # POST /invitations

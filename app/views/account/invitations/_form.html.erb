@@ -43,7 +43,7 @@
     <% if form.object.persisted? %>
     <%= link_to t('global.buttons.cancel'), account_invitation_path(invitation), class: "button-secondary" %>
     <% else %>
-    <%= link_to t('global.buttons.cancel'), params[:cancel_path] || account_team_invitations_path(@team), class: "button-secondary" %>
+    <%= link_to t('global.buttons.cancel'), @cancel_path || account_team_invitations_path(@team), class: "button-secondary" %>
     <% end %>
   </div>
 <% end %>

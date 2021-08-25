@@ -132,4 +132,14 @@ class ApplicationController < ActionController::Base
     yield
     I18n.locale = I18n.default_locale
   end
+
+  # Whitelist the account namespace and prevent JavaScript
+  # embedding when passing paths as parameters in links.
+  def only_allow_path(path)
+    return if path.nil?
+    account_namespace_regexp = /^\/account\/*+/
+    scheme = URI.parse(path).scheme
+    return nil unless path.match?(account_namespace_regexp) && scheme != "javascript"
+    path
+  end
 end
