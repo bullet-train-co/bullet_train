@@ -9,14 +9,14 @@ module Account::TeamsHelper
   end
 
   def users_as_select_options(users, values = [])
-    values = [values] unless values.is_a?(Array)
+    values = Array(values)
     users.map { |user|
       "<option value=\"#{user.id}\" data-image=\"#{user_profile_photo_url(user)}\" #{"selected=\"selected\"" if values.include?(user.id)}>#{user.name}</option>"
     }.join.html_safe
   end
 
   def memberships_as_select_options(memberships, values = [])
-    values = [values] unless values.is_a?(Array)
+    values = Array(values)
     memberships.map { |membership|
       "<option value=\"#{membership.id}\" data-image=\"#{membership_profile_photo_url(membership)}\" #{"selected=\"selected\"" if values.include?(membership.id)}>#{membership.name}</option>"
     }.join.html_safe
