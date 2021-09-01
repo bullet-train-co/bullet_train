@@ -85,3 +85,10 @@ jobs:
       # - run:
       #     name: Run system tests
       #     command: bundle exec rails test:system
+      #
+      # If you want to gather test results in CircleCI when not running tests in parallel,
+      # include `minitest-ci` in your Gemfile and uncomment the following step.
+      # You can access the test results via the "Tests" tab within each build in CircleCI.
+      #
+      # - store_test_results:
+      #     path: test/reports
