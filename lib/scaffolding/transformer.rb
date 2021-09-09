@@ -220,14 +220,14 @@ class Scaffolding::Transformer
     end
   end
 
-  def add_line_to_file(file, content, after, options = {})
+  def add_line_to_file(file, content, hook, options = {})
     increase_indent = options[:increase_indent]
     add_before = options[:add_before]
     add_after = options[:add_after]
 
     transformed_file_name = file
     transformed_content = content
-    transformed_after = after
+    transform_hook = hook
 
     begin
       target_file_content = File.open(transformed_file_name).read
@@ -244,8 +244,7 @@ class Scaffolding::Transformer
       new_target_file_content = []
 
       target_file_content.split("\n").each do |line|
-        # TODO i forget what the transformed after stuff is.
-        if options[:exact_match] ? line == transformed_after : line.match(/#{Regexp.escape(transformed_after)}\s*$/)
+        if options[:exact_match] ? line == transform_hook : line.match(/#{Regexp.escape(transform_hook)}\s*$/)
 
           if add_before
             new_target_file_content << "#{line} #{add_before}"
@@ -255,8 +254,7 @@ class Scaffolding::Transformer
             end
           end
 
-          # TODO i forget what the transformed after stuff is.
-          line =~ /^(\s*).*#{Regexp.escape(transformed_after)}.*/
+          line =~ /^(\s*).*#{Regexp.escape(transform_hook)}.*/
           leading_whitespace = $1
 
           incoming_leading_whitespace = nil
@@ -298,11 +296,11 @@ class Scaffolding::Transformer
     end
   end
 
-  def scaffold_add_line_to_file(file, content, after, options = {})
+  def scaffold_add_line_to_file(file, content, hook, options = {})
     file = transform_string(file)
     content = transform_string(content)
-    after = transform_string(after)
-    add_line_to_file(file, content, after, options)
+    hook = transform_string(hook)
+    add_line_to_file(file, content, hook, options)
   end
 
   def replace_line_in_file(file, content, in_place_of)

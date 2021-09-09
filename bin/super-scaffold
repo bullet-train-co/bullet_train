@@ -22,14 +22,14 @@ def legacy_replace_in_file(file, before, after)
   end
 end
 
-def legacy_add_line_to_file(file, content, after, child, parent, options = {})
+def legacy_add_line_to_file(file, content, hook, child, parent, options = {})
   increase_indent = options[:increase_indent]
   add_before = options[:add_before]
   add_after = options[:add_after]
 
   transformed_file_name = file
   transformed_content = content
-  transformed_after = after
+  transform_hook = hook
 
   target_file_content = File.open(transformed_file_name).read
 
@@ -38,7 +38,7 @@ def legacy_add_line_to_file(file, content, after, child, parent, options = {})
   else
     new_target_file_content = []
     target_file_content.split("\n").each do |line|
-      if line.match(/#{Regexp.escape(transformed_after)}\s*$/)
+      if line.match(/#{Regexp.escape(transform_hook)}\s*$/)
 
         if add_before
           new_target_file_content << "#{line} #{add_before}"
@@ -49,7 +49,7 @@ def legacy_add_line_to_file(file, content, after, child, parent, options = {})
         end
 
         # get leading whitespace.
-        line.match(/^(\s*).*#{Regexp.escape(transformed_after)}.*/)
+        line.match(/^(\s*).*#{Regexp.escape(transform_hook)}.*/)
         leading_whitespace = $1
         new_target_file_content << "#{leading_whitespace}#{"  " if increase_indent}#{transformed_content}"
 
