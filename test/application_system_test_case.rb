@@ -45,9 +45,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   @@test_devices = {
-    # iphone_8: {resolution: [750, 1334], mobile: true, high_dpi: true},
-    macbook_pro_15_inch: {resolution: [2880, 1800], mobile: false, high_dpi: true}
-    # hd_monitor: {resolution: [1920, 1080], mobile: false, high_dpi: false},
+    iphone_8: {resolution: [750, 1334], mobile: true, high_dpi: true},
+    macbook_pro_15_inch: {resolution: [2880, 1800], mobile: false, high_dpi: true},
+    hd_monitor: {resolution: [1920, 1080], mobile: false, high_dpi: false},
   }
 
   if ENV["TEST_DEVICE"]
@@ -61,7 +61,6 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def resize_for(display_details)
-    # TODO Does this even work?
     page.driver.browser.manage.window.resize_to(*calculate_resolution(display_details))
   end
 
