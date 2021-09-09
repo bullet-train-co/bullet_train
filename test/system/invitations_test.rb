@@ -51,7 +51,27 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       first_membership = Membership.order(:id).last
 
       assert page.has_content?("The Testing Team Team Members")
-      click_on "Invite a New Team Member"
+
+      # Paths that begin with "/account/" are whitelisted when accessing
+      # invitation#new while passing a cancel_path to the params.
+      hanakos_team = Team.first
+      path_for_new_invitation = /invitations\/new/
+      path_with_cancel_path_params = /invitations\/new\?cancel_path=/
+      visit new_account_team_invitation_path(hanakos_team, cancel_path: account_team_memberships_path(hanakos_team))
+      assert page.current_url.match?(path_with_cancel_path_params)
+
+      # Make sure we cannot embed JavaScript when accessing the new invitation path.
+      js_str = "javascript:alert('Testing')"
+      visit new_account_team_invitation_path(hanakos_team, cancel_path: js_str)
+      assert page.current_path.match?(path_for_new_invitation)
+      assert !page.current_path.match?(js_str)
+      assert !page.current_path.match?(path_with_cancel_path_params)
+
+      # Paths that don't start with /account/ are not accepted either.
+      faulty_link = "/memberships/"
+      assert page.current_path.match?(path_for_new_invitation)
+      visit new_account_team_invitation_path(hanakos_team, cancel_path: faulty_link)
+      assert !page.current_path.match?(path_with_cancel_path_params)
 
       perform_enqueued_jobs do
         clear_emails
