@@ -137,9 +137,6 @@ gem "sidekiq"
 # cloud file hosting, image resizing, and cdn.
 gem "cloudinary"
 
-# we'll occasionally use this for timestamps when accuracy isn't important.
-gem "time_ago_in_words"
-
 # enables `binding.pry` for debugging.
 gem "pry"
 gem "pry-stack_explorer"

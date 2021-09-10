@@ -339,6 +339,8 @@ GEM
     nokogiri (1.12.3)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
+    nokogiri (1.12.3-x86_64-linux)
+      racc (~> 1.4)
     oauth2 (1.4.7)
       faraday (>= 0.8, < 2.0)
       jwt (>= 1.0, < 3.0)
@@ -529,7 +531,6 @@ GEM
     thor (1.1.0)
     thread-local (1.1.0)
     tilt (2.0.10)
-    time_ago_in_words (0.1.1)
     turbo-rails (0.7.4)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
@@ -568,6 +569,7 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-linux
 
 DEPENDENCIES
   api-pagination
@@ -639,7 +641,6 @@ DEPENDENCIES
   standard
   storybook_rails (~> 1.0)
   stripe
-  time_ago_in_words
   trix!
   turbo-rails
   tzinfo-data
