@@ -1102,7 +1102,6 @@ class Scaffolding::Transformer
         replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{current_transformer.parent_table_name}'}")
       end
 
-      # TODO remove the class_name if not needed.
       scaffold_add_line_to_file("./app/models/scaffolding/absolutely_abstract/creative_concept.rb", "has_many :completely_concrete_tangible_things, class_name: 'Scaffolding::CompletelyConcrete::TangibleThing', dependent: :destroy, foreign_key: :absolutely_abstract_creative_concept_id", HAS_MANY_HOOK, prepend: true)
 
       if class_names_transformer.belongs_to_needs_class_definition?
@@ -1184,7 +1183,7 @@ class Scaffolding::Transformer
     # add sortability.
     if options["sortable"]
       unless options["skip-model"]
-        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "def collection\n    absolutely_abstract_creative_concept.completely_concrete_tangible_things\n  end\n", METHODS_HOOK, prepend: true)
+        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "def collection\n  absolutely_abstract_creative_concept.completely_concrete_tangible_things\nend\n\n", METHODS_HOOK, prepend: true)
         scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "include Sortable\n", CONCERNS_HOOK, prepend: true)
       end
 

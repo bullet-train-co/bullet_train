@@ -14,7 +14,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   #   bundle exec test/bin/setup-super-scaffolding-system-test
   #
   # to run this test:
-  #   rails test test/integration/super_scaffolding_system_test.rb
+  #   rails test test/system/super_scaffolding_test.rb
   #
   # after the test you can tear down what we've done here in the db:
   #   rake db:migrate VERSION=`ls db/migrate | sort | tail -n 9 | head -n 1`
