@@ -47,9 +47,10 @@ class ApplicationRecord < ActiveRecord::Base
   end
 
   def parent_collection
-    # TODO Try to suggest what the entire method definition should actually be.
+    # TODO Try to suggest what the entire method definition should actually be
+    # using parent_key below to do so.
     model_name = self.class
-    parent_key = model_name.reflect_on_all_associations(:belongs_to).first.name
+    # parent_key = model_name.reflect_on_all_associations(:belongs_to).first.name
     raise "You're trying to use a feature that requires #{model_name} to have a `collection` method defined that returns the Active Record association that this model belongs to within its parent object."
   end
 end
