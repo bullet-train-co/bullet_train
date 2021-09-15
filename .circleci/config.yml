@@ -70,6 +70,9 @@ jobs:
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run:
+          name: Check Standard Ruby
+          command: bundle exec standardrb
+      - run:
           name: Run tests with Knapsack Pro
           command: |
             export RAILS_ENV=test
