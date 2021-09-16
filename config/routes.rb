@@ -146,6 +146,10 @@ Rails.application.routes.draw do
             post :reinvite
           end
 
+          collection do
+            get :search
+          end
+
           scope module: "memberships" do
             namespace :reassignments do
               resources :scaffolding_completely_concrete_tangible_things_reassignments, only: [:new, :create, :index]

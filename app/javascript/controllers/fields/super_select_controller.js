@@ -7,7 +7,8 @@ export default class extends Controller {
   static targets = [ "select" ]
   static values = {
     acceptsNew: Boolean,
-    enableSearch: Boolean
+    enableSearch: Boolean,
+    searchUrl: String,
   }
 
   connect() {
@@ -30,6 +31,22 @@ export default class extends Controller {
     }
 
     options.tags = this.acceptsNewValue
+
+    if (this.searchUrlValue) {
+      options.ajax = {
+        url: this.searchUrlValue,
+        dataType: 'json',
+        // We enable pagination by default here
+        data: function(params) {
+          var query = {
+            search: params.term,
+            page: params.page || 1
+          }
+          return query
+        }
+        // Any additional params go here...
+      }
+    }
 
     options.templateResult = this.formatState;
     options.templateSelection = this.formatState;

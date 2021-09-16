@@ -57,7 +57,7 @@ class Team < ApplicationRecord
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
 
   def admins
-    memberships.current_and_invited.select(&:admin?)
+    memberships.current_and_invited.admins
   end
 
   def admin_users

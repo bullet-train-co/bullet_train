@@ -9,11 +9,18 @@ other_options ||= {}
 html_options ||= {}
 html_options[:id] ||= id_for(form, method)
 html_options[:class] = "form-control select2 #{html_options[:class]}".strip
-choices ||= options_for(form, method)&.invert
+choices_url ||= nil
+if choices_url.nil?
+  choices ||= options_for(form, method)&.invert
+else
+  # If we have a choices_url, we're going to eager load the values so we want this set to an empty hash
+  choices = {}
+end
 
 wrapper_options = { data: { controller: stimulus_controller }}
 wrapper_options[:data]["#{stimulus_controller}-enable-search-value"] = true if other_options[:search]
 wrapper_options[:data]["#{stimulus_controller}-accepts-new-value"] = true if other_options[:accepts_new]
+wrapper_options[:data]["#{stimulus_controller}-search-url-value"] = choices_url if choices_url.present?
 html_options[:data] = { "#{stimulus_controller}-target": 'select' }
 
 %>

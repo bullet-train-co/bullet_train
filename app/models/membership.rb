@@ -28,6 +28,7 @@ class Membership < ApplicationRecord
     end
   end
 
+  scope :admins, -> { includes(:roles).where(roles: {key: :admin}) }
   scope :current_and_invited, -> { includes(:invitation).where("user_id IS NOT NULL OR invitations.id IS NOT NULL").references(:invitation) }
   scope :current, -> { where("user_id IS NOT NULL") }
   scope :tombstones, -> { includes(:invitation).where("user_id IS NULL AND invitations.id IS NULL").references(:invitation) }

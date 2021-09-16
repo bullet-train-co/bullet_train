@@ -1,7 +1,7 @@
 <%= render 'account/shared/page' do |p| %>
   <% p.content_for :title, t('.section') %>
   <% p.content_for :body do %>
-    <%= render 'index', memberships: @memberships.current_and_invited if @memberships.current_and_invited.any? %>
-    <%= render 'tombstones', memberships: @memberships.tombstones if @memberships.tombstones.any? %>
+    <%= render 'index', memberships: @memberships.current_and_invited.includes(:user, :roles) if @memberships.current_and_invited.any? %>
+    <%= render 'tombstones', memberships: @memberships.tombstones.includes(:user, :roles) if @memberships.tombstones.any? %>
   <% end %>
 <% end %>
