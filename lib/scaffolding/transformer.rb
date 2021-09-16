@@ -1,16 +1,15 @@
-# TODO `options` is overriden in tons of places.
 require "indefinite_article"
 
 class Scaffolding::Transformer
-  attr_accessor :child, :parent, :parents, :class_names_transformer, :options, :additional_steps, :namespace
+  attr_accessor :child, :parent, :parents, :class_names_transformer, :cli_options, :additional_steps, :namespace
 
-  def initialize(child, parents, options = {})
+  def initialize(child, parents, cli_options = {})
     self.child = child
     self.parent = parents.first
     self.parents = parents
-    self.namespace = options["namespace"] || "account"
+    self.namespace = cli_options["namespace"] || "account"
     self.class_names_transformer = Scaffolding::ClassNamesTransformer.new(child, parent, namespace)
-    self.options = options
+    self.cli_options = cli_options
     self.additional_steps = []
   end
 
@@ -441,7 +440,7 @@ class Scaffolding::Transformer
     puts
   end
 
-  def add_attributes_to_various_views(attributes, local_options = {})
+  def add_attributes_to_various_views(attributes, scaffolding_options = {})
     sql_type_to_field_type_mapping = {
       # 'binary' => '',
       "boolean" => "buttons",
@@ -461,9 +460,7 @@ class Scaffolding::Transformer
 
     # add attributes to various views.
     attributes.each_with_index do |attribute, index|
-      first_table_cell = index == 0 && local_options[:type] == :crud
-
-      cli_options = options.dup
+      first_table_cell = index == 0 && scaffolding_options[:type] == :crud
 
       parts = attribute.split(":")
       name = parts.shift
@@ -492,7 +489,7 @@ class Scaffolding::Transformer
       is_id = name.match?(/_id$/)
       is_ids = name.match?(/_ids$/)
       # if this is the first attribute of a newly scaffolded model, that field is required.
-      is_required = attribute_options[:required] || (local_options[:type] == :crud && index == 0)
+      is_required = attribute_options[:required] || (scaffolding_options[:type] == :crud && index == 0)
       is_vanilla = attribute_options&.key?(:vanilla)
       is_belongs_to = is_id && !is_vanilla
       is_has_many = is_ids && !is_vanilla
@@ -518,7 +515,7 @@ class Scaffolding::Transformer
           "option"
         end
       when "cloudinary_image"
-        options << "height: 200"
+        attribute_options[:height] = 200
         "image"
       when "phone_field"
         "phone_number"
@@ -636,7 +633,7 @@ class Scaffolding::Transformer
         field_attributes = {method: ":#{name}"}
         field_options = {}
 
-        if local_options[:type] == :crud && index == 0
+        if scaffolding_options[:type] == :crud && index == 0
           field_options[:autofocus] = "true"
         end
 
@@ -738,16 +735,15 @@ class Scaffolding::Transformer
           scaffold_add_line_to_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb", field_content, "<%# 🚅 super scaffolding will insert new field headers above this line. %>", prepend: true)
         end
 
-        # table cell.
-        options = []
+        table_cell_options = []
 
         if first_table_cell
-          options << "url: [:account, tangible_thing]"
+          table_cell_options << "url: [:account, tangible_thing]"
         end
 
         # this gets stripped and is one line, so indentation isn't a problem.
         field_content = <<-ERB
-          <td#{cell_attributes}><%= render 'shared/attributes/#{attribute_partial}', attribute: :#{attribute_name}#{", #{options.join(", ")}" if options.any?} %></td>
+          <td#{cell_attributes}><%= render 'shared/attributes/#{attribute_partial}', attribute: :#{attribute_name}#{", #{table_cell_options.join(", ")}" if table_cell_options.any?} %></td>
         ERB
 
         unless ["Team", "User"].include?(child)
@@ -1025,28 +1021,28 @@ class Scaffolding::Transformer
   end
 
   def scaffold_crud(attributes)
-    if options["only-index"]
-      options["skip-table"] = false
-      options["skip-views"] = true
-      options["skip-controller"] = true
-      options["skip-form"] = true
-      options["skip-show"] = true
-      options["skip-form"] = true
-      options["skip-api"] = true
-      options["skip-model"] = true
-      options["skip-parent"] = true
-      options["skip-locales"] = true
-      options["skip-routes"] = true
+    if cli_options["only-index"]
+      cli_options["skip-table"] = false
+      cli_options["skip-views"] = true
+      cli_options["skip-controller"] = true
+      cli_options["skip-form"] = true
+      cli_options["skip-show"] = true
+      cli_options["skip-form"] = true
+      cli_options["skip-api"] = true
+      cli_options["skip-model"] = true
+      cli_options["skip-parent"] = true
+      cli_options["skip-locales"] = true
+      cli_options["skip-routes"] = true
     end
 
-    if options["namespace"]
-      options["skip-api"] = true
-      options["skip-model"] = true
-      options["skip-locales"] = true
+    if cli_options["namespace"]
+      cli_options["skip-api"] = true
+      cli_options["skip-model"] = true
+      cli_options["skip-locales"] = true
     end
 
     # TODO fix this. we can do this better.
-    files = if options["only-index"]
+    files = if cli_options["only-index"]
       [
         "./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb",
         "./app/views/account/scaffolding/completely_concrete/tangible_things/index.html.erb"
@@ -1056,10 +1052,10 @@ class Scaffolding::Transformer
       [
         "./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb",
         "./app/views/account/scaffolding/completely_concrete/tangible_things",
-        ("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml" unless options["skip-locales"]),
-        ("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb" unless options["skip-api"]),
-        ("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb" unless options["skip-api"]),
-        ("./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb" unless options["skip-api"]),
+        ("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml" unless cli_options["skip-locales"]),
+        ("./app/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint.rb" unless cli_options["skip-api"]),
+        ("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb" unless cli_options["skip-api"]),
+        ("./app/serializers/api/v1/scaffolding/completely_concrete/tangible_thing_serializer.rb" unless cli_options["skip-api"]),
         # "./app/filters/scaffolding/completely_concrete/tangible_things_filter.rb"
       ].compact
     end
@@ -1072,14 +1068,14 @@ class Scaffolding::Transformer
       end
     end
 
-    unless options["skip-api"]
+    unless cli_options["skip-api"]
 
       # add endpoint to the api.
       scaffold_add_line_to_file("./app/controllers/api/v1/root.rb", "mount Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpoint", ENDPOINTS_HOOK, prepend: true)
 
     end
 
-    unless options["skip-model"]
+    unless cli_options["skip-model"]
 
       # update the factory generated by `rails g`.
       content = if transform_string(":absolutely_abstract_creative_concept") == transform_string(":scaffolding_absolutely_abstract_creative_concept")
@@ -1117,16 +1113,16 @@ class Scaffolding::Transformer
       end
     end
 
-    unless options["skip-api"]
+    unless cli_options["skip-api"]
       scaffold_replace_line_in_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", build_factory_setup.join("\n"), "# 🚅 super scaffolding will insert factory setup in place of this line.")
     end
 
     # add children to the show page of their parent.
-    unless options["skip-parent"] || parent == "None"
+    unless cli_options["skip-parent"] || parent == "None"
       scaffold_add_line_to_file("./app/views/account/scaffolding/absolutely_abstract/creative_concepts/show.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/index', tangible_things: @creative_concept.completely_concrete_tangible_things, hide_back: true %>", "<%# 🚅 super scaffolding will insert new children above this line. %>", prepend: true)
     end
 
-    unless options["skip-model"]
+    unless cli_options["skip-model"]
 
       before_scaffolding_hooks = <<~RUBY
         #{CONCERNS_HOOK}
@@ -1166,7 +1162,7 @@ class Scaffolding::Transformer
     # DELEGATIONS
     #
 
-    unless options["skip-model"]
+    unless cli_options["skip-model"]
 
       if ["Team", "User"].include?(parents.last) && parent != parents.last
         scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "delegate :#{parents.last.underscore}, to: :absolutely_abstract_creative_concept", DELEGATIONS_HOOK, prepend: true)
@@ -1176,34 +1172,34 @@ class Scaffolding::Transformer
 
     add_attributes_to_various_views(attributes, type: :crud)
 
-    unless options["skip-locales"]
+    unless cli_options["skip-locales"]
       add_locale_helper_export_fix
     end
 
     # add sortability.
-    if options["sortable"]
-      unless options["skip-model"]
+    if cli_options["sortable"]
+      unless cli_options["skip-model"]
         scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "def collection\n  absolutely_abstract_creative_concept.completely_concrete_tangible_things\nend\n\n", METHODS_HOOK, prepend: true)
         scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "include Sortable\n", CONCERNS_HOOK, prepend: true)
       end
 
-      unless options["skip-table"]
+      unless cli_options["skip-table"]
         scaffold_replace_line_in_file("./app/views/account/scaffolding/completely_concrete/tangible_things/_index.html.erb", transform_string("<tbody data-reorder=\"<%= url_for [:reorder, :account, context, collection] %>\">"), "<tbody>")
       end
 
-      unless options["skip-controller"]
+      unless cli_options["skip-controller"]
         scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", "include SortableActions\n", "Account::ApplicationController", increase_indent: true)
       end
     end
 
     # titleize the localization file.
-    unless options["skip-locales"]
+    unless cli_options["skip-locales"]
       replace_in_file(transform_string("./config/locales/en/scaffolding/completely_concrete/tangible_things.en.yml"), child, child.underscore.humanize.titleize)
     end
 
     # apply routes.
-    unless options["skip-routes"]
-      routes_namespace = @options["namespace"] || "account"
+    unless cli_options["skip-routes"]
+      routes_namespace = cli_options["namespace"] || "account"
 
       begin
         routes_path = if routes_namespace == "account"
@@ -1211,7 +1207,7 @@ class Scaffolding::Transformer
         else
           "config/routes/#{routes_namespace}.rb"
         end
-        routes_manipulator = Scaffolding::RoutesFileManipulator.new(routes_path, child, parent, options)
+        routes_manipulator = Scaffolding::RoutesFileManipulator.new(routes_path, child, parent, cli_options)
       rescue Errno::ENOENT => _
         puts "Creating '#{routes_path}'.".green
 
@@ -1247,12 +1243,12 @@ class Scaffolding::Transformer
       routes_manipulator.write
     end
 
-    unless options["skip-parent"]
+    unless cli_options["skip-parent"]
 
       if parent == "Team" || parent == "None"
         icon_name = nil
-        if options["sidebar"].present?
-          icon_name = options["sidebar"]
+        if cli_options["sidebar"].present?
+          icon_name = cli_options["sidebar"]
         else
           puts ""
           puts "Hey, models that are scoped directly off of a Team (or nothing) are eligible to be added to the sidebar. Do you want to add this resource to the sidebar menu? (y/N)"
