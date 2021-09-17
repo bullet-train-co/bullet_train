@@ -6,7 +6,7 @@ class Scaffolding::AbsolutelyAbstract::CreativeConcept < ApplicationRecord
 
   has_many :completely_concrete_tangible_things, class_name: "Scaffolding::CompletelyConcrete::TangibleThing", foreign_key: :absolutely_abstract_creative_concept_id, dependent: :destroy
   has_many :collaborators, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator", dependent: :destroy, foreign_key: :creative_concept_id
-  has_many :collaborating_memberships, through: :collaborators, class_name: "Membership", source: :membership
+  has_many :memberships, through: :collaborators
   # 🚅 add has_many associations above.
 
   # 🚅 add oauth providers above.
@@ -35,7 +35,7 @@ class Scaffolding::AbsolutelyAbstract::CreativeConcept < ApplicationRecord
   end
 
   def all_collaborators
-    team.admins.or(Membership.where(id: collaborating_memberships.pluck(:id)))
+    team.admins.or(Membership.where(id: memberships.pluck(:id)))
   end
 
   # 🚅 add methods above.
