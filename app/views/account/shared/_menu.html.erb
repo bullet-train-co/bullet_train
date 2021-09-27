@@ -45,9 +45,11 @@
 
   <% end %>
 
-  <%= render 'account/shared/menu/item', url: main_app.destroy_user_session_path, method: :delete, label: t('menus.main.labels.logout') do |p| %>
-    <% p.content_for :icon do %>
-      <i class="fal fa-sign-out ti ti-close"></i>
+  <div data-turbo="false">
+    <%= render 'account/shared/menu/item', url: main_app.destroy_user_session_path, method: :delete, label: t('menus.main.labels.logout') do |p| %>
+      <% p.content_for :icon do %>
+        <i class="fal fa-sign-out ti ti-close"></i>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
