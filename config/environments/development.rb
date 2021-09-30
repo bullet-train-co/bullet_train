@@ -103,7 +103,7 @@ Rails.application.configure do
   config.storybook_rails.stories_path = Rails.root.join("storybook")
   config.storybook_rails.show_stories = true
   config.autoload_paths << Rails.root.join("storybook")
-  config.asset_host = "http://localhost:3000"
+  config.asset_host = ENV["BASE_URL"]
 
   # ✅ YOUR APPLICATION'S CONFIGURATION
   # If you need to customize your application's configuration, this is the place to do it. This helps avoid merge
