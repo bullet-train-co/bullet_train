@@ -12,13 +12,13 @@ class Account::MembershipsController < Account::ApplicationController
     # In the future, I could see us replacing this with a recommended example using Elasticsearch and the `searchkick` Ruby Gem.
     limit = params[:limit] || 100
     page = [params[:page].to_i, 1].max # Ensure we never have a negative or zero page value
-    search_term = params[:search]&.upcase
+    search_term = "%#{params[:search]&.upcase}%"
     offset = (page - 1) * limit
     # Currently we're only searching on user.first_name, user.last_name, memberships.user_first_name and memberships.user_last_name. Should we also search on the email address?
     # This query could use impromement.  Currently if you search for "Ad Pal" you wouldn't find a user "Adam Pallozzi"
-    query = "UPPER(first_name) LIKE '%#{search_term}%' OR UPPER(last_name) LIKE '%#{search_term}%' OR UPPER(user_first_name) LIKE '%#{search_term}%' OR UPPER(user_last_name) LIKE '%#{search_term}%'"
+    query = "UPPER(first_name) LIKE :search_term OR UPPER(last_name) LIKE :search_term OR UPPER(user_first_name) LIKE :search_term OR UPPER(user_last_name) LIKE :search_term"
     # We're using left outer join here because we may get memberships that don't belong to a membership yet
-    memberships = @team.memberships.accessible_by(current_ability, :show).left_outer_joins(:user).where(query)
+    memberships = @team.memberships.accessible_by(current_ability, :show).left_outer_joins(:user).where(query, search_term: search_term)
     total_results = memberships.size
     # the Areal.sql(LOWER(COALESCE...)) part means that if the user record doesn't exist or if there are records that start with a lower case letter, we will still sort everything correctly using the user.first_name instead.
     memberships_array = memberships.limit(limit).offset(offset).order(Arel.sql("LOWER(COALESCE(first_name, user_first_name) )")).map { |membership| {id: membership.id, text: membership.label_string.to_s} }
