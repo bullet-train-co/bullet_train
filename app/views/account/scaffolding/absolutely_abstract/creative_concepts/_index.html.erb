@@ -2,7 +2,7 @@
 <% hide_actions ||= false %>
 <% hide_back ||= false %>
 
-<%= broadcast_from context, :scaffolding_absolutely_abstract_creative_concepts do %>
+<%= updates_for context, :scaffolding_absolutely_abstract_creative_concepts do %>
   <%= render 'account/shared/box' do |p| %>
     <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
     <% p.content_for :description do %>

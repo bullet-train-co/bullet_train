@@ -1,7 +1,7 @@
 <%= render 'account/shared/page' do |p| %>
   <% p.content_for :title, t('.section') %>
   <% p.content_for :body do %>
-    <%= broadcast_from @creative_concept do %>
+    <%= updates_for @creative_concept do %>
       <%= render 'account/shared/box', divider: true do |p| %>
         <% p.content_for :title, t('.header') %>
         <% p.content_for :description, t('.description') %>

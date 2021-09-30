@@ -183,7 +183,7 @@ gem "microscope"
 # serving language based on browser settings
 gem "http_accept_language"
 
-gem "cable_ready", github: "bullet-train-co/cable_ready", branch: "stream_updates"
+gem "cable_ready", github: "bullet-train-co/cable_ready", branch: "master"
 gem "hiredis"
 
 group :production do

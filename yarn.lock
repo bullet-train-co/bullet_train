@@ -3373,9 +3373,9 @@ bytes@3.1.0, bytes@^3.0.0:
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
 
-cable_ready@bullet-train-co/cable_ready#stream_updates:
-  version "5.0.0-pre2"
-  resolved "https://codeload.github.com/bullet-train-co/cable_ready/tar.gz/3aa78ec6e60ce79dcbb9ee1f250f1d14d66ad753"
+cable_ready@bullet-train-co/cable_ready#master:
+  version "5.0.0-pre3"
+  resolved "https://codeload.github.com/bullet-train-co/cable_ready/tar.gz/89e0d1df050603713f7e1db791c073bdf06e0e02"
   dependencies:
     morphdom "^2.6.1"
 

@@ -7,10 +7,10 @@ GIT
 
 GIT
   remote: https://github.com/bullet-train-co/cable_ready.git
-  revision: 3aa78ec6e60ce79dcbb9ee1f250f1d14d66ad753
-  branch: stream_updates
+  revision: 89e0d1df050603713f7e1db791c073bdf06e0e02
+  branch: master
   specs:
-    cable_ready (5.0.0.pre2)
+    cable_ready (5.0.0.pre3)
       rails (>= 5.2)
       thread-local (>= 1.1.0)
 

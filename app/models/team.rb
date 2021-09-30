@@ -5,7 +5,7 @@ class Team < ApplicationRecord
 
   # super scaffolding
   unless scaffolding_things_disabled?
-    has_many :scaffolding_absolutely_abstract_creative_concepts, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcept", dependent: :destroy, broadcast: true
+    has_many :scaffolding_absolutely_abstract_creative_concepts, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcept", dependent: :destroy, enable_updates: true
   end
 
   # webhooks
