@@ -3,9 +3,9 @@ module Webhooks::Outgoing::IssuingModel
 
   # define relationships.
   included do
-    after_create :generate_created_webhook
-    after_update :generate_updated_webhook
-    after_destroy :generate_deleted_webhook
+    after_commit :generate_created_webhook, on: [:create]
+    after_commit :generate_updated_webhook, on: [:update]
+    after_commit :generate_deleted_webhook, on: [:destroy]
     has_many :webhooks_outgoing_events, as: :subject, class_name: "Webhooks::Outgoing::Event", dependent: :nullify
   end
 
