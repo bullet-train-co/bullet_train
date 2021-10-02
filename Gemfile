@@ -183,8 +183,10 @@ gem "microscope"
 # serving language based on browser settings
 gem "http_accept_language"
 
-gem "cable_ready", github: "bullet-train-co/cable_ready", branch: "master"
+gem "cable_ready", "5.0.0.pre4"
 gem "hiredis"
+
+gem "active_hash"
 
 group :production do
   # we suggest using postmark for email deliverability.
