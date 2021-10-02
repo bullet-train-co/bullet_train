@@ -20,8 +20,6 @@ class WebhooksSystemTest < ApplicationSystemTestCase
 
     @@test_devices.each do |device_name, display_details|
       test "team member registers for webhooks and then receives them on #{device_name}" do
-        skip "i wish i knew why this test stopped being able to connect to itself in rails 6"
-
         resize_for(display_details)
         login_as(@user, scope: :user)
         visit account_dashboard_path
@@ -33,52 +31,76 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         click_on "Add New Endpoint"
         fill_in "Name", with: "Some Bullet Train App"
         fill_in "URL", with: "#{Capybara.app_host}/webhooks/incoming/bullet_train_webhooks"
-        select2_select "Event Types to Deliver", ["create", "update"]
+        select2_select "Event Types", ["thing.create", "thing.update"]
         click_on "Create Endpoint"
         assert page.has_content?("Endpoint was successfully created.")
 
         # trigger the webhook event.
         within_primary_menu_for(display_details) do
-          click_on "Things"
+          click_on "Creative Concepts"
         end
 
+        assert page.has_content? "Your Team’s Creative Concepts"
+
+        click_on "Add New Creative Concept"
+        assert page.has_content? "New Creative Concept Details"
+
+        fill_in "Name", with: "Testing"
+        click_on "Create Creative Concept"
+        assert page.has_content? "Creative Concept was successfully created"
+
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
-          click_on "Add New Thing"
-          fill_in "Name", with: "Some Thing"
-          click_on "Create Thing"
-          assert page.has_content?("Thing was successfully created.")
+          click_on "Add New Tangible Thing"
+          assert page.has_content? "New Tangible Thing Details"
+          fill_in "Text Field Value", with: "Some Thing"
+          click_on "Create Tangible Thing"
+          assert page.has_content? "Tangible Thing was successfully created"
         end
 
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
-          click_on "Add New Thing"
-          fill_in "Name", with: "Some Other Thing"
-          click_on "Create Thing"
-          assert page.has_content?("Thing was successfully created.")
+          click_on "Add New Tangible Thing"
+          fill_in "Text Field Value", with: "Some Other Thing"
+          click_on "Create Tangible Thing"
+          assert page.has_content? "Tangible Thing was successfully created"
+
+          # Sidekiq isn't running, so we'll run this manually.
+          # TODO Is there another way to make Sidekiq jobs run inline in test mode?
+          Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
           click_on "Some Thing"
-          click_on "Edit"
-          fill_in "Name", with: "Some Updated Thing"
-          click_on "Update Thing"
-          assert page.has_content?("Thing was successfully updated.")
+          assert page.has_content? "Tangible Thing Details"
+          click_on "Edit Tangible Thing"
+          assert page.has_content? "Edit Tangible Thing Details"
+          fill_in "Text Field Value", with: "Some Updated Thing"
+          click_on "Update Tangible Thing"
+          assert page.has_content? "Tangible Thing was successfully updated"
         end
 
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
-          click_on "Edit"
-          fill_in "Name", with: "One Last Updated Thing"
-          click_on "Update Thing"
-          assert page.has_content?("Thing was successfully updated.")
+          click_on "Edit Tangible Thing"
+          fill_in "Text Field Value", with: "One Last Updated Thing"
+          click_on "Update Tangible Thing"
+          assert page.has_content? "Tangible Thing was successfully updated"
+
+          # Sidekiq isn't running, so we'll run this manually.
+          # TODO Is there another way to make Sidekiq jobs run inline in test mode?
+          Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
         click_on "Back"
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 0, "an outbound webhook should not be issued" do
-          within("table[data-class='Scaffolding::Thing'] tr:first-child[data-id]") do
+          within("table tr:first-child[data-id]") do
             click_on "Delete"
           end
           page.driver.browser.switch_to.alert.accept
-          assert page.has_content?("Thing was successfully destroyed.")
+          assert page.has_content?("Tangible Thing was successfully destroyed.")
+
+          # Sidekiq isn't running, so we'll run this manually.
+          # TODO Is there another way to make Sidekiq jobs run inline in test mode?
+          Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
         sign_out_for(display_details)
@@ -87,18 +109,27 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         login_as(@another_user, scope: :user)
         visit account_dashboard_path
 
-        # do something that _could_ trigger a webhook event, (but shouldn't.)
+        # trigger the webhook event.
         within_primary_menu_for(display_details) do
-          click_on "Things"
+          click_on "Creative Concepts"
         end
+
+        assert page.has_content? "Your Team’s Creative Concepts"
+
+        click_on "Add New Creative Concept"
+        assert page.has_content? "New Creative Concept Details"
+
+        fill_in "Name", with: "Testing"
+        click_on "Create Creative Concept"
+        assert page.has_content? "Creative Concept was successfully created"
 
         # make sure that when a user takes an action that would trigger a webhook event that another user's has an
         # endpoint configured to receive, that the webhooks don't bleed across teams.
         assert_difference "Webhooks::Outgoing::Delivery.count", 0, "an outbound webhook should not be issued" do
-          click_on "Add New Thing"
-          fill_in "Name", with: "Some Thing"
-          click_on "Create Thing"
-          assert page.has_content?("Thing was successfully created.")
+          click_on "Add New Tangible Thing"
+          fill_in "Text Field Value", with: "Some Thing"
+          click_on "Create Tangible Thing"
+          assert page.has_content?("Tangible Thing was successfully created.")
         end
       end
     end

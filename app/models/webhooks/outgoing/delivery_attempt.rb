@@ -13,7 +13,7 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
   end
 
   def successful?
-    response_code == 200
+    [200, 201, 202, 203, 204, 205, 206, 207, 226].include?(response_code)
   end
 
   def attempt
@@ -35,7 +35,7 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
     end
 
     save
-    response_code == 200
+    successful?
   end
 
   def label_string
