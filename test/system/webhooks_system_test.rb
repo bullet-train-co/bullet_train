@@ -131,6 +131,40 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           click_on "Create Tangible Thing"
           assert page.has_content?("Tangible Thing was successfully created.")
         end
+
+        # create the endpoint.
+        within_primary_menu_for(display_details) do
+          click_on "Webhooks"
+        end
+        click_on "Add New Endpoint"
+        fill_in "Name", with: "Some Bullet Train App"
+        fill_in "URL", with: "#{Capybara.app_host}/webhooks/incoming/bullet_train_webhooks"
+        click_on "Create Endpoint"
+        assert page.has_content?("Endpoint was successfully created.")
+
+        # trigger the webhook event.
+        within_primary_menu_for(display_details) do
+          click_on "Creative Concepts"
+        end
+
+        assert page.has_content? "Your Team’s Creative Concepts"
+
+        click_on "Testing"
+        assert page.has_content? "Creative Concept Details"
+
+        assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
+          assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should not be issued" do
+            within("table tr:first-child[data-id]") do
+              click_on "Delete"
+            end
+            page.driver.browser.switch_to.alert.accept
+            assert page.has_content?("Tangible Thing was successfully destroyed.")
+          end
+
+          # Sidekiq isn't running, so we'll run this manually.
+          # TODO Is there another way to make Sidekiq jobs run inline in test mode?
+          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+        end
       end
     end
 
