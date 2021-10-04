@@ -1281,8 +1281,9 @@ class Scaffolding::Transformer
           scaffold_add_line_to_file("./app/views/account/shared/_menu.html.erb", "<%= render 'account/scaffolding/completely_concrete/tangible_things/menu_item' %>", "<% # added by super scaffolding. %>")
         end
       end
-
     end
+
+    add_additional_step :yellow, transform_string("If you would like the table view you've just generated to reactively update when a Tangible Thing is updated on the server, please edit `app/models/scaffolding/absolutely_abstract/creative_concept.rb`, locate the `has_many :completely_concrete_tangible_things`, and add `enable_updates: true, inverse_of: :absolutely_abstract_creative_concept` to it.")
 
     restart_server
   end
