@@ -1,11 +1,4 @@
 GIT
-  remote: https://github.com/andrewculver/nice_partials.git
-  revision: c1b26169798afc2f79c47d2dfa50e5c4aadfdde8
-  branch: bt
-  specs:
-    nice_partials (0.1.2)
-
-GIT
   remote: https://github.com/bullet-train-co/trix.git
   revision: 078043a8bb6a95d8cf6742984b02fa96be689847
   specs:
@@ -331,6 +324,8 @@ GEM
       mustermann (>= 1.0.0)
     nested_form (0.3.2)
     netrc (0.11.0)
+    nice_partials (0.1.4)
+      actionview (>= 4.2.6)
     nio4r (2.5.8)
     nokogiri (1.12.3)
       mini_portile2 (~> 2.6.1)
@@ -610,7 +605,7 @@ DEPENDENCIES
   magic_test
   microscope
   minitest-retry
-  nice_partials!
+  nice_partials (~> 0.1)
   omniauth
   omniauth-rails_csrf_protection
   omniauth-stripe-connect

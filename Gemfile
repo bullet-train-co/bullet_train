@@ -160,7 +160,7 @@ gem "valid_email"
 # extract the body from emails received using action inbox.
 gem "extended_email_reply_parser"
 
-gem "nice_partials", github: "andrewculver/nice_partials", branch: "bt"
+gem "nice_partials", "~> 0.1"
 gem "storybook_rails", "~> 1.0"
 
 gem "turbo-rails"
