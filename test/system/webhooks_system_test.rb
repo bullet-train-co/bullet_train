@@ -1,4 +1,5 @@
 require "application_system_test_case"
+require "sidekiq/testing"
 
 class WebhooksSystemTest < ApplicationSystemTestCase
   def setup
@@ -14,6 +15,8 @@ class WebhooksSystemTest < ApplicationSystemTestCase
     @api_key.generate_encrypted_secret(ENV["BULLET_TRAIN_API_SECRET"])
 
     @another_user = create :onboarded_user, first_name: "John", last_name: "Smith"
+
+    switch_adapter_to_sidekiq
   end
 
   unless scaffolding_things_disabled?
@@ -63,8 +66,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           click_on "Create Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully created"
 
-          # Sidekiq isn't running, so we'll run this manually.
-          # TODO Is there another way to make Sidekiq jobs run inline in test mode?
+          # TODO: Use Sidekiq::Testing.inline! to run tests inline.
           Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
@@ -84,8 +86,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           click_on "Update Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully updated"
 
-          # Sidekiq isn't running, so we'll run this manually.
-          # TODO Is there another way to make Sidekiq jobs run inline in test mode?
+          # TODO: Use Sidekiq::Testing.inline! to run tests inline.
           Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
@@ -98,8 +99,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           page.driver.browser.switch_to.alert.accept
           assert page.has_content?("Tangible Thing was successfully destroyed.")
 
-          # Sidekiq isn't running, so we'll run this manually.
-          # TODO Is there another way to make Sidekiq jobs run inline in test mode?
+          # TODO: Use Sidekiq::Testing.inline! to run tests inline.
           Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
@@ -161,8 +161,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
             assert page.has_content?("Tangible Thing was successfully destroyed.")
           end
 
-          # Sidekiq isn't running, so we'll run this manually.
-          # TODO Is there another way to make Sidekiq jobs run inline in test mode?
+          # TODO: Use Sidekiq::Testing.inline! to run tests inline.
           Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
       end
