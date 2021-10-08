@@ -35,15 +35,17 @@ module ThemeHelper
           end
 
           # Otherwise, we need to traverse the inheritance structure of the themes to find the right partial.
-          normal_file_path = options.sub(/.*\K\//, "/_")
-          debased_file_path = normal_file_path.sub("#{include_target}/", "")
+          debased_file_path = remove_hierarchy_base(options, include_target)
+          normal_file_path = convert_to_literal_partial(options)
+
           # TODO this is a hack because the main menu is still in this directory
           # and other people might also add stuff there.
           unless File.exist?("#{Rails.root}/app/views/#{normal_file_path}.html.erb")
             THEME_DIRECTORY_ORDER.each do |theme_directory|
-              if File.exist?("#{Rails.root}/app/views/themes/#{theme_directory}/#{debased_file_path}.html.erb")
+              full_debased_file_path = convert_to_literal_partial(get_full_debased_file_path(debased_file_path, theme_directory))
+              if File.exist?(full_debased_file_path)
                 # Once we've found it, ensure we don't do this again for the same partial.
-                $resolved_theme_partials[options] = "themes/#{theme_directory}/#{debased_file_path}".gsub("/_", "/")
+                $resolved_theme_partials[options] = add_hierarchy_to_path(debased_file_path, theme_directory)
                 return super $resolved_theme_partials[options], locals, &block
               end
             end
@@ -53,5 +55,26 @@ module ThemeHelper
     end
 
     super
+  end
+
+  # i.e. Changes "account/shared/box" to "account/shared/_box"
+  def convert_to_literal_partial(path)
+    path.sub(/.*\K\//, "/_")
+  end
+
+  # i.e. Changes "account/shared/_box" to "_box"
+  def remove_hierarchy_base(path, include_target)
+    path.sub(/^#{include_target}\//, "")
+  end
+
+  # i.e. Get "app/views/themes/light/_box.html.erb" from "_box"
+  def get_full_debased_file_path(path, theme_directory)
+    "app/views/themes/#{theme_directory}/#{path}.html.erb"
+  end
+
+  # Adds a hierarchy with a specific theme to a partial.
+  # i.e. Changes "workflow/box" to "themes/light/workflow/box"
+  def add_hierarchy_to_path(file_path, theme_directory)
+    "themes/#{theme_directory}/#{file_path}"
   end
 end
