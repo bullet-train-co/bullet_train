@@ -48,4 +48,7 @@ yarn-debug.log*
 /public/_storybook
 storybook/**/*.stories.json
 
+# Ignore IDE specific folders
+.idea/
+
 # 🚅 add your files to ignore here.
