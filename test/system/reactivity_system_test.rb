@@ -2,6 +2,12 @@ require "application_system_test_case"
 
 unless scaffolding_things_disabled?
   class ReactivitySystemTest < ApplicationSystemTestCase
+    ::Selenium::WebDriver::Remote::Bridge.slow_down_execute_time
+
+    def teardown
+      ::Selenium::WebDriver::Remote::Bridge.reset_execute_time
+    end
+
     @@test_devices.each do |device_name, display_details|
       test "create a new tangible thing on a #{device_name} and update it" do
         resize_for(display_details)
@@ -44,15 +50,9 @@ unless scaffolding_things_disabled?
         fill_in "Description", with: "Dummy description for my creative concept"
         click_on "Create Creative Concept"
 
-        # TODO Not sure why this is required. The test becomes flakey without this.
-        sleep 0.5
-
         assert page.has_content? "Creative Concept was successfully created."
 
         within_window second_window do
-          # TODO It seems like we require a little sleep anytime we're switching tabs. Not sure why.
-          sleep 0.5
-
           # Ensure we're still on the same page.
           assert page.has_content? "My Super Team’s Dashboard"
 
@@ -66,14 +66,8 @@ unless scaffolding_things_disabled?
           fill_in "Name", with: "My Updated Creative Concept"
           click_on "Update Creative Concept"
 
-          # TODO Not sure why this is required. The test becomes flakey without this.
-          sleep 0.5
-
           assert page.has_content? "Creative Concept was successfully updated."
         end
-
-        # Because we're switching tabs.
-        sleep 0.5
 
         # Ensure this first tab hasn't been refreshed by ensuring it still has that original flash message on it.
         assert page.has_content? "Creative Concept was successfully created."
@@ -83,17 +77,11 @@ unless scaffolding_things_disabled?
 
         # Now for the final test, we need one of the tabs to be looking at the index.
         within_window second_window do
-          # Because we're switching tabs.
-          sleep 0.5
-
           click_on "Back"
 
           # Confirm that we're still looking at a populated list of Creative Concepts.
           assert page.has_content? "Below is a list of Creative Concepts you can see"
         end
-
-        # Because we're switching tabs.
-        sleep 0.5
 
         # Now that someone is looking at the index, let's destroy the Creative Concept.
 
@@ -108,17 +96,11 @@ unless scaffolding_things_disabled?
 
         page.driver.browser.switch_to.alert.accept
 
-        # TODO Not sure why this is required. The test becomes flakey without this.
-        sleep 0.5
-
         assert page.has_content? "Creative Concept was successfully destroyed."
         assert page.has_content? "There are no Creative Concepts for you to see on My Super Team yet."
 
         # Now for the final test, we need one of the tabs to be looking at the index.
         within_window second_window do
-          # Because we're switching tabs.
-          sleep 0.5
-
           # Confirm that we're no longer looking at a populated list of Creative Concepts.
           assert page.has_content? "There are no Creative Concepts for you to see on My Super Team yet."
         end

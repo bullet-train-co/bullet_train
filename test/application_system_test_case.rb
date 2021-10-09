@@ -198,4 +198,25 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # cut the display's pixel count in half if we're mimicking a high dpi display.
     display_details[:resolution].map { |pixel_count| pixel_count / (display_details[:high_dpi] ? 2 : 1) }
   end
+
+  # We monkey patch #execute when headless browser system tests
+  # are finicky and need to sleep to reflect changes.
+  module ::Selenium::WebDriver::Remote
+    class Bridge
+      @@execute_sleep_time = 0
+      alias_method :patched_execute, :execute
+      def execute(*args)
+        sleep @@execute_sleep_time
+        patched_execute(*args)
+      end
+
+      def self.slow_down_execute_time
+        @@execute_sleep_time = 0.5
+      end
+
+      def self.reset_execute_time
+        @@execute_sleep_time = 0
+      end
+    end
+  end
 end
