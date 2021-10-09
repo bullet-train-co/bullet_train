@@ -499,8 +499,19 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
-    sentry-raven (3.1.2)
+    sentry-rails (4.7.3)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 4.7.0)
+    sentry-ruby (4.7.3)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
       faraday (>= 1.0)
+      sentry-ruby-core (= 4.7.3)
+    sentry-ruby-core (4.7.3)
+      concurrent-ruby
+      faraday
+    sentry-sidekiq (4.7.3)
+      sentry-ruby-core (~> 4.7.0)
+      sidekiq (>= 3.0)
     sexp_processor (4.15.3)
     sidekiq (6.2.2)
       connection_pool (>= 2.2.2)
@@ -628,7 +639,9 @@ DEPENDENCIES
   rqrcode
   sass-rails (>= 6)
   selenium-webdriver
-  sentry-raven
+  sentry-rails
+  sentry-ruby
+  sentry-sidekiq
   sidekiq
   standard
   storybook_rails (~> 1.0)

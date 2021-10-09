@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception, prepend: true
 
   around_action :set_locale
-  before_action :set_raven_context
+  before_action :set_sentry_context
   layout :layout_by_resource
 
   protect_from_forgery with: :exception
@@ -34,10 +34,19 @@ class ApplicationController < ActionController::Base
     stored_location_for(resource) || account_dashboard_path
   end
 
-  def set_raven_context
-    if ENV["SENTRY_DSN"]
-      Raven.user_context(id: current_user.id, email: current_user.email) if current_user.present?
-      Raven.extra_context(params: params.to_unsafe_h, url: request.url)
+  def set_sentry_context
+    return unless ENV["SENTRY_DSN"]
+
+    Sentry.configure_scope do |scope|
+      scope.set_user(id: current_user.id, email: current_user.email) if current_user
+
+      scope.set_context(
+        "request",
+        {
+          url: request.url,
+          params: params.to_unsafe_h
+        }
+      )
     end
   end
 
