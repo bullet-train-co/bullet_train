@@ -1,19 +1,21 @@
-<%= render 'account/shared/menu/section', title: t('menus.main.labels.resources') do %>
-  <%= render 'account/teams/menu_item' %>
-  <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/menu_item' unless scaffolding_things_disabled? %>
-  <% # added by super scaffolding. %>
-<% end %>
+<% unless hide_team_resource_menus? %>
+  <%= render 'account/shared/menu/section', title: t('menus.main.labels.resources') do %>
+    <%= render 'account/teams/menu_item' %>
+    <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/menu_item' unless scaffolding_things_disabled? %>
+    <% # added by super scaffolding. %>
+  <% end %>
 
-<%= render 'account/shared/menu/section', title: t('menus.main.labels.integrations') do %>
-  <%= render 'account/integrations/stripe_installations/menu_item' if stripe_enabled? %>
-  <%# 🚅 super scaffolding will insert new oauth providers above this line. %>
-  <%= render 'account/doorkeeper/applications/menu_item' %>
-  <%= render 'account/api_keys/menu_item' %>
-  <%= render 'account/webhooks/outgoing/endpoints/menu_item' if webhooks_enabled? %>
-<% end %>
+  <%= render 'account/shared/menu/section', title: t('menus.main.labels.integrations') do %>
+    <%= render 'account/integrations/stripe_installations/menu_item' if stripe_enabled? %>
+    <%# 🚅 super scaffolding will insert new oauth providers above this line. %>
+    <%= render 'account/doorkeeper/applications/menu_item' %>
+    <%= render 'account/api_keys/menu_item' %>
+    <%= render 'account/webhooks/outgoing/endpoints/menu_item' if webhooks_enabled? %>
+  <% end %>
 
-<%= render 'account/shared/menu/section', title: t('menus.main.labels.collaborate') do %>
-  <%= render 'account/memberships/menu_item' %>
+  <%= render 'account/shared/menu/section', title: t('menus.main.labels.collaborate') do %>
+    <%= render 'account/memberships/menu_item' %>
+  <% end %>
 <% end %>
 
 <div class="pb-3">
