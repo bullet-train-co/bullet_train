@@ -65,11 +65,24 @@ class Account::ApplicationController < ApplicationController
     false
   end
 
+  def switching_teams?
+    return true if request.get? && request.path == account_teams_path
+    false
+  end
+
+  def managing_account?
+    is_a?(Account::UsersController) || self.class.module_parents.include?(Oauth)
+  end
+
   def accepting_invitation?
     (params[:controller] == "account/invitations") && (params[:action] == "show" || params[:action] == "accept")
   end
 
   def ensure_onboarding_is_complete
+    # This is temporary, but if we've gotten this far and `@team` is loaded, we need to ensure current_team is
+    # updated for the checks below. This entire concept of `current_team` is going away soon.
+    current_user.update(current_team: @team) if @team&.persisted?
+
     # since the onboarding controllers are child classes of this class,
     # we actually have to check to make sure we're not currently on that
     # step otherwise we'll end up in an endless redirection loop.

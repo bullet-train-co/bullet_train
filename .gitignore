@@ -36,6 +36,7 @@ yarn-debug.log*
 # 🚅 this is bullet train's list of files to ignore.
 # please add yours at the end of the file.
 
+Untitled
 .DS_Store
 
 # Ignore application configuration

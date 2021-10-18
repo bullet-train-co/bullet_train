@@ -24,8 +24,6 @@ class Webhooks::Incoming::BulletTrainWebhook < ApplicationRecord
     JSON.parse(response.body) == data
   end
 
-  private
-
   def process
   end
 end

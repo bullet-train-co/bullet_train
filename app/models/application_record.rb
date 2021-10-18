@@ -11,6 +11,8 @@ class ApplicationRecord < ActiveRecord::Base
   include CableReady::Updatable
   enable_updates
 
+  extend ActiveHash::Associations::ActiveRecordExtensions
+
   # 🏚 i'd like to deprecate these. they're not descriptive enough.
   scope :newest, -> { order("created_at DESC") }
   scope :oldest, -> { order("created_at ASC") }

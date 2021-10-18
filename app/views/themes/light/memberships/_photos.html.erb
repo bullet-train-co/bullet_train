@@ -1,7 +1,7 @@
 <% size ||= 12 %>
 <% align ||= nil %>
 
-<% valid_sizes = [9, 12] %>
+<% valid_sizes = [7, 9, 12] %>
 <% raise "Invalid membership photo size: #{size}. Valid options are #{valid_sizes.to_sentence}." unless valid_sizes.include?(size) %>
 
 <div class="flex overflow-hidden <%= 'place-content-center' if align == :center %>">

@@ -1,11 +1,13 @@
 <% yield p = np %>
 
 <% divider ||= nil %>
+<% no_background ||= false %>
+<% title_size ||= "text-xl" %>
 
-<div class="bg-white rounded-md shadow overflow-hidden">
+<div class="<%= "bg-white rounded-md shadow" unless no_background %> overflow-hidden">
   <div class="py-6 px-8 space-y-2 <%= 'border-b shadow-sm' if divider %>">
     <% if p.content_for? :title %>
-      <h2 class="text-xl font-semibold">
+      <h2 class="<%= title_size %> font-semibold">
         <%= p.content_for :title %>
       </h2>
     <% end %>
@@ -44,6 +46,12 @@
   <% if p.content_for? :footer %>
     <div class="py-4 px-8 bg-gray-50 border-t">
       <%= p.content_for :footer %>
+    </div>
+  <% end %>
+
+  <% if p.content_for? :raw_footer %>
+    <div class="bg-gray-50">
+      <%= p.content_for :raw_footer %>
     </div>
   <% end %>
 </div>
