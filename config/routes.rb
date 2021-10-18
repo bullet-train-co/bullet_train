@@ -54,7 +54,6 @@ Rails.application.routes.draw do
   namespace :webhooks do
     namespace :incoming do
       resources :bullet_train_webhooks
-      resources :stripe_webhooks
       namespace :oauth do
         resources :stripe_account_webhooks if stripe_enabled?
         # 🚅 super scaffolding will insert new oauth provider webhooks above this line.

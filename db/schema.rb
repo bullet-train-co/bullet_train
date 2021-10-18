@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_16_072508) do
+ActiveRecord::Schema.define(version: 2021_10_18_173808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -328,14 +328,6 @@ ActiveRecord::Schema.define(version: 2021_08_16_072508) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["oauth_stripe_account_id"], name: "index_stripe_webhooks_on_stripe_account_id"
-  end
-
-  create_table "webhooks_incoming_stripe_webhooks", force: :cascade do |t|
-    t.jsonb "data"
-    t.datetime "processed_at"
-    t.datetime "verified_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "webhooks_outgoing_deliveries", force: :cascade do |t|
