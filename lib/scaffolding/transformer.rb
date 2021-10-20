@@ -398,10 +398,21 @@ class Scaffolding::Transformer
     setup_lines
   end
 
-  def replace_in_file(file, before, after)
+  def replace_in_file(file, before, after, target_regexp = nil)
     puts "Replacing in '#{file}'."
-    target_file_content = File.open(file).read
-    target_file_content.gsub!(before, after)
+    if target_regexp.present?
+      target_file_content = ""
+      File.open(file).each_line do |l|
+        target_file_content += if !!l.match(target_regexp)
+          l.gsub!(before, after)
+        else
+          l
+        end
+      end
+    else
+      target_file_content = File.open(file).read
+      target_file_content.gsub!(before, after)
+    end
     File.open(file, "w+") do |f|
       f.write(target_file_content)
     end
@@ -957,7 +968,7 @@ class Scaffolding::Transformer
           unless class_name_matches
 
             if migration_file_name
-              replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}")
+              replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}", /t\.references :#{name_without_id}/)
               # TODO also solve the 60 character long index limitation.
               modified_migration = true
             else
