@@ -18,14 +18,6 @@ module AbilityTest
       assert @user_ability.cannot?(:manage, @another_user)
     end
 
-    test "can manage their api_key" do
-      assert @user_ability.can?(:manage, ApiKey.new(user: @user))
-    end
-
-    test "can't manage foreign api_key" do
-      assert @user_ability.cannot?(:manage, @another_user, ApiKey.new)
-    end
-
     test "can manage team" do
       assert @user_ability.can?(:manage, @user, Team.new)
     end
@@ -50,14 +42,6 @@ module AbilityTest
 
     test "can't manage foreign account" do
       assert @user_ability.cannot?(:manage, @another_user)
-    end
-
-    test "can manage their api_key" do
-      assert @user_ability.can?(:manage, ApiKey.new(user: @user))
-    end
-
-    test "can't manage foreign api_key" do
-      assert @user_ability.cannot?(:manage, @another_user, ApiKey.new)
     end
 
     test "can't manage team" do

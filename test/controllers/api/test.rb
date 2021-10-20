@@ -6,8 +6,6 @@ class Api::Test < ActionDispatch::IntegrationTest
 
   def access_token
     params = {
-      token: @api_key.token,
-      secret: "something we know",
       client_id: @doorkeeper_application.uid,
       client_secret: @doorkeeper_application.secret,
       grant_type: "password",
@@ -21,8 +19,6 @@ class Api::Test < ActionDispatch::IntegrationTest
 
   def another_access_token
     params = {
-      token: @another_api_key.token,
-      secret: "something else we know",
       client_id: @another_doorkeeper_application.uid,
       client_secret: @another_doorkeeper_application.secret,
       grant_type: "password",
@@ -46,15 +42,9 @@ class Api::Test < ActionDispatch::IntegrationTest
 
     @user = create(:onboarded_user)
     @team = @user.current_team
-    @api_key = build(:api_key, user: @user)
-    @api_key.generate_encrypted_secret("something we know")
-    @api_key.save
     @doorkeeper_application = create(:doorkeeper_application, team: @team)
 
     @another_user = create(:onboarded_user)
-    @another_api_key = build(:api_key, user: @another_user)
-    @another_api_key.generate_encrypted_secret("something else we know")
-    @another_api_key.save
     @another_doorkeeper_application = create(:doorkeeper_application, team: @another_user.current_team)
   end
 end

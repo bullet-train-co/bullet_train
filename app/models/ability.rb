@@ -54,7 +54,6 @@ class Ability
 
       # INDIVIDUAL USER PERMISSIONS.
       can :manage, User, id: user.id
-      can :manage, ApiKey, user_id: user.id, revoked_at: nil
 
       # TEAM ADMINISTRATOR PERMISSIONS.
       # get a list of team ids this user is an administrator for.

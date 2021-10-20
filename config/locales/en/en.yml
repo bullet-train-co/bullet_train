@@ -68,7 +68,6 @@ en:
         account: Account
         new: New
         profile_details: Profile Details
-        manage_api_keys: Manage API Keys
         logout: Logout
         skip: Skip For Now
         dashboard: Dashboard

@@ -81,8 +81,6 @@ Rails.application.routes.draw do
 
       # user specific resources.
       resources :users do
-        resources :api_keys
-
         namespace :oauth do
           resources :stripe_accounts if stripe_enabled?
           # 🚅 super scaffolding will insert new oauth providers above this line.

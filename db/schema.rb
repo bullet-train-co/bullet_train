@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_18_173808) do
+ActiveRecord::Schema.define(version: 2021_10_20_200855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,17 +60,6 @@ ActiveRecord::Schema.define(version: 2021_10_18_173808) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "api_keys", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "token"
-    t.datetime "last_used_at"
-    t.datetime "revoked_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "encrypted_secret"
-    t.index ["user_id"], name: "index_api_keys_on_user_id"
   end
 
   create_table "imports_csv_imports", force: :cascade do |t|
@@ -131,7 +120,9 @@ ActiveRecord::Schema.define(version: 2021_10_18_173808) do
     t.string "user_profile_photo_id"
     t.string "user_email"
     t.bigint "added_by_id"
+    t.bigint "doorkeeper_application_id"
     t.index ["added_by_id"], name: "index_memberships_on_added_by_id"
+    t.index ["doorkeeper_application_id"], name: "index_memberships_on_doorkeeper_application_id"
     t.index ["invitation_id"], name: "index_memberships_on_invitation_id"
     t.index ["team_id"], name: "index_memberships_on_team_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
@@ -387,7 +378,6 @@ ActiveRecord::Schema.define(version: 2021_10_18_173808) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "api_keys", "users"
   add_foreign_key "imports_csv_imports", "teams"
   add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"
   add_foreign_key "integrations_stripe_installations", "teams"
@@ -396,6 +386,7 @@ ActiveRecord::Schema.define(version: 2021_10_18_173808) do
   add_foreign_key "membership_roles", "roles"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "memberships", "memberships", column: "added_by_id"
+  add_foreign_key "memberships", "oauth_applications", column: "doorkeeper_application_id"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
   add_foreign_key "memberships_reassignments_assignments", "memberships"

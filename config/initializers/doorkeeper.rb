@@ -15,13 +15,14 @@ Doorkeeper.configure do
 
   resource_owner_from_credentials do |_routes|
     # performs explicit validation on all required parameters to raise better errors when they're missing
-    [:token, :secret, :client_id, :client_secret].each do |param|
+    [:client_id, :client_secret].each do |param|
       # when omitted, :token is automatically populated as a Hash of all params,
       # so naturally we don't want that to count
       raise Doorkeeper::Errors::MissingRequiredParameter.new(param.to_s) unless params[param].present? && params[param].is_a?(String)
     end
 
-    User.authenticate_by_api_key(params[:token], params[:secret])
+    # TODO Should we throw a more meaningful error if the application can't be found by these keys?
+    Doorkeeper::Application.find_by(uid: params[:client_id], secret: params[:client_secret])&.user
   end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
@@ -507,9 +508,32 @@ module Doorkeeper::Applications
     def self.included(base)
       base.class_eval do
         belongs_to :team
+        has_one :membership, foreign_key: :doorkeeper_application_id, dependent: :nullify
+        has_one :user, through: :membership
+
+        after_create :create_user_and_membership
+        after_update :update_user_and_membership
+        before_destroy :destroy_user
 
         def label_string
           name
+        end
+
+        def create_user_and_membership
+          faux_password = SecureRandom.hex
+          new_user = User.create(email: "noreply+#{SecureRandom.hex}@bullettrain.co", password: faux_password, password_confirmation: faux_password, first_name: label_string)
+          create_membership(team: team, user: new_user)
+          membership.roles << Role.admin
+        end
+
+        def update_user_and_membership
+          user.update(first_name: label_string)
+        end
+
+        def destroy_user
+          former_user = membership.user
+          membership.nullify_user
+          former_user.destroy
         end
       end
     end

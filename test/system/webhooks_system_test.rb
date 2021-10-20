@@ -5,17 +5,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
   def setup
     super
     @user = create :onboarded_user, first_name: "Andrew", last_name: "Culver"
-
-    # we have to make sure the api keys the ones from the environment so the
-    # server can use them to verify the authenticity of incoming webhooks.
-    @api_key = @user.api_keys.create
-    @api_key.token = ENV["BULLET_TRAIN_API_KEY"]
-    @api_key.save
-
-    @api_key.generate_encrypted_secret(ENV["BULLET_TRAIN_API_SECRET"])
-
     @another_user = create :onboarded_user, first_name: "John", last_name: "Smith"
-
     switch_adapter_to_sidekiq
   end
 

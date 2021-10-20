@@ -9,7 +9,6 @@
     <%= render 'account/integrations/stripe_installations/menu_item' if stripe_enabled? %>
     <%# 🚅 super scaffolding will insert new oauth providers above this line. %>
     <%= render 'account/doorkeeper/applications/menu_item' %>
-    <%= render 'account/api_keys/menu_item' %>
     <%= render 'account/webhooks/outgoing/endpoints/menu_item' if webhooks_enabled? %>
   <% end %>
 

@@ -12,9 +12,6 @@ class User < ApplicationRecord
       :recoverable, :rememberable, :trackable, :validatable
   end
 
-  # api
-  has_many :api_keys
-
   # teams
   has_many :memberships, dependent: :destroy
   has_many :teams, through: :memberships
@@ -63,15 +60,6 @@ class User < ApplicationRecord
   # at anybody's real email address.
   def email_is_oauth_placeholder?
     !!email.match(/noreply\+.*@bullettrain.co/)
-  end
-
-  def self.authenticate_by_api_key(token, secret)
-    api_key = ApiKey.find_by_credentials(token, secret)
-    if api_key
-      api_key.last_used_at = Time.zone.now
-      api_key.save
-    end
-    api_key.try(:user)
   end
 
   def label_string
