@@ -1,6 +1,6 @@
 class Account::ApplicationController < ApplicationController
   include LoadsAndAuthorizesResource
-  include Fields::SuperSelectSupport
+  include Fields::ControllerSupport
 
   before_action :set_last_seen_at, if: proc {
     user_signed_in? && (current_user.last_seen_at.nil? || current_user.last_seen_at < 1.minute.ago)

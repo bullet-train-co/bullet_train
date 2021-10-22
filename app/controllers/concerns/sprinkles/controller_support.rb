@@ -1,3 +1,4 @@
+# TODO This should be safe to remove. Can we remove it?
 module Sprinkles::ControllerSupport
   extend ActiveSupport::Concern
 
