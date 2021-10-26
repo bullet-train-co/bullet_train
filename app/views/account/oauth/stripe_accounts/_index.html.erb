@@ -35,7 +35,11 @@
   <% unless hide_actions %>
     <% p.content_for :actions do %>
       <% if can? :create, Oauth::StripeAccount.new(user: @user) %>
-        <%= link_to stripe_accounts.empty? ? t('.buttons.new') : t('.buttons.another'), [:new, :account, @user, :oauth_stripe_account], class: 'button' %>
+        <span data-turbo="false">
+          <%= button_to user_stripe_connect_omniauth_authorize_path, class: "#{first_button_primary(:integrations_stripe_installation)} new" do %>
+            <%= stripe_accounts.empty? ? t('.buttons.new') : t('.buttons.another') %>
+          <% end %>
+        </span>
       <% end %>
     <% end %>
   <% end %>

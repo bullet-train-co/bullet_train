@@ -12,28 +12,26 @@
 
   <% p.content_for :body do %>
     <% if stripe_installations.any? %>
-      <% stripe_installations.each do |stripe_installation| %>
-        <div class="space-y-0 border border-gray-200 shadow-sm rounded-md divide-y divide-gray-200">
-          <% stripe_installations.each do |stripe_installation| %>
-            <div class="flex py-1.5 px-3 items-center">
-              <div class="flex-1 min-w-0">
-                <%= stripe_installation.name %>
-              </div>
-              <div class="flex flex-0 min-w-0 space-x-2 items-center">
-                <% if can? :edit, stripe_installation %>
-                  <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, stripe_installation], class: 'button-secondary button-smaller' %>
-                <% end %>
-
-                <% if can? :destroy, stripe_installation %>
-                  <%= link_to [:account, stripe_installation, return_to: request.path], method: :delete, data: { confirm: t('.buttons.confirmations.destroy_from_user', team_name: stripe_installation.team.label_string) }, class: 'inline-block text-gray-300 hover:text-gray-400 hover:no-underline text-lg' do %>
-                    <i class="ti ti-close"></i>
-                  <% end %>
-                <% end %>
-              </div>
+      <div class="space-y-0 border border-gray-200 shadow-sm rounded-md divide-y divide-gray-200">
+        <% stripe_installations.each do |stripe_installation| %>
+          <div class="flex py-1.5 px-3 items-center">
+            <div class="flex-1 min-w-0">
+              <%= stripe_installation.name %>
             </div>
-          <% end %>
-        </div>
-      <% end %>
+            <div class="flex flex-0 min-w-0 space-x-2 items-center">
+              <% if can? :edit, stripe_installation %>
+                <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, stripe_installation], class: 'button-secondary button-smaller' %>
+              <% end %>
+
+              <% if can? :destroy, stripe_installation %>
+                <%= link_to [:account, stripe_installation, return_to: request.path], method: :delete, data: { confirm: t('.buttons.confirmations.destroy_from_user', team_name: stripe_installation.team.label_string) }, class: 'inline-block text-gray-300 hover:text-gray-400 hover:no-underline text-lg' do %>
+                  <i class="ti ti-close"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 
@@ -41,7 +39,11 @@
     <% unless hide_actions %>
       <% if context == team %>
         <% if can? :create, Integrations::StripeInstallation.new(team: team) %>
-          <%= link_to t('.buttons.new'), [:new, :account, team, :integrations_stripe_installation], class: "#{first_button_primary(:integrations_stripe_installation)} new" %>
+          <span data-turbo="false">
+            <%= button_to user_stripe_connect_omniauth_authorize_path(team_id: team.id), class: "#{first_button_primary(:integrations_stripe_installation)} new" do %>
+              <%= t('.buttons.new') %>
+            <% end %>
+          </span>
         <% end %>
       <% end %>
 

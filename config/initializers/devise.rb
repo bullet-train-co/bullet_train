@@ -1,7 +1,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  config.omniauth :stripe_connect, ENV["STRIPE_CLIENT_ID"], ENV["STRIPE_SECRET_KEY"]
+  config.omniauth :stripe_connect, ENV["STRIPE_CLIENT_ID"], ENV["STRIPE_SECRET_KEY"], scope: "read_write"
   # 🚅 super scaffolding will insert new oauth providers above this line.
 
   if two_factor_authentication_enabled?

@@ -15,7 +15,6 @@ class Account::Integrations::StripeInstallationsController < Account::Applicatio
 
   # GET /account/teams/:team_id/integrations/stripe_installations/new
   def new
-    redirect_to user_stripe_connect_omniauth_authorize_path(team_id: @team.id)
   end
 
   # GET /account/integrations/stripe_installations/:id/edit

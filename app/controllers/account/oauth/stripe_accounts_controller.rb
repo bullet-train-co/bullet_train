@@ -17,7 +17,6 @@ class Account::Oauth::StripeAccountsController < Account::ApplicationController
 
   # GET /account/users/:user_id/oauth/stripe_accounts/new
   def new
-    redirect_to user_stripe_connect_omniauth_authorize_path
   end
 
   # GET /account/oauth/stripe_accounts/:id/edit
