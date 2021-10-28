@@ -78,8 +78,8 @@ group :development do
   # letter opener opens any sent emails in your browser instead of having to setup an smtp trap.
   gem "letter_opener"
 
-  # # xray makes it easy to find which view or partial file an element is in when inspecting a page's source.
-  # gem "xray-rails"
+  # xray makes it easy to find which view or partial file an element is in when inspecting a page's source.
+  gem "xray-rails"
 
   # add color to some console output.
   gem "colorize"
