@@ -1,12 +1,12 @@
 en:
   activerecord:
     attributes:
-      doorkeeper/application:
+      platform/application:
         name: 'Name'
         redirect_uri: 'Redirect URI'
     errors:
       models:
-        doorkeeper/application:
+        platform/application:
           attributes:
             redirect_uri:
               fragment_present: 'cannot contain a fragment.'
@@ -18,7 +18,7 @@ en:
             scopes:
               not_match_configured: "can only contain the strings \"read\", \"write\", or \"delete\". You can also leave this field blank"
 
-  doorkeeper:
+  platform:
     applications:
       confirmations:
         destroy: 'Are you sure?'
@@ -60,6 +60,7 @@ en:
         actions: 'Actions'
         not_defined: 'Not defined'
 
+  doorkeeper:
     authorizations:
       buttons:
         authorize: 'Authorize'
@@ -146,6 +147,6 @@ en:
         title: 'OAuth authorization required'
 
     scopes:
-      delete: 'Your OAuth application is missing the required scope to access this API method.'
-      read: 'Your OAuth application is missing the required scope to access this API method.'
-      write: 'Your OAuth application is missing the required scope to access this API method.'
+      delete: "Your OAuth application is missing the 'delete' scope to access this API method."
+      read: "Your OAuth application is missing the 'read' scope to access this API method."
+      write: "Your OAuth application is missing the 'write' scope to access this API method."

@@ -6,8 +6,8 @@ class Api::Test < ActionDispatch::IntegrationTest
 
   def access_token
     params = {
-      client_id: @doorkeeper_application.uid,
-      client_secret: @doorkeeper_application.secret,
+      client_id: @platform_application.uid,
+      client_secret: @platform_application.secret,
       grant_type: "password",
       scope: "read write delete"
     }
@@ -19,8 +19,8 @@ class Api::Test < ActionDispatch::IntegrationTest
 
   def another_access_token
     params = {
-      client_id: @another_doorkeeper_application.uid,
-      client_secret: @another_doorkeeper_application.secret,
+      client_id: @another_platform_application.uid,
+      client_secret: @another_platform_application.secret,
       grant_type: "password",
       scope: "read write delete"
     }
@@ -42,9 +42,9 @@ class Api::Test < ActionDispatch::IntegrationTest
 
     @user = create(:onboarded_user)
     @team = @user.current_team
-    @doorkeeper_application = create(:doorkeeper_application, team: @team)
+    @platform_application = create(:platform_application, team: @team)
 
     @another_user = create(:onboarded_user)
-    @another_doorkeeper_application = create(:doorkeeper_application, team: @another_user.current_team)
+    @another_platform_application = create(:platform_application, team: @another_user.current_team)
   end
 end

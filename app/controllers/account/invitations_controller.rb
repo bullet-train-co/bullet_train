@@ -7,7 +7,7 @@ class Account::InvitationsController < Account::ApplicationController
   # we skip the onboarding requirement for users claiming and invitation.
   # this way the invitation gets accepted after they complete the devise
   # workflow, but before they're prompted to complete their onboarding.
-  skip_before_action :ensure_onboarding_is_complete, only: :accept
+  skip_before_action :ensure_onboarding_is_complete_and_set_next_step, only: :accept
   skip_before_action :authenticate_user!, only: :accept
 
   # GET /invitations

@@ -124,10 +124,10 @@ class Ability
       # the following abilities were added by super scaffolding.
 
       # all team admins can read, create, update, and destroy all Doorkeeper applications on their team.
-      can :manage, Doorkeeper::Application, team_id: user.administrating_team_ids
+      can :manage, Platform::Application, team_id: user.administrating_team_ids
 
       # regular team members can only view Doorkeeper applications.
-      can :read, Doorkeeper::Application, team_id: user.team_ids
+      can :read, Platform::Application, team_id: user.team_ids
 
       if user.developer?
         # the following admin abilities were added by super scaffolding.

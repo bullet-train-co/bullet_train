@@ -7,7 +7,7 @@ class Membership < ApplicationRecord
   belongs_to :team
   belongs_to :invitation, optional: true, dependent: :destroy
   belongs_to :added_by, class_name: "Membership", optional: true
-  belongs_to :doorkeeper_application, class_name: "Doorkeeper::Application", optional: true
+  belongs_to :platform_agent_of, class_name: "Platform::Application", optional: true
   has_many :membership_roles, dependent: :destroy
   has_many :roles, through: :membership_roles
 

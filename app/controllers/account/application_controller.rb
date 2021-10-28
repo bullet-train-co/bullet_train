@@ -23,7 +23,7 @@ class Account::ApplicationController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_paper_trail_whodunnit
-  before_action :ensure_onboarding_is_complete
+  before_action :ensure_onboarding_is_complete_and_set_next_step
 
   # many times the team will already be loaded by account_load_and_authorize_resource,
   # so we don't need any of this logic. however, there are a handful of account pages
@@ -76,6 +76,12 @@ class Account::ApplicationController < ApplicationController
 
   def accepting_invitation?
     (params[:controller] == "account/invitations") && (params[:action] == "show" || params[:action] == "accept")
+  end
+
+  def ensure_onboarding_is_complete_and_set_next_step
+    unless ensure_onboarding_is_complete
+      session[:after_onboarding_url] ||= request.url
+    end
   end
 
   def ensure_onboarding_is_complete

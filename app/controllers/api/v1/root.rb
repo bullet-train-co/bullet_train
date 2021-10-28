@@ -14,6 +14,7 @@ class Api::V1::Root < Api::Base
     mount Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpoint
   end
 
+  mount Api::V1::MeEndpoint
   mount Api::V1::TeamsEndpoint
   mount Api::V1::Webhooks::Outgoing::EndpointsEndpoint
   mount Api::V1::Webhooks::Outgoing::DeliveriesEndpoint

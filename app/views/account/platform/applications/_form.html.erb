@@ -1,4 +1,4 @@
-<%= form_with model: application, url: (application.persisted? ? [:account, application] : [:account, @team, :doorkeeper_applications]), local: true, class: 'form' do |form| %>
+<%= form_with model: application, url: (application.persisted? ? [:account, application] : [:account, @team, :platform_applications]), local: true, class: 'form' do |form| %>
   <%= render 'account/shared/forms/errors', form: form %>
 
   <% with_field_settings form: form do %>
@@ -13,7 +13,7 @@
     <% if form.object.persisted? %>
     <%= link_to t('global.buttons.cancel'), [:account, application], class: "button-secondary" %>
     <% else %>
-    <%= link_to t('global.buttons.cancel'), [:account, @team, :doorkeeper_applications], class: "button-secondary" %>
+    <%= link_to t('global.buttons.cancel'), [:account, @team, :platform_applications], class: "button-secondary" %>
     <% end %>
   </div>
 

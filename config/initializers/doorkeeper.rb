@@ -5,14 +5,6 @@ Doorkeeper.configure do
   # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
   orm :active_record
 
-  # This block will be called to check whether the resource owner is authenticated or not.
-  # resource_owner_authenticator do
-  # raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
-  # Put your resource owner authentication logic here.
-  # Example implementation:
-  #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
-  # end
-
   resource_owner_from_credentials do |_routes|
     # performs explicit validation on all required parameters to raise better errors when they're missing
     [:client_id, :client_secret].each do |param|
@@ -22,7 +14,7 @@ Doorkeeper.configure do
     end
 
     # TODO Should we throw a more meaningful error if the application can't be found by these keys?
-    Doorkeeper::Application.find_by(uid: params[:client_id], secret: params[:client_secret])&.user
+    Platform::Application.find_by(uid: params[:client_id], secret: params[:client_secret])&.user
   end
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
@@ -70,6 +62,8 @@ Doorkeeper.configure do
   #   end
   # end
 
+  application_class "Platform::Application"
+
   # Enables polymorphic Resource Owner association for Access Tokens and Access Grants.
   # By default this option is disabled.
   #
@@ -91,7 +85,7 @@ Doorkeeper.configure do
   # want to use API mode that will skip all the views management and change the way how
   # Doorkeeper responds to a requests.
   #
-  api_only
+  # api_only
 
   # Enforce token request content type to application/x-www-form-urlencoded.
   # It is not enabled by default to not break prior versions of the gem.
@@ -356,7 +350,8 @@ Doorkeeper.configure do
   #   http://tools.ietf.org/html/rfc6819#section-4.4.2
   #   http://tools.ietf.org/html/rfc6819#section-4.4.3
   #
-  grant_flows %w[password]
+  # TODO What are the implications of each of these?
+  grant_flows %w[authorization_code password implicit client_credentials]
 
   # Allows to customize OAuth grant flows that +each+ application support.
   # You can configure a custom block (or use a class respond to `#call`) that must
@@ -438,6 +433,7 @@ Doorkeeper.configure do
   # For example if dealing with a trusted application.
   #
   skip_authorization do
+    # TODO We actually want to disable this. We want people to have to approve their authorizations.
     true
   end
 
@@ -499,45 +495,3 @@ Doorkeeper.configure do
   #
   # realm "Doorkeeper"
 end
-
-# We need all Doorkeeper::Application instances to be scoped by team.
-# We don't want a custom subclass because `Doorkeeper::Application` is actually the perfect name, and our controllers
-# and views will match whatever the class name is.
-module Doorkeeper::Applications
-  module BulletTrainSupport
-    def self.included(base)
-      base.class_eval do
-        belongs_to :team
-        has_one :membership, foreign_key: :doorkeeper_application_id, dependent: :nullify
-        has_one :user, through: :membership
-
-        after_create :create_user_and_membership
-        after_update :update_user_and_membership
-        before_destroy :destroy_user
-
-        def label_string
-          name
-        end
-
-        def create_user_and_membership
-          faux_password = SecureRandom.hex
-          new_user = User.create(email: "noreply+#{SecureRandom.hex}@bullettrain.co", password: faux_password, password_confirmation: faux_password, first_name: label_string)
-          create_membership(team: team, user: new_user)
-          membership.roles << Role.admin
-        end
-
-        def update_user_and_membership
-          user.update(first_name: label_string)
-        end
-
-        def destroy_user
-          former_user = membership.user
-          membership.nullify_user
-          former_user.destroy
-        end
-      end
-    end
-  end
-end
-
-Doorkeeper::Application.send(:include, Doorkeeper::Applications::BulletTrainSupport)

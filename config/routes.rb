@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  use_doorkeeper do
-    skip_controllers :authorizations, :applications, :authorized_applications
-  end
+  use_doorkeeper
 
   # Grape API
   mount Api::Base, at: "/api"
@@ -175,7 +173,7 @@ Rails.application.routes.draw do
           # 🚅 super scaffolding will insert new integration installations above this line.
         end
 
-        namespace :doorkeeper do
+        namespace :platform do
           resources :applications
         end
       end

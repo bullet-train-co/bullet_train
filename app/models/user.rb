@@ -21,6 +21,9 @@ class User < ApplicationRecord
   # oauth providers
   has_many :oauth_stripe_accounts, class_name: "Oauth::StripeAccount" if stripe_enabled?
 
+  # platform functionality.
+  belongs_to :platform_agent_of, class_name: "Platform::Application", optional: true
+
   # validations
   validate :real_emails_only
   validates :time_zone, inclusion: {in: ActiveSupport::TimeZone.all.map(&:name)}, allow_nil: true

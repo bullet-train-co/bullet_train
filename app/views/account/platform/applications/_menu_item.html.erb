@@ -1,0 +1,10 @@
+<% if can? :read, Platform::Application.new(team: current_team) %>
+  <%= render 'account/shared/menu/item', {
+    url: main_app.polymorphic_path([:account, current_team, :platform_applications]),
+    label: t('platform/applications.navigation.label'),
+  } do |p| %>
+    <% p.content_for :icon do %>
+      <i class="<%= t('platform/applications.navigation.icon') %>"></i>
+    <% end %>
+  <% end %>
+<% end %>

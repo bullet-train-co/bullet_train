@@ -38,6 +38,12 @@ class Account::TeamsController < Account::ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    # I don't think this is the best place to close the loop on the onboarding process, but practically speaking it's
+    # the easiest place to implement this at the moment, because all the onboarding steps redirect here on success.
+    if session[:after_onboarding_url].present?
+      redirect_to session.delete(:after_onboarding_url)
+    end
+
     current_user.current_team = @team
     current_user.save
   end

@@ -42,6 +42,7 @@ module Account::FormsHelper
   end
 
   def options_for(form, method)
+    # e.g. "scaffolding/completely_concrete/tangible_things.fields.text_area_value.options"
     path = [model_key(form), (current_fields_namespace || :fields), method, :options]
     t(path.compact.join("."))
   end

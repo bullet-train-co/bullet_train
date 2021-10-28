@@ -7,7 +7,7 @@
 <%= render 'account/shared/box' do |p| %>
   <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
   <% p.content_for :description do %>
-    <%= t(".contexts.#{context.class.name.underscore}.description") %>
+    <%= t(".contexts.#{context.class.name.underscore}.description#{"_empty" unless tangible_things.any?}") %>
   <% end %>
 
   <% p.content_for :table do %>

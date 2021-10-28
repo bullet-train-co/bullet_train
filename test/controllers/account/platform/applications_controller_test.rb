@@ -1,6 +1,6 @@
 require "test_helper"
 
-class Account::Doorkeeper::ApplicationsControllerTest < ActionDispatch::IntegrationTest
+class Account::Platform::ApplicationsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
   def setup
@@ -8,23 +8,23 @@ class Account::Doorkeeper::ApplicationsControllerTest < ActionDispatch::Integrat
     @user = create(:onboarded_user)
     sign_in @user
     @team = @user.current_team
-    @application = create(:doorkeeper_application, team: @team)
+    @application = create(:platform_application, team: @team)
   end
 
   test "should get index" do
-    get url_for([:account, @team, :doorkeeper_applications])
+    get url_for([:account, @team, :platform_applications])
     assert_response :success
   end
 
   test "should get new" do
-    get url_for([:new, :account, @team, :doorkeeper_application])
+    get url_for([:new, :account, @team, :platform_application])
     assert_response :success
   end
 
   test "should create application" do
-    assert_difference("Doorkeeper::Application.count") do
-      post url_for([:account, @team, :doorkeeper_applications]), params: {
-        doorkeeper_application: {
+    assert_difference("Platform::Application.count") do
+      post url_for([:account, @team, :platform_applications]), params: {
+        platform_application: {
           name: @application.name,
           scopes: @application.scopes,
           redirect_uri: @application.redirect_uri
@@ -33,7 +33,7 @@ class Account::Doorkeeper::ApplicationsControllerTest < ActionDispatch::Integrat
       }
     end
 
-    assert_redirected_to url_for([:account, @team, :doorkeeper_applications])
+    assert_redirected_to url_for([:account, @team, :platform_applications])
   end
 
   test "should show application" do
@@ -48,7 +48,7 @@ class Account::Doorkeeper::ApplicationsControllerTest < ActionDispatch::Integrat
 
   test "should update application" do
     patch url_for([:account, @application]), params: {
-      doorkeeper_application: {
+      platform_application: {
         name: @application.name,
         scopes: @application.scopes,
         redirect_uri: @application.redirect_uri
@@ -59,10 +59,10 @@ class Account::Doorkeeper::ApplicationsControllerTest < ActionDispatch::Integrat
   end
 
   test "should destroy application" do
-    assert_difference("Doorkeeper::Application.count", -1) do
+    assert_difference("Platform::Application.count", -1) do
       delete url_for([:account, @application])
     end
 
-    assert_redirected_to url_for([:account, @team, :doorkeeper_applications])
+    assert_redirected_to url_for([:account, @team, :platform_applications])
   end
 end
