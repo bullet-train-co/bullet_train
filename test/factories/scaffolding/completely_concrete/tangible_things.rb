@@ -5,6 +5,7 @@ FactoryBot.define do
     button_value { "one" }
     cloudinary_image_value { "MyString" }
     date_field_value { "2019-12-03" }
+    date_and_time_field_value { "2021-11-05" }
     email_field_value { "MyString" }
     password_field_value { "MyString" }
     phone_field_value { "MyString" }

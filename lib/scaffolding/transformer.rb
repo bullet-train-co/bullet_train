@@ -900,7 +900,14 @@ class Scaffolding::Transformer
             scaffold_add_line_to_file(file, ":#{name},", RUBY_NEW_FIELDS_HOOK, prepend: true)
           end
 
-          scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", "assert_equal tangible_thing_data['#{name}'], tangible_thing.#{name}", RUBY_NEW_FIELDS_HOOK, prepend: true)
+          assertion = if type == "date_field"
+            "assert_equal Date.parse(tangible_thing_data['#{name}']), tangible_thing.#{name}"
+          elsif type == "date_and_time_field"
+            "assert_equal DateTime.parse(tangible_thing_data['#{name}']), tangible_thing.#{name}"
+          else
+            "assert_equal tangible_thing_data['#{name}'], tangible_thing.#{name}"
+          end
+          scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_endpoint_test.rb", assertion, RUBY_NEW_FIELDS_HOOK, prepend: true)
         end
 
         # scaffold_add_line_to_file("./test/controllers/api/v1/scaffolding/completely_concrete/tangible_things_controller_test.rb", "assert_equal tangible_thing_attributes['#{name.gsub('_', '-')}'], tangible_thing.#{name}", RUBY_NEW_FIELDS_HOOK, prepend: true)
