@@ -1,3 +1,15 @@
 import I18n from "i18n-js"
+
 I18n.translations = <%= I18n::JS.filtered_translations.to_json %>;
+
+// The webdev server is triggered when we update the locale,
+// but the I18n Ruby object doesn't have any knowledge of the changes,
+// so we update that here.
+var lang = I18n.currentLocale()
+import(`js-yaml-loader!../../../config/locales/${lang}/${lang}.yml`)
+  .then((locale) => {
+    I18n.translations[lang]["fields"]["date_field"]["apply"]  = locale[lang]["fields"]["date_field"]["apply"]
+    I18n.translations[lang]["fields"]["date_field"]["cancel"] = locale[lang]["fields"]["date_field"]["cancel"]
+  });
+
 export default I18n
