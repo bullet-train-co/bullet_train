@@ -2,10 +2,19 @@
 
 require 'active_support/inflector'
 
-def replace_in_file(file, before, after)
+def replace_in_file(file, before, after, target_regexp = nil)
   puts "Replacing in '#{file}'."
-  target_file_content = File.open(file).read
-  target_file_content.gsub!(before, after)
+  if target_regexp.present?
+    target_file_content = ""
+    File.open(file).each_line do |l|
+      l.gsub!(before, after) if !!l.match(target_regexp)
+      l if !!l.match(target_regexp)
+      target_file_content += l
+    end
+  else
+    target_file_content = File.open(file).read
+    target_file_content.gsub!(before, after)
+  end
   File.open(file, "w+") do |f|
     f.write(target_file_content)
   end
@@ -22,8 +31,10 @@ human = ARGV[0]
 variable = ActiveSupport::Inflector.parameterize(human, separator: '_')
 environment_variable = ActiveSupport::Inflector.parameterize(human, separator: '_').upcase
 class_name = variable.classify
+kebab_case = variable.tr("_", "-")
 
 puts ""
+replace_in_file(".circleci/config.yml", "bullet_train", variable)
 replace_in_file("./config/database.yml", "bullet_train", variable)
 replace_in_file("./config/database.yml", "BULLET_TRAIN", environment_variable)
 replace_in_file("./config/cable.yml", "bullet_train", variable)
@@ -31,8 +42,16 @@ replace_in_file("./config/initializers/session_store.rb", "bullet_train", variab
 replace_in_file("./config/environments/production.rb", "bullet_train", variable)
 replace_in_file("./config/environments/development.rb", "bullet_train", variable)
 replace_in_file("./config/application.rb", "BulletTrain", class_name)
-replace_in_file("./config/locales/en/application.en.yml", "Bullet Train", human)
+replace_in_file("./config/locales/en/application.en.yml", "Bullet Train", human, /name/)
 replace_in_file("./config/locales/en/application.en.yml", "bullet_train", variable)
+replace_in_file("./config/locales/en/application.en.yml", "The Ruby on Rails SaaS Template", "Tagline for #{human}")
+replace_in_file("./config/locales/en/application.en.yml", "Bullet Train is a Ruby on Rails SaaS-in-a-Box that saves developers weeks of effort.", "Description for #{human}")
+replace_in_file("./config/locales/en/application.en.yml", "bullet train", "#{human.downcase} bullet train", /keywords: bullet train/)
+replace_in_file("./config/locales/en/user_mailer.en.yml", "Bullet Train, Inc.", human)
+replace_in_file("./config/locales/en/user_mailer.en.yml", "Bullet Train", human, /Invitation/)
+replace_in_file("./config/locales/en/user_mailer.en.yml", "Bullet Train", human, /%{inviter_name}/)
+replace_in_file("./CHANGELOG.md", "Bullet Train", human)
+replace_in_file("./README.md", "_Your Bullet Train Application Name_", human)
 
 puts ""
 puts "Be sure to do a global search for 'Bullet Train' to find places you might want to update with your own application name and marketing copy. At the very least you should update `config/locales/en/application.en.yml`."
