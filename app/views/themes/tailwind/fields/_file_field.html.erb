@@ -18,8 +18,8 @@ other_options ||= {}
         <% end %>
       <% end %>
       <%= link_to "#", onclick: "$(this).closest('.file-field').find('.file-upload').click(); return false;", class: 'button-alternative upload-file mr-3' do %>
-        <i class="leading-none mr-2 text-base ti ti-upload"></i>
-        <span>Upload New Document</span>
+        <i class="leading-none mr-2 text-base ti ti-upload dark:text-white"></i>
+        <span class="dark:text-white">Upload New Document</span>
       <% end %>
       <% if form.object.send(method).attached? %>
         <%= link_to "#", onclick: "$(this).closest('.file-field').find('.download-file').hide(); $(this).closest('.file-field').find('.remove-file').hide(); $(this).closest('.file-field').find('.remove-file-flag').val(true); return false;", class: 'button-alternative remove-file mr-3' do %>

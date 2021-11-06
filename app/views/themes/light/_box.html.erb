@@ -4,10 +4,10 @@
 <% no_background ||= false %>
 <% title_size ||= "text-xl" %>
 
-<div class="<%= "bg-white rounded-md shadow" unless no_background %> overflow-hidden">
-  <div class="py-6 px-8 space-y-2 <%= 'border-b shadow-sm' if divider %>">
+<div class="<%= "bg-white rounded-md shadow dark:bg-sealBlue-400" unless no_background %> overflow-hidden">
+  <div class="py-6 px-8 space-y-2 <%= 'border-b shadow-sm dark:border-sealBlue-500' if divider %>">
     <% if p.content_for? :title %>
-      <h2 class="<%= title_size %> font-semibold">
+      <h2 class="<%= title_size %> font-semibold dark:text-white">
         <%= p.content_for :title %>
       </h2>
     <% end %>

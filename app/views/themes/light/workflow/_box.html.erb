@@ -4,14 +4,13 @@
 
 <div class="min-h-screen flex flex-col justify-center sm:py-12">
   <div class="mx-auto w-full <%= width %> p-1.5">
-    <div class="bg-white py-8 px-10 shadow rounded-lg">
-
+    <div class="bg-white py-8 px-10 shadow rounded-lg dark:bg-sealBlue-400">
       <div class="sm:mx-auto sm:w-full sm:max-w-md py-5">
         <a href="<%= main_app.root_path %>" class="block py-3">
           <img alt="" src="<%= asset_pack_path("media/images/light/logo/logo.png") %>" width="<%= image_width_for_height('light/logo/logo.png', 54) %>" height="54" class="mx-auto h-12 w-auto" />
         </a>
 
-        <h1 class="mt-6 text-center text-3xl font-semibold tracking-tight">
+        <h1 class="mt-6 text-center text-3xl font-semibold tracking-tight dark:text-white">
           <%= p.yield :title %>
         </h1>
 

@@ -11,7 +11,7 @@ module.exports = {
       "./app/**/*.scss"
     ]
   },
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media',
   theme: {
     extend: {
       fontSize: {
@@ -41,6 +41,27 @@ module.exports = {
           DEFAULT: '#71c21a',
           light: '#c5f0c0',
         },
+        sealBlue: {
+          100: '#232942',
+          200: '#293145',
+          300: '#2b344e',
+          400: '#323c58',
+          500: '#4D566F',
+          600: '#777E94',
+          700: '#9facc7',
+          800: '#b3bcde',
+          900: '#ccd9e8'
+        },
+        vividBlue: {
+          700: '#1c4cc3',
+          800: '#0e369a'
+        },
+        black: {
+          100: '#000000',
+          200: '#101112',
+          300: '#171818',
+          400: '#292b2c'
+        }
       },
       fontFamily: {
         // "Avenir Next W01", "Proxima Nova W01", "", -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif

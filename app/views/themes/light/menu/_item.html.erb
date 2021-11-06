@@ -3,11 +3,11 @@
 <% method ||= nil %>
 <% active ||= request.path == url %>
 
-<%= send (method ? :button_to : :link_to), url, class: "block group hover:text-white hover:no-underline hover-indent-child #{'bg-blue-darker' if active} text-white px-2 py-2 rounded-md", method: method do %>
+<%= send (method ? :button_to : :link_to), url, class: "block group hover:text-white hover:no-underline hover-indent-child #{'bg-blue-darker dark:bg-black dark:bg-opacity-10' if active} text-white px-2 py-2 rounded-md dark:text-white", method: method do %>
   <div class="inline-block indent-child flex items-center">
     <!-- Heroicon name: home -->
     <% if p.content_for? :icon %>
-      <span class="mr-3 h-6 w-6 text-center text-blue-light text-xl leading-6">
+      <span class="mr-3 h-6 w-6 text-center text-blue-light text-xl leading-6 dark:text-gray-400">
         <%= p.content_for :icon %>
       </span>
     <% end %>

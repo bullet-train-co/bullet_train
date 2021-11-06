@@ -6,7 +6,7 @@ stimulus_controller = 'fields--date'
 form ||= current_fields_form
 options ||= {}
 options[:id] ||= id_for(form, method)
-options[:class] = "form-control single-daterange w-full #{options[:class]}".strip
+options[:class] = "form-control single-daterange w-full border-gray-300 dark:bg-sealBlue-300 dark:border-sealBlue-100 #{options[:class]}".strip
 options[:value] = form.object.send(method)&.strftime('%m/%d/%Y')
 options = options.merge({ data: {"#{stimulus_controller}-target": 'field' }})
 other_options ||= {}
@@ -23,7 +23,7 @@ other_options ||= {}
         data-<%= stimulus_controller %>-target="clearButton"
         data-action="<%= stimulus_controller %>#clearDate"
       >
-        <i class="leading-4 text-lg ti ti-trash"></i>
+        <i class="leading-4 text-lg ti ti-trash dark:text-blue-500"></i>
       </button>
       <% end %>
     </div>

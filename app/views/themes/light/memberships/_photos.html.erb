@@ -6,7 +6,7 @@
 
 <div class="flex overflow-hidden <%= 'place-content-center' if align == :center %>">
   <% memberships.each_with_index do |membership, index| %>
-    <%= image_tag membership_profile_photo_url(membership), class: "#{'-ml-1' if index > 0} inline-block h-#{size} w-#{size} rounded-full ring-2 ring-white" %>
+    <%= image_tag membership_profile_photo_url(membership), class: "#{'-ml-1' if index > 0} inline-block h-#{size} w-#{size} rounded-full ring-2 ring-white dark:ring-transparent" %>
   <% end %>
 </div>
 

@@ -1,11 +1,11 @@
 <ul class="space-y">
   <% @teams.each do |team| %>
-    <li class="bg-white shadow overflow-hidden sm:rounded-md">
-      <%= link_to [:account, team], class: "group block hover:bg-gray-50" do %>
+    <li class="bg-white shadow overflow-hidden sm:rounded-md dark:bg-sealBlue-400">
+      <%= link_to [:account, team], class: "group block hover:bg-gray-50 dark:hover:bg-sealBlue-400 dark:text-sealBlue-800" do %>
         <div class="px-4 py-4 flex items-center sm:pl-8 sm:pr-6">
           <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
-              <div class="flex text-xl font-semibold text-blue uppercase group-hover:text-blue-dark tracking-widest">
+              <div class="flex text-xl font-semibold text-blue uppercase group-hover:text-blue-dark tracking-widest dark:text-white">
                 <%= team.name %>
               </div>
             </div>

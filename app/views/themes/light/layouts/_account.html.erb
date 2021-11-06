@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html>
   <head>
     <%= render 'themes/light/layouts/head' %>
   </head>
-  <body class="bg-light-blue-gradient text-gray-700 text-sm font-normal">
+  <body class="bg-light-blue-gradient text-gray-700 text-sm font-normal dark:bg-dark-blue-gradient dark:text-sealBlue-900">
     <div class="p-4 bg-blue-darker electron-draggable electron-title-bar hidden electron-mobile-only"></div>
     <div class="md:p-5 main-container-padding">
       <div class="h-screen md:h-auto overflow-hidden md:rounded-lg flex shadow main-container"
@@ -15,11 +14,11 @@
       >
 
         <% menu = capture do %>
-          <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker md:rounded-tl-lg electron-draggable electron-title-bar">
+          <div class="flex items-center flex-shrink-0 p-4 bg-blue-darker md:rounded-tl-lg electron-draggable electron-title-bar dark:bg-black dark:bg-opacity-10">
             <%= image_tag asset_pack_path('media/images/light/logo/logo.png'), class: 'h-5 w-auto mx-auto' %>
 
             <div class="lg:hidden absolute right-0">
-              <button class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+              <button class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white dark:ring-transparent"
                 data-action="reveal#hide"
               >
                 <span class="sr-only">Close Application Menu</span>
@@ -41,7 +40,7 @@
                     <div class="text-white">
                       <%= current_user.name %>
                     </div>
-                    <div class="text-2xs tracking-widest uppercase text-blue-light group-hover:text-white">
+                    <div class="text-2xs tracking-widest uppercase text-blue-light group-hover:text-white dark:text-gray-500">
                       <%= current_team.name %>
                     </div>
                   </div>
@@ -93,7 +92,7 @@
               data-transition-leave-start="translate-x-0"
               data-transition-leave-end="-translate-x-full"
 
-              class="relative flex-1 flex flex-col max-w-xs w-full pb-4 bg-dark-blue-gradient shadow-xl"
+              class="relative flex-1 flex flex-col max-w-xs w-full pb-4 shadow-xl"
             >
               <%= menu %>
             </div>
@@ -101,13 +100,13 @@
           </div>
         </div>
 
-        <div class="hidden bg-dark-blue-gradient lg:flex lg:flex-shrink-0 overflow-y-auto">
+        <div class="hidden lg:flex lg:flex-shrink-0 overflow-y-auto bg-gradient-to-b from-vividBlue-700 to-vividBlue-800 dark:from-sealBlue-200 dark:to-sealBlue-200">
           <div class="w-64">
             <%= menu %>
           </div>
         </div>
 
-        <div class="flex flex-col w-0 flex-1 overflow-y-auto bg-gray-100">
+        <div class="flex flex-col w-0 flex-1 overflow-y-auto bg-gray-100 dark:bg-sealBlue-200 border-l dark:border-gray-500">
           <main class="flex-1 relative z-0 focus:outline-none" tabindex="0">
             <div class="flex flex-row items-center shadow-sm electron-draggable">
               <button class="mobile-menu-trigger lg:hidden h-12 w-12 ml-1 flex-none inline-flex items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue"

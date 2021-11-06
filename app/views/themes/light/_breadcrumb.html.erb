@@ -15,7 +15,7 @@
 
     <% # don't link to the same page we're already on. %>
     <% if url && url != request.url %>
-      <%= link_to label, url, class: "#{item_style} hover:text-gray-700 hover:underline" %>
+      <%= link_to label, url, class: "#{item_style} hover:text-gray-700 hover:underline dark:text-blue-300" %>
     <% else %>
       <span class="<%= item_style %>"><%= label %></span>
     <% end %>
