@@ -6,7 +6,7 @@ class Webhooks::Incoming::BulletTrainWebhook < ApplicationRecord
   # whatever that method is, you would implement it here.
   def verify_authenticity
     # trying to fix integration tests. if this fixes it, i don't know why puma won't accept another connection here.
-    return true if Rails.test?
+    return true if Rails.env.test?
 
     uri = URI.parse(api_v1_webhooks_outgoing_event_url(data["event_id"]))
     http = Net::HTTP.new(uri.host, uri.port)

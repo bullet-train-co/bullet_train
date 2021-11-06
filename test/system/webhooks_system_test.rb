@@ -55,9 +55,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           fill_in "Text Field Value", with: "Some Other Thing"
           click_on "Create Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully created"
-
-          # TODO: Use Sidekiq::Testing.inline! to run tests inline.
-          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+          Sidekiq::Testing.inline! { Webhooks::Outgoing::Delivery.order(:id).last.deliver }
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
@@ -75,9 +73,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           fill_in "Text Field Value", with: "One Last Updated Thing"
           click_on "Update Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully updated"
-
-          # TODO: Use Sidekiq::Testing.inline! to run tests inline.
-          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+          Sidekiq::Testing.inline! { Webhooks::Outgoing::Delivery.order(:id).last.deliver }
         end
 
         click_on "Back"
@@ -88,9 +84,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           end
           page.driver.browser.switch_to.alert.accept
           assert page.has_content?("Tangible Thing was successfully destroyed.")
-
-          # TODO: Use Sidekiq::Testing.inline! to run tests inline.
-          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+          Sidekiq::Testing.inline! { Webhooks::Outgoing::Delivery.order(:id).last.deliver }
         end
 
         sign_out_for(display_details)
@@ -150,9 +144,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
             page.driver.browser.switch_to.alert.accept
             assert page.has_content?("Tangible Thing was successfully destroyed.")
           end
-
-          # TODO: Use Sidekiq::Testing.inline! to run tests inline.
-          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+          Sidekiq::Testing.inline! { Webhooks::Outgoing::Delivery.order(:id).last.deliver }
         end
       end
     end
