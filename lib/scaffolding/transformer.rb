@@ -403,11 +403,8 @@ class Scaffolding::Transformer
     if target_regexp.present?
       target_file_content = ""
       File.open(file).each_line do |l|
-        target_file_content += if !!l.match(target_regexp)
-          l.gsub!(before, after)
-        else
-          l
-        end
+        l.gsub!(before, after) if !!l.match(target_regexp)
+        target_file_content += l
       end
     else
       target_file_content = File.open(file).read
