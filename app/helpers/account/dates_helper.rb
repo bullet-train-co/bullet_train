@@ -13,12 +13,13 @@ module Account::DatesHelper
   # e.g. Yesterday at 2:12 PM
   # e.g. April 24 at 7:39 AM
   def display_date_and_time(timestamp)
-    # today?
     return nil unless timestamp
+
+    # today?
     if local_time(timestamp).to_date == local_time(Time.now).to_date
       "Today at #{display_time(timestamp)}"
     # yesterday?
-    elsif (local_time(timestamp).to_date - 1.day) == local_time(Time.now).to_date
+    elsif (local_time(timestamp).to_date) == (local_time(Time.now).to_date - 1.day)
       "Yesterday at #{display_time(timestamp)}"
     else
       "#{display_date(timestamp)} at #{display_time(timestamp)}"

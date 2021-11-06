@@ -533,6 +533,7 @@ GEM
     thor (1.1.0)
     thread-local (1.1.0)
     tilt (2.0.10)
+    timecop (0.9.4)
     turbo-rails (0.7.4)
       rails (>= 6.0.0)
     tzinfo (2.0.4)
@@ -646,6 +647,7 @@ DEPENDENCIES
   standard
   storybook_rails (~> 1.0)
   stripe
+  timecop
   trix!
   turbo-rails
   tzinfo-data
