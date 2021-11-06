@@ -12,7 +12,7 @@ class Platform::Application < ApplicationRecord
   # 🚅 add oauth providers above.
 
   has_one :membership, foreign_key: :platform_agent_of_id, dependent: :nullify
-  has_one :user, foreign_key: :platform_agent_of_id, dependent: :destroy
+  has_one :user, foreign_key: :platform_agent_of_id
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
@@ -44,10 +44,7 @@ class Platform::Application < ApplicationRecord
   def destroy_user
     former_user = membership.user
     membership.nullify_user
-
-    # TODO For some reason `rails test test/controllers/account/platform/applications_controller_test.rb` has a test
-    # where this is nil, but I can't figure out why that would be. For now, I'm adding the `&` here.
-    former_user&.destroy
+    former_user.destroy
   end
 
   # 🚅 add methods above.
