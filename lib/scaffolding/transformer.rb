@@ -479,7 +479,8 @@ class Scaffolding::Transformer
       boolean_buttons = type == "boolean"
 
       # extract any options they passed in with the field.
-      type, attribute_options = type.scan(/^(.*)\[(.*)\]/).first || type
+      # will extract options declared with either [] or {}.
+      type, attribute_options = type.scan(/^(.*)[\[|{](.*)[\]|}]/).first || type
 
       # create a hash of the options.
       attribute_options = if attribute_options
