@@ -1,6 +1,4 @@
 class ApplicationController < ActionController::Base
-  include Sprinkles::ControllerSupport
-
   # these are common for authentication workflows.
   include InvitationOnlyHelper
   include InvitationsHelper

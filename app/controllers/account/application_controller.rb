@@ -13,13 +13,7 @@ class Account::ApplicationController < ApplicationController
     /^Account::/
   end
 
-  # TODO 🍩 we need to figure out some way to get this extracted for sprinkles.
-  # by default we use the 'account' layout, but we want to be able to disable the
-  # layout entirely for polling updates.
-  layout :calculate_layout
-  def calculate_layout
-    params["layoutless"] ? false : "account"
-  end
+  layout "account"
 
   before_action :authenticate_user!
   before_action :set_paper_trail_whodunnit

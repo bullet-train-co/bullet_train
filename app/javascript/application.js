@@ -30,7 +30,6 @@ require("@icon/themify-icons/themify-icons.css")
 require.context('images', true)
 
 require("account")
-require("sprinkles")
 require("concerns")
 require("electron")
 

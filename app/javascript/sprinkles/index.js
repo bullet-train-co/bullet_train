@@ -1,2 +1,0 @@
-require("./collections")
-require("./models")
