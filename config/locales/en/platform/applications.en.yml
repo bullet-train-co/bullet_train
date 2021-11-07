@@ -5,7 +5,7 @@ en:
       label: *label
     navigation:
       label: Your Applications
-      icon: fal fa-puzzle-piece ti ti-plug
+      icon: fal fa-browser ti ti-plug
     buttons: &buttons
       new: Add New Platform Application
       create: Provision Platform Application

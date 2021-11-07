@@ -5,7 +5,7 @@ en:
       label: *label
     navigation:
       label: *label
-      icon: fal fa-puzzle-piece ti ti-bolt
+      icon: fal fa-satellite-dish ti ti-bolt
     buttons: &buttons
       new: Add New Endpoint
       create: Create Endpoint
