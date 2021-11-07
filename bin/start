@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require "active_support/core_ext/string"
+require "pry"
+require "colorize"
+
+def we_will_start_it(command)
+  puts "`#{command}` isn't running. We'll start it.".green
+end
+
+PREREQUISITE = {
+  'bundle exec puma' => 'bundle install'
+}
+
+# In certain cases we need to check for multiple strings to ensure we don't match things like `puma` with `puma-dev`.
+PROCESSES = {
+  'puma' => ['puma', 'tcp']
+}
+
+`cat ./Procfile`.lines.each do |line|
+
+  # Grab the left hand and the right hand of every line in `Procfile`.
+  name, command = line.split(": ").map(&:strip)
+
+  # Remove `bundle exec` from every command when we're referencing it by name.
+  simple_command = command.split('-').first.gsub('bundle exec', '').strip
+
+  # Check whether that command is running.
+  is_not_running = `ps aux | #{(PROCESSES[simple_command] || [simple_command]).map { |process| "grep '#{process}'" }.join(" | ")} | grep -v "grep"`.lines.empty?
+
+  if is_not_running
+    we_will_start_it(simple_command)
+
+    # Check whether there is something we should run before a given command.
+    if PREREQUISITE[simple_command].present?
+      puts "Before we run `#{simple_command}`, we're going to run `#{prerequisite[simple_command]}`.".green
+      puts `#{prerequisite[simple_command]}`
+    end
+
+    puts "Now we're going to run `#{command}`".green
+
+    # If we're in this loop, there's always more, because of the `webpack` stuff below.
+    puts "However, there's more to run, so be sure to open another tab and run `bin/start` again!".yellow
+
+    exec command
+  end
+end
+
+if `ps aux | grep webpack | grep -v "grep"`.lines.empty?
+  we_will_start_it("bin/webpack-dev-server")
+  puts "Before we run `bin/webpack-dev-server`, we're going to run `yarn install`.".green
+  puts "And after that, we don't have anything else left to run!".green
+  exec "bin/webpack-dev-server"
+else
+  puts "We don't have anything else left to run!".green
+end
