@@ -44,13 +44,13 @@
   </div>
 
   <% if p.content_for? :footer %>
-    <div class="py-4 px-8 bg-gray-50 border-t">
+    <div class="py-4 px-8 bg-gray-50 border-t dark:bg-sealBlue-300 dark:border-sealBlue-500">
       <%= p.content_for :footer %>
     </div>
   <% end %>
 
   <% if p.content_for? :raw_footer %>
-    <div class="bg-gray-50">
+    <div class="bg-gray-50 dark:bg-sealBlue-300">
       <%= p.content_for :raw_footer %>
     </div>
   <% end %>
