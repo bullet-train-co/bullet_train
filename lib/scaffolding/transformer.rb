@@ -205,12 +205,15 @@ class Scaffolding::Transformer
   end
 
   def scaffold_directory(directory)
-    # TODO rescue whatever the actual error is here.
+    transformed_directory_name = transform_string(directory)
     begin
-      Dir.mkdir(transform_string(directory))
-    rescue
-      nil
+      Dir.mkdir(transformed_directory_name)
+    rescue Errno::EEXIST => _
+      puts "The directory #{transformed_directory_name} already exists, skipping generation.".yellow
+    rescue Errno::ENOENT => _
+      puts "Proceeding to generate '#{transformed_directory_name}'."
     end
+
     Dir.foreach(directory) do |file|
       file = "#{directory}/#{file}"
       unless File.directory?(file)
