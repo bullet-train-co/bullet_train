@@ -249,26 +249,32 @@ elsif scaffolding_type == 'breadcrumbs'
 
   unless argv.count == 2
     puts ""
-    puts "🚅  usage: bin/super-scaffold breadcrumbs <Model> <ParentModel>"
+    puts "🚅  usage: bin/super-scaffold breadcrumbs <Model> <ParentModel[s]>"
     puts ""
     puts "Heads up! You only need to use this if you generated your views before the new Bullet Train breadcrumbs implementation came into effect.".green
     puts ""
     puts "E.g. create updated breadcrumbs for Pages:"
-    puts "  bin/super-scaffold breadcrumbs Page Site"
+    puts "  bin/super-scaffold breadcrumbs Page Site,Team"
     puts ""
-    puts "You only have to specify the immediate parent, not the entire path back to Team (unless the immediate parent is Team)."
+    puts "When Super Scaffolding breadcrumbs, you have to specify the entire path of the immediate parent back to Team."
     puts ""
     exit
   end
 
   child = argv[0]
   parents = argv[1] ? argv[1].split(',') : []
-  parents += ['Team']
   parents = parents.map(&:classify).uniq
   parent = parents.first
 
+  unless parents.include?("Team")
+    raise "Parents for #{child} should trace back to the Team model, but Team wasn't provided. Please confirm that all of the parents tracing back to the Team model are present and try again.\n" +
+      "E.g.:\n" +
+      "bin/super-scaffold breadcrumbs Page Site,Team\n"
+  end
+
   # get all the attributes.
-  scaffold_new_breadcrumbs(child, parents)
+  transformer = Scaffolding::Transformer.new(child, parents, @options)
+  transformer.scaffold_new_breadcrumbs(child, parents)
 
 elsif scaffolding_type == 'oauth-provider'
 
