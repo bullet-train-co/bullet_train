@@ -1,5 +1,6 @@
 require_relative "../lib/bullet_train"
 require_relative "../lib/colorizer"
+require_relative "../lib/theme_partials"
 require_relative "../lib/string/emoji"
 
 require_relative "boot"

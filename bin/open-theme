@@ -13,7 +13,9 @@ require 'fileutils'
 require 'colorize'
 
 require_relative '../app/helpers/theme_helper.rb'
+require_relative '../lib/theme_partials.rb'
 include ThemeHelper
+include ThemePartials
 
 puts "Your current theme: #{current_theme}"
 
