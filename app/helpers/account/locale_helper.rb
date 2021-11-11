@@ -1,4 +1,8 @@
 module Account::LocaleHelper
+  def current_locale
+    current_user.locale || current_team.locale || "en"
+  end
+
   # as of now, we only calculate a possessive version of nouns in english.
   # if you're aware of another language where we can do this, please don't hesitate to reach out!
   def possessive_string(string)

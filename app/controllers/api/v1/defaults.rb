@@ -27,6 +27,10 @@ module Api::V1::Defaults
       def current_membership
         current_user.memberships.where(team: current_team).first
       end
+
+      def current_locale
+        current_user.locale || current_team.locale || "en"
+      end
     end
   end
 end

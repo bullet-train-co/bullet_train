@@ -61,6 +61,9 @@ en:
       last_day:
         one: Last Day
         other: Last %{count} Days
+    formats:
+      date: '%m/%d/%Y'
+      date_and_time: '%m/%d/%Y %l:%M %p'
 
   menus:
     main:

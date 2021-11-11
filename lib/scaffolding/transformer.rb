@@ -848,7 +848,6 @@ class Scaffolding::Transformer
         end
 
         scaffold_add_line_to_file("./app/controllers/account/scaffolding/completely_concrete/tangible_things_controller.rb", special_processing, RUBY_NEW_FIELDS_PROCESSING_HOOK, prepend: true) if special_processing
-
       end
 
       #

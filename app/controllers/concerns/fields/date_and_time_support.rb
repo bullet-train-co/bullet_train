@@ -7,9 +7,7 @@ module Fields::DateAndTimeSupport
     if strong_params.dig(attribute).present?
       time_zone = ActiveSupport::TimeZone.new(strong_params[time_zone_attribute] || current_team.time_zone)
       strong_params.delete(time_zone_attribute)
-
-      # TODO make this work with other time and date formats.
-      strong_params[attribute] = time_zone.strptime(strong_params[attribute], "%m/%d/%Y %l:%M %p")
+      strong_params[attribute] = time_zone.strptime(strong_params[attribute], t("global.formats.date_and_time"))
     end
   end
 end

@@ -56,6 +56,10 @@ class ApplicationController < ActionController::Base
     helpers.current_membership
   end
 
+  def current_locale
+    helpers.current_locale
+  end
+
   def enforce_invitation_only
     if invitation_only?
       unless helpers.invited?
