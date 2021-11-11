@@ -16,6 +16,10 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
     [200, 201, 202, 203, 204, 205, 206, 207, 226].include?(response_code)
   end
 
+  def failed?
+    !(successful? || still_attempting?)
+  end
+
   def attempt
     uri = URI.parse(delivery.endpoint_url)
     http = Net::HTTP.new(uri.host, uri.port)

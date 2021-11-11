@@ -29,7 +29,7 @@
               <tr data-id="<%= delivery_attempt.id %>">
                 <td><%= render 'shared/attributes/text', attribute: :attempt_number, url: [:account, delivery_attempt] %></td>
                 <td><%= render 'shared/attributes/date_and_time', attribute: :created_at %></td>
-                <td class="text-center"><%= render 'shared/attributes/attempt', attribute: :status, success_method: :successful?, attempting_method: :still_attempting? %></td>
+                <td class="text-center"><%= render 'shared/attributes/attempt', attribute: :status, success_method: :successful?, attempting_method: :still_attempting?, failure_method: :failed? %></td>
                 <td class="text-center"><%= render 'shared/attributes/code', attribute: :response_code %></td>
                 <%# 🚅 super scaffolding will insert new fields above this line. %>
                 <td class="buttons">

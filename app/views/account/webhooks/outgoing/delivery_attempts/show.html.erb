@@ -11,7 +11,7 @@
       <% p.content_for :body do %>
         <% with_attribute_settings object: @delivery_attempt, strategy: :label do %>
           <%= render 'shared/attributes/text', attribute: :attempt_number %>
-          <%= render 'shared/attributes/attempt', attribute: :status, success_method: :successful?, attempting_method: :still_attempting? %>
+          <%= render 'shared/attributes/attempt', attribute: :status, success_method: :successful?, attempting_method: :still_attempting?, failure_method: :failed? %>
           <%= render 'shared/attributes/code', attribute: :response_code %>
           <%= render 'shared/attributes/code', attribute: :response_message %>
           <%= render 'shared/attributes/block', attribute: :response_body %>

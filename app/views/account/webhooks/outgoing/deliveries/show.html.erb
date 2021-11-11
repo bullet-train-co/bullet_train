@@ -17,7 +17,7 @@
               <pre><%= JSON.pretty_generate(@delivery.event.payload) %></pre>
             <% end %>
           <% end %>
-          <%= render 'shared/attributes/attempt', attribute: :status, success_method: :delivered?, attempting_method: :still_attempting? %>
+          <%= render 'shared/attributes/attempt', attribute: :status, success_method: :delivered?, attempting_method: :still_attempting?, failure_method: :failed? %>
           <%= render 'shared/attributes/code', attribute: :endpoint_url %>
           <%= render 'shared/attributes/date_and_time', attribute: :delivered_at %>
           <%# 🚅 super scaffolding will insert new fields above this line. %>

@@ -64,6 +64,10 @@ class Webhooks::Outgoing::Delivery < ApplicationRecord
     attempt_count < max_attempts
   end
 
+  def failed?
+    !(delivered? || still_attempting?)
+  end
+
   def name
     event.short_uuid
   end

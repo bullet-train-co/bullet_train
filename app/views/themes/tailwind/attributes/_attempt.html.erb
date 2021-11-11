@@ -1,5 +1,3 @@
-<% # TODO We should allow them to specify the `failure_method` as well. %>
-
 <% object ||= current_attributes_object %>
 <% strategy ||= current_attributes_strategy || :none %>
 <% url ||= nil %>
@@ -19,7 +17,7 @@
       <span class="inline-block" style="animation: spinner 4s linear infinite;">
         <i class="fal fa-sync ti ti-reload"></i>
       </span>
-    <% else %>
+    <% elsif object.send(failure_method) %>
       <i class="fal fa-close ti ti-close text-red"></i>
     <% end %>
   </span>
