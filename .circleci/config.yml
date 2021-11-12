@@ -5,7 +5,7 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.4-node-browsers
+      - image: circleci/ruby:3.0.2-node-browsers
         environment:
           PGHOST: localhost
           PGUSER: bullet_train

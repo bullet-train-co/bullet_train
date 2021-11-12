@@ -6,7 +6,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.4"
+ruby "3.0.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem "rails", "~> 6.1.1"
@@ -187,7 +187,7 @@ gem "http_accept_language"
 gem "cable_ready", "5.0.0.pre4"
 gem "hiredis"
 
-gem "active_hash"
+gem "active_hash", git: "git@github.com:bullet-train-co/active_hash.git", branch: "fixes/address-keyword-argument-issue"
 
 group :production do
   # we suggest using postmark for email deliverability.

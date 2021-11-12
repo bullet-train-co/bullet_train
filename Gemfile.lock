@@ -1,4 +1,12 @@
 GIT
+  remote: git@github.com:bullet-train-co/active_hash.git
+  revision: 01ff08fe4b06bc3b0f82b501d53121bbcd49c26f
+  branch: fixes/address-keyword-argument-issue
+  specs:
+    active_hash (3.1.0)
+      activesupport (>= 5.0.0)
+
+GIT
   remote: https://github.com/bullet-train-co/trix.git
   revision: 078043a8bb6a95d8cf6742984b02fa96be689847
   specs:
@@ -54,8 +62,6 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_hash (3.1.0)
-      activesupport (>= 5.0.0)
     activejob (6.1.4.1)
       activesupport (= 6.1.4.1)
       globalid (>= 0.3.6)
@@ -324,7 +330,7 @@ GEM
       mustermann (>= 1.0.0)
     nested_form (0.3.2)
     netrc (0.11.0)
-    nice_partials (0.1.4)
+    nice_partials (0.1.5)
       actionview (>= 4.2.6)
     nio4r (2.5.8)
     nokogiri (1.12.3)
@@ -575,7 +581,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  active_hash
+  active_hash!
   api-pagination
   awesome_print
   aws-sdk-s3
@@ -659,7 +665,7 @@ DEPENDENCIES
   xray-rails
 
 RUBY VERSION
-   ruby 2.7.4
+   ruby 3.0.2p107
 
 BUNDLED WITH
-   2.2.0
+   2.2.28

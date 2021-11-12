@@ -19,6 +19,6 @@ class UserMailer < ApplicationMailer
       inviter_name: @invitation.from_membership&.user&.full_name || @invitation.from_membership.name,
       team_name: @invitation.team.name,
     }
-    mail(to: @invitation.email, subject: I18n.t("user_mailer.invited.subject", @values))
+    mail(to: @invitation.email, subject: I18n.t("user_mailer.invited.subject", **@values))
   end
 end
