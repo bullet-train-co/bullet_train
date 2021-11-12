@@ -64,15 +64,23 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # BULLET TRAIN GEMS
 # This section is all the gems we're adding.
 
+group :development, :test do
+  # `standardrb --fix`
+  gem "standard"
+
+  # Similar to standard for correcting format
+  gem "rails_best_practices"
+
+  # for super scaffolding: "select *a* team member" vs. "select *an* option".
+  gem "indefinite_article"
+end
+
 group :test do
   gem "minitest-retry"
   gem "capybara-screenshot"
   gem "capybara-email"
   gem "magic_test"
 end
-
-# we use factories not just for testing, but also for generating example API payloads.
-gem "factory_bot_rails"
 
 # some development tools we actively use.
 group :development do
@@ -85,6 +93,9 @@ group :development do
   # add color to some console output.
   gem "colorize"
 end
+
+# we use factories not just for testing, but also for generating example API payloads.
+gem "factory_bot_rails"
 
 # authentication.
 gem "devise"
@@ -165,15 +176,6 @@ gem "nice_partials", "~> 0.1"
 gem "storybook_rails", "~> 1.0"
 
 gem "turbo-rails"
-
-# `standardrb --fix`
-gem "standard"
-
-# Similar to standard for correcting format
-gem "rails_best_practices"
-
-# for super scaffolding: "select *a* team member" vs. "select *an* option".
-gem "indefinite_article"
 
 # for obfuscating ids in urls
 gem "hashids"
