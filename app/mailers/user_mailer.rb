@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
     @values = {
       # are there any substitution values you want to include?
     }
-    mail(to: @user.email, subject: I18n.t("user_mailer.welcome.subject", @values))
+    mail(to: @user.email, subject: I18n.t("user_mailer.welcome.subject", **@values))
   end
 
   # technically not a 'user' email, but they'll be a user soon.
