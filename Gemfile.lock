@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:bullet-train-co/active_hash.git
+  remote: https://github.com/bullet-train-co/active_hash.git
   revision: 01ff08fe4b06bc3b0f82b501d53121bbcd49c26f
   branch: fixes/address-keyword-argument-issue
   specs:

@@ -189,7 +189,7 @@ gem "http_accept_language"
 gem "cable_ready", "5.0.0.pre4"
 gem "hiredis"
 
-gem "active_hash", git: "git@github.com:bullet-train-co/active_hash.git", branch: "fixes/address-keyword-argument-issue"
+gem "active_hash", github: "bullet-train-co/active_hash", branch: "fixes/address-keyword-argument-issue"
 
 group :production do
   # we suggest using postmark for email deliverability.
