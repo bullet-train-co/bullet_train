@@ -17,3 +17,6 @@ While Bullet Train assumes you are familiar with Rails development norms, we've 
 
 ### Fully Responsive Interface
 Every single page of your app works on mobile by default.
+
+## Additional Philosophy Topics
+ - [Anti-Patterns](/docs/philosophy/anti-patterns.md)
