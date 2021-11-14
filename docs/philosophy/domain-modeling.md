@@ -78,7 +78,7 @@ Push up a pull request with your scratch file and invite review from other devel
 
 ### 3. Review with non-developer stakeholders.
 
-Engage with product owners or potential users and talk through each part of the domain model in your scratch file without showing it to them or getting to technical. Just talk through which entities you chose to represent, which attributes and options are available. Talk through the features those models and attributes allow you to provide and which use cases you think you've covered.
+Engage with product owners or potential users and talk through each part of the domain model in your scratch file without showing it to them or getting too technical. Just talk through which entities you chose to represent, which attributes and options are available. Talk through the features those models and attributes allow you to provide and which use cases you think you've covered.
 
 In these discussions, you're looking for inspiration of additional nouns, verbs, and use cases you may not have considered in your initial modeling. Even if you choose not to incorporate certain ideas or feature requests immediately, you're at least taking into consideration whether they would fit nicely into the mental model you have represented in your domain model.
 
