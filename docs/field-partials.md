@@ -46,6 +46,16 @@ The 1:1 relationship between these field partials and their underlying Rails for
 
 Individual field partials might have additional options available based on the underlying Rails form field helper. Links to the documentation for individual form field partials are listed at the end of this page.
 
+## `options` vs. `other_options`
+
+Because Bullet Train field partials have more responsibilities than the underlying Rails form field helpers, there are also additional options for things like hiding labels, displaying specific error messages, etc. For these options, we pass them separately as `other_options`. This keeps them separate from the options in `options` that will be passed directly to the underlying Rails form field helper.
+
+For example, to suppress a label on any field, we can use the `hide_label` option like so:
+
+```
+<%= render 'shared/fields/text_field', method: :text_field_value, options: {autofocus: true}, other_options: {hide_label: true} %>
+```
+
 ## Reducing Repetition
 When you're including multiple fields, you can DRY up redundant settings (e.g. `form: form`) like so:
 
