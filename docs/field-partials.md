@@ -53,7 +53,7 @@ Because Bullet Train field partials have more responsibilities than the underlyi
 For example, to suppress a label on any field, we can use the `hide_label` option like so:
 
 ```
-<%= render 'shared/fields/text_field', method: :text_field_value, options: {autofocus: true}, other_options: {hide_label: true} %>
+<%= render 'shared/fields/text_field', form: form, method: :text_field_value, other_options: {hide_label: true} %>
 ```
 
 ## Reducing Repetition
