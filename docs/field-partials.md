@@ -58,9 +58,11 @@ For example, to suppress a label on any field, we can use the `hide_label` optio
 
 ### Globally-available `other_options` options:
 
- - `help`: Display a specific help string.
- - `error`: Display a specific error string.
- - `hide_label`: Hide the field label.
+| Key | Value Type | Description |
+| --- | --- | --- |
+| `help` | string | Display a specific help string. |
+| `error` | string | Display a specific error string. |
+| `hide_label` | boolean | Hide the field label. |
 
 ## Reducing Repetition
 When you're including multiple fields, you can DRY up redundant settings (e.g. `form: form`) like so:
