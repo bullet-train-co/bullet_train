@@ -110,7 +110,7 @@ Certain form field partials like `buttons` and `super_select` can also have thei
 ## Available Field Partials
 
 | Field Partial | Multiple Values? | Assignment Helpers | JavaScript Library | Description | Commercial License Required |
-| --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | `boolean` | | `assign_boolean` | | | |
 | [`buttons`](/docs/field-partials/buttons.md) | Optionally | `assign_checkboxes` | | | |
 | `ckeditor` | | | [CKEditor 5](https://ckeditor.com/ckeditor-5/) | Best-of-breed open-source WYSIWYG component with many powerful modular extensions, but comes with a commercial licensing obligation for SaaS projects. | [⚠️](https://ckeditor.com/pricing/) |
