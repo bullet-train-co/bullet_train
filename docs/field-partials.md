@@ -75,15 +75,6 @@ When you're including multiple fields, you can DRY up redundant settings (e.g. `
 <% end %>
 ```
 
-## Enhanced field partials that invoke supporting JavaScript libraries
-Some of the form field partials lean on specific JavaScript libraries to provide functionality beyond what's available from standard HTML fields. For example:
-
- - `date_field` and `date_and_time_field` use the [Date Range Picker](https://www.daterangepicker.com) library and provide another ~45 lines of JavaScript to polish up the user experience interacting with the fields in the context of a Bullet Train application.
- - `super_select` field partial uses [Select2](https://select2.org) to provide powerful option search and multi-select functionality out-of-the-box.
- - `phone_field` uses the [International Telephone Input](https://intl-tel-input.com) library to ensure any telephone numbers that are entered by users are in a format that can be used by third-party service providers like Twilio.
- - `ckeditor` invokes [CKEditor 5](https://ckeditor.com/ckeditor-5/). Bullet Train has already tackled the work involved in getting CKEditor 5 building from source in the context of a Rails application, so you can easily mix-in any of the powerful add-ons available.
- - `trix_editor` invokes [Trix](https://github.com/basecamp/trix) to provide basic HTML-powered formatting features as well as support for at-mentions amongst team members.
-
 ## Field partials that integrate with third-party service providers
  - `cloudinary` makes it trivial to upload photos and images to [Cloudinary](https://cloudinary.com) and store their resulting Cloudinary ID as an attribute of the model backing the form.
 
@@ -116,6 +107,27 @@ You can also configure some placeholder text (displayed in the field when in an 
 
 Certain form field partials like `buttons` and `super_select` can also have their selectable options configured in this Yaml file. See their respective documentation for details, as usage varies slightly.
 
-## Specific Field Partials
+## Available Field Partials
+
+| Field Partial | Multiple Values? | Assignment Helpers | JavaScript Library | Description | Commercial License Required |
+| --- | --- | --- |
+| `boolean` | | `assign_boolean` | | | |
+| [`buttons`](/docs/field-partials/buttons.md) | Optionally | `assign_checkboxes` | | | |
+| `ckeditor` | | | [CKEditor 5](https://ckeditor.com/ckeditor-5/) | Best-of-breed open-source WYSIWYG component with many powerful modular extensions, but comes with a commercial licensing obligation for SaaS projects. | [⚠️](https://ckeditor.com/pricing/) |
+| `cloudinary_image` | | | | | |
+| `color_picker` | | | [pickr](https://simonwep.github.io/pickr/) | | |
+| `date_and_time_field` | | `assign_date_and_time` | [Date Range Picker](https://www.daterangepicker.com) | | |
+| `date_field` | | `assign_date` | [Date Range Picker](https://www.daterangepicker.com) | | |
+| `email_field` | | | | | |
+| `file_field` | | | [Active Storage](https://edgeguides.rubyonrails.org/active_storage_overview.html) | | |
+| `options` | Optionally | `assign_checkboxes` | | | |
+| `password_field` | | | | | |
+| `phone_field` | | | [International Telephone Input](https://intl-tel-input.com) | Ensures telephone numbers are in a format that can be used by providers like Twilio. | |
+| [`super_select`](/docs/field-partials/super-select.md) | Optionally | `assign_select_options` | [Select2](https://select2.org) | Provides powerful option search, AJAX search, and multi-select functionality. | |
+| `text_area` | | | | | |
+| `text_field` | | | | | |
+| `trix_editor` | | | [Trix](https://github.com/basecamp/trix) | Basic HTML-powered formatting features and support for at-mentions amongst team members. | |
+
+## Additional Field Partials Documentation
  - [`buttons`](/docs/field-partials/buttons.md)
  - [`super_select`](/docs/field-partials/super-select.md)
