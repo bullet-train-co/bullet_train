@@ -37,7 +37,7 @@ You can generate the available buttons using a collection of database objects by
 <pre><code><%= render 'shared/fields/super_select', form: form, method: :category_id,
   choices: Category.all.map { |category| [category.label_string, category.id] } %></code></pre>
 
-## Allowing Multiple Button Selections
+## Allowing Multiple Option Selections
 
 Here is an example allowing multiple team members to be assigned to a (hypothetical) `Project` model:
 
