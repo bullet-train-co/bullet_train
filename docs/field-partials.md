@@ -56,6 +56,12 @@ For example, to suppress a label on any field, we can use the `hide_label` optio
 <%= render 'shared/fields/text_field', form: form, method: :text_field_value, other_options: {hide_label: true} %>
 ```
 
+### Globally-available `other_options` options:
+
+ - `help`: Display a specific help string.
+ - `error`: Display a specific error string.
+ - `hide_label`: Hide the field label.
+
 ## Reducing Repetition
 When you're including multiple fields, you can DRY up redundant settings (e.g. `form: form`) like so:
 
