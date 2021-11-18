@@ -56,7 +56,7 @@ For example, to suppress a label on any field, we can use the `hide_label` optio
 <%= render 'shared/fields/text_field', form: form, method: :text_field_value, other_options: {hide_label: true} %>
 ```
 
-### Globally-available `other_options` options:
+### Globally-Available `other_options` Options
 
 | Key | Value Type | Description |
 | --- | --- | --- |
