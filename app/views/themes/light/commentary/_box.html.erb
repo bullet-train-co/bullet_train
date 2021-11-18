@@ -1,0 +1,13 @@
+<% yield p = np %>
+
+<div class="-m-0.5">
+  <div class="border-2 border-dashed rounded-lg border-yellow-300 bg-yellow-100 -m-3 p-3 xl:py-4 xl:px-4 xl:-mx-4">
+    <%= p.content_for :content %>
+
+    <div class="py-3 px-3 space-y-2 pt-6">
+      <p class="text-yellow-600 font-light leading-normal">
+        <%= p.content_for :commentary %>
+      </p>
+    </div>
+  </div>
+</div>

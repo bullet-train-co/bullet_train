@@ -69,6 +69,12 @@ en:
           description_empty: There are no Creative Concepts for you to see on %{team_name} yet. To add your own, use the button below!
       fields: *fields
       buttons: *buttons
+      commentary:
+        If you're wondering what a "Creative Concept" is, don't worry, there's nothing to understand here!
+        <code>Scaffolding::AbsolutelyAbstract::CreativeConcept</code> is a model that exists by default in Bullet Train to serve as part of Super Scaffolding's template system.
+        It also provides an example of what a scaffolded model looks like by default.
+        Yes, the class has a very weird name, but the weird name serves an important purpose when we're generating code.
+        For more details and instructions on how to hide this, see "<a href="https://tailwind.bullettrain.co/docs/super-scaffolding">Code Generation with Super Scaffolding</a>".
     show:
       section: "%{creative_concept_name}"
       header: Creative Concept Details
