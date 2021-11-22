@@ -186,7 +186,7 @@ gem "microscope"
 # serving language based on browser settings
 gem "http_accept_language"
 
-gem "cable_ready", "5.0.0.pre4"
+gem "cable_ready", "5.0.0.pre8"
 gem "hiredis"
 
 gem "active_hash", github: "bullet-train-co/active_hash", branch: "fixes/address-keyword-argument-issue"
