@@ -658,13 +658,6 @@ class Scaffolding::Transformer
           field_options[:multiple] = "true"
         end
 
-        if is_association
-          # TODO validate this input before getting anywhere near here.
-          unless attribute_options[:class_name]
-            raise "you need to specify a class_name for #{name}, e.g. `#{name}:#{type}[class_name=SomeClassName]`"
-          end
-        end
-
         valid_values = if is_id
           "valid_#{name_without_id.pluralize}"
         elsif is_ids

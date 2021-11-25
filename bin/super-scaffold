@@ -87,6 +87,55 @@ ARGV.each do |arg|
   end
 end
 
+def check_required_options_for_attributes(scaffolding_type, attributes, child, parent = nil)
+  attributes.each do |attribute|
+    parts = attribute.split(':')
+    name = parts.shift
+    type = parts.join(':')
+
+    # extract any options they passed in with the field.
+    type, attribute_options = type.scan(/^(.*)\[(.*)\]/).first || type
+
+    # create a hash of the options.
+    attribute_options = if attribute_options
+      attribute_options.split(',').map do |s|
+        option_name, option_value = s.split('=')
+        [option_name.to_sym, option_value || true]
+      end.to_h
+    else
+      {}
+    end
+
+    if name.match?(/_id$/) || name.match?(/_ids$/)
+      attribute_options ||= {}
+      unless attribute_options[:vanilla]
+        name_without_id = if name.match?(/_id$/)
+          name.gsub(/_id$/, '')
+        elsif name.match?(/_ids$/)
+          name.gsub(/_ids$/, '')
+        end
+
+        attribute_options[:class_name] ||= name_without_id.classify
+
+
+        file_name = "app/models/#{attribute_options[:class_name].underscore}.rb"
+        unless File.exists?(file_name)
+          puts ""
+          puts "Attributes that end with `_id` or `_ids` trigger awesome, powerful magic in Super Scaffolding. However, because no `#{attribute_options[:class_name]}` class was found defined in `#{file_name}`, you'll need to specify a `class_name` that exists to let us know what model class is on the other side of the association, like so:".red
+          puts ""
+          puts "  bin/super-scaffold #{scaffolding_type} #{child}#{" " + parent if parent.present?} #{name}:#{type}[class_name=#{name.gsub(/_ids?$/, '').classify}]".red
+          puts ""
+          puts "If `#{name}` is just a regular field and isn't backed by an ActiveRecord association, you can skip all this with the `[vanilla]` option, e.g.:".red
+          puts ""
+          puts "  bin/super-scaffold #{scaffolding_type} #{child}#{" " + parent if parent.present?} #{name}:#{type}[vanilla]".red
+          puts ""
+          exit
+        end
+      end
+    end
+  end
+end
+
 def show_usage
   puts ""
   puts "🚅  usage: bin/super-scaffold [type] (... | --help)"
@@ -152,6 +201,8 @@ if scaffolding_type == 'crud'
   # get all the attributes.
   attributes = argv[2..-1]
 
+  check_required_options_for_attributes(scaffolding_type, attributes, child, parent)
+
   transformer = Scaffolding::Transformer.new(child, parents, @options)
   transformer.scaffold_crud(attributes)
 
@@ -187,53 +238,7 @@ elsif scaffolding_type == 'crud-field'
   # get all the attributes.
   attributes = argv[1..-1]
 
-  # check that attributes have required options.
-  attributes.each do |attribute|
-    parts = attribute.split(':')
-    name = parts.shift
-    type = parts.join(':')
-
-    # extract any options they passed in with the field.
-    type, attribute_options = type.scan(/^(.*)\[(.*)\]/).first || type
-
-    # create a hash of the options.
-    attribute_options = if attribute_options
-      attribute_options.split(',').map do |s|
-        option_name, option_value = s.split('=')
-        [option_name.to_sym, option_value || true]
-      end.to_h
-    else
-      {}
-    end
-
-    if name.match?(/_id$/) || name.match?(/_ids$/)
-      attribute_options ||= {}
-      unless attribute_options[:vanilla]
-        name_without_id = if name.match?(/_id$/)
-          name.gsub(/_id$/, '')
-        elsif name.match?(/_ids$/)
-          name.gsub(/_ids$/, '')
-        end
-
-        attribute_options[:class_name] ||= name_without_id.classify
-
-        file_name = "app/models/#{attribute_options[:class_name].underscore}.rb"
-        unless File.exists?(file_name)
-          puts ""
-          puts "Attributes that end with `_id` or `_ids` trigger awesome, powerful magic in Super Scaffolding. However, because no `#{attribute_options[:class_name]}` class was found defined in `#{file_name}`, you'll need to specify a `class_name` that exists to let us know what model class is on the other side of the association, like so:".red
-          puts ""
-          puts "  bin/super-scaffold crud-field #{child} #{name}:#{type}[class_name=#{name.gsub(/_ids?$/, '').classify}]".red
-          puts ""
-          puts "If `#{name}` is just a regular field and isn't backed by an ActiveRecord association, you can skip all this with the `[vanilla]` option, e.g.:".red
-          puts ""
-          puts "  bin/super-scaffold crud-field #{child} #{name}:#{type}[vanilla]".red
-          puts ""
-          exit
-        end
-      end
-    end
-
-  end
+  check_required_options_for_attributes(scaffolding_type, attributes, child)
 
   transformer = Scaffolding::Transformer.new(child, parents, @options)
   transformer.add_attributes_to_various_views(attributes, type: :crud_field)
