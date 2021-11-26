@@ -9,7 +9,11 @@ def we_will_start_it(command)
 end
 
 PREREQUISITE = {
-  'bundle exec puma' => 'bundle install'
+  'puma' => 'bundle install && mkdir tmp/pids'
+}
+
+ALTERNATIVE = {
+  'puma' => 'rails s'
 }
 
 # In certain cases we need to check for multiple strings to ensure we don't match things like `puma` with `puma-dev`.
@@ -33,11 +37,16 @@ PROCESSES = {
 
     # Check whether there is something we should run before a given command.
     if PREREQUISITE[simple_command].present?
-      puts "Before we run `#{simple_command}`, we're going to run `#{prerequisite[simple_command]}`.".green
-      puts `#{prerequisite[simple_command]}`
+      puts "Before we run `#{simple_command}`, we're going to run `#{PREREQUISITE[simple_command]}`.".green
+      puts `#{PREREQUISITE[simple_command]}`
     end
 
-    puts "Now we're going to run `#{command}`".green
+    if ALTERNATIVE[simple_command].present?
+      puts "Instead of `#{command}`, we're just going to run `#{ALTERNATIVE[simple_command]}`.".green
+      command = ALTERNATIVE[simple_command]
+    else
+      puts "Now we're going to run `#{command}`".green
+    end
 
     # If we're in this loop, there's always more, because of the `webpack` stuff below.
     puts "However, there's more to run, so be sure to open another tab and run `bin/start` again!".yellow
