@@ -16,13 +16,13 @@ ngrok http 3000 -subdomain=your-subdomain
 
 ## Updating Your Configuration
 
-Before your Rails application will accept connections on your , you need to update `config/application.yml` and update `BASE_URL` like so:
+Before your Rails application will accept connections on your tunnel hostname, you need to update `config/application.yml` with:
 
 ```
 BASE_URL: https://your-subdomain.ngrok.io
 ```
 
-You'll also need to restart your Rails server, which you can do like so:
+You'll also need to restart your Rails server:
 
 ```
 rails restart
