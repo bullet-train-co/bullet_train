@@ -1,8 +1,10 @@
 # Enabling Stripe Subscriptions
 
+Bullet Train provides a base billing package and a Stripe-specific package with support for Stripe Checkout, Stripe Billing's customer portal, and incoming Stripe webhooks.
+
 ## 1. Merge the Stripe Billing Branch
 
-Bullet Train provides a base billing package and a Stripe-specific package with support for Stripe Checkout, Stripe Billing's customer portal, and incoming Stripe webhooks. You can import both packages from one branch:
+You can import both the base billing package and the Stripe package from one branch:
 
 ```
 git merge bullet-train/features/billing-stripe
