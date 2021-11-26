@@ -1,22 +1,55 @@
 # Integrating Stripe to Enable Pricing Page and Subscriptions
 
-1. Get your *test-mode* Stripe API keys at [https://dashboard.stripe.com/account/apikeys](https://dashboard.stripe.com/account/apikeys) and configure them as `STRIPE_PUBLISHABLE_KEY` and `STRIPE_SECRET_KEY` in your environment. I do this by creating a `config/application.yml` file (which will be ignored by Git) and populating it like so:
+## 1. Merge the Stripe Billing Mixin
 
 ```
-STRIPE_PUBLISHABLE_KEY: pk_0CJwz5wHlKBXxPA4DOOuEoipxQob0
-STRIPE_SECRET_KEY: sk_0CJw2Iu5wwIKHUDdrphrtGzFZyOCH
+git merge bullet-train/features/billing-stripe
 ```
 
-(The keys above are just an example and actually not valid for use.)
+## 2. Migrate the Database
 
-## Plans
+```
+rake db:migrate
+```
 
-By default, Bullet Train applications come configured with four plans, offering a "Basic" and "Pro" product with "Monthly" and "Annual" pricing options and there are two separate pricing tables for displaying the "Monthly" and "Annual" options. Obviously your own product's pricing structure might vary substantially from this, but having these as a baseline helps streamline testing.
+## 3. Create API Keys with Stripe
 
-2. Run `rake bullet_train:setup:populate_stripe_products` to push the default products and prices over to Stripe. This script will output some environment values you'll need to copy into `config/application.yml`.
+ - Create a Stripe account if you don't already have one.
+ - Visit https://dashboard.stripe.com/apikeys.
+ - For your development environment, make sure you toggle the "test mode" flag to "on" in the top-right corner.
+ - Create a new secret key.
 
-3. Run `rake db:seed` to create corresponding plans and pricing tables for your application.
+## 4. Configure Stripe API Keys Locally
 
-4. Run `rails restart` to ensure the new Stripe configuration takes effect.
+Edit `config/application.yml` and add your Stripe publishable key and new secret key to the file like so:
 
-You can now refresh the homepage and test your pricing page by clicking on the "Pricing" link on the homepage, and proceed to sign up. In test mode, you can use "4242424242424242" as a credit card number to get past the payment page.
+```
+STRIPE_PUBLISHABLE_KEY: pk_0CJwz5wHlKBXxDA4VO1uEoipxQob0
+STRIPE_SECRET_KEY: sk_0CJw2Iu5wwIKXUDdqphrt2zFZyOCH
+```
+
+## 5. Populate Stripe with Locally Configured Products
+
+Bullet Train defines subscription plans and other purchasable add-ons in `config/models/billing/products.yml` and comes preconfigured with some example plans. We recommend just getting started with these plans to ensure your setup is working before customizing the attributes of these plans.
+
+Before you can use Stripe Checkout or Stripe Billing's customer portal, these products will have to be defined on Stripe as well. You can have all locally defined products automatically created on Stripe by running the following:
+
+```
+rake billing:stripe:populate_products_in_stripe
+```
+
+That script will output some environment variables you need to copy into `config/application.yml`.
+
+## 6. Restart Rails
+
+We've modified a bunch of environment variables, so you'll have to have to restart your Rails server before you see the results in your browser.
+
+```
+rails restart
+```
+
+### 7. Test Creating a Subscription
+
+Bullet Train comes preconfigured with a "freemium" plan, so new and existing accounts will continue to work as normal. A new "Billing" menu item will appear and you can test subscription creation by clicking "Upgrade" and selecting one of the two plans presented.
+
+You should be in "test mode" on Stripe, so when prompted for a credit card number, you can enter `4242 4242 4242 4242`.
