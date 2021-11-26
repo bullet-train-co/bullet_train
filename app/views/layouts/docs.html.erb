@@ -84,6 +84,12 @@
                     <i class="fal fa-sparkles ti ti-arrow-up"></i>
                   <% end %>
                 <% end %>
+
+                <%= render 'account/shared/menu/item', url: '/docs/tunneling', label: 'Tunneling' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-bolt ti ti-bolt"></i>
+                  <% end %>
+                <% end %>
               <% end %>
 
               <%= render 'account/shared/menu/section', title: 'Developer Tools' do %>
@@ -119,7 +125,6 @@
               <% end %>
 
               <%= render 'account/shared/menu/section', title: 'Accounts & Teams' do %>
-
                 <%= render 'account/shared/menu/item', url: '/docs/authentication', label: 'Authentication' do |p| %>
                   <% p.content_for :icon do %>
                     <i class="fal fa-fingerprint ti ti-id-badge"></i>
@@ -144,15 +149,17 @@
                   <% end %>
                 <% end %>
 
-                <%= render 'account/shared/menu/item', url: '/docs/subscriptions', label: 'Subscriptions' do |p| %>
-                  <% p.content_for :icon do %>
-                    <i class="fal fa-money-bill-wave ti ti-money"></i>
-                  <% end %>
-                <% end %>
-
                 <%= render 'account/shared/menu/item', url: '/docs/namespacing', label: 'Namespacing' do |p| %>
                   <% p.content_for :icon do %>
                     <i class="fal fa-object-group ti ti-widgetized"></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+
+              <%= render 'account/shared/menu/section', title: 'Billing' do %>
+                <%= render 'account/shared/menu/item', url: '/docs/billing/stripe', label: 'Stripe' do |p| %>
+                  <% p.content_for :icon do %>
+                    <i class="fal fa-money-bill-wave ti ti-money"></i>
                   <% end %>
                 <% end %>
               <% end %>
@@ -164,13 +171,11 @@
                   <% end %>
                 <% end %>
 
-                <% if false %>
                 <%= render 'account/shared/menu/item', url: '/docs/api', label: 'REST API' do |p| %>
                   <% p.content_for :icon do %>
                     <i class="fal fa-brackets-curly ti ti-settings"></i>
                   <% end %>
-                <% end %>
-                <% end %>
+                <% end if false %>
 
                 <%= render 'account/shared/menu/item', url: '/docs/webhooks/outgoing', label: 'Outgoing Webhooks' do |p| %>
                   <% p.content_for :icon do %>
@@ -214,7 +219,6 @@
                   <% end %>
                 <% end %>
               <% end %>
-
             </div>
           </nav>
         <% end %>

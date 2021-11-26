@@ -10,6 +10,7 @@ Bullet Train is designed to be customized and extended by the development teams 
  - [Getting Started](/docs/getting-started.md)
  - [Philosophy](/docs/philosophy.md)
  - [Upgrades](/docs/upgrades.md)
+ - [Tunneling](/docs/tunneling.md)
 
 ## Developer Tools
  - [Super Scaffolding](/docs/super-scaffolding.md)
@@ -24,8 +25,10 @@ Bullet Train is designed to be customized and extended by the development teams 
  - [Teams](/docs/teams.md)
  - [Permissions](/docs/permissions.md)
  - [Onboarding](/docs/onboarding.md)
- - [Subscriptions](/docs/subscriptions.md)
  - [Namespacing](/docs/namespacing.md)
+
+## Billing
+ - [Stripe](/docs/billing/stripe.md)
 
 ## Integration
  - [OAuth Providers](/docs/oauth.md)
