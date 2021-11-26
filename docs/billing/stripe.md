@@ -79,10 +79,16 @@ Basic subscription creation will work without receiving and processing Stripe's 
  - Restart your Rails server with `rails restart`.
  - Trigger a test webhook just to ensure it's resulting in an HTTP status code of 201.
 
- ## 10. Configure Stripe Billing's Customer Portal
+## 10. Configure Stripe Billing's Customer Portal
 
   - Visit https://dashboard.stripe.com/test/settings/billing/portal.
   - Complete all required fields.
   - Be sure to add all of your actively available plans under "products".
 
 This "products" list is what Stripe will display to users as upgrade and downgrade options in the customer portal. You shouldn't list any products here that aren't properly configured in your Rails app, otherwise the resulting webhook will fail to process. If you want to stop offering a plan, you should remove it from this list as well.
+
+## 11. Test Webhooks by Managing a Subscription
+
+In the same account where you created your first test subscription, go into the "billing" menu and click "manage" on that subscription. This will take you to the Stripe Billing customer portal.
+
+Once you're in the customer portal, you should test upgrading, downgrading, and canceling your subscription and clicking "⬅ Return to {Your Application Name}" in between each step to ensure that each change you're making is properly reflected in your Bullet Train application. This will let you know that webhooks are being properly delivered and processed and all the products in both systems are properly mapped in both directions.
