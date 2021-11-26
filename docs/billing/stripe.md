@@ -78,3 +78,11 @@ Basic subscription creation will work without receiving and processing Stripe's 
 
  - Restart your Rails server with `rails restart`.
  - Trigger a test webhook just to ensure it's resulting in an HTTP status code of 201.
+
+ ## 10. Configure Stripe Billing's Customer Portal
+
+  - Visit https://dashboard.stripe.com/test/settings/billing/portal.
+  - Complete all required fields.
+  - Be sure to add all of your actively available plans under "products".
+
+This "products" list is what Stripe will display to users as upgrade and downgrade options in the customer portal. You shouldn't list any products here that aren't properly configured in your Rails app, otherwise the resulting webhook will fail to process. If you want to stop offering a plan, you should remove it from this list as well.
