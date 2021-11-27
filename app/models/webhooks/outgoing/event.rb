@@ -1,7 +1,7 @@
 class Webhooks::Outgoing::Event < ApplicationRecord
   include HasUuid
   belongs_to :team
-  belongs_to :event_type
+  belongs_to :event_type, class_name: "Webhooks::Outgoing::EventType"
   belongs_to :subject, polymorphic: true
   has_many :deliveries, dependent: :destroy
 
@@ -12,7 +12,7 @@ class Webhooks::Outgoing::Event < ApplicationRecord
   def generate_payload
     {
       event_id: uuid,
-      event_type: event_type.try(:name),
+      event_type: event_type_id,
       subject_id: subject_id,
       subject_type: subject_type,
       data: data
@@ -24,9 +24,7 @@ class Webhooks::Outgoing::Event < ApplicationRecord
   end
 
   def endpoints
-    team.webhooks_outgoing_endpoints
-      .joins("LEFT JOIN webhooks_outgoing_endpoint_event_types ON webhooks_outgoing_endpoint_event_types.endpoint_id = webhooks_outgoing_endpoints.id")
-      .where("webhooks_outgoing_endpoint_event_types.event_type_id = ? OR webhooks_outgoing_endpoint_event_types.id IS NULL", event_type.id)
+    team.webhooks_outgoing_endpoints.listening_for_event_type_id(event_type_id)
   end
 
   def deliver

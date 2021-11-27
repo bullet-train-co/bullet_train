@@ -37,7 +37,7 @@ end
 # 🚅 super scaffolding will insert new oauth providers above this line.
 
 def webhooks_enabled?
-  Webhooks::Outgoing::EventType.any?
+  true
 end
 
 def scaffolding_things_disabled?

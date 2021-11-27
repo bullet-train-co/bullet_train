@@ -1,0 +1,9 @@
+scaffolding/absolutely_abstract/creative_concept:
+  # This automatically generates `created`, `updated`, and `deleted` webhook events.
+  - crud
+scaffolding/completely_concrete/tangible_thing:
+  - crud
+invitation:
+  - crud
+membership:
+  - crud

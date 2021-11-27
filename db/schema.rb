@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_27_002944) do
+ActiveRecord::Schema.define(version: 2021_11_27_015713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -351,30 +351,17 @@ ActiveRecord::Schema.define(version: 2021_10_27_002944) do
     t.integer "attempt_number"
   end
 
-  create_table "webhooks_outgoing_endpoint_event_types", force: :cascade do |t|
-    t.integer "endpoint_id"
-    t.integer "event_type_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "webhooks_outgoing_endpoints", force: :cascade do |t|
     t.bigint "team_id"
     t.text "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.jsonb "event_type_ids", default: []
     t.index ["team_id"], name: "index_webhooks_outgoing_endpoints_on_team_id"
   end
 
-  create_table "webhooks_outgoing_event_types", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "webhooks_outgoing_events", force: :cascade do |t|
-    t.integer "event_type_id"
     t.integer "subject_id"
     t.string "subject_type"
     t.jsonb "data"
@@ -383,6 +370,7 @@ ActiveRecord::Schema.define(version: 2021_10_27_002944) do
     t.bigint "team_id"
     t.string "uuid"
     t.jsonb "payload"
+    t.string "event_type_id"
     t.index ["team_id"], name: "index_webhooks_outgoing_events_on_team_id"
   end
 

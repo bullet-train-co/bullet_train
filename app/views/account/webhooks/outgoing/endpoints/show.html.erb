@@ -14,7 +14,7 @@
           <%= render 'shared/attributes/code', attribute: :url %>
           <% # TODO We should make the `has_many` attribute partial configurable enough to handle this use case. %>
           <%= render 'shared/attributes/attribute', attribute: :event_types do %>
-            <% if @endpoint.event_types.any? %>
+            <% if @endpoint.event_type_ids.any? %>
               <% @endpoint.event_types.map do |event_type| %>
                 <% capture do %>
                   <code><%= event_type.name %></code>

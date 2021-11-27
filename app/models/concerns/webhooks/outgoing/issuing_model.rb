@@ -17,15 +17,19 @@ module Webhooks::Outgoing::IssuingModel
     # we can only generate webhooks for objects that return their team.
     return unless respond_to? :team
 
-    # we only generate a webhook for event types that are defined in the database.
-    # this is what allows users to filter which webhooks they receive, if they want to.
-    # however, even if they're not filtering, we only deliver webhooks that are
-    # defined in this table.
-    event_type = Webhooks::Outgoing::EventType.find_by(name: "#{self.class.name.underscore}.#{action}")
+    # Try to find an event type definition for this action.
+    event_type = Webhooks::Outgoing::EventType.find_by(id: "#{self.class.name.underscore}.#{action}")
+
+    # If the event type is defined as one that people can be subscribed to,
+    # and this object has a team where an associated outgoing webhooks endpoint could be registered.
     if event_type && team
-      data = "Api::V1::#{self.class.name}Serializer".constantize.new(self).serializable_hash[:data]
-      webhook = team.webhooks_outgoing_events.create(event_type: event_type, subject: self, data: data)
-      webhook.deliver
+
+      # Only generate an event record if an endpoint is actually listening for this event type.
+      if team.webhooks_outgoing_endpoints.listening_for_event_type_id(event_type.id).any?
+        data = "Api::V1::#{self.class.name}Serializer".constantize.new(self).serializable_hash[:data]
+        webhook = team.webhooks_outgoing_events.create(event_type_id: event_type.id, subject: self, data: data)
+        webhook.deliver
+      end
     end
   end
 

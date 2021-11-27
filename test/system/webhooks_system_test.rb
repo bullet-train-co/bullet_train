@@ -38,11 +38,13 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         click_on "Add New Creative Concept"
         assert page.has_content? "New Creative Concept Details"
 
-        fill_in "Name", with: "Testing"
-        click_on "Create Creative Concept"
-        assert page.has_content? "Creative Concept was successfully created"
+        assert_difference "Webhooks::Outgoing::Event.count", 0, "an outbound webhook event should not be issued" do
+          fill_in "Name", with: "Testing"
+          click_on "Create Creative Concept"
+          assert page.has_content? "Creative Concept was successfully created"
+        end
 
-        assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
+        assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook delivery should be issued" do
           click_on "Add New Tangible Thing"
           assert page.has_content? "New Tangible Thing Details"
           fill_in "Text Field Value", with: "Some Thing"

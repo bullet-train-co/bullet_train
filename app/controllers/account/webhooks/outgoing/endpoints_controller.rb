@@ -71,6 +71,7 @@ class Account::Webhooks::Outgoing::EndpointsController < Account::ApplicationCon
       # 🚅 super scaffolding will insert new arrays above this line.
     )
 
+    assign_select_options(strong_params, :event_type_ids)
     # 🚅 super scaffolding will insert processing for new fields above this line.
 
     strong_params
