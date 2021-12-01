@@ -22,6 +22,10 @@
     @apply gap-x-4;
   }
 
+  .bg-dark-blue-gradient {
+    background-image: linear-gradient(to bottom, #1c4cc3 0%, #0e369a 100%);
+  }
+
   .bg-dark-awesome-gradient {
     background-image: linear-gradient(to bottom right, darken(#D7BBEA, 45%) 10%, #0e369a 100%);
   }
