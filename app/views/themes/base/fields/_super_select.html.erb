@@ -13,8 +13,13 @@ choices_url ||= nil
 if choices_url.nil?
   choices ||= options_for(form, method)&.invert
 else
-  # If we have a choices_url, we're going to eager load the values so we want this set to an empty hash
-  choices = {}
+  # If we have a choices_url, we're going to lazy load the choices.  However, we still want to show the currently selected option.
+  method_without_id = method.to_s.gsub("_id", "")
+  if current_selection = form.object.send(method_without_id)
+    choices = [[current_selection.label_string, current_selection.id]]
+  else
+    choices = {}
+  end
 end
 
 wrapper_options = { data: { controller: stimulus_controller }}

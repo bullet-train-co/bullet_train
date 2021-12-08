@@ -8,8 +8,4 @@
 
 puts "🌱 Generating global seeds."
 
-# Ensure the admin role is in the database.
-Role.admin
-
 load "#{Rails.root}/db/seeds/development.rb" if Rails.env.development?
-load "#{Rails.root}/db/seeds/test.rb" if Rails.env.test?

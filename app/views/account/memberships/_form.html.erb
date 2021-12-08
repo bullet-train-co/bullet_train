@@ -21,14 +21,14 @@
 
   <%= hidden_field_tag 'membership[role_ids][]', nil %>
 
-  <% Role.order(:display_order).each do |role| %>
-    <% if current_membership.can_manage_role?(role) %>
+  <% Membership.assignable_roles.each do |role| %>
+    <% if role.manageable_by?(current_membership.roles) %>
       <div class="flex items-top">
         <%= form.check_box :role_ids, {multiple: true, class: "h-4 w-4 text-blue focus:ring-blue-dark border-gray-300 rounded mt-0.5"}, role.id, nil %>
         <label for="membership_role_ids_<%= role.id %>" class="ml-2 block select-none">
-          <%= t('.grant_privileges_of', role_name: t("roles.labels.#{role.key}")) %>
+          <%= t('.grant_privileges_of', role_key: t(".fields.role_ids.options.#{role.key}.label")) %>
           <div class="mt-0.5 text-gray-400 font-light leading-normal">
-            <%= t("roles.descriptions.#{role.key}") %>
+            <%= t(".fields.role_ids.options.#{role.key}.label") %>
           </div>
         </label>
       </div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_015713) do
+ActiveRecord::Schema.define(version: 2021_11_30_142547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,15 +100,6 @@ ActiveRecord::Schema.define(version: 2021_11_27_015713) do
     t.index ["team_id"], name: "index_invitations_on_team_id"
   end
 
-  create_table "membership_roles", force: :cascade do |t|
-    t.bigint "membership_id"
-    t.bigint "role_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["membership_id"], name: "index_membership_roles_on_membership_id"
-    t.index ["role_id"], name: "index_membership_roles_on_role_id"
-  end
-
   create_table "memberships", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
@@ -121,6 +112,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_015713) do
     t.string "user_email"
     t.bigint "added_by_id"
     t.bigint "platform_agent_of_id"
+    t.jsonb "role_ids", default: []
     t.index ["added_by_id"], name: "index_memberships_on_added_by_id"
     t.index ["invitation_id"], name: "index_memberships_on_invitation_id"
     t.index ["platform_agent_of_id"], name: "index_memberships_on_platform_agent_of_id"
@@ -198,13 +190,6 @@ ActiveRecord::Schema.define(version: 2021_11_27_015713) do
     t.index ["user_id"], name: "index_oauth_stripe_accounts_on_user_id"
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "key"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "display_order", default: 0
-  end
-
   create_table "scaffolding_absolutely_abstract_creative_concepts", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.string "name"
@@ -219,7 +204,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_015713) do
     t.bigint "membership_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.jsonb "roles", default: []
+    t.jsonb "role_ids", default: []
     t.index ["creative_concept_id"], name: "index_creative_concepts_collaborators_on_creative_concept_id"
     t.index ["membership_id"], name: "index_creative_concepts_collaborators_on_membership_id"
   end
@@ -380,8 +365,6 @@ ActiveRecord::Schema.define(version: 2021_11_27_015713) do
   add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"
   add_foreign_key "integrations_stripe_installations", "teams"
   add_foreign_key "invitations", "teams"
-  add_foreign_key "membership_roles", "memberships"
-  add_foreign_key "membership_roles", "roles"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "memberships", "memberships", column: "added_by_id"
   add_foreign_key "memberships", "oauth_applications", column: "platform_agent_of_id"

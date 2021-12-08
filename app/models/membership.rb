@@ -1,4 +1,6 @@
 class Membership < ApplicationRecord
+  include Role::Support
+  roles_only :default, :admin
   # 🚫 DEFAULT BULLET TRAIN MEMBERSHIP FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
@@ -8,17 +10,12 @@ class Membership < ApplicationRecord
   belongs_to :invitation, optional: true, dependent: :destroy
   belongs_to :added_by, class_name: "Membership", optional: true
   belongs_to :platform_agent_of, class_name: "Platform::Application", optional: true
-  has_many :membership_roles, dependent: :destroy
-  has_many :roles, through: :membership_roles
 
   has_many :scaffolding_completely_concrete_tangible_things_assignments, class_name: "Scaffolding::CompletelyConcrete::TangibleThings::Assignment", dependent: :destroy
   has_many :scaffolding_completely_concrete_tangible_things, through: :scaffolding_completely_concrete_tangible_things_assignments, source: :tangible_thing
   has_many :reassignments_scaffolding_completely_concrete_tangible_things_reassignments, class_name: "Memberships::Reassignments::ScaffoldingCompletelyConcreteTangibleThingsReassignment", dependent: :destroy, foreign_key: :membership_id
 
   has_many :scaffolding_absolutely_abstract_creative_concepts_collaborators, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator", dependent: :destroy
-
-  after_save :invalidate_caches
-  after_destroy :invalidate_caches
 
   after_destroy do
     # if we're destroying a user's membership to the team they have set as
@@ -29,7 +26,6 @@ class Membership < ApplicationRecord
     end
   end
 
-  scope :admins, -> { includes(:roles).where(roles: {key: :admin}) }
   scope :current_and_invited, -> { includes(:invitation).where("user_id IS NOT NULL OR invitations.id IS NOT NULL").references(:invitation) }
   scope :current, -> { where("user_id IS NOT NULL") }
   scope :tombstones, -> { includes(:invitation).where("user_id IS NULL AND invitations.id IS NULL").references(:invitation) }
@@ -61,11 +57,6 @@ class Membership < ApplicationRecord
   # 🚫 DEFAULT BULLET TRAIN TEAM FUNCTIONALITY
   # We put these at the bottom of this file to keep them out of the way. You should define your own methods above here.
 
-  def invalidate_caches
-    user&.invalidate_ability_cache
-    team&.invalidate_caches
-  end
-
   def name
     full_name
   end
@@ -86,18 +77,6 @@ class Membership < ApplicationRecord
     end
 
     super(ids)
-  end
-
-  def manageable_roles
-    (Role.roles_managable_by_all + roles.map(&:manageable_roles)).flatten.uniq
-  end
-
-  def can_manage_role?(role)
-    manageable_roles.include?(role)
-  end
-
-  def admin?
-    roles.include?(Role.admin)
   end
 
   def unclaimed?
@@ -140,7 +119,6 @@ class Membership < ApplicationRecord
       save
 
       user_was.invalidate_ability_cache
-      team.invalidate_caches
 
       user_was.update(
         current_team: user_was.teams.first,

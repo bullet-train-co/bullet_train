@@ -43,7 +43,7 @@ en:
       fields: *fields
       buttons: *buttons
     form: &form
-      invite_as: 'Invite as %{role_name}'
+      invite_as: 'Invite as %{role_key}'
       buttons: *buttons
     new:
       section: New Invitation for %{team_name}

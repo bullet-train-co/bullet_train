@@ -20,12 +20,12 @@
         <% with_attribute_settings object: @membership, strategy: :label do %>
           <%= render 'shared/attributes/text', attribute: :name %>
           <%= render 'shared/attributes/base' do |p| %>
-            <% p.content_for :heading, t('roles.header') %>
+            <% p.content_for :heading, t('.fields.role_ids.heading') %>
             <% p.content_for :body do %>
-              <% if @membership.roles.any? %>
-                <%= @membership.roles.order(:display_order).map { |role| t("roles.labels.#{role.key}") }.to_sentence %>
+              <% if @membership.assignable_roles.any? %>
+                <%= @membership.assignable_roles.map { |role| t(".fields.role_ids.options.#{role.key}.label") }.to_sentence %>
               <% else %>
-                <%= t("roles.labels.none") %>
+                <%= t(".fields.role_ids.none") %>
               <% end %>
             <% end %>
           <% end %>

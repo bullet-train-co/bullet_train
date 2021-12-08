@@ -79,14 +79,14 @@ class MembershipSystemTest < ApplicationSystemTestCase
       within_current_memberships_table do
         within_membership_row(invited_membership) do
           assert page.has_no_content?("Team Administrator")
-          assert page.has_content?("None")
+          assert page.has_content?("Viewer")
           click_on "Details"
         end
       end
 
       assert page.has_content?("SPECIAL PRIVILEGES")
       assert page.has_no_content?("Team Administrator")
-      assert page.has_content?("None")
+      assert page.has_content?("Viewer")
 
       click_on "Promote to Admin"
       page.driver.browser.switch_to.alert.accept
@@ -106,14 +106,13 @@ class MembershipSystemTest < ApplicationSystemTestCase
       fill_in "Last Name", with: "Nishiyama"
       # this is removing their admin privileges.
       find("label", text: "Grant Privileges of Team Administrator").click
-      find("label", text: "Grant Privileges of Another Role").click
       click_on "Update Membership"
 
       assert page.has_no_content?("Takashi Yamaguchi")
       assert page.has_no_content?("Team Administrator")
 
       assert page.has_content?("Yuto Nishiyama")
-      assert page.has_content?("Another Role")
+      assert page.has_content?("Viewer")
 
       click_on "Remove from Team"
       page.driver.browser.switch_to.alert.accept
@@ -131,7 +130,7 @@ class MembershipSystemTest < ApplicationSystemTestCase
 
       within_former_memberships_table do
         assert page.has_content?("Yuto Nishiyama")
-        assert page.has_content?("Another Role")
+        assert page.has_content?("Viewer")
         click_on "Re-Invite to Team"
         page.driver.browser.switch_to.alert.accept
       end
@@ -141,7 +140,7 @@ class MembershipSystemTest < ApplicationSystemTestCase
       within_current_memberships_table do
         assert page.has_content?("Yuto Nishiyama")
         within_membership_row(invited_membership) do
-          assert page.has_content?("Another Role")
+          assert page.has_content?("Viewer")
           click_on "Details"
         end
       end

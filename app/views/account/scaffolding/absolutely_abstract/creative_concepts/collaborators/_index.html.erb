@@ -19,7 +19,7 @@
         <thead>
           <tr>
             <th><%= t('.fields.membership_id.heading') %></th>
-            <th><%= t('.fields.roles.heading') %></th>
+            <th><%= t('.fields.role_ids.heading') %></th>
             <%# 🚅 super scaffolding will insert new field headers above this line. %>
             <th class="text-right"></th>
           </tr>
@@ -29,10 +29,10 @@
             <tr data-id="<%= collaborator.id %>">
               <td><%= link_to collaborator.membership.label_string, [:account, collaborator] %></td>
               <td>
-                <% if collaborator.roles.present? %>
-                  <%= collaborator.roles.map { |role| t(".fields.roles.options.#{role}") }.to_sentence %>
+                <% if collaborator.roles_without_defaults.present? %>
+                  <%= collaborator.roles_without_defaults.map { |role| t("#{collaborator.class.to_s.pluralize.underscore}.fields.role_ids.options.#{role.key}.label") }.to_sentence %>
                 <% else %>
-                  <%= t(".fields.roles.none") %>
+                  <%= t(".fields.role_ids.none") %>
                 <% end %>
               </td>
               <%# 🚅 super scaffolding will insert new fields above this line. %>

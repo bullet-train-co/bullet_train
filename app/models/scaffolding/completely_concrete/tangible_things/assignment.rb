@@ -7,6 +7,7 @@ class Scaffolding::CompletelyConcrete::TangibleThings::Assignment < ApplicationR
 
   # 🚅 add has_many associations above.
 
+  has_one :team, through: :tangible_thing
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
@@ -15,7 +16,6 @@ class Scaffolding::CompletelyConcrete::TangibleThings::Assignment < ApplicationR
 
   # 🚅 add callbacks above.
 
-  delegate :team, to: :tangible_thing
   # 🚅 add delegations above.
 
   # 🚅 add methods above.

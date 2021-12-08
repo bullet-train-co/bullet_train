@@ -50,7 +50,7 @@ class Account::MembershipsController < Account::ApplicationController
   end
 
   def demote
-    @membership.membership_roles.find_by(role: Role.admin).try(:destroy)
+    @membership.roles.delete Role.admin
     redirect_to account_team_memberships_path(@team)
   rescue RemovingLastTeamAdminException => _
     redirect_to account_team_memberships_path(@team), alert: I18n.t("memberships.notifications.cant_demote")
@@ -88,8 +88,8 @@ class Account::MembershipsController < Account::ApplicationController
 
   private
 
-  def manageable_role_ids
-    helpers.current_membership.manageable_roles.map(&:id)
+  def manageable_role_keys
+    helpers.current_membership.manageable_roles.map(&:key)
   end
 
   # NOTE this method is only designed to work in the context of updating a membership.
@@ -110,18 +110,18 @@ class Account::MembershipsController < Account::ApplicationController
     # permission to assign to other team members.
     if params[:membership] && params[:membership][:role_ids].present?
 
-      # first, start with the list of role ids already assigned to this membership.
-      existing_role_ids = @membership.role_ids
+      # first, start with the list of role keys already assigned to this membership.
+      existing_role_keys = @membership.role_ids
 
-      # generate a list of role ids we can't allow the current user to remove from this membership.
-      existing_role_id_that_are_unmanageable = existing_role_ids - manageable_role_ids
+      # generate a list of role keys we can't allow the current user to remove from this membership.
+      existing_role_keys_that_are_unmanageable = existing_role_keys - manageable_role_keys
 
-      # now let's ensure the list of role ids from the form only includes ids that they're allowed to assign.
-      assignable_role_ids_from_the_form = params[:membership][:role_ids].map(&:to_i) & manageable_role_ids
+      # now let's ensure the list of role keys from the form only includes keys that they're allowed to assign.
+      assignable_role_keys_from_the_form = params[:membership][:role_ids].map(&:to_s) & manageable_role_keys
 
-      # any role ids that are manageable by the current user have to then come from the form data,
+      # any role keys that are manageable by the current user have to then come from the form data,
       # otherwise we can assume they were removed by being unchecked.
-      strong_params[:role_ids] = existing_role_id_that_are_unmanageable + assignable_role_ids_from_the_form
+      strong_params[:role_ids] = existing_role_keys_that_are_unmanageable + assignable_role_keys_from_the_form
 
     end
 

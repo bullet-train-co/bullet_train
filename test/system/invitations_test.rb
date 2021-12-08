@@ -256,7 +256,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         assert page.has_content?("Hanako Tanaka")
         within_membership_row(last_membership) do
           assert page.has_no_content?("Invited")
-          assert page.has_content?("None")
+          assert page.has_content?("Viewer")
           click_on "Details"
         end
       end
@@ -296,7 +296,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       assert page.has_content?("Hanako Tanaka’s Membership on The Testing Team")
 
       # since the user is no longer an admin, they shouldn't see either of these options anymore.
-      assert page.has_content?("None")
+      assert page.has_content?("Viewer")
       assert page.has_no_content?("Promote to Admin")
       assert page.has_no_content?("Demote from Admin")
 

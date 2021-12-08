@@ -33,12 +33,25 @@ en:
       user_profile_photo_id:
         name: &user_profile_photo_id Profile Photo
         label: *user_profile_photo_id
+      role_ids:
+        name: &roles Special Privileges
+        label: *roles
+        heading: *roles
+        options:
+          default:
+            label: Viewer
+            description: Can only view team data
+          admin:
+            label: Team Administrator
+            description: Team administrators can manage billing and manage special privileges for other users.
+        none: Viewer
     index:
       section: "%{team_name} Team Members"
       contexts:
         team:
           header: Team Members
           description: The following people are members of your team. You can also invite new team members.
+          fields: *fields
       buttons: *buttons
     tombstones:
       contexts:
@@ -47,13 +60,14 @@ en:
           description: The following people have been removed from %{team_name}, but you can still manage their profile and reassign their assignments to other team members.
       buttons: *buttons
     form: &form
-      grant_privileges_of: Grant Privileges of %{role_name}
+      grant_privileges_of: Grant Privileges of %{role_key}
       buttons: *buttons
+      fields: *fields
     edit:
       section: "%{membership_name} on %{team_name}"
       header: Update Membership Settings
       description: You can edit the settings for %{memberships_possessive} membership on %{team_name} below.
-      grant_privileges_of: Grant Privileges of %{role_name}
+      grant_privileges_of: Grant Privileges of %{role_key}
       remove_header: Remove Team Member
       remove_description: Removing %{membership_name} won't remove any resource assignments. Instead, you'll have the option of reassigning resources to another team member. You'll also be able to re-invite %{membership_name} back to the team in the future.
       buttons: *buttons

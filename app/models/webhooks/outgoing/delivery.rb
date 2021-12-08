@@ -3,6 +3,7 @@ class Webhooks::Outgoing::Delivery < ApplicationRecord
 
   belongs_to :endpoint, class_name: "Webhooks::Outgoing::Endpoint"
   belongs_to :event, class_name: "Webhooks::Outgoing::Event"
+  has_one :team, through: :endpoint
 
   ATTEMPT_SCHEDULE = {
     1 => 15.seconds,
@@ -12,10 +13,8 @@ class Webhooks::Outgoing::Delivery < ApplicationRecord
     5 => 1.hour,
   }
 
-  belongs_to :event, class_name: "Webhooks::Outgoing::Event"
   # 🚅 add belongs_to associations above.
 
-  has_many :delivery_attempts, dependent: :destroy
   has_many :delivery_attempts, class_name: "Webhooks::Outgoing::DeliveryAttempt", dependent: :destroy, foreign_key: :delivery_id
   # 🚅 add has_many associations above.
 

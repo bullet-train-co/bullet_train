@@ -63,10 +63,13 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def collaborator_params
+    role_ids = params.dig(:scaffolding_absolutely_abstract_creative_concepts_collaborator, :role_ids)
+    role_ids = [role_ids] unless role_ids.is_a?(Array)
+    params[:scaffolding_absolutely_abstract_creative_concepts_collaborator][:role_ids] = role_ids
     strong_params = params.require(:scaffolding_absolutely_abstract_creative_concepts_collaborator).permit(
       :membership_id,
       # 🚅 super scaffolding will insert new fields above this line.
-      roles: [],
+      role_ids: [],
       # 🚅 super scaffolding will insert new arrays above this line.
     )
 

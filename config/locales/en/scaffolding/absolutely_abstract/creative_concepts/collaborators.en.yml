@@ -27,13 +27,20 @@ en:
 
       membership: *membership
 
-      roles:
+      role_ids:
         name: &roles Privileges
         label: *roles
         heading: *roles
         options:
-          admin: Administrator
-          editor: Editor
+          default:
+            label: Observer
+            description: Can view all data
+          editor:
+            label: Editor
+            description: Can edit but not delet this object
+          admin:
+            label: Admin
+            description: Can manage all data
         none: Observer
 
       # 🚅 super scaffolding will insert new fields above this line.

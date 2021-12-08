@@ -2,6 +2,7 @@ class Webhooks::Outgoing::DeliveryAttempt < ApplicationRecord
   # 🚅 add concerns above.
 
   belongs_to :delivery
+  has_one :team, through: :delivery
   scope :successful, -> { where(response_code: 200) }
 
   before_create do

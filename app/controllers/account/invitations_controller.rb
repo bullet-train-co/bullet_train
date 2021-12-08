@@ -108,8 +108,8 @@ class Account::InvitationsController < Account::ApplicationController
 
   private
 
-  def manageable_role_ids
-    helpers.current_membership.manageable_roles.map(&:id)
+  def manageable_role_keys
+    helpers.current_membership.manageable_roles.map(&:key)
   end
 
   # NOTE this method is only designed to work in the context of creating a invitation.
@@ -132,10 +132,10 @@ class Account::InvitationsController < Account::ApplicationController
     # to assign, but they do have permission to assign some to other team members.
     if params[:invitation] && params[:invitation][:role_ids].present?
 
-      # ensure the list of role ids from the form only includes ids that they're allowed to assign.
-      assignable_role_ids_from_the_form = params[:invitation][:role_ids].map(&:to_i) & manageable_role_ids
+      # ensure the list of role keys from the form only includes keys that they're allowed to assign.
+      assignable_role_keys_from_the_form = params[:invitation][:role_ids].map(&:to_i) & manageable_role_keys
 
-      strong_params[:role_ids] = assignable_role_ids_from_the_form
+      strong_params[:role_ids] = assignable_role_keys_from_the_form
 
     end
 

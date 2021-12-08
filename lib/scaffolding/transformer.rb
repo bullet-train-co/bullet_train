@@ -1,4 +1,5 @@
 require "indefinite_article"
+require "yaml"
 
 class Scaffolding::Transformer
   attr_accessor :child, :parent, :parents, :class_names_transformer, :cli_options, :additional_steps, :namespace
@@ -222,6 +223,36 @@ class Scaffolding::Transformer
     end
   end
 
+  # pass in an array where this content should be inserted within the yml file.  For example, to add content
+  # to admin.models pass in [:admin, :models]
+  def add_line_to_yml_file(file, content, location_array)
+    # First check that the given location array actually exists in the yml file:
+    yml = YAML.safe_load(File.read(file))
+    location_array.map!(&:to_s)
+    return nil if yml.dig(*location_array).nil? # Should we raise an error?
+    content += "\n" unless content[-1] == "\n"
+    # Find the location in the file where the location_array is
+    lines = File.readlines(file)
+    current_needle = location_array.shift.to_s
+    current_space = ""
+    insert_after = 1
+    lines.each_with_index do |line, index|
+      break if current_needle.nil?
+      if line.strip == current_needle + ":"
+        current_needle = location_array.shift.to_s
+        insert_after = index
+        current_space = line.match(/\s+/).to_s
+      end
+    end
+    new_lines = []
+    current_space += "  "
+    lines.each_with_index do |line, index|
+      new_lines << line
+      new_lines << current_space + content if index == insert_after
+    end
+    File.write(file, new_lines.join)
+  end
+
   def add_line_to_file(file, content, hook, options = {})
     increase_indent = options[:increase_indent]
     add_before = options[:add_before]
@@ -370,6 +401,15 @@ class Scaffolding::Transformer
 
   def build_conversation_ability_line
     build_ability_line(["Conversations::Message", "Conversation"])
+  end
+
+  def add_ability_line_to_roles_yml(class_names = nil)
+    model_names = class_names || [child]
+    role_file = "./config/models/roles.yml"
+    model_names.each do |model_name|
+      add_line_to_yml_file(role_file, "#{model_name}: read", [:default, :models])
+      add_line_to_yml_file(role_file, "#{model_name}: manage", [:admin, :models])
+    end
   end
 
   def build_factory_setup
@@ -1116,12 +1156,7 @@ class Scaffolding::Transformer
       end
 
       # add user permissions.
-      ability_line, admin_ability_line = build_ability_line
-      if admin_ability_line
-        add_line_to_file("./app/models/ability.rb", ability_line, "# the following admin abilities were added by super scaffolding.")
-      else
-        add_line_to_file("./app/models/ability.rb", ability_line, "# the following abilities were added by super scaffolding.")
-      end
+      add_ability_line_to_roles_yml
     end
 
     unless cli_options["skip-api"]
@@ -1176,7 +1211,7 @@ class Scaffolding::Transformer
     unless cli_options["skip-model"]
 
       if ["Team", "User"].include?(parents.last) && parent != parents.last
-        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "delegate :#{parents.last.underscore}, to: :absolutely_abstract_creative_concept", DELEGATIONS_HOOK, prepend: true)
+        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", "has_one :#{parents.last.underscore}, through: :absolutely_abstract_creative_concept", HAS_ONE_HOOK, prepend: true)
       end
 
     end

@@ -2,6 +2,7 @@ class Memberships::Reassignments::ScaffoldingCompletelyConcreteTangibleThingsRea
   # 🚅 add concerns above.
 
   belongs_to :membership # this is the member being reassigned from.
+  has_one :team, through: :membership
   # 🚅 add belongs_to associations above.
 
   has_many :assignments
@@ -17,7 +18,6 @@ class Memberships::Reassignments::ScaffoldingCompletelyConcreteTangibleThingsRea
   after_save :reassign
   # 🚅 add callbacks above.
 
-  delegate :team, to: :membership
   # 🚅 add delegations above.
 
   def valid_memberships

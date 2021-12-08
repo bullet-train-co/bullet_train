@@ -4,10 +4,3 @@ en:
     breadcrumbs:
       label: *label
     header: Special Privileges
-    labels:
-      admin: Team Administrator
-      another_role_key: Another Role
-      none: None
-    descriptions:
-      admin: Team administrators can manage billing and manage special privileges for other users.
-      another_role_key: This is in the Yaml file as an example of how to define other roles.

@@ -11,6 +11,7 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
   # 🚅 add oauth providers above.
 
   has_one_attached :file_field_value
+  has_one :team, through: :absolutely_abstract_creative_concept
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
@@ -21,7 +22,6 @@ class Scaffolding::CompletelyConcrete::TangibleThing < ApplicationRecord
   after_validation :remove_file_field_value, if: :file_field_value_removal?
   # 🚅 add callbacks above.
 
-  delegate :team, to: :absolutely_abstract_creative_concept
   # 🚅 add delegations above.
 
   has_rich_text :action_text_value

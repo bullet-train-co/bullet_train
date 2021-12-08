@@ -40,10 +40,10 @@
               </td>
 
               <td>
-                <% if membership.roles.any? %>
-                  <%= membership.roles.order(:display_order).map { |role| t("roles.labels.#{role.key}") }.to_sentence %>
+                <% if membership.roles_without_defaults.any? %>
+                  <%= membership.roles_without_defaults.map { |role| t("memberships.fields.role_ids.options.#{role.key}.label") }.to_sentence %>
                 <% else %>
-                  <%= t("roles.labels.none") %>
+                  <%= t("memberships.fields.role_ids.options.default.label") %>
                 <% end %>
               </td>
               <td class="text-right">

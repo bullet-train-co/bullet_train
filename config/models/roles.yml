@@ -1,0 +1,35 @@
+default:
+  models:
+    Team: read
+    Membership:
+      - read
+      - search
+    Platform::Application: read
+    Webhooks::Outgoing::Endpoint: manage
+    Webhooks::Outgoing::Event: read
+    Webhooks::Outgoing::Delivery: read
+    Webhooks::Outgoing::DeliveryAttempt: read
+    Invitation:
+      - read
+      - create
+      - destroy
+
+editor:
+  models:
+    Scaffolding::CompletelyConcrete::TangibleThing: manage
+    Scaffolding::AbsolutelyAbstract::CreativeConcept:
+      - read
+      - update
+
+admin:
+  includes:
+    - editor
+  manageable_roles:
+    - admin
+    - editor
+  models:
+    Team: manage
+    Membership: manage
+    Scaffolding::AbsolutelyAbstract::CreativeConcept: manage
+    Platform::Application: manage
+    Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator: manage

@@ -57,7 +57,7 @@ module AbilityTest
     def setup
       @admin = FactoryBot.create :onboarded_user
       @another_user = FactoryBot.create :onboarded_user
-      @membership = FactoryBot.create :membership, user: @admin, team: @admin.current_team, roles: [Role.admin]
+      @membership = FactoryBot.create :membership, user: @admin, team: @admin.current_team, role_ids: [Role.admin.id]
       @admin_ability = Ability.new(@admin)
     end
 

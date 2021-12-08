@@ -9,7 +9,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConcepts::CollaboratorsC
     sign_in @user
     @team = @user.current_team
     @creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
-    @collaborator = create(:scaffolding_absolutely_abstract_creative_concepts_collaborator, creative_concept: @creative_concept, roles: [:admin])
+    @collaborator = create(:scaffolding_absolutely_abstract_creative_concepts_collaborator, creative_concept: @creative_concept, roles: [Role.admin])
   end
 
   test "should get index" do
