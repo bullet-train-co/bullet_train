@@ -22,38 +22,43 @@ Bullet Train's `Role` model is backed by a Yaml configuration in `config/models/
 To help explain this configuration and it's options, we'll provide the following hypothetical example:
 
 ```
-# By default, users on a team are read-only participants.
-  name: default
+default:
   models:
     Project: read
-    "Billing::Subscription": read
+    Billing::Subscription: read
 
 editor:
-  # Users with the `editor` role can give other users the `editor` role.
   manageable_roles:
     - editor
   models:
-    # Users with the `editor` role can modify project details.
     Project: manage
 
 billing:
-  # Users with the `billing` role can give other users the `billing` role.
   manageable_roles:
     - billing
   models:
-  # Users with the `billing` role can create and update billing subscriptions.
     Billing::Subscription: manage
 
 admin:
-  # Users with the `admin` role inherit all the privileges of the `editor` and `billing` roles.
   includes:
     - editor
     - billing
-  # Users with the `admin` role can give other users the `editor`, `billing`, or `admin` role.
-  # (The ability to grant `editor` and `billing` privileges is inherited from the other roles listed in `includes`.)
   manageable_roles:
     - admin
 ```
+
+The following things are true given the example configuration above:
+
+ - By default, users on a team are read-only participants.
+ - Users with the `editor` role:
+   - can give other users the `editor` role.
+   - can modify project details.
+ - Users with the `billing` role:
+   - can give other users the `billing` role.
+   - can create and update billing subscriptions.
+ - Users with the `admin` role:
+   - inherit all the privileges of the `editor` and `billing` roles.
+   - can give other users the `editor`, `billing`, or `admin` role. (The ability to grant `editor` and `billing` privileges is inherited from the other roles listed in `includes`.)
 
 All of these definitions are interpreted and translated into CanCanCan directives when we invoke the following Bullet Train helper in `app/models/ability.rb`:
 
