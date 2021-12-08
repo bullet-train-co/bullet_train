@@ -41,18 +41,6 @@ class MigrateRoleIdsToYml < ActiveRecord::Migration[6.1]
 
   def down
     raise ActiveRecord::IrreversibleMigration
-    # I'm leaving the following here for testing.
-    # It will destroy data so you definitely shouldn't rely on using it!
-    # remove_column :memberships, :role_ids, :jsonb, default: []
-    # create_table :roles do |t|
-    #   t.string :key
-    #   t.timestamps
-    # end
-    # create_table :membership_roles do |t|
-    #   t.belongs_to :membership, foreign_key: true
-    #   t.belongs_to :role, foreign_key: true
-    #   t.timestamps
-    # end
   end
 
   def yml_file_path
