@@ -5,7 +5,7 @@ class ScopeValidator < ActiveModel::EachValidator
 
     if record.send(id_method).present?
       # don't allow users to assign the ids of other teams' or users' resources to this attribute.
-      unless record.send(valid_collection).ids.include?(record.send(id_method))
+      unless record.send(valid_collection).exists?(id: record.send(id_method))
         record.errors.add(id_method, :invalid)
       end
     end
