@@ -66,11 +66,13 @@ All of these definitions are interpreted and translated into CanCanCan directive
 permit user, through: :memberships, parent: :team
 ```
 
-## role.yml syntax
+## `roles.yml` Syntax
 
-We have tried to provide examples in the default role.yml file to show the different syntax styles available.
-The top level key is the name of the role.
-Under the models key, you add a hash of all models that that role can interact with.  Under the model's name, you can add either a string or an array.  If you just want to add a single CanCanCan action (eg manage), add that as a string.  If you want to add multiple CanCanCan actions, use an array with each action on a separate line.  Eg:
+We have tried to provide examples in the default `config/models/roles.yml` file to show the different syntax styles available. The top level key is the name of the role. 
+
+### Granting Access to Resources
+
+Under the `models` key, you add a hash of all models that that role can interact with. If you just want to grant access to a single CanCanCan action (e.g. `manage`), specify that as a string. If you want to add multiple CanCanCan actions, you can use an array with each action on a separate line, e.g.:
 
 ```
 admin:
@@ -81,6 +83,7 @@ admin:
       - update
 ```
 
+### Role Inheritance
 
 Roles can include other roles to inherit all their permissions.  Use the includes key and an array of roles to include (this one should always be an array).  Eg:
 
@@ -90,28 +93,11 @@ admin:
     - editor
 ```
 
-The manageable_roles key specifies which roles can be managed by the given role.  For example, say you had an editor role but you didn't want editors to be able to add other editors, you would do something like this:
+### End-User Role Management
 
-```
-reader:
-  # Some other more basic role
-  # No need to include the default role as that gets included in every role by default
-  ...
-editor:
-  includes:
-    - reader
-  manageable_roles:
-    - reader
-admin:
-  includes:
-  - editor # No need to include reader here because admin inherits that through editor
-  manageable_roles:
-    - editor
-    - admin # Roles should be able to manage themselves in most cases
-```
+The `manageable_roles` key defines which roles a user can grant to other users on the team (if they have the role being defined).
 
-
-## How the permit method works
+## Understanding `permit`
 
 The `permit` helper is some of the highest-leverage magic we provide in Bullet Train and we're sympathetic to developers who want to understand the magic they're employing, so we've provided that inline as code comments in the implementation itself.  Below is a basic explanation of how to use the permit method that should be enough to get you started.
 
