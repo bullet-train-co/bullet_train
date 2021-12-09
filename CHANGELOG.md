@@ -6,7 +6,7 @@
 
 See [the updated documentation](/docs/permissions.md) for details.
 
-Migration notes:
+#### Migration Notes
 
 - The `roles` table has been removed and replaced with `config/models/roles.yml` instead.
 - The `Role` model still exists, but is powered by [ActiveHash](https://github.com/zilkey/active_hash) and backed by that YAML file.
@@ -16,7 +16,23 @@ Migration notes:
 - This entire thing is a big change, please think carefully about the implications for your application before deploying to production. Be sure to have a database backup on hand for reference in case something goes wrong and you need to reference the previous state.
 - For an example of how to migrate your existing permissions to this new configuration file, [see this video](https://www.loom.com/share/9af9112e5d50492f835096b6b84c240a).
 
-Method migrations:
+#### Migration Steps
+
+After merging this branch, there are some additional steps required.
+
+- [Watch a video demonstrating and explaining these steps.](https://loom.com/share/9af9112e5d50492f835096b6b84c240a)
+- Work your way through each line of `ability.rb` and move each permission across to `config/models/roles.yml`.
+  - Any ability that is applied to `user.team_ids` will most likely end up being added to the default role.
+  - Any ability applied to `user.administering_team_ids` will probably end up in the admin role.  Depending on the setup of your application you may have other roles you also need to migrate permissions to.
+  - Permissions that have additional conditions in the condition hash (eg: `can can :manage, Billing::Subscription, team_id: user.administrating_team_ids, status: "initiated"`) should stay in `ability.rb`.  We're only attempting to migrate simple permissions at this stage.
+  - Also, any permissions that don't apply to a user through a role should stay in `ability.rb`.  For example `can :create, Team`.
+- Use the examples in `roles.yml` to get you started on how to migrate each `can` method call across and see the video above for a live demonstration migrating an existing Bullet Train application.
+- ⚠️ All models you migrate to `roles.yml` need to either `belongs_to :team` directly or `has_one :team, through: :some_parent`.
+  - For example, if you have `can :manage, Document, project: {team: {id: user.administering_team_ids}}`, you need to ensure that `Document` `has_one: :team, through: :project` (or `belongs_to :team` directly.)
+  - If you used Super Scaffolding on your models, you may have `delegate :team, to: :project` in the `Document` model. You should remove this line and replace it with `has_one :team, through: :project` instead.
+  - Going forward, Super Scaffolding will add `has_one` instead of `delegate` so you only need to do this on any models you scaffolded before running this migration.
+
+#### Method Migrations
 
 - The `roles_managable_by_all` method has been removed. If you were using it, look at `Role#manageable_by?` and `Role#included_roles` methods.
 - There is a new `default` role that has been added.  All members on a team actually inherit the abilities of this role.
