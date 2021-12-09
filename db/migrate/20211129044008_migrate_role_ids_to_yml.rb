@@ -12,7 +12,7 @@ class MigrateRoleIdsToYml < ActiveRecord::Migration[6.1]
       added_roles = []
       if Rails.env.development?
         Role.reload(true)
-        existing_roles = Role.all.map(&:name)
+        existing_roles = Role.all.map(&:id)
         File.open(yml_file_path, "a") do |file|
           role_keys.each do |key|
             unless existing_roles.include?(key)
