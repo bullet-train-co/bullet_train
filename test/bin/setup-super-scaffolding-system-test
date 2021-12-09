@@ -10,7 +10,7 @@ rails g model Personality::Note character_trait:references name:string
 rails g model Personality::Reactions::Response note:references name:string
 
 bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="fal fa-globe-stand" --sortable
-bin/super-scaffold crud TestPage TestSite name:text_field path:text_field
+bin/super-scaffold crud TestPage TestSite,Team name:text_field path:text_field
 bin/super-scaffold crud Project Team name:text_field description:trix_editor --sidebar="fal fa-cogs"
 bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
 bin/super-scaffold crud Objective Projects::Deliverable,Project,Team name:text_field description:trix_editor
