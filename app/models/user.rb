@@ -134,6 +134,21 @@ class User < ApplicationRecord
     end
   end
 
+  def team_ids_by_roles(roles)
+    warn "[DEPRECATION] the `User#team_ids_by_roles` method is deprecated and will be removed in a future version of Bullet Train. Please look at `parent_ids_for` as an alternative."
+    memberships.with_roles(roles).distinct.pluck(:team_id)
+  end
+
+  def team_ids_by_role(role)
+    warn "[DEPRECATION] the `User#team_ids_by_role` method is deprecated and will be removed in a future version of Bullet Train. Please look at `parent_ids_for` as an alternative."
+    team_ids_by_roles([role])
+  end
+
+  def administrating_team_ids
+    warn "[DEPRECATION] the `administrating_team_ids` method is deprecated and will be removed in a future version of Bullet Train. Please look at `parent_ids_for` as an alternative."
+    team_ids_by_role(Role.admin)
+  end
+
   def parent_ids_for(role, model, through, parent)
     parent_id_column = "#{parent}_id"
     key = "#{role.key}_#{through}_#{parent_id_column}s"
