@@ -125,7 +125,7 @@ class Role < ActiveYaml::Base
       @ability_data = role.models[model_name]
       @through = through
       @parent = user.send(through).reflect_on_association(parent_name)&.klass
-      @parent_ids = user.parent_ids_for(@role, @model, @through, parent_name) if @parent
+      @parent_ids = user.parent_ids_for(@role, @through, parent_name) if @parent
     end
 
     def valid?
