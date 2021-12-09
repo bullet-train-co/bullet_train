@@ -17,7 +17,7 @@ class CreateVersions < ActiveRecord::Migration[5.0]
 
   def change
     create_table :versions, **versions_table_options do |t|
-      t.string :item_type, item_type_options
+      t.string :item_type, **item_type_options
       t.integer :item_id, null: false
       t.string :event, null: false
       t.string :whodunnit
