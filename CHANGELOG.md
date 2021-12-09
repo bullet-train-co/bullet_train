@@ -17,7 +17,7 @@ See [the updated documentation](/docs/permissions.md) for details.
 
 #### Migrating Existing Permissions
 
-After merging this branch, if you want to migrate your existing permissions to this new configuration file, there are some additional steps required.
+If you want to migrate your existing permissions to this new configuration file, there are some additional steps required.
 
 - [Watch a video demonstrating and explaining these steps.](https://loom.com/share/9af9112e5d50492f835096b6b84c240a)
 - Work your way through each line of `ability.rb` and move each permission across to `config/models/roles.yml`.
