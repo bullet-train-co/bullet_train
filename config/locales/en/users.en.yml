@@ -81,12 +81,12 @@ en:
         help: You can find this in the authenticator application you configured when adding 2FA to your account.
     self:
       <<: [*self, *fields]
-    _: &sign_up
+    _1: &sign_up
       password:
         label: Set Password
     sign_up:
       <<: [*sign_up, *self, *fields]
-    _: &update_self
+    _2: &update_self
       password:
         label: New Password
     update_self:

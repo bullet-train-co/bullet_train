@@ -1,9 +1,10 @@
 class Membership < ApplicationRecord
-  include Role::Support
-  roles_only :default, :admin
   # 🚫 DEFAULT BULLET TRAIN MEMBERSHIP FUNCTIONALITY
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
+
+  # See `docs/permissions.md` for details.
+  include Role::Support
 
   belongs_to :user, optional: true
   belongs_to :team
