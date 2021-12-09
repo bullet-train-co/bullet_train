@@ -1,4 +1,4 @@
-module Role::Support
+module Roles::Support
   extend ActiveSupport::Concern
 
   class_methods do

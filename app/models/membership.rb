@@ -4,7 +4,7 @@ class Membership < ApplicationRecord
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
 
   # See `docs/permissions.md` for details.
-  include Role::Support
+  include Roles::Support
 
   belongs_to :user, optional: true
   belongs_to :team

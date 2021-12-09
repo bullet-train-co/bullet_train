@@ -47,6 +47,15 @@ admin:
     - admin
 ```
 
+Here's a breakdown of the structure of the configuration file:
+
+ - `default` represents all permissions that are granted to any active member on a team.
+ - `editor`, `billing`, and `admin` represent additional roles that can be assigned to a membership.
+ - `models` provides a list of resources that members with a specific role will be granted.
+ - `manageable_roles` provides a list of roles that can be assigned to other users by members that have the role being defined.
+ - `includes` provides a list of other roles whose permissions should also be made available to members with the role being defined.
+ - `manage`, `read`, etc. are all CanCanCan-defined actions that can be granted.
+
 The following things are true given the example configuration above:
 
  - By default, users on a team are read-only participants.
@@ -60,101 +69,60 @@ The following things are true given the example configuration above:
    - inherit all the privileges of the `editor` and `billing` roles.
    - can give other users the `editor`, `billing`, or `admin` role. (The ability to grant `editor` and `billing` privileges is inherited from the other roles listed in `includes`.)
 
+### Assigning Multiple Actions per Resource
+
+You can also grant more granular permissions by supplying a list of the specific actions per resource, like so:
+
+```
+editor:
+  models:
+    project:
+      - read
+      - update
+```
+
+## Applying Configuration
+
 All of these definitions are interpreted and translated into CanCanCan directives when we invoke the following Bullet Train helper in `app/models/ability.rb`:
 
 ```
 permit user, through: :memberships, parent: :team
 ```
 
-## `roles.yml` Syntax
+In the example above:
 
-We have tried to provide examples in the default `config/models/roles.yml` file to show the different syntax styles available. The top level key is the name of the role. 
+ - `through` should reference a collection on `User` where access to a resource is granted. The most common example is the `memberships` association, which grants a `User` access to a `Team`. **In the context of `permit` discussions, we refer to the `Membership` model in this example as "the grant model".**
+ - `parent` should indicate which level the models in `through` will grant a user access at. In the case of a `Membership`, this is `team`.
 
-### Granting Access to Resources
+ The `permit` helper is some of the highest-leverage magic we provide in Bullet Train and we're sympathetic to developers who want to understand the magic they're employing, so we've provided as much of that as we can inline as code comments in the implementation itself.
 
-Under the `models` key, you add a hash of all models that that role can interact with. If you just want to grant access to a single CanCanCan action (e.g. `manage`), specify that as a string. If you want to add multiple CanCanCan actions, you can use an array with each action on a separate line, e.g.:
+## Additional Grant Models
 
-```
-admin:
-  models:
-    team: manage
-    project:
-      - read
-      - update
-```
-
-### Role Inheritance
-
-Roles can include other roles to inherit all their permissions.  Use the includes key and an array of roles to include (this one should always be an array).  Eg:
+To illustrate the flexibility of this approach, consider that you may want to grant non-administrative team members different permissions for different `Project` objects on a `Team`. In that case, `permit` actually allows us to re-use the same role definitions to assign permissions that are scoped by a specific resource, like this:
 
 ```
-admin:
-  includes:
-    - editor
+permit user, through: :projects_collaborators, parent: :project
 ```
 
-### End-User Role Management
+In this example, `permit` is smart enough to only apply the permissions granted by a `Projects::Collaborator` record at the level of the `Project` it belongs to. You can turn any model into a grant model by adding `include Roles::Support` and adding a `role_ids:jsonb` attribute. You can look at `Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator` for an example.
 
-The `manageable_roles` key defines which roles a user can grant to other users on the team (if they have the role being defined).
+## Additional Notes
 
-## Understanding `permit`
+### Caching
+Because abilities are being evaluated on basically every request, it made sense to introduce a thin layer of caching to help speed things up. When evaluating permissions, we store a cache of the result in the `ability_cache` attribute of the `User`. By default, making changes to a model that includes the `Roles::Support` concern will invalidate that user's cache.
 
-The `permit` helper is some of the highest-leverage magic we provide in Bullet Train and we're sympathetic to developers who want to understand the magic they're employing, so we've provided that inline as code comments in the implementation itself.  Below is a basic explanation of how to use the permit method that should be enough to get you started.
+### Debugging
+If you want to see what CanCanCan directives are being created by your permit calls, you can add the `debug: true` option to your `permit` statement in `app/models/ability.rb`.
 
-The `through` parameter should be a relation on User where roles are added.  In most cases, this will be the Membership model so the :memberships relation.
-The `parent` is the top level resource that all child resources belong to.  In the case of Memberships, the parent resource is the Team that they belong to.
-
-To help illustrate, let's take another example.  In Bullet Train, we have the concept of "Collaborators" on a Creative Concept.
-By default, non-admin team members can't view Creative Concepts.  They need to be added to each Creative Concept as a Collaborator.  The Collaborator model also has roles.  Collaborators can be viewers, editors and admins of a particular Creative Concept.  You can think of the Collaborator model as a Membership to a Creative Concept.
-
-The real magic here is that you can use the same set of roles to apply to either a Membership or a Collaborator.  A Membership can be granted the admin role and it is considered an admin of the whole team.  A Collaborator can be granted the admin role and it is considered an admin of the Creative Concept.
-
-Because we have two different models that can have roles applied, we need two calls to the permit method in the ability file.  To add the CanCanCan directives for collaborators, you would use:
-
-```
-permit user, through: :scaffolding_absolutely_abstract_creative_concepts_collaborators, parent: :creative_concept
-```
-
-Now when the permit method runs, it will create all the required CanCanCan directives to allow users access to the correct Creative Concepts they have been added to as Collaborators.
-
-Because we use the same roles for both Membership and Collaborator, there will be some models defined in the roles that don't apply in one context or the other.  The permit method checks if a class has a certain association before adding the CanCanCan directives.  This means, if your admin role has `Team: manage`, when we come to apply the directives from a Collaborator perspective, because a team doesn't belong to a Creative Concept (the parent model for a Collaborator), we will skip that directive.  However, because a `Scaffolding::CompletelyConcrete::TangibleThing` does belong to a Creative Concept, we _would_ apply any related directives.
-
-If you want to see what CanCanCan directives are being created by your permit calls, you can add the `print_output: true` option to the permit method.  To see what roles are being added for a certain user, run this in the console:
+Likewise, to see what abilities are being added for a certain user, you can run the following on the Rails console:
 
 ```
 user = User.first
-Ability.new(user).permit user, through: :scaffolding_absolutely_abstract_creative_concepts_collaborators, parent: :creative_concept, debug: true
+Ability.new(user).permit user, through: :projects_collaborators, parent: :project, debug: true
 ```
-
-This will print out all the CanCanCan directives that would be added for that user in that context.  It will also show you which models were skipped over because they didn't repond to the parent object.
-
-## Adding Roles to a new model
-
-Generally, Roles would just be added to Membership records.  However, in some situations, you may want to add roles to other models.  For example, in Bullet Train, CreativeConcepts are only visible to admin members of the team.  To allow a regular user access to a single CreativeConcept we have a CreativeConcepts::Collaborator model.  You can think of the Collaborator model as a "membership" record for Creative Concepts.  Just like a Membership to a team grants a user access to the team with permissions scoped by roles added to the membership, a Collaborator is a user's access to a specific CreativeConcept.  If you have any resources in your application that regular team members won't have access to without explicit permission, you should consider a similar setup.  Another example would be a team representing a department in a large company.  That department may run many projects and the employees of the department should only have access to the projects that they are involved in.  In this scenario, you would have a Project model and something like a Projects::Associate.  The Projects::Associate model would join Memberships directly to Projects and allow regular users access to just those projects.  If you wanted to have different classes of Associates, you could add roles to the Associate model.
-
-The goal here is that the same roles should be able to be applied in different contexts.  So if you have an admin role that is allowed to update and destroy projects, you could apply that role to either a Membership or a Projects::Associate.  The `permit` method will work out the associations and conditions to make it all work under the hood with CanCanCan.  You just need to set the `role_ids` column to `["admin"]` on either the Membership or Projects::Associate record.
-
-If you want to add Roles to a new model in your application, do the following:
-
-- Create your new model and make sure it has a jsonb type `roles_ids` column.
-- Your model should `belongs_to :team` or `has_one :team, through: :parent`.  If you're using superscaffolding, these will be added automatically.
-- Add the Role::Support concern to your model
-- If your model should only have a subset of your roles available as options, add the `roles_only` class method.  See Membership for an example.
-- Make sure to add any role_id options to your translation file for your new model (see memberships.en.yml for an example)
-- Update your form and views to accept an array of role_ids (see membership for an example of allowing multiple roles and collaborator for an example that only alows a single role)
-- Update the `config/models/roles.yml` file with any extra Roles or models required.
-- Ensure that the model you are adding roles to belongs to User either directly or indirectly.  In default Bullet Train, Membership belongs to a User directly.  A Collaborator belongs to a user _through_ a Membership.  You just need to make sure you have a `belongs_to` or `has_one through:` back to the User model.
-- That's it! Sit back and relax knowing you have a super secure permission model that's incredibly easy to configure!
-
-## Additional Details
-
-### Caching
-Because abilities are being evaluated on every request, it made sense to introduce a thin layer of caching to help speed things up. This is primarily implemented in the `parent_ids_for` method in `app/models/user.rb`.
-
-Because almost all models eventually roll back up to a Team record, in order for us to generate the condition hash for CanCanCan, we need to know the parent ids that the current user should have access to.  We create a hash on the User record under the `ability_cache` column and add unique keys for each resource with an array of parent ids.  By default, making changes to a model that includes the `Role::Support` concern will invalidate that user's cache.  See the `invalidate_cache` method in `Role::Support`.
 
 ### Naming and Labeling
 What we call a `Role` in the domain model is referred to as “Special Privileges” in the user-facing application. You can rename this to whatever you like in `config/locales/en/roles.en.yml`.
 
 ## Note About Pundit
-Sometimes people ask us about Pundit. There’s nothing stopping you from utilizing Pundit in a Bullet Train project for specific hard-to-implement cases in your permissions model, but you wouldn’t want to try and replace CanCanCan with it. We do too much automatically with CanCanCan for that to be recommended. Furthermore, for myself personally, in those situations where there is a permission that needs to be implemented that isn’t easily implemented with CanCanCan, I usually just write vanilla Ruby code for that purpose. I’ve never personally reached for Pundit in a Bullet Train project.
+There’s nothing stopping you from utilizing Pundit in a Bullet Train project for specific hard-to-implement cases in your permissions model, but you wouldn’t want to try and replace CanCanCan with it. We do too much automatically with CanCanCan for that to be recommended. That said, in those situations where there is a permission that needs to be implemented that isn’t easily implemented with CanCanCan, consider just writing vanilla Ruby code for that purpose.

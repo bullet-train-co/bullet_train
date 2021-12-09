@@ -36,10 +36,7 @@ The Super Scaffolding shell script provides its own documentation. To get starte
 bin/super-scaffold
 ```
 
-## Advanced Examples
- - [Super Scaffolding with Delegated Types](/docs/super-scaffolding/delegated-types.md)
-
-## Other Notes
+## Additional Notes
 
 ### `TangibleThing` and `CreativeConcept`
 
@@ -57,3 +54,6 @@ You won't want your end users seeing the Super Scaffolding templates in your env
 ```
 HIDE_THINGS: true
 ```
+
+## Advanced Examples
+ - [Super Scaffolding with Delegated Types](/docs/super-scaffolding/delegated-types.md)

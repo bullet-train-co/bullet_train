@@ -1,5 +1,5 @@
 class Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator < ApplicationRecord
-  include Role::Support
+  include Roles::Support
   # 🚅 add concerns above.
 
   belongs_to :creative_concept
