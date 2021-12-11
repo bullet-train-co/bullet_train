@@ -37,7 +37,8 @@ aliases:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: bullet_train_test
           POSTGRES_USER: bullet_train
-  - &docker_hold_for_1_minute
+  - &wait_for_docker
+      # We run this because the DB might not be available for a while due to a race condition.
       run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
 jobs:
@@ -82,9 +83,7 @@ jobs:
       - run: bundle clean --force
       - run: yarn install
 
-      # We run this because the DB might not be available
-      # for a while due to a race condition
-      - *docker_hold_for_1_minute
+      - *wait_for_docker
 
       - run:
           name: Run tests with Knapsack Pro
@@ -128,9 +127,7 @@ jobs:
       - run: bundle clean --force
       - run: yarn install
 
-      # We run this because the DB might not be available
-      # for a while due to a race condition
-      - *docker_hold_for_1_minute
+      - *wait_for_docker
 
       - run:
           name: 'Setup Super Scaffolding System Test'
