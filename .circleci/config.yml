@@ -2,26 +2,55 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
 
+aliases:
+  - &restore_bundler_cache
+      name: Restore Bundler cache
+      keys:
+        - gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+        - gem-cache-v1-{{ .Branch }}-
+        - gem-cache-v1-
+  - &restore_yarn_cache
+      name: Restore Yarn cache
+      keys:
+        - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+        - yarn-packages-v1-{{ .Branch }}-
+        - yarn-packages-
+  - &save_bundle_cache
+      name: Save Bundle cache
+      key: gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      paths:
+        - vendor/bundle
+  - &save_yarn_cache
+      name: Save Yarn cache
+      key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      paths:
+        - node_modules
+  - &ruby_node_browsers_docker_image
+      - image: circleci/ruby:3.0.2-node-browsers
+        environment:
+          PGHOST: localhost
+          PGUSER: bullet_train
+          RAILS_ENV: test
+  - &postgres_docker_image
+      - image: circleci/postgres
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: bullet_train_test
+          POSTGRES_USER: bullet_train
+  - &docker_hold_for_1_minute
+      run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
 jobs:
   'Standard Ruby':
     docker:
+      # normal ruby image is also sufficient here but we are using node-browsers so that we can make use of caching and speed up the process since other jobs are also using the same image
       - image: circleci/ruby:3.0.2-node-browsers
     steps:
       - checkout
 
       # Restore dependency caches
-      - restore_cache:
-          name: Restore Bundler cache
-          keys:
-            - gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1-{{ .Branch }}-
-            - gem-cache-v1-
-      - restore_cache:
-          name: Restore Yarn cache
-          keys:
-            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - yarn-packages-v1-{{ .Branch }}-
-            - yarn-packages-
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
 
       # Install dependencies
       - ruby/bundle-install
@@ -30,16 +59,8 @@ jobs:
 
       # Save dependency caches
       # We only do this as part of this job, because it's time consuming and we don't want it to slow down test runners.
-      - save_cache:
-          name: Save gem cache
-          key: gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - save_cache:
-          name: Save yarn cache
-          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
+      - save_cache: *save_bundle_cache
+      - save_cache: *save_yarn_cache
 
       - run:
           name: Check Standard Ruby
@@ -47,32 +68,14 @@ jobs:
 
   'Minitest':
     docker:
-      - image: circleci/ruby:3.0.2-node-browsers
-        environment:
-          PGHOST: localhost
-          PGUSER: bullet_train
-          RAILS_ENV: test
-      - image: circleci/postgres
-        environment:
-          POSTGRES_HOST_AUTH_METHOD: trust
-          POSTGRES_DB: bullet_train_test
-          POSTGRES_USER: bullet_train
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
     executor: ruby/default
     parallelism: 16
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Bundler cache
-          keys:
-            - gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1-{{ .Branch }}-
-            - gem-cache-v1-
-      - restore_cache:
-          name: Restore Yarn cache
-          keys:
-            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - yarn-packages-v1-{{ .Branch }}-
-            - yarn-packages-
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
 
       # Install dependencies
       - ruby/bundle-install
@@ -81,7 +84,7 @@ jobs:
 
       # We run this because the DB might not be available
       # for a while due to a race condition
-      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - *docker_hold_for_1_minute
 
       - run:
           name: Run tests with Knapsack Pro
@@ -109,34 +112,16 @@ jobs:
 
   'Minitest for Super Scaffolding':
     docker:
-      - image: circleci/ruby:3.0.2-node-browsers
-        environment:
-          PGHOST: localhost
-          PGUSER: bullet_train
-          RAILS_ENV: test
-      - image: circleci/postgres
-        environment:
-          POSTGRES_HOST_AUTH_METHOD: trust
-          POSTGRES_DB: bullet_train_test
-          POSTGRES_USER: bullet_train
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
       - image: circleci/redis
     executor: ruby/default
     steps:
       - checkout
 
       # Restore dependency caches
-      - restore_cache:
-          name: Restore Bundler cache
-          keys:
-            - gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-            - gem-cache-v1-{{ .Branch }}-
-            - gem-cache-v1-
-      - restore_cache:
-          name: Restore Yarn cache
-          keys:
-            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-            - yarn-packages-v1-{{ .Branch }}-
-            - yarn-packages-
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
 
       # Install dependencies
       - ruby/bundle-install
@@ -145,7 +130,7 @@ jobs:
 
       # We run this because the DB might not be available
       # for a while due to a race condition
-      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - *docker_hold_for_1_minute
 
       - run:
           name: 'Setup Super Scaffolding System Test'
