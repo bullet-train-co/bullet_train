@@ -3,7 +3,49 @@ orbs:
   ruby: circleci/ruby@0.1.2
 
 jobs:
-  build:
+  'Standard Ruby':
+    docker:
+      - image: circleci/ruby:3.0.2-node-browsers
+    steps:
+      - checkout
+
+      # Restore dependency caches
+      - restore_cache:
+          name: Restore Bundler cache
+          keys:
+            - gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ .Branch }}-
+            - gem-cache-v1-
+      - restore_cache:
+          name: Restore Yarn cache
+          keys:
+            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-v1-{{ .Branch }}-
+            - yarn-packages-
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bundle clean --force
+      - run: yarn install
+
+      # Save dependency caches
+      # We only do this as part of this job, because it's time consuming and we don't want it to slow down test runners.
+      - save_cache:
+          name: Save gem cache
+          key: gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - save_cache:
+          name: Save yarn cache
+          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - node_modules
+
+      - run:
+          name: Check Standard Ruby
+          command: bundle exec standardrb
+
+  'Minitest':
     docker:
       - image: circleci/ruby:3.0.2-node-browsers
         environment:
@@ -19,28 +61,14 @@ jobs:
     parallelism: 16
     steps:
       - checkout
-      - run:
-          name: Install Redis
-          command: sudo apt-get install redis-server
-      - run:
-          name: Start Redis server
-          command: sudo redis-server --daemonize yes
-      - run:
-          name: Install bundler
-          command: gem install bundler:2.2.0
-      - run:
-          name: Which bundler?
-          command: bundle -v
-
-      # Restore dependency caches
       - restore_cache:
-          name: Restore gems cache
+          name: Restore Bundler cache
           keys:
             - gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
             - gem-cache-v1-{{ .Branch }}-
             - gem-cache-v1-
       - restore_cache:
-          name: Restore yarn cache
+          name: Restore Yarn cache
           keys:
             - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
             - yarn-packages-v1-{{ .Branch }}-
@@ -49,29 +77,12 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bundle clean --force
-      - run:
-          name: Install packages
-          command: yarn install
-
-      # Save dependency caches
-      - save_cache:
-          name: Save gem cache
-          key: gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-      - save_cache:
-          name: Save yarn cache
-          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
+      - run: yarn install
 
       # We run this because the DB might not be available
       # for a while due to a race condition
       - run: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      - run:
-          name: Check Standard Ruby
-          command: bundle exec standardrb
       - run:
           name: Run tests with Knapsack Pro
           command: |
@@ -95,3 +106,58 @@ jobs:
       #
       # - store_test_results:
       #     path: test/reports
+
+  'Minitest for Super Scaffolding':
+    docker:
+      - image: circleci/ruby:3.0.2-node-browsers
+        environment:
+          PGHOST: localhost
+          PGUSER: bullet_train
+          RAILS_ENV: test
+      - image: circleci/postgres
+        environment:
+          POSTGRES_HOST_AUTH_METHOD: trust
+          POSTGRES_DB: bullet_train_test
+          POSTGRES_USER: bullet_train
+      - image: circleci/redis
+    executor: ruby/default
+    steps:
+      - checkout
+
+      # Restore dependency caches
+      - restore_cache:
+          name: Restore Bundler cache
+          keys:
+            - gem-cache-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - gem-cache-v1-{{ .Branch }}-
+            - gem-cache-v1-
+      - restore_cache:
+          name: Restore Yarn cache
+          keys:
+            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-v1-{{ .Branch }}-
+            - yarn-packages-
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bundle clean --force
+      - run: yarn install
+
+      # We run this because the DB might not be available
+      # for a while due to a race condition
+      - run: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: 'Setup Super Scaffolding System Test'
+          command: bundle exec test/bin/setup-super-scaffolding-system-test
+      - run:
+          name: 'Run Super Scaffolding Test'
+          command: bundle exec rails test test/system/super_scaffolding_test.rb
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - 'Standard Ruby'
+      - 'Minitest'
+      - 'Minitest for Super Scaffolding'

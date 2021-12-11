@@ -18,12 +18,12 @@ bin/super-scaffold crud Personality::CharacterTrait Objective,Projects::Delivera
 bin/super-scaffold crud Personality::Note Personality::CharacterTrait,Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
 bin/super-scaffold crud Personality::Reactions::Response Personality::Note,Personality::CharacterTrait,Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
 
-sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
+sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
 
 rails g migration add_project_id_to_test_sites project:references
 bin/super-scaffold crud-field TestSite project_id:super_select[class_name=Project]
 
-sed -i "" "s/raise .*/team\.projects/g" app/models/test_site.rb
+sed -i "s/raise .*/team\.projects/g" app/models/test_site.rb
 
 rake db:migrate
 rake db:test:prepare
