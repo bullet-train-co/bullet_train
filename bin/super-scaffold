@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'active_support/inflector'
-require 'active_support/core_ext/string'
 require 'fileutils'
 require 'pry'
 require 'colorize'

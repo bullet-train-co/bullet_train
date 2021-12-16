@@ -8,63 +8,81 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby "3.0.2"
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem "rails", "~> 6.1.1"
+# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+gem "rails", "~> 7.0.0"
+
+# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
+gem "sprockets-rails"
+
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
-# Use Puma as the app server
+
+# Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
-# Use SCSS for stylesheets
-gem "sass-rails", ">= 6"
-# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem "webpacker", "~> 5.0"
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem "jbuilder", "~> 2.7"
+
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
+# Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
+gem "turbo-rails"
+
+# Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem "stimulus-rails"
+
+# Build JSON APIs with ease [https://github.com/rails/jbuilder]
+gem "jbuilder"
+
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"
-# Use Active Model has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
 
-# Use Active Storage variant
-# gem 'image_processing', '~> 1.2'
+# Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
+# gem "kredis"
+
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+# gem "bcrypt", "~> 3.1.7"
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", ">= 1.4.4", require: false
-# Enables use of I18n in JavaScript for locales
-gem "i18n-js"
+gem "bootsnap", require: false
+
+# Use Sass to process CSS
+# gem "sassc-rails"
+
+# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
-  # Increase parallelism to run CircleCI tests across multiple nodes
-  gem "knapsack_pro"
+  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "debug", platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem "web-console", ">= 4.1.0"
-  # Display performance information such as SQL time and flame graphs for each request in your browser.
-  # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem "rack-mini-profiler", "~> 2.0"
-  gem "listen", "~> 3.3"
+  # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem "web-console"
+
+  # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
+  gem "rack-mini-profiler"
+
+  # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
+  # gem "spring"
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem "capybara", ">= 3.26"
+  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
+  gem "capybara"
   gem "selenium-webdriver"
-  # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
-  gem "timecop"
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # BULLET TRAIN GEMS
 # This section is all the gems we're adding.
 
 group :development, :test do
+  # Increase parallelism to run CircleCI tests across multiple nodes
+  gem "knapsack_pro"
+
   # `standardrb --fix`
   gem "standard"
 
@@ -76,6 +94,7 @@ group :development, :test do
 end
 
 group :test do
+  gem "timecop"
   gem "minitest-retry"
   gem "capybara-screenshot"
   gem "capybara-email"
@@ -94,18 +113,29 @@ group :development do
   gem "colorize"
 end
 
+# Use SCSS for stylesheets
+# TODO I think we can remove this? Isn't this for asset pipeline?
+gem "sass-rails", ">= 6"
+
+# Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
+gem "webpacker", "~> 5.0"
+
+# Enables use of I18n in JavaScript for locales
+gem "i18n-js"
+
 # we use factories not just for testing, but also for generating example API payloads.
 gem "factory_bot_rails"
 
 # authentication.
-gem "devise"
-gem "doorkeeper", "~> 5.4.0"
+gem "devise", github: "heartcombo/devise"
+gem "doorkeeper"
 gem "omniauth"
 gem "omniauth-stripe-connect"
 # TODO Remove when we're able to properly upgrade Omniauth.
 # https://github.com/omniauth/omniauth/wiki/Resolving-CVE-2015-9284
 gem "omniauth-rails_csrf_protection"
-gem "devise-two-factor"
+# TODO This doesn't work on Rails 7 yet. Get this working again.
+# gem "devise-two-factor"
 gem "rqrcode"
 
 # authorization.
@@ -114,7 +144,7 @@ gem "grape-cancan"
 
 # api.
 gem "jsonapi-serializer"
-gem "grape", "~> 1.5.1"
+gem "grape", "~> 1.6.0"
 gem "grape-jsonapi", require: "grape_jsonapi"
 gem "grape-swagger"
 gem "grape_on_rails_routes"
@@ -124,7 +154,6 @@ gem "api-pagination"
 gem "rack-cors", require: "rack/cors"
 
 # administrative functionality.
-gem "rails_admin"
 gem "paper_trail"
 
 # ui stuff.
@@ -174,8 +203,6 @@ gem "extended_email_reply_parser"
 
 gem "nice_partials", "~> 0.1"
 gem "storybook_rails", "~> 1.0"
-
-gem "turbo-rails"
 
 # for obfuscating ids in urls
 gem "hashids"

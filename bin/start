@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 
-require "active_support/core_ext/string"
 require "pry"
 require "colorize"
 

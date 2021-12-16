@@ -1,5 +1,5 @@
 class ApplicationRecord < ActiveRecord::Base
-  self.abstract_class = true
+  primary_abstract_class
 
   # 🚫 DEFAULT BULLET TRAIN MODEL FUNCTIONALITY
   # This section represents the default features for a Bullet Train model. Your own additions to this class should be

@@ -1,5 +1,3 @@
-require "active_support/core_ext/string"
-
 def default_url_options_from_base_url
   unless ENV["BASE_URL"].present?
     if Rails.env.development?

@@ -1,5 +1,12 @@
 # Bullet Train Changelog
 
+## December 15, 2021
+
+### Rails 7 Upgrade Notes
+
+- ⚠️ We've removed all references to Rails Admin. If you had it enabled, check that it's still working for you. If you're presented with any merge conflicts related to this change, just ignore our changes and keep the copy of the files that you already have.
+- ⚠️ We've had to temporarily disable `devise-two-factor` because it's not compatible with Rails 7. If you're actively using this, don't merge this update yet.
+
 ## December 8, 2021
 
 ### ⚠️ Roles and permission definitions have been completely refactored.

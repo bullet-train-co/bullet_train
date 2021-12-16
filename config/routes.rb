@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   use_doorkeeper
 
@@ -37,13 +37,6 @@ Rails.application.routes.draw do
     end
   end
   authenticate :user, lambda { |u| u.developer? } do
-    # # RAILS ADMIN
-    # # ⚠️ this is commented out because it represents a major liability for you and a major risk for your customers data
-    # # unless you have a robust security policy enforced around your admin user accounts. i don't know if we'll ever
-    # # enable this by default, but i certainly wouldn't enable it in any application that didn't require two-factor
-    # # authentication for developer accounts.
-    # mount RailsAdmin::Engine => '/developers/admin', as: 'rails_admin'
-
     # sidekiq provides a web-based interface.
     require "sidekiq/web"
     mount Sidekiq::Web => "/developers/sidekiq"
