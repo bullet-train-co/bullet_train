@@ -1008,7 +1008,10 @@ class Scaffolding::Transformer
           unless class_name_matches
 
             if migration_file_name
+              # There are two forms this association creation can take.
               replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}", /t\.references :#{name_without_id}/)
+              replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}", /add_reference :#{child.underscore.pluralize.tr("/", "_")}, :#{name_without_id}/)
+
               # TODO also solve the 60 character long index limitation.
               modified_migration = true
             else
