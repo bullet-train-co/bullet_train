@@ -278,6 +278,8 @@ elsif scaffolding_type == 'join-model'
     puts ""
     puts "    bin/super-scaffold crud-field Project tag_ids:super_select[class_name=Projects::Tag]"
     puts ""
+    puts "    👋 Heads up! There will be one follow-up step output by this command that you need to take action on."
+    puts ""
     puts "  4️⃣  Now you can run your migrations.".blue
     exit
   end
