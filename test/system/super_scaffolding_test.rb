@@ -163,9 +163,53 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("li.select2-results__option span", text: "Example Project").click
       click_on "Update Test Site"
 
+      # Test the has-many-through scaffolding.
       assert page.has_content? "Test Site was successfully updated."
+
       click_on "Example Project"
       assert page.has_content? "Below are the details we have for Example Project"
+
+      click_on "Back"
+      assert page.has_content? "Below is a list of Projects"
+
+      click_on "Back"
+      assert page.has_content? "No Tags have been added"
+
+      click_on "Add New Tag"
+      assert page.has_content? "Please provide the details of the new Tag"
+
+      fill_in "Name", with: "One"
+      click_on "Create Tag"
+      assert page.has_content? "Tag was successfully created"
+
+      click_on "Add New Tag"
+      assert page.has_content? "Please provide the details of the new Tag"
+
+      fill_in "Name", with: "Two"
+      click_on "Create Tag"
+      assert page.has_content? "Tag was successfully created"
+
+      click_on "Add New Tag"
+      assert page.has_content? "Please provide the details of the new Tag"
+
+      fill_in "Name", with: "Three"
+      click_on "Create Tag"
+      assert page.has_content? "Tag was successfully created"
+
+      click_on "Back"
+      assert page.has_content? "Your Team’s Dashboard"
+
+      click_on "Add New Project"
+      assert page.has_content? "Please provide the details of the new Project"
+
+      fill_in "Name", with: "New Project with Tags"
+      select2_select "Tags", ["One", "Two"]
+      click_on "Create Project"
+      assert page.has_content? "Project was successfully created"
+
+      click_on "New Project with Tags"
+      assert page.has_content? "Below are the details we have for New Project with Tags"
+      assert page.has_content? "One and Two"
     end
   end
 end
