@@ -25,5 +25,21 @@ bin/super-scaffold crud-field TestSite project_id:super_select[class_name=Projec
 
 sed -i "s/raise .*/team\.projects/g" app/models/test_site.rb
 
+# Test that the foreign key table name will be inserted into the migration.
+rails g migration add_other_character_trait_to_personality_notes other_character_trait:references
+bin/super-scaffold crud-field Personality::Note other_character_trait_id:super_select\[class_name=Personality::CharacterTrait\]
+
+sed -i "s/raise .*/character_trait\.objective\.personality_character_traits/g" app/models/personality/note.rb
+
+# rails g model Project team:references name:string
+# bin/super-scaffold crud Project Team name:text_field
+#
+# rails g model Projects::Tag team:references name:string
+# bin/super-scaffold crud Projects::Tag Team name:text_field
+#
+# rails g model Projects::AppliedTag project:references tag:references
+# bin/super-scaffold join-model Projects::AppliedTag project_id:super_select\[class_name=Project\] tag_id:super_select\[class_name=Projects::Tag\]
+# bin/super-scaffold has-many-through Project tag_ids:super_select\[class_name=Projects::Tag\]
+
 rake db:migrate
 rake db:test:prepare

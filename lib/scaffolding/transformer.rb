@@ -2,7 +2,7 @@ require "indefinite_article"
 require "yaml"
 
 class Scaffolding::Transformer
-  attr_accessor :child, :parent, :parents, :class_names_transformer, :cli_options, :additional_steps, :namespace
+  attr_accessor :child, :parent, :parents, :class_names_transformer, :cli_options, :additional_steps, :namespace, :suppress_could_not_find
 
   def initialize(child, parents, cli_options = {})
     self.child = child
@@ -265,7 +265,7 @@ class Scaffolding::Transformer
     begin
       target_file_content = File.open(transformed_file_name).read
     rescue Errno::ENOENT => _
-      puts "Couldn't find '#{transformed_file_name}'".red
+      puts "Couldn't find '#{transformed_file_name}'".red unless suppress_could_not_find
       return false
     end
 
@@ -403,6 +403,40 @@ class Scaffolding::Transformer
     build_ability_line(["Conversations::Message", "Conversation"])
   end
 
+  def add_scaffolding_hooks_to_model
+    before_scaffolding_hooks = <<~RUBY
+      #{CONCERNS_HOOK}
+
+    RUBY
+
+    after_scaffolding_hooks = <<-RUBY
+      #{BELONGS_TO_HOOK}
+
+      #{HAS_MANY_HOOK}
+
+      #{HAS_ONE_HOOK}
+
+      #{SCOPES_HOOK}
+
+      #{VALIDATIONS_HOOK}
+
+      #{CALLBACKS_HOOK}
+
+      #{DELEGATIONS_HOOK}
+
+      #{METHODS_HOOK}
+    RUBY
+
+    # add scaffolding hooks to the model.
+    unless File.readlines(transform_string("./app/models/scaffolding/completely_concrete/tangible_thing.rb")).join.include?(CONCERNS_HOOK)
+      scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", before_scaffolding_hooks, "ApplicationRecord", increase_indent: true)
+    end
+
+    unless File.readlines(transform_string("./app/models/scaffolding/completely_concrete/tangible_thing.rb")).join.include?(BELONGS_TO_HOOK)
+      scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", after_scaffolding_hooks, "end", prepend: true, increase_indent: true, exact_match: true)
+    end
+  end
+
   def add_ability_line_to_roles_yml(class_names = nil)
     model_names = class_names || [child]
     role_file = "./config/models/roles.yml"
@@ -491,6 +525,38 @@ class Scaffolding::Transformer
     puts
   end
 
+  def add_has_many_association
+    has_many_line = ["has_many :completely_concrete_tangible_things"]
+
+    # TODO I _think_ this is the right way to check for whether we need `class_name` to specify the name of the model.
+    unless transform_string("completely_concrete_tangible_things").classify == child
+      has_many_line << "class_name: \"Scaffolding::CompletelyConcrete::TangibleThing\""
+    end
+
+    has_many_line << "dependent: :destroy"
+
+    # TODO I _think_ this is the right way to check for whether we need `foreign_key` to specify the name of the model.
+    unless transform_string("absolutely_abstract_creative_concept_id") == "#{parent.underscore}_id"
+      has_many_line << "foreign_key: :absolutely_abstract_creative_concept_id"
+
+      # And if we need `foreign_key`, we should also specify `inverse_of`.
+      has_many_line << "inverse_of: :absolutely_abstract_creative_concept"
+    end
+
+    has_many_string = transform_string(has_many_line.join(", "))
+    add_line_to_file(transform_string("./app/models/scaffolding/absolutely_abstract/creative_concept.rb"), has_many_string, HAS_MANY_HOOK, prepend: true)
+
+    # Return the name of the has_many association.
+    has_many_string.split(",").first.split(":").last
+  end
+
+  def add_has_many_through_associations(has_many_through_transformer)
+    has_many_association = add_has_many_association
+    has_many_through_string = has_many_through_transformer.transform_string("has_many :completely_concrete_tangible_things, through: :$HAS_MANY_ASSOCIATION")
+    has_many_through_string.gsub!("$HAS_MANY_ASSOCIATION", has_many_association)
+    add_line_to_file(transform_string("./app/models/scaffolding/absolutely_abstract/creative_concept.rb"), has_many_through_string, HAS_MANY_HOOK, prepend: true)
+  end
+
   def add_attributes_to_various_views(attributes, scaffolding_options = {})
     sql_type_to_field_type_mapping = {
       # 'binary' => '',
@@ -547,6 +613,10 @@ class Scaffolding::Transformer
       is_has_many = is_ids && !is_vanilla
       is_multiple = attribute_options&.key?(:multiple) || is_has_many
       is_association = is_belongs_to || is_has_many
+
+      # Sometimes we need all the magic of a `*_id` field, but without the scoping stuff.
+      # Possibly only ever used internally by `join-model`.
+      is_unscoped = attribute_options[:unscoped]
 
       name_without_id = name.gsub(/_id$/, "")
       name_without_ids = name.gsub(/_ids$/, "").pluralize
@@ -632,7 +702,7 @@ class Scaffolding::Transformer
       # MODEL VALIDATIONS
       #
 
-      unless cli_options["skip-form"]
+      unless cli_options["skip-form"] || is_unscoped
 
         file_name = "./app/models/scaffolding/completely_concrete/tangible_thing.rb"
 
@@ -1006,18 +1076,16 @@ class Scaffolding::Transformer
 
           # unless the table name matches the association name.
           unless class_name_matches
-
             if migration_file_name
               # There are two forms this association creation can take.
-              replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}", /t\.references :#{name_without_id}/)
-              replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}", /add_reference :#{child.underscore.pluralize.tr("/", "_")}, :#{name_without_id}/)
+              replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: \"#{attribute_options[:class_name].tableize.tr("/", "_")}\"}", /t\.references :#{name_without_id}/)
+              replace_in_file(migration_file_name, "foreign_key: true", "foreign_key: {to_table: \"#{attribute_options[:class_name].tableize.tr("/", "_")}\"}", /add_reference :#{child.underscore.pluralize.tr("/", "_")}, :#{name_without_id}/)
 
               # TODO also solve the 60 character long index limitation.
               modified_migration = true
             else
               add_additional_step :yellow, "We would have expected there to be a migration that defined `#{expected_reference}`, but we didn't find one. Where was the reference added to this model? It's _probably_ the original creation of the table. Either way, you need to rollback, change \"foreign_key: true\" to \"foreign_key: {to_table: '#{attribute_options[:class_name].tableize.tr("/", "_")}'}\" for this column, and re-run the migration."
             end
-
           end
 
           optional_line = ", optional: true" unless is_required
@@ -1027,7 +1095,7 @@ class Scaffolding::Transformer
             "./app/models/scaffolding/completely_concrete/tangible_thing.rb",
             class_name_matches ?
               "belongs_to :#{name_without_id}#{optional_line}" :
-              "belongs_to :#{name_without_id}, class_name: '#{attribute_options[:class_name]}'#{optional_line}",
+              "belongs_to :#{name_without_id}, class_name: \"#{attribute_options[:class_name]}\"#{optional_line}",
             "belongs_to :#{name_without_id}"
           )
 
@@ -1037,7 +1105,7 @@ class Scaffolding::Transformer
             "./app/models/scaffolding/completely_concrete/tangible_thing.rb",
             class_name_matches ?
               "belongs_to :#{name_without_id}#{optional_line}" :
-              "belongs_to :#{name_without_id}, class_name: '#{attribute_options[:class_name]}'#{optional_line}",
+              "belongs_to :#{name_without_id}, class_name: \"#{attribute_options[:class_name]}\"#{optional_line}",
             BELONGS_TO_HOOK,
             prepend: true
           )
@@ -1152,10 +1220,10 @@ class Scaffolding::Transformer
       end
       scaffold_replace_line_in_file("./test/factories/scaffolding/completely_concrete/tangible_things.rb", content, "absolutely_abstract_creative_concept { nil }")
 
-      scaffold_add_line_to_file("./app/models/scaffolding/absolutely_abstract/creative_concept.rb", "has_many :completely_concrete_tangible_things, class_name: 'Scaffolding::CompletelyConcrete::TangibleThing', dependent: :destroy, foreign_key: :absolutely_abstract_creative_concept_id", HAS_MANY_HOOK, prepend: true)
+      add_has_many_association
 
       if class_names_transformer.belongs_to_needs_class_definition?
-        scaffold_replace_line_in_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", transform_string("belongs_to :absolutely_abstract_creative_concept, class_name: 'Scaffolding::AbsolutelyAbstract::CreativeConcept'\n"), transform_string("belongs_to :absolutely_abstract_creative_concept\n"))
+        scaffold_replace_line_in_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", transform_string("belongs_to :absolutely_abstract_creative_concept, class_name: \"Scaffolding::AbsolutelyAbstract::CreativeConcept\"\n"), transform_string("belongs_to :absolutely_abstract_creative_concept\n"))
       end
 
       # add user permissions.
@@ -1172,39 +1240,7 @@ class Scaffolding::Transformer
     end
 
     unless cli_options["skip-model"]
-
-      before_scaffolding_hooks = <<~RUBY
-        #{CONCERNS_HOOK}
-
-      RUBY
-
-      after_scaffolding_hooks = <<-RUBY
-        #{BELONGS_TO_HOOK}
-
-        #{HAS_MANY_HOOK}
-
-        #{HAS_ONE_HOOK}
-
-        #{SCOPES_HOOK}
-
-        #{VALIDATIONS_HOOK}
-
-        #{CALLBACKS_HOOK}
-
-        #{DELEGATIONS_HOOK}
-
-        #{METHODS_HOOK}
-      RUBY
-
-      # add scaffolding hooks to the model.
-      unless File.readlines(transform_string("./app/models/scaffolding/completely_concrete/tangible_thing.rb")).join.include?(CONCERNS_HOOK)
-        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", before_scaffolding_hooks, "ApplicationRecord", increase_indent: true)
-      end
-
-      unless File.readlines(transform_string("./app/models/scaffolding/completely_concrete/tangible_thing.rb")).join.include?(BELONGS_TO_HOOK)
-        scaffold_add_line_to_file("./app/models/scaffolding/completely_concrete/tangible_thing.rb", after_scaffolding_hooks, "end", prepend: true, increase_indent: true, exact_match: true)
-      end
-
+      add_scaffolding_hooks_to_model
     end
 
     #
@@ -1332,7 +1368,7 @@ class Scaffolding::Transformer
       end
     end
 
-    add_additional_step :yellow, transform_string("If you would like the table view you've just generated to reactively update when a Tangible Thing is updated on the server, please edit `app/models/scaffolding/absolutely_abstract/creative_concept.rb`, locate the `has_many :completely_concrete_tangible_things`, and add `enable_updates: true, inverse_of: :absolutely_abstract_creative_concept` to it.")
+    add_additional_step :yellow, transform_string("If you would like the table view you've just generated to reactively update when a Tangible Thing is updated on the server, please edit `app/models/scaffolding/absolutely_abstract/creative_concept.rb`, locate the `has_many :completely_concrete_tangible_things`, and add `enable_updates: true` to it.")
 
     restart_server
   end
