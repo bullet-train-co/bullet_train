@@ -164,13 +164,25 @@ class Scaffolding::RoutesFileManipulator
     nil
   end
 
-  def find_in_namespace(needle, namespaces, within = nil)
+  def find_in_namespace(needle, namespaces, within = nil, ignore = nil)
     if namespaces.any?
       namespace_lines = find_namespaces(namespaces, within)
       within = namespace_lines[namespaces.last]
     end
 
     lines_within(within).each_with_index do |line, line_number|
+      # + 2 because line_number starts from 0, and within starts one line after
+      actual_line_number = (within + line_number + 2)
+
+      # The lines we want to ignore may be a a series of blocks, so we check each Range here.
+      ignore_line = false
+      if ignore.present?
+        ignore.each do |lines_to_ignore|
+          ignore_line = true if lines_to_ignore.include?(actual_line_number)
+        end
+      end
+
+      next if ignore_line
       return (within + (within ? 1 : 0) + line_number) if line.match?(needle)
     end
 
@@ -188,7 +200,8 @@ class Scaffolding::RoutesFileManipulator
   def find_resource(parts, options = {})
     parts = parts.dup
     resource = parts.pop
-    find_in_namespace(/resources :#{resource}#{options[:options] ? ", #{options[:options].gsub(/(\[)(.*)(\])/, '\[\2\]')}" : ""}(,?\s.*)?$/, parts, options[:within])
+    needle = /resources :#{resource}#{options[:options] ? ", #{options[:options].gsub(/(\[)(.*)(\])/, '\[\2\]')}" : ""}(,?\s.*)?$/
+    find_in_namespace(needle, parts, options[:within], options[:ignore])
   end
 
   def find_or_create_resource(parts, options = {})
@@ -196,10 +209,48 @@ class Scaffolding::RoutesFileManipulator
     resource = parts.pop
     namespaces = parts
     namespace_within = find_or_create_namespaces(namespaces, options[:within])
+
+    # The namespaces that the developer has declared are captured above in `namespace_within`,
+    # so all other namespaces nested inside the resource's parent should be ignored.
+    options[:ignore] = top_level_namespace_block_lines(options[:within]) || []
+
     unless (result = find_resource([resource], options))
       result = insert(["resources :#{resource}" + (options[:options] ? ", #{options[:options]}" : "")], namespace_within || options[:within])
     end
     result
+  end
+
+  def top_level_namespace_block_lines(within)
+    local_namespace_blocks = []
+    lines_within(within).each do |line|
+      # i.e. - Retrieve "foo" from "namespace :foo do"
+      match_data = line.match(/(\s*namespace\s:)(.*)(\sdo$)/)
+
+      # Since we only want top-level namespace blocks, we ensure that
+      # all other namespace blocks INSIDE the top-level namespace blocks are skipped
+      if match_data.present?
+        namespace_name = match_data[2]
+        local_namespace = find_namespaces([namespace_name], within)
+        starting_line_number = local_namespace[namespace_name]
+        local_namespace_block = ((starting_line_number + 1)..(find_block_end(starting_line_number) + 1))
+
+        if local_namespace_blocks.empty?
+          local_namespace_blocks << local_namespace_block
+        else
+          skip_block = false
+          local_namespace_blocks.each do |block_range|
+            if block_range.include?(local_namespace_block.first)
+              skip_block = true
+            else
+              next
+            end
+          end
+          local_namespace_blocks << local_namespace_block unless skip_block
+        end
+      end
+    end
+
+    local_namespace_blocks
   end
 
   def find_or_create_resource_block(parts, options = {})
