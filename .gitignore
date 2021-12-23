@@ -54,4 +54,8 @@ storybook/**/*.stories.json
 # Ignore IDE specific folders
 .idea/
 
+# Ignore development tools files
+.tool-versions
+.byebug_history
+
 # 🚅 add your files to ignore here.

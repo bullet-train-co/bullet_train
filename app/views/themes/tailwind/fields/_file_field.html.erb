@@ -8,25 +8,32 @@ other_options ||= {}
 
 <%= render 'shared/fields/field', form: form, method: method, helper: :file_field, options: options, other_options: other_options do %>
   <% content_for :field do %>
-    <div class="file-field">
-      <%= form.hidden_field "#{method}_removal".to_sym, value: nil, class: 'remove-file-flag' %>
-      <%= form.file_field method, class: 'file-upload hidden', onchange: "$(this).closest('.file-field').find('.download-file').remove(); $(this).closest('.file-field').find('.upload-file i').removeClass('ti-upload').addClass('ti-check'); $(this).closest('.file-field').find('.upload-file span').text('Select Another File');" %>
-      <% if form.object.send(method).attached? %>
-        <%= link_to url_for(form.object.send(method)), class: 'button download-file mr-3' do %>
-          <i class="leading-none mr-2 text-base ti ti-download"></i>
-          <span>Download Current Document</span>
+    <div class="file-field" data-controller="fields--file-field">
+      <%= form.hidden_field "#{method}_removal".to_sym, value: nil, data: {'fields--file-field-target': 'removeFileFlag'} %>
+      <%= form.file_field method, class: 'file-upload hidden', direct_upload: true, data: {'fields--file-field-target': 'fileField', action: 'change->fields--file-field#handleFileSelected'} %>
+      <div>
+        <% if form.object.send(method).attached? %>
+          <%= link_to url_for(form.object.send(method)), class: 'button download-file mr-3', data: {'fields--file-field-target': 'downloadFileButton'} do %>
+            <i class="leading-none mr-2 text-base ti ti-download"></i>
+            <span>Download Current Document</span>
+          <% end %>
         <% end %>
-      <% end %>
-      <%= link_to "#", onclick: "$(this).closest('.file-field').find('.file-upload').click(); return false;", class: 'button-alternative upload-file mr-3' do %>
-        <i class="leading-none mr-2 text-base ti ti-upload dark:text-white"></i>
-        <span class="dark:text-white">Upload New Document</span>
-      <% end %>
-      <% if form.object.send(method).attached? %>
-        <%= link_to "#", onclick: "$(this).closest('.file-field').find('.download-file').hide(); $(this).closest('.file-field').find('.remove-file').hide(); $(this).closest('.file-field').find('.remove-file-flag').val(true); return false;", class: 'button-alternative remove-file mr-3' do %>
-          <i class="leading-none mr-2 text-base ti ti-trash"></i>
-          <span>Remove Current Document</span>
+        <% if form.object.send(method).attached? %>
+          <div class="button-alternative cursor-pointer mr-3" data-action="click->fields--file-field#removeFile" data-fields--file-field-target="removeFileButton">
+            <i class="leading-none mr-2 text-base ti ti-trash"></i>
+            <span>Remove Current Document</span>
+          </div>
         <% end %>
-      <% end %>
+      </div>
+      <div class="mt-2">
+        <div class="button-alternative cursor-pointer" data-action="click->fields--file-field#uploadFile" data-fields--file-field-target="selectFileButton">
+          <i class="leading-none mr-2 text-base ti ti-upload dark:text-white"></i>
+          <span class="dark:text-white">Upload New Document</span>
+        </div>
+        <div class="mt-2 hidden flex overflow-hidden text-xs rounded bg-black-400">
+          <div data-fields--file-field-target="progressBar" aria-valuemax="100" aria-valuemin="0" aria-valuenow="0" class="flex flex-col justify-center text-white text-center whitespace-nowrap overflow-hidden bg-sealBlue-300" role="progressbar" style="width: 0%;"> 0%</div>
+        </div>
+      </div>
     </div>
   <% end %>
 <% end %>
