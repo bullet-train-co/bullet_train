@@ -2,7 +2,10 @@ require "application_system_test_case"
 
 unless scaffolding_things_disabled?
   class ReactivitySystemTest < ApplicationSystemTestCase
-    ::Selenium::WebDriver::Remote::Bridge.slow_down_execute_time
+    def setup
+      super
+      ::Selenium::WebDriver::Remote::Bridge.slow_down_execute_time
+    end
 
     def teardown
       ::Selenium::WebDriver::Remote::Bridge.reset_execute_time
