@@ -218,6 +218,8 @@ gem "hiredis"
 
 gem "active_hash", github: "bullet-train-co/active_hash", branch: "fixes/address-keyword-argument-issue"
 
+gem "bullet_train-roles"
+
 group :production do
   # we suggest using postmark for email deliverability.
   gem "postmark-rails"
