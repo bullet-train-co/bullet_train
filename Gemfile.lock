@@ -122,7 +122,7 @@ GEM
     bootsnap (1.9.3)
       msgpack (~> 1.0)
     builder (3.2.4)
-    bullet_train-roles (0.1.0)
+    bullet_train-roles (0.1.1)
       active_hash
       activesupport
       cancancan
