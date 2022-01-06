@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/bullet-train-co/active_hash.git
-  revision: bd9ba7fcff241308510b5dfe135d5385b9df8300
+  revision: a6628bc65e7c099ec9428c2bfe1e292ef01f1ef1
   specs:
     active_hash (3.1.0)
       activesupport (>= 5.0.0)
