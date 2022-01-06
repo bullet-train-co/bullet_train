@@ -216,7 +216,7 @@ gem "http_accept_language"
 gem "cable_ready", "5.0.0.pre8"
 gem "hiredis"
 
-gem "active_hash", github: "bullet-train-co/active_hash", branch: "fixes/address-keyword-argument-issue"
+gem "active_hash", github: "bullet-train-co/active_hash"
 
 gem "bullet_train-roles"
 

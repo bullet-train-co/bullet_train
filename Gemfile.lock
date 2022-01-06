@@ -1,7 +1,6 @@
 GIT
   remote: https://github.com/bullet-train-co/active_hash.git
-  revision: 25034270b31fec6ef48bba1e43be02760451d3c2
-  branch: fixes/address-keyword-argument-issue
+  revision: bd9ba7fcff241308510b5dfe135d5385b9df8300
   specs:
     active_hash (3.1.0)
       activesupport (>= 5.0.0)
