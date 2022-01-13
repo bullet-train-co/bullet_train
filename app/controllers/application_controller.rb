@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   include InvitationOnlyHelper
   include InvitationsHelper
 
+  include DeviseCurrentAttributes
+
   protect_from_forgery with: :exception, prepend: true
 
   around_action :set_locale

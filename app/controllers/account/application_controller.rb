@@ -19,32 +19,6 @@ class Account::ApplicationController < ApplicationController
   before_action :set_paper_trail_whodunnit
   before_action :ensure_onboarding_is_complete_and_set_next_step
 
-  # many times the team will already be loaded by account_load_and_authorize_resource,
-  # so we don't need any of this logic. however, there are a handful of account pages
-  # where the instance variable won't be already set, so we have some other methods
-  # for populating it.
-  def load_team
-    # if account_load_and_authorize_resource couldn't load the team.
-    unless @team
-
-      # however, the most likely case is that we want to fall back to whatever
-      # the last team was the user interacted with.
-      if current_user.try(:current_team)
-        @team = current_user.current_team
-
-      end
-
-    end
-
-    # if the currently loaded team is saved to the database, make that the
-    # user's new current team.
-    if @team.try(:persisted?)
-      if can? :show, @teams
-        current_user.update_column(:current_team_id, @team.id)
-      end
-    end
-  end
-
   def adding_user_email?
     is_a?(Account::Onboarding::UserEmailController)
   end

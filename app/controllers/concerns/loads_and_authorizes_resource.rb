@@ -6,17 +6,27 @@ module LoadsAndAuthorizesResource
       raise "This is a template method that needs to be implemented by controllers including LoadsAndAuthorizesResource."
     end
 
-    # this is a template method, but it's implementation is optional.
-    # see Account::ApplicationController for examples of why we might need this.
     def load_team
+      # Sometimes `@team` has already been populated by earlier `before_action` steps.
+      @team ||= @child_object&.team || @parent_object&.team
+
+      # Update current attributes.
+      Current.team = @team
+
+      # If the currently loaded team is saved to the database, make that the user's new current team.
+      if @team.try(:persisted?)
+        if can? :show, @team
+          current_user.update_column(:current_team_id, @team.id)
+        end
+      end
     end
 
-    # this is the only place i use this commenting style. let me know if you hate it.
     def self.model_namespace_from_controller_namespace
       controller_class_name = regex_to_remove_controller_namespace ? name.gsub(regex_to_remove_controller_namespace, "") : name
       namespace = controller_class_name.split("::")
-      namespace.pop # remove "::ThingsController"
-      namespace # return whatever is left.
+      # Remove "::ThingsController"
+      namespace.pop
+      namespace
     end
 
     # this is one of the few pieces of 'magical' functionality that bullet train implements
