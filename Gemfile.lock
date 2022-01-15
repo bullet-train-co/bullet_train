@@ -126,6 +126,7 @@ GEM
       active_hash
       activesupport
       cancancan
+    bullet_train-scope_validator (1.0.1)
     cable_ready (5.0.0.pre8)
       rails (>= 5.2)
       thread-local (>= 1.1.0)
@@ -567,6 +568,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   bullet_train-roles
+  bullet_train-scope_validator
   cable_ready (= 5.0.0.pre8)
   cancancan
   capybara

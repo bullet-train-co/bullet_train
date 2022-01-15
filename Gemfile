@@ -219,6 +219,7 @@ gem "hiredis"
 gem "active_hash", github: "bullet-train-co/active_hash"
 
 gem "bullet_train-roles"
+gem "bullet_train-scope_validator"
 
 group :production do
   # we suggest using postmark for email deliverability.
