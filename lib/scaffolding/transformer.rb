@@ -195,9 +195,7 @@ class Scaffolding::Transformer
 
     puts "Writing '#{transformed_file_name}'."
 
-    File.open(transformed_file_name, "w+") do |f|
-      f.write(transformed_file_content.strip + "\n")
-    end
+    File.write(transformed_file_name, transformed_file_content.strip + "\n")
 
     if transformed_file_name.split(".").last == "rb"
       puts "Fixing Standard Ruby on '#{transformed_file_name}'."
@@ -263,7 +261,7 @@ class Scaffolding::Transformer
     transform_hook = hook
 
     begin
-      target_file_content = File.open(transformed_file_name).read
+      target_file_content = File.read(transformed_file_name)
     rescue Errno::ENOENT => _
       puts "Couldn't find '#{transformed_file_name}'".red unless suppress_could_not_find
       return false
@@ -322,9 +320,7 @@ class Scaffolding::Transformer
 
       puts "Updating '#{transformed_file_name}'."
 
-      File.open(transformed_file_name, "w+") do |f|
-        f.write(new_target_file_content.join("\n").strip + "\n")
-      end
+      File.write(transformed_file_name, new_target_file_content.join("\n").strip + "\n")
 
     end
   end
@@ -337,16 +333,14 @@ class Scaffolding::Transformer
   end
 
   def replace_line_in_file(file, content, in_place_of)
-    target_file_content = File.open(file).read
+    target_file_content = File.read(file)
 
     if target_file_content.include?(content)
       puts "No need to update '#{file}'. It already has '#{content}'."
     else
       puts "Updating '#{file}'."
       target_file_content.gsub!(in_place_of, content)
-      File.open(file, "w+") do |f|
-        f.write(target_file_content)
-      end
+      File.write(file, target_file_content)
     end
   end
 
@@ -484,12 +478,10 @@ class Scaffolding::Transformer
         target_file_content += l
       end
     else
-      target_file_content = File.open(file).read
+      target_file_content = File.read(file)
       target_file_content.gsub!(before, after)
     end
-    File.open(file, "w+") do |f|
-      f.write(target_file_content)
-    end
+    File.write(file, target_file_content)
   end
 
   def restart_server
@@ -1300,21 +1292,19 @@ class Scaffolding::Transformer
           FileUtils.mkdir_p("config/routes")
         end
 
-        File.open(routes_path, "w+") do |file|
-          file.write <<~RUBY
-            collection_actions = [:index, :new, :create]
+        File.write(routes_path, <<~RUBY)
+          collection_actions = [:index, :new, :create]
 
-            # 🚅 Don't remove this block, it will break Super Scaffolding.
-            begin do
-              namespace :#{routes_namespace} do
-                shallow do
-                  resources :teams do
-                  end
+          # 🚅 Don't remove this block, it will break Super Scaffolding.
+          begin do
+            namespace :#{routes_namespace} do
+              shallow do
+                resources :teams do
                 end
               end
             end
-          RUBY
-        end
+          end
+        RUBY
 
         retry
       end

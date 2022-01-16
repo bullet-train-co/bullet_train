@@ -3,14 +3,13 @@ class Team < ApplicationRecord
   # Typically you should avoid adding your own functionality in this section to avoid merge conflicts in the future.
   # (If you specifically want to change Bullet Train's default behavior, that's OK and you can do that here.)
 
+  # Outgoing webhooks.
+  include Webhooks::Outgoing::TeamSupport
+
   # super scaffolding
   unless scaffolding_things_disabled?
     has_many :scaffolding_absolutely_abstract_creative_concepts, class_name: "Scaffolding::AbsolutelyAbstract::CreativeConcept", dependent: :destroy, enable_updates: true
   end
-
-  # webhooks
-  has_many :webhooks_outgoing_endpoints, class_name: "Webhooks::Outgoing::Endpoint", dependent: :destroy
-  has_many :webhooks_outgoing_events, class_name: "Webhooks::Outgoing::Event", dependent: :destroy
 
   # memberships and invitations
   has_many :memberships, dependent: :destroy
@@ -26,8 +25,6 @@ class Team < ApplicationRecord
   # validations
   validates :name, presence: true
   validates :time_zone, inclusion: {in: ActiveSupport::TimeZone.all.map(&:name)}, allow_nil: true
-
-  before_destroy :mark_for_destruction, prepend: true
 
   # ✅ YOUR APPLICATION'S TEAM FUNCTIONALITY
   # This is the place where you should implement your own features on top of Bullet Train's functionality. There
@@ -74,12 +71,6 @@ class Team < ApplicationRecord
 
   def invalidate_caches
     users.map(&:invalidate_ability_cache)
-  end
-
-  def mark_for_destruction
-    # this allows downstream logic to check whether a team is being destroyed in order to bypass webhook issuance and
-    # bypass restrictions on removing the last admin.
-    update_column(:being_destroyed, true)
   end
 
   def team

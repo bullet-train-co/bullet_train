@@ -69,9 +69,7 @@ def oauth_scaffold_file(file, options)
 
   puts "Writing '#{transformed_file_name}'."
 
-  File.open(transformed_file_name, "w+") do |f|
-    f.write(transformed_file_content)
-  end
+  File.write(transformed_file_name, transformed_file_content)
 end
 
 def oauth_transform_string(string, options)

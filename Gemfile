@@ -220,6 +220,7 @@ gem "active_hash", github: "bullet-train-co/active_hash"
 
 gem "bullet_train-roles"
 gem "bullet_train-scope_validator"
+gem "bullet_train-outgoing_webhooks"
 
 group :production do
   # we suggest using postmark for email deliverability.
