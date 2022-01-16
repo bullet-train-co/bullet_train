@@ -131,7 +131,7 @@ GEM
       active_hash
       activesupport
       cancancan
-    bullet_train-scope_validator (1.0.1)
+    bullet_train-scope_validator (1.0.2)
     cable_ready (5.0.0.pre8)
       rails (>= 5.2)
       thread-local (>= 1.1.0)
