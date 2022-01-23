@@ -65,8 +65,7 @@ Rails.application.routes.draw do
 
       # user-level onboarding tasks.
       namespace :onboarding do
-        resources :user_details
-        resources :user_email
+        # routes for standard onboarding steps are configured in the `bullet_train` gem, but you can add more here.
       end
 
       # user specific resources.
@@ -74,16 +73,13 @@ Rails.application.routes.draw do
         namespace :oauth do
           # 🚅 super scaffolding will insert new oauth providers above this line.
         end
+
+        # routes for standard user actions and resources are configured in the `bullet_train` gem, but you can add more here.
       end
 
       # team-level resources.
       resources :teams do
-        namespace :imports do
-          namespace :csv do
-            unless scaffolding_things_disabled?
-            end
-          end
-        end
+        # routes for many teams actions and resources are configured in the `bullet_train` gem, but you can add more here.
 
         # add your resources here.
         unless scaffolding_things_disabled?
@@ -108,44 +104,11 @@ Rails.application.routes.draw do
         end
 
         resources :invitations do
-          member do
-            get :accept
-            post :accept
-          end
+          # routes for standard invitation actions and resources are configured in the `bullet_train` gem, but you can add more here.
         end
 
         resources :memberships do
-          member do
-            post :demote
-            post :promote
-            post :reinvite
-          end
-
-          collection do
-            get :search
-          end
-
-          scope module: "memberships" do
-            namespace :reassignments do
-              resources :scaffolding_completely_concrete_tangible_things_reassignments, only: [:new, :create, :index]
-            end
-          end
-
-          namespace :memberships do
-            namespace :scaffolding do
-              namespace :completely_concrete do
-                resources :tangible_things
-              end
-            end
-
-            namespace :reassignments do
-              resources :scaffolding_completely_concrete_tangible_things_reassignments, only: [:show]
-            end
-          end
-        end
-
-        member do
-          post :switch_to
+          # routes for standard membership actions and resources are configured in the `bullet_train` gem, but you can add more here.
         end
 
         namespace :integrations do
