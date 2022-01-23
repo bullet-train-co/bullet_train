@@ -87,17 +87,6 @@ Rails.application.routes.draw do
           end
         end
 
-        namespace :webhooks do
-          namespace :outgoing do
-            resources :events
-            resources :endpoints do
-              resources :deliveries, only: [:index, :show] do
-                resources :delivery_attempts, only: [:index, :show]
-              end
-            end
-          end
-        end
-
         # add your resources here.
         unless scaffolding_things_disabled?
           namespace :scaffolding do

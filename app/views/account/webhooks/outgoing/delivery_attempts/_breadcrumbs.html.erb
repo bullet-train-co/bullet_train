@@ -1,8 +1,0 @@
-<% delivery_attempt ||= @delivery_attempt %>
-<% delivery ||= @delivery || delivery_attempt&.delivery %>
-<%= render 'account/webhooks/outgoing/deliveries/breadcrumbs', delivery: delivery %>
-<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, delivery, :delivery_attempts] %>
-<% if delivery_attempt&.persisted? %>
-  <%= render 'account/shared/breadcrumb', label: delivery_attempt.label_string, url: [:account, delivery_attempt] %>
-<% end %>
-<%= render 'account/shared/breadcrumbs/actions', only_for: 'webhooks/outgoing/delivery_attempts' %>
