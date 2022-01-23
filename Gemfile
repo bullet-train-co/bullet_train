@@ -222,6 +222,7 @@ gem "bullet_train-roles"
 gem "bullet_train-scope_validator"
 gem "bullet_train-outgoing_webhooks-core"
 gem "bullet_train-outgoing_webhooks"
+gem "bullet_train-integrations-stripe"
 
 group :production do
   # we suggest using postmark for email deliverability.

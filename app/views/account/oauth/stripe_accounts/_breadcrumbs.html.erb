@@ -1,8 +1,0 @@
-<% stripe_account ||= @stripe_account %>
-<% user ||= @user || stripe_account&.user %>
-<%= render 'account/users/breadcrumbs', user: user %>
-<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, user, :oauth, :stripe_accounts] %>
-<% if stripe_account&.persisted? %>
-  <%= render 'account/shared/breadcrumb', label: stripe_account.label_string, url: [:account, stripe_account] %>
-<% end %>
-<%= render 'account/shared/breadcrumbs/actions', only_for: 'oauth/stripe_accounts' %>

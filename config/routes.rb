@@ -46,7 +46,6 @@ Rails.application.routes.draw do
     namespace :incoming do
       resources :bullet_train_webhooks
       namespace :oauth do
-        resources :stripe_account_webhooks if stripe_enabled?
         # 🚅 super scaffolding will insert new oauth provider webhooks above this line.
       end
     end
@@ -73,7 +72,6 @@ Rails.application.routes.draw do
       # user specific resources.
       resources :users do
         namespace :oauth do
-          resources :stripe_accounts if stripe_enabled?
           # 🚅 super scaffolding will insert new oauth providers above this line.
         end
       end
@@ -151,7 +149,6 @@ Rails.application.routes.draw do
         end
 
         namespace :integrations do
-          resources :stripe_installations if stripe_enabled?
           # 🚅 super scaffolding will insert new integration installations above this line.
         end
 
