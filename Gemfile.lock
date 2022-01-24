@@ -31,6 +31,12 @@ GIT
       responders
       warden (~> 1.2.3)
 
+PATH
+  remote: /Users/andrewculver/Sites/extractions/scaffolding/bullet_train-super_scaffolding-templates
+  specs:
+    bullet_train-super_scaffolding-templates (0.1.0)
+      rails (>= 7.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -586,6 +592,7 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks-core
   bullet_train-roles
   bullet_train-scope_validator
+  bullet_train-super_scaffolding-templates!
   cable_ready (= 5.0.0.pre8)
   cancancan
   capybara

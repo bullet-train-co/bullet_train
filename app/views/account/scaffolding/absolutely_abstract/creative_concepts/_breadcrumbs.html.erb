@@ -1,8 +1,0 @@
-<% creative_concept ||= @creative_concept %>
-<% team ||= @team || creative_concept&.team %>
-<%= render 'account/teams/breadcrumbs', team: team %>
-<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, team, :scaffolding_absolutely_abstract_creative_concepts] %>
-<% if creative_concept&.persisted? %>
-  <%= render 'account/shared/breadcrumb', label: creative_concept.label_string, url: [:account, creative_concept] %>
-<% end %>
-<%= render 'account/shared/breadcrumbs/actions', only_for: 'scaffolding/absolutely_abstract/creative_concepts' %>
