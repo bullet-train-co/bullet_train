@@ -225,6 +225,10 @@ gem "bullet_train-outgoing_webhooks-core"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-integrations-stripe"
 gem "bullet_train-super_scaffolding-templates"
+gem "bullet_train-themes"
+gem "bullet_train-themes-base"
+gem "bullet_train-themes-tailwind_css"
+gem "bullet_train-themes-light"
 
 group :production do
   # we suggest using postmark for email deliverability.
