@@ -1,5 +1,5 @@
 class Invitation < ApplicationRecord
-  include Invitations::Core
+  include Invitations::Base
   # 🚅 add concerns above.
 
   # 🚅 add belongs_to associations above.

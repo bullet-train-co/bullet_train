@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include Users::Core
+  include Users::Base
   # 🚅 add concerns above.
 
   # 🚅 add belongs_to associations above.

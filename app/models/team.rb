@@ -1,5 +1,5 @@
 class Team < ApplicationRecord
-  include Teams::Core
+  include Teams::Base
   include Webhooks::Outgoing::TeamSupport
   # 🚅 add concerns above.
 

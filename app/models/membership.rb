@@ -1,5 +1,5 @@
 class Membership < ApplicationRecord
-  include Memberships::Core
+  include Memberships::Base
   # 🚅 add concerns above.
 
   # 🚅 add belongs_to associations above.
