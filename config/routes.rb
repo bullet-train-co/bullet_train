@@ -101,8 +101,4 @@ Rails.application.routes.draw do
       end
     end
   end
-
-  if demo?
-    get "/call", to: redirect("https://calendly.com/bullettrain/introductions"), as: "call"
-  end
 end
