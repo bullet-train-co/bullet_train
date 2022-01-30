@@ -31,6 +31,12 @@ GIT
       responders
       warden (~> 1.2.3)
 
+PATH
+  remote: /Users/andrewculver/Sites/extractions/incoming-webhooks/bullet_train-incoming_webhooks
+  specs:
+    bullet_train-incoming_webhooks (1.0.0)
+      rails (>= 7.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -122,7 +128,7 @@ GEM
     bootsnap (1.9.4)
       msgpack (~> 1.0)
     builder (3.2.4)
-    bullet_train (1.0.5)
+    bullet_train (1.0.6)
       rails (>= 7.0.0)
     bullet_train-integrations-stripe (1.0.2)
       rails (>= 7.0.0)
@@ -591,6 +597,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   bullet_train
+  bullet_train-incoming_webhooks!
   bullet_train-integrations-stripe
   bullet_train-outgoing_webhooks
   bullet_train-outgoing_webhooks-core
