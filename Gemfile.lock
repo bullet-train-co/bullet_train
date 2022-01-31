@@ -124,7 +124,7 @@ GEM
     builder (3.2.4)
     bullet_train (1.0.6)
       rails (>= 7.0.0)
-    bullet_train-api (1.0.0)
+    bullet_train-api (1.0.1)
       rails (>= 7.0.0)
     bullet_train-incoming_webhooks (1.0.0)
       rails (>= 7.0.0)
@@ -284,7 +284,7 @@ GEM
     http-cookie (1.0.4)
       domain_name (~> 0.5)
     http_accept_language (2.1.1)
-    i18n (1.8.11)
+    i18n (1.9.1)
       concurrent-ruby (~> 1.0)
     i18n-js (3.9.0)
       i18n (>= 0.6.6)
@@ -587,7 +587,7 @@ GEM
       nokogiri (~> 1.8)
     xray-rails (0.3.2)
       rails (>= 3.1.0)
-    zeitwerk (2.5.3)
+    zeitwerk (2.5.4)
 
 PLATFORMS
   ruby
