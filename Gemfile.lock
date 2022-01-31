@@ -137,9 +137,13 @@ GEM
       wine_bouncer
     bullet_train-fields (1.0.1)
       rails (>= 7.0.0)
+    bullet_train-has_uuid (1.0.0)
+      rails (>= 7.0.0)
     bullet_train-incoming_webhooks (1.0.0)
       rails (>= 7.0.0)
     bullet_train-integrations-stripe (1.0.2)
+      rails (>= 7.0.0)
+    bullet_train-obfuscates_id (1.0.1)
       rails (>= 7.0.0)
     bullet_train-outgoing_webhooks (1.0.3)
       rails (>= 7.0.0)
@@ -153,6 +157,8 @@ GEM
       active_hash
       activesupport
       cancancan
+    bullet_train-scope_questions (1.0.0)
+      rails (>= 7.0.0)
     bullet_train-scope_validator (1.0.2)
     bullet_train-serializers (1.0.1)
       jsonapi-serializer
@@ -616,13 +622,16 @@ DEPENDENCIES
   bullet_train
   bullet_train-api
   bullet_train-fields
+  bullet_train-has_uuid
   bullet_train-incoming_webhooks
   bullet_train-integrations-stripe
+  bullet_train-obfuscates_id
   bullet_train-outgoing_webhooks
   bullet_train-outgoing_webhooks-api
   bullet_train-outgoing_webhooks-core
   bullet_train-outgoing_webhooks-serializers
   bullet_train-roles
+  bullet_train-scope_questions
   bullet_train-scope_validator
   bullet_train-serializers
   bullet_train-super_scaffolding
