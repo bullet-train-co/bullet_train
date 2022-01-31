@@ -1,19 +1,5 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  use_doorkeeper
-
-  # Grape API
-  mount Api::Base, at: "/api"
-
-  # TODO 🍩 figure out how to extract this for the sprinkles gem.
-  # e.g. `resources :things, concerns: [:sortable]`
-  concern :sortable do
-    collection do
-      post :reorder
-    end
-  end
-
   collection_actions = [:index, :new, :create]
 
   devise_for :users, controllers: {
