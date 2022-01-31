@@ -141,6 +141,8 @@ GEM
       rails (>= 7.0.0)
     bullet_train-outgoing_webhooks (1.0.3)
       rails (>= 7.0.0)
+    bullet_train-outgoing_webhooks-api (1.0.2)
+      rails (>= 7.0.0)
     bullet_train-outgoing_webhooks-core (1.0.2)
       rails (>= 7.0.0)
     bullet_train-outgoing_webhooks-serializers (1.0.0)
@@ -614,6 +616,7 @@ DEPENDENCIES
   bullet_train-incoming_webhooks
   bullet_train-integrations-stripe
   bullet_train-outgoing_webhooks
+  bullet_train-outgoing_webhooks-api
   bullet_train-outgoing_webhooks-core
   bullet_train-outgoing_webhooks-serializers
   bullet_train-roles
