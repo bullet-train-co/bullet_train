@@ -122,7 +122,7 @@ GEM
     bootsnap (1.9.4)
       msgpack (~> 1.0)
     builder (3.2.4)
-    bullet_train (1.0.6)
+    bullet_train (1.0.7)
       rails (>= 7.0.0)
     bullet_train-api (1.0.2)
       api-pagination
@@ -135,6 +135,8 @@ GEM
       rack-cors
       rails (>= 7.0.0)
       wine_bouncer
+    bullet_train-fields (1.0.0)
+      rails (>= 7.0.0)
     bullet_train-incoming_webhooks (1.0.0)
       rails (>= 7.0.0)
     bullet_train-integrations-stripe (1.0.2)
@@ -613,6 +615,7 @@ DEPENDENCIES
   bootsnap
   bullet_train
   bullet_train-api
+  bullet_train-fields
   bullet_train-incoming_webhooks
   bullet_train-integrations-stripe
   bullet_train-outgoing_webhooks

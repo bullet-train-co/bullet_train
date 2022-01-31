@@ -214,6 +214,7 @@ gem "hiredis"
 gem "active_hash", github: "bullet-train-co/active_hash"
 
 gem "bullet_train"
+gem "bullet_train-fields"
 gem "bullet_train-api"
 gem "bullet_train-serializers"
 gem "bullet_train-super_scaffolding"
