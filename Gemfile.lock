@@ -137,7 +137,7 @@ GEM
       wine_bouncer
     bullet_train-fields (1.0.1)
       rails (>= 7.0.0)
-    bullet_train-has_uuid (1.0.0)
+    bullet_train-has_uuid (1.0.2)
       rails (>= 7.0.0)
     bullet_train-incoming_webhooks (1.0.0)
       rails (>= 7.0.0)

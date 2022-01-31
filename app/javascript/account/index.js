@@ -1,2 +1,1 @@
-require("./progress")
 require("./fields")
