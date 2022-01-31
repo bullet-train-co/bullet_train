@@ -214,6 +214,7 @@ gem "hiredis"
 gem "active_hash", github: "bullet-train-co/active_hash"
 
 gem "bullet_train"
+gem "bullet_train-super_load_and_authorize_resource"
 gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
