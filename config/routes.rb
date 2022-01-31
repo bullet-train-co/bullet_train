@@ -58,11 +58,6 @@ Rails.application.routes.draw do
 
       resource :two_factor, only: [:create, :destroy]
 
-      # this is the route the cloudinary field hits.
-      namespace :cloudinary do
-        resources :upload_signatures
-      end
-
       # user-level onboarding tasks.
       namespace :onboarding do
         # routes for standard onboarding steps are configured in the `bullet_train` gem, but you can add more here.

@@ -135,7 +135,7 @@ GEM
       rack-cors
       rails (>= 7.0.0)
       wine_bouncer
-    bullet_train-fields (1.0.0)
+    bullet_train-fields (1.0.1)
       rails (>= 7.0.0)
     bullet_train-incoming_webhooks (1.0.0)
       rails (>= 7.0.0)
