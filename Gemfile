@@ -219,6 +219,7 @@ gem "hiredis"
 gem "active_hash", github: "bullet-train-co/active_hash"
 
 gem "bullet_train"
+gem "bullet_train-api"
 gem "bullet_train-super_scaffolding"
 gem "bullet_train-incoming_webhooks"
 gem "bullet_train-roles"

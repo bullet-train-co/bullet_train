@@ -1,8 +1,0 @@
-<% application ||= @application %>
-<% team ||= @team || application&.team %>
-<%= render 'account/teams/breadcrumbs', team: team %>
-<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, team, :platform_applications] %>
-<% if application&.persisted? %>
-  <%= render 'account/shared/breadcrumb', label: application.label_string, url: [:account, application] %>
-<% end %>
-<%= render 'account/shared/breadcrumbs/actions', only_for: 'platform/applications' %>
