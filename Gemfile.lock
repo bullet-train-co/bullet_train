@@ -139,6 +139,9 @@ GEM
       activesupport
       cancancan
     bullet_train-scope_validator (1.0.2)
+    bullet_train-serializers (1.0.1)
+      jsonapi-serializer
+      rails (>= 7.0.0)
     bullet_train-super_scaffolding (1.0.0)
       rails (>= 7.0.0)
     bullet_train-super_scaffolding-templates (1.0.2)
@@ -604,6 +607,7 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks-core
   bullet_train-roles
   bullet_train-scope_validator
+  bullet_train-serializers
   bullet_train-super_scaffolding
   bullet_train-super_scaffolding-templates
   bullet_train-themes
@@ -639,7 +643,6 @@ DEPENDENCIES
   importmap-rails
   indefinite_article
   jbuilder
-  jsonapi-serializer
   kaminari
   knapsack_pro
   letter_opener
