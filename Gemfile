@@ -140,17 +140,11 @@ gem "rqrcode"
 
 # authorization.
 gem "cancancan"
-gem "grape-cancan"
 
-# api.
-gem "grape", "~> 1.6.0"
-gem "grape-jsonapi", require: "grape_jsonapi"
-gem "grape-swagger"
-gem "grape_on_rails_routes"
+# TODO This _has_ to be specified in the local application's Gemfile because the `bullet_train-api` gemspec can't
+# specify a specific `github` value. We need to get whatever changes we've made here into the original package, or
+# fork it properly.
 gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
-gem "kaminari"
-gem "api-pagination"
-gem "rack-cors", require: "rack/cors"
 
 # administrative functionality.
 gem "paper_trail"
@@ -215,10 +209,12 @@ gem "http_accept_language"
 gem "cable_ready", "5.0.0.pre8"
 gem "hiredis"
 
+# TODO We have to specify this in the local application until our improvements are merged into the official
+# `active_hash` package. At that point, we can just depend on the `bullet_train` package to pull this in.
 gem "active_hash", github: "bullet-train-co/active_hash"
 
 gem "bullet_train"
-gem "bullet_train-api"
+gem "bullet_train-api", path: "/Users/andrewculver/Sites/extractions/api/bullet_train-api"
 gem "bullet_train-serializers"
 gem "bullet_train-super_scaffolding"
 gem "bullet_train-incoming_webhooks"

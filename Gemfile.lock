@@ -31,6 +31,21 @@ GIT
       responders
       warden (~> 1.2.3)
 
+PATH
+  remote: /Users/andrewculver/Sites/extractions/api/bullet_train-api
+  specs:
+    bullet_train-api (1.0.2)
+      api-pagination
+      grape (~> 1.6.0)
+      grape-cancan
+      grape-jsonapi
+      grape-swagger
+      grape_on_rails_routes
+      kaminari
+      rack-cors
+      rails (>= 7.0.0)
+      wine_bouncer
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -123,8 +138,6 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     bullet_train (1.0.6)
-      rails (>= 7.0.0)
-    bullet_train-api (1.0.1)
       rails (>= 7.0.0)
     bullet_train-incoming_webhooks (1.0.0)
       rails (>= 7.0.0)
@@ -268,7 +281,7 @@ GEM
     grape-cancan (0.0.3)
       cancancan
       grape (~> 1.2)
-    grape-jsonapi (1.0.0)
+    grape-jsonapi (1.0.1)
       grape
       jsonapi-serializer
     grape-swagger (1.4.2)
@@ -595,12 +608,11 @@ PLATFORMS
 
 DEPENDENCIES
   active_hash!
-  api-pagination
   awesome_print
   aws-sdk-s3
   bootsnap
   bullet_train
-  bullet_train-api
+  bullet_train-api!
   bullet_train-incoming_webhooks
   bullet_train-integrations-stripe
   bullet_train-outgoing_webhooks
@@ -630,11 +642,6 @@ DEPENDENCIES
   factory_bot_rails
   fastimage
   figaro
-  grape (~> 1.6.0)
-  grape-cancan
-  grape-jsonapi
-  grape-swagger
-  grape_on_rails_routes
   hashids
   hiredis
   honeybadger
@@ -643,7 +650,6 @@ DEPENDENCIES
   importmap-rails
   indefinite_article
   jbuilder
-  kaminari
   knapsack_pro
   letter_opener
   magic_test
@@ -662,7 +668,6 @@ DEPENDENCIES
   pry
   pry-stack_explorer
   puma (~> 5.0)
-  rack-cors
   rack-mini-profiler
   rails (~> 7.0.0)
   rails_autoscale_agent
