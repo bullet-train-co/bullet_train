@@ -10,7 +10,17 @@ ENV["BUNDLE_GEMFILE"] ||= File.expand_path("../../Gemfile",
 require "rubygems"
 require "bundler/setup"
 
+require "pry"
+require "pry-stack_explorer"
+
 APP_ROOT = File.expand_path("..", __dir__)
 Dir.chdir(APP_ROOT) do
+  # TODO Because we don't load the entire Rails environment, we don't have any engine initializers running and so we
+  # have to explicitly include any template sources here. It feels like we'll need to re-structure these pieces now.
+  require "bullet_train/super_scaffolding/templates/path_helper"
+
+  $super_scaffolding_template_paths ||= []
+  $super_scaffolding_template_paths << BulletTrain::SuperScaffolding::Templates::PathHelper.new.root_path
+
   require "scaffolding/script"
 end
