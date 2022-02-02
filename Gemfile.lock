@@ -34,7 +34,7 @@ GIT
 GEM
   remote: https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain/
   specs:
-    bullet_train-action_models (1.0.0)
+    bullet_train-action_models (1.0.1)
       rails (>= 7.0.0)
 
 GEM
@@ -173,7 +173,7 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.0.3)
+    bullet_train-super_scaffolding (1.0.4)
       rails (>= 7.0.0)
     bullet_train-super_scaffolding-templates (1.0.4)
       rails (>= 7.0.0)
