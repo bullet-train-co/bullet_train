@@ -237,6 +237,10 @@ gem "bullet_train-themes-base"
 gem "bullet_train-themes-tailwind_css"
 gem "bullet_train-themes-light"
 
+source "https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain" do
+  gem "bullet_train-action_models"
+end
+
 group :production do
   # we suggest using postmark for email deliverability.
   gem "postmark-rails"
