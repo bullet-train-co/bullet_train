@@ -1,7 +1,7 @@
 require "test_helper"
 require "minitest/spec"
 
-require_relative "../../../lib/scaffolding"
+require "scaffolding/routes_file_manipulator"
 
 describe Scaffolding::RoutesFileManipulator do
   subject { Scaffolding::RoutesFileManipulator }
