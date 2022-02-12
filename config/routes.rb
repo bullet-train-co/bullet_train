@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # By default engine routes are drawn after application routes, so this is our best attempt at allowing engines to
+  # define routing concerns (like `sortable`) that can be used by application routes in this file.
+  BulletTrain.routing_concerns.each { |concern| instance_eval &concern }
+
+  # This is helpful to have around when working with shallow routes and complicated model namespacing. We don't use this
+  # by default, but sometimes Super Scaffolding will generate routes that use this for `only` and `except` options.
   collection_actions = [:index, :new, :create]
 
   devise_for :users, controllers: {

@@ -31,6 +31,45 @@ GIT
       responders
       warden (~> 1.2.3)
 
+PATH
+  remote: ../bullet_train-api
+  specs:
+    bullet_train-api (1.0.4)
+      api-pagination
+      grape (~> 1.6.0)
+      grape-cancan
+      grape-jsonapi
+      grape-swagger
+      grape_on_rails_routes
+      kaminari
+      rack-cors
+      rails (>= 7.0.0)
+      wine_bouncer
+
+PATH
+  remote: ../bullet_train-outgoing_webhooks-api
+  specs:
+    bullet_train-outgoing_webhooks-api (1.0.2)
+      rails (>= 7.0.0)
+
+PATH
+  remote: ../bullet_train-super_scaffolding-templates
+  specs:
+    bullet_train-super_scaffolding-templates (1.0.4)
+      rails (>= 7.0.0)
+
+PATH
+  remote: ../bullet_train-super_scaffolding
+  specs:
+    bullet_train-super_scaffolding (1.0.8)
+      rails (>= 6.0.0)
+
+PATH
+  remote: ../bullet_train
+  specs:
+    bullet_train (1.0.10)
+      rails (>= 7.0.0)
+
 GEM
   remote: https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain/
   specs:
@@ -128,19 +167,6 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.10)
-      rails (>= 7.0.0)
-    bullet_train-api (1.0.4)
-      api-pagination
-      grape (~> 1.6.0)
-      grape-cancan
-      grape-jsonapi
-      grape-swagger
-      grape_on_rails_routes
-      kaminari
-      rack-cors
-      rails (>= 7.0.0)
-      wine_bouncer
     bullet_train-fields (1.0.1)
       rails (>= 7.0.0)
     bullet_train-has_uuid (1.0.2)
@@ -152,8 +178,6 @@ GEM
     bullet_train-obfuscates_id (1.0.1)
       rails (>= 7.0.0)
     bullet_train-outgoing_webhooks (1.0.3)
-      rails (>= 7.0.0)
-    bullet_train-outgoing_webhooks-api (1.0.2)
       rails (>= 7.0.0)
     bullet_train-outgoing_webhooks-core (1.0.3)
       rails (>= 7.0.0)
@@ -172,10 +196,6 @@ GEM
     bullet_train-sortable (1.0.1)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
-      rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.0.8)
-      rails (>= 6.0.0)
-    bullet_train-super_scaffolding-templates (1.0.4)
       rails (>= 7.0.0)
     bullet_train-themes (1.0.3)
       rails (>= 7.0.0)
@@ -627,16 +647,16 @@ DEPENDENCIES
   awesome_print
   aws-sdk-s3
   bootsnap
-  bullet_train
+  bullet_train!
   bullet_train-action_models!
-  bullet_train-api
+  bullet_train-api!
   bullet_train-fields
   bullet_train-has_uuid
   bullet_train-incoming_webhooks
   bullet_train-integrations-stripe
   bullet_train-obfuscates_id
   bullet_train-outgoing_webhooks
-  bullet_train-outgoing_webhooks-api
+  bullet_train-outgoing_webhooks-api!
   bullet_train-outgoing_webhooks-core
   bullet_train-outgoing_webhooks-serializers
   bullet_train-roles
@@ -645,8 +665,8 @@ DEPENDENCIES
   bullet_train-serializers
   bullet_train-sortable
   bullet_train-super_load_and_authorize_resource
-  bullet_train-super_scaffolding
-  bullet_train-super_scaffolding-templates
+  bullet_train-super_scaffolding!
+  bullet_train-super_scaffolding-templates!
   bullet_train-themes
   bullet_train-themes-base
   bullet_train-themes-light
