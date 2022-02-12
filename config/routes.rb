@@ -79,6 +79,7 @@ Rails.application.routes.draw do
         namespace :platform do
           resources :applications
         end
+
       end
     end
   end
