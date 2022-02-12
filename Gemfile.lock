@@ -159,7 +159,7 @@ GEM
       rails (>= 7.0.0)
     bullet_train-outgoing_webhooks-serializers (1.0.0)
       rails (>= 7.0.0)
-    bullet_train-roles (0.1.5)
+    bullet_train-roles (0.1.4)
       active_hash
       activesupport
       cancancan
@@ -639,7 +639,7 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks-api
   bullet_train-outgoing_webhooks-core
   bullet_train-outgoing_webhooks-serializers
-  bullet_train-roles
+  bullet_train-roles (= 0.1.4)
   bullet_train-scope_questions
   bullet_train-scope_validator
   bullet_train-serializers
