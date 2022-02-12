@@ -31,45 +31,6 @@ GIT
       responders
       warden (~> 1.2.3)
 
-PATH
-  remote: ../bullet_train-api
-  specs:
-    bullet_train-api (1.0.4)
-      api-pagination
-      grape (~> 1.6.0)
-      grape-cancan
-      grape-jsonapi
-      grape-swagger
-      grape_on_rails_routes
-      kaminari
-      rack-cors
-      rails (>= 7.0.0)
-      wine_bouncer
-
-PATH
-  remote: ../bullet_train-outgoing_webhooks-api
-  specs:
-    bullet_train-outgoing_webhooks-api (1.0.2)
-      rails (>= 7.0.0)
-
-PATH
-  remote: ../bullet_train-super_scaffolding-templates
-  specs:
-    bullet_train-super_scaffolding-templates (1.0.4)
-      rails (>= 7.0.0)
-
-PATH
-  remote: ../bullet_train-super_scaffolding
-  specs:
-    bullet_train-super_scaffolding (1.0.8)
-      rails (>= 6.0.0)
-
-PATH
-  remote: ../bullet_train
-  specs:
-    bullet_train (1.0.10)
-      rails (>= 7.0.0)
-
 GEM
   remote: https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain/
   specs:
@@ -167,6 +128,19 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bullet_train (1.0.11)
+      rails (>= 7.0.0)
+    bullet_train-api (1.0.5)
+      api-pagination
+      grape (~> 1.6.0)
+      grape-cancan
+      grape-jsonapi
+      grape-swagger
+      grape_on_rails_routes
+      kaminari
+      rack-cors
+      rails (>= 7.0.0)
+      wine_bouncer
     bullet_train-fields (1.0.1)
       rails (>= 7.0.0)
     bullet_train-has_uuid (1.0.2)
@@ -179,11 +153,13 @@ GEM
       rails (>= 7.0.0)
     bullet_train-outgoing_webhooks (1.0.3)
       rails (>= 7.0.0)
+    bullet_train-outgoing_webhooks-api (1.0.3)
+      rails (>= 7.0.0)
     bullet_train-outgoing_webhooks-core (1.0.3)
       rails (>= 7.0.0)
     bullet_train-outgoing_webhooks-serializers (1.0.0)
       rails (>= 7.0.0)
-    bullet_train-roles (0.1.4)
+    bullet_train-roles (0.1.5)
       active_hash
       activesupport
       cancancan
@@ -193,9 +169,13 @@ GEM
     bullet_train-serializers (1.0.1)
       jsonapi-serializer
       rails (>= 7.0.0)
-    bullet_train-sortable (1.0.1)
+    bullet_train-sortable (1.0.2)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
+      rails (>= 7.0.0)
+    bullet_train-super_scaffolding (1.0.8)
+      rails (>= 6.0.0)
+    bullet_train-super_scaffolding-templates (1.0.5)
       rails (>= 7.0.0)
     bullet_train-themes (1.0.3)
       rails (>= 7.0.0)
@@ -373,7 +353,7 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    loofah (2.13.0)
+    loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     magic_test (0.0.7)
@@ -461,7 +441,7 @@ GEM
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
     public_suffix (4.0.6)
-    puma (5.6.1)
+    puma (5.6.2)
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
@@ -495,9 +475,9 @@ GEM
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
     rails_autoscale_agent (0.11.0)
-    rails_best_practices (1.22.1)
+    rails_best_practices (1.23.1)
       activesupport
-      code_analyzer (>= 0.5.2)
+      code_analyzer (~> 0.5.5)
       erubis
       i18n
       json
@@ -513,7 +493,7 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     redis (4.6.0)
-    regexp_parser (2.2.0)
+    regexp_parser (2.2.1)
     reline (0.3.1)
       io-console (~> 0.5)
     request_store (1.5.1)
@@ -528,7 +508,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
-    rqrcode (2.1.0)
+    rqrcode (2.1.1)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
@@ -541,7 +521,7 @@ GEM
       rubocop-ast (>= 1.15.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.15.1)
+    rubocop-ast (1.15.2)
       parser (>= 3.0.1.1)
     rubocop-performance (1.13.2)
       rubocop (>= 1.7.0, < 2.0)
@@ -564,16 +544,16 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
-    sentry-rails (5.0.2)
+    sentry-rails (5.1.0)
       railties (>= 5.0)
-      sentry-ruby-core (~> 5.0.2)
-    sentry-ruby (5.0.2)
+      sentry-ruby-core (~> 5.1.0)
+    sentry-ruby (5.1.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      sentry-ruby-core (= 5.0.2)
-    sentry-ruby-core (5.0.2)
+      sentry-ruby-core (= 5.1.0)
+    sentry-ruby-core (5.1.0)
       concurrent-ruby
-    sentry-sidekiq (5.0.2)
-      sentry-ruby-core (~> 5.0.2)
+    sentry-sidekiq (5.1.0)
+      sentry-ruby-core (~> 5.1.0)
       sidekiq (>= 3.0)
     sexp_processor (4.16.0)
     sidekiq (6.4.1)
@@ -647,16 +627,16 @@ DEPENDENCIES
   awesome_print
   aws-sdk-s3
   bootsnap
-  bullet_train!
+  bullet_train
   bullet_train-action_models!
-  bullet_train-api!
+  bullet_train-api
   bullet_train-fields
   bullet_train-has_uuid
   bullet_train-incoming_webhooks
   bullet_train-integrations-stripe
   bullet_train-obfuscates_id
   bullet_train-outgoing_webhooks
-  bullet_train-outgoing_webhooks-api!
+  bullet_train-outgoing_webhooks-api
   bullet_train-outgoing_webhooks-core
   bullet_train-outgoing_webhooks-serializers
   bullet_train-roles
@@ -665,8 +645,8 @@ DEPENDENCIES
   bullet_train-serializers
   bullet_train-sortable
   bullet_train-super_load_and_authorize_resource
-  bullet_train-super_scaffolding!
-  bullet_train-super_scaffolding-templates!
+  bullet_train-super_scaffolding
+  bullet_train-super_scaffolding-templates
   bullet_train-themes
   bullet_train-themes-base
   bullet_train-themes-light
