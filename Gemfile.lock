@@ -128,7 +128,7 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.13)
+    bullet_train (1.0.14)
       rails (>= 7.0.0)
     bullet_train-api (1.0.6)
       api-pagination
