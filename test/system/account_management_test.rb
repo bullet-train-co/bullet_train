@@ -38,6 +38,8 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
 
       click_on "Update Profile"
 
+      assert page.has_content? "User was successfully updated."
+
       visit edit_account_user_path(user)
 
       assert page.find("#user_email").value == "andrew.culver.new@gmail.com"
