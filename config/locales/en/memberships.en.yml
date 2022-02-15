@@ -1,0 +1,8 @@
+en:
+  teams:
+    fields:
+      # 🚅 super scaffolding will insert new fields above this line.
+  activerecord:
+    attributes:
+      team:
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.

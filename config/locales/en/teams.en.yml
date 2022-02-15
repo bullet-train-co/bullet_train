@@ -1,0 +1,8 @@
+en:
+  memberships:
+    fields:
+      # 🚅 super scaffolding will insert new fields above this line.
+  activerecord:
+    attributes:
+      membership:
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
