@@ -167,13 +167,11 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_scaffolding (1.0.10)
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.3)
-      rails (>= 7.0.0)
-    bullet_train-themes-base (1.0.1)
+    bullet_train-themes (1.0.4)
       rails (>= 7.0.0)
     bullet_train-themes-light (1.0.1)
       rails (>= 7.0.0)
-    bullet_train-themes-tailwind_css (1.0.2)
+    bullet_train-themes-tailwind_css (1.0.3)
       rails (>= 7.0.0)
     cable_ready (5.0.0.pre8)
       rails (>= 5.2)
@@ -633,7 +631,6 @@ DEPENDENCIES
   bullet_train-super_load_and_authorize_resource
   bullet_train-super_scaffolding
   bullet_train-themes
-  bullet_train-themes-base
   bullet_train-themes-light
   bullet_train-themes-tailwind_css
   cable_ready (= 5.0.0.pre8)
