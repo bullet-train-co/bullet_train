@@ -130,13 +130,14 @@ GEM
     builder (3.2.4)
     bullet_train (1.0.14)
       rails (>= 7.0.0)
-    bullet_train-api (1.0.6)
+    bullet_train-api (1.0.8)
       api-pagination
       grape (~> 1.6.0)
       grape-cancan
       grape-jsonapi
       grape-swagger
       grape_on_rails_routes
+      jsonapi-serializer
       kaminari
       rack-cors
       rails (>= 7.0.0)
@@ -151,13 +152,7 @@ GEM
       rails (>= 7.0.0)
     bullet_train-obfuscates_id (1.0.1)
       rails (>= 7.0.0)
-    bullet_train-outgoing_webhooks (1.0.3)
-      rails (>= 7.0.0)
-    bullet_train-outgoing_webhooks-api (1.0.4)
-      rails (>= 7.0.0)
-    bullet_train-outgoing_webhooks-core (1.0.3)
-      rails (>= 7.0.0)
-    bullet_train-outgoing_webhooks-serializers (1.0.0)
+    bullet_train-outgoing_webhooks (1.0.4)
       rails (>= 7.0.0)
     bullet_train-roles (0.1.4)
       active_hash
@@ -166,9 +161,6 @@ GEM
     bullet_train-scope_questions (1.0.0)
       rails (>= 7.0.0)
     bullet_train-scope_validator (1.0.2)
-    bullet_train-serializers (1.0.2)
-      jsonapi-serializer
-      rails (>= 7.0.0)
     bullet_train-sortable (1.0.2)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
@@ -634,13 +626,9 @@ DEPENDENCIES
   bullet_train-integrations-stripe
   bullet_train-obfuscates_id
   bullet_train-outgoing_webhooks
-  bullet_train-outgoing_webhooks-api
-  bullet_train-outgoing_webhooks-core
-  bullet_train-outgoing_webhooks-serializers
   bullet_train-roles (= 0.1.4)
   bullet_train-scope_questions
   bullet_train-scope_validator
-  bullet_train-serializers
   bullet_train-sortable
   bullet_train-super_load_and_authorize_resource
   bullet_train-super_scaffolding
