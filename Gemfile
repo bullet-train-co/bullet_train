@@ -213,23 +213,19 @@ gem "hiredis"
 # `active_hash` package. At that point, we can just depend on the `bullet_train` package to pull this in.
 gem "active_hash", github: "bullet-train-co/active_hash"
 
+# Core packages
 gem "bullet_train"
-gem "bullet_train-super_load_and_authorize_resource"
+gem "bullet_train-super_scaffolding"
+gem "bullet_train-api"
+gem "bullet_train-outgoing_webhooks"
+gem "bullet_train-incoming_webhooks"
+gem "bullet_train-themes-light"
+gem "bullet_train-integrations-stripe"
+
+# Optional support packages.
 gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
-gem "bullet_train-has_uuid"
-gem "bullet_train-fields"
-gem "bullet_train-api"
-gem "bullet_train-super_scaffolding"
-gem "bullet_train-incoming_webhooks"
-gem "bullet_train-roles", "0.1.4"
-gem "bullet_train-scope_validator"
-gem "bullet_train-outgoing_webhooks"
-gem "bullet_train-integrations-stripe"
-gem "bullet_train-themes"
-gem "bullet_train-themes-tailwind_css"
-gem "bullet_train-themes-light"
 
 source "https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain" do
   gem "bullet_train-action_models"

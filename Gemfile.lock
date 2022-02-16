@@ -128,7 +128,12 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.14)
+    bullet_train (1.0.16)
+      bullet_train-fields
+      bullet_train-has_uuid
+      bullet_train-roles (= 0.1.4)
+      bullet_train-scope_validator
+      bullet_train-super_load_and_authorize_resource
       rails (>= 7.0.0)
     bullet_train-api (1.0.8)
       api-pagination
@@ -169,9 +174,11 @@ GEM
       rails (>= 6.0.0)
     bullet_train-themes (1.0.4)
       rails (>= 7.0.0)
-    bullet_train-themes-light (1.0.1)
+    bullet_train-themes-light (1.0.2)
+      bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
-    bullet_train-themes-tailwind_css (1.0.3)
+    bullet_train-themes-tailwind_css (1.0.4)
+      bullet_train-themes
       rails (>= 7.0.0)
     cable_ready (5.0.0.pre8)
       rails (>= 5.2)
@@ -297,7 +304,7 @@ GEM
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
-    honeybadger (4.10.0)
+    honeybadger (4.11.0)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.4)
@@ -365,7 +372,7 @@ GEM
     minitest (5.15.0)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
-    msgpack (1.4.4)
+    msgpack (1.4.5)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
@@ -618,21 +625,14 @@ DEPENDENCIES
   bullet_train
   bullet_train-action_models!
   bullet_train-api
-  bullet_train-fields
-  bullet_train-has_uuid
   bullet_train-incoming_webhooks
   bullet_train-integrations-stripe
   bullet_train-obfuscates_id
   bullet_train-outgoing_webhooks
-  bullet_train-roles (= 0.1.4)
   bullet_train-scope_questions
-  bullet_train-scope_validator
   bullet_train-sortable
-  bullet_train-super_load_and_authorize_resource
   bullet_train-super_scaffolding
-  bullet_train-themes
   bullet_train-themes-light
-  bullet_train-themes-tailwind_css
   cable_ready (= 5.0.0.pre8)
   cancancan
   capybara
