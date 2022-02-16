@@ -173,10 +173,8 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.0.9)
+    bullet_train-super_scaffolding (1.0.10)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding-templates (1.0.5)
-      rails (>= 7.0.0)
     bullet_train-themes (1.0.3)
       rails (>= 7.0.0)
     bullet_train-themes-base (1.0.1)
@@ -646,7 +644,6 @@ DEPENDENCIES
   bullet_train-sortable
   bullet_train-super_load_and_authorize_resource
   bullet_train-super_scaffolding
-  bullet_train-super_scaffolding-templates
   bullet_train-themes
   bullet_train-themes-base
   bullet_train-themes-light
