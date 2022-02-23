@@ -113,7 +113,6 @@ Certain form field partials like `buttons` and `super_select` can also have thei
 | --- | --- | --- | --- | --- | --- |
 | `boolean` | | `assign_boolean` | | | |
 | [`buttons`](/docs/field-partials/buttons.md) | Optionally | `assign_checkboxes` | | | |
-| `ckeditor` | | | [CKEditor 5](https://ckeditor.com/ckeditor-5/) | Best-of-breed open-source WYSIWYG component with many powerful modular extensions, but comes with a commercial licensing obligation for SaaS projects. | [⚠️](https://ckeditor.com/pricing/) |
 | `cloudinary_image` | | | | | |
 | `color_picker` | | | [pickr](https://simonwep.github.io/pickr/) | | |
 | `date_and_time_field` | | `assign_date_and_time` | [Date Range Picker](https://www.daterangepicker.com) | | |

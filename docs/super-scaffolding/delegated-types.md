@@ -224,7 +224,7 @@ Also, below that (and below the Super Scaffolding hook), we want to add the `Mes
     <% when Message %>
       <%= render 'shared/fields/text_field', method: :subject %>
     <% when Comment %>
-      <%= render 'shared/fields/ckeditor', method: :content %>
+      <%= render 'shared/fields/trix_editor', method: :content %>
     <% end %>
   <% end %>
 <% end %>

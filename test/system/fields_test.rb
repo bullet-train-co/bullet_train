@@ -63,14 +63,6 @@ unless scaffolding_things_disabled?
           reconnect_stimulus_controller_on date_field
           improperly_disconnect_and_reconnect_stimulus_controller_on date_field
         end
-
-        ckeditor = find_stimulus_controller_for_label "CKEditor Value", "fields--ckeditor"
-        assert_no_js_errors do
-          disconnect_stimulus_controller_on ckeditor
-          reconnect_stimulus_controller_on ckeditor
-          improperly_disconnect_and_reconnect_stimulus_controller_on ckeditor
-          assert ckeditor.has_css?(".ck-editor", count: 1)
-        end
       end
     end
   end

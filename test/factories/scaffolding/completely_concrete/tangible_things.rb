@@ -12,7 +12,6 @@ FactoryBot.define do
     super_select_value { "three" }
     text_area_value { "MyText" }
     action_text_value { "MyText" }
-    ckeditor_value { "MyText" }
     sort_order { 1 }
   end
 end
