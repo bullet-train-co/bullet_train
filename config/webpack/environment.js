@@ -1,6 +1,5 @@
 const { environment } = require('@rails/webpacker')
 const erb = require('./loaders/erb')
-const CopyPlugin = require("copy-webpack-plugin");
 
 const webpack = require('webpack')
 environment.plugins.prepend('Provide',
@@ -20,16 +19,6 @@ const CKEditorWebpackPlugin = require( '@ckeditor/ckeditor5-dev-webpack-plugin')
 environment.plugins.prepend('CKEditor',
   new CKEditorWebpackPlugin({
     language: 'en'
-  })
-)
-
-// Copy utils.js from intl-tel-input dependency to `public/assets`.
-// See `app/javascript/fields/phone_field.js` for where we use this.
-environment.plugins.prepend('CopyPlugin',
-  new CopyPlugin({
-    patterns: [
-      { from: "node_modules/intl-tel-input/build/js/utils.js", to: "../assets/intl-tel-input/utils.js" }
-    ]
   })
 )
 

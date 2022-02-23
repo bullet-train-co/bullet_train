@@ -1,1 +1,2 @@
-require("./trix_editor")
+import { trixEditor } from "@bullet-train/fields"
+trixEditor()
