@@ -82,8 +82,10 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bundle clean --force
-      - run: yarn install
       - run: bundle exec rake bullet_train:link_gems
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
 
       - *wait_for_docker
 
@@ -128,8 +130,10 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bundle clean --force
-      - run: yarn install
       - run: bundle exec rake bullet_train:link_gems
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
 
       - *wait_for_docker
 
