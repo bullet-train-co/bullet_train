@@ -9,8 +9,13 @@ import CableReady from 'cable_ready'
 import consumer from '../channels/consumer'
 
 const application = Application.start()
-const context = require.context("controllers", true, /_controller\.js$/)
-application.load(definitionsFromContext(context))
+
+// TODO This doesn't work in esbuild.
+// const context = require.context("controllers", true, /_controller\.js$/)
+
+// TODO I don't know what this does, but it doesn't work in esbuild.
+// application.load(definitionsFromContext(context))
+
 application.load(bulletTrainFieldControllers)
 application.register('reveal', RevealController)
 CableReady.initialize({ consumer })
