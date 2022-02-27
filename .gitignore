@@ -28,6 +28,9 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
 /public/packs
 /public/packs-test
 /node_modules

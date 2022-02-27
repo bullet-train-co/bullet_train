@@ -22,7 +22,7 @@ GIT
 
 GIT
   remote: https://github.com/heartcombo/devise.git
-  revision: 025b1c873491908b346e4d394f54481ec18fb02c
+  revision: 451ff6d49c71e543962d2b29d77f2e744b2d47e1
   specs:
     devise (4.8.1)
       bcrypt (~> 3.0)
@@ -34,7 +34,7 @@ GIT
 GEM
   remote: https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain/
   specs:
-    bullet_train-action_models (1.0.4)
+    bullet_train-action_models (1.0.8)
       rails (>= 6.0.0)
 
 GEM
@@ -105,17 +105,17 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.554.0)
-    aws-sdk-core (3.126.1)
+    aws-partitions (1.559.0)
+    aws-sdk-core (3.127.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.54.0)
-      aws-sdk-core (~> 3, >= 3.126.0)
+    aws-sdk-kms (1.55.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.112.0)
-      aws-sdk-core (~> 3, >= 3.126.0)
+    aws-sdk-s3 (1.113.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
     aws-sigv4 (1.4.0)
@@ -128,7 +128,7 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.17)
+    bullet_train (1.0.20)
       bullet_train-fields
       bullet_train-has_uuid
       bullet_train-roles (= 0.1.4)
@@ -147,7 +147,7 @@ GEM
       rack-cors
       rails (>= 7.0.0)
       wine_bouncer
-    bullet_train-fields (1.0.1)
+    bullet_train-fields (1.0.3)
       rails (>= 7.0.0)
     bullet_train-has_uuid (1.0.2)
       rails (>= 7.0.0)
@@ -170,14 +170,14 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.0.10)
+    bullet_train-super_scaffolding (1.0.12)
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.4)
+    bullet_train-themes (1.0.5)
       rails (>= 7.0.0)
-    bullet_train-themes-light (1.0.3)
+    bullet_train-themes-light (1.0.9)
       bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
-    bullet_train-themes-tailwind_css (1.0.5)
+    bullet_train-themes-tailwind_css (1.0.6)
       bullet_train-themes
       rails (>= 7.0.0)
     cable_ready (5.0.0.pre8)
@@ -203,7 +203,7 @@ GEM
     childprocess (4.1.0)
     chronic (0.10.2)
     chunky_png (1.4.0)
-    cloudinary (1.21.0)
+    cloudinary (1.22.0)
       aws_cf_signer
       rest-client (>= 2.0.0)
     code_analyzer (0.5.5)
@@ -216,6 +216,8 @@ GEM
     crass (1.0.6)
     css_parser (1.11.0)
       addressable
+    cssbundling-rails (1.1.0)
+      railties (>= 6.0.0)
     debug (1.4.0)
       irb (>= 1.3.6)
       reline (>= 0.2.7)
@@ -255,33 +257,14 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (1.9.3)
-      faraday-em_http (~> 1.0)
-      faraday-em_synchrony (~> 1.0)
-      faraday-excon (~> 1.1)
-      faraday-httpclient (~> 1.0)
-      faraday-multipart (~> 1.0)
-      faraday-net_http (~> 1.0)
-      faraday-net_http_persistent (~> 1.0)
-      faraday-patron (~> 1.0)
-      faraday-rack (~> 1.0)
-      faraday-retry (~> 1.0)
+    faraday (2.2.0)
+      faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
-    faraday-em_http (1.0.0)
-    faraday-em_synchrony (1.0.0)
-    faraday-excon (1.1.0)
-    faraday-httpclient (1.0.1)
-    faraday-multipart (1.0.3)
-      multipart-post (>= 1.2, < 3)
-    faraday-net_http (1.0.1)
-    faraday-net_http_persistent (1.2.0)
-    faraday-patron (1.0.0)
-    faraday-rack (1.0.0)
-    faraday-retry (1.0.3)
+    faraday-net_http (2.0.1)
     fastimage (2.2.6)
-    ffi (1.15.5)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
+    foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     grape (1.6.2)
@@ -314,9 +297,6 @@ GEM
       concurrent-ruby (~> 1.0)
     i18n-js (3.9.1)
       i18n (>= 0.6.6)
-    importmap-rails (1.0.2)
-      actionpack (>= 6.0.0)
-      railties (>= 6.0.0)
     indefinite_article (0.2.4)
       activesupport
     io-console (0.5.11)
@@ -326,6 +306,8 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.0)
+    jsbundling-rails (1.0.2)
+      railties (>= 6.0.0)
     json (2.6.1)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
@@ -361,21 +343,20 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
-    microscope (1.1.0)
+    microscope (1.1.1)
       activerecord (>= 4.1.0)
       activesupport (>= 4.1.0)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
-    mini_portile2 (2.7.1)
+    mini_portile2 (2.8.0)
     minitest (5.15.0)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
     msgpack (1.4.5)
     multi_json (1.15.0)
     multi_xml (0.6.0)
-    multipart-post (2.1.1)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.1)
@@ -384,13 +365,13 @@ GEM
     nice_partials (0.1.6)
       actionview (>= 4.2.6)
     nio4r (2.5.8)
-    nokogiri (1.13.1)
-      mini_portile2 (~> 2.7.0)
+    nokogiri (1.13.3)
+      mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    nokogiri (1.13.1-x86_64-linux)
+    nokogiri (1.13.3-x86_64-linux)
       racc (~> 1.4)
-    oauth2 (1.4.7)
-      faraday (>= 0.8, < 2.0)
+    oauth2 (1.4.9)
+      faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
@@ -412,10 +393,10 @@ GEM
       activerecord (>= 5.2)
       request_store (~> 1.1)
     parallel (1.21.0)
-    parser (3.1.0.0)
+    parser (3.1.1.0)
       ast (~> 2.4.1)
-    pg (1.3.2)
-    phonelib (0.6.55)
+    pg (1.3.3)
+    phonelib (0.6.57)
     possessive (1.0.1)
     postmark (1.22.0)
       json
@@ -444,10 +425,8 @@ GEM
       rack (>= 0.4)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
-    rack-mini-profiler (2.3.3)
+    rack-mini-profiler (3.0.0)
       rack (>= 1.2.0)
-    rack-proxy (0.7.2)
-      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.0)
@@ -516,39 +495,28 @@ GEM
       rubocop-ast (>= 1.15.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.15.2)
-      parser (>= 3.0.1.1)
+    rubocop-ast (1.16.0)
+      parser (>= 3.1.1.0)
     rubocop-performance (1.13.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    sass-rails (6.0.0)
-      sassc-rails (~> 2.1, >= 2.1.1)
-    sassc (2.4.0)
-      ffi (~> 1.9)
-    sassc-rails (2.1.2)
-      railties (>= 4.0.0)
-      sassc (>= 2.0)
-      sprockets (> 3.0)
-      sprockets-rails
-      tilt
     selenium-webdriver (4.1.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
-    semantic_range (3.0.0)
-    sentry-rails (5.1.0)
+    sentry-rails (5.1.1)
       railties (>= 5.0)
-      sentry-ruby-core (~> 5.1.0)
-    sentry-ruby (5.1.0)
+      sentry-ruby-core (~> 5.1.1)
+    sentry-ruby (5.1.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      sentry-ruby-core (= 5.1.0)
-    sentry-ruby-core (5.1.0)
+      sentry-ruby-core (= 5.1.1)
+    sentry-ruby-core (5.1.1)
       concurrent-ruby
-    sentry-sidekiq (5.1.0)
-      sentry-ruby-core (~> 5.1.0)
+    sentry-sidekiq (5.1.1)
+      sentry-ruby-core (~> 5.1.1)
       sidekiq (>= 3.0)
     sexp_processor (4.16.0)
     sidekiq (6.4.1)
@@ -567,13 +535,12 @@ GEM
     standard (1.7.2)
       rubocop (= 1.25.1)
       rubocop-performance (= 1.13.2)
-    stimulus-rails (1.0.2)
+    stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     storybook_rails (1.2.0)
-    stripe (5.43.0)
+    stripe (5.44.0)
     thor (1.2.1)
     thread-local (1.1.0)
-    tilt (2.0.10)
     timecop (0.9.4)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
@@ -599,11 +566,6 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0)
-    webpacker (5.4.3)
-      activesupport (>= 5.2)
-      rack-proxy (>= 0.6.1)
-      railties (>= 5.2)
-      semantic_range (>= 2.3.0)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -642,6 +604,7 @@ DEPENDENCIES
   cloudinary
   colorize
   commonmarker
+  cssbundling-rails
   debug
   devise!
   doorkeeper
@@ -649,14 +612,15 @@ DEPENDENCIES
   factory_bot_rails
   fastimage
   figaro
+  foreman
   hashids
   hiredis
   honeybadger
   http_accept_language
   i18n-js
-  importmap-rails
   indefinite_article
   jbuilder
+  jsbundling-rails
   knapsack_pro
   letter_opener
   magic_test
@@ -681,7 +645,6 @@ DEPENDENCIES
   rails_best_practices
   redis (~> 4.0)
   rqrcode
-  sass-rails (>= 6)
   selenium-webdriver
   sentry-rails
   sentry-ruby
@@ -699,7 +662,6 @@ DEPENDENCIES
   valid_email
   web-console
   webdrivers
-  webpacker (~> 5.0)
   wine_bouncer!
   xray-rails
 
