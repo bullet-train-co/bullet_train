@@ -129,7 +129,7 @@ jobs:
       - ruby/bundle-install
       - run: bundle clean --force
       - run: yarn install
-      - run: rake bullet_train:link_gems
+      - run: bundle exec rake bullet_train:link_gems
 
       - *wait_for_docker
 
