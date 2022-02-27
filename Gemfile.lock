@@ -128,7 +128,7 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.20)
+    bullet_train (1.0.21)
       bullet_train-fields
       bullet_train-has_uuid
       bullet_train-roles (= 0.1.4)
