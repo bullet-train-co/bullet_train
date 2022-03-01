@@ -188,7 +188,6 @@ gem "valid_email"
 gem "extended_email_reply_parser"
 
 gem "nice_partials", "~> 0.1"
-gem "storybook_rails", "~> 1.0"
 
 # for obfuscating ids in urls
 gem "hashids"

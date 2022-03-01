@@ -50,10 +50,6 @@ Untitled
 # Ignore Active Storage
 /storage
 
-# Storybook
-/public/_storybook
-storybook/**/*.stories.json
-
 # Ignore IDE specific folders
 .idea/
 

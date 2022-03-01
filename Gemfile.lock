@@ -537,7 +537,6 @@ GEM
       rubocop-performance (= 1.13.2)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
-    storybook_rails (1.2.0)
     stripe (5.44.0)
     thor (1.2.1)
     thread-local (1.1.0)
@@ -651,7 +650,6 @@ DEPENDENCIES
   sprockets-rails
   standard
   stimulus-rails
-  storybook_rails (~> 1.0)
   stripe
   timecop
   trix!

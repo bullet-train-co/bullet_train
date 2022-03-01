@@ -98,12 +98,6 @@ Rails.application.configure do
   # configuration right now, i'm making them the default here as well.
   config.action_mailbox.ingress = :mailgun
 
-  # storybook_rails config
-  config.storybook_rails.stories_path = Rails.root.join("storybook")
-  config.storybook_rails.show_stories = true
-  config.autoload_paths << Rails.root.join("storybook")
-  config.asset_host = ENV["BASE_URL"]
-
   # ✅ YOUR APPLICATION'S CONFIGURATION
   # If you need to customize your application's configuration, this is the place to do it. This helps avoid merge
   # conflicts in the future when Rails or Bullet Train update their own default settings.
