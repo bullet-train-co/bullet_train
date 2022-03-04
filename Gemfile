@@ -96,8 +96,6 @@ gem "bullet_train-incoming_webhooks"
 gem "bullet_train-themes-light"
 gem "bullet_train-integrations-stripe"
 
-gem "nice_partials"
-
 # Optional support packages.
 gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"

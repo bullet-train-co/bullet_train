@@ -599,7 +599,6 @@ DEPENDENCIES
   letter_opener
   magic_test
   minitest-retry
-  nice_partials
   pg (>= 0.18, < 2.0)
   postmark-rails
   puma (~> 5.0)
