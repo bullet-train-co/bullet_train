@@ -1,7 +1,3 @@
-require_relative "../lib/bullet_train"
-require_relative "../lib/colorizer"
-require_relative "../lib/string/emoji"
-
 require_relative "boot"
 
 require "rails/all"
