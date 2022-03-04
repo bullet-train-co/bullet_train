@@ -126,7 +126,7 @@ group :test do
   # Interact with emails during testing.
   gem "capybara-email"
 
-  # ❓ I think we might be able to get rid of this entirely.
+  # Generate test objects.
   gem "factory_bot_rails"
 
   # Write system tests by pointing and clicking in your browser.
