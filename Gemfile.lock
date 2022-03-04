@@ -177,6 +177,8 @@ GEM
       active_hash
       activesupport
       cancancan
+    bullet_train-scope_questions (1.0.0)
+      rails (>= 7.0.0)
     bullet_train-scope_validator (1.0.2)
     bullet_train-sortable (1.0.2)
       rails (>= 7.0.0)
@@ -579,6 +581,7 @@ DEPENDENCIES
   bullet_train-integrations-stripe
   bullet_train-obfuscates_id
   bullet_train-outgoing_webhooks
+  bullet_train-scope_questions
   bullet_train-sortable
   bullet_train-super_scaffolding
   bullet_train-themes-light
@@ -586,6 +589,7 @@ DEPENDENCIES
   capybara-email
   cssbundling-rails
   debug
+  devise
   factory_bot_rails
   foreman
   honeybadger
@@ -595,6 +599,7 @@ DEPENDENCIES
   letter_opener
   magic_test
   minitest-retry
+  nice_partials
   pg (>= 0.18, < 2.0)
   postmark-rails
   puma (~> 5.0)

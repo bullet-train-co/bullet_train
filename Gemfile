@@ -82,14 +82,21 @@ end
 # BULLET TRAIN GEMS
 # This section is the list of Ruby gems included by default for Bullet Train.
 
+# TODO We have to reference `devise` in the local application Gemfile before `bullet_train`, otherwise our overrides of
+# its views don't take effect. Is there another way around this?
+gem "devise"
+
 # Core packages.
 gem "bullet_train"
+gem "bullet_train-fields"
 gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
 gem "bullet_train-themes-light"
 gem "bullet_train-integrations-stripe"
+
+gem "nice_partials"
 
 # Optional support packages.
 gem "bullet_train-sortable"
