@@ -80,132 +80,9 @@ group :test do
 end
 
 # BULLET TRAIN GEMS
-# This section is all the gems we're adding.
+# This section is the list of Ruby gems included by default for Bullet Train.
 
-group :development, :test do
-  # Increase parallelism to run CircleCI tests across multiple nodes
-  gem "knapsack_pro"
-
-  # `standardrb --fix`
-  gem "standard"
-
-  # Similar to standard for correcting format
-  gem "rails_best_practices"
-
-  # for super scaffolding: "select *a* team member" vs. "select *an* option".
-  gem "indefinite_article"
-end
-
-group :test do
-  gem "timecop"
-  gem "minitest-retry"
-  gem "capybara-screenshot"
-  gem "capybara-email"
-  gem "magic_test"
-end
-
-# some development tools we actively use.
-group :development do
-  # letter opener opens any sent emails in your browser instead of having to setup an smtp trap.
-  gem "letter_opener"
-
-  # add color to some console output.
-  gem "colorize"
-end
-
-# Enables use of I18n in JavaScript for locales
-gem "i18n-js"
-
-# we use factories not just for testing, but also for generating example API payloads.
-gem "factory_bot_rails"
-
-# authentication.
-gem "devise", github: "heartcombo/devise"
-gem "doorkeeper"
-gem "omniauth"
-gem "omniauth-stripe-connect"
-# TODO Remove when we're able to properly upgrade Omniauth.
-# https://github.com/omniauth/omniauth/wiki/Resolving-CVE-2015-9284
-gem "omniauth-rails_csrf_protection"
-# TODO This doesn't work on Rails 7 yet. Get this working again.
-# gem "devise-two-factor"
-gem "rqrcode"
-
-# authorization.
-gem "cancancan"
-
-# TODO This _has_ to be specified in the local application's Gemfile because the `bullet_train-api` gemspec can't
-# specify a specific `github` value. We need to get whatever changes we've made here into the original package, or
-# fork it properly.
-gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
-
-# administrative functionality.
-gem "paper_trail"
-
-# ui stuff.
-gem "trix", github: "bullet-train-co/trix"
-
-# subscriptions and/or oauth examples.
-gem "stripe"
-
-# allow users to supply content with markdown formatting.
-# powers our markdown() view helper.
-gem "commonmarker"
-
-# we use this to detect the size of the logo assets.
-gem "fastimage"
-
-# we use this to add "'s" as appropriate in certain headings.
-gem "possessive"
-
-# background jobs.
-gem "sidekiq"
-
-# cloud file hosting, image resizing, and cdn.
-gem "cloudinary"
-
-# enables `binding.pry` for debugging.
-gem "pry"
-gem "pry-stack_explorer"
-gem "awesome_print"
-
-# define ENV values in `config/application.yml`.
-gem "figaro"
-
-# inline all css for emails.
-gem "premailer-rails"
-
-# parse natural language dates.
-gem "chronic"
-
-# parse and format phone numbers.
-gem "phonelib"
-
-# validate email addresses.
-gem "valid_email"
-
-# extract the body from emails received using action inbox.
-gem "extended_email_reply_parser"
-
-gem "nice_partials", "~> 0.1"
-
-# for obfuscating ids in urls
-gem "hashids"
-
-# Add helpful scopes automatically on booleans and date/time attributes.
-gem "microscope"
-
-# serving language based on browser settings
-gem "http_accept_language"
-
-gem "cable_ready", "5.0.0.pre8"
-gem "hiredis"
-
-# TODO We have to specify this in the local application until our improvements are merged into the official
-# `active_hash` package. At that point, we can just depend on the `bullet_train` package to pull this in.
-gem "active_hash", github: "bullet-train-co/active_hash"
-
-# Core packages
+# Core packages.
 gem "bullet_train"
 gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
@@ -223,28 +100,62 @@ source "https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain" do
   gem "bullet_train-action_models"
 end
 
+group :development do
+  # Open any sent emails in your browser instead of having to setup an SMTP trap.
+  gem "letter_opener"
+
+  # Ruby formatter. Try `standardrb --fix`.
+  gem "standard"
+
+  # Similar to standard for correcting format.
+  gem "rails_best_practices"
+end
+
+group :test do
+  # Make it easier to test things related to time.
+  gem "timecop"
+
+  # Helps smooth over flakiness in system tests.
+  gem "minitest-retry"
+
+  # Interact with emails during testing.
+  gem "capybara-email"
+
+  # ❓ I think we might be able to get rid of this entirely.
+  gem "factory_bot_rails"
+
+  # Write system tests by pointing and clicking in your browser.
+  gem "magic_test"
+
+  # Increase parallelism to run CircleCI tests across multiple nodes
+  gem "knapsack_pro"
+end
+
 group :production do
-  # we suggest using postmark for email deliverability.
+  # We suggest using Postmark for email deliverability.
   gem "postmark-rails"
 
-  # if you're hosting on heroku, this service is highly recommended for autoscaling of dynos.
+  # If you're hosting on Heroku, this service is highly recommended for autoscaling of dynos.
   gem "rails_autoscale_agent"
 
-  # exception tracking and uptime monitoring service with a generous free tier.
+  # Exception tracking, uptime monitoring, and status page service with a generous free tier.
   gem "honeybadger"
 
-  # another exception tracking service
-  gem "sentry-ruby"
-  gem "sentry-rails"
-  gem "sentry-sidekiq"
-
-  # use s3 for active storage by default.
+  # Use S3 for Active Storage by default.
   gem "aws-sdk-s3", require: false
 end
 
+# TODO Have to specify this dependency here until our changes are in the original package.
+gem "active_hash", github: "bullet-train-co/active_hash"
+
+# TODO We need to get back onto the official Trix release.
+gem "trix", github: "bullet-train-co/trix"
+
+# TODO Have to specify this dependency here until our changes are in the original package or properly forked.
+gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
+
 # YOUR GEMS
-# you can add any gems you need below. by keeping them separate from
-# our gems above, you avoid the likelihood that we'll have a merge
-# conflict in the future.
+# You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
+# that you run into a merge conflict in the future.
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
