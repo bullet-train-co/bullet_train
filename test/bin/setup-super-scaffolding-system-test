@@ -19,7 +19,7 @@ bin/super-scaffold crud Personality::Note Personality::CharacterTrait,Objective,
 bin/super-scaffold crud Personality::Reactions::Response Personality::Note,Personality::CharacterTrait,Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
 
 rails g migration add_project_id_to_test_sites project:references
-bin/super-scaffold crud-field TestSite project_id:super_select[class_name=Project]
+bin/super-scaffold crud-field TestSite project_id:super_select\[class_name=Project\]
 
 # Test that the foreign key table name will be inserted into the migration.
 rails g migration add_other_character_trait_to_personality_notes other_character_trait:references
@@ -43,7 +43,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 
   # TODO This is a fix for the bug in the route manipulator.
   sed -i "" "s/resources :tags//g" config/routes.rb
-  sed -i "" "s/resources :teams do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
+  sed -i "" "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
 else
   sed -i "s/raise .*/team\.projects/g" app/models/test_site.rb
   sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
@@ -52,7 +52,7 @@ else
 
   # TODO This is a fix for the bug in the route manipulator.
   sed -i "s/resources :tags//g" config/routes.rb
-  sed -i "s/resources :teams do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
+  sed -i "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
 fi
 
 rake db:migrate
