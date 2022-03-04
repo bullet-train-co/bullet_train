@@ -128,7 +128,7 @@ group :test do
   gem "capybara-email"
 
   # Generate test objects.
-  gem "factory_bot_rails"
+  gem "factory_bot_rails", group: :development
 
   # Write system tests by pointing and clicking in your browser.
   gem "magic_test"
