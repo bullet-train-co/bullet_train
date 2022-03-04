@@ -1,6 +1,0 @@
-en:
-  roles:
-    label: &label Special Privileges
-    breadcrumbs:
-      label: *label
-    header: Special Privileges
