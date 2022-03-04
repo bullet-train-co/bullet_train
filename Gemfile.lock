@@ -6,13 +6,6 @@ GIT
       activesupport (>= 5.0.0)
 
 GIT
-  remote: https://github.com/bullet-train-co/trix.git
-  revision: 078043a8bb6a95d8cf6742984b02fa96be689847
-  specs:
-    trix (0.11.1)
-      rails (> 4.1, <= 7.0)
-
-GIT
   remote: https://github.com/bullet-train-co/wine_bouncer.git
   revision: 638eef8b4087532ac8950d9961552536a8de6660
   specs:
@@ -29,61 +22,67 @@ GEM
 GEM
   remote: https://rubygems.org/
   specs:
-    actioncable (7.0.0)
-      actionpack (= 7.0.0)
-      activesupport (= 7.0.0)
+    actioncable (7.0.2.2)
+      actionpack (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
       nio4r (~> 2.0)
       websocket-driver (>= 0.6.1)
-    actionmailbox (7.0.0)
-      actionpack (= 7.0.0)
-      activejob (= 7.0.0)
-      activerecord (= 7.0.0)
-      activestorage (= 7.0.0)
-      activesupport (= 7.0.0)
+    actionmailbox (7.0.2.2)
+      actionpack (= 7.0.2.2)
+      activejob (= 7.0.2.2)
+      activerecord (= 7.0.2.2)
+      activestorage (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
       mail (>= 2.7.1)
-    actionmailer (7.0.0)
-      actionpack (= 7.0.0)
-      actionview (= 7.0.0)
-      activejob (= 7.0.0)
-      activesupport (= 7.0.0)
+      net-imap
+      net-pop
+      net-smtp
+    actionmailer (7.0.2.2)
+      actionpack (= 7.0.2.2)
+      actionview (= 7.0.2.2)
+      activejob (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
       mail (~> 2.5, >= 2.5.4)
+      net-imap
+      net-pop
+      net-smtp
       rails-dom-testing (~> 2.0)
-    actionpack (7.0.0)
-      actionview (= 7.0.0)
-      activesupport (= 7.0.0)
+    actionpack (7.0.2.2)
+      actionview (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
       rack (~> 2.0, >= 2.2.0)
       rack-test (>= 0.6.3)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.0, >= 1.2.0)
-    actiontext (7.0.0)
-      actionpack (= 7.0.0)
-      activerecord (= 7.0.0)
-      activestorage (= 7.0.0)
-      activesupport (= 7.0.0)
+    actiontext (7.0.2.2)
+      actionpack (= 7.0.2.2)
+      activerecord (= 7.0.2.2)
+      activestorage (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
       globalid (>= 0.6.0)
       nokogiri (>= 1.8.5)
-    actionview (7.0.0)
-      activesupport (= 7.0.0)
+    actionview (7.0.2.2)
+      activesupport (= 7.0.2.2)
       builder (~> 3.1)
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    activejob (7.0.0)
-      activesupport (= 7.0.0)
+    activejob (7.0.2.2)
+      activesupport (= 7.0.2.2)
       globalid (>= 0.3.6)
-    activemodel (7.0.0)
-      activesupport (= 7.0.0)
-    activerecord (7.0.0)
-      activemodel (= 7.0.0)
-      activesupport (= 7.0.0)
-    activestorage (7.0.0)
-      actionpack (= 7.0.0)
-      activejob (= 7.0.0)
-      activerecord (= 7.0.0)
-      activesupport (= 7.0.0)
+    activemodel (7.0.2.2)
+      activesupport (= 7.0.2.2)
+    activerecord (7.0.2.2)
+      activemodel (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
+    activestorage (7.0.2.2)
+      actionpack (= 7.0.2.2)
+      activejob (= 7.0.2.2)
+      activerecord (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
       marcel (~> 1.0)
       mini_mime (>= 1.1.0)
-    activesupport (7.0.0)
+    activesupport (7.0.2.2)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
@@ -237,6 +236,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    digest (3.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.5.4)
@@ -313,6 +313,7 @@ GEM
     indefinite_article (0.2.4)
       activesupport
     io-console (0.5.11)
+    io-wait (0.2.1)
     irb (1.4.1)
       reline (>= 0.3.0)
     jbuilder (2.11.5)
@@ -374,6 +375,21 @@ GEM
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.1)
       mustermann (>= 1.0.0)
+    net-imap (0.2.3)
+      digest
+      net-protocol
+      strscan
+    net-pop (0.1.1)
+      digest
+      net-protocol
+      timeout
+    net-protocol (0.1.2)
+      io-wait
+      timeout
+    net-smtp (0.3.1)
+      digest
+      net-protocol
+      timeout
     netrc (0.11.0)
     nice_partials (0.1.6)
       actionview (>= 4.2.6)
@@ -439,20 +455,20 @@ GEM
       rack (>= 1.2.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
-    rails (7.0.0)
-      actioncable (= 7.0.0)
-      actionmailbox (= 7.0.0)
-      actionmailer (= 7.0.0)
-      actionpack (= 7.0.0)
-      actiontext (= 7.0.0)
-      actionview (= 7.0.0)
-      activejob (= 7.0.0)
-      activemodel (= 7.0.0)
-      activerecord (= 7.0.0)
-      activestorage (= 7.0.0)
-      activesupport (= 7.0.0)
+    rails (7.0.2.2)
+      actioncable (= 7.0.2.2)
+      actionmailbox (= 7.0.2.2)
+      actionmailer (= 7.0.2.2)
+      actionpack (= 7.0.2.2)
+      actiontext (= 7.0.2.2)
+      actionview (= 7.0.2.2)
+      activejob (= 7.0.2.2)
+      activemodel (= 7.0.2.2)
+      activerecord (= 7.0.2.2)
+      activestorage (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
       bundler (>= 1.15.0)
-      railties (= 7.0.0)
+      railties (= 7.0.2.2)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -467,9 +483,9 @@ GEM
       json
       require_all (~> 3.0)
       ruby-progressbar
-    railties (7.0.0)
-      actionpack (= 7.0.0)
-      activesupport (= 7.0.0)
+    railties (7.0.2.2)
+      actionpack (= 7.0.2.2)
+      activesupport (= 7.0.2.2)
       method_source
       rake (>= 12.2)
       thor (~> 1.0)
@@ -531,9 +547,11 @@ GEM
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
     stripe (5.45.0)
+    strscan (3.0.1)
     thor (1.2.1)
     thread-local (1.1.0)
     timecop (0.9.4)
+    timeout (0.2.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -612,7 +630,6 @@ DEPENDENCIES
   standard
   stimulus-rails
   timecop
-  trix!
   turbo-rails
   tzinfo-data
   web-console
@@ -620,7 +637,7 @@ DEPENDENCIES
   wine_bouncer!
 
 RUBY VERSION
-   ruby 3.0.3p157
+   ruby 3.1.1p18
 
 BUNDLED WITH
    2.2.32

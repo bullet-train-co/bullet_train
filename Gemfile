@@ -6,7 +6,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.0.3"
+ruby "3.1.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
@@ -153,8 +153,8 @@ end
 # TODO Have to specify this dependency here until our changes are in the original package.
 gem "active_hash", github: "bullet-train-co/active_hash"
 
-# TODO We need to get back onto the official Trix release.
-gem "trix", github: "bullet-train-co/trix"
+# # TODO We need to get back onto the official Trix release.
+# gem "trix", github: "bullet-train-co/trix"
 
 # TODO Have to specify this dependency here until our changes are in the original package or properly forked.
 gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"

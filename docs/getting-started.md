@@ -21,7 +21,7 @@ brew services start postgresql
 brew install redis
 brew services start redis
 nvm install 16
-rvm install ruby-3.0.3
+rvm install ruby-3.1.1
 ```
 
 ## 2. Clone (Don't Fork) The Repository
