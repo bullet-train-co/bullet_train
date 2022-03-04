@@ -73,10 +73,6 @@ def invitation_keys
   ENV["INVITATION_KEYS"].split(",").map(&:strip)
 end
 
-def show_developer_documentation?
-  Rails.env.production? ? ENV["ENABLE_DOCS"].present? : true
-end
-
 def font_awesome?
   ENV["FONTAWESOME_NPM_AUTH_TOKEN"].present?
 end

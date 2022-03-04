@@ -1,5 +1,5 @@
 # DEFAULT RAILS GEMS
-# This section is something close to the default Rails 5.2.3 Gemfile.
+# This section is something close to the default Rails Gemfile.
 # Bullet Train updates the Ruby version. The comments in this section
 # are from vanilla Rails.
 

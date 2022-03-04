@@ -116,7 +116,7 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.24)
+    bullet_train (1.0.25)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -347,7 +347,7 @@ GEM
     loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    magic_test (0.0.7)
+    magic_test (0.0.9)
       capybara (>= 3.0)
       pry
       pry-stack_explorer
