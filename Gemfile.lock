@@ -116,7 +116,7 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.25)
+    bullet_train (1.0.28)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -161,6 +161,8 @@ GEM
       rails (>= 7.0.0)
     bullet_train-incoming_webhooks (1.0.0)
       rails (>= 7.0.0)
+    bullet_train-integrations (1.0.0)
+      rails (>= 6.0.0)
     bullet_train-integrations-stripe (1.0.3)
       omniauth
       omniauth-rails_csrf_protection
@@ -596,6 +598,7 @@ DEPENDENCIES
   bullet_train-api
   bullet_train-fields
   bullet_train-incoming_webhooks
+  bullet_train-integrations
   bullet_train-integrations-stripe
   bullet_train-obfuscates_id
   bullet_train-outgoing_webhooks
