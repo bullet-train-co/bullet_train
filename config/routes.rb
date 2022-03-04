@@ -36,7 +36,7 @@ Rails.application.routes.draw do
       end
 
       # user specific resources.
-      resources :users, (extending) do
+      resources :users, extending do
         namespace :oauth do
           # 🚅 super scaffolding will insert new oauth providers above this line.
         end
@@ -45,16 +45,16 @@ Rails.application.routes.draw do
       end
 
       # team-level resources.
-      resources :teams, (extending) do
+      resources :teams, extending do
         # routes for many teams actions and resources are configured in the `bullet_train` gem, but you can add more here.
 
         # add your resources here.
 
-        resources :invitations, (extending) do
+        resources :invitations, extending do
           # routes for standard invitation actions and resources are configured in the `bullet_train` gem, but you can add more here.
         end
 
-        resources :memberships, (extending) do
+        resources :memberships, extending do
           # routes for standard membership actions and resources are configured in the `bullet_train` gem, but you can add more here.
         end
 
