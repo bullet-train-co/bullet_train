@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+# We redirect this script to a rake task because I don't know a better way to boot the Rails environment for this script.
+exec "rake \"bullet_train:resolve[#{ARGV.join(" ").gsub(",", "\\,")}]\""
