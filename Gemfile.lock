@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/brentd/xray-rails.git
+  revision: 4f6cca0cd01417d6be6a774314f941d52c660e4d
+  ref: 4f6cca0
+  specs:
+    xray-rails (0.3.2)
+      rails (>= 3.1.0)
+
+GIT
   remote: https://github.com/bullet-train-co/active_hash.git
   revision: a6628bc65e7c099ec9428c2bfe1e292ef01f1ef1
   specs:
@@ -116,7 +124,7 @@ GEM
     bootsnap (1.10.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.28)
+    bullet_train (1.0.30)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -638,6 +646,7 @@ DEPENDENCIES
   web-console
   webdrivers
   wine_bouncer!
+  xray-rails!
 
 RUBY VERSION
    ruby 3.1.1p18
