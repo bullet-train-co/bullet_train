@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_23_210337) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_02_23_210337) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,8 +18,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.integer "status", default: 0, null: false
     t.string "message_id", null: false
     t.string "message_checksum", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["message_id", "message_checksum"], name: "index_action_mailbox_inbound_emails_uniqueness", unique: true
   end
 
@@ -28,9 +27,9 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "record_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
   end
 
@@ -39,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -51,13 +50,13 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.text "metadata"
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
-    t.datetime "created_at", null: false
+    t.datetime "created_at", precision: nil, null: false
     t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -71,12 +70,12 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.text "logging_output", default: ""
     t.text "error_message"
     t.text "rejected_lines", default: ""
-    t.datetime "started_at"
-    t.datetime "estimated_finish_at"
-    t.datetime "completed_at"
-    t.datetime "failed_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "started_at", precision: nil
+    t.datetime "estimated_finish_at", precision: nil
+    t.datetime "completed_at", precision: nil
+    t.datetime "failed_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["team_id"], name: "index_imports_csv_imports_on_team_id"
   end
 
@@ -84,8 +83,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.bigint "team_id", null: false
     t.bigint "oauth_stripe_account_id", null: false
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["oauth_stripe_account_id"], name: "index_stripe_installations_on_stripe_account_id"
     t.index ["team_id"], name: "index_integrations_stripe_installations_on_team_id"
   end
@@ -94,8 +93,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.string "email"
     t.string "uuid"
     t.integer "from_membership_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "team_id"
     t.index ["team_id"], name: "index_invitations_on_team_id"
   end
@@ -103,8 +102,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
   create_table "memberships", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "team_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "invitation_id"
     t.string "user_first_name"
     t.string "user_last_name"
@@ -121,18 +120,18 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
   end
 
   create_table "memberships_reassignments_assignments", force: :cascade do |t|
-    t.bigint "membership_id", null: false
-    t.bigint "scaffolding_completely_concrete_tangible_things_reassignments_i"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "membership_id", null: false
+    t.integer "scaffolding_completely_concrete_tangible_things_reassignments_i"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["membership_id"], name: "index_memberships_reassignments_assignments_on_membership_id"
     t.index ["scaffolding_completely_concrete_tangible_things_reassignments_i"], name: "index_assignments_on_tangible_things_reassignment_id"
   end
 
   create_table "memberships_reassignments_scaffolding_completely_concrete_tangi", force: :cascade do |t|
-    t.bigint "membership_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.integer "membership_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["membership_id"], name: "index_tangible_things_reassignments_on_membership_id"
   end
 
@@ -142,8 +141,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.string "token", null: false
     t.integer "expires_in", null: false
     t.text "redirect_uri", null: false
-    t.datetime "created_at", null: false
-    t.datetime "revoked_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "revoked_at", precision: nil
     t.string "scopes", default: "", null: false
     t.index ["application_id"], name: "index_oauth_access_grants_on_application_id"
     t.index ["resource_owner_id"], name: "index_oauth_access_grants_on_resource_owner_id"
@@ -156,8 +155,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.string "token", null: false
     t.string "refresh_token"
     t.integer "expires_in"
-    t.datetime "revoked_at"
-    t.datetime "created_at", null: false
+    t.datetime "revoked_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
     t.string "scopes"
     t.string "previous_refresh_token", default: "", null: false
     t.index ["application_id"], name: "index_oauth_access_tokens_on_application_id"
@@ -173,8 +172,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.text "redirect_uri"
     t.string "scopes", default: "", null: false
     t.boolean "confidential", default: true, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "team_id", null: false
     t.index ["team_id"], name: "index_oauth_applications_on_team_id"
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
@@ -184,33 +183,33 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.string "uid"
     t.jsonb "data"
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["uid"], name: "index_oauth_stripe_accounts_on_uid", unique: true
     t.index ["user_id"], name: "index_oauth_stripe_accounts_on_user_id"
   end
 
   create_table "scaffolding_absolutely_abstract_creative_concepts", force: :cascade do |t|
-    t.bigint "team_id", null: false
+    t.integer "team_id", null: false
     t.string "name"
     t.text "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_absolutely_abstract_creative_concepts_on_team_id"
   end
 
   create_table "scaffolding_absolutely_abstract_creative_concepts_collaborators", force: :cascade do |t|
     t.bigint "creative_concept_id", null: false
     t.bigint "membership_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.jsonb "role_ids", default: []
     t.index ["creative_concept_id"], name: "index_creative_concepts_collaborators_on_creative_concept_id"
     t.index ["membership_id"], name: "index_creative_concepts_collaborators_on_membership_id"
   end
 
   create_table "scaffolding_completely_concrete_tangible_things", force: :cascade do |t|
-    t.bigint "absolutely_abstract_creative_concept_id", null: false
+    t.integer "absolutely_abstract_creative_concept_id", null: false
     t.string "text_field_value"
     t.string "button_value"
     t.string "cloudinary_image_value"
@@ -220,10 +219,10 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.string "phone_field_value"
     t.string "super_select_value"
     t.text "text_area_value"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "sort_order"
-    t.datetime "date_and_time_field_value"
+    t.datetime "date_and_time_field_value", precision: nil
     t.jsonb "multiple_button_values", default: []
     t.jsonb "multiple_super_select_values", default: []
     t.string "color_picker_value"
@@ -236,8 +235,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
   create_table "scaffolding_completely_concrete_tangible_things_assignments", force: :cascade do |t|
     t.bigint "tangible_thing_id"
     t.bigint "membership_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["membership_id"], name: "index_tangible_things_assignments_on_membership_id"
     t.index ["tangible_thing_id"], name: "index_tangible_things_assignments_on_tangible_thing_id"
   end
@@ -245,8 +244,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
   create_table "teams", id: :serial, force: :cascade do |t|
     t.string "name"
     t.string "slug"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.boolean "being_destroyed"
     t.string "time_zone"
     t.string "locale"
@@ -256,23 +255,23 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "current_team_id"
     t.string "first_name"
     t.string "last_name"
     t.string "time_zone"
-    t.datetime "last_seen_at"
+    t.datetime "last_seen_at", precision: nil
     t.string "profile_photo_id"
     t.jsonb "ability_cache"
-    t.datetime "last_notification_email_sent_at"
+    t.datetime "last_notification_email_sent_at", precision: nil
     t.boolean "former_user", default: false, null: false
     t.string "encrypted_otp_secret"
     t.string "encrypted_otp_secret_iv"
@@ -287,31 +286,21 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "versions", id: :serial, force: :cascade do |t|
-    t.string "item_type", null: false
-    t.integer "item_id", null: false
-    t.string "event", null: false
-    t.string "whodunnit"
-    t.text "object"
-    t.datetime "created_at"
-    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
-  end
-
   create_table "webhooks_incoming_bullet_train_webhooks", force: :cascade do |t|
     t.jsonb "data"
-    t.datetime "processed_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "verified_at"
+    t.datetime "processed_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "verified_at", precision: nil
   end
 
   create_table "webhooks_incoming_oauth_stripe_account_webhooks", force: :cascade do |t|
     t.jsonb "data"
-    t.datetime "processed_at"
-    t.datetime "verified_at"
+    t.datetime "processed_at", precision: nil
+    t.datetime "verified_at", precision: nil
     t.bigint "oauth_stripe_account_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["oauth_stripe_account_id"], name: "index_stripe_webhooks_on_stripe_account_id"
   end
 
@@ -319,17 +308,17 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.integer "endpoint_id"
     t.integer "event_id"
     t.text "endpoint_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "delivered_at"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "delivered_at", precision: nil
   end
 
   create_table "webhooks_outgoing_delivery_attempts", force: :cascade do |t|
     t.integer "delivery_id"
     t.integer "response_code"
     t.text "response_body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.text "response_message"
     t.text "error_message"
     t.integer "attempt_number"
@@ -338,8 +327,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
   create_table "webhooks_outgoing_endpoints", force: :cascade do |t|
     t.bigint "team_id"
     t.text "url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.jsonb "event_type_ids", default: []
     t.index ["team_id"], name: "index_webhooks_outgoing_endpoints_on_team_id"
@@ -349,8 +338,8 @@ ActiveRecord::Schema.define(version: 2022_02_23_210337) do
     t.integer "subject_id"
     t.string "subject_type"
     t.jsonb "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "team_id"
     t.string "uuid"
     t.jsonb "payload"
