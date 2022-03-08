@@ -46,35 +46,4 @@ bin/dev
 
 ---
 
-#### Below are instructions for developers working on applications built with Bullet Train.
-🚅 `bin/configure` will remove everything above this line when you begin building an application.
-
-# Untitled Application
-
-## Getting Started
-
-1. Install Dependencies
-
-Before you can get started developing, you must have the following dependencies installed:
-
- - Ruby 3.1
- - PostgreSQL 13
- - Redis 6.2
- - Node 16.14
- - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
-
-If you don't have these installed, you can use [rails.new](https://rails.new) to help with the process.
-
-2. Run the setup script:
-
-```
-bin/setup
-```
-
-3. Start the application:
-
-```
-bin/dev
-```
-
-4. Visit http://localhost:3000.
+This `README.md` file will be replaced with [`README.md.example`](./README.md.example) after running `bin/configure`.
