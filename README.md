@@ -5,16 +5,16 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
 1. Clone the template repository:
 
-```
-git clone git@github.com:bullet-train-co/bullet_train.git your_new_project_name
-cd your_new_project_name
-```
+    ```
+    git clone git@github.com:bullet-train-co/bullet_train.git your_new_project_name
+    cd your_new_project_name
+    ```
 
 2. Run the configuration script:
 
-```
-bin/configure
-```
+    ```
+    bin/configure
+    ```
 
 ## Contributing to Bullet Train
 If you're looking to Bullet Train, you should "Fork" the template repository on GitHub, like so:
@@ -25,22 +25,22 @@ If you're looking to Bullet Train, you should "Fork" the template repository on 
 4. Click the "Code" button on the new repository and copy the SSH path.
 5. Clone your forked repository using the SSH path you copied, like so:
 
-```
-git clone git@github.com:your-account/bullet_train.git
-cd bullet_train
-```
+    ```
+    git clone git@github.com:your-account/bullet_train.git
+    cd bullet_train
+    ```
 
 6. Run the setup script:
 
-```
-bin/setup
-```
+    ```
+    bin/setup
+    ```
 
 7. Start the application:
 
-```
-bin/dev
-```
+    ```
+    bin/dev
+    ```
 
 8. Visit http://localhost:3000.
 
