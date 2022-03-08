@@ -1,10 +1,7 @@
 # Bullet Train Application Template
 
-## Getting Started
-
-### Building a New Application with Bullet Train
-
-You don't want to "Fork" the template repository on GitHub. Instead, you should:
+## Building a New Application with Bullet Train
+If you're building a new application with Bullet Train, you don't want to "Fork" the template repository on GitHub. Instead, you should:
 
 1. Clone the template repository:
 
@@ -19,9 +16,8 @@ cd your_new_project_name
 bin/configure
 ```
 
-### Contributing to Bullet Train
-
-If you want to contribute to Bullet Train, you should "Fork" the template repository on GitHub, like so:
+## Contributing to Bullet Train
+If you're looking to Bullet Train, you should "Fork" the template repository on GitHub, like so:
 
 1. Visit https://github.com/bullet-train-co/bullet_train.
 2. Click "Fork" in the top-right corner.
