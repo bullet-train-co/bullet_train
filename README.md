@@ -1,7 +1,7 @@
 # Bullet Train Application Template
 
 ## Building a New Application with Bullet Train
-If you're building a new application with Bullet Train, you don't want to "Fork" the template repository on GitHub. Instead, you should:
+If you're building a new application with Bullet Train, you don't want to "fork" the template repository on GitHub. Instead, you should:
 
 1. Clone the template repository:
 
