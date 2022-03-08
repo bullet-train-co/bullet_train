@@ -17,7 +17,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     ```
 
 ## Contributing to Bullet Train
-If you're looking to Bullet Train, you should "Fork" the template repository on GitHub, like so:
+If you're looking contribute to Bullet Train, you should "Fork" the template repository on GitHub, like so:
 
 1. Visit https://github.com/bullet-train-co/bullet_train.
 2. Click "Fork" in the top-right corner.
