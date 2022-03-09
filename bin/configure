@@ -137,6 +137,9 @@ puts ""
 puts green "Moving `./README.md.example` to `./README.md`."
 puts `mv ./README.md.example ./README.md`.chomp
 
+# We can only do this after the README is moved into place.
+replace_in_file("./README.md", "Untitled Application", human)
+
 puts green "Committing all these changes to the repository."
 stream "git add -A"
 stream "git commit -m \"Run configuration script.\""
