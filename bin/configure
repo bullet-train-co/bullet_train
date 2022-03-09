@@ -1,10 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'active_support/inflector'
-
 def replace_in_file(file, before, after, target_regexp = nil)
   puts "Replacing in '#{file}'."
-  if target_regexp.present?
+  if target_regexp
     target_file_content = ""
     File.open(file).each_line do |l|
       l.gsub!(before, after) if !!l.match(target_regexp)
@@ -20,33 +18,132 @@ def replace_in_file(file, before, after, target_regexp = nil)
   end
 end
 
-unless ARGV.count >= 1
+def stream(command, prefix = "  ")
   puts ""
-  puts "🚅  usage: bin/set-name \"<Your App Name in Title Case with Spaces>\""
+  IO.popen(command) do |io|
+    while (line = io.gets) do
+      puts "#{prefix}#{line}"
+    end
+  end
   puts ""
+end
+
+def red(string)
+  "\e[1;31m#{string}\e[0m"
+end
+
+def green(string)
+  "\e[1;32m#{string}\e[0m"
+end
+
+def blue(string)
+  "\e[1;34m#{string}\e[0m"
+end
+
+def yellow(string)
+  "\e[1;33m#{string}\e[0m"
+end
+
+def ask(string)
+  puts blue string
+  return gets.strip
+end
+
+# Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
+required_ruby = `cat ./.ruby-version`.strip
+actual_ruby = `ruby -v`.strip
+message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
+if actual_ruby.include?(required_ruby)
+  puts green(message)
+else
+  puts red(message)
   exit
 end
 
-human = ARGV[0]
+# Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
+required = `cat ./.nvmrc`.strip
+actual = `node -v`.strip
+message = "Bullet Train requires Node.js #{required} and `node -v` returns #{actual}."
+if actual_ruby.include?(required_ruby)
+  puts green(message)
+else
+  puts red(message)
+  exit
+end
+
+if `git remote | grep bullet-train`.strip.length > 0
+  puts yellow "Repository already has a \`bullet-train`\ remote."
+else
+  if `git remote | grep origin`.strip.length > 0
+    puts green "Renaming repository `origin` remote to `bullet-train`."
+    `git remote rename origin bullet-train`
+  else
+    puts red "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?"
+  end
+end
+
+if `git remote | grep origin`.strip.length > 0
+  puts yellow "Repository already has a \`origin`\ remote."
+else
+  ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
+  `open https://github.com/new`
+
+  ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+  puts green "Setting repository's `origin` remote to `#{ssh_path}`."
+  puts `git remote add origin #{ssh_path}`.chomp
+end
+
+local_branch = `git branch | grep "*"`.split.last
+
+puts green "Pushing repository to `origin`."
+stream "git push origin #{local_branch}:main 2>&1"
+
+puts green "Running `bundle install`."
+stream "bundle install"
+
+if `yarn -v 2> /dev/null`.strip.length > 0
+  puts green "Yarn is installed."
+else
+  puts red "Yarn is not installed. Try `brew install yarn`."
+  exit
+end
+
+puts green "Running `yarn install`."
+stream "yarn install"
+
+# This should be available now.
+require "active_support/inflector"
+
+human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 variable = ActiveSupport::Inflector.parameterize(human, separator: '_')
 environment_variable = ActiveSupport::Inflector.parameterize(human, separator: '_').upcase
 class_name = variable.classify
 kebab_case = variable.tr("_", "-")
 
 puts ""
+puts green "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase."
 replace_in_file("./.circleci/config.yml", "untitled_application", variable)
 replace_in_file("./config/database.yml", "untitled_application", variable)
 replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
 replace_in_file("./config/cable.yml", "untitled_application", variable)
 replace_in_file("./config/initializers/session_store.rb", "untitled_application", variable)
 replace_in_file("./config/environments/production.rb", "untitled_application", variable)
-replace_in_file("./config/environments/development.rb", "untitled_application", variable)
 replace_in_file("./config/application.rb", "UntitledApplication", class_name)
 replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
 replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
-replace_in_file("./README.md", "Run `bin/configure` to get started.", "")
+puts ""
+
+puts green "Moving `./README.md.example` to `./README.md`."
+puts `mv ./README.md.example ./README.md`.chomp
+
+puts green "Committing all these changes to the repository."
+stream "git add -A"
+stream "git commit -m \"Run configuration script.\""
+stream "git push origin #{local_branch}:main"
 
 puts ""
-puts "Be sure to do a global search for 'Bullet Train' to find places you might want to update with your own application name and marketing copy. At the very least you should update `config/locales/en/application.en.yml`."
+puts yellow "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!"
+puts ""
+puts green "Next you can run `bin/setup` and then `bin/dev`."
 puts ""
