@@ -2,7 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "@bullet-train/bullet-train": "^0.2.2",
+    "@bullet-train/bullet-train": "^0.2.4",
     "@bullet-train/bullet-train-sortable": "^0.1.2",
     "@bullet-train/fields": "^0.1.2",
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",

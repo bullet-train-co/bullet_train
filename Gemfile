@@ -88,7 +88,6 @@ gem "devise"
 
 # Core packages.
 gem "bullet_train"
-gem "bullet_train-fields"
 gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
@@ -102,9 +101,10 @@ gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
 
-source "https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain" do
-  gem "bullet_train-action_models"
-end
+# source "https://BULLET_TRAIN_PRO_TOKEN@gem.fury.io/bullettrain" do
+#   gem "bullet_train-action_models"
+#   gem "bullet_train-conversations"
+# end
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.

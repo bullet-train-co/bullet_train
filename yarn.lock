@@ -30,10 +30,10 @@
   dependencies:
     dragula "^3.7.3"
 
-"@bullet-train/bullet-train@^0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-0.2.2.tgz#7db9bdb6f7266c0a93e290a9523ce573bf258ee7"
-  integrity sha512-kAIXbx/yygqywwEq2NtOMtMCpzOprrU6iGGpMTej3nbMFgZ5yA+ilcfS3QkNJGB9r9/LXflvJlv/J7UQ7l8yyA==
+"@bullet-train/bullet-train@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-0.2.4.tgz#18bdfd641293796a19e54125b8c4b1f7f0eef25b"
+  integrity sha512-TLDWmVyhdn4gG+TxNDmCeTtucYecA+JohXJKWmk25lAGdG3lL7YCkwcDSSYjFI+RUeHwtbU1cLGLPL3vGKOG/Q==
   dependencies:
     stimulus "^2.0.0"
 
@@ -467,12 +467,12 @@ esbuild-android-arm64@0.14.23:
 
 esbuild-darwin-64@0.14.23:
   version "0.14.23"
-  resolved "https://registry.npmjs.org/esbuild-darwin-64/-/esbuild-darwin-64-0.14.23.tgz"
+  resolved "https://registry.yarnpkg.com/esbuild-darwin-64/-/esbuild-darwin-64-0.14.23.tgz#1c131e8cb133ed935ca32f824349a117c896a15b"
   integrity sha512-lB0XRbtOYYL1tLcYw8BoBaYsFYiR48RPrA0KfA/7RFTr4MV7Bwy/J4+7nLsVnv9FGuQummM3uJ93J3ptaTqFug==
 
 esbuild-darwin-arm64@0.14.23:
   version "0.14.23"
-  resolved "https://registry.yarnpkg.com/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.23.tgz#3c6245a50109dd84953f53d7833bd3b4f0e8c6fa"
+  resolved "https://registry.npmjs.org/esbuild-darwin-arm64/-/esbuild-darwin-arm64-0.14.23.tgz"
   integrity sha512-yat73Z/uJ5tRcfRiI4CCTv0FSnwErm3BJQeZAh+1tIP0TUNh6o+mXg338Zl5EKChD+YGp6PN+Dbhs7qa34RxSw==
 
 esbuild-freebsd-64@0.14.23:

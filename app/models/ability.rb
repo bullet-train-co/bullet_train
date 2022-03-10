@@ -29,7 +29,6 @@ class Ability
       if user.developer?
         # the following admin abilities were added by super scaffolding.
       end
-
     end
   end
 end

@@ -22,12 +22,6 @@ GIT
       grape (>= 0.10)
 
 GEM
-  remote: https://ZTHtJ-OqtBroMn45CUr9BMWXqqKGFhug@gem.fury.io/bullettrain/
-  specs:
-    bullet_train-action_models (1.0.10)
-      rails (>= 6.0.0)
-
-GEM
   remote: https://rubygems.org/
   specs:
     actioncable (7.0.2.2)
@@ -602,9 +596,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   bullet_train
-  bullet_train-action_models!
   bullet_train-api
-  bullet_train-fields
   bullet_train-incoming_webhooks
   bullet_train-integrations
   bullet_train-integrations-stripe
