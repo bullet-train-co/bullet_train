@@ -17,6 +17,11 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     ```
     $ bin/configure
     ```
+    
+## Provisioning a Production Environment on Heroku
+You can use this public repository to provision a new application on Heroku and then push your private application code there later.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=http://github.com/bullet-train-co/bullet_train)
 
 ## Contribute to Bullet Train
 If you're looking contribute to Bullet Train, you should "Fork" this template repository on GitHub, like so:
