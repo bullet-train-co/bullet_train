@@ -2,9 +2,7 @@
 
 ## Getting Started
 
-1. Install Dependencies
-
-    Before you can get started developing, you must have the following dependencies installed:
+1. You must have the following dependencies installed:
 
      - Ruby 3.1
      - PostgreSQL 13
