@@ -26,7 +26,7 @@
     "postcss-extend-rule": "^4.0.0",
     "postcss-import": "^14.0.2",
     "postcss-nested": "^5.0.6",
-    "stimulus-reveal": "bullet-train-co/stimulus-reveal#main",
+    "stimulus-reveal": "^1.2.12",
     "tailwindcss": "^3.0.23"
   },
   "scripts": {
