@@ -4,10 +4,10 @@
 
 1. You must have the following dependencies installed:
 
-     - Ruby 3.1
+     - Ruby 3. Check [`.ruby-version`](.ruby-version) for the specific version number.
      - PostgreSQL 13
      - Redis 6.2
-     - Node 16.14
+     - Node 16. Check [`.nvmrc`](.nvmrc) for the specific version number.
      - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
 
     If you don't have these installed, you can use [rails.new](https://rails.new) to help with the process.
