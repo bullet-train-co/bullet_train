@@ -2,7 +2,7 @@
 
 If you're new to Bullet Train, start with the [Bullet Train Developer Documentation](https://tailwind.bullettrain.co/docs) and the [Getting Started](https://tailwind.bullettrain.co/docs/getting-started) guide.
 
-## Get Started Building a New Application with Bullet Train
+## Building a New Application with Bullet Train
 If you're building a new application with Bullet Train, you don't want to "Fork" the template repository on GitHub. Instead, you should:
 
 1. Clone the template repository:
