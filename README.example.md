@@ -14,8 +14,8 @@
 
     If you don't have these installed, you can use [rails.new](https://rails.new) to help with the process.
 
-2. Run the setup script: `bin/setup`
-3. Start the application: `bin/dev`
+2. Run the `bin/setup` script.
+3. Start the application with `bin/dev`.
 4. Visit http://localhost:3000.
 
 ## Information about Bullet Train
