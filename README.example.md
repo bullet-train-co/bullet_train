@@ -4,15 +4,15 @@
 
 1. Install Dependencies
 
-Before you can get started developing, you must have the following dependencies installed:
+    Before you can get started developing, you must have the following dependencies installed:
 
- - Ruby 3.1
- - PostgreSQL 13
- - Redis 6.2
- - Node 16.14
- - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
+     - Ruby 3.1
+     - PostgreSQL 13
+     - Redis 6.2
+     - Node 16.14
+     - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
 
-If you don't have these installed, you can use [rails.new](https://rails.new) to help with the process.
+    If you don't have these installed, you can use [rails.new](https://rails.new) to help with the process.
 
 2. Run the setup script: `bin/setup`
 3. Start the application: `bin/dev`
