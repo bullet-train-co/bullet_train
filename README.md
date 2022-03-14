@@ -36,11 +36,11 @@ $ bin/super-scaffold crud-field Project description:trix_editor
     
 These first two points are just the tip of the iceberg, so when you're ready, be sure to [learn more about Super Scaffolding](https://github.com/bullet-train-co/bullet_train-base/blob/main/docs/super-scaffolding.md).
 
-#### 3. Figure out which ERB views are powering something you see in the UI:
+#### 3. Figure out which ERB views are powering something you see in the UI by:
 
- - Right click the element.
- - Select "Inspect Element".
- - Look for the `<!--XRAY START ...-->` comment above the element you've selected.
+ - Right clicking the element.
+ - Selecting "Inspect Element".
+ - Looking for the `<!--XRAY START ...-->` comment above the element you've selected.
 
 #### 4. Figure out the full I18N translation key of any string on the page by adding `?show_locales=true` to the URL.
 
