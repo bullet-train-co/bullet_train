@@ -1,8 +1,8 @@
 {
-  "name": "New Bullet Train App",
+  "name": "New Bullet Train Application",
   "description": "The Ruby on Rails SaaS-in-a-Box",
-  "repository": "https://github.com/bullet-train-co/bullet-train-tailwind-css",
-  "logo": "https://bullet-train-tailwind-css.herokuapp.com/heroku-logo.png",
+  "repository": "https://github.com/bullet-train-co/bullet_train",
+  "logo": "https://tailwind.bullettrain.co/heroku-logo.png",
   "keywords": ["ruby", "rails"],
   "buildpacks": [
     { "url": "heroku/nodejs" },
