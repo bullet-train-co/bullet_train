@@ -4,11 +4,11 @@
 
 1. You must have the following dependencies installed:
 
-     - Ruby 3.
+     - Ruby 3
           - See [`.ruby-version`](.ruby-version) for the specific version number.
      - PostgreSQL 13
      - Redis 6.2
-     - Node 16. 
+     - Node 16 
           - See [`.nvmrc`](.nvmrc) for the specific version number.
      - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
 
