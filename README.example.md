@@ -17,4 +17,4 @@
 4. Visit http://localhost:3000.
 
 ## Information about Bullet Train
-If this is your first time working on a Bullet Train application, be sure to review the [Bullet Train Basics](https://github.com/bullet-train-co/bullet_train) and the [Bullet Train Developer Documentation](http://tailwind.bullettrain.co/docs).
+If this is your first time working on a Bullet Train application, be sure to review the [Bullet Train Basics](https://github.com/bullet-train-co/bullet_train#bullet-train-basics) and the [Bullet Train Developer Documentation](http://tailwind.bullettrain.co/docs).
