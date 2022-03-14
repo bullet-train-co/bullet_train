@@ -5,14 +5,14 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
 1. Clone the template repository:
 
-    ```shell
+    ```
     $ git clone git@github.com:bullet-train-co/bullet_train.git your_new_project_name
     $ cd your_new_project_name
     ```
 
 2. Run the configuration script:
 
-    ```shell
+    ```
     $ bin/configure
     ```
 
@@ -22,14 +22,14 @@ If you're using Bullet Train for the first time, start by learning these five te
 
 1. Use `rails g model` to create and `bin/super-scaffold` to scaffold a new model:
 
-    ```shell
+    ```
     $ rails g model Project team:references name:string
     $ bin/super-scaffold crud Project Team name:text_field
     ```
 
 2. Use `rails g migration` and `bin/super-scaffold` to add a new field to a model you've already scaffolded:
 
-    ```shell
+    ```
     $ rails g migration add_description_to_projects description:text
     $ bin/super-scaffold crud-field Project description:trix_editor
     ```
@@ -42,7 +42,7 @@ If you're using Bullet Train for the first time, start by learning these five te
 
 5. Use `bin/resolve` to figure out where framework or theme things are coming from and eject them if you need to customize something locally:
 
-    ```shell
+    ```
     $ bin/resolve Users::Base
     $ bin/resolve en.account.teams.show.header --open
     $ bin/resolve shared/box --open --eject
@@ -50,7 +50,7 @@ If you're using Bullet Train for the first time, start by learning these five te
 
     Also, for inputs that can't be provided on the shell, there's an interactive mode where you can paste them:
 
-    ```shell
+    ```
     $ bin/resolve --interactive --eject --open
 
     <!--XRAY START 73 /Users/andrewculver/.rbenv/versions/3.1.1/lib/ruby/gems/3.1.0/gems/bullet_train-themes-light-1.0.10/app/views/themes/light/commentary/_box.html.erb-->
@@ -65,20 +65,20 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 4. Click the "Code" button on the new repository and copy the SSH path.
 5. Clone your forked repository using the SSH path you copied, like so:
 
-    ```shell
+    ```
     $ git clone git@github.com:your-account/bullet_train.git
     $ cd bullet_train
     ```
 
 6. Run the setup script:
 
-    ```shell
+    ```
     $ bin/setup
     ```
 
 7. Start the application:
 
-    ```shell
+    ```
     $ bin/dev
     ```
 
