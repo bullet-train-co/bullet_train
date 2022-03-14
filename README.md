@@ -42,9 +42,7 @@ These first two points are just the tip of the iceberg, so when you're ready, be
  - Select "Inspect Element".
  - Look for the `<!--XRAY START ...-->` comment above the element you've selected.
 
-#### 4. Figure out the full I18N translation key of any string on the page:
-
- - Add `?show_locales=true` to the URL.
+#### 4. Figure out the full I18N translation key of any string on the page by adding `?show_locales=true` to the URL.
 
 #### 5. Use `bin/resolve` to figure out where framework or theme things are coming from and eject them if you need to customize something locally:
 
