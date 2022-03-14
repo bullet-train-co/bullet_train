@@ -6,10 +6,10 @@
 
      - Ruby 3
           - See [`.ruby-version`](.ruby-version) for the specific version.
-     - PostgreSQL 13
-     - Redis 6.2
      - Node 16 
           - See [`.nvmrc`](.nvmrc) for the specific version.
+     - PostgreSQL 13
+     - Redis 6.2
      - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
 
     If you don't have these installed, you can use [rails.new](https://rails.new) to help with the process.
