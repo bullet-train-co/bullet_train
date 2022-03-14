@@ -34,7 +34,7 @@ If you're using Bullet Train for the first time, start by learning these five te
     $ bin/super-scaffold crud-field Project description:trix_editor
     ```
     
-    This is just the tip of the iceberg, so when you're ready, be sure to [learn more about Super Scaffolding](https://github.com/bullet-train-co/bullet_train-base/blob/main/docs/super-scaffolding.md).
+    These first two points are just the tip of the iceberg, so when you're ready, be sure to [learn more about Super Scaffolding](https://github.com/bullet-train-co/bullet_train-base/blob/main/docs/super-scaffolding.md).
 
 3. Figure out which ERB views are powering something you see in the UI by right clicking the element, selecting "Inspect Element", and looking for the parent `<!--XRAY START ...-->` comment.
 
