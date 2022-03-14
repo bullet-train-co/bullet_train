@@ -17,3 +17,6 @@ If you don't have these installed, you can use [rails.new](https://rails.new) to
 2. Run the setup script: `bin/setup`
 3. Start the application: `bin/dev`
 4. Visit http://localhost:3000.
+
+## Information about Bullet Train
+If this is your first time working on a Bullet Train application, be sure to review the [Bullet Train Basics](https://github.com/bullet-train-co/bullet_train) and the [Bullet Train Developer Documentation](http://tailwind.bullettrain.co/docs).
