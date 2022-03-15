@@ -7,7 +7,6 @@
   "buildpacks": [
     { "url": "heroku/nodejs" },
     { "url": "heroku/ruby" },
-    { "url": "https://github.com/weibeld/heroku-buildpack-run" },
   ],
   "formation": {
     "web": {
