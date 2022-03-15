@@ -147,6 +147,11 @@ group :production do
   # Exception tracking, uptime monitoring, and status page service with a generous free tier.
   gem "honeybadger"
 
+  # Another exception tracking service.
+  gem "sentry-ruby"
+  gem "sentry-rails"
+  gem "sentry-sidekiq"
+
   # Use S3 for Active Storage by default.
   gem "aws-sdk-s3", require: false
 end
