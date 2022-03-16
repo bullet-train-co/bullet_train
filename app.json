@@ -6,7 +6,7 @@
   "keywords": ["ruby", "rails"],
   "buildpacks": [
     { "url": "heroku/nodejs" },
-    { "url": "heroku/ruby" },
+    { "url": "heroku/ruby" }
   ],
   "formation": {
     "web": {
