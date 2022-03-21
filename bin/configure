@@ -123,6 +123,7 @@ kebab_case = variable.tr("_", "-")
 puts ""
 puts green "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase."
 replace_in_file("./.circleci/config.yml", "untitled_application", variable)
+replace_in_file("./config/application.rb", "untitled_application", variable)
 replace_in_file("./config/database.yml", "untitled_application", variable)
 replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
 replace_in_file("./config/cable.yml", "untitled_application", variable)
