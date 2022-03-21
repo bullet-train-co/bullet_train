@@ -53,4 +53,4 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 
 ---
 
-This `README.md` file will be replaced with [`README.md.example`](./README.md.example) after running `bin/configure`.
+This `README.md` file will be replaced with [`README.example.md`](./README.example.md) after running `bin/configure`.
