@@ -1,5 +1,4 @@
 # Bullet Train Application Template
-
 If you're new to Bullet Train, start with the [Bullet Train Developer Documentation](https://tailwind.bullettrain.co/docs) and the [Getting Started](https://tailwind.bullettrain.co/docs/getting-started) guide.
 
 ## Building a New Application with Bullet Train
@@ -17,7 +16,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     ```
     $ bin/configure
     ```
-    
+
 ## Provisioning a Production Environment on Heroku
 You can use this public repository to provision a new application on Heroku and then push your private application code there later.
 
