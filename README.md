@@ -8,10 +8,15 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
     ```
     $ git clone git@github.com:bullet-train-co/bullet_train.git your_new_project_name
+    ```
+    
+2. Enter the project directory:
+
+    ```
     $ cd your_new_project_name
     ```
 
-2. Run the configuration script:
+3. Run the configuration script:
 
     ```
     $ bin/configure
