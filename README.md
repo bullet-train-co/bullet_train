@@ -24,7 +24,9 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
 ## Sponsored By
 
+<center>
 <a href="https://www.clickfunnels.com"><img src="https://images.clickfunnel.com/uploads/digital_asset/file/176632/clickfunnels-dark-logo.svg" width="575" /></a>
+</center>
 
 ## Provisioning a Production Environment on Heroku
 You can use this public repository to provision a new application on Heroku and then push your private application code there later.
