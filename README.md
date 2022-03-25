@@ -22,7 +22,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     $ bin/configure
     ```
 
-> ## Sponsored By
+> ### Sponsored By
 > 
 > <a href="https://www.clickfunnels.com"><img src="https://images.clickfunnel.com/uploads/digital_asset/file/176632/clickfunnels-dark-logo.svg" width="575" /></a>
 
