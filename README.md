@@ -25,7 +25,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 <br>
 
 <p align="center">
-<strong>Bullet Train development is sponsored by:</strong>
+<strong>Bullet Train's open-source development is sponsored by:</strong>
 </p>
 
 <p align="center">
