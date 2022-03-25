@@ -24,11 +24,10 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
 <br>
 
-> ### Sponsored By
->
-> <p align="center">
-> <a href="https://www.clickfunnels.com"><img src="https://images.clickfunnel.com/uploads/digital_asset/file/176632/clickfunnels-dark-logo.svg" width="575" /></a>
-> </p>
+<p align="center">
+<h3>Sponsored By</h3>
+<a href="https://www.clickfunnels.com"><img src="https://images.clickfunnel.com/uploads/digital_asset/file/176632/clickfunnels-dark-logo.svg" width="575" /></a>
+</p>
 
 <br>
 
