@@ -95,7 +95,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.569.0)
+    aws-partitions (1.570.0)
     aws-sdk-core (3.130.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -187,15 +187,15 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.0.20)
+    bullet_train-super_scaffolding (1.0.21)
       indefinite_article
       rails (>= 6.0.0)
     bullet_train-themes (1.0.6)
       rails (>= 7.0.0)
-    bullet_train-themes-light (1.0.10)
+    bullet_train-themes-light (1.0.11)
       bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
-    bullet_train-themes-tailwind_css (1.0.6)
+    bullet_train-themes-tailwind_css (1.0.8)
       bullet_train-themes
       rails (>= 7.0.0)
     cable_ready (5.0.0.pre8)
@@ -342,7 +342,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    knapsack_pro (3.2.0)
+    knapsack_pro (3.2.1)
       rake
     launchy (2.5.0)
       addressable (~> 2.7)
