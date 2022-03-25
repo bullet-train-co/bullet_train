@@ -132,6 +132,7 @@ replace_in_file("./config/application.rb", "UntitledApplication", class_name)
 replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
 replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
+replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
 puts ""
 
 puts green "Moving `./README.md.example` to `./README.md`."
