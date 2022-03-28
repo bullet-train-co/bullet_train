@@ -60,11 +60,10 @@ else
   exit
 end
 
-# Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
 required_node = `cat ./.nvmrc`.strip
-actual_node = `node -v`.strip
+actual_node = `node -v`.strip.gsub("v", "")
 message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
-if actual_node.include?(required_node)
+if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
   puts green(message)
 else
   puts red(message)
