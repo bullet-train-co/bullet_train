@@ -139,8 +139,8 @@ replace_in_file("./config/locales/en/application.en.yml", "untitled application"
 replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
 puts ""
 
-puts green "Moving `./README.md.example` to `./README.md`."
-puts `mv ./README.md.example ./README.md`.chomp
+puts green "Moving `./README.example.md` to `./README.md`."
+puts `mv ./README.example.md ./README.md`.chomp
 
 # We can only do this after the README is moved into place.
 replace_in_file("./README.md", "Untitled Application", human)
