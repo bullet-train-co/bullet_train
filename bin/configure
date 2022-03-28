@@ -60,7 +60,6 @@ else
   exit
 end
 
-# Unless the shell's current version of Node.js is the same as what the application requires, we should flag it.
 required_node = `cat ./.nvmrc`.strip
 actual_node = `node -v`.strip.gsub("v", "")
 message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
@@ -86,7 +85,12 @@ if `git remote | grep origin`.strip.length > 0
   puts yellow "Repository already has a \`origin`\ remote."
 else
   ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
-  `open https://github.com/new`
+  command = if Gem::Platform.local.os == "linux"
+    "xdg-open"
+  else
+    "open"
+  end
+  `#{command} https://github.com/new`
 
   ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
   puts green "Setting repository's `origin` remote to `#{ssh_path}`."
@@ -132,6 +136,7 @@ replace_in_file("./config/application.rb", "UntitledApplication", class_name)
 replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
 replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
+replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
 puts ""
 
 puts green "Moving `./README.md.example` to `./README.md`."

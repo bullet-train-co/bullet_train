@@ -1,0 +1,34 @@
+en:
+  user_mailer:
+    signature: &SIGNATURE
+      html:
+        <p>If you have any questions, please don't hesitate to <a href="mailto:%{support_email}">send us an email</a>.</p>
+        <p>Thanks,<br>The Untitled Application Team</p>
+    invited:
+      subject: Invitation to join %{team_name} on Untitled Application!
+      preview: '%{inviter_name} has sent you this invitation.'
+      heading: You're invited!
+      body:
+        html:
+          <p>
+            %{inviter_name} has invited you to join %{team_name} on Untitled Application.
+            You can join %{team_name} by clicking the button below.
+          </p>
+      cta:
+        label: Join %{team_name}
+      signature:
+        <<: *SIGNATURE
+    welcome:
+      subject: Welcome to Untitled Application!
+      preview: This email contains details on how to get started using your account.
+      heading: Welcome to Untitled Application!
+      body:
+        html:
+          <p>This is the default welcome email! The content of this welcome email can be updated in `config/locales/en/user_mailer.en.yml`.</p>
+          <p>Thanks to the team at <a href="https://postmarkapp.com">Postmark</a> for making the original foundation for this email template <a href="https://github.com/wildbit/postmark-templates">freely available</a>.</p>
+      cta:
+        heading: What's next?
+        body: You can use the following link to return to your account dashboard.
+        label: View Your Account Dashboard
+      signature:
+        <<: *SIGNATURE

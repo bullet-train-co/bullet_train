@@ -1,12 +1,12 @@
 {
-  "name": "New Bullet Train App",
+  "name": "New Bullet Train Application",
   "description": "The Ruby on Rails SaaS-in-a-Box",
-  "repository": "https://github.com/bullet-train-co/bullet-train-tailwind-css",
-  "logo": "https://bullet-train-tailwind-css.herokuapp.com/heroku-logo.png",
+  "repository": "https://github.com/bullet-train-co/bullet_train",
+  "logo": "https://tailwind.bullettrain.co/heroku-logo.png",
   "keywords": ["ruby", "rails"],
   "buildpacks": [
     { "url": "heroku/nodejs" },
-    { "url": "heroku/ruby" },
+    { "url": "heroku/ruby" }
   ],
   "formation": {
     "web": {
@@ -42,6 +42,11 @@
     "POSTMARK_API_TOKEN": {
       "description": "We recommend using Postmark for email delivery. To use it, add and configure a new server at `https://account.postmarkapp.com/servers`, fetch the API token from the \"API Tokens\" tab, and enter it here.",
       "required": false
+    },
+    "HIDE_THINGS": {
+      "description": "This ensures the Super Scaffolding templates don't show up in production.",
+      "generator": "secret",
+      "required": true
     }
   }
 }

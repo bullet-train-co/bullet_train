@@ -95,8 +95,8 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.565.0)
-    aws-sdk-core (3.129.0)
+    aws-partitions (1.570.0)
+    aws-sdk-core (3.130.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -111,14 +111,14 @@ GEM
     aws-sigv4 (1.4.0)
       aws-eventstream (~> 1, >= 1.0.2)
     aws_cf_signer (0.1.3)
-    bcrypt (3.1.16)
+    bcrypt (3.1.17)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.33)
+    bullet_train (1.0.41)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -161,8 +161,8 @@ GEM
       rails (>= 6.0.0)
     bullet_train-has_uuid (1.0.2)
       rails (>= 7.0.0)
-    bullet_train-incoming_webhooks (1.0.0)
-      rails (>= 7.0.0)
+    bullet_train-incoming_webhooks (1.0.1)
+      rails (>= 6.0.0)
     bullet_train-integrations (1.0.0)
       rails (>= 6.0.0)
     bullet_train-integrations-stripe (1.0.3)
@@ -180,22 +180,22 @@ GEM
       active_hash
       activesupport
       cancancan
-    bullet_train-scope_questions (1.0.0)
-      rails (>= 7.0.0)
+    bullet_train-scope_questions (1.0.2)
+      rails (>= 6.0.0)
     bullet_train-scope_validator (1.0.2)
     bullet_train-sortable (1.0.2)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.0.17)
+    bullet_train-super_scaffolding (1.0.21)
       indefinite_article
       rails (>= 6.0.0)
     bullet_train-themes (1.0.6)
       rails (>= 7.0.0)
-    bullet_train-themes-light (1.0.10)
+    bullet_train-themes-light (1.0.11)
       bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
-    bullet_train-themes-tailwind_css (1.0.6)
+    bullet_train-themes-tailwind_css (1.0.8)
       bullet_train-themes
       rails (>= 7.0.0)
     cable_ready (5.0.0.pre8)
@@ -223,7 +223,7 @@ GEM
       sexp_processor
     coderay (1.1.3)
     commonmarker (0.23.4)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crass (1.0.6)
     css_parser (1.11.0)
@@ -271,7 +271,7 @@ GEM
       charlock_holmes
       email_reply_parser (~> 0.5.9)
       mail
-    factory_bot (6.2.0)
+    factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
@@ -342,13 +342,13 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    knapsack_pro (3.2.0)
+    knapsack_pro (3.2.1)
       rake
     launchy (2.5.0)
       addressable (~> 2.7)
-    letter_opener (1.8.0)
+    letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
-    loofah (2.14.0)
+    loofah (2.15.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     magic_test (0.0.9)
@@ -422,10 +422,10 @@ GEM
       omniauth (~> 1.3)
       omniauth-oauth2 (~> 1.4)
     orm_adapter (0.5.0)
-    parallel (1.21.0)
+    parallel (1.22.0)
     parser (3.1.1.0)
       ast (~> 2.4.1)
-    pg (1.3.3)
+    pg (1.3.4)
     phonelib (0.6.57)
     possessive (1.0.1)
     postmark (1.22.0)
@@ -510,18 +510,18 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
-    rubocop (1.25.1)
+    rubocop (1.26.0)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml
-      rubocop-ast (>= 1.15.1, < 2.0)
+      rubocop-ast (>= 1.16.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.16.0)
       parser (>= 3.1.1.0)
-    rubocop-performance (1.13.2)
+    rubocop-performance (1.13.3)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
@@ -531,6 +531,17 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
+    sentry-rails (5.2.1)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 5.2.1)
+    sentry-ruby (5.2.1)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      sentry-ruby-core (= 5.2.1)
+    sentry-ruby-core (5.2.1)
+      concurrent-ruby
+    sentry-sidekiq (5.2.1)
+      sentry-ruby-core (~> 5.2.1)
+      sidekiq (>= 3.0)
     sexp_processor (4.16.0)
     sidekiq (6.4.1)
       connection_pool (>= 2.2.2)
@@ -545,12 +556,12 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    standard (1.7.2)
-      rubocop (= 1.25.1)
-      rubocop-performance (= 1.13.2)
+    standard (1.9.0)
+      rubocop (= 1.26.0)
+      rubocop-performance (= 1.13.3)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
-    stripe (5.45.0)
+    stripe (5.46.0)
     strscan (3.0.1)
     thor (1.2.1)
     thread-local (1.1.0)
@@ -563,7 +574,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.8)
+    unf_ext (0.0.8.1)
     unicode-display_width (2.1.0)
     valid_email (0.1.4)
       activemodel
@@ -629,6 +640,9 @@ DEPENDENCIES
   rails_best_practices
   redis (~> 4.0)
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
+  sentry-sidekiq
   sprockets-rails
   standard
   stimulus-rails
