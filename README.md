@@ -1,6 +1,8 @@
 # Bullet Train Application Template
 If you're new to Bullet Train, start with the [Bullet Train Developer Documentation](https://bullettrain.co/docs) and the [Getting Started](https://bullettrain.co/docs/getting-started) guide.
 
+You can also join Bullet Train's Discord channel –– [here is your invite](https://discord.gg/bullettrain)
+
 ## Building a New Application with Bullet Train
 If you're building a new application with Bullet Train, you don't want to "Fork" the template repository on GitHub. Instead, you should:
 
