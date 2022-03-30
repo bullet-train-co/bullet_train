@@ -8,6 +8,11 @@ def system!(*args)
   system(*args) || abort("\n== Command #{args} failed ==")
 end
 
+# TODO: We should have one unified place for colorize methods.
+def red(string)
+  "\e[1;31m#{string}\e[0m"
+end
+
 FileUtils.chdir APP_ROOT do
   # This script is a way to set up or update your development environment automatically.
   # This script is idempotent, so that you can run it at any time and get an expectable outcome.
@@ -35,6 +40,16 @@ FileUtils.chdir APP_ROOT do
     puts "`config/application.yml` already exists!"
   else
     system! "cp config/application.yml.example config/application.yml"
+  end
+
+  puts "\n== Checking Redis connection =="
+  result = `redis-cli info clients`
+  if result.include?("connected_clients")
+    connected_clients = result.scan(/connected_clients:\d+/).first.split(":").last
+    puts "You are connected to #{connected_clients} server#{"s" if connected_clients.to_i > 1}."
+  else
+    puts red("You are not connected to a Redis server. Please run `$ redis-server` in another tab and run bin/setup again.")
+    exit 1
   end
 
   puts "\n== Restarting application server =="
