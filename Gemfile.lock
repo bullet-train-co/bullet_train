@@ -191,7 +191,7 @@ GEM
     bullet_train-super_scaffolding (1.0.22)
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.7)
+    bullet_train-themes (1.0.8)
       rails (>= 7.0.0)
     bullet_train-themes-light (1.0.11)
       bullet_train-themes-tailwind_css
@@ -610,7 +610,6 @@ DEPENDENCIES
   bootsnap
   bullet_train
   bullet_train-api
-  bullet_train-fields
   bullet_train-incoming_webhooks
   bullet_train-integrations
   bullet_train-integrations-stripe
@@ -619,7 +618,6 @@ DEPENDENCIES
   bullet_train-scope_questions
   bullet_train-sortable
   bullet_train-super_scaffolding
-  bullet_train-themes
   bullet_train-themes-light
   capybara
   capybara-email
