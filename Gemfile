@@ -104,6 +104,7 @@ gem "bullet_train-obfuscates_id"
 # source "https://BULLET_TRAIN_PRO_TOKEN@gem.fury.io/bullettrain" do
 #   gem "bullet_train-action_models"
 #   gem "bullet_train-conversations"
+#   gem "bullet_train-audit_logs"
 # end
 
 group :development do
