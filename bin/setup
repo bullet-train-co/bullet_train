@@ -37,6 +37,9 @@ FileUtils.chdir APP_ROOT do
     system! "cp config/application.yml.example config/application.yml"
   end
 
+  puts "\n== Installing foreman =="
+  system! "gem install foreman"
+
   puts "\n== Restarting application server =="
   system! "bin/rails restart"
 end
