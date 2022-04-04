@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/brentd/xray-rails.git
-  revision: 4f6cca0cd01417d6be6a774314f941d52c660e4d
-  ref: 4f6cca0
-  specs:
-    xray-rails (0.3.2)
-      rails (>= 3.1.0)
-
-GIT
   remote: https://github.com/bullet-train-co/active_hash.git
   revision: a6628bc65e7c099ec9428c2bfe1e292ef01f1ef1
   specs:
@@ -654,7 +646,6 @@ DEPENDENCIES
   web-console
   webdrivers
   wine_bouncer!
-  xray-rails!
 
 RUBY VERSION
    ruby 3.1.1p18
