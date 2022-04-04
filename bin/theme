@@ -23,13 +23,10 @@ exit 1 if gem_path.include?("Could not find gem") || gem_path.empty?
 file_path = case file_type
 when "tailwind-config"
   "/tailwind.#{theme}.config.js"
-  # TODO Check that the file actually exists before reporting it back?
 when "tailwind-stylesheet"
   "/app/assets/stylesheets/#{theme}.tailwind.css"
-  # TODO Check that the file actually exists before reporting it back?
 when "javascript"
   "/app/javascript/application.#{theme}.js"
-  # TODO Check that the file actually exists before reporting it back?
 else
   raise "Sorry, we couldn't recognize the file you're looking for: \"#{file_type}\""
 end
