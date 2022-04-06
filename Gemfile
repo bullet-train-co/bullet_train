@@ -119,9 +119,6 @@ group :development do
 end
 
 group :test do
-  # Make it easier to test things related to time.
-  gem "timecop"
-
   # Helps smooth over flakiness in system tests.
   gem "minitest-retry"
 

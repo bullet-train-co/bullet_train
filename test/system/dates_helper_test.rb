@@ -36,18 +36,16 @@ class DatesHelperTest < ApplicationSystemTestCase
       assert page.has_text? "Today at #{time.strftime("%l:%M %p").strip}"
 
       # Assert yesterday's date is displayed correctly.
-      Timecop.travel(time + 1.day)
+      travel_to time + 1.day
       visit current_url # Refresh the page
       assert page.has_text? "Yesterday at #{(time).strftime("%l:%M %p").strip}"
 
       # Assert the month and day is shown for anything before then.
-      Timecop.travel(time + 2.days)
+      travel_to time + 2.days
       visit current_url
       assert page.has_text? "#{time.strftime("%B %-d").strip} at #{time.strftime("%l:%M %p").strip}"
 
       # TODO: Write test for a user with a different time zone
-
-      Timecop.return
     end
   end
 end

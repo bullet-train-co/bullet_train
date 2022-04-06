@@ -557,7 +557,6 @@ GEM
     strscan (3.0.1)
     thor (1.2.1)
     thread-local (1.1.0)
-    timecop (0.9.5)
     timeout (0.2.0)
     turbo-rails (1.0.1)
       actionpack (>= 6.0.0)
@@ -638,7 +637,6 @@ DEPENDENCIES
   sprockets-rails
   standard
   stimulus-rails
-  timecop
   turbo-rails
   tzinfo-data
   web-console
