@@ -9,6 +9,9 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import "./channels"
 
+// React Components
+import "./react/index.js"
+
 Rails.start()
 ActiveStorage.start()
 
