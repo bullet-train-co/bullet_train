@@ -57,7 +57,10 @@ if actual_ruby.include?(required_ruby)
   puts green(message)
 else
   puts red(message)
-  exit
+  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y]"
+  if input.downcase[0] == "n"
+    exit
+  end
 end
 
 required_node = `cat ./.nvmrc`.strip
@@ -67,7 +70,10 @@ if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
   puts green(message)
 else
   puts red(message)
-  exit
+  input = ask "Try proceeding with Node #{actual_node} anyway? [y]"
+  if input.downcase[0] == "n"
+    exit
+  end
 end
 
 if `git remote | grep bullet-train`.strip.length > 0
