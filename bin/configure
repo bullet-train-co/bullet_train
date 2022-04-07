@@ -118,6 +118,13 @@ if not_installed?("icu4c")
   end
 end
 
+if `yarn -v 2> /dev/null`.length > 0
+  puts green "Yarn is installed."
+else
+  puts red "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install ."
+  exit
+end
+
 if `git remote | grep bullet-train`.strip.length > 0
   puts yellow "Repository already has a \`bullet-train`\ remote."
 else
