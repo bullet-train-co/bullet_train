@@ -178,10 +178,12 @@ variable = ActiveSupport::Inflector.parameterize(human, separator: '_')
 environment_variable = ActiveSupport::Inflector.parameterize(human, separator: '_').upcase
 class_name = variable.classify
 kebab_case = variable.tr("_", "-")
+connected_name = variable.gsub("_", "") # i.e. `bullettrain` as opposed to `bullet_train`
 
 puts ""
 puts green "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase."
 replace_in_file("./.circleci/config.yml", "untitled_application", variable)
+replace_in_file("./config/application.rb", "untitled_application", connected_name)
 replace_in_file("./config/database.yml", "untitled_application", variable)
 replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
 replace_in_file("./config/cable.yml", "untitled_application", variable)

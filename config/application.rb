@@ -25,7 +25,7 @@ module UntitledApplication
     config.i18n.default_locale = config.i18n.available_locales.first
 
     # This actually doesn't appear to work.
-    # TODO We should update `bullettrain` here during `bin/set-name` and then make the at-mentions stuff configurable.
-    config.action_view.sanitized_allowed_protocols = ["http", "bullettrain"]
+    # TODO We should make the at-mentions stuff configurable.
+    config.action_view.sanitized_allowed_protocols = ["http", "untitled_application"]
   end
 end
