@@ -67,9 +67,6 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
-  # TODO Not sure why we need to add this when it's not in the Gemfile of a new Rails application.
-  gem "foreman"
 end
 
 group :test do
@@ -116,6 +113,9 @@ group :development do
 
   # Similar to standard for correcting format.
   gem "rails_best_practices"
+
+  # Rails doesn't include this by default, but we depend on it.
+  gem "foreman"
 end
 
 group :test do
