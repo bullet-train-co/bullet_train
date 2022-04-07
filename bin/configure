@@ -49,6 +49,10 @@ def ask(string)
   return gets.strip
 end
 
+def not_installed?(package)
+  `brew info #{package} | grep "Not installed"`.strip.length > 0
+end
+
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
 required_ruby = `cat ./.ruby-version`.strip
 actual_ruby = `ruby -v`.strip
@@ -71,6 +75,44 @@ if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
 else
   puts red(message)
   input = ask "Try proceeding with Node #{actual_node} anyway? [y]"
+  if input.downcase[0] == "n"
+    exit
+  end
+end
+
+if `brew info 2> /dev/null`.length > 0
+  puts green "Homebrew is installed."
+else
+  puts red "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it."
+  input = ask "Try proceeding without Homebrew?"
+  if input.downcase[0] == "n"
+    exit
+  end
+end
+
+if not_installed?("postgresql@13")
+  puts red "PostgreSQL 13 is not installed via Homebrew. Try running `brew install postgresql@13`."
+  input = ask "Try proceeding without PostgreSQL 13?"
+  if input.downcase[0] == "n"
+    exit
+  end
+else
+  puts green "PostgreSQL 13 is installed via Homebrew."
+end
+
+if not_installed?("redis")
+  puts red "Redis is not installed via Homebrew. Try running `brew install redis`."
+  input = ask "Try proceeding without Redis?"
+  if input.downcase[0] == "n"
+    exit
+  end
+else
+  puts green "Redis is installed via Homebrew."
+end
+
+if not_installed?("icu4c")
+  puts red "icu4c is not installed via Homebrew. Try running `brew install icu4c`."
+  input = ask "Try proceeding without icu4c?"
   if input.downcase[0] == "n"
     exit
   end
