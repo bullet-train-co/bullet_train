@@ -2,5 +2,6 @@
 require "api"
 require "api/v1"
 require "api/v1/application_serializer"
+require "api/model_parser"
 
-GrapeSwagger.model_parsers.register(GrapeSwagger::Jsonapi::Parser, Api::V1::ApplicationSerializer)
+GrapeSwagger.model_parsers.register(Api::ModelParser, Api::V1::ApplicationSerializer)
