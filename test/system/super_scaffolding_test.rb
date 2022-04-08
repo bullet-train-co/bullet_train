@@ -221,15 +221,15 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     visit account_team_path(@jane.current_team)
 
     assert page.has_content?("Add New Color")
-    click_on "Add New Color Picker Value"
+    click_on "Add New Color"
 
     assert page.has_content?("Color Picker Value")
-    color_picker_buttons = find(".button-color")
+    color_picker_buttons = all(".button-color")
     assert_equal color_picker_buttons.size, 8
     color_picker_buttons.first.click
-    click_on "Create Color Picker Value"
+    click_on "Create Color"
 
-    assert page.has_content?("Color Picker Value was successfully created.")
+    assert page.has_content?("Color was successfully created.")
     # #9C73D2 is the first default color in the color picker's locale.
     assert_equal Color.first.color_picker_value, "#9C73D2"
     assert page.has_content?("#9C73D2")
