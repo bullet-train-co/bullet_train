@@ -174,8 +174,8 @@ stream "yarn install"
 require "active_support/inflector"
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
-variable = ActiveSupport::Inflector.parameterize(human, separator: '_')
-environment_variable = ActiveSupport::Inflector.parameterize(human, separator: '_').upcase
+variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
+environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
 class_name = variable.classify
 kebab_case = variable.tr("_", "-")
 connected_name = variable.gsub("_", "") # i.e. `bullettrain` as opposed to `bullet_train`
