@@ -36,8 +36,8 @@ bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project
 bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
 
 # Setup to test the color picker
-rails g model Color team:references color_hex:string
-bin/super-scaffold crud Color Team color_hex:color_picker
+rails g model Color team:references color_picker_value:string
+bin/super-scaffold crud Color Team color_picker_value:color_picker
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
