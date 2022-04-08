@@ -199,6 +199,8 @@ puts ""
 puts green "Moving `./README.example.md` to `./README.md`."
 puts `mv ./README.example.md ./README.md`.chomp
 
+puts `rm .github/FUNDING.yml`.chomp
+
 # We can only do this after the README is moved into place.
 replace_in_file("./README.md", "Untitled Application", human)
 
