@@ -10,6 +10,6 @@ class ResolverSystemTest < ApplicationSystemTestCase
   end
 
   test "`bin/resolve` can resolve `shared/box`" do
-    assert `bin/resolve shared/box`.include?("app/views/themes/light/_box.html.erb")
+    assert `ENABLE_VIEW_ANNOTATION=1 bin/resolve shared/box`.include?("app/views/themes/light/_box.html.erb")
   end
 end
