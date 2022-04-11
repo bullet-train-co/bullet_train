@@ -224,11 +224,14 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
     # Text Field partial
     fill_in "Test Text Field", with: "Test Text"
+    # Boolean Button Partial
+    click_on "No"
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
 
     click_on "Test Text"
     assert page.has_content?("Test Text")
+    assert page.has_content?("No")
   end
 end
