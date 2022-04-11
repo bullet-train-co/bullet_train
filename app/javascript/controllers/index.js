@@ -19,7 +19,7 @@ application.register('reveal', RevealController)
 
 const controllers = Object.keys(controllersContext).map((filename) => ({
   identifier: identifierForContextKey(filename),
-  controllerConstructor: context[filename] }))
+  controllerConstructor: controllersContext[filename] }))
 
 application.load(controllers)
 
