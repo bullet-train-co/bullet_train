@@ -239,5 +239,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     assert page.has_content?("Test Text")
     assert page.has_content?("No")
     assert page.has_content?("One")
+    assert page.has_content?(Date.today.strftime("%B %d")) # i.e. - April 7
   end
 end
