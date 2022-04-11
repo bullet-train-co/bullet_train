@@ -212,4 +212,23 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert page.has_content? "One and Two"
     end
   end
+
+  test "super scaffolded partials function properly" do
+    display_details = @@test_devices[:macbook_pro_15_inch]
+    resize_for(display_details)
+
+    login_as(@jane, scope: :user)
+    visit account_team_path(@jane.current_team)
+
+    click_on "Add New First Test Model"
+
+    # Text Field partial
+    fill_in "Test Text Field", with: "Test Text"
+
+    click_on "Create First Test Model"
+    assert page.has_content?("First Test Model was successfully created.")
+
+    click_on "Test Text"
+    assert page.has_content?("Test Text")
+  end
 end
