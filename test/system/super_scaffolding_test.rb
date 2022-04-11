@@ -233,6 +233,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     find(".daterangepicker").click_on("apply") # Chooses today's date.
     find("#first_test_model_test_date_time").click
     find(".daterangepicker").click_on("apply")
+    attach_file("test/support/foo.txt", make_visible: true)
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
@@ -244,5 +245,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     assert page.has_content?(Date.today.strftime("%B %d")) # i.e. - April 7
     refute_nil FirstTestModel.first.test_date_time
     assert_equal FirstTestModel.first.test_date_time.class, ActiveSupport::TimeWithZone
+    assert page.has_content?("#ActiveStorage::Attached::One")
   end
 end
