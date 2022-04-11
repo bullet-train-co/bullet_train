@@ -228,11 +228,13 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     click_on "No"
     # Single Button partial
     find("#first_test_model_test_single_button_one+button", visible: :all).click
-    # Date Partial
+    # Date partial
     find("#first_test_model_test_date").click
     find(".daterangepicker").click_on("apply") # Chooses today's date.
+    # DateTime partial
     find("#first_test_model_test_date_time").click
     find(".daterangepicker").click_on("apply")
+    # File partial
     attach_file("test/support/foo.txt", make_visible: true)
 
     click_on "Create First Test Model"
