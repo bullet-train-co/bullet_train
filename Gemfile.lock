@@ -280,7 +280,7 @@ GEM
     faraday (2.2.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (2.0.1)
+    faraday-net_http (2.0.2)
     fastimage (2.2.6)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
