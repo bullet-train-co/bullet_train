@@ -228,6 +228,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     click_on "No"
     # Single Button partial
     find("#first_test_model_test_single_button_one+button", visible: :all).click
+    # Date Partial
+    find("#first_test_model_test_date").click
+    find(".daterangepicker").click_on("apply") # Chooses today's date.
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
