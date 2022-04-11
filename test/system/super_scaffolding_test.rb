@@ -224,8 +224,10 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
     # Text Field partial
     fill_in "Test Text Field", with: "Test Text"
-    # Boolean Button Partial
+    # Boolean Button partial
     click_on "No"
+    # Single Button partial
+    find("#first_test_model_test_single_button_one+button", visible: :all).click
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
@@ -233,5 +235,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     click_on "Test Text"
     assert page.has_content?("Test Text")
     assert page.has_content?("No")
+    assert page.has_content?("One")
   end
 end
