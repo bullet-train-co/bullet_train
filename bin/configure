@@ -129,8 +129,8 @@ puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"
 puts "you can opt out of this step and set up the repository manually."
 puts "(If you're not sure, we suggest going with GitHub)"
-input = ask "Continue setting up with GitHub? [y/n]"
-if input.downcase[0] == "y"
+skip_github = ask "Continue setting up with GitHub? [y/n]"
+if skip_github.downcase[0] == "y"
   if `git remote | grep bullet-train`.strip.length > 0
     puts yellow "Repository already has a \`bullet-train`\ remote."
   else
@@ -211,10 +211,15 @@ puts `rm .github/FUNDING.yml`.chomp
 # We can only do this after the README is moved into place.
 replace_in_file("./README.md", "Untitled Application", human)
 
-puts green "Committing all these changes to the repository."
-stream "git add -A"
-stream "git commit -m \"Run configuration script.\""
-stream "git push origin #{local_branch}:main"
+if skip_github
+  puts ""
+  puts yellow("Make sure you save your changes with Git.")
+else
+  puts green "Committing all these changes to the repository."
+  stream "git add -A"
+  stream "git commit -m \"Run configuration script.\""
+  stream "git push origin #{local_branch}:main"
+end
 
 puts ""
 puts yellow "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!"
