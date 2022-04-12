@@ -236,6 +236,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     find(".daterangepicker").click_on("apply")
     # File partial
     attach_file("test/support/foo.txt", make_visible: true)
+    # Option value
+    choose("One")
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
@@ -249,5 +251,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     assert_equal FirstTestModel.first.test_date_time.class, ActiveSupport::TimeWithZone
     refute_nil FirstTestModel.first.test_file
     assert_equal FirstTestModel.first.test_file.class, ActiveStorage::Attached::One
+    refute_nil FirstTestModel.first.test_option
+    assert_equal FirstModel.first.test_option, "One"
   end
 end

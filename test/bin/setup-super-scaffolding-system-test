@@ -42,14 +42,16 @@ rails g model FirstTestModel team:references \
   test_single_button:string \
   test_date:date \
   test_date_time:datetime \
-  test_file:attachment
+  test_file:attachment \
+  test_option:string
 bin/super-scaffold crud FirstTestModel Team \
   test_text_field:text_field \
   test_boolean:boolean \
   test_single_button:buttons \
   test_date:date_field\
   test_date_time:date_and_time_field \
-  test_file:file_field
+  test_file:file_field \
+  test_option:options
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
