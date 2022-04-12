@@ -252,6 +252,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     refute_nil FirstTestModel.first.test_file
     assert_equal FirstTestModel.first.test_file.class, ActiveStorage::Attached::One
     refute_nil FirstTestModel.first.test_option
-    assert_equal FirstModel.first.test_option, "One"
+    assert_equal FirstTestModel.first.test_option, "one"
   end
 end
