@@ -253,8 +253,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     # Single Button
     assert page.has_content?("One")
     # Multiple Buttons
-    refute_nil FirstTestModel.test_multiple_buttons
-    assert_equal FirstTestModel.test_multiple_buttons, ["two", "three"]
+    refute_nil FirstTestModel.first.test_multiple_buttons
+    assert_equal FirstTestModel.first.test_multiple_buttons, ["two", "three"]
     # Date
     assert page.has_content?(Date.today.strftime("%B %d")) # i.e. - April 7
     # DateTime
