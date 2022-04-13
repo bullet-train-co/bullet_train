@@ -248,6 +248,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     # check("One")
     # check("Three")
 
+    # Password partial
+    fill_in "Test Password", with: "testpassword123"
+
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
 
@@ -275,5 +278,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     # Multiple Options
     # refute_nil FirstTestModel.first.test_options
     # assert_equal FirstTestModel.first.test_options, ["one", "three"]
+    # Password
+    refute_nil FirstTestModel.first.test_password
+    assert_equal FirstTestModel.first.test_password, "testpassword123"
   end
 end
