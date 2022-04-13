@@ -239,8 +239,11 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     find(".daterangepicker").click_on("apply")
     # File partial
     attach_file("test/support/foo.txt", make_visible: true)
-    # Single Option value
+    # Single Option partial
     choose("One")
+    # Multiple Option partial
+    check("One")
+    check("Three")
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
@@ -266,5 +269,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     # Single Option
     refute_nil FirstTestModel.first.test_option
     assert_equal FirstTestModel.first.test_option, "one"
+    # Multiple Options
+    refute_nil FirstTestModel.first.test_options
+    assert_equal FirstTestModel.first.test_options, ["one", "three"]
   end
 end
