@@ -250,6 +250,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
     # Password partial
     fill_in "Test Password", with: "testpassword123"
+    # Phone Field Partial
+    fill_in "Test Phone Field", with: "(000)000-0000"
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
@@ -281,5 +283,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     # Password
     refute_nil FirstTestModel.first.test_password
     assert_equal FirstTestModel.first.test_password, "testpassword123"
+    # Phone Field
+    refute_nil FirstTestModel.first.test_phone_field
+    assert_equal FirstTestModel.first.test_phone_field, "(000)000-0000"
   end
 end
