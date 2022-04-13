@@ -228,6 +228,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     click_on "No"
     # Single Button partial
     find("#first_test_model_test_single_button_one+button", visible: :all).click
+    # Multiple Button partial
+    find("#first_test_model_test_multiple_buttons_two+button", visible: :all).click
+    find("#first_test_model_test_multiple_buttons_three+button", visible: :all).click
     # Date partial
     find("#first_test_model_test_date").click
     find(".daterangepicker").click_on("apply") # Chooses today's date.
@@ -236,21 +239,31 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     find(".daterangepicker").click_on("apply")
     # File partial
     attach_file("test/support/foo.txt", make_visible: true)
-    # Option value
+    # Single Option value
     choose("One")
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
 
+    # Text field
     click_on "Test Text"
     assert page.has_content?("Test Text")
+    # Boolean Button
     assert page.has_content?("No")
+    # Single Button
     assert page.has_content?("One")
+    # Multiple Buttons
+    refute_nil FirstTestModel.test_multiple_buttons
+    assert_equal FirstTestModel.test_multiple_buttons, ["two", "three"]
+    # Date
     assert page.has_content?(Date.today.strftime("%B %d")) # i.e. - April 7
+    # DateTime
     refute_nil FirstTestModel.first.test_date_time
     assert_equal FirstTestModel.first.test_date_time.class, ActiveSupport::TimeWithZone
+    # File
     refute_nil FirstTestModel.first.test_file
     assert_equal FirstTestModel.first.test_file.class, ActiveStorage::Attached::One
+    # Single Option
     refute_nil FirstTestModel.first.test_option
     assert_equal FirstTestModel.first.test_option, "one"
   end
