@@ -223,7 +223,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     click_on "Add New Partial Test"
 
     # Text Field partial
-    fill_in "Test Text Field", with: "Test Text"
+    fill_in "Text Field Test", with: "Test Text"
     # Boolean Button partial
     click_on "No"
     # Single Button partial
@@ -249,9 +249,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     # check("Three")
 
     # Password partial
-    fill_in "Test Password", with: "testpassword123"
+    fill_in "Password Test", with: "testpassword123"
     # Phone Field Partial
-    fill_in "Test Phone Field", with: "(000)000-0000"
+    fill_in "Phone Field Test", with: "(000)000-0000"
     # Super Select partial
     # Not using #select2_select here since we need to enable `other_options: {search: true}` to do so.
     find("#partial_test_super_select_test").find("option[value='three']").select_option
@@ -259,7 +259,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     find("#partial_test_multiple_super_select_test").find("option[value='one']").select_option
     find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
     # Text Area partial
-    fill_in "Test Text Area", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 
     click_on "Create Partial Test"
     assert page.has_content?("Partial Test was successfully created.")
