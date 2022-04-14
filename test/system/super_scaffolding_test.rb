@@ -213,96 +213,98 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     end
   end
 
-  test "super scaffolded partials function properly" do
-    display_details = @@test_devices[:macbook_pro_15_inch]
-    resize_for(display_details)
+  if defined?(PartialTest)
+    test "super scaffolded partials function properly" do
+      display_details = @@test_devices[:macbook_pro_15_inch]
+      resize_for(display_details)
 
-    login_as(@jane, scope: :user)
-    visit account_team_path(@jane.current_team)
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
 
-    click_on "Add New Partial Test"
+      click_on "Add New Partial Test"
 
-    # Text Field partial
-    fill_in "Text Field Test", with: "Test Text"
-    # Boolean Button partial
-    click_on "No"
-    # Single Button partial
-    find("#partial_test_single_button_test_one+button", visible: :all).click
-    # Multiple Button partial
-    find("#partial_test_multiple_buttons_test_two+button", visible: :all).click
-    find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
-    # Date partial
-    find("#partial_test_date_test").click
-    find(".daterangepicker").click_on("apply") # Chooses today's date.
-    # DateTime partial
-    find("#partial_test_date_time_test").click
-    find(".daterangepicker").click_on("apply")
-    # File partial
-    attach_file("test/support/foo.txt", make_visible: true)
-    # Single Option partial
-    choose("One")
+      # Text Field partial
+      fill_in "Text Field Test", with: "Test Text"
+      # Boolean Button partial
+      click_on "No"
+      # Single Button partial
+      find("#partial_test_single_button_test_one+button", visible: :all).click
+      # Multiple Button partial
+      find("#partial_test_multiple_buttons_test_two+button", visible: :all).click
+      find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
+      # Date partial
+      find("#partial_test_date_test").click
+      find(".daterangepicker").click_on("apply") # Chooses today's date.
+      # DateTime partial
+      find("#partial_test_date_time_test").click
+      find(".daterangepicker").click_on("apply")
+      # File partial
+      attach_file("test/support/foo.txt", make_visible: true)
+      # Single Option partial
+      choose("One")
 
-    # TODO: We'll need to adjust bullet_train-themes-tailwind_css to
-    # make this one pass, will come back to this one soon.
-    # Multiple Option partial
-    # check("One")
-    # check("Three")
+      # TODO: We'll need to adjust bullet_train-themes-tailwind_css to
+      # make this one pass, will come back to this one soon.
+      # Multiple Option partial
+      # check("One")
+      # check("Three")
 
-    # Password partial
-    fill_in "Password Test", with: "testpassword123"
-    # Phone Field Partial
-    fill_in "Phone Field Test", with: "(000)000-0000"
-    # Super Select partial
-    # Not using #select2_select here since we need to enable `other_options: {search: true}` to do so.
-    find("#partial_test_super_select_test").find("option[value='three']").select_option
-    # Multple Super Select Partial
-    find("#partial_test_multiple_super_select_test").find("option[value='one']").select_option
-    find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
-    # Text Area partial
-    fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # Password partial
+      fill_in "Password Test", with: "testpassword123"
+      # Phone Field Partial
+      fill_in "Phone Field Test", with: "(000)000-0000"
+      # Super Select partial
+      # Not using #select2_select here since we need to enable `other_options: {search: true}` to do so.
+      find("#partial_test_super_select_test").find("option[value='three']").select_option
+      # Multple Super Select Partial
+      find("#partial_test_multiple_super_select_test").find("option[value='one']").select_option
+      find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
+      # Text Area partial
+      fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 
-    click_on "Create Partial Test"
-    assert page.has_content?("Partial Test was successfully created.")
+      click_on "Create Partial Test"
+      assert page.has_content?("Partial Test was successfully created.")
 
-    # Text field
-    click_on "Test Text"
-    partial_test = PartialTest.first
-    assert page.has_content?("Test Text")
-    # Boolean Button
-    assert page.has_content?("No")
-    # Single Button
-    assert page.has_content?("One")
-    # Multiple Buttons
-    refute_nil partial_test.multiple_buttons_test
-    assert_equal partial_test.multiple_buttons_test, ["two", "three"]
-    # Date
-    assert page.has_content?(Date.today.strftime("%B %d")) # i.e. - April 7
-    # DateTime
-    refute_nil partial_test.date_time_test
-    assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
-    # File
-    refute_nil partial_test.file_test
-    assert_equal partial_test.file_test.class, ActiveStorage::Attached::One
-    # Single Option
-    refute_nil partial_test.option_test
-    assert_equal partial_test.option_test, "one"
-    # Multiple Options
-    # refute_nil partial_test.options_test
-    # assert_equal partial_test.options_test, ["one", "three"]
-    # Password
-    refute_nil partial_test.password_test
-    assert_equal partial_test.password_test, "testpassword123"
-    # Phone Field
-    refute_nil partial_test.phone_field_test
-    assert_equal partial_test.phone_field_test, "(000)000-0000"
-    # Super Select
-    refute_nil partial_test.super_select_test
-    assert_equal partial_test.super_select_test, "three"
-    # Multiple Super Select
-    refute_nil partial_test.multiple_super_select_test
-    assert_equal partial_test.multiple_super_select_test, ["one", "two"]
-    # Text Area
-    refute_nil partial_test.text_area_test
-    assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # Text field
+      click_on "Test Text"
+      partial_test = PartialTest.first
+      assert page.has_content?("Test Text")
+      # Boolean Button
+      assert page.has_content?("No")
+      # Single Button
+      assert page.has_content?("One")
+      # Multiple Buttons
+      refute_nil partial_test.multiple_buttons_test
+      assert_equal partial_test.multiple_buttons_test, ["two", "three"]
+      # Date
+      assert page.has_content?(Date.today.strftime("%B %d")) # i.e. - April 7
+      # DateTime
+      refute_nil partial_test.date_time_test
+      assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
+      # File
+      refute_nil partial_test.file_test
+      assert_equal partial_test.file_test.class, ActiveStorage::Attached::One
+      # Single Option
+      refute_nil partial_test.option_test
+      assert_equal partial_test.option_test, "one"
+      # Multiple Options
+      # refute_nil partial_test.options_test
+      # assert_equal partial_test.options_test, ["one", "three"]
+      # Password
+      refute_nil partial_test.password_test
+      assert_equal partial_test.password_test, "testpassword123"
+      # Phone Field
+      refute_nil partial_test.phone_field_test
+      assert_equal partial_test.phone_field_test, "(000)000-0000"
+      # Super Select
+      refute_nil partial_test.super_select_test
+      assert_equal partial_test.super_select_test, "three"
+      # Multiple Super Select
+      refute_nil partial_test.multiple_super_select_test
+      assert_equal partial_test.multiple_super_select_test, ["one", "two"]
+      # Text Area
+      refute_nil partial_test.text_area_test
+      assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    end
   end
 end
