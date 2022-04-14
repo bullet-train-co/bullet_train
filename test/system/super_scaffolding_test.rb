@@ -220,22 +220,22 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     login_as(@jane, scope: :user)
     visit account_team_path(@jane.current_team)
 
-    click_on "Add New First Test Model"
+    click_on "Add New Partial Test"
 
     # Text Field partial
     fill_in "Test Text Field", with: "Test Text"
     # Boolean Button partial
     click_on "No"
     # Single Button partial
-    find("#first_test_model_test_single_button_one+button", visible: :all).click
+    find("#partial_test_single_button_test_one+button", visible: :all).click
     # Multiple Button partial
-    find("#first_test_model_test_multiple_buttons_two+button", visible: :all).click
-    find("#first_test_model_test_multiple_buttons_three+button", visible: :all).click
+    find("#partial_test_multiple_buttons_test_two+button", visible: :all).click
+    find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
     # Date partial
-    find("#first_test_model_test_date").click
+    find("#partial_test_date_test").click
     find(".daterangepicker").click_on("apply") # Chooses today's date.
     # DateTime partial
-    find("#first_test_model_test_date_time").click
+    find("#partial_test_date_time_test").click
     find(".daterangepicker").click_on("apply")
     # File partial
     attach_file("test/support/foo.txt", make_visible: true)
@@ -254,54 +254,55 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     fill_in "Test Phone Field", with: "(000)000-0000"
     # Super Select partial
     # Not using #select2_select here since we need to enable `other_options: {search: true}` to do so.
-    find("#first_test_model_test_super_select").find("option[value='three']").select_option
+    find("#partial_test_super_select_test").find("option[value='three']").select_option
     # Multple Super Select Partial
-    find("#first_test_model_test_multiple_super_select").find("option[value='one']").select_option
-    find("#first_test_model_test_multiple_super_select").find("option[value='two']").select_option
+    find("#partial_test_multiple_super_select_test").find("option[value='one']").select_option
+    find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
     # Text Area partial
     fill_in "Test Text Area", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 
-    click_on "Create First Test Model"
-    assert page.has_content?("First Test Model was successfully created.")
+    click_on "Create Partial Test"
+    assert page.has_content?("Partial Test was successfully created.")
 
     # Text field
     click_on "Test Text"
+    partial_test = PartialTest.first
     assert page.has_content?("Test Text")
     # Boolean Button
     assert page.has_content?("No")
     # Single Button
     assert page.has_content?("One")
     # Multiple Buttons
-    refute_nil FirstTestModel.first.test_multiple_buttons
-    assert_equal FirstTestModel.first.test_multiple_buttons, ["two", "three"]
+    refute_nil partial_test.multiple_buttons_test
+    assert_equal partial_test.multiple_buttons_test, ["two", "three"]
     # Date
     assert page.has_content?(Date.today.strftime("%B %d")) # i.e. - April 7
     # DateTime
-    refute_nil FirstTestModel.first.test_date_time
-    assert_equal FirstTestModel.first.test_date_time.class, ActiveSupport::TimeWithZone
+    refute_nil partial_test.date_time_test
+    assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
     # File
-    refute_nil FirstTestModel.first.test_file
-    assert_equal FirstTestModel.first.test_file.class, ActiveStorage::Attached::One
+    refute_nil partial_test.file_test
+    assert_equal partial_test.file_test.class, ActiveStorage::Attached::One
     # Single Option
-    refute_nil FirstTestModel.first.test_option
-    assert_equal FirstTestModel.first.test_option, "one"
+    refute_nil partial_test.option_test
+    assert_equal partial_test.option_test, "one"
     # Multiple Options
-    # refute_nil FirstTestModel.first.test_options
-    # assert_equal FirstTestModel.first.test_options, ["one", "three"]
+    # refute_nil partial_test.options_test
+    # assert_equal partial_test.options_test, ["one", "three"]
     # Password
-    refute_nil FirstTestModel.first.test_password
-    assert_equal FirstTestModel.first.test_password, "testpassword123"
+    refute_nil partial_test.password_test
+    assert_equal partial_test.password_test, "testpassword123"
     # Phone Field
-    refute_nil FirstTestModel.first.test_phone_field
-    assert_equal FirstTestModel.first.test_phone_field, "(000)000-0000"
+    refute_nil partial_test.phone_field_test
+    assert_equal partial_test.phone_field_test, "(000)000-0000"
     # Super Select
-    refute_nil FirstTestModel.first.test_super_select
-    assert_equal FirstTestModel.first.test_super_select, "three"
+    refute_nil partial_test.super_select_test
+    assert_equal partial_test.super_select_test, "three"
     # Multiple Super Select
-    refute_nil FirstTestModel.first.test_multiple_super_select
-    assert_equal FirstTestModel.first.test_multiple_super_select, ["one", "two"]
+    refute_nil partial_test.multiple_super_select_test
+    assert_equal partial_test.multiple_super_select_test, ["one", "two"]
     # Text Area
-    refute_nil FirstTestModel.first.test_text_area
-    assert_equal FirstTestModel.first.test_text_area, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    refute_nil partial_test.text_area_test
+    assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
   end
 end

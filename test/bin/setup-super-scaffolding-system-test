@@ -36,34 +36,34 @@ bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project
 bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
 
 # For testing partials.
-rails g model FirstTestModel team:references \
-  test_text_field:string \
-  test_boolean:boolean \
-  test_single_button:string \
-  test_multiple_buttons:jsonb \
-  test_date:date \
-  test_date_time:datetime \
-  test_file:attachment \
-  test_option:string \
-  test_password:string \
-  test_phone_field:string \
-  test_super_select:string \
-  test_multiple_super_select:jsonb \
-  test_text_area:text
-bin/super-scaffold crud FirstTestModel Team \
-  test_text_field:text_field \
-  test_boolean:boolean \
-  test_single_button:buttons \
-  test_multiple_buttons:buttons{multiple} \
-  test_date:date_field\
-  test_date_time:date_and_time_field \
-  test_file:file_field \
-  test_option:options \
-  test_password:password_field \
-  test_phone_field:phone_field \
-  test_super_select:super_select \
-  test_multiple_super_select:super_select{multiple} \
-  test_text_area:text_area
+rails g model PartialTest team:references \
+  text_field_test:string \
+  boolean_test:boolean \
+  single_button_test:string \
+  multiple_buttons_test:jsonb \
+  date_test:date \
+  date_time_test:datetime \
+  file_test:attachment \
+  option_test:string \
+  password_test:string \
+  phone_field_test:string \
+  super_select_test:string \
+  multiple_super_select_test:jsonb \
+  text_area_test:text
+bin/super-scaffold crud PartialTest Team \
+  text_field_test:text_field \
+  boolean_test:boolean \
+  single_button_test:buttons \
+  multiple_buttons_test:buttons{multiple} \
+  date_test:date_field\
+  date_time_test:date_and_time_field \
+  file_test:file_field \
+  option_test:options \
+  password_test:password_field \
+  phone_field_test:phone_field \
+  super_select_test:super_select \
+  multiple_super_select_test:super_select{multiple} \
+  text_area_test:text_area
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
