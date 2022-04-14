@@ -46,7 +46,8 @@ rails g model FirstTestModel team:references \
   test_file:attachment \
   test_option:string \
   test_password:string \
-  test_phone_field:string
+  test_phone_field:string \
+  test_super_select:string
 bin/super-scaffold crud FirstTestModel Team \
   test_text_field:text_field \
   test_boolean:boolean \
@@ -57,7 +58,8 @@ bin/super-scaffold crud FirstTestModel Team \
   test_file:file_field \
   test_option:options \
   test_password:password_field \
-  test_phone_field:phone_field
+  test_phone_field:phone_field \
+  test_super_select:super_select
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb

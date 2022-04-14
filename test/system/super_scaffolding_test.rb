@@ -252,6 +252,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     fill_in "Test Password", with: "testpassword123"
     # Phone Field Partial
     fill_in "Test Phone Field", with: "(000)000-0000"
+    # Super Select partial
+    # Not using #select2_select here since we need to enable `other_options: {search: true}` to do so.
+    find("option[value='three']").select_option
 
     click_on "Create First Test Model"
     assert page.has_content?("First Test Model was successfully created.")
@@ -286,5 +289,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     # Phone Field
     refute_nil FirstTestModel.first.test_phone_field
     assert_equal FirstTestModel.first.test_phone_field, "(000)000-0000"
+    # Super Select
+    refute_nil FirstTestModel.first.test_super_select
+    assert_equal FirstTestModel.first.test_super_select, "three"
   end
 end
