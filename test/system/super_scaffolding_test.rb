@@ -254,7 +254,10 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     fill_in "Test Phone Field", with: "(000)000-0000"
     # Super Select partial
     # Not using #select2_select here since we need to enable `other_options: {search: true}` to do so.
-    find("option[value='three']").select_option
+    find("#first_test_model_test_super_select").find("option[value='three']").select_option
+    # Multple Super Select Partial
+    find("#first_test_model_test_multiple_super_select").find("option[value='one']").select_option
+    find("#first_test_model_test_multiple_super_select").find("option[value='two']").select_option
     # Text Area partial
     fill_in "Test Text Area", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 
@@ -294,6 +297,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     # Super Select
     refute_nil FirstTestModel.first.test_super_select
     assert_equal FirstTestModel.first.test_super_select, "three"
+    # Multiple Super Select
+    refute_nil FirstTestModel.first.test_multiple_super_select
+    assert_equal FirstTestModel.first.test_multiple_super_select, ["one", "two"]
     # Text Area
     refute_nil FirstTestModel.first.test_text_area
     assert_equal FirstTestModel.first.test_text_area, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"

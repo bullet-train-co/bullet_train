@@ -48,6 +48,7 @@ rails g model FirstTestModel team:references \
   test_password:string \
   test_phone_field:string \
   test_super_select:string \
+  test_multiple_super_select:jsonb \
   test_text_area:text
 bin/super-scaffold crud FirstTestModel Team \
   test_text_field:text_field \
@@ -61,6 +62,7 @@ bin/super-scaffold crud FirstTestModel Team \
   test_password:password_field \
   test_phone_field:phone_field \
   test_super_select:super_select \
+  test_multiple_super_select:super_select{multiple} \
   test_text_area:text_area
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
