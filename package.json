@@ -4,7 +4,7 @@
   "dependencies": {
     "@bullet-train/bullet-train": "^0.2.4",
     "@bullet-train/bullet-train-sortable": "^0.1.2",
-    "@bullet-train/fields": "^0.1.2",
+    "@bullet-train/fields": "^0.1.7",
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@fullhuman/postcss-purgecss": "3.0.0",
     "@hotwired/turbo-rails": "^7.1.1",
