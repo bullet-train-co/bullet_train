@@ -87,7 +87,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.576.0)
+    aws-partitions (1.577.0)
     aws-sdk-core (3.130.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -110,7 +110,7 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.50)
+    bullet_train (1.0.51)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -160,7 +160,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-integrations (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.0.3)
+    bullet_train-integrations-stripe (1.0.6)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
@@ -182,7 +182,8 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.0)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.0.23)
+    bullet_train-super_scaffolding (1.0.24)
+      bullet_train
       indefinite_article
       rails (>= 6.0.0)
     bullet_train-themes (1.0.8)
