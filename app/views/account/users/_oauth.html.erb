@@ -1,0 +1,2 @@
+<%= render 'account/oauth/stripe_accounts/index', context: @user, stripe_accounts: @user.oauth_stripe_accounts if stripe_enabled? %>
+<% # 🚅 super scaffolding will insert new oauth providers above this line. %>

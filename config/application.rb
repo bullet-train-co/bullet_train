@@ -1,4 +1,5 @@
 require_relative "boot"
+require_relative "../lib/bullet_train"
 
 require "rails/all"
 
