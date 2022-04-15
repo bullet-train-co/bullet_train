@@ -1,0 +1,9 @@
+<% if any_oauth_enabled? %>
+  <% verb ||= 'Sign In' %>
+
+  <%= render 'account/shared/decision_line' %>
+  <div class="grid grid-cols-1 gap-2">
+    <%= render 'devise/shared/oauth/stripe', verb: verb if stripe_enabled? %>
+    <%# 🚅 super scaffolding will insert new oauth providers above this line. %>
+  </div>
+<% end %>
