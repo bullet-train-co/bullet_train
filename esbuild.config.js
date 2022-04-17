@@ -64,6 +64,7 @@ require("esbuild").build({
     ".jpg": "file",
     ".svg": "file",
     ".woff": "file",
+    ".woff2": "file",
     ".ttf": "file",
     ".eot": "file",
   },
