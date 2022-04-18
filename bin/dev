@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+bundle exec rake bt:link
+
 if ! command -v foreman &> /dev/null
 then
   echo "Installing foreman..."
