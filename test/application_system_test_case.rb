@@ -141,13 +141,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   # https://stackoverflow.com/a/50794401/2414273
   def assert_no_js_errors
-    last_timestamp = page.driver.browser.manage.logs.get(:browser)
+    last_timestamp = page.driver.browser.logs.get(:browser)
       .map(&:timestamp)
       .last || 0
 
     yield
 
-    errors = page.driver.browser.manage.logs.get(:browser)
+    errors = page.driver.browser.logs.get(:browser)
     errors = errors.reject { |e| e.timestamp > last_timestamp } if last_timestamp > 0
     errors = errors.reject { |e| e.level == "WARNING" }
 
