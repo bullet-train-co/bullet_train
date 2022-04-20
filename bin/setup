@@ -8,6 +8,12 @@ def system!(*args)
   system(*args) || abort("\n== Command #{args} failed ==")
 end
 
+def command?(name)
+  [name,
+   *ENV['PATH'].split(File::PATH_SEPARATOR).map {|p| File.join(p, name)}
+  ].find {|f| File.executable?(f)}
+end
+
 # TODO: We should have one unified place for colorize methods.
 def red(string)
   "\e[1;31m#{string}\e[0m"
@@ -17,6 +23,15 @@ FileUtils.chdir APP_ROOT do
   # This script is a way to set up or update your development environment automatically.
   # This script is idempotent, so that you can run it at any time and get an expectable outcome.
   # Add necessary setup steps to this file.
+
+  puts "== Checking dependencies =="
+  if command?("overmind")
+    puts "Overmind is already installed."
+  else
+    puts red "Overmind not found"
+    puts "We recommend installing overmind to run your application processes"
+    puts "Visit https://github.com/DarthSim/overmind#installation for more information."
+  end
 
   puts "== Installing dependencies =="
   system! "gem install bundler --conservative"
