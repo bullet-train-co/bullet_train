@@ -87,13 +87,13 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.577.0)
+    aws-partitions (1.578.0)
     aws-sdk-core (3.130.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-kms (1.55.0)
+    aws-sdk-kms (1.56.0)
       aws-sdk-core (~> 3, >= 3.127.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.113.0)
@@ -171,7 +171,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-outgoing_webhooks (1.0.4)
       rails (>= 7.0.0)
-    bullet_train-roles (0.1.6)
+    bullet_train-roles (0.1.7)
       active_hash
       activesupport
       cancancan
@@ -543,7 +543,7 @@ GEM
       sentry-ruby-core (~> 5.2.1)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
-    sidekiq (6.4.1)
+    sidekiq (6.4.2)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
