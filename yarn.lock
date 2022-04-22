@@ -2,24 +2,24 @@
 # yarn lockfile v1
 
 
-"@bullet-train/bullet-train-sortable@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-0.1.2.tgz"
-  integrity sha512-IZ4nBMKKevi1u/iMa21IkMTj/BoU0WDIgRpyE2X1E27yNEPXOtss0SGSAyfkA6wV0vDXz/TN/5Qq3D6aroddRQ==
+"@bullet-train/bullet-train-sortable@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.0.2.tgz#5bc2035e03efef45affd37001d5171d86b5cd884"
+  integrity sha512-KNwVR3j87uov7EUssth8dNl3m/8rjta3VHpsVeNbRwW9RMLp1pKHfXoHHihKUzqkSRL5biowGuW0e0Zc9bveSw==
   dependencies:
     dragula "^3.7.3"
 
-"@bullet-train/bullet-train@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-0.3.0.tgz#90535896e032fdc7c5f103b680c63d59cd6973ed"
-  integrity sha512-9cteLC4i30tEVcGda7WdMtXeBTI74Mwm9C096IHDSNw5n21SylcJuhieDbJpotmA3or9dROSC9WUlJXuPd+aTw==
+"@bullet-train/bullet-train@^1.0.33":
+  version "1.0.33"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.33.tgz#5d3089d0e8da89c691e834e307f76220c7a247d9"
+  integrity sha512-mfYPjroHJ2XBPuP8jsvRz2OhyKl1hulJ/4VibBBBI8OWScjTIg/Kx0ekG6RJ863N510n6EUDFeXggq1YFtasXw==
   dependencies:
     stimulus "^2.0.0"
 
-"@bullet-train/fields@^0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-0.1.7.tgz#9b65e9c3b805fab30b3d11262644b87aaa9f9023"
-  integrity sha512-aqnhmqP9y0O58CcRl12wMCWS0A/xD5iIDy8qqjEHc+ZFYBuzcgkUB3kbtdQCFooQ1nYpaAgzUT1Jor/UxEuMtA==
+"@bullet-train/fields@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.0.7.tgz#8a70688c4184a557fe2d1ec6491c33b400bbdce9"
+  integrity sha512-MktGpeTUADbKl6TiBQ2ISuRInPLKFt16ZpVB3tqkxVHvIvyBqNtKtOijCQY1s50OgLVyXLcij+7PvdmQK5J6BQ==
   dependencies:
     "@simonwep/pickr" "^1.8.1"
     daterangepicker "^3.1.0"
