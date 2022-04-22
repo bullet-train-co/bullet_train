@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-rails db:migrate
+bundle exec rails db:migrate
 GIT_STATUS=`git status`
 if [[ $GIT_STATUS =~ "nothing to commit, working tree clean" ]]; then
   exit 0
