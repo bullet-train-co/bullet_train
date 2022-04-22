@@ -2,9 +2,10 @@
 
 bundle exec rails db:migrate
 GIT_STATUS=`git status db/schema.rb`
+echo $GIT_STATUS
+
 if [[ $GIT_STATUS =~ "nothing to commit, working tree clean" ]]; then
   exit 0
 else
-  echo $GIT_STATUS
   exit 1
 fi
