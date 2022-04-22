@@ -75,6 +75,12 @@ jobs:
     parallelism: 16
     steps:
       - checkout
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bundle clean --force
+      - run: bundle exec rake bt:link
+
       - run:
           name: Running rails db:migrate shouldn't cause changes
           command: bash ./.circleci/db_schema_check
