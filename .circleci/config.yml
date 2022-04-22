@@ -76,8 +76,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Running rails db:migrate shouldn't cause changes
-        command: bash ./.circleci/db_schema_check
+          name: Running rails db:migrate shouldn't cause changes
+          command: bash ./.circleci/db_schema_check
 
   'Minitest':
     docker:
