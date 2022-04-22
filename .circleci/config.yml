@@ -2,7 +2,6 @@ version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
   browser-tools: circleci/browser-tools@1.1
-  shellcheck: circleci/shellcheck@3.1.0
 aliases:
   - &restore_bundler_cache
       name: Restore Bundler cache
@@ -75,8 +74,10 @@ jobs:
     executor: ruby/default
     parallelism: 16
     steps:
-      - shellcheck/check:
-        dir: ./shellcheck
+      - checkout
+      - run:
+        name: Running rails db:migrate shouldn't cause changes
+        command: bash ./.circleci/db_schema_check
 
   'Minitest':
     docker:
