@@ -154,8 +154,8 @@ GEM
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.0.2)
-      rails (>= 7.0.0)
+    bullet_train-has_uuid (1.0.3)
+      rails (>= 6.0.0)
     bullet_train-incoming_webhooks (1.0.1)
       rails (>= 6.0.0)
     bullet_train-integrations (1.0.0)
@@ -180,8 +180,8 @@ GEM
     bullet_train-scope_validator (1.0.2)
     bullet_train-sortable (1.0.2)
       rails (>= 7.0.0)
-    bullet_train-super_load_and_authorize_resource (1.0.0)
-      rails (>= 7.0.0)
+    bullet_train-super_load_and_authorize_resource (1.0.1)
+      rails (>= 6.0.0)
     bullet_train-super_scaffolding (1.0.24)
       bullet_train
       indefinite_article
@@ -497,7 +497,7 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     redis (4.6.0)
-    regexp_parser (2.3.0)
+    regexp_parser (2.3.1)
     reline (0.3.1)
       io-console (~> 0.5)
     require_all (3.0.0)
