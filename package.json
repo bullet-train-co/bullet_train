@@ -22,7 +22,7 @@
     "glob": "^8.0.1",
     "jquery": "^3.5.1",
     "jstz": "^2.1.1",
-    "postcss": "^8.4.12",
+    "postcss": "^8.4.13",
     "postcss-extend-rule": "^4.0.0",
     "postcss-import": "^14.1.0",
     "postcss-nested": "^5.0.6",
