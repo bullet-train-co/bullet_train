@@ -10,9 +10,9 @@
     dragula "^3.7.3"
 
 "@bullet-train/bullet-train@^1.0.33":
-  version "1.0.61"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.61.tgz#43c13c13dac7d57a59dd76ef57fdd177b323acfb"
-  integrity sha512-f2ux6pWCwcPyvTS/jtSbwlV4q1y4y8yQ1KjpY42NrBFBiHgPmnjtck0P+pRYvapNKatuP7fo3knHmp0i6pOtuQ==
+  version "1.0.60"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.60.tgz#436e78537acddd5b67574e9ebb7817e81e414bca"
+  integrity sha512-0ZoKVYGd/7zP9wxJBU4dI2Tn5FQEA5UOyGjGIqYhgrIrVbUpUWJ9chfQ+qPhKiwm6IUwuZjjBr8eZw6/CY5ucw==
   dependencies:
     stimulus "^2.0.0"
 
