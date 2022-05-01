@@ -57,4 +57,7 @@ Untitled
 .tool-versions
 .byebug_history
 
+# Ignore locally cloned framework packages.
+/local
+
 # 🚅 add your files to ignore here.
