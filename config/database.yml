@@ -83,3 +83,4 @@ production:
   database: untitled_application_production
   username: untitled_application
   password: <%= ENV['UNTITLED_APPLICATION_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
