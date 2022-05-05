@@ -11,6 +11,15 @@ services:
     buildCommand: "bundle install"
     startCommand: "bundle exec sidekiq -t 25"
     envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bullet_train_database
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: bullet_train_redis
+          property: connectionString
       - fromGroup: settings
   - type: web
     name: bullet_train
@@ -18,6 +27,15 @@ services:
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
     envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bullet_train_database
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: bullet_train_redis
+          property: connectionString
       - fromGroup: settings
   - type: redis
     name: bullet_train_redis
@@ -31,15 +49,6 @@ services:
 envVarGroups:
   - name: settings
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: bullet_train_database
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: bullet_train_redis
-          property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
       - key: SECRET_KEY_BASE
