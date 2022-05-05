@@ -7,10 +7,7 @@ databases:
 services:
   - type: redis
     name: redis
-    # TODO Do we actually want this? Let's check with support@render.com.
-    ipAllowList:
-      - source: 0.0.0.0
-        description: everywhere
+    ipAllowList: []
     plan: starter
     maxmemoryPolicy: noeviction
   - type: web
