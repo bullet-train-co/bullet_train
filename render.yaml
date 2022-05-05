@@ -1,50 +1,50 @@
 databases:
-  - name: bullet_train_database
-    databaseName: bullet_train_database
+  - name: database
+    databaseName: database
     user: bullet_train
     plan: starter
 
 services:
-  - type: worker
-    name: bullet_train_worker
-    env: ruby
-    buildCommand: "bundle install"
-    startCommand: "bundle exec sidekiq -t 25"
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: bullet_train_database
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: bullet_train_redis
-          property: connectionString
-      - fromGroup: settings
-  - type: web
-    name: bullet_train
-    env: ruby
-    buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: bullet_train_database
-          property: connectionString
-      - key: REDIS_URL
-        fromService:
-          type: redis
-          name: bullet_train_redis
-          property: connectionString
-      - fromGroup: settings
   - type: redis
-    name: bullet_train_redis
+    name: redis
     # TODO Do we actually want this? Let's check with support@render.com.
     ipAllowList:
       - source: 0.0.0.0
         description: everywhere
     plan: starter
     maxmemoryPolicy: noeviction
+  - type: web
+    name: web
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: database
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: redis
+          property: connectionString
+      - fromGroup: settings
+  - type: worker
+    name: worker
+    env: ruby
+    buildCommand: "bundle install"
+    startCommand: "bundle exec sidekiq -t 25"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: database
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: redis
+          property: connectionString
+      - fromGroup: settings
 
 envVarGroups:
   - name: settings
