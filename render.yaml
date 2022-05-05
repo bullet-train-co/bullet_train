@@ -49,10 +49,6 @@ services:
 envVarGroups:
   - name: settings
     envVars:
-      - key: RAILS_MASTER_KEY
-        sync: false
-      - key: SECRET_KEY_BASE
-        generateValue: true
       - key: BASE_URL
         sync: false
       - key: FONTAWESOME_NPM_AUTH_TOKEN
@@ -60,4 +56,6 @@ envVarGroups:
       - key: POSTMARK_API_TOKEN
         sync: false
       - key: HIDE_THINGS
+        generateValue: true
+      - key: SECRET_KEY_BASE
         generateValue: true
