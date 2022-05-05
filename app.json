@@ -25,7 +25,7 @@
     "hdrive:starter-s3",
     "cloudinary:starter",
     "scheduler:standard",
-    "rails-autoscale:bronze-std",
+    "rails-autoscale:free",
     "honeybadger:free",
     "sentry:f1",
     "realemail:free"
