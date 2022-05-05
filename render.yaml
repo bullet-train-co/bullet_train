@@ -6,7 +6,7 @@ databases:
 
 services:
   - type: worker
-    name: bullet_train_sidekiq
+    name: bullet_train_worker
     env: ruby
     buildCommand: "bundle install"
     startCommand: "bundle exec sidekiq -t 25"
