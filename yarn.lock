@@ -147,10 +147,10 @@
   resolved "https://registry.yarnpkg.com/@stimulus/webpack-helpers/-/webpack-helpers-2.0.0.tgz#54296d2a2dffd4f962d2e802d99a3fdd84b8845f"
   integrity sha512-D6tJWsAC024MwGEIKlUVYU8Ln87mlrmiwHvYAjipg+s8H4eLxUMQ3PZkWyPevfipH+oR3leuHsjYsK1gN5ViQA==
 
-"@tailwindcss/forms@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.5.0.tgz#d4bea2560a10aac642573e72d3b4d62a88960449"
-  integrity sha512-KzWugryEBFkmoaYcBE18rs6gthWCFHHO7cAZm2/hv3hwD67AzwP7udSCa22E7R1+CEJL/FfhYsJWrc0b1aeSzw==
+"@tailwindcss/forms@^0.5.1":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.5.1.tgz#7fe86b9b67e6d91cb902e2d3f4ebe561cc057a13"
+  integrity sha512-QSwsFORnC2BAP0lRzQkz1pw+EzIiiPdk4e27vGQjyXkwJPeC7iLIRVndJzf9CJVbcrrIcirb/TfxF3gRTyFEVA==
   dependencies:
     mini-svg-data-uri "^1.2.3"
 
@@ -928,10 +928,10 @@ spark-md5@^3.0.1:
   resolved "https://registry.yarnpkg.com/spark-md5/-/spark-md5-3.0.2.tgz#7952c4a30784347abcee73268e473b9c0167e3fc"
   integrity sha512-wcFzz9cDfbuqe0FZzfi2or1sgyIrsDwmPwfZC4hiNidPdPINjeUwNfv5kldczoEAcjl9Y1L3SM7Uz2PUEQzxQw==
 
-stimulus-reveal@^1.2.12:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/stimulus-reveal/-/stimulus-reveal-1.3.0.tgz#c22a9488fa057eb5db4bed9343c72e77491a31c0"
-  integrity sha512-5qZGQrDWwKtOoYwrlLHRVdwQkNRe3hMsGZs8Sb+H5Hjnm7DT3qM8IYdCUInPQUj+gAmWOE65YJamtTR1ditVTg==
+stimulus-reveal@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/stimulus-reveal/-/stimulus-reveal-1.4.0.tgz#427f309a0df65da48020731d8aecfe163f4ae6a5"
+  integrity sha512-O7L+ThPCtvtkb9GvuravsTHse2EVaQJfMK2B7DdYOwcn5cuTwiMWW4hkGfx6HUrG1RcHivSBCOcwmkZenDGczQ==
   dependencies:
     stimulus "^3.0.1"
 
