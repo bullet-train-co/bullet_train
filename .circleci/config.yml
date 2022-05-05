@@ -66,6 +66,24 @@ jobs:
           name: Check Standard Ruby
           command: bundle exec standardrb
 
+  'Database Schema Check':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: circleci/redis
+    executor: ruby/default
+    parallelism: 16
+    steps:
+      - checkout
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bundle clean --force
+
+      - run:
+          name: Running rails db:migrate shouldn't cause changes
+          command: bash ./.circleci/db_schema_check
+
   'Minitest':
     docker:
       - <<: *ruby_node_browsers_docker_image
@@ -149,5 +167,6 @@ workflows:
   build:
     jobs:
       - 'Standard Ruby'
+      - 'Database Schema Check'
       - 'Minitest'
       - 'Minitest for Super Scaffolding'
