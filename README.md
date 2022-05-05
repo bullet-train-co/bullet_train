@@ -34,10 +34,20 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
 <br>
 
-## Provisioning a Production Environment on Heroku
-You can use this public repository to provision a new application on Heroku and then push your private application code there later.
+## Provisioning a Production Environment
+You can use this public repository to provision a new application and then push your private application code there later.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=http://github.com/bullet-train-co/bullet_train)
+### Heroku
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=http://github.com/bullet-train-co/bullet_train)
+
+Once that process has completed, be sure to complete the other steps from the [Deploying to Heroku](https://bullettrain.co/docs/heroku) documentation.
+
+### Render
+
+> Update this to `bullet-train-co/bullet_train`. 
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/andrewculver/bullet_train)
 
 Once that process has completed, be sure to complete the other steps from the [Deploying to Heroku](https://bullettrain.co/docs/heroku) documentation.
 
