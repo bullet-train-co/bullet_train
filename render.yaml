@@ -53,3 +53,11 @@ envVarGroups:
         sync: false
       - key: SECRET_KEY_BASE
         generateValue: true
+      - key: BASE_URL
+        sync: false
+      - key: FONTAWESOME_NPM_AUTH_TOKEN
+        sync: false
+      - key: POSTMARK_API_TOKEN
+        sync: false
+      - key: HIDE_THINGS
+        generateValue: true
