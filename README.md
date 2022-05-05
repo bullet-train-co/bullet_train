@@ -47,7 +47,7 @@ Once that process has completed, be sure to complete the other steps from the [D
 
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/bullet-train-co/bullet_train)
 
-When you're done deploying to Render, you need to go into "Dashboard" > "web", copy the server URL, then go into "Env Groups" > "settings" and paste the URL into the value for `BASE_URL`.
+When you're done deploying to Render, you need to go into "Dashboard" > "web", copy the server URL, and then go into "Env Groups" > "settings" and paste the URL into the value for `BASE_URL`.
 
 ## Contribute to Bullet Train
 If you're looking contribute to Bullet Train, you should "Fork" this template repository on GitHub, like so:
