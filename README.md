@@ -9,7 +9,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     ```
     $ git clone git@github.com:bullet-train-co/bullet_train.git your_new_project_name
     ```
-    
+
 2. Enter the project directory:
 
     ```
@@ -45,11 +45,7 @@ Once that process has completed, be sure to complete the other steps from the [D
 
 ### Render
 
-> Update this to `bullet-train-co/bullet_train`. 
-
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/andrewculver/bullet_train)
-
-Once that process has completed, be sure to complete the other steps from the [Deploying to Heroku](https://bullettrain.co/docs/heroku) documentation.
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/bullet-train-co/bullet_train)
 
 ## Contribute to Bullet Train
 If you're looking contribute to Bullet Train, you should "Fork" this template repository on GitHub, like so:
