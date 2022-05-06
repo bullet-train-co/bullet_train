@@ -101,7 +101,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.585.0)
+    aws-partitions (1.586.0)
     aws-sdk-core (3.130.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -124,7 +124,7 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.61)
+    bullet_train (1.0.63)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -203,7 +203,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-themes (1.0.9)
       rails (>= 7.0.0)
-    bullet_train-themes-light (1.0.12)
+    bullet_train-themes-light (1.0.13)
       bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
     bullet_train-themes-tailwind_css (1.0.8)
@@ -284,7 +284,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (2.2.0)
+    faraday (2.3.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (2.0.2)
