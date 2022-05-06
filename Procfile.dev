@@ -2,4 +2,4 @@ web: bin/rails server -p 3000
 worker: bundle exec sidekiq -t 25
 js: yarn build --watch
 light-js: yarn light:build --watch
-light-css: bundle exec rake bt:link && yarn light:build:css --watch
+light-css: yarn light:build:css --watch
