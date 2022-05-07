@@ -206,9 +206,10 @@ GEM
     bullet_train-themes-light (1.0.13)
       bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
-    bullet_train-themes-tailwind_css (1.0.8)
+    bullet_train-themes-tailwind_css (1.0.9)
+      bullet_train
       bullet_train-themes
-      rails (>= 7.0.0)
+      rails (>= 6.0.0)
     cable_ready (5.0.0.pre9)
       actioncable (>= 5.2)
       actionpack (>= 5.2)
