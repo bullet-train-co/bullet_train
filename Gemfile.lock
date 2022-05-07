@@ -151,17 +151,17 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.0.13)
+    bullet_train-api (1.0.14)
       api-pagination
       bullet_train
       doorkeeper
       grape (~> 1.6.0)
       grape-cancan
-      grape-jsonapi
+      grape-jsonapi (= 1.0.0)
       grape-swagger
       grape_on_rails_routes
       jsonapi-serializer
-      kaminari
+      pagy
       rack-cors
       rails (>= 7.0.0)
     bullet_train-fields (1.0.7)
@@ -305,7 +305,7 @@ GEM
     grape-cancan (0.0.3)
       cancancan
       grape (~> 1.2)
-    grape-jsonapi (1.0.1)
+    grape-jsonapi (1.0.0)
       grape
       jsonapi-serializer
     grape-swagger (1.4.2)
@@ -338,18 +338,6 @@ GEM
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     jwt (2.3.0)
-    kaminari (1.2.2)
-      activesupport (>= 4.1.0)
-      kaminari-actionview (= 1.2.2)
-      kaminari-activerecord (= 1.2.2)
-      kaminari-core (= 1.2.2)
-    kaminari-actionview (1.2.2)
-      actionview
-      kaminari-core (= 1.2.2)
-    kaminari-activerecord (1.2.2)
-      activerecord
-      kaminari-core (= 1.2.2)
-    kaminari-core (1.2.2)
     knapsack_pro (3.2.1)
       rake
     launchy (2.5.0)
@@ -429,6 +417,8 @@ GEM
       omniauth (~> 1.3)
       omniauth-oauth2 (~> 1.4)
     orm_adapter (0.5.0)
+    pagy (5.10.1)
+      activesupport
     parallel (1.22.1)
     parser (3.1.2.0)
       ast (~> 2.4.1)
