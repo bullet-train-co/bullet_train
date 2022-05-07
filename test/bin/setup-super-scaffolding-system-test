@@ -35,6 +35,9 @@ rails g model Projects::AppliedTag project:references tag:references
 bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
 bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
 
+rails g model TestFile team:references foo:attachment
+bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
   sed -i "" "s/raise .*/team\.projects/g" app/models/test_site.rb
