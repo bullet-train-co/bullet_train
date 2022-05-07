@@ -151,7 +151,7 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.0.14)
+    bullet_train-api (1.0.16)
       api-pagination
       bullet_train
       doorkeeper
