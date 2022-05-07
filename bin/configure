@@ -125,37 +125,44 @@ else
   exit
 end
 
-if `git remote | grep bullet-train`.strip.length > 0
-  puts yellow "Repository already has a \`bullet-train`\ remote."
-else
+puts "Next, let's push your application to GitHub."
+puts "If you would like to use another service like Gitlab to manage your repository,"
+puts "you can opt out of this step and set up the repository manually."
+puts "(If you're not sure, we suggest going with GitHub)"
+skip_github = ask "Continue setting up with GitHub? [y/n]"
+if skip_github.downcase[0] == "y"
+  if `git remote | grep bullet-train`.strip.length > 0
+    puts yellow "Repository already has a \`bullet-train`\ remote."
+  else
+    if `git remote | grep origin`.strip.length > 0
+      puts green "Renaming repository `origin` remote to `bullet-train`."
+      `git remote rename origin bullet-train`
+    else
+      puts red "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?"
+    end
+  end
+
   if `git remote | grep origin`.strip.length > 0
-    puts green "Renaming repository `origin` remote to `bullet-train`."
-    `git remote rename origin bullet-train`
+    puts yellow "Repository already has a \`origin`\ remote."
   else
-    puts red "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?"
+    ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
+    command = if Gem::Platform.local.os == "linux"
+      "xdg-open"
+    else
+      "open"
+    end
+    `#{command} https://github.com/new`
+
+    ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+    puts green "Setting repository's `origin` remote to `#{ssh_path}`."
+    puts `git remote add origin #{ssh_path}`.chomp
   end
+
+  local_branch = `git branch | grep "*"`.split.last
+
+  puts green "Pushing repository to `origin`."
+  stream "git push origin #{local_branch}:main 2>&1"
 end
-
-if `git remote | grep origin`.strip.length > 0
-  puts yellow "Repository already has a \`origin`\ remote."
-else
-  ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
-  command = if Gem::Platform.local.os == "linux"
-    "xdg-open"
-  else
-    "open"
-  end
-  `#{command} https://github.com/new`
-
-  ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
-  puts green "Setting repository's `origin` remote to `#{ssh_path}`."
-  puts `git remote add origin #{ssh_path}`.chomp
-end
-
-local_branch = `git branch | grep "*"`.split.last
-
-puts green "Pushing repository to `origin`."
-stream "git push origin #{local_branch}:main 2>&1"
 
 puts green "Running `bundle install`."
 stream "bundle install"
@@ -204,10 +211,15 @@ puts `rm .github/FUNDING.yml`.chomp
 # We can only do this after the README is moved into place.
 replace_in_file("./README.md", "Untitled Application", human)
 
-puts green "Committing all these changes to the repository."
-stream "git add -A"
-stream "git commit -m \"Run configuration script.\""
-stream "git push origin #{local_branch}:main"
+if skip_github
+  puts ""
+  puts yellow("Make sure you save your changes with Git.")
+else
+  puts green "Committing all these changes to the repository."
+  stream "git add -A"
+  stream "git commit -m \"Run configuration script.\""
+  stream "git push origin #{local_branch}:main"
+end
 
 puts ""
 puts yellow "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!"
