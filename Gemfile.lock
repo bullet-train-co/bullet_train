@@ -124,7 +124,7 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.65)
+    bullet_train (1.0.66)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -146,6 +146,8 @@ GEM
       pagy
       possessive
       premailer-rails
+      pry
+      pry-stack_explorer
       rails (>= 6.0.0)
       sidekiq
       unicode-emoji
