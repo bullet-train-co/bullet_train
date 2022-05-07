@@ -124,7 +124,7 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.66)
+    bullet_train (1.0.68)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -198,13 +198,13 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.24)
+    bullet_train-super_scaffolding (1.0.26)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
     bullet_train-themes (1.0.9)
       rails (>= 7.0.0)
-    bullet_train-themes-light (1.0.13)
+    bullet_train-themes-light (1.0.14)
       bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
     bullet_train-themes-tailwind_css (1.0.9)
