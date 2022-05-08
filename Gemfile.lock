@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: 2fece8d5163e8b3727077a66bb40d6e5ff6333d8
+  revision: ac0ab33d6c8fd220379024f68a71fd429d2f17fe
   specs:
     capybara (3.37.0)
       addressable
@@ -152,7 +152,7 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.0.16)
+    bullet_train-api (1.0.17)
       api-pagination
       bullet_train
       doorkeeper
