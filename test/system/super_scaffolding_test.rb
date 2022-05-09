@@ -226,7 +226,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text Field partial
       fill_in "Text Field Test", with: "Test Text"
       # Boolean Button partial
-      click_on "No"
+      choose "No"
       # Single Button partial
       find("#partial_test_single_button_test_one+button", visible: :all).click
       # Multiple Button partial
@@ -270,7 +270,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       partial_test = PartialTest.first
       assert page.has_content?("Test Text")
       # Boolean Button
-      assert page.has_content?("No")
+      assert_equal partial_test.boolean_test, false
       # Single Button
       assert page.has_content?("One")
       # Multiple Buttons
