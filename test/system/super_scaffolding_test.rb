@@ -268,16 +268,16 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text field
       click_on "Test Text"
       partial_test = PartialTest.first
-      assert page.has_content?("Test Text")
+      assert_equal partial_test.text_field_test, "Test Text"
       # Boolean Button
       assert_equal partial_test.boolean_test, false
       # Single Button
-      assert page.has_content?("One")
+      assert_equal partial_test.single_button_test, "one"
       # Multiple Buttons
       refute_nil partial_test.multiple_buttons_test
       assert_equal partial_test.multiple_buttons_test, ["two", "three"]
       # Date
-      assert page.has_content?(Date.today.strftime("%B %d")) # i.e. - April 7
+      assert_equal partial_test.date_test, Date.today
       # DateTime
       refute_nil partial_test.date_time_test
       assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
