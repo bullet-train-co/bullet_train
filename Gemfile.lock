@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: ac0ab33d6c8fd220379024f68a71fd429d2f17fe
+  revision: f973c9f1f4cff4eda8320f5dd6459cb76307aa97
   specs:
-    capybara (3.37.0)
+    capybara (3.37.1)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -394,10 +394,10 @@ GEM
     nice_partials (0.1.6)
       actionview (>= 4.2.6)
     nio4r (2.5.8)
-    nokogiri (1.13.5)
+    nokogiri (1.13.6)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    nokogiri (1.13.5-x86_64-linux)
+    nokogiri (1.13.6-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.9)
       faraday (>= 0.17.3, < 3.0)
