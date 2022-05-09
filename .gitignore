@@ -37,6 +37,8 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+.yalc
+yalc.lock
 
 # 🚅 this is bullet train's list of files to ignore.
 # please add yours at the end of the file.
@@ -56,5 +58,8 @@ Untitled
 # Ignore development tools files
 .tool-versions
 .byebug_history
+
+# Ignore locally cloned framework packages.
+/local
 
 # 🚅 add your files to ignore here.

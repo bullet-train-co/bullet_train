@@ -65,6 +65,9 @@ bin/super-scaffold crud PartialTest Team \
   multiple_super_select_test:super_select{multiple} \
   text_area_test:text_area --sidebar="ti.ti-layout"
 
+rails g model TestFile team:references foo:attachment
+bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
+
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
   sed -i "" "s/raise .*/team\.projects/g" app/models/test_site.rb

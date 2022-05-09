@@ -73,9 +73,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = {host: "localhost", port: 3001}
   config.i18n.raise_on_missing_translations = true
 
-  # TODO There are too many deprecation warnings after upgrading to Rails 6.
-  config.active_support.deprecation = :silence
-
   # TODO for some reason this doesn't seem to be doing anything.
   config.active_job.queue_adapter = :inline
 

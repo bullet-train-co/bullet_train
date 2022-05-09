@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-if ! command -v foreman &> /dev/null
-then
-  echo "Installing foreman..."
-  gem install foreman
-fi
+bundle exec rake bt:link
 
-foreman start -f Procfile.dev "$@"
+if [ -x "$(command -v overmind)" ] 
+then
+  overmind start -f Procfile.dev "$@"
+else
+  foreman start -f Procfile.dev "$@"
+fi
