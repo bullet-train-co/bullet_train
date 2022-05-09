@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_23_210337) do
+ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,24 +59,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_23_210337) do
     t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "imports_csv_imports", force: :cascade do |t|
-    t.string "type"
-    t.bigint "team_id"
-    t.integer "lines_count"
-    t.integer "processed_count", default: 0
-    t.integer "rejected_count", default: 0
-    t.text "logging_output", default: ""
-    t.text "error_message"
-    t.text "rejected_lines", default: ""
-    t.datetime "started_at", precision: nil
-    t.datetime "estimated_finish_at", precision: nil
-    t.datetime "completed_at", precision: nil
-    t.datetime "failed_at", precision: nil
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.index ["team_id"], name: "index_imports_csv_imports_on_team_id"
   end
 
   create_table "integrations_stripe_installations", force: :cascade do |t|
@@ -349,7 +331,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_23_210337) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "imports_csv_imports", "teams"
   add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"
   add_foreign_key "integrations_stripe_installations", "teams"
   add_foreign_key "invitations", "teams"

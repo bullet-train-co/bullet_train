@@ -11,6 +11,9 @@ require "knapsack_pro"
 knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
 knapsack_pro_adapter.set_test_helper_path(__FILE__)
 
+require "sidekiq/testing"
+Sidekiq::Testing.inline!
+
 ActiveSupport::TestCase.class_eval do
   # Run tests in parallel with specified workers
   # parallelize(workers: :number_of_processors)
@@ -18,13 +21,4 @@ ActiveSupport::TestCase.class_eval do
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-end
-
-# TODO: The test adapter gets overwritten when a test class inherits SystemTestCase,
-# so this is hack to get inline sidekiq jobs running.
-# https://github.com/rails/rails/issues/37270
-# https://edgeapi.rubyonrails.org/classes/ActionDispatch/SystemTestCase.html
-def switch_adapter_to_sidekiq
-  (ActiveJob::Base.descendants << ActiveJob::Base).each { |a| a.disable_test_adapter }
-  ActiveJob::Base.queue_adapter = :sidekiq
 end
