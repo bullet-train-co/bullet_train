@@ -78,8 +78,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Edit the index partial.
       custom_date_format = "\"%m/%d\"" # i.e. - 04/07 for April 4th
       custom_time_format = "\"%I %p\"" # i.e. - 11 P.M. (cuts off the minutes)
-      original_date_test = "<td><%= render 'shared/attributes/date', attribute: :date_test, url: [:account, partial_test] %></td>"
-      original_created_at = "<td><%= render 'shared/attributes/date_and_time', attribute: :created_at %></td>"
 
       file_path = "#{Rails.root}/app/views/account/partial_tests/_index.html.erb"
       transformed_content = []
@@ -98,9 +96,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
         end
       end
 
-      File.open(file_path, "w+") do |file|
-        file.write(transformed_content.join(""))
-      end
+      File.write(file_path, transformed_content.join(""))
 
       # Should show properly on the index partial.
       visit account_team_partial_tests_path(@jane.current_team)
