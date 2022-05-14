@@ -56,4 +56,23 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert TestFile.first.foo.blank?
     end
   end
+
+  if defined?(PartialTest)
+    test "developers can pass custom format to date and date_and_time partials" do
+      # Edit the contents of the render call to the partial here (pass the custom format)
+
+      display_details = @@test_devices[:macbook_pro_15_inch]
+      resize_for(display_details)
+
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      assert page.has_content?("Test Files")
+      click_on "Add New Test File"
+
+      # Select the time
+      # Create
+      # Check if it matches the custom format
+    end
+  end
 end
