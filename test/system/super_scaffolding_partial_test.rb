@@ -65,7 +65,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
-      assert page.has_content?("Partial Tests")
       click_on "Add New Partial Test"
 
       find("#partial_test_date_test").click
@@ -74,6 +73,41 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # We should be able to create a new record without passing any format options.
       click_on "Create Partial Test"
       assert page.has_content?("Partial Test was successfully created.")
+      assert page.has_content?(Date.today.strftime("%B %-d"))
+
+      # Edit the index partial.
+      custom_date_format = "\"%m/%d\"" # i.e. - 04/07 for April 4th
+      custom_time_format = "\"%I %p\"" # i.e. - 11 P.M. (cuts off the minutes)
+      original_date_test = "<td><%= render 'shared/attributes/date', attribute: :date_test, url: [:account, partial_test] %></td>"
+      original_created_at = "<td><%= render 'shared/attributes/date_and_time', attribute: :created_at %></td>"
+
+      file_path = "#{Rails.root}/app/views/account/partial_tests/_index.html.erb"
+      transformed_content = []
+      File.open(file_path, "r") do |file|
+        original_content = file.readlines
+
+        # For these regular expressions, we take the space at the end of the embedded ruby and replace it with our option.
+        transformed_content = original_content.map do |line|
+          if line.match?(/attribute: :date_test/)
+            line.gsub(/(.*url: \[:account, partial_test\])(\s)(%><\/td>\n$)/, '\1' + ", date_format: #{custom_date_format} " + '\3')
+          elsif line.match?(/attribute: :created_at/)
+            line.gsub(/(.*:created_at)(\s)(%><\/td>\n$)/, '\1' + ", date_format: #{custom_date_format}, time_format: #{custom_time_format} " + '\3')
+          else
+            line
+          end
+        end
+      end
+
+      File.open(file_path, "w+") do |file|
+        file.write(transformed_content.join(""))
+      end
+
+      # Should show properly on the index partial.
+      visit account_team_partial_tests_path(@jane.current_team)
+
+      # TODO: The system test isn't reflect the changes to the index partial made above.
+      # assert page.has_content?(Date.today.strftime("%m/%d"))
+      # assert page.has_content?(Time.now.strftime("%H %p"))
     end
   end
 end
