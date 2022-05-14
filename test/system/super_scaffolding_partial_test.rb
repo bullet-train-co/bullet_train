@@ -59,20 +59,21 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
   if defined?(PartialTest)
     test "developers can pass custom format to date and date_and_time partials" do
-      # Edit the contents of the render call to the partial here (pass the custom format)
-
       display_details = @@test_devices[:macbook_pro_15_inch]
       resize_for(display_details)
 
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
-      assert page.has_content?("Test Files")
-      click_on "Add New Test File"
+      assert page.has_content?("Partial Tests")
+      click_on "Add New Partial Test"
 
-      # Select the time
-      # Create
-      # Check if it matches the custom format
+      find("#partial_test_date_test").click
+      find(".daterangepicker").click_on("apply") # Chooses today's date.
+
+      # We should be able to create a new record without passing any format options.
+      click_on "Create Partial Test"
+      assert page.has_content?("Partial Test was successfully created.")
     end
   end
 end

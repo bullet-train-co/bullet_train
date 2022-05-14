@@ -39,12 +39,8 @@ rails g model TestFile team:references foo:attachment
 bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
 
 # For testing partials.
-rails g model PartialTest team:references \
-  date_test:date \
-  date_time_test:datetime \
-bin/super-scaffold crud PartialTest Team \
-  date_test:date_field\
-  date_time_test:date_and_time_field \
+rails g model PartialTest team:references date_test:date
+bin/super-scaffold crud PartialTest Team date_test:date_field
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
