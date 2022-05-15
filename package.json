@@ -19,7 +19,7 @@
     "cable_ready": "^5.0.0-pre8",
     "dragula": "^3.7.3",
     "esbuild": "^0.14.39",
-    "glob": "^8.0.1",
+    "glob": "^8.0.3",
     "jquery": "^3.5.1",
     "jstz": "^2.1.1",
     "postcss": "^8.4.13",
