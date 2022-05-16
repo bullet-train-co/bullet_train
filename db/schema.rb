@@ -27,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
     t.string "name", null: false
     t.text "body"
     t.string "record_type", null: false
-    t.integer "record_id", null: false
+    t.bigint "record_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
@@ -56,7 +56,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.integer "blob_id", null: false
+    t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -102,8 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
   end
 
   create_table "memberships_reassignments_assignments", force: :cascade do |t|
-    t.integer "membership_id", null: false
-    t.integer "scaffolding_completely_concrete_tangible_things_reassignments_i"
+    t.bigint "membership_id", null: false
+    t.bigint "scaffolding_completely_concrete_tangible_things_reassignments_i"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["membership_id"], name: "index_memberships_reassignments_assignments_on_membership_id"
@@ -111,7 +111,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
   end
 
   create_table "memberships_reassignments_scaffolding_completely_concrete_tangi", force: :cascade do |t|
-    t.integer "membership_id", null: false
+    t.bigint "membership_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["membership_id"], name: "index_tangible_things_reassignments_on_membership_id"
@@ -172,7 +172,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
   end
 
   create_table "scaffolding_absolutely_abstract_creative_concepts", force: :cascade do |t|
-    t.integer "team_id", null: false
+    t.bigint "team_id", null: false
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
@@ -191,7 +191,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
   end
 
   create_table "scaffolding_completely_concrete_tangible_things", force: :cascade do |t|
-    t.integer "absolutely_abstract_creative_concept_id", null: false
+    t.bigint "absolutely_abstract_creative_concept_id", null: false
     t.string "text_field_value"
     t.string "button_value"
     t.string "cloudinary_image_value"
