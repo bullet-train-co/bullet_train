@@ -17,9 +17,9 @@
     "@hotwired/stimulus" "^3.0.1"
 
 "@bullet-train/fields@^1.0.7":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.0.8.tgz#87c94fd8f191e71dd104498c77f278f3169cc96d"
-  integrity sha512-GdlGQ/rJOoqOQXM2r/iHou4y8fE6gaNcI+NRlGBwlahJS3blBztJNDO2F7PWhwLcclGkI2qYgkE+87FwyFqZ4w==
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.0.10.tgz#782f9e5937dd0f03ff0e18f1e6306384c5ecc2c8"
+  integrity sha512-lYaHCgjUKacgu86cbMQGzMIG9Qyv/d4Qberq5xW96ts64DhUuG084dxjs+AIfUpu7AQ4TRb5UmsV8h06cMr4xg==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
