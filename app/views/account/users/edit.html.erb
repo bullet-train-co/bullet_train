@@ -1,0 +1,51 @@
+<% # Ejected from `bullet_train-1.0.69`. %>
+
+<%= render 'account/shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= form_for [:account, @user] do |form| %>
+      <%= render 'account/shared/forms/errors', form: form %>
+    <% end if @user.errors.any? %>
+
+    <div class="grid grid-cols-1 gap-y gap-x-8 xl:grid-cols-2">
+      <div class="xl:col-span-1 space-y-8">
+        <%= render 'account/shared/box', divider: true do |p| %>
+          <% p.content_for :title, t('.profile.header') %>
+          <% p.content_for :description, t('.profile.description') %>
+          <% p.content_for :body do %>
+            <%= render "account/users/form", user: @user %>
+          <% end %>
+        <% end %>
+
+        <% if two_factor_authentication_enabled? %>
+          <div id="two-factor">
+            <%= render partial: "devise/registrations/two_factor" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="xl:col-span-1 space-y-8">
+        <%= render 'account/users/oauth' %>
+
+        <%= render 'account/shared/box', divider: true do |p| %>
+          <% p.content_for :title, t('.password.header') %>
+          <% p.content_for :body do %>
+            <% within_fields_namespace(:update_self) do %>
+              <%= form_for [:account, @user], html: {id: dom_id(@user, :password), class: 'form'} do |form| %>
+                <% with_field_settings form: form do %>
+                  <%= render 'shared/fields/password_field', method: :current_password %>
+                  <%= render 'shared/fields/password_field', method: :password %>
+                  <%= render 'shared/fields/password_field', method: :password_confirmation %>
+                <% end %>
+
+                <div class="buttons">
+                  <%= form.submit t('.buttons.update_password'), class: "button" %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
