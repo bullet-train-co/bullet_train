@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: 98e367d9f9f4b56652b3e7dd41996c9a1d5ae26a
+  revision: e145ec5ab7a9688c9a42077f3b981e753e981f17
   specs:
     capybara (3.37.1)
       addressable
@@ -124,7 +124,7 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.68)
+    bullet_train (1.0.69)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -165,7 +165,7 @@ GEM
       pagy
       rack-cors
       rails (>= 7.0.0)
-    bullet_train-fields (1.0.7)
+    bullet_train-fields (1.0.8)
       chronic
       cloudinary
       phonelib
@@ -202,7 +202,7 @@ GEM
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.9)
+    bullet_train-themes (1.0.10)
       rails (>= 7.0.0)
     bullet_train-themes-light (1.0.15)
       bullet_train-themes-tailwind_css
