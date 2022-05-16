@@ -34,7 +34,7 @@
               <%= form_for [:account, @user], html: {id: dom_id(@user, :password), class: 'form'} do |form| %>
                 <% with_field_settings form: form do %>
                   <%= render 'shared/fields/password_field', method: :current_password %>
-                  <%= render 'shared/fields/password_field', method: :password %>
+                  <%= render 'shared/fields/password_field', method: :password, options: {show_strength_indicator: true} %>
                   <%= render 'shared/fields/password_field', method: :password_confirmation %>
                 <% end %>
 
