@@ -124,7 +124,7 @@ GEM
     bootsnap (1.11.1)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.70)
+    bullet_train (1.0.71)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -136,6 +136,7 @@ GEM
       cancancan
       commonmarker
       devise
+      devise-pwned_password
       extended_email_reply_parser
       fastimage
       figaro
@@ -250,6 +251,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-pwned_password (0.1.9)
+      devise (~> 4)
+      pwned (~> 2.0.0)
     digest (3.1.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -447,6 +451,7 @@ GEM
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
+    pwned (2.0.2)
     racc (1.6.0)
     rack (2.2.3)
     rack-accept (0.4.5)
