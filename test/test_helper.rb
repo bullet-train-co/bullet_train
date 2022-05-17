@@ -14,9 +14,6 @@ knapsack_pro_adapter.set_test_helper_path(__FILE__)
 require "sidekiq/testing"
 Sidekiq::Testing.inline!
 
-$password = SecureRandom.hex
-$another_password = SecureRandom.hex
-
 ActiveSupport::TestCase.class_eval do
   # Run tests in parallel with specified workers
   # parallelize(workers: :number_of_processors)

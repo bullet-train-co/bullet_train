@@ -10,8 +10,8 @@ class DatesHelperTest < ApplicationSystemTestCase
       # Sign up and log in
       sign_up_from_homepage_for(display_details)
       fill_in "Your Email Address", with: "bullettrain@gmail.com"
-      fill_in "Set Password", with: $password
-      fill_in "Confirm Password", with: $password
+      fill_in "Set Password", with: example_password
+      fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
       fill_in "First Name", with: "Testy"
       fill_in "Last Name", with: "McTesterson"
