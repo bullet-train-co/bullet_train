@@ -146,8 +146,8 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       assert page.has_content?("Create Your Account")
       # this email address is purposefully different than the one they were invited via.
       fill_in "Your Email Address", with: "takashi@yamaguchi.com"
-      fill_in "Set Password", with: "password234"
-      fill_in "Confirm Password", with: "password234"
+      fill_in "Set Password", with: another_example_password
+      fill_in "Confirm Password", with: another_example_password
       click_on "Sign Up"
 
       # this first name is purposefully different than the name they were invited with.
