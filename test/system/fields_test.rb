@@ -10,8 +10,8 @@ unless scaffolding_things_disabled?
 
         click_on "Don't have an account?"
         fill_in "Your Email Address", with: "me@acme.com"
-        fill_in "Set Password", with: "password123"
-        fill_in "Confirm Password", with: "password123"
+        fill_in "Set Password", with: $password
+        fill_in "Confirm Password", with: $password
         click_on "Sign Up"
         fill_in "Your First Name", with: "John"
         fill_in "Your Last Name", with: "Doe"
