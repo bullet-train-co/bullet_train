@@ -30,8 +30,8 @@ class MembershipSystemTest < ApplicationSystemTestCase
 
       # try non-matching passwords.
       fill_in "Your Email Address", with: "jane.smith@gmail.com"
-      fill_in "Set Password", with: "password123"
-      fill_in "Confirm Password", with: "password123"
+      fill_in "Set Password", with: example_password
+      fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
       complete_pricing_page if subscriptions_enabled?

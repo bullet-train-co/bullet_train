@@ -102,7 +102,7 @@ GEM
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.587.0)
-    aws-sdk-core (3.130.2)
+    aws-sdk-core (3.131.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -165,7 +165,7 @@ GEM
       pagy
       rack-cors
       rails (>= 7.0.0)
-    bullet_train-fields (1.0.10)
+    bullet_train-fields (1.0.14)
       chronic
       cloudinary
       phonelib
@@ -202,7 +202,7 @@ GEM
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.10)
+    bullet_train-themes (1.0.11)
       rails (>= 7.0.0)
     bullet_train-themes-light (1.0.15)
       bullet_train-themes-tailwind_css
@@ -335,7 +335,7 @@ GEM
     jmespath (1.6.1)
     jsbundling-rails (1.0.2)
       railties (>= 6.0.0)
-    json (2.6.1)
+    json (2.6.2)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     jwt (2.3.0)
@@ -529,16 +529,16 @@ GEM
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
-    sentry-rails (5.3.0)
+    sentry-rails (5.3.1)
       railties (>= 5.0)
-      sentry-ruby-core (~> 5.3.0)
-    sentry-ruby (5.3.0)
+      sentry-ruby-core (~> 5.3.1)
+    sentry-ruby (5.3.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      sentry-ruby-core (= 5.3.0)
-    sentry-ruby-core (5.3.0)
+      sentry-ruby-core (= 5.3.1)
+    sentry-ruby-core (5.3.1)
       concurrent-ruby
-    sentry-sidekiq (5.3.0)
-      sentry-ruby-core (~> 5.3.0)
+    sentry-sidekiq (5.3.1)
+      sentry-ruby-core (~> 5.3.1)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
     sidekiq (6.4.2)

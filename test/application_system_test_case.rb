@@ -33,6 +33,14 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include Warden::Test::Helpers
   include Waiting
 
+  def example_password
+    @example_password ||= SecureRandom.hex
+  end
+
+  def another_example_password
+    @another_example_password ||= SecureRandom.hex
+  end
+
   def setup
     ENV["BASE_URL"] = "http://localhost:3001"
     Capybara.use_default_driver
