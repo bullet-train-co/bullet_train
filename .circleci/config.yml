@@ -167,7 +167,7 @@ jobs:
       #
       # - run:
       #     name: Run unit tests with HIDE_THINGS
-      #     command:  HIDE_THINGS=true bundle exec rails test
+      #     command: HIDE_THINGS=true bundle exec rails test
       # - run:
       #     name: Run system tests with HIDE_THINGS
       #     command: HIDE_THINGS=true bundle exec rails test:system
