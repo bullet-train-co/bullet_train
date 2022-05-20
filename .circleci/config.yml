@@ -118,8 +118,7 @@ jobs:
           name: Run the same tests with HIDE_THINGS
           command: |
             export RAILS_ENV=test
-            HIDE_THINGS=true
-            bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
+            HIDE_THINGS=true bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
 
       # If you don't want to use Knapsack Pro, then use this configuration:
       #
