@@ -116,9 +116,10 @@ jobs:
             KNAPSACK_PRO_CI_NODE_TOTAL: 16
       - run:
           name: Run the same tests with HIDE_THINGS
+          env:
+            HIDE_THINGS: true
           command: |
             export RAILS_ENV=test
-            export HIDE_THINGS=true
             bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
           environment:
             KNAPSACK_PRO_CI_NODE_TOTAL: 16
