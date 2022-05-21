@@ -113,7 +113,7 @@ jobs:
             export RAILS_ENV=test
             bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
           environment:
-            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+            KNAPSACK_PRO_CI_NODE_TOTAL: 32
 
       # If you don't want to use Knapsack Pro, then use this configuration:
       #
