@@ -92,7 +92,6 @@ jobs:
     executor: ruby/default
     parallelism: 16
     steps:
-      - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - checkout
       - restore_cache: *restore_bundler_cache
@@ -139,7 +138,6 @@ jobs:
       - image: circleci/redis
     executor: ruby/default
     steps:
-      - browser-tools/install-chrome
       - browser-tools/install-chromedriver
       - checkout
 
