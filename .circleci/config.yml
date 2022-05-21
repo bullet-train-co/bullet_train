@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
+  browser-tools: circleci/browser-tools@1.1
 aliases:
   - &restore_bundler_cache
       name: Restore Bundler cache
@@ -91,6 +92,8 @@ jobs:
     executor: ruby/default
     parallelism: 16
     steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
@@ -136,6 +139,8 @@ jobs:
       - image: circleci/redis
     executor: ruby/default
     steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
 
       # Restore dependency caches
