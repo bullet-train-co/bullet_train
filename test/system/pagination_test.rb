@@ -18,12 +18,17 @@ class PaginationTest < ApplicationSystemTestCase
     fill_in "Name", with: "Test Name"
     click_on "Create Creative Concept"
 
+    assert page.has_content? "Creative Concept was successfully created."
+
+    creative_concept = @team.scaffolding_absolutely_abstract_creative_concepts.order(:id).last
+
     # Pagy::DEFAULT[:items] denotes the max of records that exist on one page.
     (Pagy::DEFAULT[:items] + 1).times do |n|
-      click_on "Add New Tangible Thing"
-      fill_in "Text Field Value", with: "Test #{n + 1}"
-      click_on "Create Tangible Thing"
+      creative_concept.completely_concrete_tangible_things.create(text_field_value: "Test #{n + 1}")
     end
+
+    # Reload.
+    visit current_path
 
     assert page.has_content?("Test 1")
     refute page.has_content?("Test #{Pagy::DEFAULT[:items] + 1}")
