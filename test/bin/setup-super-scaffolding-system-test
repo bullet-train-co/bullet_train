@@ -77,12 +77,6 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
 
   spring rails g model Personality::CharacterTrait insight:references name:string
   bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
-
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i "" "s/raise .*/character_trait\.objective\.personality_character_traits/g" app/models/personality/note.rb
-  else
-    sed -i "s/raise .*/character_trait\.objective\.personality_character_traits/g" app/models/personality/note.rb
-  fi
 else
   echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
 fi
@@ -95,8 +89,14 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
   bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
 
   # Test that the foreign key table name will be inserted into the migration.
-  spring rails g migration add_other_character_trait_to_personality_notes other_character_trait:references
-  bin/super-scaffold crud-field Personality::Note other_character_trait_id:super_select{class_name=Personality::CharacterTrait}
+  spring rails g migration add_other_membership_to_personality_notes other_character_trait:references
+  bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+  else
+    sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+  fi
 else
   echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
 fi
