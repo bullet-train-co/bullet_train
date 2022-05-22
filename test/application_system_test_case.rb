@@ -219,7 +219,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       end
 
       def self.slow_down_execute_time
-        @@execute_sleep_time = 0.5
+        @@execute_sleep_time = 0.1
       end
 
       def self.reset_execute_time
