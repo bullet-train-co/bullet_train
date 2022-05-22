@@ -22,23 +22,31 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   #   git clean -d -f
 
   # force autoload.
-  begin
-    TestSite
-  rescue
-    nil
+  [
+    "TestSite",
+    "TestPage",
+    "Project",
+    "Projects::Deliverable",
+    "Projects::Tag",
+    "Projects::AppliedTag",
+    "Projects::Step",
+    "Objective",
+    "Insight",
+    "Personality::CharacterTrait",
+    "Personality::Disposition",
+    "Personality::Note",
+    "Personality::Observation",
+    "Personality::Reactions::Response",
+  ].each do |class_name|
+    begin
+      class_name.constantize
+    rescue
+      nil
+    end
   end
-  begin
-    TestPage
-  rescue
-    nil
-  end
 
-  if defined?(TestSite) && defined?(TestPage)
-
-    test "developers can generate a site and a nested page model" do
-      display_details = @@test_devices[:macbook_pro_15_inch]
-      resize_for(display_details)
-
+  if defined?(TestSite)
+    test "developers can generate a TestSite and a nested TestPage model" do
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
@@ -75,12 +83,18 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       within_primary_menu_for(display_details) do
         click_on "Dashboard"
       end
+    end
+  end
+
+  if defined?(Project)
+    test "developers can generate a Project and a nested Projects::Deliverable model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
 
       click_on "Add New Project"
       click_on "Create Project"
       assert page.has_content?("Name can't be blank.")
       fill_in "Name", with: "Some New Example Project"
-      # TODO figure out how to interact with trix editor fields in capybara tests.
       click_on "Create Project"
 
       assert page.has_content?("Project was successfully created.")
@@ -93,38 +107,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Deliverable"
       assert page.has_content?("Deliverable was successfully created.")
       click_on "Some New Example Deliverable"
-
-      click_on "Add New Objective"
-      click_on "Create Objective"
-      assert page.has_content?("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Objective"
-      click_on "Create Objective"
-      assert page.has_content?("Objective was successfully created.")
-      click_on "Some New Example Objective"
-
-      click_on "Add New Character Trait"
-      click_on "Create Character Trait"
-      assert page.has_content?("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Character Trait"
-      click_on "Create Character Trait"
-      assert page.has_content?("Character Trait was successfully created.")
-      click_on "Some New Example Character Trait"
-
-      click_on "Add New Note"
-      click_on "Create Note"
-      assert page.has_content?("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Note"
-      click_on "Create Note"
-      assert page.has_content?("Note was successfully created.")
-      click_on "Some New Example Note"
-
-      click_on "Add New Response"
-      click_on "Create Response"
-      assert page.has_content?("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Response"
-      click_on "Create Response"
-      assert page.has_content?("Response was successfully created.")
-      click_on "Some New Example Response"
 
       within "ol.breadcrumb" do
         click_on "Projects"
@@ -210,6 +192,102 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "New Project with Tags"
       assert page.has_content? "Below are the details we have for New Project with Tags"
       assert page.has_content? "One and Two"
+    end
+  end
+
+  if defined?(Projects::Step)
+    test "developers can generate a Projects::Step and a nested Objective model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "Add New Step"
+      click_on "Create Step"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Step"
+      click_on "Create Step"
+
+      assert page.has_content?("Step was successfully created.")
+      click_on "Some New Example Step"
+
+      click_on "Add New Objective"
+      click_on "Create Objective"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Objective"
+      click_on "Create Objective"
+      assert page.has_content?("Objective was successfully created.")
+      click_on "Some New Example Objective"
+    end
+  end
+
+  if defined?(Insight)
+    test "developers can generate a Insight and a nested Personality::CharacterTrait model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "Add New Insight"
+      click_on "Create Insight"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Insight"
+      click_on "Create Insight"
+
+      assert page.has_content?("Insight was successfully created.")
+      click_on "Some New Example Insight"
+
+      click_on "Add New Character Trait"
+      click_on "Create Character Trait"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Character Trait"
+      click_on "Create Character Trait"
+      assert page.has_content?("Character Trait was successfully created.")
+      click_on "Some New Example Character Trait"
+    end
+  end
+
+  if defined?(Personality::Disposition)
+    test "developers can generate a Personality::Disposition and a nested Personality::Note model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "Add New Disposition"
+      click_on "Create Disposition"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Disposition"
+      click_on "Create Disposition"
+
+      assert page.has_content?("Disposition was successfully created.")
+      click_on "Some New Example Disposition"
+
+      click_on "Add New Note"
+      click_on "Create Note"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Note"
+      click_on "Create Note"
+      assert page.has_content?("Note was successfully created.")
+      click_on "Some New Example Note"
+    end
+  end
+
+  if defined?(Personality::Observation)
+    test "developers can generate a Personality::Observation and a nested Personality::Reactions::Response model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "Add New Observation"
+      click_on "Create Observation"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Observation"
+      click_on "Create Observation"
+
+      assert page.has_content?("Observation was successfully created.")
+      click_on "Some New Example Observation"
+
+      click_on "Add New Response"
+      click_on "Create Response"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Response"
+      click_on "Create Response"
+      assert page.has_content?("Response was successfully created.")
+      click_on "Some New Example Response"
     end
   end
 end
