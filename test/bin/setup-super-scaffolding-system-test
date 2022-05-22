@@ -3,6 +3,11 @@
 export SPRING=true
 bundle add spring
 
+echo ""
+echo "👋 This is the node we're on:"
+echo ${CIRCLE_NODE_INDEX}
+echo ""
+
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ x"${CIRCLE_NODE_INDEX}" == "0" ]; then
   spring rails g model TestSite team:references name:string other_attribute:string url:text sort_order:integer
   bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="ti.ti-world" --sortable
