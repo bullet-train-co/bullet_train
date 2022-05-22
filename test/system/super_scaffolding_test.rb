@@ -79,10 +79,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("/test")
-
-      within_primary_menu_for(display_details) do
-        click_on "Dashboard"
-      end
     end
   end
 

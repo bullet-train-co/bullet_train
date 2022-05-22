@@ -53,7 +53,8 @@ jobs:
       - restore_cache: *restore_yarn_cache
 
       # Install dependencies
-      - ruby/bundle-install
+      # We add `spring` in this task because we want it to get saved when we save the cache below.
+      - run: "bundle add spring || bundle install"
       - run: bundle clean --force
       - run: yarn install
 
@@ -146,8 +147,8 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
-      # Install dependencies
-      - ruby/bundle-install
+      # Install dependencie
+      - run: "bundle add spring || bundle install"
       - run: bundle clean --force
       - run: bin/link
       - run: yarn install

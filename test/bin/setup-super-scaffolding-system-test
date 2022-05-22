@@ -120,6 +120,7 @@ fi
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
   spring rails g model TestFile team:references foo:attachment
   bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
+  # TODO Write an actual test for this in `test/system/super_scaffolding_test.rb`.
 else
   echo "Skipping \`TestFile\` on this CI node."
 fi
