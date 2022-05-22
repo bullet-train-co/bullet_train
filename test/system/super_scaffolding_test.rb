@@ -69,22 +69,22 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       # Select the membership we created.
       find("#select2-test_site_membership_id-container").click
-      magic_test
-      find("li.select2-results__option span", text: "Example Project").click
+      find("li.select2-results__option span", text: "Jane Smith").click
       click_on "Update Test Site"
 
       # Test the has-many-through scaffolding.
       assert page.has_content? "Test Site was successfully updated."
 
-      # make sure the content is being displayed on the index partial.
-      assert page.has_content?("Some New Example Site")
-      assert page.has_content?("http://example.org/test")
-
-      # we're now looking at the index on the team dashboard.
-      click_on "Some New Example Site"
+      # make sure the content is being displayed on the show partial.
       assert page.has_content?("Test Site Details")
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("http://example.org/test")
+      click_on "Back"
+
+      # we're now looking at the index on the team dashboard.
+      assert page.has_content?("Some New Example Site")
+      assert page.has_content?("http://example.org/test")
+      click_on "Some New Example Site"
 
       assert page.has_content?("Test Pages")
       click_on "Add New Test Page"
