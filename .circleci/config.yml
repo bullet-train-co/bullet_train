@@ -147,7 +147,6 @@ jobs:
 
       # Install dependencies
       - ruby/bundle-install
-      - run: bundle exec gem install spring
       - run: bin/link
       - run: yarn install
       - run: yarn build

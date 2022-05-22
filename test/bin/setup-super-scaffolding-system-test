@@ -2,6 +2,8 @@
 
 export SPRING=true
 
+gem install spring
+
 echo ""
 echo "👋 This is the node we're on:"
 echo ${CIRCLE_NODE_INDEX}
