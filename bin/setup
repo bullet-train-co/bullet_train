@@ -37,7 +37,7 @@ FileUtils.chdir APP_ROOT do
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
   system("yarn check") || system!("yarn install")
-  system!("rake bt:link")
+  system!("bin/link")
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")

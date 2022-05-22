@@ -100,7 +100,7 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bundle clean --force
-      - run: bundle exec rake bt:link
+      - run: bin/link
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
@@ -148,7 +148,7 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bundle clean --force
-      - run: bundle exec rake bt:link
+      - run: bin/link
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
