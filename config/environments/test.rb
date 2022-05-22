@@ -14,7 +14,7 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   if ENV["SPRING"]
-    # We don't typically use Spring, but we use it for the Super Scaffolding test suite on CI.
+    # We don't use Spring by default, but we use it in `test/bin/setup-super-scaffolding-system-test`.
     config.cache_classes = false
     config.action_view.cache_template_loading = true
   else

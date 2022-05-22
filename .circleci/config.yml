@@ -137,6 +137,7 @@ jobs:
       - <<: *postgres_docker_image
       - image: circleci/redis
     executor: ruby/default
+    parallelism: 7
     steps:
       - browser-tools/install-chrome
       - checkout
