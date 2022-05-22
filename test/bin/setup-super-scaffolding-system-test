@@ -89,7 +89,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
   bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
 
   # Test that the foreign key table name will be inserted into the migration.
-  spring rails g migration add_other_membership_to_personality_notes other_character_trait:references
+  spring rails g migration add_other_membership_to_personality_notes other_membership:references
   bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
