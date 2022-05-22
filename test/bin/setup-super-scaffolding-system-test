@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-gem install spring
+bundle add spring
 
 spring rails g model TestSite team:references name:string other_attribute:string url:text sort_order:integer
 SPRING=1 bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="ti.ti-world" --sortable
