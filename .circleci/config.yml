@@ -53,8 +53,7 @@ jobs:
       - restore_cache: *restore_yarn_cache
 
       # Install dependencies
-      # We add `spring` in this task because we want it to get saved when we save the cache below.
-      - run: "bundle add spring || bundle install"
+      - ruby/bundle-install
       - run: bundle clean --force
       - run: yarn install
 
@@ -76,10 +75,10 @@ jobs:
     parallelism: 1
     steps:
       - checkout
+      - restore_cache: *restore_bundler_cache
 
       # Install dependencies
       - ruby/bundle-install
-      - run: bundle clean --force
 
       - run:
           name: Running rails db:migrate shouldn't cause changes
@@ -100,7 +99,6 @@ jobs:
 
       # Install dependencies
       - ruby/bundle-install
-      - run: bundle clean --force
       - run: bin/link
       - run: yarn install
       - run: yarn build
@@ -147,9 +145,9 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
-      # Install dependencie
-      - run: "bundle add spring || bundle install"
-      - run: bundle clean --force
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bundle exec gem install spring
       - run: bin/link
       - run: yarn install
       - run: yarn build
