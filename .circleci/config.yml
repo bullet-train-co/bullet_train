@@ -154,6 +154,7 @@ jobs:
 
       - *wait_for_docker
 
+      - run: bundle add spring
       - run:
           name: 'Setup Super Scaffolding System Test'
           command: bundle exec test/bin/setup-super-scaffolding-system-test

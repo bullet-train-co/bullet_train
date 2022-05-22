@@ -2,8 +2,6 @@
 
 export SPRING=true
 
-bundle add spring
-
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
   spring rails g model TestSite team:references name:string other_attribute:string url:text sort_order:integer
   spring rails g model TestPage test_site:references name:string path:text
