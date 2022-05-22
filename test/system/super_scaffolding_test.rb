@@ -38,11 +38,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     "Personality::Observation",
     "Personality::Reactions::Response",
   ].each do |class_name|
-    begin
-      class_name.constantize
-    rescue
-      nil
-    end
+    class_name.constantize
+  rescue
+    nil
   end
 
   if defined?(TestSite)
