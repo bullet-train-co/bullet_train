@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-require "pry"
-
 if Dir.exist?("tmp/gems")
   puts "Removing previously linked gems."
   `rm -f tmp/gems/*`
