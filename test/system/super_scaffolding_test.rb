@@ -55,7 +55,26 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Some New Example Site"
       fill_in "Other Attribute", with: "Some Other Value"
       fill_in "Url", with: "http://example.org/test"
+
       click_on "Create Test Site"
+
+      assert page.has_content? "Below is a list of Test Sites that have been added for Your Team."
+
+      # Edit the first test site.
+      within "table", match: :first do
+        click_on "Edit", match: :first
+      end
+
+      assert page.has_content? "Edit Test Site Details"
+
+      # Select the membership we created.
+      find("#select2-test_site_membership_id-container").click
+      magic_test
+      find("li.select2-results__option span", text: "Example Project").click
+      click_on "Update Test Site"
+
+      # Test the has-many-through scaffolding.
+      assert page.has_content? "Test Site was successfully updated."
 
       # make sure the content is being displayed on the index partial.
       assert page.has_content?("Some New Example Site")
@@ -124,23 +143,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       within "ol.breadcrumb" do
         click_on "Dashboard"
       end
-
-      assert page.has_content? "Below is a list of Test Sites that have been added for Your Team."
-
-      # Edit the first test site.
-      within "table", match: :first do
-        click_on "Edit", match: :first
-      end
-
-      assert page.has_content? "Edit Test Site Details"
-
-      # Select the project we created.
-      find("#select2-test_site_project_id-container").click
-      find("li.select2-results__option span", text: "Example Project").click
-      click_on "Update Test Site"
-
-      # Test the has-many-through scaffolding.
-      assert page.has_content? "Test Site was successfully updated."
 
       click_on "Example Project"
       assert page.has_content? "Below are the details we have for Example Project"
