@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-bundle exec rake bt:link
+bin/link
 
-if [ -x "$(command -v overmind)" ] 
+if [ -x "$(command -v overmind)" ]
 then
   overmind start -f Procfile.dev "$@"
 else

@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 # We redirect this script to a rake task because I don't know a better way to boot the Rails environment for this script.
-exec "rake \"bullet_train:super_scaffolding[#{ARGV.join(" ").gsub(",", "\\,")}]\""
+exec "#{"spring" if ENV["SPRING"]} rake \"bullet_train:super_scaffolding[#{ARGV.join(" ").gsub(",", "\\,")}]\""
