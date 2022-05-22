@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-# Disable this temporarily.
-export CI=
+# # Disable this temporarily.
+# export CI=
 
 bundle add spring
 
@@ -71,5 +71,5 @@ fi
 
 spring rake db:schema:load db:migrate db:test:prepare
 
-# Re-enable this. We want full eager loading when running the test suite.
-export CI=true
+# # Re-enable this. We want full eager loading when running the test suite.
+# export CI=true
