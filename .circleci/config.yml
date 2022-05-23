@@ -70,7 +70,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: cimg/redis
+      - image: cimg/redis:6.2.6
     executor: ruby/default
     parallelism: 1
     steps:
@@ -88,7 +88,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: cimg/redis
+      - image: cimg/redis:6.2.6
     executor: ruby/default
     parallelism: 16
     steps:
@@ -134,7 +134,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: cimg/redis
+      - image: cimg/redis:6.2.6
     executor: ruby/default
     parallelism: 7
     steps:
