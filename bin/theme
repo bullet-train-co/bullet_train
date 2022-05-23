@@ -1,18 +1,22 @@
 #!/usr/bin/env ruby
 
-require "pry"
+require "fileutils"
 
-case ARGV.shift
+theme = ARGV.pop
+gem_name = `bundle show bullet_train-themes-#{theme}`.chomp
+exit 1 if gem_name.empty? # `bundle show` already throws an error if there's no gem, so no need for a message.
+
+file_name = case ARGV.shift
 when "tailwind-config"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/tailwind.#{theme}.config.js"
+  "#{gem_name}/tailwind.#{theme}.config.js"
 when "tailwind-stylesheet"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/app/assets/stylesheets/#{theme}.tailwind.css"
+  "#{gem_name}/app/assets/stylesheets/#{theme}.tailwind.css"
 when "javascript"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/app/javascript/application.#{theme}.js"
+  "#{gem_name}/app/javascript/application.#{theme}.js"
+end
+
+if File.exists?(file_name)
+  puts file_name
+else
+  raise "We couldn't find #{file_name}. Please run `bin/develop` and edit bullet_train-themes-#{theme} to configure the file manually."
 end
