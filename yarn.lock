@@ -9,17 +9,17 @@
   dependencies:
     dragula "^3.7.3"
 
-"@bullet-train/bullet-train@^1.0.68":
-  version "1.0.71"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.71.tgz#7326360bd5a73f1759417717bd2b3d08c8056a55"
-  integrity sha512-wXdaZQIlg18qbl6dii44i5mTqvU7oyszpJCfTO71r1/sfR5Dt/SaYHzFeZ6Kukc3MiZxd5QHOlCU9LVzjisC5g==
+"@bullet-train/bullet-train@^1.0.72":
+  version "1.0.72"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.72.tgz#be3a7844f1cc15f5770da456cf7f88be8f35334d"
+  integrity sha512-QVssAlEDoqmpZVCjsmf/9/MEbRggU0cjpWmNBJVADk7ZUDPsxlGjIUyBaXnR17wvqlZ9yD+geDFCp0GyhJ2xNg==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
-"@bullet-train/fields@^1.0.7":
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.0.14.tgz#39f24be0a2c96ae8567b44b6be85c1cfbaf15f9b"
-  integrity sha512-C4ktoz1uGJRWG+nOcLMxK5+UgtcVTcGhqAeYnnpIKf3t0cSQktyNoC7VNGZp4/oKPDWAEfGX+IWrW8dqWoxNLg==
+"@bullet-train/fields@^1.0.15":
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.0.15.tgz#3d49fbac2bbdbf04d2be9c794016096255833c5c"
+  integrity sha512-0gM6gDmqwrlaDpI3yzLA1R4hMHmzZzkb+/9+V3pzGGBSMEd+Ds4Qcu9oMz5ms3Cgd2EnG9o0JbPnG+zTp0KzdQ==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
