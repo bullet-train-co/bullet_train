@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: ddc223cc4d6f8944d087617b9759d7c75fb0772c
+  revision: d08e88dadd44b7572b1ae37f44649d42180e8000
   specs:
     capybara (3.37.1)
       addressable
@@ -569,8 +569,9 @@ GEM
     thor (1.2.1)
     thread-local (1.1.0)
     timeout (0.2.0)
-    turbo-rails (1.0.1)
+    turbo-rails (1.1.0)
       actionpack (>= 6.0.0)
+      activejob (>= 6.0.0)
       railties (>= 6.0.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
