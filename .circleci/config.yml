@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ruby: circleci/ruby@0.1.2
+  ruby: cimg/ruby@0.1.2
   browser-tools: circleci/browser-tools@1.1
 aliases:
   - &restore_bundler_cache
@@ -32,7 +32,7 @@ aliases:
           PGUSER: untitled_application
           RAILS_ENV: test
   - &postgres_docker_image
-      - image: circleci/postgres
+      - image: cimg/postgres
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: untitled_application_test
@@ -70,7 +70,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: circleci/redis
+      - image: cimg/redis
     executor: ruby/default
     parallelism: 1
     steps:
@@ -88,7 +88,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: circleci/redis
+      - image: cimg/redis
     executor: ruby/default
     parallelism: 16
     steps:
@@ -134,7 +134,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: circleci/redis
+      - image: cimg/redis
     executor: ruby/default
     parallelism: 7
     steps:
