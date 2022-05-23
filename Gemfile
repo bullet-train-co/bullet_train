@@ -116,6 +116,9 @@ group :development do
 
   # Rails doesn't include this by default, but we depend on it.
   gem "foreman"
+
+  # For colorizing text in command line scripts.
+  gem "colorize"
 end
 
 group :test do
