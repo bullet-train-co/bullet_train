@@ -9,11 +9,13 @@ jobs:
     name: Rails Tests
     runs-on: ubuntu-20.04
 
-    strategy:
-      fail-fast: false
-      matrix:
-        ci_node_total: [16]
-        ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    # Uncomment these lines, along with the environment variables and
+    # test command below to run tests in parallel with Knapsack Pro.
+    # strategy:
+    #   fail-fast: false
+    #   matrix:
+    #     ci_node_total: [16]
+    #     ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
     services:
       # Setup a PostgreSQL data for us to test against
@@ -80,9 +82,11 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/
-          KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST }}
-          KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
-          KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
-          KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
-          KNAPSACK_PRO_LOG_LEVEL: info
-        run: bundle exec rake knapsack_pro:queue:minitest
+          # Uncomment these environment variables and the knapsack pro command below to run tests in parallel.
+          # KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST }}
+          # KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+          # KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+          # KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
+          # KNAPSACK_PRO_LOG_LEVEL: info
+        # run: bundle exec rake knapsack_pro:queue:minitest
+        run: bundle exec rails test
