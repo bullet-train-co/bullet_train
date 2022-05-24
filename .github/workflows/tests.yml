@@ -90,3 +90,8 @@ jobs:
           # KNAPSACK_PRO_LOG_LEVEL: info
         # run: bundle exec rake knapsack_pro:queue:minitest
         run: bundle exec rails test
+
+      - name: Minitest for Super Scaffolding
+        run: |
+          bundle exec test/bin/setup-super-scaffolding-system-test
+          bundle exec rails test test/system/super_scaffolding_test.rb
