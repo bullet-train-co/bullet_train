@@ -58,10 +58,10 @@
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.0.1.tgz#141f15645acaa3b133b7c247cad58ae252ffae85"
   integrity sha512-oHsJhgY2cip+K2ED7vKUNd2P+BEswVhrCYcJ802DSsblJFv7mPFVk3cQKvm2vHgHeDVdnj7oOKrBbzp1u8D+KA==
 
-"@hotwired/turbo-rails@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.1.1.tgz#35c03b92b5c86f0137ed08bef843d955ec9bbe83"
-  integrity sha512-ZXpxUjCfkdbuXfoGrsFK80qsVzACs8xCfie9rt2jMTSN6o1olXVA0Nrk8u02yNEwSiVJm/4QSOa8cUcMj6VQjg==
+"@hotwired/turbo-rails@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@hotwired/turbo-rails/-/turbo-rails-7.1.2.tgz#018ff65fdee4561e0c3ae407aa3f8eb0db7f6b88"
+  integrity sha512-rGz5RRkZu2vW5v3GnsgGRqkfhTxnX2b0IMbsX5VRX3b03ynt+Xn5yRsDVuEes1PXlnjgkkOPadf7NEEl7OdR3Q==
   dependencies:
     "@hotwired/turbo" "^7.1.0"
     "@rails/actioncable" "^7.0"
