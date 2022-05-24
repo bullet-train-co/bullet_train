@@ -56,7 +56,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   spring rails g model Projects::Step team:references name:string
-  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor
+  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor --sidebar="ti.ti-world"
 
   spring rails g model Objective projects_step:references name:string
   bin/super-scaffold crud Objective Projects::Step,Team name:text_field description:trix_editor
@@ -66,7 +66,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
   spring rails g model Insight team:references name:string
-  bin/super-scaffold crud Insight Team name:text_field description:trix_editor
+  bin/super-scaffold crud Insight Team name:text_field description:trix_editor --sidebar="ti.ti-world"
 
   spring rails g model Personality::CharacterTrait insight:references name:string
   bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
@@ -76,7 +76,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
   spring rails g model Personality::Disposition team:references name:string
-  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor
+  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --sidebar="ti.ti-world"
 
   spring rails g model Personality::Note disposition:references name:string
   bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
@@ -96,7 +96,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
   spring rails g model Personality::Observation team:references name:string
-  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor
+  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor --sidebar="ti.ti-world"
 
   spring rails g model Personality::Reactions::Response observation:references name:string
   bin/super-scaffold crud Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
