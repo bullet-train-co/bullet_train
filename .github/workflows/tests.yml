@@ -9,6 +9,12 @@ jobs:
     name: Rails Tests
     runs-on: ubuntu-20.04
 
+    strategy:
+      fail-fast: false
+      matrix:
+        ci_node_total: [16]
+        ci_node_index: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
     services:
       # Setup a PostgreSQL data for us to test against
       postgres:
@@ -70,8 +76,13 @@ jobs:
           yarn run light:build:css
 
       # Run the tests
-      - name: Running The Tests
+      - name: Minitest
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/
-        run: bundle exec rails test
+          KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST: ${{ secrets.KNAPSACK_PRO_TEST_SUITE_TOKEN_MINITEST }}
+          KNAPSACK_PRO_CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+          KNAPSACK_PRO_CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+          KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
+          KNAPSACK_PRO_LOG_LEVEL: info
+        run: bundle exec rake knapsack_pro:queue:minitest
