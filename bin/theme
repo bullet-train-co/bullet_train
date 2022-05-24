@@ -1,18 +1,38 @@
 #!/usr/bin/env ruby
 
+# We use this script to find Tailwind and JavaScript-related files according to the theme specified.
+
+require "fileutils"
 require "pry"
 
-case ARGV.shift
-when "tailwind-config"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/tailwind.#{theme}.config.js"
-when "tailwind-stylesheet"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/app/assets/stylesheets/#{theme}.tailwind.css"
-when "javascript"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/app/javascript/application.#{theme}.js"
+if ARGV.size < 2
+  puts "Please make sure you write both the the file type you're looking for along with the theme, in that order."
+  puts "\ti.e. - `bin/theme tailwind-config light`"
+  puts ""
+  puts "File type options:"
+  puts "\t\"tailwind-config\""
+  puts "\t\"tailwind-stylesheet\""
+  puts "\t\"javascript\""
 end
+
+file_type = ARGV.shift
+theme = ARGV.shift
+gem_path = `bundle show bullet_train-themes-#{theme}`.chomp
+exit 1 if gem_path.include?("Could not find gem") || gem_path.empty?
+
+file_path = case file_type
+when "tailwind-config"
+  "/tailwind.#{theme}.config.js"
+when "tailwind-stylesheet"
+  "/app/assets/stylesheets/#{theme}.tailwind.css"
+when "javascript"
+  "/app/javascript/application.#{theme}.js"
+else
+  raise "Sorry, we couldn't recognize the file you're looking for: \"#{file_type}\""
+end
+
+full_file_path = gem_path + file_path
+unless File.exist?(full_file_path)
+  raise "Sorry, we couldn't find the file you're looking for: #{full_file_path}"
+end
+puts full_file_path
