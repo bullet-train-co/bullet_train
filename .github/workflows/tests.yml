@@ -78,7 +78,7 @@ jobs:
           yarn run light:build:css
 
       # Run the tests
-      - name: Minitest
+      - name: Minitest and Super Scaffolding Minitest
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/
@@ -89,12 +89,7 @@ jobs:
           # KNAPSACK_PRO_FIXED_QUEUE_SPLIT: true
           # KNAPSACK_PRO_LOG_LEVEL: info
         # run: bundle exec rake knapsack_pro:queue:minitest
-        run: bundle exec rails test
-
-      - name: Minitest for Super Scaffolding
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/
         run: |
+          bundle exec rails test
           bundle exec test/bin/setup-super-scaffolding-system-test
           bundle exec rails test test/system/super_scaffolding_test.rb
