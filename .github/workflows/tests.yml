@@ -62,6 +62,13 @@ jobs:
           bundle exec rake db:create
           bundle exec rake db:schema:load
 
+      - name: Build Assets
+        run: |
+          yarn run build
+          yarn run build:css
+          yarn run light:build
+          yarn run light:build:css
+
       # Run the tests
       - name: Running The Tests
         env:
