@@ -177,6 +177,9 @@ end
 puts green "Running `yarn install`."
 stream "yarn install"
 
+puts green "Building assets"
+stream "yarn run build && yarn run build:css && yarn run light:build && yarn light:build:css"
+
 # This should be available now.
 require "active_support/inflector"
 
