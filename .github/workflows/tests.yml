@@ -93,6 +93,5 @@ jobs:
 
       - name: Minitest for Super Scaffolding
         run: |
-          bundle add spring
           bundle exec test/bin/setup-super-scaffolding-system-test
           bundle exec rails test test/system/super_scaffolding_test.rb

@@ -74,6 +74,7 @@ group :test do
   gem "capybara", github: "teamcapybara/capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  gem "spring"
 end
 
 # BULLET TRAIN GEMS
