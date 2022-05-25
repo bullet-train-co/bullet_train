@@ -31,8 +31,12 @@ else
   raise "Sorry, we couldn't recognize the file you're looking for: \"#{file_type}\""
 end
 
-full_file_path = gem_path + file_path
-unless File.exist?(full_file_path)
-  raise "Sorry, we couldn't find the file you're looking for: #{full_file_path}"
+[Dir.pwd, gem_path].each do |candidate_path|
+  full_file_path = candidate_path + file_path
+  if File.exist?(full_file_path)
+    puts full_file_path
+    exit
+  end
 end
-puts full_file_path
+
+raise "Sorry, we couldn't find the file you're looking for: #{full_file_path}"
