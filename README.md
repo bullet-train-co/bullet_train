@@ -65,20 +65,20 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 5. Clone your forked repository using the SSH path you copied, like so:
 
     ```
-    $ git clone git@github.com:your-account/bullet_train.git
-    $ cd bullet_train
+    git clone git@github.com:your-account/bullet_train.git
+    cd bullet_train
     ```
 
 6. Run the setup script:
 
     ```
-    $ bin/setup
+    bin/setup
     ```
 
 7. Start the application:
 
     ```
-    $ bin/dev
+    bin/dev
     ```
 
 8. Visit http://localhost:3000.
