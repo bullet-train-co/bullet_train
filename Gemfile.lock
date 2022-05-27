@@ -205,7 +205,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-themes (1.0.13)
       rails (>= 7.0.0)
-    bullet_train-themes-light (1.0.20)
+    bullet_train-themes-light (1.0.21)
       bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
     bullet_train-themes-tailwind_css (1.0.10)
