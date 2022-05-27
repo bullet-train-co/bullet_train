@@ -373,7 +373,7 @@ GEM
     minitest (5.15.0)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
-    msgpack (1.5.1)
+    msgpack (1.5.2)
     multi_json (1.15.0)
     multi_xml (0.6.0)
     mustermann (1.1.1)
