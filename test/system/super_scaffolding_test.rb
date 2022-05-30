@@ -22,23 +22,29 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   #   git clean -d -f
 
   # force autoload.
-  begin
-    TestSite
+  [
+    "TestSite",
+    "TestPage",
+    "Project",
+    "Projects::Deliverable",
+    "Projects::Tag",
+    "Projects::AppliedTag",
+    "Projects::Step",
+    "Objective",
+    "Insight",
+    "Personality::CharacterTrait",
+    "Personality::Disposition",
+    "Personality::Note",
+    "Personality::Observation",
+    "Personality::Reactions::Response",
+  ].each do |class_name|
+    class_name.constantize
   rescue
     nil
   end
-  begin
-    TestPage
-  rescue
-    nil
-  end
 
-  if defined?(TestSite) && defined?(TestPage)
-
-    test "developers can generate a site and a nested page model" do
-      display_details = @@test_devices[:macbook_pro_15_inch]
-      resize_for(display_details)
-
+  if defined?(TestSite)
+    test "developers can generate a TestSite and a nested TestPage model" do
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
@@ -49,17 +55,36 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Some New Example Site"
       fill_in "Other Attribute", with: "Some Other Value"
       fill_in "Url", with: "http://example.org/test"
+
       click_on "Create Test Site"
 
-      # make sure the content is being displayed on the index partial.
-      assert page.has_content?("Some New Example Site")
-      assert page.has_content?("http://example.org/test")
+      assert page.has_content? "Below is a list of Test Sites that have been added for Your Team."
 
-      # we're now looking at the index on the team dashboard.
-      click_on "Some New Example Site"
+      # Edit the first test site.
+      within "table", match: :first do
+        click_on "Edit", match: :first
+      end
+
+      assert page.has_content? "Edit Test Site Details"
+
+      # Select the membership we created.
+      find("#select2-test_site_membership_id-container").click
+      find("li.select2-results__option span", text: "Jane Smith").click
+      click_on "Update Test Site"
+
+      # Test the has-many-through scaffolding.
+      assert page.has_content? "Test Site was successfully updated."
+
+      # make sure the content is being displayed on the show partial.
       assert page.has_content?("Test Site Details")
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("http://example.org/test")
+      click_on "Back"
+
+      # we're now looking at the index on the team dashboard.
+      assert page.has_content?("Some New Example Site")
+      assert page.has_content?("http://example.org/test")
+      click_on "Some New Example Site"
 
       assert page.has_content?("Test Pages")
       click_on "Add New Test Page"
@@ -71,16 +96,18 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       assert page.has_content?("Some New Example Site")
       assert page.has_content?("/test")
+    end
+  end
 
-      within_primary_menu_for(display_details) do
-        click_on "Dashboard"
-      end
+  if defined?(Project)
+    test "developers can generate a Project and a nested Projects::Deliverable model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
 
       click_on "Add New Project"
       click_on "Create Project"
       assert page.has_content?("Name can't be blank.")
       fill_in "Name", with: "Some New Example Project"
-      # TODO figure out how to interact with trix editor fields in capybara tests.
       click_on "Create Project"
 
       assert page.has_content?("Project was successfully created.")
@@ -93,38 +120,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Deliverable"
       assert page.has_content?("Deliverable was successfully created.")
       click_on "Some New Example Deliverable"
-
-      click_on "Add New Objective"
-      click_on "Create Objective"
-      assert page.has_content?("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Objective"
-      click_on "Create Objective"
-      assert page.has_content?("Objective was successfully created.")
-      click_on "Some New Example Objective"
-
-      click_on "Add New Character Trait"
-      click_on "Create Character Trait"
-      assert page.has_content?("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Character Trait"
-      click_on "Create Character Trait"
-      assert page.has_content?("Character Trait was successfully created.")
-      click_on "Some New Example Character Trait"
-
-      click_on "Add New Note"
-      click_on "Create Note"
-      assert page.has_content?("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Note"
-      click_on "Create Note"
-      assert page.has_content?("Note was successfully created.")
-      click_on "Some New Example Note"
-
-      click_on "Add New Response"
-      click_on "Create Response"
-      assert page.has_content?("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Response"
-      click_on "Create Response"
-      assert page.has_content?("Response was successfully created.")
-      click_on "Some New Example Response"
 
       within "ol.breadcrumb" do
         click_on "Projects"
@@ -148,23 +143,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       within "ol.breadcrumb" do
         click_on "Dashboard"
       end
-
-      assert page.has_content? "Below is a list of Test Sites that have been added for Your Team."
-
-      # Edit the first test site.
-      within "table", match: :first do
-        click_on "Edit", match: :first
-      end
-
-      assert page.has_content? "Edit Test Site Details"
-
-      # Select the project we created.
-      find("#select2-test_site_project_id-container").click
-      find("li.select2-results__option span", text: "Example Project").click
-      click_on "Update Test Site"
-
-      # Test the has-many-through scaffolding.
-      assert page.has_content? "Test Site was successfully updated."
 
       click_on "Example Project"
       assert page.has_content? "Below are the details we have for Example Project"
@@ -213,98 +191,99 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     end
   end
 
-  if defined?(PartialTest)
-    test "super scaffolded partials function properly" do
-      display_details = @@test_devices[:macbook_pro_15_inch]
-      resize_for(display_details)
-
+  if defined?(Projects::Step)
+    test "developers can generate a Projects::Step and a nested Objective model" do
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
-      click_on "Add New Partial Test"
+      click_on "Add New Step"
+      click_on "Create Step"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Step"
+      click_on "Create Step"
 
-      # Text Field partial
-      fill_in "Text Field Test", with: "Test Text"
-      # Boolean Button partial
-      choose "No"
-      # Single Button partial
-      find("#partial_test_single_button_test_one+button", visible: :all).click
-      # Multiple Button partial
-      find("#partial_test_multiple_buttons_test_two+button", visible: :all).click
-      find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
-      # Date partial
-      find("#partial_test_date_test").click
-      find(".daterangepicker").click_on("apply") # Chooses today's date.
-      # DateTime partial
-      find("#partial_test_date_time_test").click
-      find(".daterangepicker").click_on("apply")
-      # File partial
-      attach_file("test/support/foo.txt", make_visible: true)
-      # Single Option partial
-      choose("One")
+      assert page.has_content?("Step was successfully created.")
+      click_on "Some New Example Step"
 
-      # TODO: We'll need to adjust bullet_train-themes-tailwind_css to
-      # make this one pass, will come back to this one soon.
-      # Multiple Option partial
-      # check("One")
-      # check("Three")
+      click_on "Add New Objective"
+      click_on "Create Objective"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Objective"
+      click_on "Create Objective"
+      assert page.has_content?("Objective was successfully created.")
+      click_on "Some New Example Objective"
+    end
+  end
 
-      # Password partial
-      fill_in "Password Test", with: "testpassword123"
-      # Phone Field Partial
-      fill_in "Phone Field Test", with: "(000)000-0000"
-      # Super Select partial
-      # Not using #select2_select here since we need to enable `other_options: {search: true}` to do so.
-      find("#partial_test_super_select_test").find("option[value='three']").select_option
-      # Multple Super Select Partial
-      find("#partial_test_multiple_super_select_test").find("option[value='one']").select_option
-      find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
-      # Text Area partial
-      fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+  if defined?(Insight)
+    test "developers can generate a Insight and a nested Personality::CharacterTrait model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
 
-      click_on "Create Partial Test"
-      assert page.has_content?("Partial Test was successfully created.")
+      click_on "Add New Insight"
+      click_on "Create Insight"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Insight"
+      click_on "Create Insight"
 
-      # Text field
-      click_on "Test Text"
-      partial_test = PartialTest.first
-      assert_equal partial_test.text_field_test, "Test Text"
-      # Boolean Button
-      assert_equal partial_test.boolean_test, false
-      # Single Button
-      assert_equal partial_test.single_button_test, "one"
-      # Multiple Buttons
-      refute_nil partial_test.multiple_buttons_test
-      assert_equal partial_test.multiple_buttons_test, ["two", "three"]
-      # Date
-      assert_equal partial_test.date_test, Date.today
-      # DateTime
-      refute_nil partial_test.date_time_test
-      assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
-      # File
-      refute_nil partial_test.file_test
-      assert_equal partial_test.file_test.class, ActiveStorage::Attached::One
-      # Single Option
-      refute_nil partial_test.option_test
-      assert_equal partial_test.option_test, "one"
-      # Multiple Options
-      # refute_nil partial_test.options_test
-      # assert_equal partial_test.options_test, ["one", "three"]
-      # Password
-      refute_nil partial_test.password_test
-      assert_equal partial_test.password_test, "testpassword123"
-      # Phone Field
-      refute_nil partial_test.phone_field_test
-      assert_equal partial_test.phone_field_test, "(000)000-0000"
-      # Super Select
-      refute_nil partial_test.super_select_test
-      assert_equal partial_test.super_select_test, "three"
-      # Multiple Super Select
-      refute_nil partial_test.multiple_super_select_test
-      assert_equal partial_test.multiple_super_select_test, ["one", "two"]
-      # Text Area
-      refute_nil partial_test.text_area_test
-      assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      assert page.has_content?("Insight was successfully created.")
+      click_on "Some New Example Insight"
+
+      click_on "Add New Character Trait"
+      click_on "Create Character Trait"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Character Trait"
+      click_on "Create Character Trait"
+      assert page.has_content?("Character Trait was successfully created.")
+      click_on "Some New Example Character Trait"
+    end
+  end
+
+  if defined?(Personality::Disposition)
+    test "developers can generate a Personality::Disposition and a nested Personality::Note model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "Add New Disposition"
+      click_on "Create Disposition"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Disposition"
+      click_on "Create Disposition"
+
+      assert page.has_content?("Disposition was successfully created.")
+      click_on "Some New Example Disposition"
+
+      click_on "Add New Note"
+      click_on "Create Note"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Note"
+      click_on "Create Note"
+      assert page.has_content?("Note was successfully created.")
+      click_on "Some New Example Note"
+    end
+  end
+
+  if defined?(Personality::Observation)
+    test "developers can generate a Personality::Observation and a nested Personality::Reactions::Response model" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "Add New Observation"
+      click_on "Create Observation"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Observation"
+      click_on "Create Observation"
+
+      assert page.has_content?("Observation was successfully created.")
+      click_on "Some New Example Observation"
+
+      click_on "Add New Response"
+      click_on "Create Response"
+      assert page.has_content?("Name can't be blank.")
+      fill_in "Name", with: "Some New Example Response"
+      click_on "Create Response"
+      assert page.has_content?("Response was successfully created.")
+      click_on "Some New Example Response"
     end
   end
 end

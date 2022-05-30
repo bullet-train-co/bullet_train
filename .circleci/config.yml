@@ -75,10 +75,10 @@ jobs:
     parallelism: 1
     steps:
       - checkout
+      - restore_cache: *restore_bundler_cache
 
       # Install dependencies
       - ruby/bundle-install
-      - run: bundle clean --force
 
       - run:
           name: Running rails db:migrate shouldn't cause changes
@@ -92,15 +92,14 @@ jobs:
     executor: ruby/default
     parallelism: 16
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
       # Install dependencies
       - ruby/bundle-install
-      - run: bundle clean --force
-      - run: bundle exec rake bt:link
+      - run: bin/link
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
@@ -137,8 +136,9 @@ jobs:
       - <<: *postgres_docker_image
       - image: circleci/redis
     executor: ruby/default
+    parallelism: 7
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
       - checkout
 
       # Restore dependency caches
@@ -147,14 +147,14 @@ jobs:
 
       # Install dependencies
       - ruby/bundle-install
-      - run: bundle clean --force
-      - run: bundle exec rake bt:link
+      - run: bin/link
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
 
       - *wait_for_docker
 
+      - run: bundle add spring
       - run:
           name: 'Setup Super Scaffolding System Test'
           command: bundle exec test/bin/setup-super-scaffolding-system-test

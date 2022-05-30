@@ -30,8 +30,8 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       # try non-matching passwords.
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
-      fill_in "Set Password", with: "password123"
-      fill_in "Confirm Password", with: "password123"
+      fill_in "Set Password", with: example_password
+      fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
       complete_pricing_page if subscriptions_enabled?
@@ -146,8 +146,8 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       assert page.has_content?("Create Your Account")
       # this email address is purposefully different than the one they were invited via.
       fill_in "Your Email Address", with: "takashi@yamaguchi.com"
-      fill_in "Set Password", with: "password234"
-      fill_in "Confirm Password", with: "password234"
+      fill_in "Set Password", with: another_example_password
+      fill_in "Confirm Password", with: another_example_password
       click_on "Sign Up"
 
       # this first name is purposefully different than the name they were invited with.
@@ -235,7 +235,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       assert page.has_content?("Sign In")
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
       click_on "Next" if two_factor_authentication_enabled?
-      fill_in "Your Password", with: "password123"
+      fill_in "Your Password", with: example_password
       click_on "Sign In"
 
       assert page.has_content?("Join Another Team")

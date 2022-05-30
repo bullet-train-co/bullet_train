@@ -37,7 +37,10 @@ FileUtils.chdir APP_ROOT do
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
   system("yarn check") || system!("yarn install")
-  system!("rake bt:link")
+  system!("bin/link")
+
+  puts "== Building assets =="
+  system!("yarn run build && yarn run build:css && yarn run light:build && yarn light:build:css")
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")

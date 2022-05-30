@@ -1,42 +1,125 @@
 #!/usr/bin/env bash
 
-rails g model TestSite team:references name:string other_attribute:string url:text sort_order:integer
-rails g model TestPage test_site:references name:string path:text
-rails g model Project team:references name:string
-rails g model Projects::Deliverable project:references name:string
-rails g model Objective projects_deliverable:references name:string
-rails g model Personality::CharacterTrait objective:references name:string
-rails g model Personality::Note character_trait:references name:string
-rails g model Personality::Reactions::Response note:references name:string
+export SPRING=true
 
-bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="ti.ti-world" --sortable
-bin/super-scaffold crud TestPage TestSite,Team name:text_field path:text_field
-bin/super-scaffold crud Project Team name:text_field description:trix_editor --sidebar="ti.ti-layout"
-bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
-bin/super-scaffold crud Objective Projects::Deliverable,Project,Team name:text_field description:trix_editor
-bin/super-scaffold crud Personality::CharacterTrait Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
-bin/super-scaffold crud Personality::Note Personality::CharacterTrait,Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
-bin/super-scaffold crud Personality::Reactions::Response Personality::Note,Personality::CharacterTrait,Objective,Projects::Deliverable,Project,Team name:text_field description:trix_editor
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+  spring rails g model TestSite team:references name:string other_attribute:string url:text sort_order:integer
+  spring rails g model TestPage test_site:references name:string path:text
+  spring rails g migration add_membership_id_to_test_sites membership:references
 
-rails g migration add_project_id_to_test_sites project:references
-bin/super-scaffold crud-field TestSite project_id:super_select{class_name=Project}
+  bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="ti.ti-world" --sortable
+  bin/super-scaffold crud TestPage TestSite,Team name:text_field path:text_field
+  bin/super-scaffold crud-field TestSite membership_id:super_select{class_name=Membership}
 
-# Test that the foreign key table name will be inserted into the migration.
-rails g migration add_other_character_trait_to_personality_notes other_character_trait:references
-bin/super-scaffold crud-field Personality::Note other_character_trait_id:super_select{class_name=Personality::CharacterTrait}
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i "" "s/raise .*/team\.memberships/g" app/models/test_site.rb
+  else
+    sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb
+  fi
+else
+  echo "Skipping \`TestSite\` and \`TestSite\` on this CI node."
+fi
 
-# Setup for has-many-through test.
-rails g model Projects::Tag team:references name:string
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+  spring rails g model Project team:references name:string
+  bin/super-scaffold crud Project Team name:text_field description:trix_editor --sidebar="ti.ti-layout"
 
-# TODO This actually has a bug with the route manipulator. We account for it with a `sed` call below.
-bin/super-scaffold crud Projects::Tag Team name:text_field --sidebar="ti.ti-tag"
+  spring rails g model Projects::Deliverable project:references name:string
+  bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
 
-rails g model Projects::AppliedTag project:references tag:references
-bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
-bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
+  # Setup for has-many-through test.
+  spring rails g model Projects::Tag team:references name:string
 
-# For testing partials.
-rails g model PartialTest team:references \
+  # TODO This actually has a bug with the route manipulator. We account for it with a `sed` call below.
+  bin/super-scaffold crud Projects::Tag Team name:text_field --sidebar="ti.ti-tag"
+
+  spring rails g model Projects::AppliedTag project:references tag:references
+  bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
+  bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
+
+    # TODO This is a fix for the bug in the route manipulator.
+    sed -i "" "s/resources :tags//g" config/routes.rb
+    sed -i "" "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
+  else
+    sed -i "s/raise .*/team\.projects_tags/g" app/models/project.rb
+
+    # TODO This is a fix for the bug in the route manipulator.
+    sed -i "s/resources :tags//g" config/routes.rb
+    sed -i "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
+  fi
+else
+  echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
+  spring rails g model Projects::Step team:references name:string
+  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor --sidebar="ti.ti-world"
+
+  spring rails g model Objective projects_step:references name:string
+  bin/super-scaffold crud Objective Projects::Step,Team name:text_field description:trix_editor
+else
+  echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+  spring rails g model Insight team:references name:string
+  bin/super-scaffold crud Insight Team name:text_field description:trix_editor --sidebar="ti.ti-world"
+
+  spring rails g model Personality::CharacterTrait insight:references name:string
+  bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
+else
+  echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
+  spring rails g model Personality::Disposition team:references name:string
+  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --sidebar="ti.ti-world"
+
+  spring rails g model Personality::Note disposition:references name:string
+  bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
+
+  # Test that the foreign key table name will be inserted into the migration.
+  spring rails g migration add_other_membership_to_personality_notes other_membership:references
+  bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+  else
+    sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+  fi
+else
+  echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
+  spring rails g model Personality::Observation team:references name:string
+  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor --sidebar="ti.ti-world"
+
+  spring rails g model Personality::Reactions::Response observation:references name:string
+  bin/super-scaffold crud Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
+  else
+    sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
+  fi
+else
+  echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
+  spring rails g model TestFile team:references foo:attachment
+  bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
+  # TODO Write an actual test for this in `test/system/super_scaffolding_test.rb`.
+else
+  echo "Skipping \`TestFile\` on this CI node."
+fi
+
+# TODO: Generate these in parallel.
+spring rails g model PartialTest team:references \
   text_field_test:string \
   boolean_test:boolean \
   single_button_test:string \
@@ -65,28 +148,4 @@ bin/super-scaffold crud PartialTest Team \
   multiple_super_select_test:super_select{multiple} \
   text_area_test:text_area --sidebar="ti.ti-layout"
 
-rails g model TestFile team:references foo:attachment
-bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
-  sed -i "" "s/raise .*/team\.projects/g" app/models/test_site.rb
-  sed -i "" "s/raise .*/character_trait\.objective\.personality_character_traits/g" app/models/personality/note.rb
-  sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
-
-  # TODO This is a fix for the bug in the route manipulator.
-  sed -i "" "s/resources :tags//g" config/routes.rb
-  sed -i "" "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
-else
-  sed -i "s/raise .*/team\.projects/g" app/models/test_site.rb
-  sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
-  sed -i "s/raise .*/character_trait\.objective\.personality_character_traits/g" app/models/personality/note.rb
-  sed -i "s/raise .*/team\.projects_tags/g" app/models/project.rb
-
-  # TODO This is a fix for the bug in the route manipulator.
-  sed -i "s/resources :tags//g" config/routes.rb
-  sed -i "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
-fi
-
-rake db:migrate
-rake db:test:prepare
+spring rake db:schema:load db:migrate db:test:prepare
