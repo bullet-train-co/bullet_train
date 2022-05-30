@@ -81,10 +81,10 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
       # Date partial
       find("#partial_test_date_test").click
-      find(".daterangepicker").click_on("apply") # Chooses today's date.
+      find(".daterangepicker").click_on("Apply") # Chooses today's date.
       # DateTime partial
       find("#partial_test_date_time_test").click
-      find(".daterangepicker").click_on("apply")
+      find(".daterangepicker").click_on("Apply")
       # File partial
       attach_file("test/support/foo.txt", make_visible: true)
       # Single Option partial
