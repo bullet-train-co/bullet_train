@@ -41,14 +41,14 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
     sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
 
     # TODO This is a fix for the bug in the route manipulator.
-    sed -i "" "s/resources :tags//g" config/routes.rb
-    sed -i "" "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
+    # sed -i "" "s/resources :tags//g" config/routes.rb
+    # sed -i "" "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
   else
     sed -i "s/raise .*/team\.projects_tags/g" app/models/project.rb
 
     # TODO This is a fix for the bug in the route manipulator.
-    sed -i "s/resources :tags//g" config/routes.rb
-    sed -i "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
+    # sed -i "s/resources :tags//g" config/routes.rb
+    # sed -i "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
   fi
 else
   echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
