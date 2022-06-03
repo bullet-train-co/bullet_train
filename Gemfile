@@ -86,7 +86,7 @@ gem "devise"
 
 # Core packages.
 gem "bullet_train"
-gem "bullet_train-super_scaffolding", git: "git@github.com:bullet-train-co/bullet_train-super_scaffolding.git", branch: "fixes/scaffold-namespaced-routes-correctly"
+gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"

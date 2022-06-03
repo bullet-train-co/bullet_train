@@ -1,14 +1,4 @@
 GIT
-  remote: git@github.com:bullet-train-co/bullet_train-super_scaffolding.git
-  revision: 1f55fcaae33e25c2c90349240450ee279dcefc18
-  branch: fixes/scaffold-namespaced-routes-correctly
-  specs:
-    bullet_train-super_scaffolding (1.0.28)
-      bullet_train
-      indefinite_article
-      rails (>= 6.0.0)
-
-GIT
   remote: https://github.com/bullet-train-co/active_hash.git
   revision: a6628bc65e7c099ec9428c2bfe1e292ef01f1ef1
   specs:
@@ -208,6 +198,10 @@ GEM
     bullet_train-sortable (1.0.2)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
+      rails (>= 6.0.0)
+    bullet_train-super_scaffolding (1.0.28)
+      bullet_train
+      indefinite_article
       rails (>= 6.0.0)
     bullet_train-themes (1.0.12)
       rails (>= 7.0.0)
@@ -628,7 +622,7 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
   bullet_train-sortable
-  bullet_train-super_scaffolding!
+  bullet_train-super_scaffolding
   bullet_train-themes-light
   capybara!
   capybara-email
