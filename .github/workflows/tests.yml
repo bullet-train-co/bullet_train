@@ -35,10 +35,11 @@ jobs:
       # Checkout the commit we'd like to test
       - uses: actions/checkout@v1
 
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
+      # Setup SSH keys so we can use ssh with git.
+      - name: webfactory/ssh-agent
+        uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       # Setup Ruby
       # https://github.com/ruby/setup-ruby#single-job
