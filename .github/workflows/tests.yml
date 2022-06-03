@@ -35,21 +35,15 @@ jobs:
       # Checkout the commit we'd like to test
       - uses: actions/checkout@v1
 
-      - name: Setup SSH Keys and known_hosts
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
 
       # Setup Ruby
       # https://github.com/ruby/setup-ruby#single-job
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         with:
           ruby-version: 3.1.2
           bundler-cache: true
