@@ -17,7 +17,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
     sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb
   fi
 else
-  echo "Skipping \`TestSite\` and \`TestSite\` on this CI node."
+  echo "Skipping \`TestSite\` and \`TestPage\` on this CI node."
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
