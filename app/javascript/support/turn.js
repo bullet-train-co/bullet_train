@@ -1,3 +1,5 @@
+// TODO We should probably move this into the `@bullet-train/bullet-train` package.
+
 // MIT License
 //
 // Copyright (c) 2021 Dom Christie
