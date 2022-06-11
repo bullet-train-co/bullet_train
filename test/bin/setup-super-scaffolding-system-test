@@ -3,9 +3,9 @@
 export SPRING=true
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-  spring rails g model TestSite team:references name:string other_attribute:string url:text sort_order:integer
-  spring rails g model TestPage test_site:references name:string path:text
-  spring rails g migration add_membership_id_to_test_sites membership:references
+  bundle exec spring rails g model TestSite team:references name:string other_attribute:string url:text sort_order:integer
+  bundle exec spring rails g model TestPage test_site:references name:string path:text
+  bundle exec spring rails g migration add_membership_id_to_test_sites membership:references
 
   bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="ti.ti-world" --sortable
   bin/super-scaffold crud TestPage TestSite,Team name:text_field path:text_field
@@ -17,23 +17,23 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
     sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb
   fi
 else
-  echo "Skipping \`TestSite\` and \`TestSite\` on this CI node."
+  echo "Skipping \`TestSite\` and \`TestPage\` on this CI node."
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
-  spring rails g model Project team:references name:string
+  bundle exec spring rails g model Project team:references name:string
   bin/super-scaffold crud Project Team name:text_field description:trix_editor --sidebar="ti.ti-layout"
 
-  spring rails g model Projects::Deliverable project:references name:string
+  bundle exec spring rails g model Projects::Deliverable project:references name:string
   bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
 
   # Setup for has-many-through test.
-  spring rails g model Projects::Tag team:references name:string
+  bundle exec spring rails g model Projects::Tag team:references name:string
 
   # TODO This actually has a bug with the route manipulator. We account for it with a `sed` call below.
   bin/super-scaffold crud Projects::Tag Team name:text_field --sidebar="ti.ti-tag"
 
-  spring rails g model Projects::AppliedTag project:references tag:references
+  bundle exec spring rails g model Projects::AppliedTag project:references tag:references
   bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
   bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
 
@@ -55,34 +55,34 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
-  spring rails g model Projects::Step team:references name:string
-  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor
+  bundle exec spring rails g model Projects::Step team:references name:string
+  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor --sidebar="ti.ti-world"
 
-  spring rails g model Objective projects_step:references name:string
+  bundle exec spring rails g model Objective projects_step:references name:string
   bin/super-scaffold crud Objective Projects::Step,Team name:text_field description:trix_editor
 else
   echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
-  spring rails g model Insight team:references name:string
-  bin/super-scaffold crud Insight Team name:text_field description:trix_editor
+  bundle exec spring rails g model Insight team:references name:string
+  bin/super-scaffold crud Insight Team name:text_field description:trix_editor --sidebar="ti.ti-world"
 
-  spring rails g model Personality::CharacterTrait insight:references name:string
+  bundle exec spring rails g model Personality::CharacterTrait insight:references name:string
   bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
 else
   echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
-  spring rails g model Personality::Disposition team:references name:string
-  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor
+  bundle exec spring rails g model Personality::Disposition team:references name:string
+  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --sidebar="ti.ti-world"
 
-  spring rails g model Personality::Note disposition:references name:string
+  bundle exec spring rails g model Personality::Note disposition:references name:string
   bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
 
   # Test that the foreign key table name will be inserted into the migration.
-  spring rails g migration add_other_membership_to_personality_notes other_membership:references
+  bundle exec spring rails g migration add_other_membership_to_personality_notes other_membership:references
   bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -95,10 +95,10 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
-  spring rails g model Personality::Observation team:references name:string
-  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor
+  bundle exec spring rails g model Personality::Observation team:references name:string
+  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor --sidebar="ti.ti-world"
 
-  spring rails g model Personality::Reactions::Response observation:references name:string
+  bundle exec spring rails g model Personality::Reactions::Response observation:references name:string
   bin/super-scaffold crud Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -111,11 +111,11 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
-  spring rails g model TestFile team:references foo:attachment
+  bundle exec spring rails g model TestFile team:references foo:attachment
   bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
   # TODO Write an actual test for this in `test/system/super_scaffolding_test.rb`.
 else
   echo "Skipping \`TestFile\` on this CI node."
 fi
 
-spring rake db:schema:load db:migrate db:test:prepare
+bundle exec spring rake db:schema:load db:migrate db:test:prepare

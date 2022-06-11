@@ -153,14 +153,7 @@ end
 puts "Running `bundle install`.".green
 stream "bundle install"
 
-if `yarn -v 2> /dev/null`.strip.length > 0
-  puts "Yarn is installed.".green
-else
-  puts "Yarn is not installed. Try `brew install yarn`.".red
-  exit
-end
-
-puts "Running `yarn install`.".green
+puts green "Running `yarn install`."
 stream "yarn install"
 
 # This should be available now.
