@@ -2,15 +2,6 @@ require "application_system_test_case"
 
 unless scaffolding_things_disabled?
   class ReactivitySystemTest < ApplicationSystemTestCase
-    def setup
-      super
-      ::Selenium::WebDriver::Remote::Bridge.slow_down_execute_time
-    end
-
-    def teardown
-      ::Selenium::WebDriver::Remote::Bridge.reset_execute_time
-    end
-
     @@test_devices.each do |device_name, display_details|
       test "create a new tangible thing on a #{device_name} and update it" do
         resize_for(display_details)
@@ -95,9 +86,7 @@ unless scaffolding_things_disabled?
         # to try and figure this scenario out. So for now, we'll do it like this, from the index page:
 
         click_on "Back"
-        click_on "Delete"
-
-        page.driver.browser.switch_to.alert.accept
+        accept_alert { click_on "Delete" }
 
         assert page.has_content? "Creative Concept was successfully destroyed."
         assert page.has_content? "There are no Creative Concepts for you to see on My Super Team yet."
