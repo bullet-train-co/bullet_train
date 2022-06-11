@@ -156,9 +156,10 @@ group :production do
 
   # Selenium is the default default Capybara driver for system tests that ships with
   # Rails. Cuprite is an alternative driver that uses Chrome's native DevTools protocol
-  # and offers improved speed and reliability. You can switch to Cuprite by commenting out
-  # `commenting out `gem "selenium-webdriver"` and `gem webdrivers` and uncommenting
-  # `gem cuprite` and Bullet Train will automatically load the correct configuration.
+  # and offers improved speed and reliability, but only works with Chrome. If you want 
+  # to switch to Cuprite, you can comment out the `selenium-webdriver` and `webdrivers`
+  # gems and uncomment the `cuprite` gem below. Bullet Train will automatically load 
+  # the correct configuration based on which gem is included.
   gem "selenium-webdriver"
   gem "webdrivers"
 
