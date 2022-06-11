@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'colorize'
+
 def replace_in_file(file, before, after, target_regexp = nil)
   puts "Replacing in '#{file}'."
   if target_regexp
@@ -28,24 +30,8 @@ def stream(command, prefix = "  ")
   puts ""
 end
 
-def red(string)
-  "\e[1;31m#{string}\e[0m"
-end
-
-def green(string)
-  "\e[1;32m#{string}\e[0m"
-end
-
-def blue(string)
-  "\e[1;34m#{string}\e[0m"
-end
-
-def yellow(string)
-  "\e[1;33m#{string}\e[0m"
-end
-
 def ask(string)
-  puts blue string
+  puts string.blue
   return gets.strip
 end
 
@@ -58,9 +44,9 @@ required_ruby = `cat ./.ruby-version`.strip
 actual_ruby = `ruby -v`.strip
 message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
 if actual_ruby.include?(required_ruby)
-  puts green(message)
+  puts message.green
 else
-  puts red(message)
+  puts message.red
   input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y]"
   if input.downcase[0] == "n"
     exit
@@ -71,9 +57,9 @@ required_node = `cat ./.nvmrc`.strip
 actual_node = `node -v`.strip.gsub("v", "")
 message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
 if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
-  puts green(message)
+  puts message.green
 else
-  puts red(message)
+  puts message.red
   input = ask "Try proceeding with Node #{actual_node} anyway? [y]"
   if input.downcase[0] == "n"
     exit
@@ -81,9 +67,9 @@ else
 end
 
 if `brew info 2> /dev/null`.length > 0
-  puts green "Homebrew is installed."
+  puts "Homebrew is installed.".green
 else
-  puts red "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it."
+  puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
   input = ask "Try proceeding without Homebrew?"
   if input.downcase[0] == "n"
     exit
@@ -91,27 +77,27 @@ else
 end
 
 if not_installed?("postgresql@13")
-  puts red "PostgreSQL 13 is not installed via Homebrew. Try running `brew install postgresql@13`."
+  puts "PostgreSQL 13 is not installed via Homebrew. Try running `brew install postgresql@13`.".red
   input = ask "Try proceeding without PostgreSQL 13?"
   if input.downcase[0] == "n"
     exit
   end
 else
-  puts green "PostgreSQL 13 is installed via Homebrew."
+  puts "PostgreSQL 13 is installed via Homebrew.".green
 end
 
 if not_installed?("redis")
-  puts red "Redis is not installed via Homebrew. Try running `brew install redis`."
+  puts "Redis is not installed via Homebrew. Try running `brew install redis`.".red
   input = ask "Try proceeding without Redis?"
   if input.downcase[0] == "n"
     exit
   end
 else
-  puts green "Redis is installed via Homebrew."
+  puts "Redis is installed via Homebrew.".green
 end
 
 if not_installed?("icu4c")
-  puts red "icu4c is not installed via Homebrew. Try running `brew install icu4c`."
+  puts "icu4c is not installed via Homebrew. Try running `brew install icu4c`.".red
   input = ask "Try proceeding without icu4c?"
   if input.downcase[0] == "n"
     exit
@@ -119,9 +105,9 @@ if not_installed?("icu4c")
 end
 
 if `yarn -v 2> /dev/null`.length > 0
-  puts green "Yarn is installed."
+  puts "Yarn is installed.".green
 else
-  puts red "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install ."
+  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
   exit
 end
 
@@ -132,18 +118,18 @@ puts "(If you're not sure, we suggest going with GitHub)"
 skip_github = ask "Continue setting up with GitHub? [y/n]"
 if skip_github.downcase[0] == "y"
   if `git remote | grep bullet-train`.strip.length > 0
-    puts yellow "Repository already has a \`bullet-train`\ remote."
+    puts "Repository already has a \`bullet-train`\ remote.".yellow
   else
     if `git remote | grep origin`.strip.length > 0
-      puts green "Renaming repository `origin` remote to `bullet-train`."
+      puts "Renaming repository `origin` remote to `bullet-train`.".green
       `git remote rename origin bullet-train`
     else
-      puts red "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?"
+      puts "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?".red
     end
   end
 
   if `git remote | grep origin`.strip.length > 0
-    puts yellow "Repository already has a \`origin`\ remote."
+    puts "Repository already has a \`origin`\ remote.".yellow
   else
     ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
     command = if Gem::Platform.local.os == "linux"
@@ -154,17 +140,17 @@ if skip_github.downcase[0] == "y"
     `#{command} https://github.com/new`
 
     ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
-    puts green "Setting repository's `origin` remote to `#{ssh_path}`."
+    puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
     puts `git remote add origin #{ssh_path}`.chomp
   end
 
   local_branch = `git branch | grep "*"`.split.last
 
-  puts green "Pushing repository to `origin`."
+  puts "Pushing repository to `origin`.".green
   stream "git push origin #{local_branch}:main 2>&1"
 end
 
-puts green "Running `bundle install`."
+puts "Running `bundle install`.".green
 stream "bundle install"
 
 puts green "Running `yarn install`."
@@ -181,7 +167,7 @@ kebab_case = variable.tr("_", "-")
 connected_name = variable.gsub("_", "") # i.e. `bullettrain` as opposed to `bullet_train`
 
 puts ""
-puts green "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase."
+puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
 replace_in_file("./.circleci/config.yml", "untitled_application", variable)
 replace_in_file("./config/application.rb", "untitled_application", connected_name)
 replace_in_file("./config/database.yml", "untitled_application", variable)
@@ -196,7 +182,7 @@ replace_in_file("./config/locales/en/application.en.yml", "untitled application"
 replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
 puts ""
 
-puts green "Moving `./README.example.md` to `./README.md`."
+puts "Moving `./README.example.md` to `./README.md`.".green
 puts `mv ./README.example.md ./README.md`.chomp
 
 puts `rm .github/FUNDING.yml`.chomp
@@ -206,16 +192,16 @@ replace_in_file("./README.md", "Untitled Application", human)
 
 if skip_github
   puts ""
-  puts yellow("Make sure you save your changes with Git.")
+  puts "Make sure you save your changes with Git.".yellow
 else
-  puts green "Committing all these changes to the repository."
+  puts "Committing all these changes to the repository.".green
   stream "git add -A"
   stream "git commit -m \"Run configuration script.\""
   stream "git push origin #{local_branch}:main"
 end
 
 puts ""
-puts yellow "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!"
+puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
 puts ""
-puts green "Next you can run `bin/setup` and then `bin/dev`."
+puts "Next you can run `bin/setup` and then `bin/dev`.".green
 puts ""
