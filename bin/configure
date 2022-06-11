@@ -167,13 +167,6 @@ end
 puts green "Running `bundle install`."
 stream "bundle install"
 
-if `yarn -v 2> /dev/null`.strip.length > 0
-  puts green "Yarn is installed."
-else
-  puts red "Yarn is not installed. Try `brew install yarn`."
-  exit
-end
-
 puts green "Running `yarn install`."
 stream "yarn install"
 
