@@ -75,8 +75,6 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", github: "teamcapybara/capybara"
-  gem "selenium-webdriver"
-  gem "webdrivers"
 end
 
 # BULLET TRAIN GEMS
@@ -119,6 +117,9 @@ group :development do
 
   # Rails doesn't include this by default, but we depend on it.
   gem "foreman"
+
+  # For colorizing text in command line scripts.
+  gem "colorize"
 end
 
 group :test do
@@ -155,6 +156,17 @@ group :production do
 
   # Use S3 for Active Storage by default.
   gem "aws-sdk-s3", require: false
+
+  # Selenium is the default default Capybara driver for system tests that ships with
+  # Rails. Cuprite is an alternative driver that uses Chrome's native DevTools protocol
+  # and offers improved speed and reliability, but only works with Chrome. If you want
+  # to switch to Cuprite, you can comment out the `selenium-webdriver` and `webdrivers`
+  # gems and uncomment the `cuprite` gem below. Bullet Train will automatically load
+  # the correct configuration based on which gem is included.
+  gem "selenium-webdriver"
+  gem "webdrivers"
+
+  # gem "cuprite"
 end
 
 # TODO Have to specify this dependency here until our changes are in the original package.
