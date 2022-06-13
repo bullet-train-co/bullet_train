@@ -153,7 +153,7 @@ end
 puts "Running `bundle install`.".green
 stream "bundle install"
 
-puts green "Running `yarn install`."
+puts "Running `yarn install`.".green
 stream "yarn install"
 
 # This should be available now.
