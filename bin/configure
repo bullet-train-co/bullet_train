@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+`gem install colorize`
+
 require 'colorize'
 
 def replace_in_file(file, before, after, target_regexp = nil)
