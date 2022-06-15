@@ -199,7 +199,7 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.28)
+    bullet_train-super_scaffolding (1.0.29)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
@@ -554,6 +554,7 @@ GEM
       redis (>= 4.2.0)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
+    spring (4.0.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
