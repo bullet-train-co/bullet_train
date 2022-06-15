@@ -24,6 +24,13 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
 <br>
 
+### Cloud Development with Gitpod
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/bullet_train_co/bullet-train)
+
+Clicking this button will set up a new Bullet Train app in [Gitpod](https://gitpod.io).
+
+
 <p align="center">
 <strong>Open-source development sponsored by:</strong>
 </p>

@@ -85,6 +85,7 @@ Rails.application.configure do
 
   # allow users to access this application via the configured application domain.
   config.hosts << default_url_options_from_base_url[:host]
+  config.hosts << /.*\.gitpod\.io/
 
   config.action_mailer.delivery_method = :letter_opener
   config.active_job.queue_adapter = :sidekiq

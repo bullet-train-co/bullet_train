@@ -58,6 +58,7 @@ Untitled
 # Ignore development tools files
 .tool-versions
 .byebug_history
+dump.rdb
 
 # Ignore locally cloned framework packages.
 /local
