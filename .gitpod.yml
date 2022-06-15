@@ -11,6 +11,7 @@ tasks:
   - name: Rails
     init: |
       gp sync-await redis-started
+      bundle install &&
       bin/setup &&
       rails db:setup &&
       gp sync-done bundle # 'bundle' is an arbitrary name
