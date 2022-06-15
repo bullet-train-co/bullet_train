@@ -39,6 +39,7 @@ Clicking this button will set up a new Bullet Train app in [Gitpod](https://gitp
 </p>
 
 <br>
+<br>
 
 ## Provisioning a Production Environment
 You can use this public repository to provision a new application and then push your private application code there later.
