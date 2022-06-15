@@ -204,7 +204,7 @@ GEM
       indefinite_article
       rails (>= 6.0.0)
       spring
-    bullet_train-themes (1.0.15)
+    bullet_train-themes (1.0.13)
       rails (>= 7.0.0)
     bullet_train-themes-light (1.0.23)
       bullet_train-themes-tailwind_css
