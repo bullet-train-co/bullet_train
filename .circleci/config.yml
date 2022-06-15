@@ -93,6 +93,7 @@ jobs:
     parallelism: 16
     steps:
       - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
@@ -139,6 +140,7 @@ jobs:
     parallelism: 7
     steps:
       - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
 
       # Restore dependency caches
@@ -162,6 +164,47 @@ jobs:
           name: 'Run Super Scaffolding Test'
           command: bundle exec rails test test/system/super_scaffolding_test.rb
 
+  'System Tests with Cuprite':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: circleci/redis
+    executor: ruby/default
+    parallelism: 16
+    steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - checkout
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bin/link
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      - *wait_for_docker
+
+      - run:
+          name: Run system tests with cuprite as system test driver
+          command: |
+            if test $BT_CORE_CI
+            then
+              echo "Running system tests with Cuprite"
+              sed -i'.orig' 's/# gem "cuprite"/gem "cuprite"/' Gemfile
+              sed -i'.orig' 's/gem "selenium-webdriver"/# gem "selenium-webdriver"/' Gemfile
+              sed -i'.orig' 's/gem "webdrivers"/# gem "webdrivers"/' Gemfile
+              bundle install
+              bundle exec rails test:system
+            else
+              echo "Skipping system tests with Cuprite"
+              exit 0
+            fi
+          environment:
+            RAILS_ENV: test
+
 workflows:
   version: 2
   build:
@@ -170,3 +213,4 @@ workflows:
       - 'Database Schema Check'
       - 'Minitest'
       - 'Minitest for Super Scaffolding'
+      - 'System Tests with Cuprite'
