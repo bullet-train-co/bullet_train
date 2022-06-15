@@ -30,6 +30,11 @@ Devise.setup do |config|
   # Configure the parent class responsible to send e-mails.
   config.parent_mailer = "ApplicationMailer"
 
+  # NOTE: This is a workaround to get Devise working with Turbo
+  # Configure the parent controller.
+  config.parent_controller = "TurboDeviseController"
+  config.navigational_formats = ["*/*", :html, :turbo_stream]
+
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
@@ -267,6 +272,9 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
+  config.warden do |manager|
+    manager.failure_app = TurboFailureApp
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
