@@ -15,9 +15,9 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: d08e88dadd44b7572b1ae37f44649d42180e8000
+  revision: a930528c92a645abb69ac278b366464da61f8424
   specs:
-    capybara (3.37.1)
+    capybara (3.38.0)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -101,7 +101,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.594.0)
+    aws-partitions (1.598.0)
     aws-sdk-core (3.131.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -199,13 +199,14 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.28)
+    bullet_train-super_scaffolding (1.0.29)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.13)
-      rails (>= 7.0.0)
-    bullet_train-themes-light (1.0.23)
+      spring
+    bullet_train-themes (1.0.16)
+      rails (>= 6.0.0)
+    bullet_train-themes-light (1.0.25)
       bullet_train-themes-tailwind_css
       rails (>= 7.0.0)
     bullet_train-themes-tailwind_css (1.0.10)
@@ -343,7 +344,7 @@ GEM
     json (2.6.2)
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
-    jwt (2.3.0)
+    jwt (2.4.1)
     knapsack_pro (3.2.1)
       rake
     launchy (2.5.0)
@@ -531,7 +532,7 @@ GEM
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    selenium-webdriver (4.2.0)
+    selenium-webdriver (4.2.1)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -554,6 +555,7 @@ GEM
       redis (>= 4.2.0)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
+    spring (4.0.0)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -566,7 +568,7 @@ GEM
       rubocop-performance (= 1.13.3)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
-    stripe (6.2.0)
+    stripe (6.3.0)
     strscan (3.0.3)
     thor (1.2.1)
     thread-local (1.1.0)
