@@ -22,6 +22,12 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     bin/configure
     ```
 
+## Cloud Development with Gitpod
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/bullet-train-co/bullet_train)
+
+Clicking this button will set up a new Bullet Train app in [Gitpod](https://gitpod.io).
+
 <br>
 
 ### Cloud Development with Gitpod
@@ -39,6 +45,7 @@ Clicking this button will set up a new Bullet Train app in [Gitpod](https://gitp
 <a href="https://www.clickfunnels.com"><img src="https://images.clickfunnel.com/uploads/digital_asset/file/176632/clickfunnels-dark-logo.svg" width="575" /></a>
 </p>
 
+<br>
 <br>
 
 ## Provisioning a Production Environment
