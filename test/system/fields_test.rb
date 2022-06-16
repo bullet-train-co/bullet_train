@@ -9,6 +9,7 @@ unless scaffolding_things_disabled?
         visit root_path
 
         click_on "Don't have an account?"
+        assert page.has_content?("Create Your Account")
         fill_in "Your Email Address", with: "me@acme.com"
         fill_in "Set Password", with: example_password
         fill_in "Confirm Password", with: example_password
