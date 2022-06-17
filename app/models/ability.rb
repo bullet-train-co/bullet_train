@@ -2,6 +2,10 @@ class Ability
   include CanCan::Ability
   include Roles::Permit
 
+  if billing_enabled?
+    include Billing::AbilitySupport
+  end
+
   def initialize(user)
     if user.present?
 
@@ -25,6 +29,10 @@ class Ability
       end
 
       # 🚅 super scaffolding will insert any new oauth providers above.
+
+      if billing_enabled?
+        apply_billing_abilities user
+      end
 
       if user.developer?
         # the following admin abilities were added by super scaffolding.

@@ -15,7 +15,9 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
-      complete_pricing_page if subscriptions_enabled?
+      if billing_enabled?
+        complete_pricing_page
+      end
 
       # we should now be on an onboarding step.
       assert page.has_content?("Tell us about you")

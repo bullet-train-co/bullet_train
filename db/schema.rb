@@ -61,6 +61,35 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "billing_external_subscriptions", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.text "notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_billing_external_subscriptions_on_team_id"
+  end
+
+  create_table "billing_subscriptions", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.string "provider_subscription_type", null: false
+    t.bigint "provider_subscription_id", null: false
+    t.datetime "cycle_ends_at", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status", default: "initiated"
+    t.index ["provider_subscription_type", "provider_subscription_id"], name: "index_billing_subscriptions_on_provider_subscription"
+    t.index ["team_id"], name: "index_billing_subscriptions_on_team_id"
+  end
+
+  create_table "billing_subscriptions_included_prices", force: :cascade do |t|
+    t.bigint "subscription_id", null: false
+    t.string "price_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["subscription_id"], name: "index_billing_subscriptions_included_prices_on_subscription_id"
+  end
+
   create_table "integrations_stripe_installations", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.bigint "oauth_stripe_account_id", null: false
@@ -331,6 +360,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "billing_external_subscriptions", "teams"
+  add_foreign_key "billing_subscriptions", "teams"
+  add_foreign_key "billing_subscriptions_included_prices", "billing_subscriptions", column: "subscription_id"
   add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"
   add_foreign_key "integrations_stripe_installations", "teams"
   add_foreign_key "invitations", "teams"

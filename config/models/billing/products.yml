@@ -1,0 +1,43 @@
+free:
+  limits:
+    memberships:
+      count: 1
+      enforcement: hard
+    scaffolding/absolutely_abstract/creative_concepts:
+      count: 0
+      enforcement: hard
+basic:
+  price: basic_2021
+  image: "streamline-icon-idea-message.png"
+  limits:
+    memberships:
+      count: 3
+      enforcement: hard
+    scaffolding/absolutely_abstract/creative_concepts:
+      count: nil
+  prices:
+    basic_2021:
+      amount: 1000
+      currency: USD
+      duration: 1
+      interval: month
+      quantity: memberships
+pro:
+  price: pro_2021
+  image: "streamline-icon-laptop-idea.png"
+  limits:
+    memberships:
+      count: 10
+      enforcement: soft
+    scaffolding/absolutely_abstract/creative_concepts:
+      count: nil
+  prices:
+    pro_2021:
+      amount: 10000
+      currency: USD
+      duration: 1
+      interval: month
+extras:
+  price: pro_2021
+  features:
+    extras: true
