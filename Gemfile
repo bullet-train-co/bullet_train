@@ -182,3 +182,4 @@ gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
 # 🚅 super scaffolding will insert new oauth providers above this line.
 
 gem "bullet_train-billing", path: "local/bullet_train-billing"
+gem "bullet_train-billing-stripe", path: "local/bullet_train-billing-stripe"

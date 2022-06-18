@@ -69,6 +69,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
     t.index ["team_id"], name: "index_billing_external_subscriptions_on_team_id"
   end
 
+  create_table "billing_stripe_subscriptions", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.string "stripe_subscription_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_billing_stripe_subscriptions_on_team_id"
+  end
+
   create_table "billing_subscriptions", force: :cascade do |t|
     t.bigint "team_id", null: false
     t.string "provider_subscription_type", null: false
@@ -260,6 +268,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
     t.boolean "being_destroyed"
     t.string "time_zone"
     t.string "locale"
+    t.string "stripe_customer_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -315,6 +324,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
     t.index ["oauth_stripe_account_id"], name: "index_stripe_webhooks_on_stripe_account_id"
   end
 
+  create_table "webhooks_incoming_stripe_webhooks", force: :cascade do |t|
+    t.jsonb "data"
+    t.datetime "processed_at", precision: nil
+    t.datetime "verified_at", precision: nil
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+  end
+
   create_table "webhooks_outgoing_deliveries", force: :cascade do |t|
     t.integer "endpoint_id"
     t.integer "event_id"
@@ -361,6 +378,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "billing_external_subscriptions", "teams"
+  add_foreign_key "billing_stripe_subscriptions", "teams"
   add_foreign_key "billing_subscriptions", "teams"
   add_foreign_key "billing_subscriptions_included_prices", "billing_subscriptions", column: "subscription_id"
   add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"

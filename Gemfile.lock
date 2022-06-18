@@ -28,6 +28,13 @@ GIT
       xpath (~> 3.2)
 
 PATH
+  remote: local/bullet_train-billing-stripe
+  specs:
+    bullet_train-billing-stripe (0.1.0)
+      bullet_train-billing
+      rails (>= 6.0.0)
+
+PATH
   remote: local/bullet_train-billing
   specs:
     bullet_train-billing (0.1.0)
@@ -629,6 +636,7 @@ DEPENDENCIES
   bullet_train!
   bullet_train-api
   bullet_train-billing!
+  bullet_train-billing-stripe!
   bullet_train-incoming_webhooks
   bullet_train-integrations
   bullet_train-integrations-stripe
