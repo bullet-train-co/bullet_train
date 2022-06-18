@@ -42,6 +42,13 @@ PATH
       rails (>= 6.0)
 
 PATH
+  remote: local/bullet_train-themes-light
+  specs:
+    bullet_train-themes-light (1.0.29)
+      bullet_train-themes-tailwind_css
+      rails (>= 6.0.0)
+
+PATH
   remote: local/bullet_train
   specs:
     bullet_train (1.0.81)
@@ -223,9 +230,6 @@ GEM
       rails (>= 6.0.0)
     bullet_train-themes (1.0.16)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.0.27)
-      bullet_train-themes-tailwind_css
-      rails (>= 7.0.0)
     bullet_train-themes-tailwind_css (1.0.10)
       bullet_train
       bullet_train-themes
@@ -645,7 +649,7 @@ DEPENDENCIES
   bullet_train-scope_questions
   bullet_train-sortable
   bullet_train-super_scaffolding
-  bullet_train-themes-light
+  bullet_train-themes-light!
   capybara!
   capybara-email
   colorize

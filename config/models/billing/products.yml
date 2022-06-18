@@ -8,7 +8,7 @@ free:
       enforcement: hard
 basic:
   price: basic_2021
-  image: "streamline-icon-idea-message.png"
+  image: "sparkles.png"
   limits:
     memberships:
       count: 3
@@ -24,7 +24,7 @@ basic:
       quantity: memberships
 pro:
   price: pro_2021
-  image: "streamline-icon-laptop-idea.png"
+  image: "rocket.png"
   limits:
     memberships:
       count: 10
