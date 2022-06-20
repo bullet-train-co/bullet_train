@@ -29,8 +29,6 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
 
   # Setup for has-many-through test.
   bundle exec spring rails g model Projects::Tag team:references name:string
-
-  # TODO This actually has a bug with the route manipulator. We account for it with a `sed` call below.
   bin/super-scaffold crud Projects::Tag Team name:text_field --sidebar="ti.ti-tag"
 
   bundle exec spring rails g model Projects::AppliedTag project:references tag:references
@@ -39,16 +37,8 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
-
-    # TODO This is a fix for the bug in the route manipulator.
-    sed -i "" "s/resources :tags//g" config/routes.rb
-    sed -i "" "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
   else
     sed -i "s/raise .*/team\.projects_tags/g" app/models/project.rb
-
-    # TODO This is a fix for the bug in the route manipulator.
-    sed -i "s/resources :tags//g" config/routes.rb
-    sed -i "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
   fi
 else
   echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
