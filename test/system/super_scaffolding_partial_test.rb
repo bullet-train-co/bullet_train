@@ -63,19 +63,19 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     test "super scaffolded color pickers function properly" do
       display_details = @@test_devices[:macbook_pro_15_inch]
       resize_for(display_details)
-  
+
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
-  
+
       assert page.has_content?("Add New Color Picker")
       click_on "Add New Color Picker"
-  
+
       assert page.has_content?("Color Picker Value")
       color_picker_buttons = all(".button-color")
       assert_equal color_picker_buttons.size, 8
       color_picker_buttons.first.click
       click_on "Create Color Picker"
-  
+
       assert page.has_content?("Color Picker was successfully created.")
 
       # The default value can be found in the color picker's locale.
