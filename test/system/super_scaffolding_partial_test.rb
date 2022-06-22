@@ -82,5 +82,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       color_picker_default_value = "#9C73D2"
       assert_equal ColorPicker.first.color_picker_value, color_picker_default_value
       assert page.has_content?(color_picker_default_value)
+    end
   end
 end
