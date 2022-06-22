@@ -22,14 +22,16 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   #   git clean -d -f
 
   # force autoload.
-  begin
-    TestFile
+  [
+    "TestFile",
+    "ColorPicker",
+  ].each do |class_name|
+    class_name.constantize
   rescue
     nil
   end
 
   if defined?(TestFile)
-
     test "developers can Super Scaffold a file partial and perfrom crud actions on the record" do
       display_details = @@test_devices[:macbook_pro_15_inch]
       resize_for(display_details)
@@ -55,5 +57,30 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Test File was successfully updated.")
       assert TestFile.first.foo.blank?
     end
+  end
+
+  if defined?(ColorPicker)
+    test "super scaffolded color pickers function properly" do
+      display_details = @@test_devices[:macbook_pro_15_inch]
+      resize_for(display_details)
+
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      assert page.has_content?("Add New ColorPicker")
+      click_on "Add New ColorPicker"
+
+      assert page.has_content?("Color Picker Value")
+      color_picker_buttons = all(".button-color")
+      assert_equal color_picker_buttons.size, 8
+      color_picker_buttons.first.click
+      click_on "Create ColorPicker"
+
+      assert page.has_content?("ColorPicker was successfully created.")
+
+      # The default value can be found in the locale.
+      color_picker_default_value = "#9C73D2"
+      assert_equal ColorPicker.first.color_picker_value, color_picker_default_value
+      assert page.has_content?(color_picker_default_value)
   end
 end

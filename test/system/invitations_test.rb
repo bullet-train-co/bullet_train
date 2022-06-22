@@ -30,8 +30,8 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       # try non-matching passwords.
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
-      fill_in "Set Password", with: "password123"
-      fill_in "Confirm Password", with: "password123"
+      fill_in "Set Password", with: example_password
+      fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
       complete_pricing_page if subscriptions_enabled?
@@ -100,8 +100,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       # TODO we should first test that a canceled invitation can't be claimed.
       assert page.has_content?("Invitation Details")
 
-      click_on "Remove from Team"
-      page.driver.browser.switch_to.alert.accept
+      accept_alert { click_on "Remove from Team" }
       assert page.has_content?("That user has been successfully removed from the team.")
 
       # click the link in the email.
@@ -131,8 +130,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
           end
         end
 
-        click_on "Re-Invite to Team"
-        page.driver.browser.switch_to.alert.accept
+        accept_alert { click_on "Re-Invite to Team" }
         assert page.has_content?("The user has been successfully re-invited. They will receive an email to rejoin the team.")
       end
 
@@ -146,8 +144,8 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       assert page.has_content?("Create Your Account")
       # this email address is purposefully different than the one they were invited via.
       fill_in "Your Email Address", with: "takashi@yamaguchi.com"
-      fill_in "Set Password", with: "password234"
-      fill_in "Confirm Password", with: "password234"
+      fill_in "Set Password", with: another_example_password
+      fill_in "Confirm Password", with: another_example_password
       click_on "Sign Up"
 
       # this first name is purposefully different than the name they were invited with.
@@ -235,7 +233,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       assert page.has_content?("Sign In")
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
       click_on "Next" if two_factor_authentication_enabled?
-      fill_in "Your Password", with: "password123"
+      fill_in "Your Password", with: example_password
       click_on "Sign In"
 
       assert page.has_content?("Join Another Team")
@@ -261,8 +259,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         end
       end
 
-      click_on "Leave This Team"
-      page.driver.browser.switch_to.alert.accept
+      accept_alert { click_on "Leave This Team" }
 
       assert page.has_content?("You've successfully removed yourself from Another Team.")
 
@@ -281,8 +278,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       end
 
       assert page.has_content?("Hanako Tanaka’s Membership on The Testing Team")
-      click_on "Demote from Admin"
-      page.driver.browser.switch_to.alert.accept
+      accept_alert { click_on "Demote from Admin" }
 
       assert page.has_content?("The Testing Team Team Members")
       within_current_memberships_table do
@@ -300,8 +296,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       assert page.has_no_content?("Promote to Admin")
       assert page.has_no_content?("Demote from Admin")
 
-      click_on "Leave This Team"
-      page.driver.browser.switch_to.alert.accept
+      accept_alert { click_on "Leave This Team" }
 
       # if this is happening, it shouldn't be.
       assert page.has_no_content?("You are not authorized to access this page.")

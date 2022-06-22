@@ -26,8 +26,8 @@ class AccountTest < ApplicationSystemTestCase
       login_as(@jane, scope: :user)
       visit edit_account_user_path(@jane)
       fill_in "Current Password", with: @jane.password
-      fill_in "New Password", with: "new_password"
-      fill_in "Confirm Password", with: "new_password"
+      fill_in "New Password", with: another_example_password
+      fill_in "Confirm Password", with: another_example_password
       click_on "Update Password"
       @jane.reload
       assert page.has_content?("User was successfully updated.")
@@ -35,7 +35,7 @@ class AccountTest < ApplicationSystemTestCase
       visit new_user_session_path
       fill_in "Email", with: @jane.email
       click_on "Next" if two_factor_authentication_enabled?
-      fill_in "Your Password", with: "new_password"
+      fill_in "Your Password", with: another_example_password
       click_on "Sign In"
       assert page.has_content?("Signed in successfully.")
     end
@@ -45,8 +45,8 @@ class AccountTest < ApplicationSystemTestCase
       login_as(@jane, scope: :user)
       visit edit_account_user_path(@jane)
       fill_in "Current Password", with: "invalid"
-      fill_in "New Password", with: "new_password"
-      fill_in "Confirm Password", with: "new_password"
+      fill_in "New Password", with: another_example_password
+      fill_in "Confirm Password", with: another_example_password
       click_on "Update Password"
       @jane.reload
       assert page.has_content?("Current password is invalid.")
@@ -54,7 +54,7 @@ class AccountTest < ApplicationSystemTestCase
       visit new_user_session_path
       fill_in "Email", with: @jane.email
       click_on "Next" if two_factor_authentication_enabled?
-      fill_in "Your Password", with: "new_password"
+      fill_in "Your Password", with: another_example_password
       click_on "Sign In"
       assert page.has_content?("Invalid Email Address or Password.")
     end

@@ -13,8 +13,14 @@ Rails.application.configure do
 
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Turn false under Spring and add config.action_view.cache_template_loading = true
-  config.cache_classes = true
+  if ENV["SPRING"]
+    # We don't use Spring by default, but we use it in `test/bin/setup-super-scaffolding-system-test`.
+    config.cache_classes = false
+    config.action_view.cache_template_loading = true
+  else
+    # Turn false under Spring and add config.action_view.cache_template_loading = true
+    config.cache_classes = true
+  end
 
   # Eager loading loads your whole application. When running a single test locally,
   # this probably isn't necessary. It's a good idea to do in a continuous integration

@@ -72,4 +72,6 @@ require("esbuild").build({
   plugins: [
     ImportGlobPlugin()
   ],
+  // TODO: Silencing warnings until the charset warning is fixed.
+  logLevel: 'error',
 }).catch(() => process.exit(1));
