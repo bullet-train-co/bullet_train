@@ -116,7 +116,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
   # TODO Write an actual test for this in `test/system/super_scaffolding_test.rb`.
 
   bundle exec spring rails g model ColorPicker team:references color_picker_value:string
-  bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker
+  bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --sidebar="ti.ti-tag"
 else
   echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
 fi
