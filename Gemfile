@@ -93,7 +93,7 @@ end
 gem "devise"
 
 # Core packages.
-gem "bullet_train"
+gem "bullet_train", git: "https://github.com/bullet-train-co/bullet_train-base.git", branch: "features/bin-develop-with-gitpod"
 gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
