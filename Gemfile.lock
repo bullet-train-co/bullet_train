@@ -220,7 +220,7 @@ GEM
       activesupport (>= 5.2)
       railties (>= 5.2)
       thread-local (>= 1.1.0)
-    cancancan (3.3.0)
+    cancancan (3.4.0)
     capybara-email (3.0.2)
       capybara (>= 2.4, < 4.0)
       mail
@@ -533,7 +533,7 @@ GEM
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    selenium-webdriver (4.2.1)
+    selenium-webdriver (4.3.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -590,7 +590,7 @@ GEM
       activemodel
       mail (>= 2.6.1)
       simpleidn
-    version_gem (1.0.0)
+    version_gem (1.0.2)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
