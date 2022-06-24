@@ -73,7 +73,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
 
       # Also ensure we can't do that same action as another user.
       get "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {access_token: another_access_token}
-      assert_response_specific_not_found
+      assert_response :forbidden
     end
 
     test "create" do
@@ -92,7 +92,6 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       # Also ensure we can't do that same action as another user.
       post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things",
         params: tangible_thing_data.merge({access_token: another_access_token})
-      # TODO Why is this returning forbidden instead of the specific "Not Found" we get everywhere else?
       assert_response :forbidden
     end
 
@@ -132,7 +131,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
 
       # Also ensure we can't do that same action as another user.
       put "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {access_token: another_access_token}
-      assert_response_specific_not_found
+      assert_response :forbidden
     end
 
     test "destroy" do
@@ -144,7 +143,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
 
       # Also ensure we can't do that same action as another user.
       delete "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {access_token: another_access_token}
-      assert_response_specific_not_found
+      assert_response :forbidden
     end
   end # 🚅 skip when scaffolding.
 end

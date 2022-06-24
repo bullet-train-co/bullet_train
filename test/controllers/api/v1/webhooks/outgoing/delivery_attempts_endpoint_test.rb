@@ -56,7 +56,7 @@ class Api::V1::Webhooks::Outgoing::DeliveryAttemptsEndpointTest < Api::Test
 
     # Also ensure we can't do that same action as another user.
     get "/api/v1/webhooks/outgoing/delivery_attempts/#{@delivery_attempt.id}", params: {access_token: another_access_token}
-    assert_response_specific_not_found
+    assert_response :forbidden
   end
 
   test "create" do
