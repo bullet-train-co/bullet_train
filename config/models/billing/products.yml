@@ -1,29 +1,38 @@
 free:
   limits:
     memberships:
-      count: 1
-      enforcement: hard
-    scaffolding/absolutely_abstract/creative_concepts:
-      count: 0
-      enforcement: hard
-basic:
-  price: basic_2021
-  image: "sparkles.png"
-  limits:
-    memberships:
       count: 3
       enforcement: hard
     scaffolding/absolutely_abstract/creative_concepts:
+      count: 25
+      enforcement: hard
+basic:
+  price: basic_2022
+  image: "sparkles.png"
+  limits:
+    memberships:
       count: nil
+    scaffolding/absolutely_abstract/creative_concepts:
+      count: 50
+      enforcement: soft
   prices:
-    basic_2021:
+    basic_monthly_2022:
       amount: 1000
       currency: USD
       duration: 1
       interval: month
       quantity: memberships
+      highlight: true
+      trial_days: 7
+    basic_annual_2022:
+      amount: 10000
+      currency: USD
+      duration: 1
+      interval: year
+      quantity: memberships
+      highlight: true
 pro:
-  price: pro_2021
+  price: pro_2022
   image: "rocket.png"
   limits:
     memberships:
@@ -32,12 +41,13 @@ pro:
     scaffolding/absolutely_abstract/creative_concepts:
       count: nil
   prices:
-    pro_2021:
+    pro_monthly_2022:
       amount: 10000
       currency: USD
       duration: 1
       interval: month
-extras:
-  price: pro_2021
-  features:
-    extras: true
+    pro_annual_2022:
+      amount: 100000
+      currency: USD
+      duration: 1
+      interval: year
