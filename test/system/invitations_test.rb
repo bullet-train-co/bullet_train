@@ -192,14 +192,6 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "Team Name", with: "Another Team"
       click_on "Create Team"
 
-      if subscriptions_enabled?
-        complete_pricing_page
-
-        # TODO this feels like a bug. after the subscription creation, we should go to the dashboard.
-        assert page.has_content?("Your Teams")
-        click_on "Another Team"
-      end
-
       assert page.has_content?("Another Team’s Dashboard")
       within_team_menu_for(display_details) do
         click_on "Team Members"
