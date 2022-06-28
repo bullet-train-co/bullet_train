@@ -8,3 +8,8 @@ def any_oauth_enabled?
     # 🚅 super scaffolding will insert new oauth provider checks above this line.
   ].select(&:present?).any?
 end
+
+# TODO Temporary to get tests passing.
+def billing_enabled?
+  false
+end
