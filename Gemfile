@@ -93,12 +93,12 @@ end
 gem "devise"
 
 # Core packages.
-gem "bullet_train", path: "local/bullet_train"
+gem "bullet_train"
 gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
-gem "bullet_train-themes-light", path: "local/bullet_train-themes-light"
+gem "bullet_train-themes-light"
 gem "bullet_train-integrations"
 gem "bullet_train-integrations-stripe"
 
@@ -180,6 +180,3 @@ gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
 # that you run into a merge conflict in the future.
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
-
-gem "bullet_train-billing", path: "local/bullet_train-billing"
-gem "bullet_train-billing-stripe", path: "local/bullet_train-billing-stripe"
