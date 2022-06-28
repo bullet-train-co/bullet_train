@@ -1,11 +1,12 @@
 require_relative "boot"
-require_relative "../lib/bullet_train"
 
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
+
+require_relative "../lib/bullet_train"
 
 module UntitledApplication
   class Application < Rails::Application
