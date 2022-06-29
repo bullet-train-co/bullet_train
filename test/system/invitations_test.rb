@@ -150,6 +150,11 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: another_example_password
       click_on "Sign Up"
 
+      # The email was sent to takashi.yamaguchi@gmail.com,
+      # but since the user signed up with the email takashi@yamaguchi.com,
+      # we have to confirm that we actually want to join the team under this account.
+      click_on "Join The Testing Team"
+
       # this first name is purposefully different than the name they were invited with.
       # assert page.has_content?('Create Your Account')
       assert page.has_content?("Tell us about you")
