@@ -1,0 +1,17 @@
+en:
+  billing/products:
+    free:
+      name: Free
+    basic:
+      name: Basic
+      description: This is an example plan that includes a free trial when paid for monthly.
+      features:
+        - Demonstrates pricing per team member.
+        - Allows creation of up to fifty "Creative Concepts".
+        - Soft enforcement that limit.
+    pro:
+      name: Pro
+      description: An improved example plan that demonstrates different features.
+      features:
+        - Demonstrates a fixed price for up to ten team members.
+        - Allows creation of an unlimited number of "Creative Concepts".
