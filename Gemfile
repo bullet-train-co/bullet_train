@@ -107,12 +107,6 @@ gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
 
-# source "https://BULLET_TRAIN_PRO_TOKEN@gem.fury.io/bullettrain" do
-#   gem "bullet_train-action_models"
-#   gem "bullet_train-conversations"
-#   gem "bullet_train-audit_logs"
-# end
-
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
   gem "letter_opener"
