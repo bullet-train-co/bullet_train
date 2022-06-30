@@ -101,7 +101,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.601.0)
+    aws-partitions (1.602.0)
     aws-sdk-core (3.131.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -124,7 +124,7 @@ GEM
     bootsnap (1.12.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.85)
+    bullet_train (1.0.88)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -433,7 +433,7 @@ GEM
     possessive (1.0.1)
     postmark (1.22.1)
       json
-    postmark-rails (0.22.0)
+    postmark-rails (0.22.1)
       actionmailer (>= 3.0.0)
       postmark (>= 1.21.3, < 2.0)
     premailer (1.16.0)
@@ -568,7 +568,7 @@ GEM
       rubocop-performance (= 1.13.3)
     stimulus-rails (1.0.4)
       railties (>= 6.0.0)
-    stripe (6.4.0)
+    stripe (6.5.0)
     strscan (3.0.3)
     thor (1.2.1)
     thread-local (1.1.0)
