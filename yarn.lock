@@ -10,9 +10,9 @@
     dragula "^3.7.3"
 
 "@bullet-train/bullet-train@^1.0.72":
-  version "1.0.89"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.89.tgz#2c77c0284b52f2326d33bf53ce2b0699b9173647"
-  integrity sha512-ux5dN9Vp9ORJT6eummBAYrXToQ4gYCqjHbrBidmYozkKWKxJy02Dpvz+DQiueDZUeuerHNYzKmF+yAdFNEeHdA==
+  version "1.0.90"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.90.tgz#b200a0ff1c6efa4018af3343e9ae973898ed4cfe"
+  integrity sha512-7qNifdoylnQmSWKsKJkBHNcUe2bQkzFD/l8BScQvi+05PqqN5G8PAOz8hDR/5cbiBoQjXNeXTMBHT/zX8UPyqg==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
@@ -354,9 +354,9 @@ dragula@^3.7.3:
     crossvent "1.5.5"
 
 electron-to-chromium@^1.4.172:
-  version "1.4.176"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.176.tgz#61ab2a1de3b5072ee31881a937c08ac6780d1cfa"
-  integrity sha512-92JdgyRlcNDwuy75MjuFSb3clt6DGJ2IXSpg0MCjKd3JV9eSmuUAIyWiGAp/EtT0z2D4rqbYqThQLV90maH3Zw==
+  version "1.4.177"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.177.tgz#b6a4436eb788ca732556cd69f384b8a3c82118c5"
+  integrity sha512-FYPir3NSBEGexSZUEeht81oVhHfLFl6mhUKSkjHN/iB/TwEIt/WHQrqVGfTLN5gQxwJCQkIJBe05eOXjI7omgg==
 
 esbuild-android-64@0.14.48:
   version "0.14.48"
