@@ -395,7 +395,7 @@ GEM
       net-protocol
       timeout
     netrc (0.11.0)
-    nice_partials (0.1.6)
+    nice_partials (0.1.7)
       actionview (>= 4.2.6)
     nio4r (2.5.8)
     nokogiri (1.13.6)
