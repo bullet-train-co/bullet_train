@@ -203,7 +203,8 @@ GEM
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.17)
+    bullet_train-themes (1.0.18)
+      nice_partials (>= 0.1.7)
       rails (>= 6.0.0)
     bullet_train-themes-light (1.0.38)
       bullet_train-themes-tailwind_css
