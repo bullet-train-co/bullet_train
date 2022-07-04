@@ -23,13 +23,13 @@ default: &default
 
 development:
   <<: *default
-  database: untitled_application_development
+  database: sharpen_page_availability_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: untitled_application-app
+  #username: sharpen_page_availability-app
 
   # The password associated with the postgres role (username).
   #password:
@@ -57,7 +57,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: untitled_application_test
+  database: sharpen_page_availability_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -80,7 +80,7 @@ test:
 #
 production:
   <<: *default
-  database: untitled_application_production
-  username: untitled_application
-  password: <%= ENV['UNTITLED_APPLICATION_DATABASE_PASSWORD'] %>
+  database: sharpen_page_availability_production
+  username: sharpen_page_availability
+  password: <%= ENV['SHARPEN_PAGE_AVAILABILITY_DATABASE_PASSWORD'] %>
   url: <%= ENV['DATABASE_URL'] %>

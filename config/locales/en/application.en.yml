@@ -1,8 +1,8 @@
 en:
   application:
-    name: Untitled Application
-    owner: Unidentified Developer
-    description: "You can update this description in `config/locales/en/application.en.yml`."
-    keywords: untitled application seo keywords
-    support_email: change.me@localhost
-    key: untitled_application
+    name: Sharpen.page Availability
+    owner: Pascal Laliberté
+    description: "Sharpen.page Availability"
+    keywords: sharpen.page availability seo keywords
+    support_email: pascal@hey.com
+    key: sharpen_page_availability

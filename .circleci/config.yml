@@ -29,14 +29,14 @@ aliases:
       - image: cimg/ruby:3.1.2-browsers
         environment:
           PGHOST: localhost
-          PGUSER: untitled_application
+          PGUSER: sharpen_page_availability
           RAILS_ENV: test
   - &postgres_docker_image
       - image: circleci/postgres
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
-          POSTGRES_DB: untitled_application_test
-          POSTGRES_USER: untitled_application
+          POSTGRES_DB: sharpen_page_availability_test
+          POSTGRES_USER: sharpen_page_availability
   - &wait_for_docker
       # We run this because the DB might not be available for a while due to a race condition.
       run: dockerize -wait tcp://localhost:5432 -timeout 1m
