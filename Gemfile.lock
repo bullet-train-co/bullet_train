@@ -206,7 +206,7 @@ GEM
     bullet_train-themes (1.0.18)
       nice_partials (>= 0.1.7)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.0.38)
+    bullet_train-themes-light (1.0.40)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
     bullet_train-themes-tailwind_css (1.0.10)
@@ -396,7 +396,7 @@ GEM
       net-protocol
       timeout
     netrc (0.11.0)
-    nice_partials (0.1.7)
+    nice_partials (0.1.8)
       actionview (>= 4.2.6)
     nio4r (2.5.8)
     nokogiri (1.13.6)
