@@ -354,9 +354,9 @@ dragula@^3.7.3:
     crossvent "1.5.5"
 
 electron-to-chromium@^1.4.172:
-  version "1.4.177"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.177.tgz#b6a4436eb788ca732556cd69f384b8a3c82118c5"
-  integrity sha512-FYPir3NSBEGexSZUEeht81oVhHfLFl6mhUKSkjHN/iB/TwEIt/WHQrqVGfTLN5gQxwJCQkIJBe05eOXjI7omgg==
+  version "1.4.179"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.179.tgz#450561ade3ca3497dfed65af412c672972b2dad5"
+  integrity sha512-1XeTb/U/8Xgh2YgPOqhakLYsvCcU4U7jUjTMbEnhIJoIWd/Qt3yC8y0cbG+fHzn4zUNF99Ey1xiPf20bwgLO3Q==
 
 esbuild-android-64@0.14.48:
   version "0.14.48"
