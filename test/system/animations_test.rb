@@ -1,0 +1,49 @@
+require "application_system_test_case"
+
+class AnimationsTest < ApplicationSystemTestCase
+  def setup
+    super
+    @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
+    @team = @jane.current_team
+  end
+
+  test "mobile menu works properly" do
+    display_details = { resolution: [750, 1334], mobile: true, high_dpi: true }
+    animation_duration = 0.5
+    resize_for(display_details)
+    login_as(@jane, scope: :user)
+    
+    visit account_team_path(@jane.current_team)
+    
+    els = {
+      :open_button => first("#mobile-menu-open", :visible => false),
+      :close_button => first("#mobile-menu-close", :visible => false),
+      :backdrop => first("#mobile-menu-backdrop", :visible => false)
+    }
+    
+    5.times do |i|
+      assert_not els[:open_button].obscured?, "open_button should not initially be obscured on iteration #{i}"
+      [:close_button, :backdrop].each do |key|
+        assert_not els[key].visible?, "#{key.to_s} should initially be hidden on iteration #{i}"
+      end
+      
+      els[:open_button].click
+      
+      sleep(animation_duration)
+      
+      assert els[:open_button].obscured?, "open_button should be obscured after mobile menu open on iteration #{i}"
+      [:close_button, :backdrop].each do |key|
+        assert els[key].visible?, "#{key.to_s} should be visible after mobile menu open on iteration #{i}"
+      end
+      
+      # alternate either method of closing
+      if i.even?
+        els[:close_button].click
+      else
+        els[:backdrop].click
+      end
+      
+      sleep(animation_duration)
+    end
+  end
+end
