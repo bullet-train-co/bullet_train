@@ -99,7 +99,6 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         end
       end
 
-      # TODO we should first test that a canceled invitation can't be claimed.
       assert page.has_content?("Invitation Details")
 
       accept_alert { click_on "Remove from Team" }
@@ -115,6 +114,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       # if we're back on the team's dashboard, then we're *not* on the accept invitation page, which means the
       # invitation wasn't claimable.
       assert page.has_content?("The Testing Team’s Dashboard")
+      assert page.has_content?("Sorry, but we couldn't find your invitation.")
       within_team_menu_for(display_details) do
         click_on "Team Members"
       end
