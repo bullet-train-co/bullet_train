@@ -14,7 +14,7 @@
     "@rails/activestorage": "^7.0.0",
     "@rails/ujs": "^7.0.0",
     "@tailwindcss/forms": "^0.5.2",
-    "@tailwindcss/typography": "^0.5.2",
+    "@tailwindcss/typography": "^0.5.3",
     "autoprefixer": "^10.4.7",
     "cable_ready": "^5.0.0-pre8",
     "dragula": "^3.7.3",
@@ -28,7 +28,7 @@
     "postcss-import": "^14.1.0",
     "postcss-nested": "^5.0.6",
     "stimulus-reveal": "^1.4.2",
-    "tailwindcss": "^3.1.4"
+    "tailwindcss": "^3.1.5"
   },
   "scripts": {
     "build": "node esbuild.config.js",
