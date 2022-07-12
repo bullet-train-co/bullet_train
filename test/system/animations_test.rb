@@ -21,7 +21,7 @@ class AnimationsTest < ApplicationSystemTestCase
       :backdrop => first("#mobile-menu-backdrop", :visible => false)
     }
     
-    5.times do |i|
+    3.times do |i|
       assert_not els[:open_button].obscured?, "open_button should not initially be obscured on iteration #{i}"
       [:close_button, :backdrop].each do |key|
         assert_not els[key].visible?, "#{key.to_s} should initially be hidden on iteration #{i}"
@@ -36,12 +36,7 @@ class AnimationsTest < ApplicationSystemTestCase
         assert els[key].visible?, "#{key.to_s} should be visible after mobile menu open on iteration #{i}"
       end
       
-      # alternate either method of closing
-      if i.even?
-        els[:close_button].click
-      else
-        els[:backdrop].click
-      end
+      els[:close_button].click
       
       sleep(animation_duration)
     end
