@@ -167,7 +167,6 @@ stream "yarn install"
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 
-require "active_support"
 require "rails"
 
 variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
