@@ -28,7 +28,7 @@
     "postcss-import": "^14.1.0",
     "postcss-nested": "^5.0.6",
     "stimulus-reveal": "^1.4.2",
-    "tailwindcss": "^3.1.5"
+    "tailwindcss": "^3.1.6"
   },
   "scripts": {
     "build": "node esbuild.config.js",
