@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: 8350c78823d6869c3380f5d8174f18e86dff4d9c
+  revision: 6d5ee0aadf3bdf8e87e9205c1fc3bed986724c97
   specs:
     capybara (3.38.0)
       addressable
@@ -101,7 +101,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.602.0)
+    aws-partitions (1.605.0)
     aws-sdk-core (3.131.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -188,7 +188,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-outgoing_webhooks (1.0.4)
       rails (>= 7.0.0)
-    bullet_train-roles (0.1.7)
+    bullet_train-roles (0.1.8)
       active_hash
       activesupport
       cancancan
@@ -199,7 +199,7 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.32)
+    bullet_train-super_scaffolding (1.0.33)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
@@ -242,9 +242,9 @@ GEM
       addressable
     cssbundling-rails (1.1.1)
       railties (>= 6.0.0)
-    debug (1.5.0)
+    debug (1.6.1)
       irb (>= 1.3.6)
-      reline (>= 0.2.7)
+      reline (>= 0.3.1)
     debug_inspector (1.1.0)
     devise (4.8.1)
       bcrypt (~> 3.0)
@@ -260,15 +260,11 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.5.4)
       railties (>= 5)
-    dry-configurable (0.15.0)
+    dry-container (0.10.0)
       concurrent-ruby (~> 1.0)
-      dry-core (~> 0.6)
-    dry-container (0.9.0)
-      concurrent-ruby (~> 1.0)
-      dry-configurable (~> 0.13, >= 0.13.0)
     dry-core (0.7.1)
       concurrent-ruby (~> 1.0)
-    dry-inflector (0.2.1)
+    dry-inflector (0.3.0)
     dry-logic (1.2.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.5, >= 0.5)
@@ -344,7 +340,7 @@ GEM
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     jwt (2.4.1)
-    knapsack_pro (3.2.1)
+    knapsack_pro (3.3.0)
       rake
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -403,7 +399,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.7-x86_64-linux)
       racc (~> 1.4)
-    oauth2 (2.0.4)
+    oauth2 (2.0.6)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
       multi_xml (~> 0.5)
@@ -525,7 +521,7 @@ GEM
       rubocop-ast (>= 1.17.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.18.0)
+    rubocop-ast (1.19.1)
       parser (>= 3.1.1.0)
     rubocop-performance (1.13.3)
       rubocop (>= 1.7.0, < 2.0)
