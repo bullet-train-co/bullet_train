@@ -42,7 +42,8 @@ def not_installed?(package)
 end
 
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
-required_ruby = `cat ./.ruby-version`.strip
+# rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
+required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
 actual_ruby = `ruby -v`.strip
 message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
 if actual_ruby.include?(required_ruby)
