@@ -25,9 +25,8 @@ class PaginationTest < ApplicationSystemTestCase
       assert page.has_content?("Test 1")
       refute page.has_content?("Test #{Pagy::DEFAULT[:items] + 1}")
 
-        click_on "Next"
-        assert page.has_content?("Test #{Pagy::DEFAULT[:items] + 1}")
-      end
+      click_on "Next"
+      assert page.has_content?("Test #{Pagy::DEFAULT[:items] + 1}")
     end
   end
 end
