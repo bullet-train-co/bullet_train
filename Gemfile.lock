@@ -1,4 +1,23 @@
 GIT
+  remote: git@github.com:bullet-train-co/bullet_train-api.git
+  revision: b75b9c4c9971b8a3022b27059f6b596ab9bead86
+  branch: fixes/hide-things-in-api
+  specs:
+    bullet_train-api (1.0.17)
+      api-pagination
+      bullet_train
+      doorkeeper
+      grape (~> 1.6.0)
+      grape-cancan
+      grape-jsonapi (= 1.0.0)
+      grape-swagger
+      grape_on_rails_routes
+      jsonapi-serializer
+      pagy
+      rack-cors
+      rails (>= 7.0.0)
+
+GIT
   remote: https://github.com/bullet-train-co/active_hash.git
   revision: a6628bc65e7c099ec9428c2bfe1e292ef01f1ef1
   specs:
@@ -153,19 +172,6 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.0.17)
-      api-pagination
-      bullet_train
-      doorkeeper
-      grape (~> 1.6.0)
-      grape-cancan
-      grape-jsonapi (= 1.0.0)
-      grape-swagger
-      grape_on_rails_routes
-      jsonapi-serializer
-      pagy
-      rack-cors
-      rails (>= 7.0.0)
     bullet_train-fields (1.0.15)
       chronic
       cloudinary
@@ -615,7 +621,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   bullet_train
-  bullet_train-api
+  bullet_train-api!
   bullet_train-incoming_webhooks
   bullet_train-integrations
   bullet_train-integrations-stripe
