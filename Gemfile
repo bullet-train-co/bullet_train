@@ -95,7 +95,7 @@ gem "devise"
 # Core packages.
 gem "bullet_train"
 gem "bullet_train-super_scaffolding"
-gem "bullet_train-api", git: "git@github.com:bullet-train-co/bullet_train-api.git", branch: "fixes/hide-things-in-api"
+gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
 gem "bullet_train-themes-light"
