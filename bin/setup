@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require "fileutils"
+require "colorize"
 
 # path to your application root.
 APP_ROOT = File.expand_path("..", __dir__)
@@ -14,11 +15,6 @@ def command?(name)
   ].find {|f| File.executable?(f)}
 end
 
-# TODO: We should have one unified place for colorize methods.
-def red(string)
-  "\e[1;31m#{string}\e[0m"
-end
-
 FileUtils.chdir APP_ROOT do
   # This script is a way to set up or update your development environment automatically.
   # This script is idempotent, so that you can run it at any time and get an expectable outcome.
@@ -28,7 +24,7 @@ FileUtils.chdir APP_ROOT do
   if command?("overmind")
     puts "Overmind is already installed."
   else
-    puts red "Overmind not found"
+    puts "Overmind not found".red
     puts "We recommend installing overmind to run your application processes"
     puts "Visit https://github.com/DarthSim/overmind#installation for more information."
   end
@@ -37,7 +33,10 @@ FileUtils.chdir APP_ROOT do
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
   system("yarn check") || system!("yarn install")
-  system!("rake bt:link")
+  system!("bin/link")
+
+  puts "== Building assets =="
+  system!("yarn run build && yarn run build:css && yarn run light:build && yarn light:build:css")
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")
@@ -64,7 +63,7 @@ FileUtils.chdir APP_ROOT do
     connected_clients = result.scan(/connected_clients:\d+/).first.split(":").last
     puts "You are connected to #{connected_clients} server#{"s" if connected_clients.to_i > 1}."
   else
-    puts red("You are not connected to a Redis server. Please run `$ redis-server` in another tab and run bin/setup again.")
+    puts "You are not connected to a Redis server. Please run `$ redis-server` in another tab and run bin/setup again.".red
     exit 1
   end
 

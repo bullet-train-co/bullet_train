@@ -72,8 +72,17 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", github: "teamcapybara/capybara"
+
+  # Selenium is the default default Capybara driver for system tests that ships with
+  # Rails. Cuprite is an alternative driver that uses Chrome's native DevTools protocol
+  # and offers improved speed and reliability, but only works with Chrome. If you want
+  # to switch to Cuprite, you can comment out the `selenium-webdriver` and `webdrivers`
+  # gems and uncomment the `cuprite` gem below. Bullet Train will automatically load
+  # the correct configuration based on which gem is included.
   gem "selenium-webdriver"
   gem "webdrivers"
+
+  # gem "cuprite"
 end
 
 # BULLET TRAIN GEMS
@@ -98,12 +107,6 @@ gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
 
-# source "https://BULLET_TRAIN_PRO_TOKEN@gem.fury.io/bullettrain" do
-#   gem "bullet_train-action_models"
-#   gem "bullet_train-conversations"
-#   gem "bullet_train-audit_logs"
-# end
-
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
   gem "letter_opener"
@@ -116,6 +119,9 @@ group :development do
 
   # Rails doesn't include this by default, but we depend on it.
   gem "foreman"
+
+  # For colorizing text in command line scripts.
+  gem "colorize"
 end
 
 group :test do
@@ -159,9 +165,6 @@ gem "active_hash", github: "bullet-train-co/active_hash"
 
 # TODO Have to specify this dependency here until our changes are in the original package or properly forked.
 gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
-
-# # TODO Have to specify this dependency here until a fix is in the original package.
-# gem "xray-rails", github: "brentd/xray-rails", ref: "4f6cca0"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood

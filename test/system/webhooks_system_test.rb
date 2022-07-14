@@ -80,9 +80,8 @@ class WebhooksSystemTest < ApplicationSystemTestCase
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 0, "an outbound webhook should not be issued" do
           within("table tr:first-child[data-id]") do
-            click_on "Delete"
+            accept_alert { click_on "Delete" }
           end
-          page.driver.browser.switch_to.alert.accept
           assert page.has_content?("Tangible Thing was successfully destroyed.")
           Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
@@ -139,9 +138,8 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
           assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should not be issued" do
             within("table tr:first-child[data-id]") do
-              click_on "Delete"
+              accept_alert { click_on "Delete" }
             end
-            page.driver.browser.switch_to.alert.accept
             assert page.has_content?("Tangible Thing was successfully destroyed.")
           end
           Webhooks::Outgoing::Delivery.order(:id).last.deliver

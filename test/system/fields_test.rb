@@ -9,6 +9,7 @@ unless scaffolding_things_disabled?
         visit root_path
 
         click_on "Don't have an account?"
+        assert page.has_content?("Create Your Account")
         fill_in "Your Email Address", with: "me@acme.com"
         fill_in "Set Password", with: example_password
         fill_in "Confirm Password", with: example_password
@@ -41,7 +42,7 @@ unless scaffolding_things_disabled?
         assert_no_js_errors do
           disconnect_stimulus_controller_on button
           reconnect_stimulus_controller_on button
-          assert button.find('input[type="radio"]', visible: false)["checked"] == "true"
+          assert button.find('input[type="radio"]', visible: false)["checked"]
           improperly_disconnect_and_reconnect_stimulus_controller_on button # the radio button won't be checked because we're using innerHTML
         end
 
