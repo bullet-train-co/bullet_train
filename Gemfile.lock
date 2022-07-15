@@ -101,7 +101,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.606.0)
+    aws-partitions (1.607.0)
     aws-sdk-core (3.131.2)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -205,10 +205,10 @@ GEM
       rails (>= 6.0.0)
     bullet_train-themes (1.0.20)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.0.40)
+    bullet_train-themes-light (1.0.41)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.0.10)
+    bullet_train-themes-tailwind_css (1.0.12)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
@@ -262,7 +262,7 @@ GEM
       railties (>= 5)
     dry-container (0.10.0)
       concurrent-ruby (~> 1.0)
-    dry-core (0.7.1)
+    dry-core (0.8.0)
       concurrent-ruby (~> 1.0)
     dry-inflector (0.3.0)
     dry-logic (1.2.0)
