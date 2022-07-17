@@ -57,7 +57,7 @@ if actual_ruby.include?(required_ruby)
   puts message.green
 else
   puts message.red
-  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y]"
+  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -70,7 +70,7 @@ if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
   puts message.green
 else
   puts message.red
-  input = ask "Try proceeding with Node #{actual_node} anyway? [y]"
+  input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -80,7 +80,7 @@ if `brew info 2> /dev/null`.length > 0
   puts "Homebrew is installed.".green
 else
   puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
-  input = ask "Try proceeding without Homebrew?"
+  input = ask "Try proceeding without Homebrew? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -88,7 +88,7 @@ end
 
 if not_installed?("postgresql@13")
   puts "PostgreSQL 13 is not installed via Homebrew. Try running `brew install postgresql@13`.".red
-  input = ask "Try proceeding without PostgreSQL 13?"
+  input = ask "Try proceeding without PostgreSQL 13? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -98,7 +98,7 @@ end
 
 if not_installed?("redis")
   puts "Redis is not installed via Homebrew. Try running `brew install redis`.".red
-  input = ask "Try proceeding without Redis?"
+  input = ask "Try proceeding without Redis? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -108,7 +108,7 @@ end
 
 if not_installed?("icu4c")
   puts "icu4c is not installed via Homebrew. Try running `brew install icu4c`.".red
-  input = ask "Try proceeding without icu4c?"
+  input = ask "Try proceeding without icu4c? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
