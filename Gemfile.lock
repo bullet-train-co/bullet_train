@@ -114,7 +114,7 @@ GEM
       aws-sdk-core (~> 3, >= 3.127.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
-    aws-sigv4 (1.5.0)
+    aws-sigv4 (1.5.1)
       aws-eventstream (~> 1, >= 1.0.2)
     aws_cf_signer (0.1.3)
     bcrypt (3.1.18)
@@ -208,7 +208,7 @@ GEM
     bullet_train-themes-light (1.0.41)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.0.12)
+    bullet_train-themes-tailwind_css (1.0.13)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
@@ -340,7 +340,7 @@ GEM
     jsonapi-serializer (2.2.0)
       activesupport (>= 4.2)
     jwt (2.4.1)
-    knapsack_pro (3.3.0)
+    knapsack_pro (3.3.1)
       rake
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -372,7 +372,7 @@ GEM
       minitest (>= 5.0)
     msgpack (1.5.3)
     multi_xml (0.6.0)
-    mustermann (2.0.0)
+    mustermann (2.0.1)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.2)
       mustermann (>= 1.0.0)
@@ -573,7 +573,7 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
-    tzinfo (2.0.4)
+    tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
       unf_ext
