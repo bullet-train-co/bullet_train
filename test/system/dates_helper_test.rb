@@ -45,7 +45,25 @@ class DatesHelperTest < ApplicationSystemTestCase
       visit current_url
       assert page.has_text? "#{time.strftime("%B %-d").strip} at #{time.strftime("%l:%M %p").strip}"
 
-      # TODO: Write test for a user with a different time zone
+      # Create a new record in a different time zone.
+      Time.zone = 'Tokyo'
+
+      # No need to check the strings on the page if the record
+      # is successfully created and the times below are different.
+      visit root_path
+      click_on "Test Concept"
+      click_on "Add New Tangible Thing"
+      fill_in "Text Field Value", with: "Another Test Tangible Thing"
+      click_on "Create Tangible Thing"
+      assert page.has_text? "Tangible Thing was successfully created."
+
+      # Compare by hours instead of seconds/minutes for accuracy.
+      tokyo_time = Scaffolding::CompletelyConcrete::TangibleThing.last.created_at
+      refute time.strftime("%l").to_i == tokyo_time.strftime("%l").to_i
+
+      # Even if we push UTC time forward by an hour,
+      # it should still be behind Tokyo time.
+      assert tokyo_time > (time + 1.hour)
     end
   end
 end
