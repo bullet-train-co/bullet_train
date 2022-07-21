@@ -38,7 +38,7 @@ class DatesHelperTest < ApplicationSystemTestCase
       # Assert yesterday's date is displayed correctly.
       travel_to time + 1.day
       visit current_url # Refresh the page
-      assert page.has_text? "Yesterday at #{(time).strftime("%l:%M %p").strip}"
+      assert page.has_text? "Yesterday at #{time.strftime("%l:%M %p").strip}"
 
       # Assert the month and day is shown for anything before then.
       travel_to time + 2.days
