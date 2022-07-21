@@ -46,7 +46,7 @@ class DatesHelperTest < ApplicationSystemTestCase
       assert page.has_text? "#{time.strftime("%B %-d").strip} at #{time.strftime("%l:%M %p").strip}"
 
       # Create a new record in a different time zone.
-      Time.zone = 'Tokyo'
+      Time.zone = "Tokyo"
 
       # No need to check the strings on the page if the record
       # is successfully created and the times below are different.
