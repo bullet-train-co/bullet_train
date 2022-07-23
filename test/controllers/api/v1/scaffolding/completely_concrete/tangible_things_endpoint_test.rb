@@ -12,6 +12,8 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       # 🚅 skip this section when scaffolding.
       @absolutely_abstract_creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
       @tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
+      @tangible_thing.file_field_value = Rack::Test::UploadedFile.new("test/support/foo.txt")
+      @tangible_thing.save
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert factory setup in place of this line.
       @other_tangible_things = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
@@ -30,6 +32,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_equal Date.parse(tangible_thing_data["date_field_value"]), tangible_thing.date_field_value
       assert_equal DateTime.parse(tangible_thing_data["date_and_time_field_value"]), tangible_thing.date_and_time_field_value
       assert_equal tangible_thing_data["email_field_value"], tangible_thing.email_field_value
+      assert tangible_thing_data["file_field_value"].match?("foo.txt")
       assert_equal tangible_thing_data["password_field_value"], tangible_thing.password_field_value
       assert_equal tangible_thing_data["phone_field_value"], tangible_thing.phone_field_value
 
