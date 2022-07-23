@@ -13,10 +13,10 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       @absolutely_abstract_creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
       @tangible_thing = build(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
       # 🚅 stop any skipping we're doing now.
-      # 🚅 super scaffolding will insert file-related logic above this line.
-      @tangible_thing.save
       # 🚅 super scaffolding will insert factory setup in place of this line.
       @other_tangible_things = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
+      # 🚅 super scaffolding will insert file-related logic above this line.
+      @tangible_thing.save
     end
 
     # This assertion is written in such a way that new attributes won't cause the tests to start failing, but removing
