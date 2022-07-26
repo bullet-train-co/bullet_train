@@ -89,7 +89,6 @@ Rails.application.configure do
     config.hosts << /.*#{URI.parse(gitpod_workspace_url).host}/
   end
 
-
   config.action_mailer.delivery_method = :letter_opener
   config.active_job.queue_adapter = :sidekiq
 
