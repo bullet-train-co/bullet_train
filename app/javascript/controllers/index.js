@@ -1,4 +1,4 @@
-import { Application } from "stimulus"
+import { Application } from "@hotwired/stimulus"
 import { identifierForContextKey } from "stimulus/webpack-helpers"
 import { controllerDefinitions as bulletTrainControllers } from "@bullet-train/bullet-train"
 import { controllerDefinitions as bulletTrainFieldControllers } from "@bullet-train/fields"
