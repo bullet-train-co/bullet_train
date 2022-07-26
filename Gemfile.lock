@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: 6d5ee0aadf3bdf8e87e9205c1fc3bed986724c97
+  revision: 407da734681e7344b422456b23bab88e0aac81c7
   specs:
     capybara (3.38.0)
       addressable
@@ -101,7 +101,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.609.0)
+    aws-partitions (1.610.0)
     aws-sdk-core (3.131.3)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -124,7 +124,7 @@ GEM
     bootsnap (1.12.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.93)
+    bullet_train (1.0.98)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -147,8 +147,6 @@ GEM
       pagy
       possessive
       premailer-rails
-      pry
-      pry-stack_explorer
       rails (>= 6.0.0)
       sidekiq
       unicode-emoji
@@ -166,7 +164,7 @@ GEM
       pagy
       rack-cors
       rails (>= 7.0.0)
-    bullet_train-fields (1.0.18)
+    bullet_train-fields (1.0.19)
       chronic
       cloudinary
       phonelib
@@ -195,20 +193,20 @@ GEM
     bullet_train-scope_questions (1.0.2)
       rails (>= 6.0.0)
     bullet_train-scope_validator (1.0.2)
-    bullet_train-sortable (1.0.2)
+    bullet_train-sortable (1.0.3)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.34)
+    bullet_train-super_scaffolding (1.0.35)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.20)
+    bullet_train-themes (1.0.21)
       rails (>= 6.0.0)
     bullet_train-themes-light (1.0.44)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.0.13)
+    bullet_train-themes-tailwind_css (1.0.14)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
@@ -370,9 +368,9 @@ GEM
     minitest (5.16.2)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
-    msgpack (1.5.3)
+    msgpack (1.5.4)
     multi_xml (0.6.0)
-    mustermann (2.0.1)
+    mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
     mustermann-grape (1.0.2)
       mustermann (>= 1.0.0)
@@ -394,10 +392,10 @@ GEM
     nice_partials (0.1.6)
       actionview (>= 4.2.6)
     nio4r (2.5.8)
-    nokogiri (1.13.7)
+    nokogiri (1.13.8)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    nokogiri (1.13.7-x86_64-linux)
+    nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.6)
       faraday (>= 0.17.3, < 3.0)
@@ -512,14 +510,14 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
-    rubocop (1.31.2)
+    rubocop (1.32.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.18.0, < 2.0)
+      rubocop-ast (>= 1.19.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.19.1)
@@ -535,16 +533,13 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.3.1)
+    sentry-rails (5.4.1)
       railties (>= 5.0)
-      sentry-ruby-core (~> 5.3.1)
-    sentry-ruby (5.3.1)
+      sentry-ruby (~> 5.4.1)
+    sentry-ruby (5.4.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-      sentry-ruby-core (= 5.3.1)
-    sentry-ruby-core (5.3.1)
-      concurrent-ruby
-    sentry-sidekiq (5.3.1)
-      sentry-ruby-core (~> 5.3.1)
+    sentry-sidekiq (5.4.1)
+      sentry-ruby (~> 5.4.1)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
     sidekiq (6.5.1)
@@ -560,13 +555,13 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    standard (1.13.0)
-      rubocop (= 1.31.2)
+    standard (1.14.0)
+      rubocop (= 1.32.0)
       rubocop-performance (= 1.14.3)
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     stripe (6.5.0)
-    strscan (3.0.3)
+    strscan (3.0.4)
     thor (1.2.1)
     thread-local (1.1.0)
     timeout (0.3.0)
