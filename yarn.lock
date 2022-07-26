@@ -3,27 +3,29 @@
 
 
 "@bullet-train/bullet-train-sortable@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.0.2.tgz#5bc2035e03efef45affd37001d5171d86b5cd884"
-  integrity sha512-KNwVR3j87uov7EUssth8dNl3m/8rjta3VHpsVeNbRwW9RMLp1pKHfXoHHihKUzqkSRL5biowGuW0e0Zc9bveSw==
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.0.3.tgz#1220963db7100b84c663782e5ca89eadd955058f"
+  integrity sha512-4sRYHDoj96QvM1yrMtOleoikQRv2uuWaUrOO9Q1BIln9X0sRRbiztl+2x4PxPpnouNxs+1UccXpR7ZQwbzOldw==
   dependencies:
+    "@hotwired/stimulus" "^3.0.1"
     dragula "^3.7.3"
 
 "@bullet-train/bullet-train@^1.0.72":
-  version "1.0.93"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.93.tgz#f8b804f440d01ba38ac7d8f65347eb65b97af7b1"
-  integrity sha512-EvSzu+9maQu2M6yQlRKoUQMNQ41BkVLglFjOKoYHJxVPb9IxIE5JgZrOdtvR2KFSU9rsrykv/MOmF4KRhUIMRw==
+  version "1.0.98"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.98.tgz#d03900dcd926a0dd4b8fda34e12a01606253b1cb"
+  integrity sha512-MBY/sQnqWYN/vk5QRLWfWwX+tO7V1e6WxsjhFwoIcwr9cZ+ZJCwyP85zrp3oPtrYkH17VsaREXf/ZKs3ZA4gDg==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
 "@bullet-train/fields@^1.0.15":
-  version "1.0.18"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.0.18.tgz#4eecbec60e3d87b4d26a3804983cb3108a81fb7f"
-  integrity sha512-ds3NuY13uaEZ5vJVgYMB1fnO9GobMYOGQHyOKPq3aOC5Z75rYWHEXTfG0Kgd0YDxr66NVx+lCfatdPSZ2b9LmA==
+  version "1.0.19"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.0.19.tgz#6cb15963d417c1d7791c3066050badf570c67713"
+  integrity sha512-e3tfTwD5I7yUn/Bml+aXfVDx/f89fcBiQbbNakHTtSvnbTP0VIsJlc0GZSAm4Ly8oknvZPns7ztvV+4oVaR82w==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
     daterangepicker "^3.1.0"
+    emoji-mart "^5.1.0"
     i18n-js "^3.8.0"
     intl-tel-input "^17.0.8"
     select2 "^4.0.13"
@@ -249,9 +251,9 @@ camelcase-css@^2.0.1:
   integrity sha512-QOSvevhslijgYwRx6Rv7zKdMF8lbRmx+uQGx2+vDc+KI/eBnsy9kit5aj23AgGu3pa4t9AgwbnXWqS+iOY+2aA==
 
 caniuse-lite@^1.0.30001335, caniuse-lite@^1.0.30001366:
-  version "1.0.30001368"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001368.tgz#c5c06381c6051cd863c45021475434e81936f713"
-  integrity sha512-wgfRYa9DenEomLG/SdWgQxpIyvdtH3NW8Vq+tB6AwR9e56iOIcu1im5F/wNdDf04XlKHXqIx4N8Jo0PemeBenQ==
+  version "1.0.30001370"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001370.tgz#0a30d4f20d38b9e108cc5ae7cc62df9fe66cd5ba"
+  integrity sha512-3PDmaP56wz/qz7G508xzjx8C+MC2qEm4SYhSEzC9IBROo+dGXFWRuaXkWti0A9tuI00g+toiriVqxtWMgl350g==
 
 chokidar@^3.5.3:
   version "3.5.3"
@@ -292,9 +294,9 @@ contra@1.9.4:
     ticky "1.0.1"
 
 core-js@^3.15.1:
-  version "3.23.5"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.23.5.tgz#1f82b0de5eece800827a2f59d597509c67650475"
-  integrity sha512-7Vh11tujtAZy82da4duVreQysIoO2EvVrur7y6IzZkH1IHPSekuDi8Vuw1+YKjkbfWLRD7Nc9ICQ/sIUDutcyg==
+  version "3.24.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.24.0.tgz#4928d4e99c593a234eb1a1f9abd3122b04d3ac57"
+  integrity sha512-IeOyT8A6iK37Ep4kZDD423mpi6JfPRoPUdQwEWYiGolvn4o6j2diaRzNfDfpTdu3a5qMbrGUzKUpYpRY8jXCkQ==
 
 crossvent@1.5.5:
   version "1.5.5"
@@ -354,9 +356,14 @@ dragula@^3.7.3:
     crossvent "1.5.5"
 
 electron-to-chromium@^1.4.188:
-  version "1.4.197"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.197.tgz#172054244cca16320ebc19459bd03d8a9018ff73"
-  integrity sha512-7EZCIDDraA2NUaHewLaAh6T63cZzgBmgDx/iiaeZ/pjSs36bOFEJ3hLIrn1TKCFhV0PEZZKu6qFPrxa/LGAzLg==
+  version "1.4.201"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.201.tgz#b018802ace20ce2567842d52b9e1c9d090fda674"
+  integrity sha512-87D0gEHbhLZgZxZl2e9/rC/I2BicPC/y9wR/cuaJSqvkgN41s5EImi89S7YExHc7F0OBXiKsABZt9mmb9bqFcQ==
+
+emoji-mart@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/emoji-mart/-/emoji-mart-5.1.0.tgz#8a36a872e1297747342d1385bd7b7141ac2f4365"
+  integrity sha512-ytXgeemyw4FormPQqWd35Vh06ZSnQFhVUqW51kASZzzjhQOPSGtiN3VCC7vDq94Pkxmsbet+Gps/qj5N90mEnw==
 
 esbuild-android-64@0.14.50:
   version "0.14.50"
