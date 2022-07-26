@@ -6,6 +6,8 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+require_relative "../lib/bullet_train"
+
 module UntitledApplication
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -23,9 +25,5 @@ module UntitledApplication
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.available_locales = YAML.safe_load(File.read("config/locales/locales.yml"), aliases: true).with_indifferent_access.dig(:locales).keys.map(&:to_sym)
     config.i18n.default_locale = config.i18n.available_locales.first
-
-    # This actually doesn't appear to work.
-    # TODO We should update `bullettrain` here during `bin/set-name` and then make the at-mentions stuff configurable.
-    config.action_view.sanitized_allowed_protocols = ["http", "bullettrain"]
   end
 end

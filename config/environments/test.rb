@@ -13,8 +13,14 @@ Rails.application.configure do
 
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Turn false under Spring and add config.action_view.cache_template_loading = true
-  config.cache_classes = true
+  if ENV["SPRING"]
+    # We don't use Spring by default, but we use it in `test/bin/setup-super-scaffolding-system-test`.
+    config.cache_classes = false
+    config.action_view.cache_template_loading = true
+  else
+    # Turn false under Spring and add config.action_view.cache_template_loading = true
+    config.cache_classes = true
+  end
 
   # Eager loading loads your whole application. When running a single test locally,
   # this probably isn't necessary. It's a good idea to do in a continuous integration
@@ -61,7 +67,8 @@ Rails.application.configure do
   # config.i18n.raise_on_missing_translations = true
 
   # Annotate rendered view with file names.
-  # config.action_view.annotate_rendered_view_with_filenames = true
+  # We only enable this for a specific test.
+  config.action_view.annotate_rendered_view_with_filenames = ENV["ENABLE_VIEW_ANNOTATION"] || false
 
   # 🚫 DEFAULT BULLET TRAIN CONFIGURATION
   # This section represents the default settings for a Bullet Train application. Your own configuration should be
@@ -71,9 +78,6 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = {host: "localhost", port: 3001}
   config.i18n.raise_on_missing_translations = true
-
-  # TODO There are too many deprecation warnings after upgrading to Rails 6.
-  config.active_support.deprecation = :silence
 
   # TODO for some reason this doesn't seem to be doing anything.
   config.active_job.queue_adapter = :inline

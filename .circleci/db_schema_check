@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+bundle exec rails db:migrate
+GIT_STATUS=`git status db/schema.rb`
+echo $GIT_STATUS
+
+if [[ $GIT_STATUS =~ "nothing to commit, working tree clean" ]]; then
+  exit 0
+else
+  echo ""
+  echo "rails db:migrate made a change to your database's schema."
+  echo "Please make sure your database is updated locally before pushing to CircleCI:"
+  git diff db/schema.rb
+  exit 1
+fi

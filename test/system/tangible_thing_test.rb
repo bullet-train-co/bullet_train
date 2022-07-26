@@ -8,10 +8,11 @@ unless scaffolding_things_disabled?
 
         visit root_path
 
-        click_on "Don't have an account?"
+        invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
+        assert page.has_content?("Create Your Account")
         fill_in "Your Email Address", with: "me@acme.com"
-        fill_in "Set Password", with: "password123"
-        fill_in "Confirm Password", with: "password123"
+        fill_in "Set Password", with: example_password
+        fill_in "Confirm Password", with: example_password
         click_on "Sign Up"
         fill_in "Your First Name", with: "John"
         fill_in "Your Last Name", with: "Doe"

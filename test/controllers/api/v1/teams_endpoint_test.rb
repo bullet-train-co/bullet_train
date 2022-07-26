@@ -8,7 +8,7 @@ class Api::V1::TeamsEndpointTest < Api::Test
     # See `test/controllers/api/test.rb` for common set up for API tests.
     super
 
-    @other_teams = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
+    @other_teams = create_list(:team, 3)
   end
 
   def assert_proper_object_serialization(team_data)

@@ -10,8 +10,8 @@ class DatesHelperTest < ApplicationSystemTestCase
       # Sign up and log in
       sign_up_from_homepage_for(display_details)
       fill_in "Your Email Address", with: "bullettrain@gmail.com"
-      fill_in "Set Password", with: "password123"
-      fill_in "Confirm Password", with: "password123"
+      fill_in "Set Password", with: example_password
+      fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
       fill_in "First Name", with: "Testy"
       fill_in "Last Name", with: "McTesterson"
@@ -36,18 +36,34 @@ class DatesHelperTest < ApplicationSystemTestCase
       assert page.has_text? "Today at #{time.strftime("%l:%M %p").strip}"
 
       # Assert yesterday's date is displayed correctly.
-      Timecop.travel(time + 1.day)
+      travel_to time + 1.day
       visit current_url # Refresh the page
-      assert page.has_text? "Yesterday at #{(time).strftime("%l:%M %p").strip}"
+      assert page.has_text? "Yesterday at #{time.strftime("%l:%M %p").strip}"
 
       # Assert the month and day is shown for anything before then.
-      Timecop.travel(time + 2.days)
+      travel_to time + 2.days
       visit current_url
       assert page.has_text? "#{time.strftime("%B %-d").strip} at #{time.strftime("%l:%M %p").strip}"
 
-      # TODO: Write test for a user with a different time zone
+      # Create a new record in a different time zone.
+      Time.zone = "Tokyo"
 
-      Timecop.return
+      # No need to check the strings on the page if the record
+      # is successfully created and the times below are different.
+      visit root_path
+      click_on "Test Concept"
+      click_on "Add New Tangible Thing"
+      fill_in "Text Field Value", with: "Another Test Tangible Thing"
+      click_on "Create Tangible Thing"
+      assert page.has_text? "Tangible Thing was successfully created."
+
+      # Compare by hours instead of seconds/minutes for accuracy.
+      tokyo_time = Scaffolding::CompletelyConcrete::TangibleThing.last.created_at
+      refute time.strftime("%l").to_i == tokyo_time.strftime("%l").to_i
+
+      # Even if we push UTC time forward by an hour,
+      # it should still be behind Tokyo time.
+      assert tokyo_time > (time + 1.hour)
     end
   end
 end

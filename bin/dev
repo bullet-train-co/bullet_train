@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
 
-if ! command -v foreman &> /dev/null
-then
-  echo "Installing foreman..."
-  gem install foreman
-fi
+bin/link
 
-foreman start -f Procfile.dev "$@"
+# TODO Enable this again when https://github.com/DarthSim/overmind/issues/132 is fixed.
+# if [ -x "$(command -v overmind)" ]
+# then
+#   overmind start -f Procfile.dev "$@"
+# else
+#   foreman start -f Procfile.dev "$@"
+# fi
+
+bundle exec foreman start -f Procfile.dev "$@"

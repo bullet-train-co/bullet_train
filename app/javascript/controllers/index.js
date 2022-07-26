@@ -1,4 +1,4 @@
-import { Application } from "stimulus"
+import { Application } from "@hotwired/stimulus"
 import { identifierForContextKey } from "stimulus/webpack-helpers"
 import { controllerDefinitions as bulletTrainControllers } from "@bullet-train/bullet-train"
 import { controllerDefinitions as bulletTrainFieldControllers } from "@bullet-train/fields"
@@ -19,7 +19,7 @@ application.register('reveal', RevealController)
 
 const controllers = Object.keys(controllersContext).map((filename) => ({
   identifier: identifierForContextKey(filename),
-  controllerConstructor: context[filename] }))
+  controllerConstructor: controllersContext[filename] }))
 
 application.load(controllers)
 

@@ -64,6 +64,7 @@ require("esbuild").build({
     ".jpg": "file",
     ".svg": "file",
     ".woff": "file",
+    ".woff2": "file",
     ".ttf": "file",
     ".eot": "file",
   },
@@ -71,4 +72,6 @@ require("esbuild").build({
   plugins: [
     ImportGlobPlugin()
   ],
+  // TODO: Silencing warnings until the charset warning is fixed.
+  logLevel: 'error',
 }).catch(() => process.exit(1));

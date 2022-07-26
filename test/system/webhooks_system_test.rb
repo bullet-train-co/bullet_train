@@ -1,12 +1,10 @@
 require "application_system_test_case"
-require "sidekiq/testing"
 
 class WebhooksSystemTest < ApplicationSystemTestCase
   def setup
     super
     @user = create :onboarded_user, first_name: "Andrew", last_name: "Culver"
     @another_user = create :onboarded_user, first_name: "John", last_name: "Smith"
-    switch_adapter_to_sidekiq
   end
 
   unless scaffolding_things_disabled?
@@ -57,7 +55,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           fill_in "Text Field Value", with: "Some Other Thing"
           click_on "Create Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully created"
-          Sidekiq::Testing.inline! { Webhooks::Outgoing::Delivery.order(:id).last.deliver }
+          Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
@@ -75,18 +73,17 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           fill_in "Text Field Value", with: "One Last Updated Thing"
           click_on "Update Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully updated"
-          Sidekiq::Testing.inline! { Webhooks::Outgoing::Delivery.order(:id).last.deliver }
+          Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
         click_on "Back"
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 0, "an outbound webhook should not be issued" do
           within("table tr:first-child[data-id]") do
-            click_on "Delete"
+            accept_alert { click_on "Delete" }
           end
-          page.driver.browser.switch_to.alert.accept
           assert page.has_content?("Tangible Thing was successfully destroyed.")
-          Sidekiq::Testing.inline! { Webhooks::Outgoing::Delivery.order(:id).last.deliver }
+          Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
 
         sign_out_for(display_details)
@@ -141,12 +138,11 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
           assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should not be issued" do
             within("table tr:first-child[data-id]") do
-              click_on "Delete"
+              accept_alert { click_on "Delete" }
             end
-            page.driver.browser.switch_to.alert.accept
             assert page.has_content?("Tangible Thing was successfully destroyed.")
           end
-          Sidekiq::Testing.inline! { Webhooks::Outgoing::Delivery.order(:id).last.deliver }
+          Webhooks::Outgoing::Delivery.order(:id).last.deliver
         end
       end
     end

@@ -31,6 +31,10 @@
     <% end %>
   <% end %>
 
+  <% if billing_enabled? %>
+    <%= render 'account/billing/subscriptions/menu_item' %>
+  <% end %>
+
   <% if current_user.multiple_teams? %>
 
     <%= render 'account/shared/menu/item', url: main_app.account_teams_path, label: t('menus.main.labels.switch_teams') do |p| %>

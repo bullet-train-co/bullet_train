@@ -26,13 +26,13 @@ aliases:
       paths:
         - node_modules
   - &ruby_node_browsers_docker_image
-      - image: cimg/ruby:3.1.1-browsers
+      - image: cimg/ruby:3.1.2-browsers
         environment:
           PGHOST: localhost
           PGUSER: untitled_application
           RAILS_ENV: test
   - &postgres_docker_image
-      - image: circleci/postgres
+      - image: cimg/postgres:14.2
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: untitled_application_test
@@ -66,23 +66,41 @@ jobs:
           name: Check Standard Ruby
           command: bundle exec standardrb
 
+  'Database Schema Check':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: cimg/redis:6.2.6
+    executor: ruby/default
+    parallelism: 1
+    steps:
+      - checkout
+      - restore_cache: *restore_bundler_cache
+
+      # Install dependencies
+      - ruby/bundle-install
+
+      - run:
+          name: Running rails db:migrate shouldn't cause changes
+          command: bash ./.circleci/db_schema_check
+
   'Minitest':
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: circleci/redis
+      - image: cimg/redis:6.2.6
     executor: ruby/default
     parallelism: 16
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
       # Install dependencies
       - ruby/bundle-install
-      - run: bundle clean --force
-      - run: bundle exec rake bt:link
+      - run: bin/link
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
@@ -117,10 +135,12 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: circleci/redis
+      - image: cimg/redis:6.2.6
     executor: ruby/default
+    parallelism: 7
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
       - checkout
 
       # Restore dependency caches
@@ -129,14 +149,14 @@ jobs:
 
       # Install dependencies
       - ruby/bundle-install
-      - run: bundle clean --force
-      - run: bundle exec rake bt:link
+      - run: bin/link
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
 
       - *wait_for_docker
 
+      - run: bundle add spring
       - run:
           name: 'Setup Super Scaffolding System Test'
           command: bundle exec test/bin/setup-super-scaffolding-system-test
@@ -144,10 +164,55 @@ jobs:
           name: 'Run Super Scaffolding Test'
           command: bundle exec rails test test/system/super_scaffolding_test.rb
 
+  'System Tests with Cuprite':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: circleci/redis
+    executor: ruby/default
+    parallelism: 16
+    steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - checkout
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bin/link
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      - *wait_for_docker
+
+      - run:
+          name: Run system tests with cuprite as system test driver
+          command: |
+            if test $BT_CORE_CI
+            then
+              echo "Running system tests with Cuprite"
+              sed -i'.orig' 's/# gem "cuprite"/gem "cuprite"/' Gemfile
+              sed -i'.orig' 's/gem "selenium-webdriver"/# gem "selenium-webdriver"/' Gemfile
+              sed -i'.orig' 's/gem "webdrivers"/# gem "webdrivers"/' Gemfile
+              bundle install
+              bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
+            else
+              echo "Skipping system tests with Cuprite"
+              exit 0
+            fi
+          environment:
+            RAILS_ENV: test
+            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+            KNAPSACK_PRO_TEST_FILE_PATTERN: "test/system/**{,/*/**}/*_test.rb"
+
 workflows:
   version: 2
   build:
     jobs:
       - 'Standard Ruby'
+      - 'Database Schema Check'
       - 'Minitest'
       - 'Minitest for Super Scaffolding'
+      - 'System Tests with Cuprite'

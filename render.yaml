@@ -1,0 +1,58 @@
+databases:
+  - name: database
+    databaseName: database
+    user: bullet_train
+    plan: starter
+
+services:
+  - type: redis
+    name: redis
+    ipAllowList: []
+    plan: starter
+    maxmemoryPolicy: noeviction
+  - type: web
+    name: web
+    env: ruby
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: database
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: redis
+          property: connectionString
+      - fromGroup: settings
+  - type: worker
+    name: worker
+    env: ruby
+    buildCommand: "bundle install"
+    startCommand: "bundle exec sidekiq -t 25"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: database
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: redis
+          property: connectionString
+      - fromGroup: settings
+
+envVarGroups:
+  - name: settings
+    envVars:
+      - key: BASE_URL
+        generateValue: true
+      - key: FONTAWESOME_NPM_AUTH_TOKEN
+        sync: false
+      - key: POSTMARK_API_TOKEN
+        sync: false
+      - key: HIDE_THINGS
+        generateValue: true
+      - key: SECRET_KEY_BASE
+        generateValue: true
