@@ -1,8 +1,15 @@
 #!/usr/bin/env ruby
 
-`gem install colorize`
+puts ""
+puts `gem install colorize`
+puts ""
+
+puts ""
+puts `gem install activesupport`
+puts ""
 
 require 'colorize'
+require 'active_support'
 
 def replace_in_file(file, before, after, target_regexp = nil)
   puts "Replacing in '#{file}'."
@@ -42,7 +49,8 @@ def not_installed?(package)
 end
 
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
-required_ruby = `cat ./.ruby-version`.strip
+# rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
+required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
 actual_ruby = `ruby -v`.strip
 message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
 if actual_ruby.include?(required_ruby)
@@ -158,10 +166,10 @@ stream "bundle install"
 puts "Running `yarn install`.".green
 stream "yarn install"
 
-# This should be available now.
-require "active_support/inflector"
-
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+
+require "rails"
+
 variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
 environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
 class_name = variable.classify

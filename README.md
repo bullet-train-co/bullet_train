@@ -26,7 +26,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/bullet-train-co/bullet_train)
 
-Clicking this button will set up a new Bullet Train app in [Gitpod](https://gitpod.io).
+Clicking this button will set up a new Bullet Train project for development on [Gitpod](https://gitpod.io).
 
 <br>
 
