@@ -53,6 +53,9 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# A natural language date/time parser.
+gem "chronic"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
@@ -106,12 +109,6 @@ gem "bullet_train-integrations-stripe"
 gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
-
-# source "https://BULLET_TRAIN_PRO_TOKEN@gem.fury.io/bullettrain" do
-#   gem "bullet_train-action_models"
-#   gem "bullet_train-conversations"
-#   gem "bullet_train-audit_logs"
-# end
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
@@ -171,9 +168,6 @@ gem "active_hash", github: "bullet-train-co/active_hash"
 
 # TODO Have to specify this dependency here until our changes are in the original package or properly forked.
 gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
-
-# # TODO Have to specify this dependency here until a fix is in the original package.
-# gem "xray-rails", github: "brentd/xray-rails", ref: "4f6cca0"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood

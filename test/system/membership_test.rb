@@ -20,7 +20,7 @@ class MembershipSystemTest < ApplicationSystemTestCase
   end
 
   @@test_devices.each do |device_name, display_details|
-    test "visitors can sign-up and manage team members with subscriptions #{subscriptions_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
+    test "visitors can sign-up and manage team members with subscriptions #{billing_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
       resize_for(display_details)
 
       be_invited_to_sign_up
@@ -34,7 +34,9 @@ class MembershipSystemTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
-      complete_pricing_page if subscriptions_enabled?
+      if billing_enabled?
+        complete_pricing_page
+      end
 
       # we should now be on an onboarding step.
       assert page.has_content?("Tell us about you")
