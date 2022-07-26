@@ -8,7 +8,7 @@ FactoryBot.define do
     last_sign_in_at { 1.day.ago }
     current_sign_in_ip { "127.0.0.1" }
     last_sign_in_ip { "127.0.0.2" }
-    time_zone { nil }
+    time_zone { ActiveSupport::TimeZone.all.first.name }
     locale { nil }
     factory :onboarded_user do
       first_name { "First Name" }

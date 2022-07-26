@@ -32,7 +32,7 @@ aliases:
           PGUSER: untitled_application
           RAILS_ENV: test
   - &postgres_docker_image
-      - image: circleci/postgres
+      - image: cimg/postgres:14.2
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_DB: untitled_application_test
@@ -70,7 +70,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: circleci/redis
+      - image: cimg/redis:6.2.6
     executor: ruby/default
     parallelism: 1
     steps:
@@ -88,7 +88,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: circleci/redis
+      - image: cimg/redis:6.2.6
     executor: ruby/default
     parallelism: 16
     steps:
@@ -183,7 +183,7 @@ jobs:
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
-      - image: circleci/redis
+      - image: cimg/redis:6.2.6
     executor: ruby/default
     parallelism: 7
     steps:
@@ -245,13 +245,15 @@ jobs:
               sed -i'.orig' 's/gem "selenium-webdriver"/# gem "selenium-webdriver"/' Gemfile
               sed -i'.orig' 's/gem "webdrivers"/# gem "webdrivers"/' Gemfile
               bundle install
-              bundle exec rails test:system
+              bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
             else
               echo "Skipping system tests with Cuprite"
               exit 0
             fi
           environment:
             RAILS_ENV: test
+            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+            KNAPSACK_PRO_TEST_FILE_PATTERN: "test/system/**{,/*/**}/*_test.rb"
 
 workflows:
   version: 2

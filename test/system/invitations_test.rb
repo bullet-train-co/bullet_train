@@ -99,7 +99,6 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         end
       end
 
-      # TODO we should first test that a canceled invitation can't be claimed.
       assert page.has_content?("Invitation Details")
 
       accept_alert { click_on "Remove from Team" }
@@ -115,6 +114,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       # if we're back on the team's dashboard, then we're *not* on the accept invitation page, which means the
       # invitation wasn't claimable.
       assert page.has_content?("The Testing Team’s Dashboard")
+      assert page.has_content?("Sorry, but we couldn't find your invitation.")
       within_team_menu_for(display_details) do
         click_on "Team Members"
       end
@@ -177,90 +177,92 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       assert page.has_content?("Taka Yamaguchi’s Membership on The Testing Team")
 
-      within_team_menu_for(display_details) do
-        click_on "Add New Team"
+      # Users cannot create another team in invitation-only mode.
+      unless invitation_only?
+        within_team_menu_for(display_details) do
+          click_on "Add New Team"
+        end
+
+        assert page.has_content?("Create a New Team")
+        fill_in "Team Name", with: "Another Team"
+        click_on "Create Team"
+
+        assert page.has_content?("Another Team’s Dashboard")
+        within_team_menu_for(display_details) do
+          click_on "Team Members"
+        end
+
+        assert page.has_content?("Another Team Team Members")
+        click_on "Invite a New Team Member"
+
+        assert page.has_content?("New Invitation Details")
+
+        perform_enqueued_jobs do
+          clear_emails
+
+          # this is specifically a different email address than the one they signed up with originally.
+          fill_in "Email Address", with: "hanako@some-company.com"
+          click_on "Create Invitation"
+          assert page.has_content?("Invitation was successfully created.")
+        end
+
+        # sign out.
+        sign_out_for(display_details)
+
+        # we need the id of the membership that's created so we can address it's row in the table specifically.
+        invited_membership = Membership.order(:id).last
+
+        # # click the link in the email.
+        open_email "hanako@some-company.com"
+        current_email.click_link "Join Another Team"
+
+        assert page.has_content?("Create Your Account")
+        click_link "Already have an account?"
+
+        assert page.has_content?("Sign In")
+        fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
+        click_on "Next" if two_factor_authentication_enabled?
+        fill_in "Your Password", with: example_password
+        click_on "Sign In"
+
+        assert page.has_content?("Join Another Team")
+        assert page.has_content?("Taka Yamaguchi has invited you to join Another Team")
+        assert page.has_content?("This invitation was emailed to hanako@some-company.com")
+        assert page.has_content?("but you're currently signed in as hanako.tanaka@gmail.com")
+        click_on "Join Another Team"
+
+        assert page.has_content?("Welcome to Another Team!")
+
+        within_team_menu_for(display_details) do
+          click_on "Team Members"
+        end
+
+        last_membership = Membership.order(:id).last
+
+        within_current_memberships_table do
+          assert page.has_content?("Hanako Tanaka")
+          within_membership_row(last_membership) do
+            assert page.has_no_content?("Invited")
+            assert page.has_content?("Viewer")
+            click_on "Details"
+          end
+        end
+
+        accept_alert { click_on "Leave This Team" }
+
+        assert page.has_content?("You've successfully removed yourself from Another Team.")
+
+        assert page.has_content?("The Testing Team’s Dashboard")
       end
 
-      if invitation_only?
-        assert page.has_content?("Creating new teams is currently limited")
-
-        # this will take them to the create new team page.
-        be_invited_to_sign_up
-      end
-
-      assert page.has_content?("Create a New Team")
-      fill_in "Team Name", with: "Another Team"
-      click_on "Create Team"
-
-      assert page.has_content?("Another Team’s Dashboard")
-      within_team_menu_for(display_details) do
-        click_on "Team Members"
-      end
-
-      assert page.has_content?("Another Team Team Members")
-      click_on "Invite a New Team Member"
-
-      assert page.has_content?("New Invitation Details")
-
-      perform_enqueued_jobs do
-        clear_emails
-
-        # this is specifically a different email address than the one they signed up with originally.
-        fill_in "Email Address", with: "hanako@some-company.com"
-        click_on "Create Invitation"
-        assert page.has_content?("Invitation was successfully created.")
-      end
-
-      # sign out.
+      # Make sure we're actually signed in as Hanako and on the Team Members page.
       sign_out_for(display_details)
-
-      # we need the id of the membership that's created so we can address it's row in the table specifically.
-      invited_membership = Membership.order(:id).last
-
-      # # click the link in the email.
-      open_email "hanako@some-company.com"
-      current_email.click_link "Join Another Team"
-
-      assert page.has_content?("Create Your Account")
-      click_link "Already have an account?"
-
-      assert page.has_content?("Sign In")
+      visit root_url
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
       click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: example_password
       click_on "Sign In"
-
-      assert page.has_content?("Join Another Team")
-      assert page.has_content?("Taka Yamaguchi has invited you to join Another Team")
-      assert page.has_content?("This invitation was emailed to hanako@some-company.com")
-      assert page.has_content?("but you're currently signed in as hanako.tanaka@gmail.com")
-      click_on "Join Another Team"
-
-      assert page.has_content?("Welcome to Another Team!")
-
-      within_team_menu_for(display_details) do
-        click_on "Team Members"
-      end
-
-      last_membership = Membership.order(:id).last
-
-      within_current_memberships_table do
-        assert page.has_content?("Hanako Tanaka")
-        within_membership_row(last_membership) do
-          assert page.has_no_content?("Invited")
-          assert page.has_content?("Viewer")
-          click_on "Details"
-        end
-      end
-
-      accept_alert { click_on "Leave This Team" }
-
-      assert page.has_content?("You've successfully removed yourself from Another Team.")
-
-      assert page.has_content?("The Testing Team’s Dashboard")
-      within_team_menu_for(display_details) do
-        click_on "Team Members"
-      end
+      click_on "Team Members"
 
       assert page.has_content?("The Testing Team Team Members")
       within_current_memberships_table do
