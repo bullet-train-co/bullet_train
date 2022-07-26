@@ -628,6 +628,7 @@ DEPENDENCIES
   bullet_train-themes-light
   capybara!
   capybara-email
+  chronic
   colorize
   cssbundling-rails
   debug
