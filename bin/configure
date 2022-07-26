@@ -48,6 +48,20 @@ def not_installed?(package)
   `brew info #{package} | grep "Not installed"`.strip.length > 0
 end
 
+def check_package(package)
+  if not_installed?(package)
+    puts "#{package} is not installed via Homebrew. Try running `brew install #{package}`.".red
+    input = ask "Try proceeding without #{package}?"
+    if input.downcase[0] == "n"
+      exit
+    end
+  else
+    puts "#{package} is installed via Homebrew.".green
+  end
+end
+
+
+
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
 # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
 required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
@@ -63,6 +77,29 @@ else
   end
 end
 
+if `brew info 2> /dev/null`.length > 0
+  puts "Homebrew is installed.".green
+else
+  puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
+  input = ask "Try proceeding without Homebrew?"
+  if input.downcase[0] == "n"
+    exit
+  end
+end
+
+check_package("postgresql@13")
+check_package("redis")
+check_package("icu4c")
+check_package("node")
+
+if `yarn -v 2> /dev/null`.length > 0
+  puts "Yarn is installed.".green
+else
+  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
+  exit
+end
+
+
 required_node = `cat ./.nvmrc`.strip
 actual_node = `node -v`.strip.gsub("v", "")
 message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
@@ -76,50 +113,6 @@ else
   end
 end
 
-if `brew info 2> /dev/null`.length > 0
-  puts "Homebrew is installed.".green
-else
-  puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
-  input = ask "Try proceeding without Homebrew?"
-  if input.downcase[0] == "n"
-    exit
-  end
-end
-
-if not_installed?("postgresql@13")
-  puts "PostgreSQL 13 is not installed via Homebrew. Try running `brew install postgresql@13`.".red
-  input = ask "Try proceeding without PostgreSQL 13?"
-  if input.downcase[0] == "n"
-    exit
-  end
-else
-  puts "PostgreSQL 13 is installed via Homebrew.".green
-end
-
-if not_installed?("redis")
-  puts "Redis is not installed via Homebrew. Try running `brew install redis`.".red
-  input = ask "Try proceeding without Redis?"
-  if input.downcase[0] == "n"
-    exit
-  end
-else
-  puts "Redis is installed via Homebrew.".green
-end
-
-if not_installed?("icu4c")
-  puts "icu4c is not installed via Homebrew. Try running `brew install icu4c`.".red
-  input = ask "Try proceeding without icu4c?"
-  if input.downcase[0] == "n"
-    exit
-  end
-end
-
-if `yarn -v 2> /dev/null`.length > 0
-  puts "Yarn is installed.".green
-else
-  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
-  exit
-end
 
 puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"

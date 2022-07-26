@@ -17,6 +17,8 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert factory setup in place of this line.
       @other_tangible_things = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
+      # 🚅 super scaffolding will insert file-related logic above this line.
+      @tangible_thing.save
     end
 
     # This assertion is written in such a way that new attributes won't cause the tests to start failing, but removing
