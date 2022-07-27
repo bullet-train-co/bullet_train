@@ -93,7 +93,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
-      
+
       click_on "Add New Partial Test"
 
       # Text Field partial
@@ -164,7 +164,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # refute_nil partial_test.options_test
       # assert_equal partial_test.options_test, ["one", "three"]
       # Password
-      #refute_nil partial_test.password_test
+      # refute_nil partial_test.password_test
       # assert_equal partial_test.password_test, "testpassword123"
       # Phone Field
       refute_nil partial_test.phone_field_test
