@@ -29,8 +29,6 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
 
   # Setup for has-many-through test.
   bundle exec spring rails g model Projects::Tag team:references name:string
-
-  # TODO This actually has a bug with the route manipulator. We account for it with a `sed` call below.
   bin/super-scaffold crud Projects::Tag Team name:text_field --sidebar="ti.ti-tag"
 
   bundle exec spring rails g model Projects::AppliedTag project:references tag:references
@@ -39,16 +37,8 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
-
-    # TODO This is a fix for the bug in the route manipulator.
-    sed -i "" "s/resources :tags//g" config/routes.rb
-    sed -i "" "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
   else
     sed -i "s/raise .*/team\.projects_tags/g" app/models/project.rb
-
-    # TODO This is a fix for the bug in the route manipulator.
-    sed -i "s/resources :tags//g" config/routes.rb
-    sed -i "s/resources :teams, extending do/resources :teams do\n        namespace :projects do\n          resources :tags\n        end\n/g" config/routes.rb
   fi
 else
   echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
@@ -120,5 +110,35 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
 else
   echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
 fi
+
+# TODO: Generate these in parallel.
+spring rails g model PartialTest team:references \
+  text_field_test:string \
+  boolean_test:boolean \
+  single_button_test:string \
+  multiple_buttons_test:jsonb \
+  date_test:date \
+  date_time_test:datetime \
+  file_test:attachment \
+  option_test:string \
+  password_test:string \
+  phone_field_test:string \
+  super_select_test:string \
+  multiple_super_select_test:jsonb \
+  text_area_test:text
+bin/super-scaffold crud PartialTest Team \
+  text_field_test:text_field \
+  boolean_test:boolean \
+  single_button_test:buttons \
+  multiple_buttons_test:buttons{multiple} \
+  date_test:date_field\
+  date_time_test:date_and_time_field \
+  file_test:file_field \
+  option_test:options \
+  password_test:password_field \
+  phone_field_test:phone_field \
+  super_select_test:super_select \
+  multiple_super_select_test:super_select{multiple} \
+  text_area_test:text_area --sidebar="ti.ti-layout"
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare

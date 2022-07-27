@@ -12,9 +12,13 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       # 🚅 skip this section when scaffolding.
       @absolutely_abstract_creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
       @tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
+      @tangible_thing.file_field_value = Rack::Test::UploadedFile.new("test/support/foo.txt")
+      @tangible_thing.save
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert factory setup in place of this line.
       @other_tangible_things = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
+      # 🚅 super scaffolding will insert file-related logic above this line.
+      @tangible_thing.save
     end
 
     # This assertion is written in such a way that new attributes won't cause the tests to start failing, but removing
@@ -32,6 +36,9 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_equal tangible_thing_data["email_field_value"], tangible_thing.email_field_value
       assert_equal tangible_thing_data["password_field_value"], tangible_thing.password_field_value
       assert_equal tangible_thing_data["phone_field_value"], tangible_thing.phone_field_value
+
+      # TODO: Add support for uploading attachments via the API when creating a record.
+      assert tangible_thing_data["file_field_value"].match?("foo.txt") unless response.status == 201
 
       if tangible_thing.option_value.nil?
         assert_nil tangible_thing_data["option_value"]
