@@ -123,7 +123,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # check("Three")
 
       # Password partial
-      fill_in "Password Test", with: "testpassword123"
+      # fill_in "Password Test", with: "testpassword123"
       # Phone Field Partial
       fill_in "Phone Field Test", with: "(000)000-0000"
       # Super Select partial
@@ -164,8 +164,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # refute_nil partial_test.options_test
       # assert_equal partial_test.options_test, ["one", "three"]
       # Password
-      refute_nil partial_test.password_test
-      assert_equal partial_test.password_test, "testpassword123"
+      #refute_nil partial_test.password_test
+      # assert_equal partial_test.password_test, "testpassword123"
       # Phone Field
       refute_nil partial_test.phone_field_test
       assert_equal partial_test.phone_field_test, "(000)000-0000"

@@ -122,7 +122,6 @@ bundle exec spring rails g model PartialTest team:references \
   date_time_test:datetime \
   file_test:attachment \
   option_test:string \
-  # password_test:string \
   phone_field_test:string \
   super_select_test:string \
   multiple_super_select_test:jsonb \
@@ -136,7 +135,6 @@ bin/super-scaffold crud PartialTest Team \
   date_time_test:date_and_time_field \
   file_test:file_field \
   option_test:options \
-  # password_test:password_field \
   phone_field_test:phone_field \
   super_select_test:super_select \
   multiple_super_select_test:super_select{multiple} \
