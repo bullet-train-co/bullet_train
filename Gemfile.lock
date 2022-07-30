@@ -15,7 +15,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: 407da734681e7344b422456b23bab88e0aac81c7
+  revision: b8705059b142930e97fcbd8f34b9409755570c44
   specs:
     capybara (3.38.0)
       addressable
@@ -101,7 +101,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.612.0)
+    aws-partitions (1.613.0)
     aws-sdk-core (3.131.5)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -258,7 +258,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.5.4)
       railties (>= 5)
-    dry-container (0.10.0)
+    dry-container (0.10.1)
       concurrent-ruby (~> 1.0)
     dry-core (0.8.1)
       concurrent-ruby (~> 1.0)
