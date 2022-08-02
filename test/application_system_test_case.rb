@@ -277,6 +277,80 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     display_details[:resolution].map { |pixel_count| pixel_count / (display_details[:high_dpi] ? 2 : 1) }
   end
 
+  def complete_pricing_page(card = nil)
+    assert page.has_content?("Select Your Plan")
+    sleep 0.5
+    within('.pricing-plan.highlight') do
+      start_subscription
+    end
+
+    complete_payment_page(card)
+  end
+
+  def complete_payment_page(card = nil)
+    # we should be on the credit card page.
+    if free_trial?
+      assert page.has_content?("Start Your Free Trial")
+      assert page.has_content?("30-Day Free Trial".upcase)
+    else
+      assert page.has_content?("Upgrade Your Account")
+      assert page.has_content?("It Will Work For You!".upcase)
+    end
+
+    fill_in_stripe_elements(card)
+
+    if free_trial?
+      click_on "Start Free Trial"
+    else
+      click_on "Upgrade Now"
+    end
+  end
+
+  def start_subscription
+    if free_trial?
+      click_on "Start Trial"
+    else
+      click_on "Sign Up"
+    end
+  end
+
+  def fill_in_stripe_elements(card = nil)
+
+    # default card.
+    card ||= {
+      card_number: '4242424242424242',
+      expiration_month: '12',
+      expiration_year: '29',
+      security_code: '234',
+      zip: '93063'
+    }
+
+    using_wait_time(10) do
+      card_number_frame = find('#card-number iframe')
+      cvc_frame = find('#card-cvc iframe')
+      card_exp = find('#card-exp iframe')
+
+      within_frame(card_number_frame) do
+        card[:card_number].split(//).each do |digit|
+          find_field('cardnumber').send_keys(digit)
+        end
+      end
+
+      within_frame(cvc_frame) do
+        card[:security_code].split(//).each do |digit|
+          find_field('cvc').send_keys(digit)
+        end
+      end
+
+      within_frame(card_exp) do
+        (card[:expiration_month] + card[:expiration_year]).split(//).each do |digit|
+          find_field('exp-date').send_keys(digit)
+        end
+      end
+    end 
+
+  end
+  
   if !use_cuprite?
     module ::Selenium::WebDriver::Remote
       class Bridge
