@@ -57,6 +57,12 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       assert page.has_content?("Test File was successfully updated.")
       assert TestFile.first.foo.blank?
+
+      # This tests consistently adds a new text file,
+      # so we clear out the directory the files are saved to.
+      Dir.glob("tmp/storage/*").each do |dir|
+        FileUtils.rm_rf(dir)
+      end
     end
   end
 
