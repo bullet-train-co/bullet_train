@@ -56,6 +56,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_date_time_test").click
       find(".daterangepicker").click_on("Apply")
       # File partial
+      assert page.has_content?("Upload New Document")
       attach_file("test/support/foo.txt", make_visible: true)
       # Single Option partial
       choose("One")
@@ -78,9 +79,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
       # Text Area partial
       fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-      # File partial
-      assert page.has_content?("Upload New Document")
-      attach_file("test/support/foo.txt", make_visible: true)
 
       click_on "Create Partial Test"
       assert page.has_content?("Partial Test was successfully created.")
@@ -103,6 +101,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
       # File
       refute_nil partial_test.file_test
+      refute partial_test.foo.blank?
       assert_equal partial_test.file_test.class, ActiveStorage::Attached::One
       # Single Option
       refute_nil partial_test.option_test
@@ -125,9 +124,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text Area
       refute_nil partial_test.text_area_test
       assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-      # File Field
-      refute partial_test.foo.blank?
 
+      # Make sure we can remove a file as well.
       click_on "Edit"
       assert page.has_content?("Remove Current Document")
       find("span", text: "Remove Current Document").click
