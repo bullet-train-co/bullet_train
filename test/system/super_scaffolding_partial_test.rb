@@ -130,9 +130,10 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Remove Current Document")
       find("span", text: "Remove Current Document").click
       click_on "Update Partial Test"
-
       assert page.has_content?("Partial Test was successfully updated.")
-      assert partial_test.file_test.blank?
+
+      # We make another call to the database here since the record's state has been updated.
+      assert PartialTest.first.file_test.blank?
 
       # This tests consistently adds a new text file,
       # so we clear out the directory the files are saved to.
