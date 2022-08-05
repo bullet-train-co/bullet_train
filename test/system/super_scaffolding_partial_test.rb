@@ -137,9 +137,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       # This tests consistently adds a new text file,
       # so we clear out the directory the files are saved to.
-      Dir.glob("tmp/storage/*").each do |dir|
-        FileUtils.rm_rf(dir)
-      end
+      Dir.glob("tmp/storage/*").each { |dir| FileUtils.rm_r(dir) }
     end
   end
 end
