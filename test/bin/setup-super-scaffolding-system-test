@@ -114,7 +114,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
     phone_field_test:string \
     super_select_test:string \
     multiple_super_select_test:jsonb \
-    text_area_test:text \
+    text_area_test:text
   bin/super-scaffold crud PartialTest Team \
     text_field_test:text_field \
     boolean_test:boolean \
