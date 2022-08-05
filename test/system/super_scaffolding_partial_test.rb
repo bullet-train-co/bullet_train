@@ -101,7 +101,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
       # File
       refute_nil partial_test.file_test
-      refute partial_test.foo.blank?
+      refute partial_test.file_test.blank?
       assert_equal partial_test.file_test.class, ActiveStorage::Attached::One
       # Single Option
       refute_nil partial_test.option_test
@@ -132,7 +132,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Update Partial Test"
 
       assert page.has_content?("Partial Test was successfully updated.")
-      assert partial_test.foo.blank?
+      assert partial_test.file_test.blank?
 
       # This tests consistently adds a new text file,
       # so we clear out the directory the files are saved to.
