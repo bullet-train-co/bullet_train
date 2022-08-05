@@ -115,7 +115,6 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
     super_select_test:string \
     multiple_super_select_test:jsonb \
     text_area_test:text \
-    file_test:attachment
   bin/super-scaffold crud PartialTest Team \
     text_field_test:text_field \
     boolean_test:boolean \
@@ -129,8 +128,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
     phone_field_test:phone_field \
     super_select_test:super_select \
     multiple_super_select_test:super_select{multiple} \
-    text_area_test:text_area \
-    file_test:file_field --sidebar="ti.ti-layout"
+    text_area_test:text_area --sidebar="ti.ti-layout"
 else
   echo "Skipping \`PartialTest\` on this CI node."
 fi
