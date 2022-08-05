@@ -23,47 +23,11 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
   # force autoload.
   [
-    "TestFile",
     "PartialTest"
   ].each do |class_name|
     class_name.constantize
   rescue
     nil
-  end
-
-  if defined?(TestFile)
-
-    test "developers can Super Scaffold a file partial and perfrom crud actions on the record" do
-      display_details = @@test_devices[:macbook_pro_15_inch]
-      resize_for(display_details)
-
-      login_as(@jane, scope: :user)
-      visit account_team_path(@jane.current_team)
-
-      assert page.has_content?("Test Files")
-      click_on "Add New Test File"
-
-      assert page.has_content?("Upload New Document")
-      attach_file("test/support/foo.txt", make_visible: true)
-      click_on "Create Test File"
-
-      assert page.has_content?("Test File was successfully created.")
-      refute TestFile.first.foo.blank?
-
-      click_on "Edit"
-      assert page.has_content?("Remove Current Document")
-      find("span", text: "Remove Current Document").click
-      click_on "Update Test File"
-
-      assert page.has_content?("Test File was successfully updated.")
-      assert TestFile.first.foo.blank?
-
-      # This tests consistently adds a new text file,
-      # so we clear out the directory the files are saved to.
-      Dir.glob("tmp/storage/*").each do |dir|
-        FileUtils.rm_rf(dir)
-      end
-    end
   end
 
   if defined?(PartialTest)
@@ -114,6 +78,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
       # Text Area partial
       fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # File partial
+      assert page.has_content?("Upload New Document")
+      attach_file("test/support/foo.txt", make_visible: true)
 
       click_on "Create Partial Test"
       assert page.has_content?("Partial Test was successfully created.")
@@ -158,6 +125,22 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text Area
       refute_nil partial_test.text_area_test
       assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # File Field
+      refute partial_test.foo.blank?
+
+      click_on "Edit"
+      assert page.has_content?("Remove Current Document")
+      find("span", text: "Remove Current Document").click
+      click_on "Update Partial Test"
+
+      assert page.has_content?("Partial Test was successfully updated.")
+      assert partial_test.foo.blank?
+
+      # This tests consistently adds a new text file,
+      # so we clear out the directory the files are saved to.
+      Dir.glob("tmp/storage/*").each do |dir|
+        FileUtils.rm_rf(dir)
+      end
     end
   end
 end
