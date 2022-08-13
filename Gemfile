@@ -91,8 +91,6 @@ end
 # BULLET TRAIN GEMS
 # This section is the list of Ruby gems included by default for Bullet Train.
 
-gem "devise"
-
 # Core packages.
 gem "bullet_train"
 gem "bullet_train-super_scaffolding"
@@ -107,6 +105,8 @@ gem "bullet_train-integrations-stripe"
 gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
+
+gem "devise"
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
