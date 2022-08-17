@@ -13,9 +13,6 @@ class Ability
       permit user, through: :memberships, parent: :team
       permit user, through: :scaffolding_absolutely_abstract_creative_concepts_collaborators, parent: :creative_concept
 
-      # TODO is this even used?
-      can :dashboard, User, user_id: user.id
-
       # INDIVIDUAL USER PERMISSIONS.
       can :manage, User, id: user.id
       can :destroy, Membership, user_id: user.id
