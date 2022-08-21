@@ -197,7 +197,7 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.39)
+    bullet_train-super_scaffolding (1.0.40)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
