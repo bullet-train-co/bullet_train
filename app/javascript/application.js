@@ -25,10 +25,6 @@ import "@bullet-train/bullet-train-sortable"
 
 require("@icon/themify-icons/themify-icons.css")
 
-// For inline use in `app/views/account/onboarding/user_details/edit.html.erb`.
-import jstz from 'jstz';
-global.jstz = require("jstz");
-
 import { trixEditor } from "@bullet-train/fields"
 trixEditor()
 
