@@ -174,3 +174,7 @@ gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
 # that you run into a merge conflict in the future.
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
+
+source "https://IvP6C-qMWfGlri6Ca997TnapNmwnCqFdA@gem.fury.io/bullettrain" do
+  gem "bullet_train-action_models"
+end
