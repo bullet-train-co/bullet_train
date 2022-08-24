@@ -11,9 +11,9 @@
     dragula "^3.7.3"
 
 "@bullet-train/bullet-train@^1.0.72":
-  version "1.0.98"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.98.tgz#d03900dcd926a0dd4b8fda34e12a01606253b1cb"
-  integrity sha512-MBY/sQnqWYN/vk5QRLWfWwX+tO7V1e6WxsjhFwoIcwr9cZ+ZJCwyP85zrp3oPtrYkH17VsaREXf/ZKs3ZA4gDg==
+  version "1.0.99"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.0.99.tgz#d9b6f8f68278a9c41111238149bbbb216952dbed"
+  integrity sha512-6zleIjtNErZ5g3rM8FuS4MR+8+Mmq6zM7G+qyBsuHOMMBCTli05qbY2xXyga6wJGjm/fdrcWSuICIrcIM8eWnQ==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 

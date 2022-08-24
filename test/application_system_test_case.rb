@@ -280,7 +280,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def complete_pricing_page(card = nil)
     assert page.has_content?("Select Your Plan")
     sleep 0.5
-    within('.pricing-plan.highlight') do
+    within(".pricing-plan.highlight") do
       start_subscription
     end
 
@@ -315,42 +315,40 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def fill_in_stripe_elements(card = nil)
-
     # default card.
     card ||= {
-      card_number: '4242424242424242',
-      expiration_month: '12',
-      expiration_year: '29',
-      security_code: '234',
-      zip: '93063'
+      card_number: "4242424242424242",
+      expiration_month: "12",
+      expiration_year: "29",
+      security_code: "234",
+      zip: "93063"
     }
 
     using_wait_time(10) do
-      card_number_frame = find('#card-number iframe')
-      cvc_frame = find('#card-cvc iframe')
-      card_exp = find('#card-exp iframe')
+      card_number_frame = find("#card-number iframe")
+      cvc_frame = find("#card-cvc iframe")
+      card_exp = find("#card-exp iframe")
 
       within_frame(card_number_frame) do
-        card[:card_number].split(//).each do |digit|
-          find_field('cardnumber').send_keys(digit)
+        card[:card_number].chars.each do |digit|
+          find_field("cardnumber").send_keys(digit)
         end
       end
 
       within_frame(cvc_frame) do
-        card[:security_code].split(//).each do |digit|
-          find_field('cvc').send_keys(digit)
+        card[:security_code].chars.each do |digit|
+          find_field("cvc").send_keys(digit)
         end
       end
 
       within_frame(card_exp) do
-        (card[:expiration_month] + card[:expiration_year]).split(//).each do |digit|
-          find_field('exp-date').send_keys(digit)
+        (card[:expiration_month] + card[:expiration_year]).chars.each do |digit|
+          find_field("exp-date").send_keys(digit)
         end
       end
-    end 
-
+    end
   end
-  
+
   if !use_cuprite?
     module ::Selenium::WebDriver::Remote
       class Bridge

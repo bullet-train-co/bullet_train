@@ -124,7 +124,7 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.98)
+    bullet_train (1.0.99)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -201,12 +201,12 @@ GEM
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.0.21)
+    bullet_train-themes (1.0.22)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.0.47)
+    bullet_train-themes-light (1.0.48)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.0.14)
+    bullet_train-themes-tailwind_css (1.0.15)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
@@ -496,7 +496,7 @@ GEM
     rake (13.0.6)
     rash_alt (0.4.12)
       hashie (>= 3.4)
-    redis (4.7.1)
+    redis (4.8.0)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -542,7 +542,7 @@ GEM
       sentry-ruby (~> 5.4.2)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
-    sidekiq (6.5.4)
+    sidekiq (6.5.5)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.5.0)
