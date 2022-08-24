@@ -6,38 +6,6 @@ GIT
       activesupport (>= 5.0.0)
 
 GIT
-  remote: https://github.com/bullet-train-co/bullet_train-base.git
-  revision: 0f4e133951ec8fb6e287335b3f99da8b4efef82b
-  specs:
-    bullet_train (1.0.98)
-      awesome_print
-      bullet_train-fields
-      bullet_train-has_uuid
-      bullet_train-roles
-      bullet_train-scope_validator
-      bullet_train-super_load_and_authorize_resource
-      bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
-      cancancan
-      commonmarker
-      devise
-      devise-pwned_password
-      extended_email_reply_parser
-      fastimage
-      figaro
-      hiredis
-      http_accept_language
-      microscope
-      nice_partials (~> 0.1)
-      pagy
-      possessive
-      premailer-rails
-      rails (>= 6.0.0)
-      sidekiq
-      unicode-emoji
-      valid_email
-
-GIT
   remote: https://github.com/bullet-train-co/bullet_train-super_scaffolding.git
   revision: fab9ce02c0c6ad351b79a146fc809f947b3b2253
   specs:
@@ -189,6 +157,33 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
+    bullet_train (1.0.99)
+      awesome_print
+      bullet_train-fields
+      bullet_train-has_uuid
+      bullet_train-roles
+      bullet_train-scope_validator
+      bullet_train-super_load_and_authorize_resource
+      bullet_train-themes
+      cable_ready (= 5.0.0.pre9)
+      cancancan
+      commonmarker
+      devise
+      devise-pwned_password
+      extended_email_reply_parser
+      fastimage
+      figaro
+      hiredis
+      http_accept_language
+      microscope
+      nice_partials (~> 0.1)
+      pagy
+      possessive
+      premailer-rails
+      rails (>= 6.0.0)
+      sidekiq
+      unicode-emoji
+      valid_email
     bullet_train-api (1.0.17)
       api-pagination
       bullet_train
@@ -521,7 +516,7 @@ GEM
     rake (13.0.6)
     rash_alt (0.4.12)
       hashie (>= 3.4)
-    redis (4.7.1)
+    redis (4.8.0)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -567,7 +562,7 @@ GEM
       sentry-ruby (~> 5.4.2)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
-    sidekiq (6.5.4)
+    sidekiq (6.5.5)
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.5.0)
@@ -635,7 +630,7 @@ DEPENDENCIES
   active_hash!
   aws-sdk-s3
   bootsnap
-  bullet_train!
+  bullet_train
   bullet_train-api
   bullet_train-incoming_webhooks
   bullet_train-integrations
