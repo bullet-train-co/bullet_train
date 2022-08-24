@@ -89,13 +89,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       attach_file("test/support/foo.txt", make_visible: true)
       # Single Option partial
       choose("One")
-
-      # TODO: We'll need to adjust bullet_train-themes-tailwind_css to
-      # make this one pass, will come back to this one soon.
       # Multiple Option partial
-      # check("One")
-      # check("Three")
-
+      check("One")
+      check("Three")
       # Password partial
       fill_in "Password Test", with: "testpassword123"
       # Phone Field Partial
@@ -135,8 +131,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       refute_nil partial_test.option_test
       assert_equal partial_test.option_test, "one"
       # Multiple Options
-      # refute_nil partial_test.options_test
-      # assert_equal partial_test.options_test, ["one", "three"]
+      refute_nil partial_test.multiple_options_test
+      assert_equal partial_test.multiple_options_test, ["one", "three"]
       # Password
       refute_nil partial_test.password_test
       assert_equal partial_test.password_test, "testpassword123"
