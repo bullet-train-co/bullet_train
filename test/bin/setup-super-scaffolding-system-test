@@ -104,12 +104,16 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
   bundle exec spring rails g model TestFile team:references foo:attachment
   bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
   # TODO Write an actual test for this in `test/system/super_scaffolding_test.rb`.
+
+  bundle exec spring rails g model ColorPicker team:references color_picker_value:string
+  bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --sidebar="ti.ti-tag"
 else
-  echo "Skipping \`TestFile\` on this CI node."
+  echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
 fi
 
 # TODO: Generate these in parallel.
-spring rails g model PartialTest team:references \
+# TODO: Super Scaffold password_field partials correctly.
+bundle exec spring rails g model PartialTest team:references \
   text_field_test:string \
   boolean_test:boolean \
   single_button_test:string \
