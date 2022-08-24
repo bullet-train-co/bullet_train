@@ -6,6 +6,71 @@ GIT
       activesupport (>= 5.0.0)
 
 GIT
+  remote: https://github.com/bullet-train-co/bullet_train-base.git
+  revision: 0f4e133951ec8fb6e287335b3f99da8b4efef82b
+  specs:
+    bullet_train (1.0.98)
+      awesome_print
+      bullet_train-fields
+      bullet_train-has_uuid
+      bullet_train-roles
+      bullet_train-scope_validator
+      bullet_train-super_load_and_authorize_resource
+      bullet_train-themes
+      cable_ready (= 5.0.0.pre9)
+      cancancan
+      commonmarker
+      devise
+      devise-pwned_password
+      extended_email_reply_parser
+      fastimage
+      figaro
+      hiredis
+      http_accept_language
+      microscope
+      nice_partials (~> 0.1)
+      pagy
+      possessive
+      premailer-rails
+      rails (>= 6.0.0)
+      sidekiq
+      unicode-emoji
+      valid_email
+
+GIT
+  remote: https://github.com/bullet-train-co/bullet_train-super_scaffolding.git
+  revision: fab9ce02c0c6ad351b79a146fc809f947b3b2253
+  specs:
+    bullet_train-super_scaffolding (1.0.40)
+      bullet_train
+      indefinite_article
+      rails (>= 6.0.0)
+
+GIT
+  remote: https://github.com/bullet-train-co/bullet_train-themes-light.git
+  revision: f5bfc1cc51ff01dc88dde2c6920f209d6b064386
+  specs:
+    bullet_train-themes-light (1.0.47)
+      bullet_train-themes-tailwind_css
+      rails (>= 6.0.0)
+
+GIT
+  remote: https://github.com/bullet-train-co/bullet_train-themes-tailwind_css.git
+  revision: 1a2d248911f8c89f2112f0395d198494552cff59
+  specs:
+    bullet_train-themes-tailwind_css (1.0.14)
+      bullet_train
+      bullet_train-themes
+      rails (>= 6.0.0)
+
+GIT
+  remote: https://github.com/bullet-train-co/bullet_train-themes.git
+  revision: 364e2ee9508c61085d98b414c3624d45d59fec8b
+  specs:
+    bullet_train-themes (1.0.21)
+      rails (>= 6.0.0)
+
+GIT
   remote: https://github.com/bullet-train-co/wine_bouncer.git
   revision: 638eef8b4087532ac8950d9961552536a8de6660
   specs:
@@ -124,33 +189,6 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.98)
-      awesome_print
-      bullet_train-fields
-      bullet_train-has_uuid
-      bullet_train-roles
-      bullet_train-scope_validator
-      bullet_train-super_load_and_authorize_resource
-      bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
-      cancancan
-      commonmarker
-      devise
-      devise-pwned_password
-      extended_email_reply_parser
-      fastimage
-      figaro
-      hiredis
-      http_accept_language
-      microscope
-      nice_partials (~> 0.1)
-      pagy
-      possessive
-      premailer-rails
-      rails (>= 6.0.0)
-      sidekiq
-      unicode-emoji
-      valid_email
     bullet_train-api (1.0.17)
       api-pagination
       bullet_train
@@ -196,19 +234,6 @@ GEM
     bullet_train-sortable (1.0.3)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
-      rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.40)
-      bullet_train
-      indefinite_article
-      rails (>= 6.0.0)
-    bullet_train-themes (1.0.21)
-      rails (>= 6.0.0)
-    bullet_train-themes-light (1.0.47)
-      bullet_train-themes-tailwind_css
-      rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.0.14)
-      bullet_train
-      bullet_train-themes
       rails (>= 6.0.0)
     cable_ready (5.0.0.pre9)
       actioncable (>= 5.2)
@@ -610,7 +635,7 @@ DEPENDENCIES
   active_hash!
   aws-sdk-s3
   bootsnap
-  bullet_train
+  bullet_train!
   bullet_train-api
   bullet_train-incoming_webhooks
   bullet_train-integrations
@@ -619,8 +644,10 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
   bullet_train-sortable
-  bullet_train-super_scaffolding
-  bullet_train-themes-light
+  bullet_train-super_scaffolding!
+  bullet_train-themes!
+  bullet_train-themes-light!
+  bullet_train-themes-tailwind_css!
   capybara!
   capybara-email
   chronic
