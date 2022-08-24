@@ -97,7 +97,7 @@ gem "bullet_train-super_scaffolding", github: "bullet-train-co/bullet_train-supe
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
-gem "bullet_train-themes-light", github: "bullet-train-co/bullet_train-themes-light"
+gem "bullet_train-themes-light"
 gem "bullet_train-integrations"
 gem "bullet_train-integrations-stripe"
 
@@ -173,5 +173,5 @@ gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
 
-gem "bullet_train-themes", github: "bullet-train-co/bullet_train-themes"
-gem "bullet_train-themes-tailwind_css", github: "bullet-train-co/bullet_train-themes-tailwind_css"
+gem "bullet_train-themes"
+gem "bullet_train-themes-tailwind_css"
