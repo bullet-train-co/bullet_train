@@ -110,7 +110,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def open_mobile_menu
-    find(".mobile-menu-trigger").click
+    find("#mobile-menu-open").click
   end
 
   # sign out.
