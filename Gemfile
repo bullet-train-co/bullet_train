@@ -93,7 +93,7 @@ end
 
 # Core packages.
 gem "bullet_train"
-gem "bullet_train-super_scaffolding", github: "bullet-train-co/bullet_train-super_scaffolding"
+gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
@@ -175,3 +175,5 @@ gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
 
 gem "bullet_train-themes"
 gem "bullet_train-themes-tailwind_css"
+
+gem "spring"
