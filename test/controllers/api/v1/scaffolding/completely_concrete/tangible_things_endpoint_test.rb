@@ -1,5 +1,6 @@
 require "test_helper"
 require "controllers/api/test"
+require "support/custom_assertions"
 
 class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api::Test
   include Devise::Test::IntegrationHelpers
@@ -40,11 +41,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       # TODO: Add support for uploading attachments via the API when creating a record.
       assert tangible_thing_data["file_field_value"].match?("foo.txt") unless response.status == 201
 
-      if tangible_thing.option_value.nil?
-        assert_nil tangible_thing_data["option_value"]
-      else
-        assert_equal tangible_thing_data["option_value"], tangible_thing.option_value
-      end
+      assert_equal_or_nil tangible_thing_data["option_value"], tangible_thing.option_value
 
       assert_equal tangible_thing_data["super_select_value"], tangible_thing.super_select_value
       # assert_equal tangible_thing_data["text_area_value"], tangible_thing.text_area_value

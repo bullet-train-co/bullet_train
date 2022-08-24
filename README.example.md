@@ -6,7 +6,7 @@
 
      - Ruby 3
           - See [`.ruby-version`](.ruby-version) for the specific version.
-     - Node 16 
+     - Node 18 
           - See [`.nvmrc`](.nvmrc) for the specific version.
      - PostgreSQL 13
      - Redis 6.2

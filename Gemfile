@@ -91,10 +91,6 @@ end
 # BULLET TRAIN GEMS
 # This section is the list of Ruby gems included by default for Bullet Train.
 
-# TODO We have to reference `devise` in the local application Gemfile before `bullet_train`, otherwise our overrides of
-# its views don't take effect. Is there another way around this?
-gem "devise"
-
 # Core packages.
 gem "bullet_train"
 gem "bullet_train-super_scaffolding"
@@ -109,6 +105,8 @@ gem "bullet_train-integrations-stripe"
 gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
+
+gem "devise"
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.

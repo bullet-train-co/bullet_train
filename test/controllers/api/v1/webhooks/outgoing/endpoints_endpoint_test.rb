@@ -80,7 +80,7 @@ class Api::V1::Webhooks::Outgoing::EndpointsEndpointTest < Api::Test
     put "/api/v1/webhooks/outgoing/endpoints/#{@endpoint.id}", params: {
       access_token: access_token,
       name: "Alternative String Value",
-      url: "Alternative String Value",
+      url: "http://example.com",
       # 🚅 super scaffolding will also insert new fields above this line.
     }
 
@@ -92,7 +92,7 @@ class Api::V1::Webhooks::Outgoing::EndpointsEndpointTest < Api::Test
     # But we have to manually assert the value was properly updated.
     @endpoint.reload
     assert_equal @endpoint.name, "Alternative String Value"
-    assert_equal @endpoint.url, "Alternative String Value"
+    assert_equal @endpoint.url, "http://example.com"
     # 🚅 super scaffolding will additionally insert new fields above this line.
 
     # Also ensure we can't do that same action as another user.

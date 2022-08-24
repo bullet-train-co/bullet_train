@@ -2,12 +2,11 @@
 
 bin/link
 
-# TODO Enable this again when https://github.com/DarthSim/overmind/issues/132 is fixed.
-# if [ -x "$(command -v overmind)" ]
-# then
-#   overmind start -f Procfile.dev "$@"
-# else
-#   foreman start -f Procfile.dev "$@"
-# fi
+if [ -x "$(command -v overmind)" ]
+then
+  overmind start -f Procfile.dev "$@"
+else
+  foreman start -f Procfile.dev "$@"
+fi
 
 bundle exec foreman start -f Procfile.dev "$@"
