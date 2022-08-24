@@ -548,7 +548,6 @@ GEM
       redis (>= 4.5.0)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
-    spring (4.0.0)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -621,9 +620,7 @@ DEPENDENCIES
   bullet_train-scope_questions
   bullet_train-sortable
   bullet_train-super_scaffolding
-  bullet_train-themes
   bullet_train-themes-light
-  bullet_train-themes-tailwind_css
   capybara!
   capybara-email
   chronic
@@ -652,7 +649,6 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   sentry-sidekiq
-  spring
   sprockets-rails
   standard
   stimulus-rails

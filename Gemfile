@@ -172,8 +172,3 @@ gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
 # that you run into a merge conflict in the future.
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
-
-gem "bullet_train-themes"
-gem "bullet_train-themes-tailwind_css"
-
-gem "spring"
