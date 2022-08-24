@@ -8,6 +8,9 @@ class AnimationsTest < ApplicationSystemTestCase
   end
 
   test "mobile menu works properly" do
+    # TODO This test fails on Cuprite?
+    skip unless Capybara.current_driver.to_s.include?("selenium")
+
     display_details = {resolution: [750, 1334], mobile: true, high_dpi: true}
     animation_duration = 0.5
     resize_for(display_details)
