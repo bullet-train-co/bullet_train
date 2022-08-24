@@ -8,36 +8,36 @@ class AnimationsTest < ApplicationSystemTestCase
   end
 
   test "mobile menu works properly" do
-    display_details = { resolution: [750, 1334], mobile: true, high_dpi: true }
+    display_details = {resolution: [750, 1334], mobile: true, high_dpi: true}
     animation_duration = 0.5
     resize_for(display_details)
     login_as(@jane, scope: :user)
-    
+
     visit account_team_path(@jane.current_team)
-    
+
     els = {
-      :open_button => first("#mobile-menu-open", :visible => false),
-      :close_button => first("#mobile-menu-close", :visible => false),
-      :backdrop => first("#mobile-menu-backdrop", :visible => false)
+      open_button: first("#mobile-menu-open", visible: false),
+      close_button: first("#mobile-menu-close", visible: false),
+      backdrop: first("#mobile-menu-backdrop", visible: false)
     }
-    
+
     3.times do |i|
       assert_not els[:open_button].obscured?, "open_button should not initially be obscured on iteration #{i}"
       [:close_button, :backdrop].each do |key|
-        assert_not els[key].visible?, "#{key.to_s} should initially be hidden on iteration #{i}"
+        assert_not els[key].visible?, "#{key} should initially be hidden on iteration #{i}"
       end
-      
+
       els[:open_button].click
-      
+
       sleep(animation_duration)
-      
+
       assert els[:open_button].obscured?, "open_button should be obscured after mobile menu open on iteration #{i}"
       [:close_button, :backdrop].each do |key|
-        assert els[key].visible?, "#{key.to_s} should be visible after mobile menu open on iteration #{i}"
+        assert els[key].visible?, "#{key} should be visible after mobile menu open on iteration #{i}"
       end
-      
+
       els[:close_button].click
-      
+
       sleep(animation_duration)
     end
   end
