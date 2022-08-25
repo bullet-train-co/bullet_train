@@ -8,7 +8,8 @@ class AnimationsTest < ApplicationSystemTestCase
   end
 
   test "mobile menu works properly" do
-    # TODO This test fails on Cuprite?
+    # TODO: Unfortunately we have to skip this test when using Cuprite because
+    # the `obscured?` method below has not been implemented in the driver yet.
     skip unless Capybara.current_driver.to_s.include?("selenium")
 
     display_details = {resolution: [750, 1334], mobile: true, high_dpi: true}
