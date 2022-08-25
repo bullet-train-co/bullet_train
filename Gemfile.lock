@@ -102,7 +102,7 @@ GEM
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.621.0)
-    aws-sdk-core (3.134.0)
+    aws-sdk-core (3.135.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -184,8 +184,9 @@ GEM
     bullet_train-obfuscates_id (1.0.2)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.0.4)
-      rails (>= 7.0.0)
+    bullet_train-outgoing_webhooks (1.0.5)
+      public_suffix
+      rails (>= 6.0.0)
     bullet_train-roles (0.1.8)
       active_hash
       activesupport
