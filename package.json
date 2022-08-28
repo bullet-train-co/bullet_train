@@ -20,7 +20,7 @@
     "dragula": "^3.7.3",
     "esbuild": "^0.15.5",
     "glob": "^8.0.1",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.1",
     "jstz": "^2.1.1",
     "postcss": "^8.4.16",
     "postcss-css-variables": "^0.18.0",
