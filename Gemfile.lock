@@ -102,7 +102,7 @@ GEM
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.624.0)
-    aws-sdk-core (3.137.0)
+    aws-sdk-core (3.138.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -187,7 +187,7 @@ GEM
     bullet_train-outgoing_webhooks (1.0.5)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (0.1.8)
+    bullet_train-roles (0.1.10)
       active_hash
       activesupport
       cancancan
@@ -398,12 +398,12 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
-    oauth2 (2.0.7)
+    oauth2 (2.0.8)
       faraday (>= 0.17.3, < 3.0)
       jwt (>= 1.0, < 3.0)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-      rash_alt (>= 0.4, < 1)
+      snaky_hash (~> 2.0)
       version_gem (~> 1.1)
     omniauth (1.9.2)
       hashie (>= 3.4.6)
@@ -495,8 +495,6 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
-    rash_alt (0.4.12)
-      hashie (>= 3.4)
     redis (4.8.0)
     regexp_parser (2.5.0)
     reline (0.3.1)
@@ -549,6 +547,9 @@ GEM
       redis (>= 4.5.0, < 5)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
+    snaky_hash (2.0.0)
+      hashie
+      version_gem (~> 1.1)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
