@@ -92,17 +92,17 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
   bin/super-scaffold crud Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
+    sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
   else
-    sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_endpoint_test.rb
+    sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
   fi
 else
   echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
-  bundle exec spring rails g model TestFile team:references foo:attachment
-  bin/super-scaffold crud TestFile Team foo:file_field --sidebar="ti.ti-tag"
+  bundle exec spring rails g model TestFile team:references name:string foo:attachment
+  bin/super-scaffold crud TestFile Team name:text_field foo:file_field --sidebar="ti.ti-tag"
   # TODO Write an actual test for this in `test/system/super_scaffolding_test.rb`.
 
   bundle exec spring rails g model ColorPicker team:references color_picker_value:string
