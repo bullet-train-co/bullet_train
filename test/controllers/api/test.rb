@@ -30,13 +30,6 @@ class Api::Test < ActionDispatch::IntegrationTest
     response.parsed_body["access_token"]
   end
 
-  def assert_response_specific_not_found
-    assert_response :not_found
-    # Some invalid token errors also return 404, so it's important that we assert for the actual error message,
-    # otherwise we're not testing the right thing.
-    assert response.parsed_body["error"].include?("could not be found")
-  end
-
   def setup
     super
 

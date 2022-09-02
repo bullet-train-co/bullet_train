@@ -27,6 +27,62 @@ GIT
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
 
+PATH
+  remote: ../bullet_train-api
+  specs:
+    bullet_train-api (1.0.17)
+      bullet_train
+      doorkeeper
+      pagy
+      pagy_cursor
+      rack-cors
+      rails (>= 6.0.0)
+
+PATH
+  remote: ../bullet_train-base
+  specs:
+    bullet_train (1.0.99)
+      awesome_print
+      bullet_train-fields
+      bullet_train-has_uuid
+      bullet_train-roles
+      bullet_train-scope_validator
+      bullet_train-super_load_and_authorize_resource
+      bullet_train-themes
+      cable_ready (= 5.0.0.pre9)
+      cancancan
+      commonmarker
+      devise
+      devise-pwned_password
+      extended_email_reply_parser
+      fastimage
+      figaro
+      hiredis
+      http_accept_language
+      microscope
+      nice_partials (~> 0.1)
+      pagy
+      possessive
+      premailer-rails
+      rails (>= 6.0.0)
+      sidekiq
+      unicode-emoji
+      valid_email
+
+PATH
+  remote: ../bullet_train-super_scaffolding
+  specs:
+    bullet_train-super_scaffolding (1.0.43)
+      bullet_train
+      indefinite_article
+      rails (>= 6.0.0)
+
+PATH
+  remote: ../bullet_train-themes
+  specs:
+    bullet_train-themes (1.0.23)
+      rails (>= 6.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -97,7 +153,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    api-pagination (5.0.0)
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
@@ -124,46 +179,6 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.99)
-      awesome_print
-      bullet_train-fields
-      bullet_train-has_uuid
-      bullet_train-roles
-      bullet_train-scope_validator
-      bullet_train-super_load_and_authorize_resource
-      bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
-      cancancan
-      commonmarker
-      devise
-      devise-pwned_password
-      extended_email_reply_parser
-      fastimage
-      figaro
-      hiredis
-      http_accept_language
-      microscope
-      nice_partials (~> 0.1)
-      pagy
-      possessive
-      premailer-rails
-      rails (>= 6.0.0)
-      sidekiq
-      unicode-emoji
-      valid_email
-    bullet_train-api (1.0.17)
-      api-pagination
-      bullet_train
-      doorkeeper
-      grape (~> 1.6.0)
-      grape-cancan
-      grape-jsonapi (= 1.0.0)
-      grape-swagger
-      grape_on_rails_routes
-      jsonapi-serializer
-      pagy
-      rack-cors
-      rails (>= 7.0.0)
     bullet_train-fields (1.0.19)
       chronic
       cloudinary
@@ -197,12 +212,6 @@ GEM
     bullet_train-sortable (1.0.3)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
-      rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.43)
-      bullet_train
-      indefinite_article
-      rails (>= 6.0.0)
-    bullet_train-themes (1.0.23)
       rails (>= 6.0.0)
     bullet_train-themes-light (1.0.49)
       bullet_train-themes-tailwind_css
@@ -303,16 +312,6 @@ GEM
       mustermann-grape (~> 1.0.0)
       rack (>= 1.3.0)
       rack-accept
-    grape-cancan (0.0.3)
-      cancancan
-      grape (~> 1.2)
-    grape-jsonapi (1.0.0)
-      grape
-      jsonapi-serializer
-    grape-swagger (1.5.0)
-      grape (~> 1.3)
-    grape_on_rails_routes (0.3.2)
-      rails (>= 3.1.1)
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
@@ -336,8 +335,6 @@ GEM
     jsbundling-rails (1.0.3)
       railties (>= 6.0.0)
     json (2.6.2)
-    jsonapi-serializer (2.2.0)
-      activesupport (>= 4.2)
     jwt (2.5.0)
     knapsack_pro (3.3.1)
       rake
@@ -420,6 +417,9 @@ GEM
     orm_adapter (0.5.0)
     pagy (5.10.1)
       activesupport
+    pagy_cursor (0.5.0)
+      activerecord (>= 5)
+      pagy (>= 5, < 6)
     parallel (1.22.1)
     parser (3.1.2.1)
       ast (~> 2.4.1)
@@ -611,8 +611,8 @@ DEPENDENCIES
   active_hash!
   aws-sdk-s3
   bootsnap
-  bullet_train
-  bullet_train-api
+  bullet_train!
+  bullet_train-api!
   bullet_train-incoming_webhooks
   bullet_train-integrations
   bullet_train-integrations-stripe
@@ -620,7 +620,8 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
   bullet_train-sortable
-  bullet_train-super_scaffolding
+  bullet_train-super_scaffolding!
+  bullet_train-themes!
   bullet_train-themes-light
   capybara!
   capybara-email

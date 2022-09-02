@@ -28,6 +28,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do 
+    draw "api/v1"
+    # 🚅 super scaffolding will insert new api versions above this line.
+  end
+  
   namespace :account do
     shallow do
       # user-level onboarding tasks.
