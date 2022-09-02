@@ -9,7 +9,6 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
       # 🚅 skip this section when scaffolding.
       @absolutely_abstract_creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
       @tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
-      @another_tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
       @tangible_thing.file_field_value = Rack::Test::UploadedFile.new("test/support/foo.txt")
       @tangible_thing.save
       # 🚅 stop any skipping we're doing now.
@@ -17,6 +16,8 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
       @other_tangible_things = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
       # 🚅 super scaffolding will insert file-related logic above this line.
       @tangible_thing.save
+
+      @another_tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
     end
 
     # This assertion is written in such a way that new attributes won't cause the tests to start failing, but removing
