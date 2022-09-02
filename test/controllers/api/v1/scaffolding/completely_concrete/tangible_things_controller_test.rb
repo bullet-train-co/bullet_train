@@ -1,10 +1,6 @@
-require "test_helper"
-require "controllers/api/test"
-require "support/custom_assertions"
+require "controllers/api/v1/test"
 
-class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api::Test
-  include Devise::Test::IntegrationHelpers
-
+class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < Api::Test
   unless scaffolding_things_disabled? # 🚅 skip when scaffolding.
     def setup
       # See `test/controllers/api/test.rb` for common set up for API tests.
@@ -20,6 +16,8 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       @other_tangible_things = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
       # 🚅 super scaffolding will insert file-related logic above this line.
       @tangible_thing.save
+
+      @another_tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
     end
 
     # This assertion is written in such a way that new attributes won't cause the tests to start failing, but removing
@@ -37,10 +35,6 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_equal tangible_thing_data["email_field_value"], tangible_thing.email_field_value
       assert_equal tangible_thing_data["password_field_value"], tangible_thing.password_field_value
       assert_equal tangible_thing_data["phone_field_value"], tangible_thing.phone_field_value
-
-      # TODO: Add support for uploading attachments via the API when creating a record.
-      assert tangible_thing_data["file_field_value"].match?("foo.txt") unless response.status == 201
-
       assert_equal_or_nil tangible_thing_data["option_value"], tangible_thing.option_value
 
       assert_equal tangible_thing_data["super_select_value"], tangible_thing.super_select_value
@@ -57,14 +51,14 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_response :success
 
       # Make sure it's returning our resources.
-      tangible_thing_ids_returned = response.parsed_body.dig("data").map { |tangible_thing| tangible_thing.dig("attributes", "id") }
+      tangible_thing_ids_returned = response.parsed_body.dig("data").map { |tangible_thing| tangible_thing["id"] }
       assert_includes(tangible_thing_ids_returned, @tangible_thing.id)
 
       # But not returning other people's resources.
       assert_not_includes(tangible_thing_ids_returned, @other_tangible_things[0].id)
 
       # And that the object structure is correct.
-      assert_proper_object_serialization response.parsed_body.dig("data").first.dig("attributes")
+      assert_proper_object_serialization response.parsed_body.dig("data").first
     end
 
     test "show" do
@@ -73,55 +67,56 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       assert_response :success
 
       # Ensure all the required data is returned properly.
-      assert_proper_object_serialization response.parsed_body.dig("data", "attributes")
+      assert_proper_object_serialization response.parsed_body
 
       # Also ensure we can't do that same action as another user.
       get "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {access_token: another_access_token}
-      assert_response_specific_not_found
+      assert_response :not_found
     end
 
     test "create" do
       # Use the serializer to generate a payload, but strip some attributes out.
-      tangible_thing_data = Api::V1::Scaffolding::CompletelyConcrete::TangibleThingSerializer.new(build(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: nil)).serializable_hash.dig(:data, :attributes)
-      tangible_thing_data.except!(:id, :absolutely_abstract_creative_concept_id, :created_at, :updated_at)
+      params = {access_token: access_token}
+      tangible_thing_data = JSON.parse(build(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: nil).to_api_json)
+      tangible_thing_data.except!("id", "absolutely_abstract_creative_concept_id", "created_at", "updated_at")
+      params[:scaffolding_completely_concrete_tangible_thing] = tangible_thing_data
 
-      post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things",
-        params: tangible_thing_data.merge({access_token: access_token})
-
+      post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things", params: params
       assert_response :success
 
-      # Ensure all the required data is returned properly.
-      assert_proper_object_serialization response.parsed_body.dig("data", "attributes")
+      # # Ensure all the required data is returned properly.
+      assert_proper_object_serialization response.parsed_body
 
       # Also ensure we can't do that same action as another user.
       post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things",
-        params: tangible_thing_data.merge({access_token: another_access_token})
-      # TODO Why is this returning forbidden instead of the specific "Not Found" we get everywhere else?
-      assert_response :forbidden
+        params: params.merge({access_token: another_access_token})
+      assert_response :not_found
     end
 
     test "update" do
       # Post an attribute update ensure nothing is seriously broken.
       put "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {
         access_token: access_token,
-        # 🚅 skip this section when scaffolding.
-        text_field_value: "Alternative String Value",
-        button_value: @tangible_thing.button_value,
-        cloudinary_image_value: @tangible_thing.cloudinary_image_value,
-        date_field_value: @tangible_thing.date_field_value,
-        email_field_value: "another.email@test.com",
-        password_field_value: "Alternative String Value",
-        phone_field_value: "+19053871234",
-        super_select_value: @tangible_thing.super_select_value,
-        text_area_value: "Alternative String Value",
-        # 🚅 stop any skipping we're doing now.
-        # 🚅 super scaffolding will also insert new fields above this line.
+        scaffolding_completely_concrete_tangible_thing: {
+          # 🚅 skip this section when scaffolding.
+          text_field_value: "Alternative String Value",
+          button_value: @tangible_thing.button_value,
+          cloudinary_image_value: @tangible_thing.cloudinary_image_value,
+          date_field_value: @tangible_thing.date_field_value,
+          email_field_value: "another.email@test.com",
+          password_field_value: "Alternative String Value",
+          phone_field_value: "+19053871234",
+          super_select_value: @tangible_thing.super_select_value,
+          text_area_value: "Alternative String Value",
+          # 🚅 stop any skipping we're doing now.
+          # 🚅 super scaffolding will also insert new fields above this line.
+        }
       }
 
       assert_response :success
 
       # Ensure all the required data is returned properly.
-      assert_proper_object_serialization response.parsed_body.dig("data", "attributes")
+      assert_proper_object_serialization response.parsed_body
 
       # But we have to manually assert the value was properly updated.
       @tangible_thing.reload
@@ -136,7 +131,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
 
       # Also ensure we can't do that same action as another user.
       put "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {access_token: another_access_token}
-      assert_response_specific_not_found
+      assert_response :not_found
     end
 
     test "destroy" do
@@ -147,8 +142,8 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsEndpointTest < Api
       end
 
       # Also ensure we can't do that same action as another user.
-      delete "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {access_token: another_access_token}
-      assert_response_specific_not_found
+      delete "/api/v1/scaffolding/completely_concrete/tangible_things/#{@another_tangible_thing.id}", params: {access_token: another_access_token}
+      assert_response :not_found
     end
   end # 🚅 skip when scaffolding.
 end

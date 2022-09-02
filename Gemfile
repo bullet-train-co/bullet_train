@@ -97,6 +97,7 @@ gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
+gem "bullet_train-themes"
 gem "bullet_train-themes-light"
 gem "bullet_train-integrations"
 gem "bullet_train-integrations-stripe"
@@ -163,9 +164,6 @@ end
 
 # TODO Have to specify this dependency here until our changes are in the original package.
 gem "active_hash", github: "bullet-train-co/active_hash"
-
-# TODO Have to specify this dependency here until our changes are in the original package or properly forked.
-gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood

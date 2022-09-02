@@ -6,14 +6,6 @@ GIT
       activesupport (>= 5.0.0)
 
 GIT
-  remote: https://github.com/bullet-train-co/wine_bouncer.git
-  revision: 638eef8b4087532ac8950d9961552536a8de6660
-  specs:
-    wine_bouncer (1.0.4)
-      doorkeeper (>= 1.4, < 6.0)
-      grape (>= 0.10)
-
-GIT
   remote: https://github.com/teamcapybara/capybara.git
   revision: b8705059b142930e97fcbd8f34b9409755570c44
   specs:
@@ -97,7 +89,6 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
-    api-pagination (5.0.0)
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
@@ -124,7 +115,7 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.0.99)
+    bullet_train (1.1.0)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -151,19 +142,13 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.0.17)
-      api-pagination
+    bullet_train-api (1.1.0)
       bullet_train
       doorkeeper
-      grape (~> 1.6.0)
-      grape-cancan
-      grape-jsonapi (= 1.0.0)
-      grape-swagger
-      grape_on_rails_routes
-      jsonapi-serializer
       pagy
+      pagy_cursor
       rack-cors
-      rails (>= 7.0.0)
+      rails (>= 6.0.0)
     bullet_train-fields (1.0.19)
       chronic
       cloudinary
@@ -184,7 +169,7 @@ GEM
     bullet_train-obfuscates_id (1.0.2)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.0.5)
+    bullet_train-outgoing_webhooks (1.1.0)
       public_suffix
       rails (>= 6.0.0)
     bullet_train-roles (0.1.10)
@@ -198,7 +183,7 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.0.43)
+    bullet_train-super_scaffolding (1.1.0)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
@@ -259,20 +244,6 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.5.4)
       railties (>= 5)
-    dry-container (0.10.1)
-      concurrent-ruby (~> 1.0)
-    dry-core (0.8.1)
-      concurrent-ruby (~> 1.0)
-    dry-inflector (0.3.0)
-    dry-logic (1.2.0)
-      concurrent-ruby (~> 1.0)
-      dry-core (~> 0.5, >= 0.5)
-    dry-types (1.5.1)
-      concurrent-ruby (~> 1.0)
-      dry-container (~> 0.3)
-      dry-core (~> 0.5, >= 0.5)
-      dry-inflector (~> 0.1, >= 0.1.2)
-      dry-logic (~> 1.0, >= 1.0.2)
     email_reply_parser (0.5.10)
     erubi (1.11.0)
     erubis (2.7.0)
@@ -296,23 +267,6 @@ GEM
     foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    grape (1.6.2)
-      activesupport
-      builder
-      dry-types (>= 1.1)
-      mustermann-grape (~> 1.0.0)
-      rack (>= 1.3.0)
-      rack-accept
-    grape-cancan (0.0.3)
-      cancancan
-      grape (~> 1.2)
-    grape-jsonapi (1.0.0)
-      grape
-      jsonapi-serializer
-    grape-swagger (1.5.0)
-      grape (~> 1.3)
-    grape_on_rails_routes (0.3.2)
-      rails (>= 3.1.1)
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
@@ -336,8 +290,6 @@ GEM
     jsbundling-rails (1.0.3)
       railties (>= 6.0.0)
     json (2.6.2)
-    jsonapi-serializer (2.2.0)
-      activesupport (>= 4.2)
     jwt (2.5.0)
     knapsack_pro (3.3.1)
       rake
@@ -371,10 +323,6 @@ GEM
       minitest (>= 5.0)
     msgpack (1.5.6)
     multi_xml (0.6.0)
-    mustermann (3.0.0)
-      ruby2_keywords (~> 0.0.1)
-    mustermann-grape (1.0.2)
-      mustermann (>= 1.0.0)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -420,6 +368,9 @@ GEM
     orm_adapter (0.5.0)
     pagy (5.10.1)
       activesupport
+    pagy_cursor (0.5.0)
+      activerecord (>= 5)
+      pagy (>= 5, < 6)
     parallel (1.22.1)
     parser (3.1.2.1)
       ast (~> 2.4.1)
@@ -450,8 +401,6 @@ GEM
     pwned (2.0.2)
     racc (1.6.0)
     rack (2.2.4)
-    rack-accept (0.4.5)
-      rack (>= 0.4)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-mini-profiler (3.0.0)
@@ -622,6 +571,7 @@ DEPENDENCIES
   bullet_train-scope_questions
   bullet_train-sortable
   bullet_train-super_scaffolding
+  bullet_train-themes
   bullet_train-themes-light
   capybara!
   capybara-email
@@ -658,7 +608,6 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webdrivers
-  wine_bouncer!
 
 RUBY VERSION
    ruby 3.1.2
