@@ -78,7 +78,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
       # Use the serializer to generate a payload, but strip some attributes out.
       params = {access_token: access_token}
       tangible_thing_data = JSON.parse(build(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: nil).to_api_json)
-      tangible_thing_data.except!('id', 'absolutely_abstract_creative_concept_id', 'created_at', 'updated_at')
+      tangible_thing_data.except!("id", "absolutely_abstract_creative_concept_id", "created_at", "updated_at")
       params[:scaffolding_completely_concrete_tangible_thing] = tangible_thing_data
 
       post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things", params: params
@@ -88,7 +88,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
       assert_proper_object_serialization response.parsed_body
 
       # Also ensure we can't do that same action as another user.
-      post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things", 
+      post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things",
         params: params.merge({access_token: another_access_token})
       assert_response :not_found
     end

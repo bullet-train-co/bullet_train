@@ -24,7 +24,7 @@ class Api::V1::ApplicationController < ActionController::API
 
   def process_params(strong_params)
   end
-  
+
   # TODO Why doesn't `before_action :doorkeeper_authorize!` throw an exception?
   class NotAuthenticatedError < StandardError
   end
@@ -49,11 +49,11 @@ class Api::V1::ApplicationController < ActionController::API
     request.format = :json
   end
 
-  rescue_from CanCan::AccessDenied, ActiveRecord::RecordNotFound do |exception| 
-    render json: {error: 'Not found'}, status: :not_found
+  rescue_from CanCan::AccessDenied, ActiveRecord::RecordNotFound do |exception|
+    render json: {error: "Not found"}, status: :not_found
   end
 
-  rescue_from NotAuthenticatedError do |exception| 
-    render json: {error: 'Invalid token'}, status: :unauthorized
+  rescue_from NotAuthenticatedError do |exception|
+    render json: {error: "Invalid token"}, status: :unauthorized
   end
 end
