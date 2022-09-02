@@ -62,7 +62,7 @@ GIT
 
 GIT
   remote: https://github.com/bullet-train-co/bullet_train-super_scaffolding.git
-  revision: bc531db31ad6c53158febb1a8b230a910edc6492
+  revision: 9cd47b40263eecdcd8324a9158dfa6ef6922f85d
   branch: features/new-api
   specs:
     bullet_train-super_scaffolding (1.0.43)
