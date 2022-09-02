@@ -95,7 +95,7 @@ end
 gem "bullet_train", github: "bullet-train-co/bullet_train-base", branch: "features/new-api"
 gem "bullet_train-super_scaffolding", github: "bullet-train-co/bullet_train-super_scaffolding", branch: "features/new-api"
 gem "bullet_train-api", github: "bullet-train-co/bullet_train-api", branch: "features/new-api"
-gem "bullet_train-outgoing_webhooks"
+gem "bullet_train-outgoing_webhooks", github: "bullet-train-co/bullet_train-outgoing_webhooks", branch: "features/new-api"
 gem "bullet_train-incoming_webhooks"
 gem "bullet_train-themes"
 gem "bullet_train-themes-light"
