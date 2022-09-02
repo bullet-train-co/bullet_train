@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/bullet-train-co/bullet_train-base.git
-  revision: 93cedf16817b118b5a069914658e3a1c7316a043
+  revision: 499b1e510bf086eb70fe1e020df5d40c22e39960
   branch: features/new-api
   specs:
     bullet_train (1.0.99)
@@ -202,7 +202,7 @@ GEM
     bullet_train-outgoing_webhooks (1.0.5)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (0.1.8)
+    bullet_train-roles (0.1.10)
       active_hash
       activesupport
       cancancan
