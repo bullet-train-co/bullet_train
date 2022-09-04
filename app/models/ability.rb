@@ -14,7 +14,8 @@ class Ability
       permit user, through: :scaffolding_absolutely_abstract_creative_concepts_collaborators, parent: :creative_concept
 
       # INDIVIDUAL USER PERMISSIONS.
-      can :manage, User, id: user.collaborating_user_ids
+      can :manage, User, id: user.id
+      can :read, User, id: user.collaborating_user_ids
       can :destroy, Membership, user_id: user.id
 
       can :create, Team
