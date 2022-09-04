@@ -15,6 +15,7 @@ class Ability
 
       # INDIVIDUAL USER PERMISSIONS.
       can :manage, User, id: user.id
+      can :read, User, id: user.collaborating_user_ids
       can :destroy, Membership, user_id: user.id
 
       can :create, Team
