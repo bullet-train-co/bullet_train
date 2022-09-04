@@ -6,6 +6,62 @@ GIT
       activesupport (>= 5.0.0)
 
 GIT
+  remote: https://github.com/bullet-train-co/bullet_train-api.git
+  revision: 45f23a6a5d43d5bbc3c35f31c0c3b9d6d8d29cd3
+  branch: features/api-improvements
+  specs:
+    bullet_train-api (1.1.0)
+      bullet_train
+      doorkeeper
+      pagy
+      pagy_cursor
+      rack-cors
+      rails (>= 6.0.0)
+
+GIT
+  remote: https://github.com/bullet-train-co/bullet_train-base.git
+  revision: 7a8e1abe4a12f85570ce5365ae1ac3b0c4de9031
+  branch: features/api-improvements
+  specs:
+    bullet_train (1.1.0)
+      awesome_print
+      bullet_train-fields
+      bullet_train-has_uuid
+      bullet_train-roles
+      bullet_train-scope_validator
+      bullet_train-super_load_and_authorize_resource
+      bullet_train-themes
+      cable_ready (= 5.0.0.pre9)
+      cancancan
+      commonmarker
+      devise
+      devise-pwned_password
+      extended_email_reply_parser
+      fastimage
+      figaro
+      hiredis
+      http_accept_language
+      microscope
+      nice_partials (~> 0.1)
+      pagy
+      possessive
+      premailer-rails
+      rails (>= 6.0.0)
+      sidekiq
+      unicode-emoji
+      valid_email
+
+GIT
+  remote: https://github.com/bullet-train-co/bullet_train-super_scaffolding.git
+  revision: 0da0cc508e77f60f97d511c4a71c3a0c3973e1c3
+  branch: features/api-improvements
+  specs:
+    bullet_train-super_scaffolding (1.1.0)
+      bullet_train
+      indefinite_article
+      rails (>= 6.0.0)
+
+GIT
   remote: https://github.com/teamcapybara/capybara.git
   revision: b8705059b142930e97fcbd8f34b9409755570c44
   specs:
@@ -115,40 +171,6 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.1.0)
-      awesome_print
-      bullet_train-fields
-      bullet_train-has_uuid
-      bullet_train-roles
-      bullet_train-scope_validator
-      bullet_train-super_load_and_authorize_resource
-      bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
-      cancancan
-      commonmarker
-      devise
-      devise-pwned_password
-      extended_email_reply_parser
-      fastimage
-      figaro
-      hiredis
-      http_accept_language
-      microscope
-      nice_partials (~> 0.1)
-      pagy
-      possessive
-      premailer-rails
-      rails (>= 6.0.0)
-      sidekiq
-      unicode-emoji
-      valid_email
-    bullet_train-api (1.1.0)
-      bullet_train
-      doorkeeper
-      pagy
-      pagy_cursor
-      rack-cors
-      rails (>= 6.0.0)
     bullet_train-fields (1.0.19)
       chronic
       cloudinary
@@ -182,10 +204,6 @@ GEM
     bullet_train-sortable (1.0.3)
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
-      rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.1.0)
-      bullet_train
-      indefinite_article
       rails (>= 6.0.0)
     bullet_train-themes (1.0.23)
       rails (>= 6.0.0)
@@ -561,8 +579,8 @@ DEPENDENCIES
   active_hash!
   aws-sdk-s3
   bootsnap
-  bullet_train
-  bullet_train-api
+  bullet_train!
+  bullet_train-api!
   bullet_train-incoming_webhooks
   bullet_train-integrations
   bullet_train-integrations-stripe
@@ -570,7 +588,7 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
   bullet_train-sortable
-  bullet_train-super_scaffolding
+  bullet_train-super_scaffolding!
   bullet_train-themes
   bullet_train-themes-light
   capybara!

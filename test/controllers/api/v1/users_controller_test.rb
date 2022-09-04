@@ -18,10 +18,10 @@ class Api::V1::UsersControllerTest < Api::Test
     # Fetch the user in question and prepare to compare it's attributes.
     user = User.find(user_data["id"])
 
-    assert_equal_or_nil user_data['first_name'], user.first_name
-    assert_equal_or_nil user_data['last_name'], user.last_name
-    assert_equal_or_nil user_data['time_zone'], user.time_zone
-    assert_equal_or_nil user_data['locale'], user.locale
+    assert_equal_or_nil user_data["first_name"], user.first_name
+    assert_equal_or_nil user_data["last_name"], user.last_name
+    assert_equal_or_nil user_data["time_zone"], user.time_zone
+    assert_equal_or_nil user_data["locale"], user.locale
     # 🚅 super scaffolding will insert new fields above this line.
   end
 
