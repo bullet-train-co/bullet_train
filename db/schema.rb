@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_05_171758) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -141,6 +141,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_04_18_034147) do
     t.datetime "created_at", precision: nil, null: false
     t.string "scopes"
     t.string "previous_refresh_token", default: "", null: false
+    t.string "description"
+    t.datetime "last_used_at"
+    t.boolean "provisioned", default: false
     t.index ["application_id"], name: "index_oauth_access_tokens_on_application_id"
     t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
     t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"

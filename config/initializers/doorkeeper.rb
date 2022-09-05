@@ -71,6 +71,7 @@ Doorkeeper.configure do
   # end
 
   application_class "Platform::Application"
+  access_token_class "Platform::AccessToken"
 
   # Enables polymorphic Resource Owner association for Access Tokens and Access Grants.
   # By default this option is disabled.
@@ -227,7 +228,7 @@ Doorkeeper.configure do
   # `grant_type` - the grant type of the request (see Doorkeeper::OAuth)
   # `scopes` - the requested scopes (see Doorkeeper::OAuth::Scopes)
   #
-  use_refresh_token
+  # use_refresh_token
 
   # Provide support for an owner to be assigned to each registered application (disabled by default)
   # Optional parameter confirmation: true (default: false) if you want to enforce ownership of
@@ -241,8 +242,8 @@ Doorkeeper.configure do
   # For more information go to
   # https://doorkeeper.gitbook.io/guides/ruby-on-rails/scopes
   #
-  default_scopes :read
-  optional_scopes :write, :delete
+  # default_scopes :read
+  # optional_scopes :write, :delete
 
   # Allows to restrict only certain scopes for grant_type.
   # By default, all the scopes will be available for all the grant types.
@@ -251,13 +252,13 @@ Doorkeeper.configure do
   # values should be the array of scopes for that grant type.
   # Note: scopes should be from configured_scopes (i.e. default or optional)
   #
-  scopes_by_grant_type password: [:read, :write, :delete]
+  # scopes_by_grant_type password: [:read, :write, :delete]
 
   # Forbids creating/updating applications with arbitrary scopes that are
   # not in configuration, i.e. +default_scopes+ or +optional_scopes+.
   # (disabled by default)
   #
-  enforce_configured_scopes
+  # enforce_configured_scopes
 
   # Change the way client credentials are retrieved from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then
