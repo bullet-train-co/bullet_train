@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/bullet-train-co/bullet_train-api.git
-  revision: 7d13637fd92a7e1ee81694eb460598260abcf87e
+  revision: 9c000006bc4de6866edf081fa12a7995275a0229
   branch: features/improving-access-tokens
   specs:
     bullet_train-api (1.1.2)
@@ -20,7 +20,7 @@ GIT
 
 GIT
   remote: https://github.com/bullet-train-co/bullet_train-base.git
-  revision: ed59648eb490bd60f9655bc094ddad7f923f105b
+  revision: 953a868ff1d360e2ad2302ccb9a1845f17a7ecff
   branch: features/improving-access-tokens
   specs:
     bullet_train (1.1.3)
