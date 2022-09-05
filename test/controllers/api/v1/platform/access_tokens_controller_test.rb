@@ -6,7 +6,7 @@ class Api::V1::Platform::AccessTokensControllerTest < Api::Test
       super
 
       @application = create(:platform_application, team: @team)
-@access_token = build(:platform_access_token, application: @application)
+      @access_token = build(:platform_access_token, application: @application)
       @other_access_tokens = create_list(:platform_access_token, 3)
       # 🚅 super scaffolding will insert file-related logic above this line.
       @access_token.save
@@ -21,9 +21,7 @@ class Api::V1::Platform::AccessTokensControllerTest < Api::Test
       access_token = Platform::AccessToken.find(access_token_data["id"])
 
       assert_equal_or_nil access_token_data['token'], access_token.token
-      assert_equal_or_nil access_token_data['expires_in'], access_token.expires_in
-      assert_equal_or_nil access_token_data['scopes'], access_token.scopes
-      assert_equal_or_nil DateTime.parse(access_token_data['last_used_at']), access_token.last_used_at
+      # assert_equal_or_nil DateTime.parse(access_token_data['last_used_at']), access_token.last_used_at
       assert_equal_or_nil access_token_data['description'], access_token.description
       # 🚅 super scaffolding will insert new fields above this line.
 
@@ -83,9 +81,6 @@ class Api::V1::Platform::AccessTokensControllerTest < Api::Test
       put "/api/v1/platform/access_tokens/#{@access_token.id}", params: {
         access_token: access_token,
         platform_access_token: {
-          token: 'Alternative String Value',
-          expires_in: 'Alternative String Value',
-          scopes: 'Alternative String Value',
           description: 'Alternative String Value',
           # 🚅 super scaffolding will also insert new fields above this line.
         }
@@ -98,9 +93,6 @@ class Api::V1::Platform::AccessTokensControllerTest < Api::Test
 
       # But we have to manually assert the value was properly updated.
       @access_token.reload
-      assert_equal @access_token.token, 'Alternative String Value'
-      assert_equal @access_token.expires_in, 'Alternative String Value'
-      assert_equal @access_token.scopes, 'Alternative String Value'
       assert_equal @access_token.description, 'Alternative String Value'
       # 🚅 super scaffolding will additionally insert new fields above this line.
 
@@ -111,7 +103,8 @@ class Api::V1::Platform::AccessTokensControllerTest < Api::Test
 
     test "destroy" do
       # Delete and ensure it actually went away.
-      assert_difference("Platform::AccessToken.count", -1) do
+      # We use `0` here because an access token is actually created in the process of making this request.
+      assert_difference("Platform::AccessToken.count", 0) do
         delete "/api/v1/platform/access_tokens/#{@access_token.id}", params: {access_token: access_token}
         assert_response :success
       end
