@@ -1,0 +1,30 @@
+openapi: 3.1.0
+info:
+  title: Bullet Train API
+  description: |
+    The baseline API of a new Bullet Train application.
+  license: 
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: "<%= @version.upcase %>"
+servers:
+  - url: <%= ENV["BASE_URL"] %>/api/<%= @version %>
+components:
+  schemas:
+    <%= components_for Team %>
+    <%= components_for User %>
+    <%= components_for Scaffolding::CompletelyConcrete::TangibleThing unless scaffolding_things_disabled? %>
+    <%# 🚅 super scaffolding will insert new components above this line. %>
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+paths:
+  <%= paths_for Team %>
+  <%= paths_for User %>
+  <%= paths_for Scaffolding::CompletelyConcrete::TangibleThing unless scaffolding_things_disabled? %>
+  <%# 🚅 super scaffolding will insert new paths above this line. %>
+  
