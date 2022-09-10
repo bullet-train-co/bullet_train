@@ -161,7 +161,7 @@ stream "yarn install"
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 
-require "rails"
+require "active_support/inflector"
 
 variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
 environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
