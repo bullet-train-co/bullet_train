@@ -162,8 +162,7 @@ group :production do
   gem "aws-sdk-s3", require: false
 end
 
-# TODO Have to specify this dependency here until our changes are in the original package.
-gem "active_hash", github: "bullet-train-co/active_hash"
+gem "active_hash"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
