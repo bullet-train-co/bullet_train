@@ -1,4 +1,11 @@
 GIT
+  remote: git@github.com:active-hash/active_hash.git
+  revision: cbf3d200710ba90df0e98375e232f1288900bfda
+  specs:
+    active_hash (3.1.1)
+      activesupport (>= 5.0.0)
+
+GIT
   remote: https://github.com/teamcapybara/capybara.git
   revision: b8705059b142930e97fcbd8f34b9409755570c44
   specs:
@@ -11,12 +18,6 @@ GIT
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
-
-PATH
-  remote: ../../../ruby/gems/active_hash
-  specs:
-    active_hash (3.1.1)
-      activesupport (>= 5.0.0)
 
 GEM
   remote: https://rubygems.org/
