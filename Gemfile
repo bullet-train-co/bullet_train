@@ -162,10 +162,8 @@ group :production do
   gem "aws-sdk-s3", require: false
 end
 
+# TODO: Eventually just use `gem "active_hash"`
 gem "active_hash", git: "git@github.com:active-hash/active_hash.git"
-
-# YOUR GEMS
-# You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
