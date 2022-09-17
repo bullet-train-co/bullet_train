@@ -1,20 +1,24 @@
 free:
   limits:
     memberships:
-      count: 3
-      enforcement: hard
+      have:
+        count: 3
+        enforcement: hard
     scaffolding/absolutely_abstract/creative_concepts:
-      count: 25
-      enforcement: hard
+      have:
+        count: 25
+        enforcement: hard
 basic:
   price: basic_2022
   image: "sparkles.png"
   limits:
     memberships:
-      count: nil
+      have:
+        count: nil
     scaffolding/absolutely_abstract/creative_concepts:
-      count: 50
-      enforcement: soft
+      have:
+        count: 50
+        enforcement: soft
   prices:
     basic_monthly_2022:
       amount: 1000
@@ -36,10 +40,12 @@ pro:
   image: "rocket.png"
   limits:
     memberships:
-      count: 10
-      enforcement: soft
+      have:
+        count: 10
+        enforcement: soft
     scaffolding/absolutely_abstract/creative_concepts:
-      count: nil
+      have:
+        count: nil
   prices:
     pro_monthly_2022:
       amount: 10000
