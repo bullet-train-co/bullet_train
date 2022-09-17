@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: b8705059b142930e97fcbd8f34b9409755570c44
+  revision: f1588b82f1f5654f0d5f54e68be79ce8bf3c4111
   specs:
     capybara (3.38.0)
       addressable
@@ -93,7 +93,7 @@ GEM
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
     aws-partitions (1.631.0)
-    aws-sdk-core (3.148.0)
+    aws-sdk-core (3.149.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -382,9 +382,9 @@ GEM
     postmark-rails (0.22.1)
       actionmailer (>= 3.0.0)
       postmark (>= 1.21.3, < 2.0)
-    premailer (1.16.0)
+    premailer (1.17.0)
       addressable
-      css_parser (>= 1.6.0)
+      css_parser (>= 1.12.0)
       htmlentities (>= 4.0.0)
     premailer-rails (1.11.1)
       actionmailer (>= 3)
