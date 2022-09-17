@@ -1,4 +1,5 @@
 ignore:
+  - 'local/**/*'
   - '**/*':
     - Style/TrailingCommaInArguments
     - Style/TrailingCommaInArrayLiteral
