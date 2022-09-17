@@ -115,7 +115,7 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.1.4)
+    bullet_train (1.1.6)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
