@@ -375,7 +375,7 @@ GEM
     parser (3.1.2.1)
       ast (~> 2.4.1)
     pg (1.4.3)
-    phonelib (0.7.2)
+    phonelib (0.7.3)
     possessive (1.0.1)
     postmark (1.22.1)
       json
@@ -533,7 +533,7 @@ GEM
       activemodel
       mail (>= 2.6.1)
       simpleidn
-    version_gem (1.1.0)
+    version_gem (1.1.1)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
