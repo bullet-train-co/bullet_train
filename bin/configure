@@ -64,7 +64,10 @@ end
 
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
 # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
-required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
+asdf_version = `cat ./.tool-versions`.lines.find { |i| i.include?("ruby") }.gsub(/\b\w*[ruby]\w*\b/i, "").strip
+rvm_version = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
+
+required_ruby = asdf_version || rvm_version
 actual_ruby = `ruby -v`.strip
 message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
 if actual_ruby.include?(required_ruby)
@@ -87,10 +90,9 @@ else
   end
 end
 
-check_package("postgresql@13")
+check_package("postgresql@14")
 check_package("redis")
 check_package("icu4c")
-check_package("node")
 
 if `yarn -v 2> /dev/null`.length > 0
   puts "Yarn is installed.".green
@@ -99,8 +101,10 @@ else
   exit
 end
 
+asdf_version = `cat ./.tool-versions`.lines.find { |i| i.include?("node") }.gsub(/\b\w*[node]\w*\b/i, "").strip
+nvm_version = `cat ./.nvmrc`.strip
 
-required_node = `cat ./.nvmrc`.strip
+required_node = asdf_version || nvm_version
 actual_node = `node -v`.strip.gsub("v", "")
 message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
 if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)

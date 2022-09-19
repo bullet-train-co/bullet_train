@@ -56,7 +56,6 @@ Untitled
 .idea/
 
 # Ignore development tools files
-.tool-versions
 .byebug_history
 dump.rdb
 
