@@ -36,6 +36,9 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       fill_in "First Name", with: "Testy"
       fill_in "Last Name", with: "McTesterson"
       fill_in "Your Team Name", with: "The Testing Team"
+      
+      select2_select "Your Time Zone", "Tokyo"
+      
       click_on "Next"
 
       # sign out.
