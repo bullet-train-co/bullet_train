@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: f1588b82f1f5654f0d5f54e68be79ce8bf3c4111
+  revision: f37e50ee7e7bd77da45862900eb9acb5d28c1b4c
   specs:
     capybara (3.38.0)
       addressable
@@ -92,8 +92,8 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.634.0)
-    aws-sdk-core (3.152.0)
+    aws-partitions (1.635.0)
+    aws-sdk-core (3.153.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -516,7 +516,7 @@ GEM
     thor (1.2.1)
     thread-local (1.1.0)
     timeout (0.3.0)
-    turbo-rails (1.1.1)
+    turbo-rails (1.3.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
