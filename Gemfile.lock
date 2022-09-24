@@ -92,8 +92,8 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.635.0)
-    aws-sdk-core (3.153.0)
+    aws-partitions (1.636.0)
+    aws-sdk-core (3.154.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
       aws-sigv4 (~> 1.1)
@@ -427,7 +427,7 @@ GEM
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
     rails_autoscale_agent (0.12.0)
-    rails_best_practices (1.23.1)
+    rails_best_practices (1.23.2)
       activesupport
       code_analyzer (~> 0.5.5)
       erubis
@@ -496,9 +496,9 @@ GEM
       redis (>= 4.5.0, < 5)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
-    snaky_hash (2.0.0)
+    snaky_hash (2.0.1)
       hashie
-      version_gem (~> 1.1)
+      version_gem (~> 1.1, >= 1.1.1)
     sprockets (4.1.1)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
