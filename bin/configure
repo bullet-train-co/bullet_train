@@ -185,12 +185,14 @@ replace_in_file("./config/locales/en/application.en.yml", "untitled application"
 replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
 puts ""
 
+if skip_github
+  original_repo_link = "https://github.com/bullet-train-co/bullet_train"
+  new_repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
+  replace_in_file("README.md", original_repo_link, new_repo_link, /repo=#{original_repo_link}/)
+end
+
 puts "Moving `./README.example.md` to `./README.md`.".green
 puts `mv ./README.example.md ./README.md`.chomp
-
-unless skip_github
-  repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
-end
 
 puts `rm .github/FUNDING.yml`.chomp
 
