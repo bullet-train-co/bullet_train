@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: f37e50ee7e7bd77da45862900eb9acb5d28c1b4c
+  revision: a9fd24012257bba2afa6f36b7c99231c6a069a5e
   specs:
     capybara (3.38.0)
       addressable
@@ -92,7 +92,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.640.0)
+    aws-partitions (1.641.0)
     aws-sdk-core (3.158.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.525.0)
@@ -256,7 +256,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (2.5.2)
+    faraday (2.6.0)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-net_http (3.0.0)
@@ -474,13 +474,13 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.4.2)
+    sentry-rails (5.5.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.4.2)
-    sentry-ruby (5.4.2)
+      sentry-ruby (~> 5.5.0)
+    sentry-ruby (5.5.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sentry-sidekiq (5.4.2)
-      sentry-ruby (~> 5.4.2)
+    sentry-sidekiq (5.5.0)
+      sentry-ruby (~> 5.5.0)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
     sidekiq (6.5.7)
