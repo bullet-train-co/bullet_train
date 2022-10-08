@@ -11,6 +11,19 @@ if Bundler.locked_gems.dependencies.has_key? "cuprite"
   require "capybara/cuprite"
   require "support/ferrum_console_logger"
 
+  remote_chrome_url = ENV["REMOTE_CHROME_URL"].presence
+
+  # Chrome doesn't allow connecting to CDP by hostnames (other than localhost),
+  # but allows using IP addresses.
+  if remote_chrome_url&.match?(/host.docker.internal/)
+    require "resolv"
+
+    uri = URI.parse(remote_chrome_url)
+    ip = Resolv.getaddress(uri.host)
+
+    remote_chrome_url = remote_chrome_url.sub("host.docker.internal", ip)
+  end
+
   Capybara.register_driver(:bt_cuprite) do |app|
     Capybara::Cuprite::Driver.new(
       app,
@@ -19,6 +32,7 @@ if Bundler.locked_gems.dependencies.has_key? "cuprite"
       process_timeout: 10,
       inspector: true,
       headless: !ENV["HEADLESS"].in?(%w[n 0 no false]) && !ENV["MAGIC_TEST"].in?(%w[y 1 yes true]),
+      url: remote_chrome_url,
     )
   end
   Capybara.default_driver = Capybara.javascript_driver = :bt_cuprite
@@ -29,15 +43,10 @@ end
 
 Capybara.default_max_wait_time = ENV.fetch("CAPYBARA_DEFAULT_MAX_WAIT_TIME", ENV["MAGIC_TEST"].present? ? 5 : 15)
 
-Capybara.register_server :puma do |app, port, host|
-  require "rack/handler/puma"
-  # current we need at least three threads for the webhooks tests to pass.
-  Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: "5:5", config_files: ["-"])
-end
-
-Capybara.server = :puma
+Capybara.server = :puma, {Silent: true, Threads: "5:5", config_files: ["-"]}
 Capybara.server_port = 3001
-Capybara.app_host = "http://localhost:3001"
+Capybara.server_host = "0.0.0.0" if ENV["BULLET_TRAIN_ENV"] == "docker"
+Capybara.app_host = ENV.fetch("APP_HOST", "http://localhost:3001")
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def self.use_cuprite?
@@ -69,7 +78,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def setup
-    ENV["BASE_URL"] = "http://localhost:3001"
+    ENV["BASE_URL"] = Capybara.app_host
     Capybara.use_default_driver
     Capybara.reset_sessions!
   end

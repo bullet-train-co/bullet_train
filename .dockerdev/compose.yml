@@ -1,0 +1,146 @@
+x-app: &app
+  build:
+    context: .
+    args:
+      RUBY_VERSION: '3.2.1'
+      PG_MAJOR: '14'
+      NODE_MAJOR: '19'
+      YARN_VERSION: '1.22.19'
+  image: untitled-application-dev:1.0.0
+  environment: &env
+    NODE_ENV: ${NODE_ENV:-development}
+    RAILS_ENV: ${RAILS_ENV:-development}
+    BULLET_TRAIN_ENV: "docker"
+  tmpfs:
+    - /tmp
+    - /app/tmp/pids
+
+x-backend: &backend
+  <<: *app
+  stdin_open: true
+  tty: true
+  volumes:
+    - ..:/app:cached
+    - bundle:/usr/local/bundle
+    - rails_cache:/app/tmp/cache
+    - node_modules:/app/node_modules
+    - assets:/app/public/assets
+    - assets_builds:/app/app/assets/builds
+    - history:/usr/local/hist
+    - ./.psqlrc:/root/.psqlrc:ro
+    - ./.bashrc:/root/.bashrc:ro
+  environment: &backend_environment
+    <<: *env
+    REDIS_URL: redis://redis:6379/
+    DATABASE_URL: postgres://postgres:postgres@postgres:5432
+    REMOTE_CHROME_URL: ${REMOTE_CHROME_URL:-http://chrome:3333}
+    MALLOC_ARENA_MAX: 2
+    WEB_CONCURRENCY: ${WEB_CONCURRENCY:-1}
+    BOOTSNAP_CACHE_DIR: /usr/local/bundle/_bootsnap
+    XDG_DATA_HOME: /app/tmp/cache
+    YARN_CACHE_FOLDER: /app/node_modules/.yarn-cache
+    HISTFILE: /usr/local/hist/.bash_history
+    PSQL_HISTFILE: /usr/local/hist/.psql_history
+    IRB_HISTFILE: /usr/local/hist/.irb_history
+    EDITOR: vi
+  depends_on: &backend_depends_on
+    postgres:
+      condition: service_healthy
+    redis:
+      condition: service_healthy
+
+services:
+  rails:
+    <<: *backend
+    command: bundle exec rails
+
+  web:
+    <<: *backend
+    command: bundle exec rails server -b 0.0.0.0
+    ports:
+      - '3000:3000'
+    depends_on:
+      frontend:
+        condition: service_started
+      sidekiq:
+        condition: service_started
+
+  # Special service definition for system tests
+  # which launches Chrome service in addition to other deps
+  rails_chrome:
+    <<: *backend
+    environment:
+      <<: *backend_environment
+      APP_HOST: ${APP_HOST:-http://untitled-application.test:3001}
+    ports:
+      - '3001:3001'
+    depends_on:
+      <<: *backend_depends_on
+      chrome:
+        condition: service_started
+    networks:
+      default:
+        aliases:
+          - untitled-application.test
+
+  sidekiq:
+    <<: *backend
+    command: bundle exec sidekiq
+
+  frontend:
+    <<: *backend
+    command: hivemind --root=./ .dockerdev/Procfile.frontend
+
+  postgres:
+    image: postgres:14
+    volumes:
+      - .psqlrc:/root/.psqlrc:ro
+      - postgres:/var/lib/postgresql/data
+      - history:/user/local/hist
+    environment:
+      PSQL_HISTFILE: /user/local/hist/.psql_history
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
+      interval: 5s
+
+  redis:
+    image: redis:6.2-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 6379
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  chrome:
+    # See https://github.com/browserless/chrome/issues/1393
+    image: browserless/chrome:latest
+    ports:
+      - "3333:3333"
+    # Mount application source code to support file uploading
+    # (otherwise Chrome won't be able to find files).
+    # NOTE: Make sure you use absolute paths in `#attach_file`.
+    volumes:
+      - ..:/app:cached
+    environment:
+      # By default, it uses 3000, which is typically used by Rails.
+      PORT: 3333
+      # Set connection timeout to avoid timeout exception during debugging
+      # https://docs.browserless.io/docs/docker.html#connection-timeout
+      CONNECTION_TIMEOUT: 600000
+
+volumes:
+  bundle:
+  node_modules:
+  history:
+  rails_cache:
+  postgres:
+  redis:
+  assets:
+  assets_builds:
