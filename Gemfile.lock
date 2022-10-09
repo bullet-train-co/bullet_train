@@ -259,7 +259,7 @@ GEM
     faraday (2.6.0)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.0)
+    faraday-net_http (3.0.1)
     fastimage (2.2.6)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
