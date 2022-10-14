@@ -142,9 +142,10 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.1.6)
+    bullet_train-api (1.1.7)
       bullet_train
       doorkeeper
+      jbuilder-schema
       pagy
       pagy_cursor
       rack-cors
@@ -285,6 +286,10 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jbuilder-schema (1.0.0)
+      jbuilder
+      rails (>= 5.0.0)
+      safe_parser
     jmespath (1.6.1)
     jsbundling-rails (1.0.3)
       railties (>= 6.0.0)
@@ -468,7 +473,11 @@ GEM
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
+    ruby_parser (3.8.4)
+      sexp_processor (~> 4.1)
     rubyzip (2.3.2)
+    safe_parser (1.0.0)
+      ruby_parser (~> 3.8.4)
     selenium-webdriver (4.5.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)

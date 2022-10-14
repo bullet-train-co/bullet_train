@@ -3,7 +3,7 @@ info:
   title: Bullet Train API
   description: |
     The baseline API of a new Bullet Train application.
-  license: 
+  license:
     name: MIT
     url: https://opensource.org/licenses/MIT
   version: "<%= @version.upcase %>"
@@ -11,9 +11,9 @@ servers:
   - url: <%= ENV["BASE_URL"] %>/api/<%= @version %>
 components:
   schemas:
-    <%= components_for Team %>
-    <%= components_for User %>
-    <%= components_for Scaffolding::CompletelyConcrete::TangibleThing unless scaffolding_things_disabled? %>
+    <%= automatic_components_for Team %>
+    <%= automatic_components_for User %>
+    <%= automatic_components_for Scaffolding::CompletelyConcrete::TangibleThing unless scaffolding_things_disabled? %>
     <%# 🚅 super scaffolding will insert new components above this line. %>
   parameters:
     id:
@@ -25,6 +25,5 @@ components:
 paths:
   <%= paths_for Team %>
   <%= paths_for User %>
-  <%= paths_for Scaffolding::CompletelyConcrete::TangibleThing unless scaffolding_things_disabled? %>
+  <%= automatic_paths_for Scaffolding::CompletelyConcrete::TangibleThing, Scaffolding::AbsolutelyAbstract::CreativeConcept unless scaffolding_things_disabled? %>
   <%# 🚅 super scaffolding will insert new paths above this line. %>
-  
