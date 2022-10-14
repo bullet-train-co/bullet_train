@@ -10,6 +10,10 @@ info:
 servers:
   - url: <%= ENV["BASE_URL"] %>/api/<%= @version %>
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
   schemas:
     <%= automatic_components_for Team %>
     <%= automatic_components_for User %>
@@ -22,6 +26,8 @@ components:
       required: true
       schema:
         type: string
+security:
+  - BearerAuth: []
 paths:
   <%= paths_for Team %>
   <%= paths_for User %>
