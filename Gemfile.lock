@@ -286,7 +286,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (1.0.0)
+    jbuilder-schema (1.0.2)
       jbuilder
       rails (>= 5.0.0)
       safe_parser
