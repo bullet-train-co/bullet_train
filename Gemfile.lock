@@ -142,7 +142,7 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.1.9)
+    bullet_train-api (1.1.10)
       bullet_train
       doorkeeper
       jbuilder-schema
@@ -184,7 +184,7 @@ GEM
       rails (>= 7.0.0)
     bullet_train-super_load_and_authorize_resource (1.0.1)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.1.8)
+    bullet_train-super_scaffolding (1.1.9)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
@@ -286,7 +286,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (1.0.0)
+    jbuilder-schema (1.0.2)
       jbuilder
       rails (>= 5.0.0)
       safe_parser
