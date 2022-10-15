@@ -394,7 +394,7 @@ GEM
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
     public_suffix (5.0.0)
-    puma (5.6.5)
+    puma (6.0.0)
       nio4r (~> 2.0)
     pwned (2.0.2)
     racc (1.6.0)
@@ -592,7 +592,7 @@ DEPENDENCIES
   minitest-retry
   pg (>= 0.18, < 2.0)
   postmark-rails
-  puma (~> 5.0)
+  puma (~> 6.0)
   rack-mini-profiler
   rails (~> 7.0.0)
   rails_autoscale_agent
