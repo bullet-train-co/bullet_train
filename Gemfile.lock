@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: a9fd24012257bba2afa6f36b7c99231c6a069a5e
+  revision: 4f9b1ac2e68e5d446d9a29b3a6a57f2b22e69325
   specs:
     capybara (3.38.0)
       addressable
@@ -286,7 +286,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (1.0.2)
+    jbuilder-schema (1.0.3)
       jbuilder
       rails (>= 5.0.0)
       safe_parser
