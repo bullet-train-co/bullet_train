@@ -58,7 +58,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       # Remove the Platform Application and ensure it's
       # not present in the tombstoned Memberships list.
       click_on "Your Applications"
-      accept_alert{ click_on("Delete") }
+      accept_alert { click_on("Delete") }
 
       within_team_menu_for(display_details) do
         click_on "Team Members"
