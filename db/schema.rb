@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_05_171758) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_21_110141) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_171758) do
     t.bigint "added_by_id"
     t.bigint "platform_agent_of_id"
     t.jsonb "role_ids", default: []
+    t.boolean "platform_agent", default: false
     t.index ["added_by_id"], name: "index_memberships_on_added_by_id"
     t.index ["invitation_id"], name: "index_memberships_on_invitation_id"
     t.index ["platform_agent_of_id"], name: "index_memberships_on_platform_agent_of_id"
