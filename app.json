@@ -26,7 +26,7 @@
     "cloudinary:starter",
     "scheduler:standard",
     "rails-autoscale:free",
-    "honeybadger:free",
+    "honeybadger:basic",
     "sentry:f1",
     "realemail:free"
   ],
