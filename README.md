@@ -29,6 +29,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 Clicking this button will set up a new Bullet Train project for development on [Gitpod](https://gitpod.io).
 
 <br>
+<br>
 
 <p align="center">
 <strong>Open-source development sponsored by:</strong>
