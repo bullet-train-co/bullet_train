@@ -10,7 +10,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
 
   # Set up the action we want to test.
   PERFORM_METHOD="  def perform_on_target(project)"
-  TARGETS_MANY_ACTION='project.update(name: "#{project.name} + archived")'
+  TARGETS_MANY_ACTION='project.update(name: "#{project.name} archived")'
   PERFORM_METHOD_WITH_CONTENT="  def perform_on_target(project)\n    ${TARGETS_MANY_ACTION}"
   sed -i "s/${PERFORM_METHOD}/${PERFORM_METHOD_WITH_CONTENT}/g" app/models/projects/archive_action.rb
 else
