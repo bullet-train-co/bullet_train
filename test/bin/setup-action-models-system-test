@@ -3,7 +3,7 @@
 export SPRING=true
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-  bundle exec spring rails g model Project team:references title:string
+  bundle exec spring rails g model Project team:references name:string
   bin/super-scaffold crud Project Team name:text_field --sidebar="ti.ti-world"
 
   bin/super-scaffold action-model:targets-many Archive Project Team
