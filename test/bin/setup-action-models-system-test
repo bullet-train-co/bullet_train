@@ -17,4 +17,19 @@ else
   echo "Skipping the \`targets-many\` action on this CI node."
 fi
 
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+  bundle exec spring rails g model Listing team:references name:string
+  bin/super-scaffold crud Listing Team name:text_field --sidebar="ti.ti-world"
+  rails db:migrate
+  bin/super-scaffold action-model:targets-one Publish Listing Team
+
+  # Set up the action we want to test.
+  PERFORM_METHOD="  def perform_on_target(listing)"
+  TARGETS_MANY_ACTION='listing.update(name: "#{listing.name} published")'
+  PERFORM_METHOD_WITH_CONTENT="  def perform_on_target(listing)\n    ${TARGETS_MANY_ACTION}"
+  sed -i "s/${PERFORM_METHOD}/${PERFORM_METHOD_WITH_CONTENT}/g" app/models/listings/publish_action.rb
+else
+  echo "Skipping the \`targets-one\` action on this CI node."
+fi
+
 rails db:migrate
