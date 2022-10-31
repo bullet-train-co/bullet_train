@@ -117,7 +117,8 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Please provide the details of the new Publish Action you'd like to add to Test Listing.")
       click_on "Perform Publish Action"
 
-      # TODO: Finish writing this test.
+      assert page.has_content?("Publish Action was successfully created.")
+      assert page.has_content?("Test Listing published")
     end
   end
 end
