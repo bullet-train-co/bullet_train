@@ -27,7 +27,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
 
   # force autoload.
   [
-    "Archive"
+    "Projects::ArchiveAction"
   ].each do |class_name|
     class_name.constantize
   rescue
