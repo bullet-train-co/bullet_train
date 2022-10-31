@@ -27,7 +27,8 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
 
   # force autoload.
   [
-    "Projects::ArchiveAction"
+    "Projects::ArchiveAction",
+    "Listings::PublishAction"
   ].each do |class_name|
     class_name.constantize
   rescue
@@ -37,9 +38,10 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # 💡 All of the logic for the specific actions are written in the setup script.
   # Please edit that file if you want the action we're testing to do something else.
 
+  # targets-many action
   if defined?(Projects::ArchiveAction)
     test "developers can archive a single project" do
-      skip 'This needs to be fixed on the Action Models first'
+      skip 'This needs to be fixed in Action Models first'
 
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
@@ -86,6 +88,36 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Project 2 archived")
       assert page.has_content?("Archive Action on 2 Projects")
       assert page.has_content?(/Processed 2 of 2 Today/i)
+    end
+  end
+
+  # targets-one action
+  if defined?(Listings::PublishAction)
+    test "developers can publish only one listing at a time" do
+      skip 'This needs to be fixed in Action Models first'
+
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "Add New Listing"
+      fill_in "Name", with: "Test Listing"
+      click_on "Create Listing"
+
+      # Developers can click "Publish" on a single record,
+      # but cannot perform the action on multiple ones.
+      assert page.has_content?("Publish")
+      click_on "Select Multiple"
+      refute page.has_content?("Publish")
+      click_on "Hide Checkboxes"
+
+      # Test targets-one logic
+      click_on "Publish"
+
+      # Confirm action page
+      assert page.has_content?("Please provide the details of the new Publish Action you'd like to add to Test Listing.")
+      click_on "Perform Publish Action"
+
+      # TODO: Finish writing this test.
     end
   end
 end
