@@ -217,13 +217,13 @@ jobs:
 
     steps:
       - run:
-        name: Checking if Action Models is present
-        command: bash ./.circleci/action_models_check
+          name: Checking if Action Models is present
+          command: bash ./.circleci/action_models_check
 
       - run:
-        name: 'Skipping Action Model Tests'
-        command: echo "We could not find Action Models in your repository, so we are skipping these tests."
-        when: on_fail
+          name: 'Skipping Action Model Tests'
+          command: echo "We could not find Action Models in your repository, so we are skipping these tests."
+          when: on_fail
 
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
