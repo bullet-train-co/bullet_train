@@ -216,39 +216,53 @@ jobs:
     parallelism: 16
 
     steps:
+      - checkout
+
+      parameters:
+        action_models_presence:
+          type: boolean
+          default: false
+
       - run:
           name: Checking if Action Models is present
-          command: bash ./.circleci/action_models_check
+          command: |
+          ACTION_MODELS_PRESENCE=$(git grep bullet_train-action_models Gemfile.lock)
+          if [[ $ACTION_MODELS_PRESENCE ]]; then
+            action_models_presence=true
+          fi
 
-      - run:
-          name: 'Skipping Action Model Tests'
-          command: echo "We could not find Action Models in your repository, so we are skipping these tests."
-          when: on_fail
+      - unless:
+          condition: <<parameters.action_models_presence>>
+          steps:
+            - run:
+                name: 'Skipping Action Model Tests'
+                command: echo "We could not find Action Models in your repository, so we are skipping these tests."
 
-      - browser-tools/install-chrome
-      - browser-tools/install-chromedriver
-      - checkout
-      - restore_cache: *restore_bundler_cache
-      - restore_cache: *restore_yarn_cache
+      - when:
+          condition: <<parameters.action_models_presence>>
+          steps:
+            - browser-tools/install-chrome
+            - browser-tools/install-chromedriver
+            - checkout
+            - restore_cache: *restore_bundler_cache
+            - restore_cache: *restore_yarn_cache
 
-      # Install dependencies
-      - ruby/bundle-install
-      - run: bin/link
-      - run: yarn install
-      - run: yarn build
-      - run: yarn build:css
+            # Install dependencies
+            - ruby/bundle-install
+            - run: bin/link
+            - run: yarn install
+            - run: yarn build
+            - run: yarn build:css
 
-      - *wait_for_docker
+            - *wait_for_docker
 
-      - run: bundle add spring
-      - run:
-          name: 'Setup Action Models System Test'
-          command: bundle exec test/bin/setup-action-models-system-test
-          when: on_success
-      - run:
-          name: 'Run Action Models Test'
-          command: bundle exec rails test test/system/action_models_test.rb
-          when: on_success
+            - run: bundle add spring
+            - run:
+                name: 'Setup Action Models System Test'
+                command: bundle exec test/bin/setup-action-models-system-test
+            - run:
+                name: 'Run Action Models Test'
+                command: bundle exec rails test test/system/action_models_test.rb
 
 workflows:
   version: 2
