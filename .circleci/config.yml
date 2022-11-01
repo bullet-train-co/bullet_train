@@ -243,6 +243,7 @@ jobs:
             if [[ $ACTION_MODELS_PRESENCE ]]; then
               action_models_presence=true
             fi
+            exit 0
 
       - unless:
           condition: <<parameters.action_models_presence>>
