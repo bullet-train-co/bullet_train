@@ -216,8 +216,6 @@ jobs:
     parallelism: 16
 
     steps:
-      - checkout
-
       parameters:
         action_models_presence:
           type: boolean
