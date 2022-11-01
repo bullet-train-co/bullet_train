@@ -207,6 +207,47 @@ jobs:
             KNAPSACK_PRO_CI_NODE_TOTAL: 16
             KNAPSACK_PRO_TEST_FILE_PATTERN: "test/system/**{,/*/**}/*_test.rb"
 
+  'System Tests for Action Models':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: cimg/redis:6.2.6
+    executor: ruby/default
+    parallelism: 16
+
+    steps:
+      - run:
+        name: Checking if Action Models is present
+        command: bash ./.circleci/action_models_check
+      - when: on_fail
+        - run:
+          name: 'Skipping Action Model Tests'
+          command: echo "We could not find Action Models in your repository, so we are skipping these tests."
+      - when: on_success
+        steps:
+          - browser-tools/install-chrome
+          - browser-tools/install-chromedriver
+          - checkout
+          - restore_cache: *restore_bundler_cache
+          - restore_cache: *restore_yarn_cache
+
+          # Install dependencies
+          - ruby/bundle-install
+          - run: bin/link
+          - run: yarn install
+          - run: yarn build
+          - run: yarn build:css
+
+          - *wait_for_docker
+
+          - run: bundle add spring
+          - run:
+              name: 'Setup Action Models System Test'
+              command: bundle exec test/bin/setup-action-models-system-test
+          - run:
+              name: 'Run Action Models Test'
+              command: bundle exec rails test test/system/action_models_test.rb
+
 workflows:
   version: 2
   build:
@@ -216,3 +257,4 @@ workflows:
       - 'Minitest'
       - 'Minitest for Super Scaffolding'
       - 'System Tests with Cuprite'
+      - 'System Tests for Action Models'
