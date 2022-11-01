@@ -224,10 +224,10 @@ jobs:
       - run:
           name: Checking if Action Models is present
           command: |
-          ACTION_MODELS_PRESENCE=$(git grep bullet_train-action_models Gemfile.lock)
-          if [[ $ACTION_MODELS_PRESENCE ]]; then
-            action_models_presence=true
-          fi
+            ACTION_MODELS_PRESENCE=$(git grep bullet_train-action_models Gemfile.lock)
+            if [[ $ACTION_MODELS_PRESENCE ]]; then
+              action_models_presence=true
+            fi
 
       - unless:
           condition: <<parameters.action_models_presence>>
