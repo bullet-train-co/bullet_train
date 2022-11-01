@@ -215,12 +215,12 @@ jobs:
     executor: ruby/default
     parallelism: 16
 
-    steps:
-      parameters:
+    parameters:
         action_models_presence:
           type: boolean
           default: false
 
+    steps:
       - run:
           name: Checking if Action Models is present
           command: |
