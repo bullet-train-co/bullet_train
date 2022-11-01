@@ -36,9 +36,6 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
     nil
   end
 
-  # 💡 All of the logic for the specific actions are written in the setup script.
-  # Please edit that file if you want the action we're testing to do something else.
-
   # targets-many action
   if defined?(Projects::ArchiveAction)
     test "developers can archive a single project" do
