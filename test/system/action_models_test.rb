@@ -39,7 +39,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # targets-many action
   if defined?(Projects::ArchiveAction)
     test "developers can archive a single project" do
-      skip 'This needs to be fixed in Action Models first'
+      skip "This needs to be fixed in Action Models first"
 
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
@@ -92,7 +92,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # targets-one action
   if defined?(Listings::PublishAction)
     test "developers can publish only one listing at a time" do
-      skip 'This needs to be fixed in Action Models first'
+      skip "This needs to be fixed in Action Models first"
 
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
@@ -124,7 +124,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # performs-import action
   if defined?(Articles::CsvImportAction)
     test "developers can import CSV file information to their records" do
-      skip 'This needs to be fixed in Action Models first'
+      skip "This needs to be fixed in Action Models first"
 
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
