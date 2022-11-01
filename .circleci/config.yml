@@ -207,6 +207,7 @@ jobs:
             KNAPSACK_PRO_CI_NODE_TOTAL: 16
             KNAPSACK_PRO_TEST_FILE_PATTERN: "test/system/**{,/*/**}/*_test.rb"
 
+  # Uncomment the job at the bottom of this file to run these system tests.
   'System Tests for Action Models':
     docker:
       - <<: *ruby_node_browsers_docker_image
@@ -214,11 +215,6 @@ jobs:
       - image: cimg/redis:6.2.6
     executor: ruby/default
     parallelism: 16
-
-    parameters:
-        action_models_presence:
-          type: boolean
-          default: false
 
     steps:
       - browser-tools/install-chrome
@@ -236,32 +232,13 @@ jobs:
 
       - *wait_for_docker
 
+      - run: bundle add spring
       - run:
-          name: Checking if Action Models is present
-          command: |
-            ACTION_MODELS_PRESENCE=$(git grep bullet_train-action_models Gemfile.lock)
-            if [[ $ACTION_MODELS_PRESENCE ]]; then
-              action_models_presence=true
-            fi
-            exit 0
-
-      - unless:
-          condition: <<parameters.action_models_presence>>
-          steps:
-            - run:
-                name: 'Skipping Action Model Tests'
-                command: echo "We could not find Action Models in your repository, so we are skipping these tests."
-
-      - when:
-          condition: <<parameters.action_models_presence>>
-          steps:
-            - run: bundle add spring
-            - run:
-                name: 'Setup Action Models System Test'
-                command: bundle exec test/bin/setup-action-models-system-test
-            - run:
-                name: 'Run Action Models Test'
-                command: bundle exec rails test test/system/action_models_test.rb
+          name: 'Setup Action Models System Test'
+          command: bundle exec test/bin/setup-action-models-system-test
+      - run:
+          name: 'Run Action Models Test'
+          command: bundle exec rails test test/system/action_models_test.rb
 
 workflows:
   version: 2
