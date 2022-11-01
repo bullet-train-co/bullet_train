@@ -221,6 +221,21 @@ jobs:
           default: false
 
     steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - checkout
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bin/link
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      - *wait_for_docker
+
       - run:
           name: Checking if Action Models is present
           command: |
@@ -239,21 +254,6 @@ jobs:
       - when:
           condition: <<parameters.action_models_presence>>
           steps:
-            - browser-tools/install-chrome
-            - browser-tools/install-chromedriver
-            - checkout
-            - restore_cache: *restore_bundler_cache
-            - restore_cache: *restore_yarn_cache
-
-            # Install dependencies
-            - ruby/bundle-install
-            - run: bin/link
-            - run: yarn install
-            - run: yarn build
-            - run: yarn build:css
-
-            - *wait_for_docker
-
             - run: bundle add spring
             - run:
                 name: 'Setup Action Models System Test'
