@@ -221,37 +221,37 @@ jobs:
         command: bash ./.circleci/action_models_check
 
       - when:
-        condition: on_fail
-        steps:
-        - run:
-          name: 'Skipping Action Model Tests'
-          command: echo "We could not find Action Models in your repository, so we are skipping these tests."
+          condition: on_fail
+          steps:
+          - run:
+            name: 'Skipping Action Model Tests'
+            command: echo "We could not find Action Models in your repository, so we are skipping these tests."
 
       - when:
-        condition: on_success
-        steps:
-          - browser-tools/install-chrome
-          - browser-tools/install-chromedriver
-          - checkout
-          - restore_cache: *restore_bundler_cache
-          - restore_cache: *restore_yarn_cache
+          condition: on_success
+          steps:
+            - browser-tools/install-chrome
+            - browser-tools/install-chromedriver
+            - checkout
+            - restore_cache: *restore_bundler_cache
+            - restore_cache: *restore_yarn_cache
 
-          # Install dependencies
-          - ruby/bundle-install
-          - run: bin/link
-          - run: yarn install
-          - run: yarn build
-          - run: yarn build:css
+            # Install dependencies
+            - ruby/bundle-install
+            - run: bin/link
+            - run: yarn install
+            - run: yarn build
+            - run: yarn build:css
 
-          - *wait_for_docker
+            - *wait_for_docker
 
-          - run: bundle add spring
-          - run:
-              name: 'Setup Action Models System Test'
-              command: bundle exec test/bin/setup-action-models-system-test
-          - run:
-              name: 'Run Action Models Test'
-              command: bundle exec rails test test/system/action_models_test.rb
+            - run: bundle add spring
+            - run:
+                name: 'Setup Action Models System Test'
+                command: bundle exec test/bin/setup-action-models-system-test
+            - run:
+                name: 'Run Action Models Test'
+                command: bundle exec rails test test/system/action_models_test.rb
 
 workflows:
   version: 2
