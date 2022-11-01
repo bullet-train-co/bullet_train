@@ -28,7 +28,8 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # force autoload.
   [
     "Projects::ArchiveAction",
-    "Listings::PublishAction"
+    "Listings::PublishAction",
+    "Articles::CsvImportAction"
   ].each do |class_name|
     class_name.constantize
   rescue
@@ -120,6 +121,25 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Test Listing published")
       assert page.has_content?("Publish Action was successfully created.")
       assert page.has_content?("Current and Scheduled Publish Operations")
+    end
+  end
+
+  # performs-import action
+  if defined?(Articles::CsvImportAction)
+    test "developers can import CSV file information to their records" do
+      skip 'This needs to be fixed in Action Models first'
+
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "Add New Article"
+      fill_in "Name", with: "Test Article"
+      click_on "Create Article"
+
+      # Test import logic
+      click_on "Csv Import"
+
+      # TODO: From here, upload new document and configure field mappings, etc.
     end
   end
 end

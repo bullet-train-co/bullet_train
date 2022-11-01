@@ -34,12 +34,9 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   bundle exec spring rails g model Article team:references name:string
   bin/super-scaffold crud Article Team name:text_field --sidebar="ti.ti-world"
   rails db:migrate
-  bin/super-scaffold action-model:targets-one-parent CsvImport Article Team
+  bin/super-scaffold action-model:performs-import CsvImport Article Team
 
-  PERFORM_METHOD="  def perform_on_target(team)"
-  TARGETS_ONE_PARENT_ACTION='team.articles.each {|articles| articles.update(name: "#{articles.name} updated")}'
-  PERFORM_METHOD_WITH_CONTENT="  def perform_on_target(team)\n    ${TARGETS_ONE_PARENT_ACTION}"
-  sed -i "s/${PERFORM_METHOD}/${PERFORM_METHOD_WITH_CONTENT}/g" app/models/articles/csv_import_action.rb
+  # TODO: We need to either make a CSV file here or in the system test itself.
 else
   echo "Skipping the \`targets-one-parent\` action on this CI node."
 fi
