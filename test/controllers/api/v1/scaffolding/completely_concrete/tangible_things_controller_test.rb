@@ -51,14 +51,14 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
       assert_response :success
 
       # Make sure it's returning our resources.
-      tangible_thing_ids_returned = response.parsed_body.dig("data").map { |tangible_thing| tangible_thing["id"] }
+      tangible_thing_ids_returned = response.parsed_body.map { |tangible_thing| tangible_thing["id"] }
       assert_includes(tangible_thing_ids_returned, @tangible_thing.id)
 
       # But not returning other people's resources.
       assert_not_includes(tangible_thing_ids_returned, @other_tangible_things[0].id)
 
       # And that the object structure is correct.
-      assert_proper_object_serialization response.parsed_body.dig("data").first
+      assert_proper_object_serialization response.parsed_body.first
     end
 
     test "show" do
