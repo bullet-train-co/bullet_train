@@ -443,8 +443,6 @@ GEM
     rainbow (3.1.1)
     rake (13.0.6)
     redis (4.8.0)
-    redis-client (0.11.0)
-      connection_pool
     regexp_parser (2.6.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -494,11 +492,10 @@ GEM
       sentry-ruby (~> 5.5.0)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
-    sidekiq (7.0.0)
-      concurrent-ruby (< 2)
-      connection_pool (>= 2.3.0)
-      rack (>= 2.2.4)
-      redis-client (>= 0.9.0)
+    sidekiq (6.5.7)
+      connection_pool (>= 2.2.5)
+      rack (~> 2.0)
+      redis (>= 4.5.0, < 5)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
     snaky_hash (2.0.1)
@@ -605,6 +602,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   sentry-sidekiq
+  sidekiq (~> 6.0)
   sprockets-rails
   standard
   stimulus-rails
