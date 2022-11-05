@@ -33,6 +33,8 @@ class Api::Test < ActionDispatch::IntegrationTest
   def setup
     super
 
+    puts "Text to test CircleCI check"
+
     @user = create(:onboarded_user)
     @team = @user.current_team
     @platform_application = create(:platform_application, team: @team)
