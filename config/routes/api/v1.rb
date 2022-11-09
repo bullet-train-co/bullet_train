@@ -4,6 +4,11 @@ extending = {only: []}
 
 shallow do
   namespace :v1 do
+    namespace :webhooks do
+      namespace :incoming do
+      end
+    end
+
     # user specific resources.
     resources :users, extending do
       namespace :oauth do
