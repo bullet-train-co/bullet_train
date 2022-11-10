@@ -165,6 +165,7 @@ end
 # TODO Have to specify this dependency here until our changes are in the original package.
 gem "active_hash", github: "bullet-train-co/active_hash"
 
+# TODO Upgrade to Sidekiq 7.
 gem "sidekiq", "~> 6.0"
 
 # YOUR GEMS
