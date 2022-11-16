@@ -115,11 +115,12 @@ GEM
     bootsnap (1.13.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.1.7)
+    bullet_train (1.1.9)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
       bullet_train-roles
+      bullet_train-routes
       bullet_train-scope_validator
       bullet_train-super_load_and_authorize_resource
       bullet_train-themes
@@ -142,10 +143,10 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.1.11)
+    bullet_train-api (1.1.14)
       bullet_train
       doorkeeper
-      jbuilder-schema
+      jbuilder-schema (>= 2.0.0)
       pagy
       pagy_cursor
       rack-cors
@@ -177,6 +178,8 @@ GEM
       active_hash
       activesupport
       cancancan
+    bullet_train-routes (1.0.0)
+      rails (>= 6.0.0)
     bullet_train-scope_questions (1.0.2)
       rails (>= 6.0.0)
     bullet_train-scope_validator (1.0.2)
@@ -286,10 +289,9 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (1.0.3)
+    jbuilder-schema (2.0.3)
       jbuilder
       rails (>= 5.0.0)
-      safe_parser
     jmespath (1.6.1)
     jsbundling-rails (1.0.3)
       railties (>= 6.0.0)
@@ -384,8 +386,9 @@ GEM
       addressable
       css_parser (>= 1.12.0)
       htmlentities (>= 4.0.0)
-    premailer-rails (1.11.1)
+    premailer-rails (1.12.0)
       actionmailer (>= 3)
+      net-smtp
       premailer (~> 1.7, >= 1.7.9)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -473,11 +476,7 @@ GEM
       rubocop-ast (>= 0.4.0)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
-    ruby_parser (3.8.4)
-      sexp_processor (~> 4.1)
     rubyzip (2.3.2)
-    safe_parser (1.0.0)
-      ruby_parser (~> 3.8.4)
     selenium-webdriver (4.5.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -492,8 +491,8 @@ GEM
       sentry-ruby (~> 5.5.0)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
-    sidekiq (6.5.7)
-      connection_pool (>= 2.2.5)
+    sidekiq (6.5.8)
+      connection_pool (>= 2.2.5, < 3)
       rack (~> 2.0)
       redis (>= 4.5.0, < 5)
     simpleidn (0.2.1)
@@ -552,7 +551,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.4)
+    zeitwerk (2.6.6)
 
 PLATFORMS
   ruby
