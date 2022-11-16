@@ -143,7 +143,7 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.1.14)
+    bullet_train-api (1.1.15)
       bullet_train
       doorkeeper
       jbuilder-schema (>= 2.0.0)
@@ -584,6 +584,7 @@ DEPENDENCIES
   foreman
   honeybadger
   jbuilder
+  jbuilder-schema
   jsbundling-rails
   knapsack_pro
   letter_opener
