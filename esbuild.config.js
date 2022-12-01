@@ -73,8 +73,10 @@ require("esbuild").build({
     global: "window"
   },
   bundle: true,
-  splitting: true,
-  format: "esm",
+  // ESM + Splitting will only work if the script is type="module"
+  // splitting: true,
+  // format: "esm",
+  format: "iife",
   sourcemap: true,
   outdir: path.join(process.cwd(), "app/assets/builds"),
   loader: {
