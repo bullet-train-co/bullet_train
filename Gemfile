@@ -166,7 +166,7 @@ end
 gem "active_hash", github: "bullet-train-co/active_hash"
 
 # TODO Upgrade to Sidekiq 7.
-gem "sidekiq", "~> 6.0"
+gem "sidekiq", "~> 7.0"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
