@@ -215,4 +215,5 @@ workflows:
       - 'Database Schema Check'
       - 'Minitest'
       - 'Minitest for Super Scaffolding'
-      - 'System Tests with Cuprite'
+      # TODO Re-enable this after https://github.com/bullet-train-co/bullet_train/issues/527 is fixed.
+      # - 'System Tests with Cuprite'
