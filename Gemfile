@@ -36,7 +36,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.0.5"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -166,7 +166,7 @@ end
 gem "active_hash", github: "bullet-train-co/active_hash"
 
 # TODO Upgrade to Sidekiq 7.
-gem "sidekiq", "~> 6.0"
+gem "sidekiq"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
