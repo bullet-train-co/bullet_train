@@ -1,5 +1,3 @@
-# Force rebuild.
-
 require "test_helper"
 require "capybara/email"
 require "support/waiting"
