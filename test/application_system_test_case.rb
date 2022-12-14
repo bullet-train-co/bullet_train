@@ -204,13 +204,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   private def assert_no_js_errors_cuprite &block
-    last_timestamp = page.driver.browser.logger.logs
+    last_timestamp = page.driver.browser.options.logger.logs
       .map(&:timestamp)
       .last || 0
 
     yield
 
-    errors = page.driver.browser.logger.logs
+    errors = page.driver.browser.options.logger.logs
 
     errors = errors.reject { |e| e.timestamp.blank? || e.timestamp < last_timestamp } if last_timestamp > 0
     errors = errors.filter { |e| e.level == "error" }

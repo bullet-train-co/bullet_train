@@ -108,6 +108,8 @@ gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
 
 gem "devise"
+gem "devise-two-factor"
+gem "rqrcode"
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.

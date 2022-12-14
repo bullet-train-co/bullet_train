@@ -26,6 +26,22 @@ components:
       required: true
       schema:
         type: string
+    after:
+      name: after
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: "ID of item after which the collection should be returned"
+  headers:
+    PaginationNext:
+      description: "ID of next item in collection if exists, to be used in `after` route param for cursor-style paignation"
+      schema:
+        type: integer
+    Link:
+      description: "Link to the next page"
+      schema:
+        type: string
 security:
   - BearerAuth: []
 paths:
