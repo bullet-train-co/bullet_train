@@ -214,6 +214,7 @@ GEM
       mail
     charlock_holmes (0.7.7)
     chronic (0.10.2)
+    chunky_png (1.4.0)
     cloudinary (1.23.0)
       aws_cf_signer
       rest-client (>= 2.0.0)
@@ -242,6 +243,11 @@ GEM
     devise-pwned_password (0.1.9)
       devise (~> 4)
       pwned (~> 2.0.0)
+    devise-two-factor (5.0.0)
+      activesupport (~> 7.0)
+      devise (~> 4.0)
+      railties (~> 7.0)
+      rotp (~> 6.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.6.2)
@@ -462,6 +468,11 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rexml (3.2.5)
+    rotp (6.2.1)
+    rqrcode (2.1.2)
+      chunky_png (~> 1.0)
+      rqrcode_core (~> 1.0)
+    rqrcode_core (1.2.0)
     rubocop (1.39.0)
       json (~> 2.3)
       parallel (~> 1.10)
@@ -583,6 +594,7 @@ DEPENDENCIES
   cssbundling-rails
   debug
   devise
+  devise-two-factor
   factory_bot_rails
   foreman
   honeybadger
@@ -600,6 +612,7 @@ DEPENDENCIES
   rails_autoscale_agent
   rails_best_practices
   redis (~> 4.0)
+  rqrcode
   selenium-webdriver
   sentry-rails
   sentry-ruby
