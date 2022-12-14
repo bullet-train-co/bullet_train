@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+export SPRING=true
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+  bundle exec spring rails g model Project team:references name:string
+  bin/super-scaffold crud Project Team name:text_field --sidebar="ti.ti-world"
+  rails db:migrate
+  bin/super-scaffold action-model:targets-many Archive Project Team
+
+  PERFORM_METHOD="  def perform_on_target(project)"
+  TARGETS_MANY_ACTION='project.update(name: "#{project.name} archived")'
+  PERFORM_METHOD_WITH_CONTENT="  def perform_on_target(project)\n    ${TARGETS_MANY_ACTION}"
+  sed -i "s/${PERFORM_METHOD}/${PERFORM_METHOD_WITH_CONTENT}/g" app/models/projects/archive_action.rb
+else
+  echo "Skipping the \`targets-many\` action on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+  bundle exec spring rails g model Listing team:references name:string
+  bin/super-scaffold crud Listing Team name:text_field --sidebar="ti.ti-world"
+  rails db:migrate
+  bin/super-scaffold action-model:targets-one Publish Listing Team
+
+  PERFORM_METHOD="  def perform_on_target(listing)"
+  TARGETS_ONE_ACTION='listing.update(name: "#{listing.name} published")'
+  PERFORM_METHOD_WITH_CONTENT="  def perform_on_target(listing)\n    ${TARGETS_ONE_ACTION}"
+  sed -i "s/${PERFORM_METHOD}/${PERFORM_METHOD_WITH_CONTENT}/g" app/models/listings/publish_action.rb
+else
+  echo "Skipping the \`targets-one\` action on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
+  bundle exec spring rails g model Article team:references name:string
+  bin/super-scaffold crud Article Team name:text_field --sidebar="ti.ti-world"
+  rails db:migrate
+  bin/super-scaffold action-model:performs-import CsvImport Article Team
+
+  # TODO: We need to either make a CSV file here or in the system test itself.
+else
+  echo "Skipping the \`targets-one-parent\` action on this CI node."
+fi
+
+rails db:migrate
