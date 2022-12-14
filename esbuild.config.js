@@ -47,18 +47,38 @@ const ImportGlobPlugin = () => ({
   },
 });
 
+let themeFile = ""
+if (process.env.THEME) {
+  themeFile = execSync(`bundle exec bin/theme javascript ${process.env.THEME}`).toString().trim()
+}
+
+// Could also swap to packs?
+const otherEntrypoints = {}
+glob("app/javascript/entrypoints/**/*.js")
+  .forEach((file) => {
+  	// strips app/javascript/entrypoints from the key.
+    const key = path.join(path.dirname(file), path.basename(file)).split(path.sep + "entrypoints" + path.sep)[1]
+    const value = "." + path.sep + path.join(path.dirname(file), path.basename(file), path.extname(file))
+    otherEntrypoints[key] = value
+  });
+
 require("esbuild").build({
-  entryPoints: [
-    path.join(process.cwd(), "app/javascript/application.js"),
-    path.join(process.cwd(), "app/javascript/intl-tel-input-utils.js")
-  ],
+  entryPoints: {
+    ...otherEntrypoints,
+    "application": path.join(process.cwd(), "app/javascript/application.js"),
+    "intl-tel-input-utils": path.join(process.cwd(), "app/javascript/intl-tel-input-utils.js"),
+    [`application.${process.env.THEME}`]: themeFile,
+},
   define: {
     global: "window"
   },
   bundle: true,
+  // ESM + Splitting will only work if the script is type="module"
+  // splitting: true,
+  // format: "esm",
+  format: "iife",
   sourcemap: true,
   outdir: path.join(process.cwd(), "app/assets/builds"),
-  // absWorkingDir: path.join(process.cwd(), "app/javascript"),
   loader: {
     ".png": "file",
     ".jpg": "file",
