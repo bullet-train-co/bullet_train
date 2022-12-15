@@ -48,6 +48,7 @@ security:
 paths:
   <%= paths_for Team %>
   <%= paths_for User %>
-  <%= automatic_paths_for Webhooks::Outgoing::Endpoint, Team %>
+  <%# TODO This causes a "Missing partial endpoints/_endpoint" error? %>
+  <%#= automatic_paths_for Webhooks::Outgoing::Endpoint, Team %>
   <%= automatic_paths_for Scaffolding::CompletelyConcrete::TangibleThing, Scaffolding::AbsolutelyAbstract::CreativeConcept unless scaffolding_things_disabled? %>
   <%# 🚅 super scaffolding will insert new paths above this line. %>
