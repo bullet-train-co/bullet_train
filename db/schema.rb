@@ -94,6 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_191001) do
     t.bigint "added_by_id"
     t.bigint "platform_agent_of_id"
     t.jsonb "role_ids", default: []
+    t.boolean "platform_agent", default: false
     t.index ["added_by_id"], name: "index_memberships_on_added_by_id"
     t.index ["invitation_id"], name: "index_memberships_on_invitation_id"
     t.index ["platform_agent_of_id"], name: "index_memberships_on_platform_agent_of_id"
