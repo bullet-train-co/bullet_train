@@ -1,5 +1,6 @@
 default:
   models:
+    Scaffolding::CompletelyConcrete::SimpleSingleton: read
     Team: read
     Membership:
       - read
@@ -28,6 +29,7 @@ admin:
     - admin
     - editor
   models:
+    Scaffolding::CompletelyConcrete::SimpleSingleton: manage
     Team: manage
     Membership: manage
     Scaffolding::AbsolutelyAbstract::CreativeConcept: manage

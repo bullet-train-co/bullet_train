@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_28_191001) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_15_152529) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -193,6 +193,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_191001) do
     t.index ["membership_id"], name: "index_creative_concepts_collaborators_on_membership_id"
   end
 
+  create_table "scaffolding_completely_concrete_simple_singletons", force: :cascade do |t|
+    t.bigint "absolutely_abstract_creative_concept_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["absolutely_abstract_creative_concept_id"], name: "index_simple_singletons_on_creative_concept_id"
+  end
+
   create_table "scaffolding_completely_concrete_tangible_things", force: :cascade do |t|
     t.bigint "absolutely_abstract_creative_concept_id", null: false
     t.string "text_field_value"
@@ -353,6 +361,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_28_191001) do
   add_foreign_key "scaffolding_absolutely_abstract_creative_concepts", "teams"
   add_foreign_key "scaffolding_absolutely_abstract_creative_concepts_collaborators", "memberships"
   add_foreign_key "scaffolding_absolutely_abstract_creative_concepts_collaborators", "scaffolding_absolutely_abstract_creative_concepts", column: "creative_concept_id"
+  add_foreign_key "scaffolding_completely_concrete_simple_singletons", "scaffolding_absolutely_abstract_creative_concepts", column: "absolutely_abstract_creative_concept_id"
   add_foreign_key "scaffolding_completely_concrete_tangible_things", "scaffolding_absolutely_abstract_creative_concepts", column: "absolutely_abstract_creative_concept_id"
   add_foreign_key "scaffolding_completely_concrete_tangible_things_assignments", "memberships"
   add_foreign_key "scaffolding_completely_concrete_tangible_things_assignments", "scaffolding_completely_concrete_tangible_things", column: "tangible_thing_id"

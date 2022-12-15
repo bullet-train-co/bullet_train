@@ -30,6 +30,20 @@ shallow do
       namespace :integrations do
         # 🚅 super scaffolding will insert new integration installations above this line.
       end
+
+      namespace :scaffolding do
+        namespace :absolutely_abstract do
+          namespace :completely_concrete do
+            resources :simple_singletons
+          end
+        end
+
+        resources :absolutely_abstract_creative_concepts, path: 'absolutely_abstract/creative_concepts' do
+          namespace :completely_concrete do
+            resources :simple_singletons
+          end
+        end
+      end
     end
   end
 end

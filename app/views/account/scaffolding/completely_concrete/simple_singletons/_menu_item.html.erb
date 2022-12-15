@@ -1,0 +1,10 @@
+<% if can? :read, Scaffolding::CompletelyConcrete::SimpleSingleton.new(team: current_team) %>
+  <%= render 'account/shared/menu/item', {
+    url: main_app.polymorphic_path([:account, current_team, :scaffolding_completely_concrete_simple_singletons]),
+    label: t('scaffolding/completely_concrete/simple_singletons.navigation.label'),
+  } do |p| %>
+    <% p.content_for :icon do %>
+      <i class="<%= t('scaffolding/completely_concrete/simple_singletons.navigation.icon') %>"></i>
+    <% end %>
+  <% end %>
+<% end %>
