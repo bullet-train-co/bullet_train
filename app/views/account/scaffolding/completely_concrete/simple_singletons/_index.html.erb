@@ -1,0 +1,81 @@
+<% absolutely_abstract_creative_concept = @absolutely_abstract_creative_concept || @creative_concept %>
+<% context ||= absolutely_abstract_creative_concept %>
+<% collection ||= :completely_concrete_simple_singletons %>
+<% hide_actions ||= false %>
+<% hide_back ||= false %>
+
+<% simple_singletons = simple_singletons.order(:id) unless has_order?(simple_singletons) %>
+<% pagy, simple_singletons = pagy(simple_singletons, page_param: :simple_singletons_page) %>
+
+<%= action_model_select_controller do %>
+  <%= updates_for context, collection do %>
+    <%= render 'account/shared/box', pagy: pagy do |p| %>
+      <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+      <% p.content_for :description do %>
+        <%= t(".contexts.#{context.class.name.underscore}.description#{"_empty" unless simple_singletons.any?}") %>
+        <%= render "shared/limits/index", model: simple_singletons.model %>
+      <% end %>
+
+      <% p.content_for :table do %>
+        <% if simple_singletons.any? %>
+          <table class="table">
+            <thead>
+              <tr>
+                <%= render "shared/tables/select_all" %>
+                <th><%= t('.fields.name.heading') %></th>
+                <%# 🚅 super scaffolding will insert new field headers above this line. %>
+                <th><%= t('.fields.created_at.heading') %></th>
+                <th class="text-right"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% simple_singletons.each do |simple_singleton| %>
+                <% with_attribute_settings object: simple_singleton do %>
+                  <tr data-id="<%= simple_singleton.id %>">
+                    <%= render "shared/tables/checkbox", object: simple_singleton %>
+                    <td><%= render 'shared/attributes/text', attribute: :name, url: [:account, simple_singleton] %></td>
+                    <%# 🚅 super scaffolding will insert new fields above this line. %>
+                    <td><%= render 'shared/attributes/date_and_time', attribute: :created_at %></td>
+                    <td class="buttons">
+                      <% unless hide_actions %>
+                        <% if can? :edit, simple_singleton %>
+                          <%= link_to t('.buttons.shorthand.edit'), [:edit, :account, simple_singleton], class: 'button-secondary button-smaller' %>
+                        <% end %>
+                        <% if can? :destroy, simple_singleton %>
+                          <%= button_to t('.buttons.shorthand.destroy'), [:account, simple_singleton], method: :delete, data: { confirm: t('.buttons.confirmations.destroy', model_locales(simple_singleton)) }, class: 'button-secondary button-smaller' %>
+                        <% end %>
+                        <%# 🚅 super scaffolding will insert new action model buttons above this line. %>
+                      <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+      <% end %>
+
+      <% p.content_for :actions do %>
+        <% unless hide_actions %>
+          <% if context == absolutely_abstract_creative_concept %>
+            <% if can? :create, Scaffolding::CompletelyConcrete::SimpleSingleton.new(absolutely_abstract_creative_concept: absolutely_abstract_creative_concept) %>
+              <%= link_to t('.buttons.new'), [:new, :account, absolutely_abstract_creative_concept, :completely_concrete_simple_singleton], class: "#{first_button_primary(:completely_concrete_simple_singleton)} new" %>
+            <% end %>
+          <% end %>
+
+          <%# 🚅 super scaffolding will insert new targets one parent action model buttons above this line. %>
+          <%# 🚅 super scaffolding will insert new bulk action model buttons above this line. %>
+          <%= render "shared/bulk_action_select" %>
+
+          <% unless hide_back %>
+            <%= link_to t('global.buttons.back'), [:account, context], class: "#{first_button_primary(:completely_concrete_simple_singleton)} back" %>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <% p.content_for :raw_footer do %>
+        <%# 🚅 super scaffolding will insert new action model index views above this line. %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

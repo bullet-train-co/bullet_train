@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # This helps mark `resources` definitions below as not actually defining the routes for a given resource, but just
   # making it possible for developers to extend definitions that are already defined by the `bullet_train` Ruby gem.
   # TODO Would love to get this out of the application routes file.
-  extending = {only: []}
+  extending = { only: [] }
 
   scope module: "public" do
     # To keep things organized, we put non-authenticated controllers in the `Public::` namespace.
@@ -65,6 +65,20 @@ Rails.application.routes.draw do
 
         namespace :integrations do
           # 🚅 super scaffolding will insert new integration installations above this line.
+        end
+
+        namespace :scaffolding do
+          namespace :absolutely_abstract do
+            namespace :completely_concrete do
+              resources :simple_singletons
+            end
+          end
+
+          # resources :absolutely_abstract_creative_concepts, path: 'absolutely_abstract/creative_concepts' do
+          #   namespace :completely_concrete do
+          #     resources :simple_singletons
+          #   end
+          # end
         end
       end
     end

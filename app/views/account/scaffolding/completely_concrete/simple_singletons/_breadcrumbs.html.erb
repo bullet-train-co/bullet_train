@@ -1,0 +1,8 @@
+<% simple_singleton ||= @simple_singleton %>
+<% absolutely_abstract_creative_concept ||= @absolutely_abstract_creative_concept || simple_singleton&.absolutely_abstract_creative_concept %>
+<%= render 'account/scaffolding/absolutely_abstract/creative_concepts/breadcrumbs', creative_concept: absolutely_abstract_creative_concept %>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, absolutely_abstract_creative_concept, :completely_concrete_simple_singletons] %>
+<% if simple_singleton&.persisted? %>
+  <%= render 'account/shared/breadcrumb', label: simple_singleton.label_string, url: [:account, simple_singleton] %>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'scaffolding/completely_concrete/simple_singletons' %>

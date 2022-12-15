@@ -1,0 +1,91 @@
+en:
+  scaffolding/completely_concrete/simple_singletons: &simple_singletons
+    label: &label Simple Singletons
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Simple Singleton
+      create: Create Simple Singleton
+      edit: Edit Simple Singleton
+      update: Update Simple Singleton
+      destroy: Remove Simple Singleton
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{simple_singleton_name}? This will also remove any child resources and can't be undone.
+    fields: &fields
+      id:
+        heading: Simple Singleton ID
+      absolutely_abstract_creative_concept_id:
+        heading: Creative Concept ID
+      name:
+        _: &name Name
+        label: *name
+        heading: *name
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Simple Singletons"
+      index: "List Simple Singletons"
+      create: "Add a New Simple Singleton"
+      member_actions: "Actions for an Individual Simple Singleton"
+      show: "Retrieve a Simple Singleton"
+      update: "Update a Simple Singleton"
+      destroy: "Delete a Simple Singleton"
+      fields: *fields
+    index:
+      section: "%{creative_concepts_possessive} Simple Singletons"
+      contexts:
+        scaffolding/absolutely_abstract/creative_concept:
+          header: Simple Singletons
+          description: Below is a list of Simple Singletons that have been added for %{creative_concept_name}.
+          description_empty: No Simple Singletons have been added for %{creative_concept_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{simple_singleton_name}"
+      header: Simple Singleton Details
+      description: Below are the details we have for %{simple_singleton_name}.
+      manage_description: You'll also find options for updating these details or removing %{simple_singleton_name} from %{creative_concept_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Simple Singleton for %{creative_concept_name}"
+      header: New Simple Singleton Details
+      description: Please provide the details of the new Simple Singleton you'd like to add to %{creative_concept_name}.
+      form: *form
+    edit:
+      section: "%{simple_singleton_name}"
+      header: Edit Simple Singleton Details
+      description: You can update the details or settings for %{simple_singleton_name} below.
+      form: *form
+    notifications:
+      created: Simple Singleton was successfully created.
+      updated: Simple Singleton was successfully updated.
+      destroyed: Simple Singleton was successfully destroyed.
+  account:
+    scaffolding:
+      completely_concrete:
+        simple_singletons: *simple_singletons
+  activerecord:
+    attributes:
+      scaffolding/completely_concrete/simple_singleton:
+        name: *name
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at
