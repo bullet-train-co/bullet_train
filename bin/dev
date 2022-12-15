@@ -8,5 +8,3 @@ then
 else
   foreman start -f Procfile.dev "$@"
 fi
-
-bundle exec foreman start -f Procfile.dev "$@"

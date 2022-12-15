@@ -14,10 +14,12 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert factory setup in place of this line.
       @other_tangible_things = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
-      # 🚅 super scaffolding will insert file-related logic above this line.
-      @tangible_thing.save
 
       @another_tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
+
+      # 🚅 super scaffolding will insert file-related logic above this line.
+      @tangible_thing.save
+      @another_tangible_thing.save
     end
 
     # This assertion is written in such a way that new attributes won't cause the tests to start failing, but removing
@@ -51,14 +53,14 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
       assert_response :success
 
       # Make sure it's returning our resources.
-      tangible_thing_ids_returned = response.parsed_body.dig("data").map { |tangible_thing| tangible_thing["id"] }
+      tangible_thing_ids_returned = response.parsed_body.map { |tangible_thing| tangible_thing["id"] }
       assert_includes(tangible_thing_ids_returned, @tangible_thing.id)
 
       # But not returning other people's resources.
       assert_not_includes(tangible_thing_ids_returned, @other_tangible_things[0].id)
 
       # And that the object structure is correct.
-      assert_proper_object_serialization response.parsed_body.dig("data").first
+      assert_proper_object_serialization response.parsed_body.first
     end
 
     test "show" do
