@@ -56,7 +56,8 @@ class AccountTest < ApplicationSystemTestCase
       click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: another_example_password
       click_on "Sign In"
-      assert page.has_content?("Invalid Email Address or Password.")
+      # TODO I feel like password should be capitalized here?
+      assert page.has_content?("Invalid Email Address or password.")
     end
   end
 end
