@@ -248,5 +248,5 @@ workflows:
       - 'Database Schema Check'
       - 'Minitest'
       - 'Minitest for Super Scaffolding'
-      - 'System Tests with Cuprite'
+      # - 'System Tests with Cuprite'
       # - 'System Tests for Action Models'

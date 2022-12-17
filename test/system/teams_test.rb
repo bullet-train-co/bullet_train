@@ -52,7 +52,9 @@ class TeamsTest < ApplicationSystemTestCase
       resize_for(display_details)
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
-      click_on "Edit Team"
+      within_team_menu_for(display_details) do
+        click_link "Team Settings"
+      end
       fill_in "Name", with: "Changed Team"
       click_on "Update Team"
 
@@ -64,7 +66,9 @@ class TeamsTest < ApplicationSystemTestCase
       resize_for(display_details)
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
-      click_link "Edit Team"
+      within_team_menu_for(display_details) do
+        click_link "Team Settings"
+      end
       fill_in "Name", with: ""
       click_on "Update Team"
 

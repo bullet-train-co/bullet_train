@@ -1,12 +1,6 @@
 <%= render 'account/shared/page' do |p| %>
   <% p.content_for :title, t('.header', teams_possessive: possessive_string(@team.name)) %>
 
-  <% p.content_for :actions do %>
-    <%= link_to edit_account_team_path(@team), class: 'button-secondary button-smaller' do %>
-      <%= t('teams.buttons.edit') %>
-    <% end if can? :edit, @team %>
-  <% end %>
-
   <% p.content_for :body do %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
 

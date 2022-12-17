@@ -41,7 +41,9 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       click_on "Next"
 
       # Create a new Platform Application
-      click_on "Your Applications"
+      within_developers_menu_for(display_details) do
+        click_on "API"
+      end
       click_on "Provision New Platform Application"
       fill_in "Name", with: "Test Platform Application"
       click_on "Provision Platform Application"
@@ -57,7 +59,9 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
 
       # Remove the Platform Application and ensure it's
       # not present in the tombstoned Memberships list.
-      click_on "Your Applications"
+      within_developers_menu_for(display_details) do
+        click_on "API"
+      end
       accept_alert { click_on("Delete") }
 
       within_team_menu_for(display_details) do
