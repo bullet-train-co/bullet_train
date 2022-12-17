@@ -126,11 +126,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def sign_out_for(display_details)
     if display_details[:mobile]
       open_mobile_menu
-      click_on "Logout"
     else
       find("#user").hover
-      click_on "Logout"
     end
+    click_on "Logout"
 
     # make sure we're actually signed out.
     # (this will vary depending on where you send people when they sign out.)
