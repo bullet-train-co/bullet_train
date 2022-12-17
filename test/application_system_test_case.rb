@@ -104,9 +104,18 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def within_team_menu_for(display_details)
-    within_primary_menu_for(display_details) do
-      yield
-    end
+    first("#team").hover
+    yield
+  end
+
+  def within_user_menu_for(display_details)
+    find("#user").hover
+    yield
+  end
+
+  def within_developers_menu_for(display_details)
+    find("#developers").hover
+    yield
   end
 
   def open_mobile_menu
@@ -119,10 +128,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       open_mobile_menu
       click_on "Logout"
     else
-      within ".menu" do
-        # first(".logged-user-i").hover
-        click_on "Logout"
-      end
+      find("#user").hover
+      click_on "Logout"
     end
 
     # make sure we're actually signed out.
