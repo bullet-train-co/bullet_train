@@ -1,5 +1,4 @@
 <% expand ||= false %>
-<% hide_user ||= false %>
 
 <% unless hide_team_resource_menus? %>
   <%= render 'account/shared/menu/section' do %>
@@ -36,7 +35,7 @@
   <% end %>
 <% end %>
 
-<% unless hide_user %>
+<% if expand %>
   <%= render 'account/shared/menu/subsection', title: t('menus.main.labels.your_account'), expand: expand do %>
     <%= render "account/shared/menu/user_items" %>
   <% end %>
