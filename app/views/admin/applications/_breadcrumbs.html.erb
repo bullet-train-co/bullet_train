@@ -1,0 +1,6 @@
+<% application ||= @application %>
+<%= render 'shared/breadcrumb', label: t('.label'), url: [:admin, :applications], first: true %>
+<%= render 'shared/breadcrumbs/actions', only_for: 'applications' %>
+<% if (action_name == 'show' && controller_name == 'applications') || current_user.one_application? %>
+  <%= render 'shared/breadcrumb', label: 'Dashboard', url: [:admin, application] %>
+<% end %>

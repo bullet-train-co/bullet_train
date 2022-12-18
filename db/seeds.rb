@@ -6,6 +6,8 @@
 
 puts "🌱 Generating global seeds."
 
+Application.find_or_create_by(id: 1)
+
 load "#{Rails.root}/db/seeds/development.rb" if Rails.env.development?
 
 # We use this stub to test `seeding?` for ActiveRecord models.

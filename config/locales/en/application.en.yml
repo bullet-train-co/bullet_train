@@ -6,3 +6,92 @@ en:
     keywords: untitled application seo keywords
     support_email: change.me@localhost
     key: untitled_application
+  applications: &applications
+    label: &label Applications
+    singular: Application
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: Application
+    buttons: &buttons
+      new: Add New Application
+      create: Create Application
+      edit: Edit Application
+      update: Update Application
+    index:
+      section: Applications
+      header: Your Applications
+      create: Create New Application
+      buttons: *buttons
+    show:
+      header: '%{applications_possessive} Dashboard'
+    new:
+      header: Create a New Application
+      former_user_header: Join a Application
+      buttons: *buttons
+      you_can: "You can either:"
+      invitation_header: Accept an invitation
+      logout_header: Log out of this account
+      alert: The account <b>%{user_email}</b> is not currently a member of any applications.
+      invitation: If you have received an email inviting you to join a new application, click the link in that email to accept the invitation.
+      log_out: You can log out of this account and log in with a different account that is a member of a application.
+      new_application: You can use the form below to create a new application of your own.
+    edit:
+      section: '%{application_name}'
+      header: Edit Application Details
+      description: You can update the details of and settings for this application below.
+    notifications:
+      created: Application was successfully created.
+      updated: Application was successfully updated.
+      invitation_only: Creating new applications is currently limited to users who have been invited for early access. If you've received an early access URL, please visit it before trying again.
+    form:
+      buttons: *buttons
+    fields: &fields
+      id:
+        _: &id Application ID
+        label: *id
+        heading: *id
+      name:
+        _: &name Application Name
+        label: *name
+        heading: Application
+      time_zone:
+        _: &time_zone Primary Time Zone
+        label: "Primary Time Zone"
+        heading: *time_zone
+      locale:
+        _: &locale Language
+        label: "Primary Language"
+        heading: *locale
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Signed Up At
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated At
+        heading: *updated_at
+    _: &self
+      name:
+        label: Your Application Name
+    self:
+      <<: [*self, *fields]
+    api:
+      actions: "Actions for Applications"
+      index: "List Applications"
+      create: "Add a New Application"
+      show: "Retrieve a Application"
+      update: "Update a Application"
+      fields: *fields
+  account:
+    applications: *applications
+  admin:
+    applications: *applications
+  activerecord:
+    attributes:
+      application:
+        name: *name
+        time_zone: *time_zone
+        locale: *locale
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

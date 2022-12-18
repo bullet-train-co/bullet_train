@@ -1,0 +1,11 @@
+<% expand ||= false %>
+
+<%= render 'shared/menu/section' do %>
+  <% # added by super scaffolding. %>
+<% end %>
+
+<% if expand %>
+  <%= render 'shared/menu/subsection', title: t('menus.main.labels.your_account'), expand: expand do %>
+    <%= render 'account/shared/menu/user_items' %>
+  <% end %>
+<% end %>

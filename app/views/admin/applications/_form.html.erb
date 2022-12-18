@@ -1,0 +1,23 @@
+<%= form_with model: [:admin, application], local: true, class: 'form' do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+
+  <% with_field_settings form: form do %>
+    <%= render 'shared/fields/text_field', method: :name, options: {autofocus: true} %>
+
+    <%= render 'shared/fields/super_select', method: :time_zone,
+      choices: time_zone_options_for_select(application.time_zone, nil, ActiveSupport::TimeZone),
+      other_options: {search: true} %>
+
+    <% if multiple_locales? %>
+      <%= render 'shared/fields/buttons', method: :locale, options: t("locale.locales") %>
+    <% end %>
+
+    <%= render "admin/applications/fields", application: application, form: form %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+  <% end %>
+
+  <div class="buttons">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
+    <%= link_to t('global.buttons.cancel'), form.object.persisted? ? [:admin, application] : [:admin, :applications], class: "button-secondary" %>
+  </div>
+<% end %>

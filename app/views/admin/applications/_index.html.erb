@@ -1,0 +1,9 @@
+<ul class="space-y">
+  <%= yield %>
+</ul>
+
+<% if show_sign_up_options? && can?(:create, Application.new) %>
+  <div class="pt-5">
+    <%= link_to t('.buttons.create'), new_admin_application_path(@application), class: 'button'  %>
+  </div>
+<% end %>
