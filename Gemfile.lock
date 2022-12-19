@@ -231,7 +231,7 @@ GEM
       addressable
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
-    date (3.3.2)
+    date (3.3.3)
     debug (1.7.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
