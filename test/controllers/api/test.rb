@@ -1,9 +1,4 @@
 class Api::Test < ActionDispatch::IntegrationTest
-  # Since response.parsed_body only works with :json out of the box,
-  # we register this encoder so rails knows how to parse a JSON:API response.
-  ActionDispatch::IntegrationTest.register_encoder :jsonapi,
-    response_parser: ->(body) { JSON.parse(body) }
-
   def access_token
     params = {
       client_id: @platform_application.uid,

@@ -207,6 +207,39 @@ jobs:
             KNAPSACK_PRO_CI_NODE_TOTAL: 16
             KNAPSACK_PRO_TEST_FILE_PATTERN: "test/system/**{,/*/**}/*_test.rb"
 
+  # Uncomment the job at the bottom of this file to run these system tests.
+  'System Tests for Action Models':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: cimg/redis:6.2.6
+    executor: ruby/default
+    parallelism: 16
+
+    steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - checkout
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bin/link
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      - *wait_for_docker
+
+      - run: bundle add spring
+      - run:
+          name: 'Setup Action Models System Test'
+          command: bundle exec test/bin/setup-action-models-system-test
+      - run:
+          name: 'Run Action Models Test'
+          command: bundle exec rails test test/system/action_models_test.rb
+
 workflows:
   version: 2
   build:
@@ -215,4 +248,5 @@ workflows:
       - 'Database Schema Check'
       - 'Minitest'
       - 'Minitest for Super Scaffolding'
-      - 'System Tests with Cuprite'
+      # - 'System Tests with Cuprite'
+      # - 'System Tests for Action Models'

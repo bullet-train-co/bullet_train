@@ -1,3 +1,3 @@
-JbuilderSchema.configure do |config|
+Jbuilder::Schema.configure do |config|
   config.description_name = :heading
 end
