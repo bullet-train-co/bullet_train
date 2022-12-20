@@ -1,0 +1,8 @@
+<% user ||= @user %>
+<% application ||= @application || user&.application %>
+<%= render 'admin/applications/breadcrumbs', application: application %>
+<%= render 'shared/breadcrumb', label: t('.label'), url: [:admin, application, :users] %>
+<% if user&.persisted? %>
+  <%= render 'shared/breadcrumb', label: user.label_string, url: [:admin, user] %>
+<% end %>
+<%= render 'shared/breadcrumbs/actions', only_for: 'users' %>

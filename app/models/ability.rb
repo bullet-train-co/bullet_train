@@ -34,10 +34,6 @@ class Ability
       if billing_enabled?
         apply_billing_abilities user
       end
-
-      if user.developer?
-        # the following admin abilities were added by super scaffolding.
-      end
     end
   end
 end

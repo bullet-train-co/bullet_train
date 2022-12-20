@@ -9,6 +9,7 @@
 
   <% p.content_for :body do %>
     <%= render 'admin/teams/index', teams: @application.teams, hide_back: true %>
+    <%= render 'admin/users/index', users: @application.users, hide_back: true %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
   <% end %>
 <% end %>

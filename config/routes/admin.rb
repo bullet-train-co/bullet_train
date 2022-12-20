@@ -7,6 +7,7 @@ shallow do
   namespace :admin do
     resources :applications do
       resources :teams
+      resources :users
     end
   end
 end

@@ -1,0 +1,10 @@
+<% if can? :read, User.new %>
+  <%= render 'shared/menu/item', {
+    url: main_app.polymorphic_path([:admin, Application.first, :users]),
+    label: t('users.navigation.label'),
+  } do |p| %>
+    <% p.content_for :icon do %>
+      <i class="<%= t('users.navigation.icon') %>"></i>
+    <% end %>
+  <% end %>
+<% end %>

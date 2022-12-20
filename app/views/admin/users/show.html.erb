@@ -1,0 +1,34 @@
+<%= render 'shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= updates_for @user do %>
+      <%= render 'shared/box', divider: true do |p| %>
+        <% p.content_for :title, t('.header') %>
+        <% p.content_for :description do %>
+          <%= t('.description') %>
+          <%= t('.manage_description') if can? :manage, @user %>
+        <% end %>
+
+        <% p.content_for :body do %>
+          <% with_attribute_settings object: @user, strategy: :label do %>
+            <%= render 'shared/attributes/text', attribute: :email %>
+            <%# 🚅 super scaffolding will insert new fields above this line. %>
+          <% end %>
+        <% end %>
+
+        <% p.content_for :actions do %>
+          <%= link_to t('.buttons.edit'), [:edit, :admin, @user], class: first_button_primary if can? :edit, @user %>
+          <%# 🚅 super scaffolding will insert new action model buttons above this line. %>
+          <%= button_to t('.buttons.destroy'), [:admin, @user], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@user)) } if can? :destroy, @user %>
+          <%= link_to t('global.buttons.back'), [:admin, @application, :users], class: first_button_primary %>
+        <% end %>
+
+        <% p.content_for :raw_footer do %>
+          <%# 🚅 super scaffolding will insert new action model index views above this line. %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%# 🚅 super scaffolding will insert new children above this line. %>
+  <% end %>
+<% end %>
