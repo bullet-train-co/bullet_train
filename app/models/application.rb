@@ -1,12 +1,22 @@
 class Application < ApplicationRecord
-  # There is only ever one application record.
-  validates :id, comparison: { equal_to: 1 }
-  def name
-    I18n.t("application.name")
-  end
-  has_many :teams
-  has_many :users
-  def team
-    nil
-  end
+  include Applications::Base
+  # 🚅 add concerns above.
+
+  # 🚅 add belongs_to associations above.
+
+  # 🚅 add has_many associations above.
+
+  # 🚅 add oauth providers above.
+
+  # 🚅 add has_one associations above.
+
+  # 🚅 add scopes above.
+
+  # 🚅 add validations above.
+
+  # 🚅 add callbacks above.
+
+  # 🚅 add delegations above.
+
+  # 🚅 add methods above.
 end

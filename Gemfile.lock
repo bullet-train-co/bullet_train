@@ -20,6 +20,12 @@ GIT
       xpath (~> 3.2)
 
 PATH
+  remote: local/bullet_train-core/bullet_train-super_load_and_authorize_resource
+  specs:
+    bullet_train-super_load_and_authorize_resource (1.2.3)
+      rails (>= 7.0.0)
+
+PATH
   remote: local/bullet_train-core/bullet_train-super_scaffolding
   specs:
     bullet_train-super_scaffolding (1.2.3)
@@ -205,8 +211,6 @@ GEM
     bullet_train-scope_validator (1.2.4)
     bullet_train-sortable (1.2.4)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.4)
-      rails (>= 7.0.0)
     bullet_train-themes (1.2.4)
       rails (>= 6.0.0)
     bullet_train-themes-tailwind_css (1.2.4)
@@ -603,6 +607,7 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
   bullet_train-sortable
+  bullet_train-super_load_and_authorize_resource!
   bullet_train-super_scaffolding!
   bullet_train-themes
   bullet_train-themes-light!

@@ -5,4 +5,3 @@ class Admin::ApplicationController < ApplicationController
     @current_ability ||= Admin::Ability.new(current_user)
   end
 end
-  

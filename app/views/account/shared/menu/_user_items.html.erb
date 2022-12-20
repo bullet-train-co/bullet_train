@@ -18,6 +18,22 @@
   <% end %>
 <% end %>
 
+<% if current_user.developer? %>
+  <% if account_controller? %>
+    <%= render 'account/shared/menu/item', url: [:admin, Application.first], label: t('menus.main.labels.admin') do |p| %>
+      <% p.content_for :icon do %>
+        <i class="ti ti-lock"></i>
+      <% end %>
+    <% end %>
+  <% elsif admin_controller? %>
+    <%= render 'account/shared/menu/item', url: [:account, :dashboard], label: t('menus.main.labels.dashboard') do |p| %>
+      <% p.content_for :icon do %>
+        <i class="ti ti-home"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+
 <div data-turbo="false">
   <%= render 'account/shared/menu/item', url: main_app.destroy_user_session_path, method: :delete, label: t('menus.main.labels.logout') do |p| %>
     <% p.content_for :icon do %>

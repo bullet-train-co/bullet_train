@@ -7,11 +7,6 @@ module Admin::Applications::ControllerBase
       member_actions: (defined?(MEMBER_ACTIONS) ? MEMBER_ACTIONS : []),
       collection_actions: (defined?(COLLECTION_ACTIONS) ? COLLECTION_ACTIONS : [])
 
-    before_action do
-      # for magic locales.
-      @child_object = @application
-    end
-
     private
   end
 
@@ -24,6 +19,8 @@ module Admin::Applications::ControllerBase
   # GET /applications/1
   # GET /applications/1.json
   def show
+    @parent_object = Application.first
+    @child_object = Application.first
   end
 
   # GET /applications/1/edit

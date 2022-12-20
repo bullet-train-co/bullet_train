@@ -1,8 +1,8 @@
 <%= render 'shared/menu/item', {
-  url: main_app.polymorphic_path([:admin, current_application]),
-  label: t('menus.main.labels.dashboard'),
+  url: main_app.polymorphic_path([:admin, Application.first]),
+  label: t('menus.main.labels.admin'),
 } do |p| %>
   <% p.content_for :icon do %>
-    <i class="fal fa-home-lg-alt ti ti-home"></i>
+    <i class="fal fa-lock ti ti-lock"></i>
   <% end %>
 <% end %>

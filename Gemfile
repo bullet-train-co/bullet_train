@@ -94,6 +94,7 @@ end
 # Core packages.
 gem "bullet_train", path: "local/bullet_train-core/bullet_train"
 gem "bullet_train-super_scaffolding", path: "local/bullet_train-core/bullet_train-super_scaffolding"
+gem "bullet_train-super_load_and_authorize_resource", path: "local/bullet_train-core/bullet_train-super_load_and_authorize_resource"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
