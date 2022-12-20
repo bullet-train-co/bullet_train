@@ -25,6 +25,7 @@ en:
       buttons: *buttons
     show:
       header: '%{applications_possessive} Dashboard'
+      buttons: *buttons
     new:
       header: Create a New Application
       former_user_header: Join a Application

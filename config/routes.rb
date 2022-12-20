@@ -28,9 +28,7 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :admin do
-    draw "admin"
-  end
+  draw "admin"
 
   namespace :api do
     draw "api/v1"

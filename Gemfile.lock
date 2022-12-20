@@ -19,6 +19,53 @@ GIT
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
 
+PATH
+  remote: local/bullet_train-core/bullet_train-super_scaffolding
+  specs:
+    bullet_train-super_scaffolding (1.2.3)
+      bullet_train
+      indefinite_article
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-themes-light
+  specs:
+    bullet_train-themes-light (1.2.3)
+      bullet_train-themes-tailwind_css
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train
+  specs:
+    bullet_train (1.2.3)
+      awesome_print
+      bullet_train-fields
+      bullet_train-has_uuid
+      bullet_train-roles
+      bullet_train-routes
+      bullet_train-scope_validator
+      bullet_train-super_load_and_authorize_resource
+      bullet_train-themes
+      cable_ready (= 5.0.0.pre9)
+      cancancan
+      commonmarker
+      devise
+      devise-pwned_password
+      extended_email_reply_parser
+      fastimage
+      figaro
+      hiredis
+      http_accept_language
+      microscope
+      nice_partials (~> 0.1)
+      pagy
+      possessive
+      premailer-rails
+      rails (>= 6.0.0)
+      sidekiq
+      unicode-emoji
+      valid_email
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -115,34 +162,6 @@ GEM
     bootsnap (1.15.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.4)
-      awesome_print
-      bullet_train-fields
-      bullet_train-has_uuid
-      bullet_train-roles
-      bullet_train-routes
-      bullet_train-scope_validator
-      bullet_train-super_load_and_authorize_resource
-      bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
-      cancancan
-      commonmarker
-      devise
-      devise-pwned_password
-      extended_email_reply_parser
-      fastimage
-      figaro
-      hiredis
-      http_accept_language
-      microscope
-      nice_partials (~> 0.1)
-      pagy
-      possessive
-      premailer-rails
-      rails (>= 6.0.0)
-      sidekiq
-      unicode-emoji
-      valid_email
     bullet_train-api (1.2.4)
       bullet_train
       doorkeeper
@@ -188,14 +207,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-super_load_and_authorize_resource (1.2.4)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.2.4)
-      bullet_train
-      indefinite_article
-      rails (>= 6.0.0)
     bullet_train-themes (1.2.4)
-      rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.4)
-      bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
     bullet_train-themes-tailwind_css (1.2.4)
       bullet_train
@@ -582,7 +594,7 @@ DEPENDENCIES
   active_hash!
   aws-sdk-s3
   bootsnap
-  bullet_train
+  bullet_train!
   bullet_train-api
   bullet_train-incoming_webhooks
   bullet_train-integrations
@@ -591,9 +603,9 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
   bullet_train-sortable
-  bullet_train-super_scaffolding
+  bullet_train-super_scaffolding!
   bullet_train-themes
-  bullet_train-themes-light
+  bullet_train-themes-light!
   capybara!
   capybara-email
   chronic

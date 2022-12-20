@@ -92,13 +92,13 @@ end
 # This section is the list of Ruby gems included by default for Bullet Train.
 
 # Core packages.
-gem "bullet_train"
-gem "bullet_train-super_scaffolding"
+gem "bullet_train", path: "local/bullet_train-core/bullet_train"
+gem "bullet_train-super_scaffolding", path: "local/bullet_train-core/bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
 gem "bullet_train-themes"
-gem "bullet_train-themes-light"
+gem "bullet_train-themes-light", path: "local/bullet_train-core/bullet_train-themes-light"
 gem "bullet_train-integrations"
 gem "bullet_train-integrations-stripe"
 

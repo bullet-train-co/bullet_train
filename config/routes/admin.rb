@@ -2,6 +2,11 @@
 collection_actions = [:index, :new, :create] # standard:disable Lint/UselessAssignment
 extending = {only: []} # standard:disable Lint/UselessAssignment
 
+# 🚅 Don't remove this block, it will break Super Scaffolding.
 shallow do
-  resources :applications
+  namespace :admin do
+    resources :applications do
+      resources :teams
+    end
+  end
 end

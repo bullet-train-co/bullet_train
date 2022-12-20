@@ -18,5 +18,8 @@ class User < ApplicationRecord
 
   # 🚅 add delegations above.
 
+  def one_application?
+    true
+  end
   # 🚅 add methods above.
 end
