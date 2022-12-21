@@ -19,7 +19,7 @@
     "autoprefixer": "^10.4.13",
     "cable_ready": "^5.0.0-pre8",
     "dragula": "^3.7.3",
-    "esbuild": "^0.16.9",
+    "esbuild": "^0.16.10",
     "glob": "^8.0.1",
     "jquery": "^3.6.2",
     "jstz": "^2.1.1",
