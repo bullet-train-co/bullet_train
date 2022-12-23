@@ -25,5 +25,6 @@ module UntitledApplication
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.available_locales = YAML.safe_load(File.read("config/locales/locales.yml"), aliases: true).with_indifferent_access.dig(:locales).keys.map(&:to_sym)
     config.i18n.default_locale = config.i18n.available_locales.first
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
   end
 end
