@@ -49,7 +49,7 @@ const ImportGlobPlugin = () => ({
 
 let themeFile = ""
 if (process.env.THEME) {
-  themeFile = execSync(`bin/theme javascript ${process.env.THEME}`).toString().trim()
+  themeFile = execSync(`bundle exec bin/theme javascript ${process.env.THEME}`).toString().trim()
 }
 
 // Could also swap to packs?
