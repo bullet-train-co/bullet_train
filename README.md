@@ -47,7 +47,7 @@ You can use this public repository to provision a new application and then push 
 
 ### Heroku
 
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=http://github.com/gazayas/bullet_train/tree/fixes/deploy-with-heroku)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=http://github.com/gazayas/bullet_train/bullet-train-co/bullet_train)
 
 Clicking this button will take you to the first step of a process that, when completed, will provision production-grade infrastructure and services for your Bullet Train application which will cost about **$140/month**.
 
