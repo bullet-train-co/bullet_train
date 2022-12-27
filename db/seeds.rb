@@ -19,6 +19,7 @@ if zapier_app_id
     puts ""
     puts "Creating a platform application for Zapier. Within the `zapier` directory, run:".yellow
     puts ""
+    puts "  cd zapier"
     puts "  zapier env:set 1.0.0 BASE_URL=#{ENV["BASE_URL"]} CLIENT_ID=#{zapier.uid} CLIENT_SECRET=#{zapier.secret}".yellow
     puts ""
   end
