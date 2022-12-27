@@ -45,7 +45,7 @@ module.exports = {
         label: 'Creative Concept',
         dynamic:
           'scaffolding_absolutely_abstract_creative_concept_created.id.Name',
-        helpText: 'Filter by the parent Creative Concept.',
+        helpText: 'Optional. You can limit Zap triggers to Tangible Things created within a specific Creative Concept.',
         required: false,
         list: false,
         altersDynamicFields: false,
