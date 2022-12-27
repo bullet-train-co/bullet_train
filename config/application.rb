@@ -30,6 +30,23 @@ module UntitledApplication
     config.to_prepare do
       # TODO Is there a way to move this into `bullet_train-api`?
       Doorkeeper::ApplicationController.layout "devise"
+
+      # TODO Is there a better way to implement this?
+      # This monkey patch is required to ensure the OAuth2 token includes which team was connected to.
+      if Doorkeeper::TokensController
+        class Doorkeeper::TokensController
+          def create
+            headers.merge!(authorize_response.headers)
+            user = User.find(authorize_response.token.resource_owner_id)
+
+            # Add the selected `team_id` to this response.
+            render json: authorize_response.body.merge(user.teams.one? ? {"team_id" => user.team_ids.first} : {}),
+              status: authorize_response.status
+          rescue Errors::DoorkeeperError => e
+            handle_token_exception(e)
+          end
+        end
+      end
     end
   end
 end
