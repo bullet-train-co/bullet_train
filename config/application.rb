@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require "rails/all"
+require "pry"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -25,5 +26,10 @@ module UntitledApplication
     config.i18n.load_path += Dir[Rails.root.join("config", "locales", "**", "*.{rb,yml}")]
     config.i18n.available_locales = YAML.safe_load(File.read("config/locales/locales.yml"), aliases: true).with_indifferent_access.dig(:locales).keys.map(&:to_sym)
     config.i18n.default_locale = config.i18n.available_locales.first
+
+    config.to_prepare do
+      # TODO Is there a way to move this into `bullet_train-api`?
+      Doorkeeper::ApplicationController.layout "devise"
+    end
   end
 end

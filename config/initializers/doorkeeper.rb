@@ -1,29 +1,10 @@
-# frozen_string_literal: true
-
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use (requires ORM extensions installed).
   # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
   orm :active_record
 
   # This block will be called to check whether the resource owner is authenticated or not.
-  # resource_owner_authenticator do
-  # raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
-  # Put your resource owner authentication logic here.
-  # Example implementation:
-  #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
-  # end
-
-  resource_owner_from_credentials do |_routes|
-    # performs explicit validation on all required parameters to raise better errors when they're missing
-    [:client_id, :client_secret].each do |param|
-      # when omitted, :token is automatically populated as a Hash of all params,
-      # so naturally we don't want that to count
-      raise Doorkeeper::Errors::MissingRequiredParameter.new(param.to_s) unless params[param].present? && params[param].is_a?(String)
-    end
-
-    # TODO Should we throw a more meaningful error if the application can't be found by these keys?
-    Platform::Application.find_by(uid: params[:client_id], secret: params[:client_secret])&.user
-  end
+  resource_owner_authenticator BulletTrain::Platform::ConnectionWorkflow.new
 
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
   # file then you need to declare this block in order to restrict access to the web interface for
@@ -241,9 +222,8 @@ Doorkeeper.configure do
   # Define access token scopes for your provider
   # For more information go to
   # https://doorkeeper.gitbook.io/guides/ruby-on-rails/scopes
-  #
-  # default_scopes :read
-  # optional_scopes :write, :delete
+
+  default_scopes :read, :write, :delete
 
   # Allows to restrict only certain scopes for grant_type.
   # By default, all the scopes will be available for all the grant types.
