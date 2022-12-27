@@ -15,7 +15,7 @@ const performSubscribe = async (z, bundle) => {
     body: {
       webhooks_outgoing_endpoint: {
         url: bundle.targetUrl,
-        name: 'Creative Concept Created',
+        name: 'Trigger a Zap when a Creative Concept is created',
         event_type_ids: [
           'scaffolding/absolutely_abstract/creative_concept.created',
         ],

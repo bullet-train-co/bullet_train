@@ -15,14 +15,18 @@ end
 
 # If it has, configure a platform application for Zapier in this environment.
 if zapier_app_id
-  zapier = Platform::Application.find_or_create_by(name: "Zapier", team: nil) do |zapier|
-    puts ""
-    puts "Creating a platform application for Zapier. Within the `zapier` directory, run:".yellow
-    puts ""
-    puts "  cd zapier"
-    puts "  zapier env:set 1.0.0 BASE_URL=#{ENV["BASE_URL"]} CLIENT_ID=#{zapier.uid} CLIENT_SECRET=#{zapier.secret}".yellow
-    puts ""
+  creating = false
+  zapier = Platform::Application.find_or_create_by(name: "Zapierasdf", team: nil) do |zapier|
+    creating = true
   end
+
+  puts ""
+  puts "Creating a platform application for Zapier. Within the `zapier` directory, run:".yellow
+  puts ""
+  puts "  cd zapier".yellow
+  puts "  zapier env:set 1.0.0 BASE_URL=#{ENV["BASE_URL"]} CLIENT_ID=#{zapier.uid} CLIENT_SECRET=#{zapier.secret}".yellow
+  puts "  cd ..".yellow
+  puts ""
 
   zapier.redirect_uri = "https://zapier.com/dashboard/auth/oauth/return/App#{zapier_app_id}CLIAPI/"
   zapier.save

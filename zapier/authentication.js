@@ -45,7 +45,7 @@ module.exports = {
       },
       method: 'POST',
     },
-    scope: 'all',
+    scope: 'admin',
   },
   fields: [{ computed: true, key: 'team_id', required: false, type: 'string' }],
   connectionLabel: 'on {{team_name}}',

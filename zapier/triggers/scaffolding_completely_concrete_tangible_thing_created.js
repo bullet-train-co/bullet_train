@@ -15,7 +15,7 @@ const performSubscribe = async (z, bundle) => {
     body: {
       webhooks_outgoing_endpoint: {
         url: bundle.targetUrl,
-        name: 'Tangible Thing Created',
+        name: 'Trigger a Zap when a Tangible Thing is created',
         event_type_ids: [
           'scaffolding/completely_concrete/tangible_thing.created',
         ],
