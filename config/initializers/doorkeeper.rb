@@ -1,4 +1,3 @@
-require "bullet_train/platform"
 require "bullet_train/platform/connection_workflow"
 
 Doorkeeper.configure do
