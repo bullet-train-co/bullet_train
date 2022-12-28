@@ -1,17 +1,10 @@
-# frozen_string_literal: true
-
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use (requires ORM extensions installed).
   # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
   orm :active_record
 
   # This block will be called to check whether the resource owner is authenticated or not.
-  # resource_owner_authenticator do
-  # raise "Please configure doorkeeper resource_owner_authenticator block located in #{__FILE__}"
-  # Put your resource owner authentication logic here.
-  # Example implementation:
-  #   User.find_by(id: session[:user_id]) || redirect_to(new_user_session_url)
-  # end
+  resource_owner_authenticator BulletTrain::Platform::ConnectionWorkflow.new
 
   resource_owner_from_credentials do |_routes|
     # performs explicit validation on all required parameters to raise better errors when they're missing
@@ -241,9 +234,11 @@ Doorkeeper.configure do
   # Define access token scopes for your provider
   # For more information go to
   # https://doorkeeper.gitbook.io/guides/ruby-on-rails/scopes
-  #
-  # default_scopes :read
-  # optional_scopes :write, :delete
+
+  # 🚅
+  # I'm pretty sure it's going to make sense to line these scopes up 1:1 with team roles.
+  # For now, every connection is an admin on the team it connects to.
+  default_scopes :admin
 
   # Allows to restrict only certain scopes for grant_type.
   # By default, all the scopes will be available for all the grant types.
