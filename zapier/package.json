@@ -1,7 +1,7 @@
 {
-  "name": "example-application",
+  "name": "untitled-application",
   "version": "1.0.0",
-  "description": "A demonstration integration with Example Application",
+  "description": "Integrate Zapier with Untitled Application",
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive -t 10000"

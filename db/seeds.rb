@@ -16,7 +16,7 @@ end
 # If it has, configure a platform application for Zapier in this environment.
 if zapier_app_id
   creating = false
-  zapier = Platform::Application.find_or_create_by(name: "Zapierasdf", team: nil) do |zapier|
+  zapier = Platform::Application.find_or_create_by(name: "Zapier", team: nil) do |zapier|
     creating = true
   end
 

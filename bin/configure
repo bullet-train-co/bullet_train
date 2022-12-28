@@ -183,6 +183,9 @@ replace_in_file("./config/locales/en/application.en.yml", "Untitled Application"
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
 replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
 replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
+replace_in_file("./zapier/package.json", "untitled-application", kebab_case)
+replace_in_file("./zapier/package.json", "Untitled Application", human)
+
 puts ""
 
 puts "Moving `./README.example.md` to `./README.md`.".green
