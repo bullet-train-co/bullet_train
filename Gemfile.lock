@@ -613,6 +613,7 @@ DEPENDENCIES
   minitest-retry
   pg (>= 0.18, < 2.0)
   postmark-rails
+  pry
   puma (~> 6.0)
   rack-mini-profiler
   rails (~> 7.0.0)

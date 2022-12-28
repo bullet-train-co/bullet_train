@@ -167,6 +167,9 @@ end
 # TODO Have to specify this dependency here until our changes are in the original package.
 gem "active_hash", github: "bullet-train-co/active_hash"
 
+# A great debugger.
+gem "pry"
+
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
 # that you run into a merge conflict in the future.
