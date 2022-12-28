@@ -87,7 +87,7 @@ else
   end
 end
 
-check_package("postgresql@13")
+check_package("postgresql@14")
 check_package("redis")
 check_package("icu4c")
 check_package("node")
