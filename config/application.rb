@@ -37,12 +37,17 @@ module UntitledApplication
         class Doorkeeper::TokensController
           def create
             headers.merge!(authorize_response.headers)
-            user = User.find(authorize_response.token.resource_owner_id)
+
+            user = if authorize_response.is_a?(Doorkeeper::OAuth::ErrorResponse)
+              nil
+            else
+              User.find(authorize_response.token.resource_owner_id)
+            end
 
             # Add the selected `team_id` to this response.
-            render json: authorize_response.body.merge(user.teams.one? ? {"team_id" => user.team_ids.first} : {}),
+            render json: authorize_response.body.merge(user&.teams&.one? ? {"team_id" => user.team_ids.first} : {}),
               status: authorize_response.status
-          rescue Errors::DoorkeeperError => e
+          rescue Doorkeeper::Errors::DoorkeeperError => e
             handle_token_exception(e)
           end
         end

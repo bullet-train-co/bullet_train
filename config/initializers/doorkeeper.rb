@@ -6,6 +6,18 @@ Doorkeeper.configure do
   # This block will be called to check whether the resource owner is authenticated or not.
   resource_owner_authenticator BulletTrain::Platform::ConnectionWorkflow.new
 
+  resource_owner_from_credentials do |_routes|
+    # performs explicit validation on all required parameters to raise better errors when they're missing
+    [:client_id, :client_secret].each do |param|
+      # when omitted, :token is automatically populated as a Hash of all params,
+      # so naturally we don't want that to count
+      raise Doorkeeper::Errors::MissingRequiredParameter.new(param.to_s) unless params[param].present? && params[param].is_a?(String)
+    end
+
+    # TODO Should we throw a more meaningful error if the application can't be found by these keys?
+    Platform::Application.find_by(uid: params[:client_id], secret: params[:client_secret])&.user
+  end
+
   # If you didn't skip applications controller from Doorkeeper routes in your application routes.rb
   # file then you need to declare this block in order to restrict access to the web interface for
   # adding oauth authorized applications. In other case it will return 403 Forbidden response
