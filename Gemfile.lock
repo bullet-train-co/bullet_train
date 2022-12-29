@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: 5c8674713fa964211de43138180edfab1cc041ce
+  revision: 348484b130e912a8657113a805162f0fa9e622ca
   specs:
     capybara (3.38.0)
       addressable
@@ -92,7 +92,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.680.0)
+    aws-partitions (1.684.0)
     aws-sdk-core (3.168.4)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -115,7 +115,7 @@ GEM
     bootsnap (1.15.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.4)
+    bullet_train (1.2.9)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -143,7 +143,7 @@ GEM
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.2.4)
+    bullet_train-api (1.2.9)
       bullet_train
       doorkeeper
       jbuilder-schema (>= 2.0.0)
@@ -151,53 +151,53 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.2.4)
+    bullet_train-fields (1.2.9)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.4)
+    bullet_train-has_uuid (1.2.9)
       rails (>= 7.0.0)
-    bullet_train-incoming_webhooks (1.2.4)
+    bullet_train-incoming_webhooks (1.2.9)
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.2.4)
+    bullet_train-integrations (1.2.9)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.2.4)
+    bullet_train-integrations-stripe (1.2.9)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.2.4)
+    bullet_train-obfuscates_id (1.2.9)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.2.4)
+    bullet_train-outgoing_webhooks (1.2.9)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.2.4)
+    bullet_train-roles (1.2.9)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.2.4)
+    bullet_train-scope_questions (1.2.9)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.4)
-    bullet_train-sortable (1.2.4)
+    bullet_train-scope_validator (1.2.9)
+    bullet_train-sortable (1.2.9)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.4)
+    bullet_train-super_load_and_authorize_resource (1.2.9)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.2.4)
+    bullet_train-super_scaffolding (1.2.9)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.2.4)
+    bullet_train-themes (1.2.9)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.4)
+    bullet_train-themes-light (1.2.9)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.2.4)
+    bullet_train-themes-tailwind_css (1.2.9)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
@@ -232,7 +232,7 @@ GEM
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.3)
-    debug (1.7.0)
+    debug (1.7.1)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     debug_inspector (1.1.0)
@@ -255,7 +255,7 @@ GEM
     doorkeeper (5.6.2)
       railties (>= 5)
     email_reply_parser (0.5.10)
-    erubi (1.11.0)
+    erubi (1.12.0)
     erubis (2.7.0)
     extended_email_reply_parser (0.5.1)
       activesupport
@@ -291,7 +291,7 @@ GEM
     indefinite_article (0.2.5)
       activesupport
     io-console (0.6.0)
-    irb (1.6.1)
+    irb (1.6.2)
       reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
@@ -303,12 +303,12 @@ GEM
     jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
     json (2.6.3)
-    jwt (2.5.0)
+    jwt (2.6.0)
     knapsack_pro (3.6.0)
       rake
     language_server-protocol (3.17.0.2)
-    launchy (2.5.0)
-      addressable (~> 2.7)
+    launchy (2.5.2)
+      addressable (~> 2.8)
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
     loofah (2.19.1)
@@ -334,13 +334,13 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.0)
+    mini_portile2 (2.8.1)
     minitest (5.16.3)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
     msgpack (1.6.0)
     multi_xml (0.6.0)
-    net-imap (0.3.2)
+    net-imap (0.3.4)
       date
       net-protocol
     net-pop (0.1.2)
@@ -355,8 +355,6 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
-      racc (~> 1.4)
-    nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -387,7 +385,7 @@ GEM
     parser (3.1.3.0)
       ast (~> 2.4.1)
     pg (1.4.5)
-    phonelib (0.7.5)
+    phonelib (0.7.6)
     possessive (1.0.1)
     postmark (1.22.2)
       json
@@ -409,11 +407,11 @@ GEM
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
     public_suffix (5.0.1)
-    puma (6.0.0)
+    puma (6.0.1)
       nio4r (~> 2.0)
     pwned (2.0.2)
-    racc (1.6.1)
-    rack (2.2.4)
+    racc (1.6.2)
+    rack (2.2.5)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-mini-profiler (3.0.0)
@@ -479,7 +477,7 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.39.0)
+    rubocop (1.40.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
@@ -489,7 +487,7 @@ GEM
       rubocop-ast (>= 1.23.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.24.0)
+    rubocop-ast (1.24.1)
       parser (>= 3.1.1.0)
     rubocop-performance (1.15.1)
       rubocop (>= 1.7.0, < 2.0)
@@ -520,16 +518,16 @@ GEM
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
-    sprockets (4.1.1)
+    sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
-      rack (> 1, < 3)
+      rack (>= 2.2.4, < 4)
     sprockets-rails (3.4.2)
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    standard (1.19.1)
+    standard (1.20.0)
       language_server-protocol (~> 3.17.0.2)
-      rubocop (= 1.39.0)
+      rubocop (= 1.40.0)
       rubocop-performance (= 1.15.1)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
@@ -549,7 +547,7 @@ GEM
     unicode-display_width (2.3.0)
     unicode-emoji (3.3.1)
       unicode-version (~> 1.0)
-    unicode-version (1.2.0)
+    unicode-version (1.3.0)
     valid_email (0.1.4)
       activemodel
       mail (>= 2.6.1)
