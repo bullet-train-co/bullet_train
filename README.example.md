@@ -6,9 +6,9 @@
 
      - Ruby 3
           - See [`.ruby-version`](.ruby-version) for the specific version.
-     - Node 18 
+     - Node 19
           - See [`.nvmrc`](.nvmrc) for the specific version.
-     - PostgreSQL 13
+     - PostgreSQL 14
      - Redis 6.2
      - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
 
