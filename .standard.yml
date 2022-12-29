@@ -7,3 +7,7 @@ ignore:
     - Style/CommentedKeyword
   - 'app/controllers/**/*':
     - Style/RedundantAssignment
+  - 'config/routes.rb':
+    - Lint/UselessAssignment
+  - 'config/routes/api/v1.rb':
+    - Lint/UselessAssignment
