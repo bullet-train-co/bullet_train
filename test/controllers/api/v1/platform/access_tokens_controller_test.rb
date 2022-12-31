@@ -60,7 +60,7 @@ class Api::V1::Platform::AccessTokensControllerTest < Api::Test
   test "create" do
     # Use the serializer to generate a payload, but strip some attributes out.
     params = {access_token: access_token}
-    access_token_data = JSON.parse(build(:platform_access_token, application: nil).to_api_json)
+    access_token_data = JSON.parse(build(:platform_access_token, application: nil).to_api_json.to_json)
     access_token_data.except!("id", "application_id", "created_at", "updated_at")
     params[:platform_access_token] = access_token_data
 
