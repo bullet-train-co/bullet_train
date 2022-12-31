@@ -45,7 +45,7 @@ class DatesHelperTest < ApplicationSystemTestCase
       visit current_url
 
       # We have to assert these two things separately so it doesn't fail on the last day of the year when the year is present.
-      assert page.has_text? "#{time.strftime("%B %-d").strip}"
+      assert page.has_text? time.strftime("%B %-d").strip.to_s
       assert page.has_text? "at #{time.strftime("%l:%M %p").strip}"
 
       # Create a new record in a different time zone.
