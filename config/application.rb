@@ -27,6 +27,10 @@ module UntitledApplication
     config.i18n.available_locales = YAML.safe_load(File.read("config/locales/locales.yml"), aliases: true).with_indifferent_access.dig(:locales).keys.map(&:to_sym)
     config.i18n.default_locale = config.i18n.available_locales.first
 
+    config.after_initialize do
+      BulletTrain::TranslationsBackfiller.new.register_all
+    end
+
     config.to_prepare do
       # TODO Is there a way to move this into `bullet_train-api`?
       Doorkeeper::ApplicationController.layout "devise"
