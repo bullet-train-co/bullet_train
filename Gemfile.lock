@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: 348484b130e912a8657113a805162f0fa9e622ca
+  revision: 631f3ead1d51373cba897f4198fe2e6bafef035c
   specs:
     capybara (3.38.0)
       addressable
@@ -335,7 +335,7 @@ GEM
     mime-types-data (3.2022.0105)
     mini_mime (1.1.2)
     mini_portile2 (2.8.1)
-    minitest (5.16.3)
+    minitest (5.17.0)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
     msgpack (1.6.0)
@@ -355,6 +355,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.10)
       mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
+    nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -407,7 +409,7 @@ GEM
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
     public_suffix (5.0.1)
-    puma (6.0.1)
+    puma (6.0.2)
       nio4r (~> 2.0)
     pwned (2.0.2)
     racc (1.6.2)
