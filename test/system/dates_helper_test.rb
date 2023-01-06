@@ -32,6 +32,9 @@ class DatesHelperTest < ApplicationSystemTestCase
 
       time = Scaffolding::CompletelyConcrete::TangibleThing.first.created_at
 
+      # Go to the Tangible Thing's index page.
+      click_on "Back"
+
       # Assert today's date is displayed correctly.
       assert page.has_text? "Today at #{time.strftime("%l:%M %p").strip}"
 

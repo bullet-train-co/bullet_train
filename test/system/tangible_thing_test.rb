@@ -42,7 +42,7 @@ unless scaffolding_things_disabled?
         click_on "Create Tangible Thing"
         assert page.has_content? "Tangible Thing was successfully created."
 
-        click_on "My value for this text field"
+        # Creating a Tangible Thing redirects to its show page.
         assert page.has_content? "Tangible Thing Details"
 
         assert page.has_content? "My value for this text field"
