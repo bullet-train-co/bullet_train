@@ -135,7 +135,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Partial Test was successfully created.")
 
       # Text field
-      click_on "Test Text"
       partial_test = PartialTest.first
       assert_equal partial_test.text_field_test, "Test Text"
       # Boolean Button
