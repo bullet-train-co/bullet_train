@@ -57,6 +57,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Url", with: "http://example.org/test"
 
       click_on "Create Test Site"
+      click_on "Back"
 
       assert page.has_content? "Below is a list of Test Sites that have been added for Your Team."
 
@@ -111,7 +112,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Project"
 
       assert page.has_content?("Project was successfully created.")
-      click_on "Some New Example Project"
 
       click_on "Add New Deliverable"
       click_on "Create Deliverable"
@@ -119,7 +119,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Some New Example Deliverable"
       click_on "Create Deliverable"
       assert page.has_content?("Deliverable was successfully created.")
-      click_on "Some New Example Deliverable"
 
       within "ol.breadcrumb" do
         click_on "Projects"
@@ -160,12 +159,16 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Tag"
       assert page.has_content? "Tag was successfully created"
 
+      click_on "Back"
+
       click_on "Add New Tag"
       assert page.has_content? "Please provide the details of the new Tag"
 
       fill_in "Name", with: "Two"
       click_on "Create Tag"
       assert page.has_content? "Tag was successfully created"
+
+      click_on "Back"
 
       click_on "Add New Tag"
       assert page.has_content? "Please provide the details of the new Tag"
@@ -174,6 +177,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Tag"
       assert page.has_content? "Tag was successfully created"
 
+      click_on "Back"
+      assert page.has_content? "Your Team’s Tags"
       click_on "Back"
       assert page.has_content? "Your Team’s Dashboard"
 
@@ -185,7 +190,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Project"
       assert page.has_content? "Project was successfully created"
 
-      click_on "New Project with Tags"
       assert page.has_content? "Below are the details we have for New Project with Tags"
       assert page.has_content? "One and Two"
     end
@@ -203,7 +207,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Step"
 
       assert page.has_content?("Step was successfully created.")
-      click_on "Some New Example Step"
 
       click_on "Add New Objective"
       click_on "Create Objective"
@@ -211,7 +214,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Some New Example Objective"
       click_on "Create Objective"
       assert page.has_content?("Objective was successfully created.")
-      click_on "Some New Example Objective"
     end
   end
 
@@ -227,7 +229,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Insight"
 
       assert page.has_content?("Insight was successfully created.")
-      click_on "Some New Example Insight"
 
       click_on "Add New Character Trait"
       click_on "Create Character Trait"
@@ -235,7 +236,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Some New Example Character Trait"
       click_on "Create Character Trait"
       assert page.has_content?("Character Trait was successfully created.")
-      click_on "Some New Example Character Trait"
     end
   end
 
@@ -251,7 +251,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Disposition"
 
       assert page.has_content?("Disposition was successfully created.")
-      click_on "Some New Example Disposition"
 
       click_on "Add New Note"
       click_on "Create Note"
@@ -259,7 +258,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Some New Example Note"
       click_on "Create Note"
       assert page.has_content?("Note was successfully created.")
-      click_on "Some New Example Note"
     end
   end
 
@@ -275,7 +273,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Observation"
 
       assert page.has_content?("Observation was successfully created.")
-      click_on "Some New Example Observation"
 
       click_on "Add New Response"
       click_on "Create Response"
@@ -283,7 +280,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Some New Example Response"
       click_on "Create Response"
       assert page.has_content?("Response was successfully created.")
-      click_on "Some New Example Response"
     end
   end
 
