@@ -16,10 +16,11 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     cd your_new_project_name
     ```
 
-3. Run the configuration script:
+3. Run the configuration and setup scripts:
 
     ```
     bin/configure
+    bin/setup
     ```
 
 ## Cloud Development with Gitpod
