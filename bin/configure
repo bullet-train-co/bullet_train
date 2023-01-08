@@ -209,5 +209,5 @@ end
 puts ""
 puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
 puts ""
-puts "Next you can run `bin/setup` and then `bin/dev`.".green
+puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
 puts ""
