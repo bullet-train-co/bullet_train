@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: 172daf52bd2a989417d810bd58111e505dd90375
+  revision: 69abf9e24cc225aca1ef7e25b1bfb7b61017f017
   specs:
     capybara (3.38.0)
       addressable
@@ -92,7 +92,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.689.0)
+    aws-partitions (1.690.0)
     aws-sdk-core (3.168.4)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -227,7 +227,7 @@ GEM
     concurrent-ruby (1.1.10)
     connection_pool (2.3.0)
     crass (1.0.6)
-    css_parser (1.13.0)
+    css_parser (1.14.0)
       addressable
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
@@ -402,7 +402,7 @@ GEM
       actionmailer (>= 3)
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
-    pry (0.14.1)
+    pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
     pry-stack_explorer (0.6.1)
@@ -459,7 +459,7 @@ GEM
     rake (13.0.6)
     redis (5.0.5)
       redis-client (>= 0.9.0)
-    redis-client (0.11.2)
+    redis-client (0.12.0)
       connection_pool
     regexp_parser (2.6.1)
     reline (0.3.2)
