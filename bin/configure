@@ -81,7 +81,7 @@ if `brew info 2> /dev/null`.length > 0
   puts "Homebrew is installed.".green
 else
   puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
-  input = ask "Try proceeding without Homebrew?"
+  input = ask "Try proceeding without Homebrew? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
