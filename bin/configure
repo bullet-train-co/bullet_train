@@ -160,6 +160,10 @@ puts "Running `yarn install`.".green
 stream "yarn install"
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+while human == ""
+  puts "You must provide a name for your application.".red
+  human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+end
 
 require "rails"
 
