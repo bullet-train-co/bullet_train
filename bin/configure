@@ -143,6 +143,10 @@ if skip_github.downcase[0] == "y"
     `#{command} https://github.com/new`
 
     ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+    while ssh_path == ""
+      puts "You must provide a path for your new repository.".red
+      ssh_path = ask "What was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+    end
     puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
     puts `git remote add origin #{ssh_path}`.chomp
   end
