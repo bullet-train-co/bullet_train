@@ -19,7 +19,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         visit account_dashboard_path
 
         # create the endpoint.
-        within_primary_menu_for(display_details) do
+        within_developers_menu_for(display_details) do
           click_on "Webhooks"
         end
         click_on "Add New Endpoint"
@@ -130,7 +130,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         end
 
         # create the endpoint.
-        within_primary_menu_for(display_details) do
+        within_developers_menu_for(display_details) do
           click_on "Webhooks"
         end
         click_on "Add New Endpoint"
@@ -161,7 +161,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           perform_enqueued_jobs
         end
 
-        within_primary_menu_for(display_details) do
+        within_developers_menu_for(display_details) do
           click_on "Webhooks"
         end
 

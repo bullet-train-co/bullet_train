@@ -6,11 +6,32 @@
 
 puts "🌱 Generating global seeds."
 
-load "#{Rails.root}/db/seeds/development.rb" if Rails.env.development?
-
-# We use this stub to test `seeding?` for ActiveRecord models.
-if Rails.env == "test" && ENV["seed_stub"] == "true"
-  User.create(email: "test@test.com", password: "956742469855eba772ea62b9f14d8626")
-  user = User.find_by(email: "test@test.com")
-  p "User is seeding: #{user.seeding?}"
+# Check whether the Zapier app has been deployed.
+zapier_app_id = begin
+  JSON.parse(File.read("zapier/.zapierapprc")).dig("id")
+rescue
+  nil
 end
+
+# If it has, configure a platform application for Zapier in this environment.
+if zapier_app_id
+  creating = false
+  zapier = Platform::Application.find_or_create_by(name: "Zapier", team: nil) do |zapier|
+    creating = true
+  end
+
+  puts ""
+  puts "Creating a platform application for Zapier. Within the `zapier` directory, run:".yellow
+  puts ""
+  puts "  cd zapier".yellow
+  puts "  zapier env:set 1.0.0 BASE_URL=#{ENV["BASE_URL"]} CLIENT_ID=#{zapier.uid} CLIENT_SECRET=#{zapier.secret}".yellow
+  puts "  cd ..".yellow
+  puts ""
+
+  zapier.redirect_uri = "https://zapier.com/dashboard/auth/oauth/return/App#{zapier_app_id}CLIAPI/"
+  zapier.save
+end
+
+load "#{Rails.root}/db/seeds/development.rb" if Rails.env.development?
+load "#{Rails.root}/db/seeds/test.rb" if Rails.env.test?
+load "#{Rails.root}/db/seeds/production.rb" if Rails.env.production?

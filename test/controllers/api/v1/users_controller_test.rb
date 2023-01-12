@@ -31,14 +31,14 @@ class Api::V1::UsersControllerTest < Api::Test
     assert_response :success
 
     # Make sure it's returning our resources.
-    user_ids_returned = response.parsed_body.dig("data").map { |user| user["id"] }
+    user_ids_returned = response.parsed_body.map { |user| user["id"] }
     assert_includes(user_ids_returned, @user.id)
 
     # But not returning other people's resources.
     assert_not_includes(user_ids_returned, @another_user.id)
 
     # And that the object structure is correct.
-    assert_proper_object_serialization response.parsed_body.dig("data").first
+    assert_proper_object_serialization response.parsed_body.first
   end
 
   test "show" do

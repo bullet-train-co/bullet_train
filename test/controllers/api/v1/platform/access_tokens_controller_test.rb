@@ -34,14 +34,14 @@ class Api::V1::Platform::AccessTokensControllerTest < Api::Test
     assert_response :success
 
     # Make sure it's returning our resources.
-    access_token_ids_returned = response.parsed_body.dig("data").map { |access_token| access_token["id"] }
+    access_token_ids_returned = response.parsed_body.map { |access_token| access_token["id"] }
     assert_includes(access_token_ids_returned, @access_token.id)
 
     # But not returning other people's resources.
     assert_not_includes(access_token_ids_returned, @other_access_tokens[0].id)
 
     # And that the object structure is correct.
-    assert_proper_object_serialization response.parsed_body.dig("data").first
+    assert_proper_object_serialization response.parsed_body.first
   end
 
   test "show" do
@@ -60,7 +60,7 @@ class Api::V1::Platform::AccessTokensControllerTest < Api::Test
   test "create" do
     # Use the serializer to generate a payload, but strip some attributes out.
     params = {access_token: access_token}
-    access_token_data = JSON.parse(build(:platform_access_token, application: nil).to_api_json)
+    access_token_data = JSON.parse(build(:platform_access_token, application: nil).to_api_json.to_json)
     access_token_data.except!("id", "application_id", "created_at", "updated_at")
     params[:platform_access_token] = access_token_data
 

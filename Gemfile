@@ -6,7 +6,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby "3.2.0"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
@@ -18,7 +18,7 @@ gem "sprockets-rails"
 gem "pg", ">= 0.18", "< 2.0"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma", "~> 6.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
@@ -36,7 +36,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.0.5"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -108,6 +108,8 @@ gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
 
 gem "devise"
+gem "devise-two-factor"
+gem "rqrcode"
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
@@ -164,6 +166,9 @@ end
 
 # TODO Have to specify this dependency here until our changes are in the original package.
 gem "active_hash", github: "bullet-train-co/active_hash"
+
+# A great debugger.
+gem "pry"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
