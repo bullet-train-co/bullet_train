@@ -51,7 +51,7 @@ end
 def check_package(package)
   if not_installed?(package)
     puts "#{package} is not installed via Homebrew. Try running `brew install #{package}`.".red
-    input = ask "Try proceeding without #{package}?"
+    input = ask "Try proceeding without #{package}? [y/n]"
     if input.downcase[0] == "n"
       exit
     end
@@ -71,7 +71,7 @@ if actual_ruby.include?(required_ruby)
   puts message.green
 else
   puts message.red
-  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y]"
+  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -81,7 +81,7 @@ if `brew info 2> /dev/null`.length > 0
   puts "Homebrew is installed.".green
 else
   puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
-  input = ask "Try proceeding without Homebrew?"
+  input = ask "Try proceeding without Homebrew? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -107,7 +107,7 @@ if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
   puts message.green
 else
   puts message.red
-  input = ask "Try proceeding with Node #{actual_node} anyway? [y]"
+  input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
