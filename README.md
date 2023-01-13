@@ -22,6 +22,14 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     bin/configure
     bin/setup
     ```
+    
+4. Boot your application:
+
+    ```
+    bin/dev
+    ```
+    
+5. Visit `http://localhost:3000`.
 
 ## Cloud Development with Gitpod
 
