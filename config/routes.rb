@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get '/healthcheck', to: proc { [200, {}, ["ok"]] }
   # See `config/routes/*.rb` to customize these configurations.
   draw "concerns"
   draw "devise"
