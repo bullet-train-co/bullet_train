@@ -1,0 +1,3 @@
+<% if can? :create, Teams::MasqueradeAction.new(team: team) %>
+  <%= link_to t('teams/masquerade_actions.buttons.shorthand.create'), [:new, :admin, team, :masquerade_action], class: 'button-secondary button-smaller bulk-action-single button_to' %>
+<% end %>

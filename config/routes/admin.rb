@@ -6,7 +6,16 @@ extending = {only: []} # standard:disable Lint/UselessAssignment
 shallow do
   namespace :admin do
     resources :applications do
-      resources :teams
+      resources :teams do
+        scope module: 'teams' do
+          resources :masquerade_actions, only: collection_actions
+        end
+      end
+      
+      namespace :teams do
+        resources :masquerade_actions, except: collection_actions
+      end
+
       resources :users
     end
   end

@@ -1,3 +1,4 @@
+
 # DEFAULT RAILS GEMS
 # This section is something close to the default Rails Gemfile.
 # Bullet Train updates the Ruby version. The comments in this section
@@ -176,3 +177,5 @@ gem "sidekiq"
 # that you run into a merge conflict in the future.
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
+
+gem "bullet_train-action_models", path: "local/bullet_train-action_models"

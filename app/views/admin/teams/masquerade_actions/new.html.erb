@@ -1,0 +1,12 @@
+<%= render 'shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'shared/box', divider: true do |p| %>
+      <% p.content_for :title, t('.header') %>
+      <% p.content_for :description, t('.description') %>
+      <% p.content_for :body do %>
+        <%= render 'form', masquerade_action: @masquerade_action %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

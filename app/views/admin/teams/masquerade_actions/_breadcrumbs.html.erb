@@ -1,0 +1,8 @@
+<% masquerade_action ||= @masquerade_action %>
+<% team ||= @team || masquerade_action&.team %>
+<%= render 'admin/teams/breadcrumbs', team: team %>
+<%= render 'shared/breadcrumb', label: t('.label'), url: [:admin, team, :masquerade_actions] %>
+<% if masquerade_action&.persisted? %>
+  <%= render 'shared/breadcrumb', label: masquerade_action.label_string, url: [:admin, masquerade_action] %>
+<% end %>
+<%= render 'shared/breadcrumbs/actions', only_for: 'teams/masquerade_actions' %>

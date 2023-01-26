@@ -1,0 +1,37 @@
+<%= render 'shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= updates_for @team do %>
+      <%= render 'shared/box', divider: true do |p| %>
+        <% p.content_for :title, t('.header') %>
+        <% p.content_for :description do %>
+          <%= t('.description') %>
+          <%= t('.manage_description') if can? :manage, @masquerade_action %>
+        <% end %>
+
+        <% p.content_for :body do %>
+          <% with_attribute_settings object: @masquerade_action, strategy: :label do %>
+            <%= render 'shared/attributes/text', attribute: :target_count %>
+            <%= render 'shared/attributes/text', attribute: :performed_count %>
+            <%= render 'shared/attributes/belongs_to', attribute: :created_by %>
+            <%= render 'shared/attributes/belongs_to', attribute: :approved_by %>
+            <%= render 'shared/attributes/date_and_time', attribute: :scheduled_for %>
+            <%= render 'shared/attributes/date_and_time', attribute: :started_at %>
+            <%= render 'shared/attributes/date_and_time', attribute: :completed_at %>
+            <%# 🚅 super scaffolding will insert new fields above this line. %>
+          <% end %>
+        <% end %>
+
+        <% p.content_for :actions do %>
+          <%= link_to t('.buttons.approve'), [:approve, :admin, @masquerade_action], method: :post, class: first_button_primary if can? :approve, @masquerade_action %>
+          <%= link_to t('.buttons.edit'), [:edit, :admin, @masquerade_action], class: first_button_primary if can? :edit, @masquerade_action %>
+          <%= button_to t('.buttons.destroy'), [:admin, @masquerade_action], method: :delete, class: first_button_primary, data: { confirm: t('.buttons.confirmations.destroy', model_locales(@masquerade_action)) } if can? :destroy, @masquerade_action %>
+          <%= link_to t('global.buttons.back'), [:admin, @team, :masquerade_actions], class: first_button_primary %>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%# 🚅 super scaffolding will insert new children above this line. %>
+    <%# 🚅 super scaffolding will insert new action model index views above this line. %>
+  <% end %>
+<% end %>

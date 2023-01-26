@@ -20,6 +20,12 @@ GIT
       xpath (~> 3.2)
 
 PATH
+  remote: local/bullet_train-action_models
+  specs:
+    bullet_train-action_models (1.1.4)
+      rails (>= 6.0.0)
+
+PATH
   remote: local/bullet_train-core/bullet_train-super_load_and_authorize_resource
   specs:
     bullet_train-super_load_and_authorize_resource (1.2.3)
@@ -599,6 +605,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   bullet_train!
+  bullet_train-action_models!
   bullet_train-api
   bullet_train-incoming_webhooks
   bullet_train-integrations

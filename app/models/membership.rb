@@ -2,6 +2,7 @@ class Membership < ApplicationRecord
   include Memberships::Base
   # 🚅 add concerns above.
 
+  belongs_to :teams_masquerade_action, class_name: "Teams::MasqueradeAction", optional: true
   # 🚅 add belongs_to associations above.
 
   # 🚅 add has_many associations above.

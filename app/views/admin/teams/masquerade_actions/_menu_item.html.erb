@@ -1,0 +1,10 @@
+<% if can? :read, Teams::MasqueradeAction.new(team: current_team) %>
+  <%= render 'shared/menu/item', {
+    url: main_app.polymorphic_path([:admin, current_team, :teams_masquerade_actions]),
+    label: t('teams/masquerade_actions.navigation.label'),
+  } do |p| %>
+    <% p.content_for :icon do %>
+      <i class="<%= t('teams/masquerade_actions.navigation.icon') %>"></i>
+    <% end %>
+  <% end %>
+<% end %>

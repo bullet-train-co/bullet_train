@@ -6,6 +6,7 @@ class Admin::Ability
       can [:read, :update], Application
       can [:read, :update], Team
       can [:read, :update], User
+      can [:create], Teams::MasqueradeAction
     end
   end
 end

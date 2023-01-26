@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_18_222740) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_20_195217) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -100,10 +100,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_222740) do
     t.bigint "platform_agent_of_id"
     t.jsonb "role_ids", default: []
     t.boolean "platform_agent", default: false
+    t.bigint "teams_masquerade_action_id"
     t.index ["added_by_id"], name: "index_memberships_on_added_by_id"
     t.index ["invitation_id"], name: "index_memberships_on_invitation_id"
     t.index ["platform_agent_of_id"], name: "index_memberships_on_platform_agent_of_id"
     t.index ["team_id"], name: "index_memberships_on_team_id"
+    t.index ["teams_masquerade_action_id"], name: "index_memberships_on_teams_masquerade_action_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
@@ -244,6 +246,23 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_222740) do
     t.index ["application_id"], name: "index_teams_on_application_id"
   end
 
+  create_table "teams_masquerade_actions", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.integer "target_count"
+    t.integer "performed_count", default: 0
+    t.datetime "scheduled_for"
+    t.string "sidekiq_jid"
+    t.bigint "created_by_id", null: false
+    t.bigint "approved_by_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["approved_by_id"], name: "index_teams_masquerades_on_approved_by_id"
+    t.index ["created_by_id"], name: "index_teams_masquerades_on_created_by_id"
+    t.index ["team_id"], name: "index_teams_masquerade_actions_on_team_id"
+  end
+
   create_table "users", id: :serial, force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -354,6 +373,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_222740) do
   add_foreign_key "memberships", "memberships", column: "added_by_id"
   add_foreign_key "memberships", "oauth_applications", column: "platform_agent_of_id"
   add_foreign_key "memberships", "teams"
+  add_foreign_key "memberships", "teams_masquerade_actions"
   add_foreign_key "memberships", "users"
   add_foreign_key "memberships_reassignments_assignments", "memberships"
   add_foreign_key "memberships_reassignments_assignments", "memberships_reassignments_scaffolding_completely_concrete_tangi", column: "scaffolding_completely_concrete_tangible_things_reassignments_i"
@@ -369,6 +389,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_222740) do
   add_foreign_key "scaffolding_completely_concrete_tangible_things_assignments", "memberships"
   add_foreign_key "scaffolding_completely_concrete_tangible_things_assignments", "scaffolding_completely_concrete_tangible_things", column: "tangible_thing_id"
   add_foreign_key "teams", "applications"
+  add_foreign_key "teams_masquerade_actions", "teams"
+  add_foreign_key "teams_masquerade_actions", "users", column: "approved_by_id"
+  add_foreign_key "teams_masquerade_actions", "users", column: "created_by_id"
   add_foreign_key "users", "applications"
   add_foreign_key "users", "oauth_applications", column: "platform_agent_of_id"
   add_foreign_key "webhooks_outgoing_endpoints", "scaffolding_absolutely_abstract_creative_concepts"

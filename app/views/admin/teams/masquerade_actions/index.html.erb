@@ -1,0 +1,6 @@
+<%= render 'shared/page' do |p| %>
+  <% p.content_for :title, t('.section') %>
+  <% p.content_for :body do %>
+    <%= render 'index', masquerade_actions: @masquerade_actions %>
+  <% end %>
+<% end %>

@@ -1,0 +1,151 @@
+en:
+  teams/masquerade_actions: &masquerade_actions
+    label: &label Masquerade Actions
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      approve: Approve and Perform
+      new: Add New Masquerade Action
+      create: Perform Masquerade Action
+      edit: Edit Masquerade Action
+      update: Update Masquerade Action
+      destroy: Remove Masquerade Action
+      shorthand:
+        create: Masquerade
+        approve: Approve
+        show: Details
+        edit: Settings
+        destroy: Cancel
+        dismiss: Dismiss
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{masquerade_action_name}? This will also remove it's associated data. This can't be undone.
+    fields: &fields
+      id:
+        heading: Masquerade Action ID
+      team_id:
+        heading: Team ID
+      target_count:
+        _: &target_count Target Count
+        label: *target_count
+        heading: *target_count
+      performed_count:
+        _: &performed_count Performed Count
+        label: *performed_count
+        heading: *performed_count
+      created_by:
+        _: &created_by Created By
+        label: *created_by
+        heading: *created_by
+        placeholder: None
+        options:
+          one: One
+          two: Two
+          three: Three
+      approved_by:
+        _: &approved_by Approved By
+        label: *approved_by
+        heading: *approved_by
+        placeholder: None
+        options:
+          one: One
+          two: Two
+          three: Three
+      scheduled_for:
+        _: &scheduled_for Scheduled For
+        label: "Would you like this action to be performed at a future time?"
+        heading: *scheduled_for
+        help: Leave this blank if you would like the action to take place immediately.
+      started_at:
+        _: &started_at Began At
+        label: *started_at
+        heading: *started_at
+      completed_at:
+        _: &completed_at Completed At
+        label: *completed_at
+        heading: *completed_at
+      performed_count_over_target_count:
+        heading: Progress
+      delay:
+        _: &delay Delay
+        label: "How many seconds should we pause between each emoji being appended?"
+        heading: *delay
+        help: "This is a great way of seeing how Action Models behave when performing long-running operations in the background."
+      emoji:
+        _: &emoji Emoji
+        label: Which emoji would you like to append to the label of the Team?
+        heading: *emoji
+        options:
+          thumbs_up: 👍
+          hands_raised: 🙌
+          flex: 💪
+          star: ⭐️
+          heart_eyes: 😍
+          party_face: 🥳
+        help: This example Action Model will add it to the parent Team three times.
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    index:
+      section: "%{teams_possessive} Masquerade Actions"
+      contexts:
+        team:
+          header: Masquerade Operations
+          description: Below is a list of ongoing and completed masquerade options for %{team_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{masquerade_action_name}"
+      header: Masquerade Action Details
+      description: Below are the details we have for %{masquerade_action_name}.
+      manage_description: You'll also find options for updating these details or removing %{masquerade_action_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Masquerade Action for %{team_name}"
+      header: New Masquerade Action Details
+      description: Please provide the details of the new Masquerade Action you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{masquerade_action_name}"
+      header: Edit Masquerade Action Details
+      description: You can update the details or settings for %{masquerade_action_name} below.
+      form: *form
+    notifications:
+      created: Masquerade Action was successfully created.
+      updated: Masquerade Action was successfully updated.
+      destroyed: Masquerade Action was successfully destroyed.
+      approved: Masquerade Action was approved.
+  account:
+    teams:
+      masquerade_actions: *masquerade_actions
+  admin:
+    teams:
+      masquerade_actions: *masquerade_actions
+  activerecord:
+    attributes:
+      teams/masquerade_action:
+        target_count: *target_count
+        performed_count: *performed_count
+        created_by: *created_by
+        approved_by: *approved_by
+        scheduled_for: *scheduled_for
+        started_at: *started_at
+        completed_at: *completed_at
+        delay: *delay
+        emoji: *emoji
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

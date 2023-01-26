@@ -5,6 +5,7 @@ class Team < ApplicationRecord
 
   # 🚅 add belongs_to associations above.
 
+  has_many :masquerade_actions, class_name: "Teams::MasqueradeAction", dependent: :destroy, foreign_key: :team_id, enable_updates: true, inverse_of: :team
   # 🚅 add has_many associations above.
 
   # 🚅 add oauth providers above.

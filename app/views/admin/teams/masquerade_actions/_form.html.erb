@@ -1,0 +1,21 @@
+<%= form_with model: masquerade_action, url: (masquerade_action.persisted? ? [:admin, masquerade_action] : [:admin, @team, :masquerade_actions]), local: true, class: 'form' do |form| %>
+  <%= render 'shared/forms/errors', form: form %>
+  <%= form.hidden_field :allow_empty_form, value: nil %>
+
+  <% with_field_settings form: form do %>
+    <%= form.object.errors.inspect %>
+    <%# 🚅 super scaffolding will insert new fields above this line. %>
+
+    <%= render "shared/actions/scheduling" %>
+  <% end %>
+
+  <div class="buttons">
+    <%= form.submit (form.object.persisted? ? t('.buttons.update') : t('.buttons.create')), class: "button" %>
+    <% if form.object.persisted? %>
+    <%= link_to t('global.buttons.cancel'), [:admin, masquerade_action], class: "button-secondary" %>
+    <% else %>
+    <%= link_to t('global.buttons.cancel'), [:admin, @team, :masquerade_actions], class: "button-secondary" %>
+    <% end %>
+  </div>
+
+<% end %>

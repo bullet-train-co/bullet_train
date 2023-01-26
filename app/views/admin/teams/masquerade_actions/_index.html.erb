@@ -1,0 +1,28 @@
+<% team = @team %>
+<% context ||= team %>
+<% collection ||= :masquerade_actions %>
+<% hide_actions ||= false %>
+<% hide_back ||= false %>
+
+<% masquerade_actions = masquerade_actions.order("scheduled_for DESC, created_at DESC") %>
+
+<%= updates_for context, collection do %>
+  <% if masquerade_actions.any? %>
+    <div class="border-t dark:border-sealBlue-500">
+      <%= render 'shared/box', no_background: true, title_size: "text-base" do |p| %>
+        <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
+        <% p.content_for :description do %>
+          <%= t(".contexts.#{context.class.name.underscore}.description") %>
+        <% end %>
+
+        <% p.content_for :table do %>
+          <div class="divide-y divide-gray-900 divide-opacity-5 border-t dark:border-sealBlue-500">
+            <% masquerade_actions.each do |masquerade_action| %>
+              <%= render "shared/actions/action", action: masquerade_action %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
