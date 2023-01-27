@@ -1,5 +1,5 @@
 class Admin::Teams::MasqueradeActionsController < Admin::ApplicationController
-  account_load_and_authorize_resource :masquerade_action, through: :team, through_association: :masquerade_actions, member_actions: [:approve]
+  account_load_and_authorize_resource :masquerade_action, through: :team, through_association: :masquerade_actions, member_actions: [:approve, :revoke]
 
   # GET /admin/teams/:team_id/masquerade_actions
   # GET /admin/teams/:team_id/masquerade_actions.json
@@ -18,6 +18,19 @@ class Admin::Teams::MasqueradeActionsController < Admin::ApplicationController
 
   # GET /admin/teams/masquerade_actions/:id/edit
   def edit
+  end
+
+  # POST /admin/teams/masquerade_actions/:id/approve
+  def revoke
+    respond_to do |format|
+      if @masquerade_action.membership.nullify_user(force: true)
+        format.html { redirect_to [:admin, @masquerade_action.team], notice: I18n.t("teams/masquerade_actions.notifications.revoked") }
+        format.json { render :show, status: :ok, location: [:admin, @masquerade_action] }
+      else
+        format.html { render :show, status: :unprocessable_entity }
+        format.json { render json: @masquerade_action.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   # POST /admin/teams/masquerade_actions/:id/approve

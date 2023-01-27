@@ -1,4 +1,3 @@
-
 # DEFAULT RAILS GEMS
 # This section is something close to the default Rails Gemfile.
 # Bullet Train updates the Ruby version. The comments in this section
@@ -96,18 +95,19 @@ end
 gem "bullet_train", path: "local/bullet_train-core/bullet_train"
 gem "bullet_train-super_scaffolding", path: "local/bullet_train-core/bullet_train-super_scaffolding"
 gem "bullet_train-super_load_and_authorize_resource", path: "local/bullet_train-core/bullet_train-super_load_and_authorize_resource"
-gem "bullet_train-api"
-gem "bullet_train-outgoing_webhooks"
-gem "bullet_train-incoming_webhooks"
-gem "bullet_train-themes"
+gem "bullet_train-api", path: "local/bullet_train-core/bullet_train-api"
+gem "bullet_train-outgoing_webhooks", path: "local/bullet_train-core/bullet_train-outgoing_webhooks"
+gem "bullet_train-incoming_webhooks", path: "local/bullet_train-core/bullet_train-incoming_webhooks"
+gem "bullet_train-themes", path: "local/bullet_train-core/bullet_train-themes"
+gem "bullet_train-themes-tailwind_css", path: "local/bullet_train-core/bullet_train-themes-tailwind_css"
 gem "bullet_train-themes-light", path: "local/bullet_train-core/bullet_train-themes-light"
-gem "bullet_train-integrations"
-gem "bullet_train-integrations-stripe"
+gem "bullet_train-integrations", path: "local/bullet_train-core/bullet_train-integrations"
+gem "bullet_train-integrations-stripe", path: "local/bullet_train-core/bullet_train-integrations-stripe"
 
 # Optional support packages.
-gem "bullet_train-sortable"
-gem "bullet_train-scope_questions"
-gem "bullet_train-obfuscates_id"
+gem "bullet_train-sortable", path: "local/bullet_train-core/bullet_train-sortable"
+gem "bullet_train-scope_questions", path: "local/bullet_train-core/bullet_train-scope_questions"
+gem "bullet_train-obfuscates_id", path: "local/bullet_train-core/bullet_train-obfuscates_id"
 
 gem "devise"
 gem "devise-two-factor"

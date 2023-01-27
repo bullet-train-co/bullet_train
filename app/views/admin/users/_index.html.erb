@@ -22,7 +22,6 @@
           <table class="table">
             <thead>
               <tr>
-                <%= render "shared/tables/select_all" %>
                 <th><%= t('.fields.email.heading') %></th>
                 <%# 🚅 super scaffolding will insert new field headers above this line. %>
                 <th><%= t('.fields.created_at.heading') %></th>
@@ -48,7 +47,6 @@
 
           <%# 🚅 super scaffolding will insert new targets one parent action model buttons above this line. %>
           <%# 🚅 super scaffolding will insert new bulk action model buttons above this line. %>
-          <%= render "shared/bulk_action_select" %>
 
           <% unless hide_back %>
             <%= link_to t('global.buttons.back'), [:admin, context], class: "#{first_button_primary(:user)} back" %>

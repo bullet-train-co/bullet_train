@@ -6,7 +6,7 @@ module Applications::Base
     has_many :users
 
     # There is only ever one application record.
-    validates :id, comparison: { equal_to: 1 }
+    validates :id, comparison: {equal_to: 1}
   end
 
   def name

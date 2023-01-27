@@ -6,8 +6,6 @@ module Admin::Applications::ControllerBase
     load_and_authorize_resource :application, class: "Application", prepend: true,
       member_actions: (defined?(MEMBER_ACTIONS) ? MEMBER_ACTIONS : []),
       collection_actions: (defined?(COLLECTION_ACTIONS) ? COLLECTION_ACTIONS : [])
-
-    private
   end
 
   # GET /applications

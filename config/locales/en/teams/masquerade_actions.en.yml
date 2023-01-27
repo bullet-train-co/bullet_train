@@ -99,8 +99,8 @@ en:
       section: "%{teams_possessive} Masquerade Actions"
       contexts:
         team:
-          header: Masquerade Operations
-          description: Below is a list of ongoing and completed masquerade options for %{team_name}.
+          header: Masquerade Sessions
+          description: Below is a list of ongoing and completed masquerade sessions for %{teams_possessive} account.
       fields: *fields
       buttons: *buttons
     show:
@@ -128,6 +128,7 @@ en:
       updated: Masquerade Action was successfully updated.
       destroyed: Masquerade Action was successfully destroyed.
       approved: Masquerade Action was approved.
+      revoked: That masquerading session has been revoked.
   account:
     teams:
       masquerade_actions: *masquerade_actions

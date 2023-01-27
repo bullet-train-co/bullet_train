@@ -7,13 +7,17 @@ shallow do
   namespace :admin do
     resources :applications do
       resources :teams do
-        scope module: 'teams' do
+        scope module: "teams" do
           resources :masquerade_actions, only: collection_actions
         end
       end
-      
+
       namespace :teams do
-        resources :masquerade_actions, except: collection_actions
+        resources :masquerade_actions, except: collection_actions do
+          member do
+            post :revoke
+          end
+        end
       end
 
       resources :users

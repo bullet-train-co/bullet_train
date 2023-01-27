@@ -8,7 +8,7 @@
 
 <%= updates_for context, collection do %>
   <% if masquerade_actions.any? %>
-    <div class="border-t dark:border-sealBlue-500">
+    <div class="border-t dark:border-darkPrimary-700">
       <%= render 'shared/box', no_background: true, title_size: "text-base" do |p| %>
         <% p.content_for :title, t(".contexts.#{context.class.name.underscore}.header") %>
         <% p.content_for :description do %>
@@ -16,9 +16,21 @@
         <% end %>
 
         <% p.content_for :table do %>
-          <div class="divide-y divide-gray-900 divide-opacity-5 border-t dark:border-sealBlue-500">
+          <div class="divide-y divide-gray-900 divide-opacity-5 border-t dark:border-darkPrimary-700">
             <% masquerade_actions.each do |masquerade_action| %>
-              <%= render "shared/actions/action", action: masquerade_action %>
+              <%= render "shared/actions/action", action: masquerade_action, hide_label: true do |ap| %>
+                <% ap.content_for :status do %>
+                  <% if masquerade_action.membership.tombstone? %>
+                    From <%= display_date_and_time(masquerade_action.created_at) %> until <%= display_date_and_time(masquerade_action.membership.updated_at) %>
+                  <% else %>
+                    Started <%= display_date_and_time(masquerade_action.created_at) %>
+
+                    <% ap.content_for :actions do %>
+                      <%= button_to "Revoke", [:revoke, :admin, masquerade_action], method: :post, class: 'button-secondary button-smaller' %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              <% end %>
             <% end %>
           </div>
         <% end %>

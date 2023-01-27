@@ -6,7 +6,6 @@
 
 <% with_attribute_settings object: user do %>
   <tr data-id="<%= user.id %>">
-    <%= render "shared/tables/checkbox", object: user %>
     <td><%= render 'shared/attributes/text', attribute: :email, url: [:admin, user] %></td>
     <%# 🚅 super scaffolding will insert new fields above this line. %>
     <td><%= render 'shared/attributes/date_and_time', attribute: :created_at %></td>

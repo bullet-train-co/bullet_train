@@ -1,10 +1,6 @@
 class Teams::MasqueradeAction < ApplicationRecord
   include Actions::TargetsOne
-  # include Actions::SupportsScheduling
-  include Actions::HasProgress
   include Actions::TracksCreator
-  # include Actions::RequiresApproval
-  # include Actions::CleansUp
   # 🚅 add concerns above.
 
   # 🚅 add attribute accessors above.
@@ -31,9 +27,8 @@ class Teams::MasqueradeAction < ApplicationRecord
     team
   end
 
-
   def label_string
-    "Masquerade Action"
+    created_by.name
   end
 
   def calculate_target_count
