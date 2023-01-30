@@ -526,8 +526,6 @@ GEM
     simplecov_json_formatter (0.1.4)
     simpleidn (0.2.1)
       unf (~> 0.1.4)
-    snail (2.2.3)
-      activesupport
     snaky_hash (2.0.1)
       hashie
       version_gem (~> 1.1, >= 1.1.1)
@@ -590,9 +588,14 @@ GEM
     zeitwerk (2.6.8)
 
 PLATFORMS
+<<<<<<< HEAD
   arm64-darwin-21
   arm64-darwin-22
   ruby
+||||||| parent of 9495313 (remove snail gem)
+=======
+  x86_64-darwin-22
+>>>>>>> 9495313 (remove snail gem)
   x86_64-linux
 
 DEPENDENCIES
