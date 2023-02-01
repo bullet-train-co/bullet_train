@@ -164,7 +164,7 @@ group :production do
   gem "aws-sdk-s3", require: false
 end
 
-# TODO Have to specify this dependency here until our changes are in the original package.
+# Use Ruby hashes as readonly datasources for ActiveRecord-like models.
 gem "active_hash"
 
 # A great debugger.
