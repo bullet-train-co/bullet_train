@@ -165,7 +165,7 @@ group :production do
 end
 
 # TODO Have to specify this dependency here until our changes are in the original package.
-gem "active_hash", github: "bullet-train-co/active_hash"
+gem "active_hash"
 
 # A great debugger.
 gem "pry"
