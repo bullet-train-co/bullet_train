@@ -7,8 +7,3 @@ ignore:
     - Style/CommentedKeyword
   - 'app/controllers/**/*':
     - Style/RedundantAssignment
-  # TODO Remove once https://github.com/testdouble/standard/issues/497 is fixed.
-  - 'config/routes.rb':
-    - Lint/UselessAssignment
-  - 'config/routes/api/v1.rb':
-    - Lint/UselessAssignment
