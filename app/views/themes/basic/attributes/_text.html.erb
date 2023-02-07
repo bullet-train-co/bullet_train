@@ -1,0 +1,10 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+<% options ||= {} %>
+
+<% if object.send(attribute).present? %>
+  <%= render 'shared/attributes/attribute', object: object, attribute: attribute, strategy: strategy, url: url do %>
+    <%= options[:password] ? "●" * object.send(attribute).length : object.send(attribute) %>
+  <% end %>
+<% end %>

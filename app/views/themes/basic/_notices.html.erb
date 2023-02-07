@@ -1,0 +1,21 @@
+<% attributes ||= [] %>
+<% attributes.select! { |attribute| form.object.errors[attribute].any? } %>
+
+<% if notice.present? %>
+  <%= render 'account/shared/alert' do %>
+    <%= notice %>
+  <% end %>
+<% end %>
+
+<% if flash[:error] == "create_limit" %>
+  <% model = @child_object ? @child_object.class : @parent_object.send(@child_collection).model %>
+  <%= render "shared/limits/error", model: model, count: 1 %>
+  <% flash[:error] = nil %>
+<% end %>
+
+<% if alert.present? || flash[:error] %>
+  <%= render 'account/shared/alert', color: 'red' do %>
+    <%= alert %>
+    <%= flash[:error] %>
+  <% end %>
+<% end %>

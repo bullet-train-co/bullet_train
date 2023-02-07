@@ -1,0 +1,24 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+
+<%= render 'shared/attributes/attribute', attribute: attribute, strategy: strategy, url: url do %>
+  <span class="inline-block">
+    <% if object.send(success_method) %>
+      <i class="fal fa-check ti ti-check text-green-500"></i>
+    <% elsif object.send(attempting_method) %>
+      <style>
+        <% if font_awesome? %>
+          @keyframes spinner { 100% { transform:rotate(360deg); } };
+        <% else %>
+          @keyframes spinner { 100% { transform:rotate(-360deg); } };
+        <% end %>
+      </style>
+      <span class="inline-block" style="animation: spinner 4s linear infinite;">
+        <i class="fal fa-sync ti ti-reload"></i>
+      </span>
+    <% elsif object.send(failure_method) %>
+      <i class="fal fa-close ti ti-close text-red-500"></i>
+    <% end %>
+  </span>
+<% end %>

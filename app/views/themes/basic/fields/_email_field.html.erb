@@ -1,0 +1,9 @@
+<% yield %>
+
+<%
+form ||= current_fields_form
+options ||= {}
+other_options ||= {}
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, helper: :email_field, options: options, other_options: other_options %>

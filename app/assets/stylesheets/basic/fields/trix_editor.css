@@ -1,0 +1,94 @@
+@import "../actiontext";
+
+/* don't show the editor tool bar unless the user is editing the field. */
+/* see https://github.com/basecamp/trix/issues/343 and `app/assets/javascripts/account/fields.js` */
+trix-toolbar {
+  opacity: 0.15;
+  &.visible {
+    opacity: 1;
+  }
+}
+
+a[href^="bullettrain://"], span.tribute-reference {
+  border-radius: 4px;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0 4px;
+  margin: -1px 0;
+  color: #3E4B5B;
+  line-height: 17px;
+  text-decoration: none;
+  background-color: #ebe2ff;
+  border: 1px solid #7147d2;
+}
+
+a[href^="bullettrain://users"], a[href^="bullettrain://teams"], span.tribute-users-reference, span.tribute-teams-reference {
+  background-color: #e2ebff;
+  border: 1px solid #4771d2;
+}
+
+.tribute-container {
+  ul {
+    border-radius: 5px;
+    overflow: hidden;
+    box-sizing: border-box;
+    border: 2px solid var(--primary-500);
+    background: white;
+    list-style: none;
+    padding: 0;
+    &:empty {
+      display: none;
+    }
+    li {
+      @apply flex items-center;
+
+      span {
+        font-weight: normal;
+      }
+      &.highlight {
+        background-color: #5897fb;
+        color: white;
+      }
+      padding: 5px 10px;
+      img {
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+trix-editor [data-trix-cursor-target] {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  /* background-color: red; */
+}
+
+.trix-editor {
+  * {
+    box-sizing: border-box;
+  }
+}
+
+trix-editor {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  @apply shadow-sm border-gray-300 font-light rounded-md;
+  &:focus, &:active {
+    border-color: var(--primary-500);
+    box-shadow: inset 0 0 0 1px var(--primary-500);
+  }
+}
+
+.trix-hide-toolbar {
+  trix-toolbar {
+    display: none !important;
+  }
+}
+
+.trix-content {
+  @apply text-base md:text-sm;
+}

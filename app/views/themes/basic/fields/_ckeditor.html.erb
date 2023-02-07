@@ -1,0 +1,25 @@
+<% yield %>
+
+<%
+# ⚠️ CKEditor 5 is distributed under a GPL 2+ copyleft license.
+# You need a commercial license to utilize it in closed-source SaaS products.
+# See https://ckeditor.com/pricing/ for more details.
+%>
+
+<%
+stimulus_controller = 'fields--ckeditor'
+
+form ||= current_fields_form
+options ||= {}
+options = options.merge({ data: {"#{stimulus_controller}-target": 'field' }})
+other_options ||= {}
+
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div data-controller="<%= stimulus_controller %>">
+      <%= form.text_area method, options %>
+    </div>
+  <% end %>
+<% end %>

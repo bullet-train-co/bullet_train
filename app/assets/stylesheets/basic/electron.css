@@ -1,0 +1,46 @@
+/* Import Electron utilities shared across all Tailwind-based themes. */
+/* @import "../tailwind/electron.scss"; */
+
+.electron, .todesktop {
+
+  a {
+    outline-color: var(--tw-ring-color);
+    --tw-ring-color: rgba(3, 98, 198, var(--tw-ring-opacity));
+    --tw-ring-opacity: 1;
+  }
+
+  .electron-mobile-only {
+    @apply block lg:hidden;
+  }
+
+  .electron-title-bar {
+    /* override `md:rounded-lg` */
+    border-top-left-radius: 0;
+
+    /* hide logo because it doesn't fit into the ui well. */
+    img { display: none; }
+
+    min-height: 36px;
+  }
+
+  .main-container-padding {
+    padding: 0;
+  }
+
+  .main-container {
+    /* override `md:rounded-lg` */
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+    /* override `md:h-auto` */
+    height: 100vh;
+  }
+
+  /* hide profiler results because they don't fit into the ui well. */
+  .profiler-results { display: none; }
+
+  /* touch up the padding of the breadcrumbs. */
+  ol.breadcrumb { padding-top: 3px; }
+}

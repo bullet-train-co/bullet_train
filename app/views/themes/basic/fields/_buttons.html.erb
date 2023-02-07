@@ -1,0 +1,34 @@
+<% yield %>
+
+<%
+stimulus_controller = 'fields--button-toggle'
+form ||= current_fields_form
+html_options ||= {}
+html_options[:id] ||= form.field_id(method)
+multiple ||= false
+other_options ||= {}
+options ||= options_for(form, method)
+%>
+
+<% content = render 'shared/fields/field', form: form, method: method, options: html_options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div>
+      <% options.each do |value, label| %>
+        <% checked = form.object.send(method).is_a?(Array) ? form.object.send(method).map(&:to_s).include?(value.to_s) : form.object.send(method).to_s == value.to_s  %>
+        <label class="btn-toggle" data-controller="<%= stimulus_controller %>">
+          <% if multiple %>
+            <%= form.check_box method, {multiple: multiple, checked: checked, data: { "#{stimulus_controller}-target": 'shadowField' }}, value, "" %>
+          <% else %>
+            <%= form.radio_button method, value, { data: { "#{stimulus_controller}-target": 'shadowField' }, checked: checked} %>
+          <% end %>
+          <button type="button" class="button-alternative mb-1.5 mr-1" data-action="<%= stimulus_controller %>#clickShadowField">
+            <%= label %>
+          </button>
+        </label>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>
+
+<%# The `-mb-1.5` is making up for the `mb-1.5` on each of the buttons. This allows them to wrap with appropriate vertical spacing. %>
+<div class="-mb-1.5"><%= content %></div>

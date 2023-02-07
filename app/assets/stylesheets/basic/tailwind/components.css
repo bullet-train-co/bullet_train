@@ -1,0 +1,189 @@
+@layer components {
+  a {
+    @apply text-secondary-500 hover:text-secondary-600 hover:underline;
+  }
+
+  b, strong {
+    @apply font-medium;
+  }
+
+  .buttons {
+    @apply space-x;
+  }
+
+  .button {
+    @apply shadow-sm text-white hover:text-white bg-primary-500 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600 hover:no-underline;
+
+    &.button-red {
+      @apply bg-red-500 hover:bg-red-600 focus:ring-red-600;
+    }
+  }
+
+  .button-secondary {
+    @apply text-secondary-500 hover:text-secondary-600 hover:underline;
+    &.button-increase-contrast {
+      @apply text-secondary-700 hover:text-secondary-900;
+    }
+
+    &.button-red {
+      @apply text-red-500 hover:text-red-600;
+      &.button-increase-contrast {
+        @apply text-red-700 hover:text-red-900;
+      }
+    }
+  }
+
+  .button, .button-secondary, .button-alternative {
+    @apply py-2 px-4 border border-transparent rounded-md;
+    @apply inline-flex items-center whitespace-nowrap;
+    &.button-smaller {
+      @apply py-1 px-3 text-xs;
+    }
+  }
+
+  .button-alternative {
+    @apply border-gray-300 rounded-md shadow-sm bg-white text-gray-500 hover:bg-gray-50 no-underline hover:no-underline;
+  }
+
+  .button-color {
+    @extend .button;
+    @apply rounded-full;
+  }
+
+  .btn-toggle {
+    input[type=checkbox], input[type=radio] {
+      display: none;
+      &:checked {
+        & + button {
+          @extend .button;
+        }
+      }
+    }
+
+    &.btn-color-picker {
+      input[type=checkbox], input[type=radio] {
+        &:checked {
+          & + button {
+            @apply ring ring-offset-2 rounded-full;
+          }
+        }
+      }
+    }
+  }
+
+  .full {
+    @apply w-full flex justify-center;
+  }
+
+  form.form {
+    @apply space-y-5;
+
+    .form-wrapper {
+      @apply space-y-5;
+      &[disabled] {
+        opacity: 0.3;
+        position: relative;
+        user-select: none;
+        &:before {
+          content: "";
+          position: absolute;
+          background-color: transparent;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        }
+      }
+    }
+
+    /*
+    This is the best way I know how to solve the problem of Tailwind's `space-y-5` creating extra space at the top
+    because Rails injects hidden fields at the top of our forms. However, we don't need this on `get` forms, because
+    no extra element is injected into the form.
+    */
+    &[method="post" i], &[method="patch" i] {
+      @apply -mt-5;
+    }
+
+    .buttons {
+      @apply pt-1 space-x;
+    }
+  }
+
+  .table {
+    @apply w-full divide-y divide-gray-900 divide-opacity-5 text-left;
+
+    & th {
+      @apply px-3 py-3 text-2xs font-semibold font-normal;
+
+      &:first-child {
+        @apply pl-5;
+      }
+
+      &:last-child {
+        @apply pr-5;
+      }
+    }
+
+    & tbody {
+      @apply divide-y divide-gray-900 divide-opacity-5;
+    }
+
+    & td {
+      @apply px-3 py-3.5;
+
+      &:first-child {
+        @apply pl-5;
+      }
+
+      &:last-child {
+        @apply pr-5;
+      }
+
+      &.buttons {
+        @apply pr-3;
+        @apply text-right space-x-2;
+
+        /* just having a cell with buttons shouldn't expand the height of a table row. */
+        & > * {
+          @apply -mt-5 -mb-5;
+        }
+      }
+    }
+  }
+
+  .box-table {
+    .table {
+      & th, & td {
+        &:first-child {
+          @apply pl-8;
+        }
+
+        &:last-child {
+          @apply pr-8;
+        }
+      }
+    }
+  }
+
+  .pagy-nav .page a,
+  .pagy-nav .page.active {
+    @apply button-alternative;
+  }
+
+  .pagy-nav .page.prev.disabled,
+  .pagy-nav .page.next.disabled {
+    @apply hidden;
+  }
+
+  .pagy-nav .page.active,
+  .pagy-nav-js .page.active {
+    @apply button;
+  }
+  
+  /* Fix Safari issue related to <summary> / <details> arrow */
+  details > summary.list-none::-webkit-details-marker,
+  details > summary.list-none::marker {
+    display: none;
+  }
+}

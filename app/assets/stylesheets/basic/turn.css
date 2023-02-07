@@ -1,0 +1,44 @@
+[data-turn-exit],
+[data-turn-enter] {
+  animation-timing-function: cubic-bezier(0.65, 0.05, 0.35, 1);
+  animation-fill-mode: forwards;
+}
+
+html.turn-exit [data-turn-exit] {
+  animation-name: fade-out-up;
+  animation-duration: .3s;
+}
+
+html.turn-enter [data-turn-enter] {
+  animation-name: fade-in-up;
+  animation-duration: .6s;
+}
+
+html.turn-before-exit [data-turn-exit],
+html.turn-exit [data-turn-exit] {
+  will-change: transform, opacity;
+}
+
+@keyframes fade-out-up {
+  0% {
+   opacity: 1;
+   transform: translateZ(0)
+  }
+
+  100% {
+   opacity: 0;
+   transform: translate3d(0, -2rem, 0)
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+   opacity: 0;
+   transform: translate3d(0, 2rem, 0)
+  }
+
+  100% {
+   opacity: 1;
+   transform: translateZ(0)
+  }
+}

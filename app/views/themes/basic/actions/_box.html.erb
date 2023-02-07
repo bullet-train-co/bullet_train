@@ -1,0 +1,6 @@
+<% yield p = np %>
+
+<%= render 'account/shared/box', no_background: true, title_size: "text-2xs", title_padding: "pt-3 pb-3.5", border_top: true do |pp| %>
+  <% pp.content_for :title, p.yield(:title) %>
+  <% pp.content_for :table, p.yield(:table) %>
+<% end %>

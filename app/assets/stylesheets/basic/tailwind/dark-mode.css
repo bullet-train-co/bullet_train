@@ -1,0 +1,213 @@
+@layer utilities {
+  @media (prefers-color-scheme: dark) {
+    /**
+     * General
+     **/
+    .button {
+      @apply ring-offset-gray-700;
+    }
+
+    .table {
+      th {
+        @apply text-gray-400;
+      }
+
+      tbody {
+        @apply border-gray-500;
+
+        tr {
+          border-top: 1px solid theme('colors.slate.500');
+        }
+
+        td {
+          @apply text-gray-400;
+
+          a,
+          input[type="submit"] {
+            @apply text-gray-200;
+          }
+        }
+      }
+    }
+
+    /**
+     * Form components
+     **/
+    .button-secondary {
+      @apply text-gray-200;
+    }
+
+    .button-alternative {
+      @apply bg-gray-400 border-gray-400 text-white;
+
+      &:hover {
+        @apply bg-gray-300 border-gray-200 text-white;
+      }
+    }
+
+    /**
+     * Custom components
+     **/
+    /* Color picker */
+    .pcr-app {
+      @apply bg-gray-800 border border-solid border-gray-900;
+
+      .pcr-interaction .pcr-result {
+        @apply text-gray-300 border border-solid border-gray-900 bg-gray-800;
+
+        &:focus {
+          box-shadow: 0 0 0 1px theme('colors.primary.500'), 0 0 0 3px theme('colors.primary.500');
+        }
+      }
+    }
+
+    /* Date range picker */
+    .daterangepicker {
+      @apply bg-gray-800 border-gray-900;
+
+      &::before {
+        border-bottom-color: theme('colors.slate.900');
+      }
+
+      &::after {
+        border-bottom-color: theme('colors.slate.800');
+      }
+
+      .calendar-table {
+        @apply bg-gray-800 text-gray-300;
+
+        /* navigation arrows */
+        .available {
+          span {
+            @apply border-primary-500;
+          }
+        }
+      }
+
+      /* Clear and Apply buttons wrapper */
+      .drp-buttons {
+        border-top-color: theme('colors.slate.900');
+        @apply text-gray-300;
+      }
+
+      th {
+        &.available:hover {
+          @apply bg-gray-600;
+        }
+      }
+
+      td {
+        &.off {
+          @apply bg-gray-800 text-white;
+        }
+
+        &.available:hover {
+          @apply bg-gray-600;
+        }
+      }
+
+      .hourselect, .minuteselect, .ampmselect {
+        @apply text-gray-300 border-gray-900 bg-gray-800 !important;
+      }
+    }
+
+    /* Phone field */
+    .iti__country-list {
+      @apply bg-gray-800 border border-solid border-gray-900;
+    }
+
+    /* Select2 */
+    .select2-container {
+      .select2-selection__rendered {
+        @apply text-gray-300 !important;
+      }
+
+      .select2-dropdown {
+        @apply bg-gray-700;
+      }
+
+      .select2-search__field {
+        @apply bg-gray-800 border-gray-900 !important;
+      }
+
+      .select2-selection--multiple, .select2-selection--single {
+        @apply bg-gray-800 focus:ring-primary-500 border-gray-900 !important;
+        @apply text-gray-300;
+      }
+
+      /* For the selected options in the multiple select2 component */
+      .select2-selection__choice {
+        @apply bg-primary-500 border-primary-500 !important;
+        @apply text-white;
+
+        .select2-selection__choice__remove {
+          @apply text-white;
+
+          &:hover {
+            @apply text-white;
+          }
+        }
+      }
+
+      .select2-results__option {
+        @apply text-gray-300;
+      }
+    }
+
+    /* Trix Editor */
+    trix-editor {
+      @apply bg-gray-800 border-gray-900 !important;
+
+      &:focus, &:active {
+        @apply border-primary-500 !important;
+      }
+    }
+
+    trix-toolbar {
+      @apply opacity-50 !important;
+
+      &.visible {
+        @apply opacity-100 !important;
+      }
+
+      .trix-button-group, .trix-button {
+        @apply border-gray-400 !important;
+      }
+
+      .trix-button:disabled::before {
+        @apply opacity-25;
+      }
+    }
+
+    .tribute-container {
+      ul {
+        @apply bg-gray-800 border-gray-900 !important;
+      }
+    }
+
+    .trix-dialogs {
+      @apply bg-gray-800 border-gray-900 !important;
+    }
+
+    .trix-content a[href^="bullettrain://"] {
+      @apply text-white bg-gray-500;
+    }
+
+    /* CKEditor */
+    .ck {
+      --ck-color-base-background: theme('colors.slate.800');
+      --ck-color-base-border: theme('colors.slate.900');
+      --ck-color-toolbar-background: theme('colors.slate.800');
+      --ck-color-toolbar-border: theme('colors.slate.900');
+      --ck-color-text: theme('colors.slate.300');
+
+      .ck-editor__editable:not(.ck-editor__nested-editable) {
+        @apply shadow-none;
+
+        &.ck-focused {
+          @apply shadow-none;
+        }
+      }
+    }
+  }
+}

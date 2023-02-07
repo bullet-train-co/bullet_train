@@ -1,0 +1,8 @@
+<% model ||= @records.model %>
+<% color ||= "red" %>
+
+<% if current_limits.exhausted?(model) %>
+  <div class="pt-3">
+    <%= render "shared/limits/error", model: model, color: color, count: 0 %>
+  </div>
+<% end %>

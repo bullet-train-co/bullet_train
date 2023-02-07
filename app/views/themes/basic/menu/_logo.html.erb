@@ -1,0 +1,6 @@
+<% if BulletTrain::Themes::Light.show_logo_in_account %>
+  <div class="flex items-center flex-shrink-0 p-4 bg-primary-900 md:rounded-tl-lg electron-draggable electron-title-bar dark:bg-black dark:bg-opacity-10">
+    <%= image_tag image_path("logo/logo.png"), class: 'theme-logo h-5 w-auto mx-auto' %>
+    <%= render "account/shared/menu/close" %>
+  </div>
+<% end %>

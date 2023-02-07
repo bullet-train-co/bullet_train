@@ -1,0 +1,71 @@
+@layer utilities {
+  .pricing-table-shadow {
+    box-shadow: 0 2px 30px 0 rgba(54,88,206,0.2);
+  }
+
+  .pricing-page-background {
+    background-image: linear-gradient(to bottom, #f8faff, #fff);
+  }
+
+  .pricing-page-background-fade-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100vw;
+    max-width: 100vw;
+    overflow: hidden;
+    z-index: -1;
+  }
+
+  .pricing-page-background-fade {
+    &:before {
+      content: "";
+      position: absolute;
+      right: -40px;
+      top: -200px;
+      width: 1000px;
+      height: 600px;
+      background-image: linear-gradient(90deg, rgba(227,231,248,0) 0%, #E8F2FC 100%);
+      z-index: -1;
+    }
+
+    position: absolute;
+    right: -800px;
+    top: 0px;
+    width: 800px;
+    height: 600px;
+    background-image: linear-gradient(90deg, rgba(227,231,248,0) 0%, #8BBAF5 100%);
+    transform: translate(-360px, 0px) rotate(-45deg);
+    z-index: -1;
+  }
+
+  .brand-title {
+    color: #047bf8;
+    font-size: 2.99rem;
+    margin: 30px 0px;
+    margin-top: 10px;
+    position: relative;
+    letter-spacing: -0.025em;
+    line-height: 120%;
+    @apply font-bold;
+  }
+
+  .brand-description {
+    color: #868686;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    @apply font-extralight;
+  }
+
+  .text-light-gradient {
+    -webkit-background-clip: text;
+    -webkit-box-decoration-break: clone;
+    -webkit-font-smoothing: subpixel-antialiased;
+    -webkit-text-fill-color: rgba(0,0,0,0);
+    background-attachment: scroll;
+    background-clip: text;
+    background-color: rgba(0,0,0,0);
+    background-image: -webkit-linear-gradient(-75deg, #c094de 10%, #65A8F1 50%, #006EF4 95%);
+  }
+}

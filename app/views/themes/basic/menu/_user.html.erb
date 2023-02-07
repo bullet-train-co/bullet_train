@@ -1,0 +1,20 @@
+<div class="flex-shrink-0 flex px-5 <%= @menu_orientation == :top ? "py-3" : "py-4" %>">
+  <div class="flex-shrink-0 w-full group block no-underline">
+    <div class="flex items-center">
+      <div class="inline-block rounded-full border border-white p-1">
+        <%= image_tag membership_profile_photo_url(current_membership), class: "#{@menu_orientation == :top ? "h-7 w-7" : "h-9 w-9"} rounded-full", alt: current_user.name %>
+      </div>
+      <div class="ml-3">
+        <div class="text-white">
+          <%= current_user.name %>
+        </div>
+        <div class="text-2xs tracking-widest uppercase text-secondary-300 group-hover:text-white dark:text-gray-500">
+          <%= current_team.name %>
+        </div>
+      </div>
+      <% unless BulletTrain::Themes::Light.show_logo_in_account %>
+        <%= render "account/shared/menu/close" %>
+      <% end %>
+    </div>
+  </div>
+</div>

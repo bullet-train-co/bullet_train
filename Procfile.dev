@@ -1,5 +1,5 @@
 web: bin/rails server -p 3000
 worker: bundle exec sidekiq -t 25
-js: THEME="light" yarn build --watch
-light-css: yarn light:build:css --watch
-light-mailer-css: yarn light:build:mailer:css --watch
+js: THEME="basic" yarn build --watch
+basic-css: yarn basic:build:css --watch
+basic-mailer-css: yarn basic:build:mailer:css --watch

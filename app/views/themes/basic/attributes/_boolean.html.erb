@@ -1,0 +1,9 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+
+<%= render 'shared/attributes/attribute', object: object, attribute: attribute, strategy: strategy, url: url do %>
+  <% unless object[attribute].nil? %>
+    <%= t("#{object.class.name.underscore.pluralize}.fields.#{attribute}.options.#{object.send(attribute)}") %>
+  <% end %>
+<% end %>

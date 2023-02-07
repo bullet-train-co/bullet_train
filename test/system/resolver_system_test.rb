@@ -13,7 +13,7 @@ class ResolverSystemTest < ApplicationSystemTestCase
     test "`bin/resolve` can resolve `shared/box`" do
       # TODO Figure out how to make this test pass when we're working on a checked out copy of the theme.
       # TODO Figure out how to make this test pass when using a theme other than Light that overrides the box partial.
-      assert `ENABLE_VIEW_ANNOTATION=1 bin/resolve shared/box`.include?("app/views/themes/light/_box.html.erb")
+      assert `ENABLE_VIEW_ANNOTATION=1 bin/resolve shared/box`.include?("app/views/themes/basic/_box.html.erb")
     end
   end
 end

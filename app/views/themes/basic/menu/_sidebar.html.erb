@@ -1,0 +1,13 @@
+<% expand ||= false %>
+
+<% # Ugly, but works. %>
+<% @menu_orientation = :side %>
+
+<%= render "account/shared/menu/logo" %>
+
+<nav class="flex-1 space-y-1 select-none">
+  <%= render "account/shared/menu/account", expand: expand %>
+  <div class="px-5 py-4 menu">
+    <%= render 'account/shared/menu', expand: expand %>
+  </div>
+</nav>

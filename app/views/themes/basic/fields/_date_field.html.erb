@@ -1,0 +1,30 @@
+<% yield %>
+
+<%
+stimulus_controller = 'fields--date'
+
+form ||= current_fields_form
+options ||= {}
+options[:id] ||= form.field_id(method)
+options[:class] = "form-control single-daterange w-full border-gray-300 dark:bg-gray-800 dark:border-gray-900 #{options[:class]}".strip
+options[:value] = form.object.send(method)&.strftime(t('global.formats.date'))
+options = options.merge({ data: {"#{stimulus_controller}-target": 'field' }})
+other_options ||= {}
+
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div class="date-input relative" data-controller="<%= stimulus_controller %>">
+      <%= form.text_field method, options %>
+      <% unless options[:disabled] %>
+      <button type="button" class="clear py-2 px-3 border border-transparent inline-flex items-center whitespace-nowrap absolute rounded-md top-1 md:top-0.5 right-0.5"
+        data-<%= stimulus_controller %>-target="clearButton"
+        data-action="<%= stimulus_controller %>#clearDate"
+      >
+        <i class="leading-4 text-lg ti ti-trash dark:text-blue-500"></i>
+      </button>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

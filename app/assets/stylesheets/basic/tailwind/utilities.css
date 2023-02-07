@@ -1,0 +1,38 @@
+@import "./utilities/billing";
+
+@layer utilities {
+  .text-2xs {
+    @apply uppercase;
+    font-size: 0.65rem;
+    line-height: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .space-y {
+    @apply space-y-5;
+  }
+
+  .space-x {
+    @apply space-x-3;
+  }
+
+  .gap-y {
+    @apply gap-y-5;
+  }
+
+  .gap-x {
+    @apply gap-x-4;
+  }
+
+  .bg-dark-gradient {
+    background-image: linear-gradient(to bottom, var(--primary-700) 0%, var(--primary-800) 100%);
+  }
+
+  .bg-dark-awesome-gradient {
+    background-image: linear-gradient(to bottom right, darken(#D7BBEA, 45%) 10%, #0e369a 100%);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}

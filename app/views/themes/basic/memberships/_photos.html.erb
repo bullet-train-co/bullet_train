@@ -1,0 +1,18 @@
+<% size ||= 12 %>
+<% align ||= nil %>
+
+<% valid_sizes = [7, 9, 12] %>
+<% raise "Invalid membership photo size: #{size}. Valid options are #{valid_sizes.to_sentence}." unless valid_sizes.include?(size) %>
+
+<div class="flex overflow-hidden <%= 'place-content-center' if align == :center %>">
+  <% memberships.each_with_index do |membership, index| %>
+    <%= image_tag membership_profile_photo_url(membership), class: "#{'-ml-1' if index > 0} inline-block h-#{size} w-#{size} rounded-full ring-2 ring-white dark:ring-transparent" %>
+  <% end %>
+</div>
+
+<% # we have to list out the evaluations we want possible above so purgecss includes them in production. %>
+<% if false %>
+  <div class="h-12 w-12"></div>
+  <div class="h-9 w-9"></div>
+  <div class="h-7 w-7"></div>
+<% end %>

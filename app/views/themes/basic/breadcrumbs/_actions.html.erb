@@ -1,0 +1,22 @@
+<% yield p = np %>
+
+<% p.helpers do
+  def account_controller_name_with_namespace
+    params[:controller].gsub(/^account\//, '')
+  end
+end %>
+
+<%
+# don't add controller-specific actions in this file. instead, include them right below where this partial is
+# included. see `app/views/account/teams/_breadcrumbs.html.erb` for an example.
+%>
+
+<% if p.account_controller_name_with_namespace == only_for %>
+  <% label = if action_name == 'edit'
+    ot("#{p.account_controller_name_with_namespace}.breadcrumbs.edit") || t('breadcrumbs.actions.edit')
+  elsif action_name == 'new'
+    ot("#{p.account_controller_name_with_namespace}.breadcrumbs.new") || t('breadcrumbs.actions.new')
+  end %>
+
+  <%= render 'account/shared/breadcrumb', label: label if label %>
+<% end %>

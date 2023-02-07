@@ -1,0 +1,30 @@
+<% yield %>
+
+<%
+stimulus_controller = 'fields--emoji-picker'
+
+form ||= current_fields_form
+options ||= {}
+other_options ||= {}
+value = form.object.send(method)
+%>
+
+<%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
+  <% content_for :field do %>
+    <div data-controller="<%= stimulus_controller %>">
+      <%= tag.button data: {action: "#{stimulus_controller}#toggle", target: "#{stimulus_controller}.button"}, class: "button-alternative" do %>
+        <span data-target="<%= stimulus_controller %>.display">
+          <% if value.present? %>
+            <%= value %>
+          <% else %>
+            <i class="ti ti-face-smile"></i>
+          <% end %>
+        </span>
+      &nbsp;
+      Choose an Emoji
+      <% end %>
+      <%= form.hidden_field method, data: {"#{stimulus_controller}-target": "input"} %>
+    </div>
+
+  <% end %>
+<% end %>

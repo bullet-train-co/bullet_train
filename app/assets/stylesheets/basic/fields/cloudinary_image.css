@@ -1,0 +1,58 @@
+.cloudinary-field {
+  button.upload {
+    margin: 0;
+    border-radius: 4px;
+    padding: 0;
+    border: 2px solid #dde2ec;
+    background: transparent;
+    position: relative;
+    min-height: 50px;
+    min-width: 50px;
+    &:not(.present) {
+      min-height: 100px;
+      min-width: 100px;
+    }
+    i {
+      display: block;
+      text-align: center;
+      vertical-align: middle;
+      position: absolute;
+      line-height: 50px;
+      width: 50px;
+      height: 50px;
+      margin-left: -25px;
+      margin-top: -25px;
+      top: 50%;
+      left: 50%;
+      font-size: 32px;
+      color: #dde2ec;
+    }
+    & + button.clear {
+      display: none;
+      font-size: 32px;
+      color: #dde2ec;
+      background: transparent;
+      border: 0;
+      vertical-align: -7px;
+      &:focus, &:active {
+        i {
+          color: var(--primary-500);
+        }
+      }
+    }
+    &.present {
+      i {
+        display: none;
+      }
+      & + button.clear {
+        display: inline;
+      }
+    }
+    &:focus, &:active {
+      border-color: var(--primary-500);
+      i {
+        color: var(--primary-500);
+      }
+    }
+  }
+}

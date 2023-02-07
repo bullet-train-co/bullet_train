@@ -1,0 +1,7 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+<% options ||= {} %>
+<% options[:height] ||= 200 %>
+
+<%= cloudinary_image_tag object.send(attribute), options %>

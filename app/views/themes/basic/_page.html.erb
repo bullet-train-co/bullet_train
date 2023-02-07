@@ -1,0 +1,12 @@
+<% yield p = np %>
+
+<%= render 'account/shared/title' do |cp| %>
+  <% cp.content_for :title, p.content_for(:title) %>
+  <% cp.content_for :actions, p.content_for(:actions) %>
+<% end %>
+
+<%= render 'account/shared/notices' %>
+
+<div class="space-y-8 py-4 xl:py-8 xl:px-8">
+  <%= p.yield :body %>
+</div>

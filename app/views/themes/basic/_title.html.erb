@@ -1,0 +1,18 @@
+<% yield p = np %>
+
+<div class="flex flex-row items-center">
+  <div class="flex-auto">
+    <h1 class="font-semibold text-base dark:text-white">
+      <%= p.content_for(:title) %>
+    </h1>
+  </div>
+  <div class="flex-auto text-right leading-none">
+    <% if p.content_for? :actions %>
+      <%= p.content_for :actions %>
+    <% end %>
+  </div>
+</div>
+
+<div class="mb-4">
+  <%= render "shared/line" %>
+</div>

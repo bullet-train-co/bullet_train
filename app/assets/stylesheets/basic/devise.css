@@ -1,0 +1,15 @@
+/*
+ * This takes care of the window's contents shifting when the
+ * scrollbar appears and disappears during the turn.css animation
+ */
+
+/* Chrome, Safari and Opera */
+.devise_layout::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox and Edge */
+.devise_layout {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

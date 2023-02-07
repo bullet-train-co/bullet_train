@@ -1,0 +1,8 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+
+<%= render 'shared/attributes/base', strategy: strategy, url: url do |p| %>
+  <% p.content_for :heading, t("#{object.class.name.pluralize.underscore}.fields.#{attribute}.heading") %>
+  <% p.content_for :body, yield %>
+<% end %>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%= render 'shared/layouts/head' %>
+  </head>
+  <body class="pricing-page-background">
+    <div data-turbo="false">
+      <div class="pricing-page-background-fade-container">
+        <div class="pricing-page-background-fade"></div>
+      </div>
+
+      <% if @back %>
+        <div class="m-5 -mb-5">
+          <%= link_to @back, class: 'button-secondary hover:no-underline group' do %>
+            <i class="ti ti-angle-left text-lg group-hover:no-underline"></i>
+            <span class="text-base ml-3 group-hover:underline">Back</span>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="m-5 sm:m-10 lg:m-20">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>

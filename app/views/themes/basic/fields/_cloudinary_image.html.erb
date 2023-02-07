@@ -1,0 +1,61 @@
+<% yield %>
+
+<% if cloudinary_enabled? %>
+
+<%
+stimulus_controller = 'fields--cloudinary-image'
+
+form ||= current_fields_form
+options ||= {}
+options[:id] ||= form.field_id(method)
+options[:width] ||= 100
+options[:height] ||= 100
+options[:cloud_name] ||= Cloudinary.config.cloud_name
+options[:api_key] ||= Cloudinary.config.api_key
+options[:google_search_key] ||= ENV['CLOUDINARY_GOOGLE_API_KEY']
+other_options ||= {}
+%>
+
+<%
+cloudinary_id = if_present(form.object.send(method))
+preview_image_options = {width: options[:width]&.*(2), height: options[:height]&.*(2), crop: :fill}
+cloudinary_url = cl_image_path(cloudinary_id, preview_image_options) if cloudinary_id
+cloudinary_url_format = cl_image_path('CLOUDINARY_ID', preview_image_options)
+%>
+
+<%
+thumbnail_shown_class = 'present'
+wrapper_options = { data: { 
+  controller: stimulus_controller,
+  "#{stimulus_controller}-signatures-url-value": new_account_cloudinary_upload_signature_path,
+  "#{stimulus_controller}-height-value": options[:height],
+  "#{stimulus_controller}-width-value": options[:width],
+  "#{stimulus_controller}-cloud-name-value": options[:cloud_name],
+  "#{stimulus_controller}-api-key-value": options[:api_key],
+  "#{stimulus_controller}-upload-preset-value": options[:upload_preset],
+  "#{stimulus_controller}-url-format-value": cloudinary_url_format,
+  "#{stimulus_controller}-thumbnail-shown-class": thumbnail_shown_class,
+}}
+wrapper_options[:data]["#{stimulus_controller}-google-api-key-value"] = options[:google_search_key] unless options[:google_search_key].blank?
+%>
+
+
+<%= render 'shared/fields/field', form: form, method: method, options: options, other_options: other_options do %>
+  <% content_for :field do %>
+    <%= content_tag :div, class: 'cloudinary-field', data: wrapper_options[:data] do %>
+      <%= form.hidden_field method, data: { "#{stimulus_controller}-target": 'hiddenField' } %>
+      <button type="button" class="upload <%= thumbnail_shown_class if cloudinary_url %>"
+        data-<%= stimulus_controller %>-target="uploadButton"
+        data-action="<%= stimulus_controller %>#pickImageAndUpload"
+      >
+        <%= image_tag cloudinary_url, width: options[:width], height: options[:height], data: { "#{stimulus_controller}-target": 'thumbnail' } if cloudinary_url %>
+        <i class="ti ti-cloud-up"></i>
+      </button>
+      <button type="button" class="clear" data-action="<%= stimulus_controller %>#clearImage">
+        <i class="ti ti-trash"></i>
+      </button>
+    <% end %>
+  <% end %>
+<% end %>
+
+<% end %>

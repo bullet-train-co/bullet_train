@@ -1,0 +1,22 @@
+<% expand ||= false %>
+<% hide_shadow ||= false %>
+
+<div class="relative <%= "group" unless expand %> <%= "shadow" unless hide_shadow %>" id="user">
+  <%= render "account/shared/menu/user" %>
+  <div class="invisible group-hover:visible">
+    <div class="absolute top-0 left-0 right-0 z-50">
+      <%= render "account/shared/menu/user" %>
+    </div>
+    <div class="absolute transition duration-150 scale-95 group-hover:scale-100 translate-y-1 group-hover:translate-y-0 bg-primary-700 -top-0 left-0 right-0 -m-2 p-2 rounded-lg z-40 shadow">
+      <div class="invisible">
+        <%= render "account/shared/menu/user", expand: expand %>
+      </div>
+      <div class="p-3 <% @menu_orientation == :top ? "" : "pt-0" %>">
+        <% @last_menu_orientation = @menu_orientation %>
+        <% @menu_orientation = :side %>
+        <%= render "account/shared/menu/user_items" %>
+        <% @menu_orientation = @last_menu_orientation%>
+      </div>
+    </div>
+  </div>
+</div>

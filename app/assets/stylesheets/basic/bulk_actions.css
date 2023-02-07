@@ -1,0 +1,44 @@
+@layer components {
+  .bulk-action-unavailable {
+    @apply hidden !important;
+  }
+
+  .bulk-actions-selectable-item-checkbox-wrapper {
+    @apply hidden;
+  }
+
+  .bulk-actions .bulk-actions-checkbox-cell {
+    @apply w-4 pr-0;
+  }
+
+  .bulk-actions:not(.selectable-available) {
+    .bulk-actions-selectable-toggle {
+      @apply hidden;
+    }
+  }
+
+  .bulk-actions:not(.selectable) {
+    td:nth-child(2),th:nth-child(2) {
+      @apply pl-5;
+    }
+
+    .box-table td:nth-child(2),th:nth-child(2) {
+      @apply pl-8;
+    }
+  }
+
+  .bulk-actions.selectable-available:not(.selectable) {
+    .bulk-action {
+      @apply hidden;
+    }
+    .bulk-actions-checkbox-cell {
+      @apply hidden;
+    }
+  }
+
+  .bulk-actions.selectable {
+    .bulk-action-single {
+      @apply hidden;
+    }
+  }
+}

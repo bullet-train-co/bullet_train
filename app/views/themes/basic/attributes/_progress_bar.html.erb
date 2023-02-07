@@ -1,0 +1,21 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% url ||= nil %>
+<% hide_completed ||= false %>
+
+<% if object.send(total).present? %>
+  <% completion_percent = (object.send(attribute).to_f / object.send(total).to_f) * 100.0 %>
+
+  <% unless completion_percent == 100 && hide_completed %>
+    <%= render 'shared/attributes/attribute', object: object, attribute: "#{attribute}_over_#{total}".to_sym, strategy: strategy, url: url do %>
+      <% if completion_percent == 100 %>
+        <i class="fal fa-check ti ti-check text-green-500"></i>
+      <% else %>
+        <div class="h-4 bg-gray-100 shadow-inner rounded w-full">
+          <div class="h-4 <%= 'animate-pulse' unless completion_percent == 100 %> bg-primary-500 rounded" style="width: <%= completion_percent %>%"></div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>
+

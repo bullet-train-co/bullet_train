@@ -1,0 +1,35 @@
+@import "./tailwind/components";
+@import "./tailwind/utilities";
+@import "./tailwind/dark-mode";
+@import "./tailwind/colors";
+
+@import './bulk_actions';
+@import "./electron";
+@import './devise';
+@import './fields';
+@import './turn';
+
+/* TODO We should be able to do this in Tailwind CSS. */
+.hover-indent-child {
+  .indent-child {
+    transition: transform 0.2s ease;
+  }
+  &:hover {
+    .indent-child {
+      transform:translateX(8px);
+    }
+  }
+}
+
+form.button_to {
+  @apply inline-block;
+  input[type=submit] {
+    @apply bg-transparent;
+    &.button {
+      @apply bg-primary-500 hover:bg-primary-600;
+    }
+  }
+}
+
+/* hide the first breadcrumb chevron */
+ol.breadcrumb li:first-child svg { display: none; }

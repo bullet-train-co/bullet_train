@@ -1,0 +1,14 @@
+<%= render "account/shared/menu/logo" %>
+
+<% # Ugly, but works. %>
+<% @menu_orientation = :top %>
+<% @not_first = false %>
+
+<nav class="w-full flex flex-row select-none items-center">
+  <div class="grow pr-5 menu flex flex-row items-center space-x-8">
+    <%= render 'account/shared/menu' %>
+  </div>
+  <div>
+    <%= render "account/shared/menu/account", hide_shadow: true %>
+  <div>
+</nav>

@@ -1,0 +1,15 @@
+<% yield %>
+
+<%
+stimulus_controller = 'fields--phone'
+
+form ||= current_fields_form
+options ||= {}
+options = options.merge({type: 'tel', data: {method: method, "#{stimulus_controller}-target": 'field' }})
+other_options ||= {}
+
+%>
+
+<div data-controller="<%= stimulus_controller %>">
+  <%= render 'shared/fields/field', form: form, method: method, helper: :text_field, options: options, other_options: other_options %>
+</div>

@@ -1,0 +1,19 @@
+<% object ||= current_attributes_object %>
+<% strategy ||= current_attributes_strategy || :none %>
+<% link_source ||= nil %>
+<% disable_links ||= false %>
+<% link_options ||= {} %>
+
+<% if object.send(attribute).any? %>
+  <%= render 'shared/attributes/attribute', object: object, attribute: attribute, strategy: strategy do %>
+    <%= object.send(attribute).map do |child_object| %>
+      <% capture do %>
+        <% if disable_links %>
+          <%= child_object.label_string %>
+        <% else %>
+          <%= link_to child_object.label_string, [:account, link_source ? child_object.send(link_source) : child_object], link_options %>
+        <% end %>
+      <% end %>
+    <% end.map(&:strip).to_sentence.html_safe %>
+  <% end %>
+<% end %>
