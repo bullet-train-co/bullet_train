@@ -1,15 +1,19 @@
-<% color ||= 'yellow' %>
+<% color ||= "yellow" %>
 <% tighter ||= false %>
 
-<div class="rounded-md bg-<%= color %>-400 border border-<%= color %>-500 py-4 px-5 mb-3">
-  <h3 class="text-sm text-<%= color %>-800 font-light">
+<% 
+case color
+when "yellow"
+  div_classes = "bg-yellow-200 border-yellow-400"
+  header_classes = "text-yellow-700"
+when "red"
+  div_classes = "bg-red-300 border-red-400"
+  header_classes = "text-red-700"
+end
+%>
+
+<div class="rounded-md border <%= div_classes %> py-4 px-5 mb-3">
+  <h3 class="text-sm  <%= header_classes %> font-light">
     <%= yield %>
   </h3>
 </div>
-
-<% # we have to list out the evaluations we want possible above so purgecss includes them in production. %>
-<% if false %>
-  <div class="bg-yellow-400 border-yellow-500 dark:border-yellow-200 text-yellow-800 dark:text-yellow-200"></div>
-  <div class="bg-red-400 border-red-500 dark:border-red-200 text-red-800 dark:text-red-200"></div>
-  <div class="bg-blue-400 border-blue-500 dark:border-blue-200 text-blue-800 dark:text-blue-200"></div>
-<% end %>
