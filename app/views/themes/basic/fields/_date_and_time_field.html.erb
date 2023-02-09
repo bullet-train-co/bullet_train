@@ -4,7 +4,7 @@
 form ||= current_fields_form
 options ||= {}
 options[:id] ||= form.field_id(method)
-options[:class] = "form-control single-daterange w-full border-gray-300 dark:bg-gray-800 dark:border-gray-900 #{options[:class]}".strip
+options[:class] = "form-control single-daterange w-full border-slate-300 dark:bg-slate-800 dark:border-slate-900 #{options[:class]}".strip
 options[:value] = form.object.send(method)&.in_time_zone(current_team.time_zone)&.strftime(t('global.formats.date_and_time'))
 options = options.merge({ data: {'fields--date-target': 'field' }})
 other_options ||= {}
@@ -23,7 +23,7 @@ other_options ||= {}
       </button>
       <% end %>
       <% if current_user.time_zone != current_user.current_team.time_zone %>
-        <div class="mt-1.5 text-xs text-gray-500">
+        <div class="mt-1.5 text-xs text-slate-500">
           <%= form.hidden_field "#{method}_time_zone".to_sym, value: current_user.current_team.time_zone, data: {'fields--date-target': 'timeZoneField'} %>
           <div data-fields--date-target="currentTimeZoneWrapper">
             <%= link_to current_user.current_team.time_zone, '#', class: 'button-secondary p-0', data: {action: 'fields--date#showTimeZoneButtons'} %>

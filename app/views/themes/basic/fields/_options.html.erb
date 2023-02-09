@@ -32,7 +32,7 @@ end
     <div class="flex">
       <%= tag.div class: [
           "hidden",
-          "inline-block dark:border-gray-600",
+          "inline-block dark:border-slate-600",
           "border-b pb-4 mb-4": show_select_all_top && !show_select_all_bottom,
           "border-t pt-4 mt-4": !show_select_all_top && show_select_all_bottom
       ], data: {
@@ -43,7 +43,7 @@ end
             <%= check_box_tag "#{html_options[:id]}-select_all", 'select-all', false, data: { 
               "select-all-target": 'toggleCheckbox',
               'action': "select-all#selectAllOrNone"
-            }, class: "focus:ring-blue h-4 w-4 text-blue border-gray-300 rounded" %>
+            }, class: "focus:ring-blue h-4 w-4 text-blue border-slate-300 rounded" %>
           </div>
           <div class="ml-2.5 text-sm pr-4">
             <%# TODO: should be localized %>
@@ -82,17 +82,17 @@ end
                 <%= form.check_box method, {
                   multiple: multiple, checked: checked_value,
                   data: option_field_options[:data],
-                  class: "focus:ring-blue h-4 w-4 text-blue border-gray-300 rounded"
+                  class: "focus:ring-blue h-4 w-4 text-blue border-slate-300 rounded"
                 }, value, "" %>
               <% else %>
-                <%= form.radio_button method, value, {class: "focus:ring-blue h-4 w-4 text-blue border-gray-300", data: option_field_options[:data]} %>
+                <%= form.radio_button method, value, {class: "focus:ring-blue h-4 w-4 text-blue border-slate-300", data: option_field_options[:data]} %>
               <% end %>
 
             </div>
             <div class="ml-2.5 text-sm">
               <div class="select-none"><%= label %></div>
               <% if labels.options_help&.dig(value)&.present? %>
-                <p class="mt-0.5 text-xs text-gray-500">
+                <p class="mt-0.5 text-xs text-slate-500">
                   <%= labels.options_help.dig(value) %>
                 </p>
               <% end %>

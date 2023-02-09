@@ -22,7 +22,7 @@
       <div class="invisible absolute group-hover:visible transition duration-200 scale-90 group-hover:scale-100 z-40
         <%= @menu_orientation == :top ? "group-hover:translate-x-3 top-100 left-0 -ml-10 -mt-2 pt-4" : "group-hover:translate-x-3 top-0 left-full -mt-3 -ml-5 pl-4" %>
       ">
-        <div class="bg-primary-700 rounded-lg py-3 px-4 w-56 shadow">
+        <div class="bg-primary-700 dark:bg-slate-700 rounded-lg py-3 px-4 w-56 shadow">
           <% @last_menu_orientation = @menu_orientation %>
           <% @menu_orientation = :side %>
           <%= yield %>

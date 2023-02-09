@@ -10,8 +10,8 @@
       <% attribute_short = attribute[0..4] %>
       <div class="flex flex-row">
         <details class="group peer order-2">
-          <% # TODO We removed `dark:text-darkAccent-200` here and replaced it with `dark:text-gray-200`. Figure out what it should actually be. %>
-          <summary class="list-none text-xs text-primary-500 dark:text-gray-200 hover:text-primary-600 hover:underline group-open:hidden cursor-pointer">Show</summary>
+          <% # TODO We removed `dark:text-darkAccent-200` here and replaced it with `dark:text-slate-200`. Figure out what it should actually be. %>
+          <summary class="list-none text-xs text-primary-500 dark:text-slate-200 hover:text-primary-600 hover:underline group-open:hidden cursor-pointer">Show</summary>
           <code class="text-pink-600 font-light"><%= attribute %></code>
         </details>
         <code class="order-1 mr-2 peer-open:hidden text-pink-600 font-light"><%= attribute_short %><% if attribute_short.length < attribute.length %>&hellip;<% end %></code>

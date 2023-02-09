@@ -8,7 +8,7 @@
   .daterangepicker {
     .hourselect, .minuteselect, .ampmselect {
       @apply rounded-md shadow-sm focus:ring-primary-500 font-light;
-      @apply border-gray-300 focus:border-primary-500 bg-white !important;
+      @apply border-slate-300 focus:border-primary-500 bg-white !important;
       text-align-last: center;
     }
 

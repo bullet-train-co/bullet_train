@@ -4,10 +4,10 @@
   <img src="<%= membership_profile_photo_url(message.membership) %>" title="<%= message.membership.name %>" alt="<%= message.membership.name %>" class="w-10 h-10 rounded-full <%= current_user_message ? 'order-2' : 'order-1' %>">
 <% end %>
 
-<div class="flex py-3 px-2  text-gray-700 <%= message.reply? ? 'border w-full bg-gray-50 rounded-md' : 'border-b' %> <%= 'opacity-30' if new_message %>">
+<div class="flex py-3 px-2  text-slate-700 <%= message.reply? ? 'border w-full bg-slate-50 rounded-md' : 'border-b' %> <%= 'opacity-30' if new_message %>">
   <div class="mr-3 min-w-max"><%= avatar %></div>
   <div class="flex flex-col w-full">
-    <div class=""><span class="uppercase font-bold text-gray-500"><%= message.user.name %></span><span class="font-extralight text-xs text-gray-400"> &bull; <%= time_ago_in_words message.created_at %> ago</span></div>
+    <div class=""><span class="uppercase font-bold text-slate-500"><%= message.user.name %></span><span class="font-extralight text-xs text-slate-400"> &bull; <%= time_ago_in_words message.created_at %> ago</span></div>
     <div class="py-2"><%= trix_sanitize message.body %></div>
     <% if message.replies.any? %>
       <div class="space-y-2 mt-2 mb-2">
@@ -18,7 +18,7 @@
     <% end %>
     <% unless message.reply? %>
       <%= turbo_frame_tag "reply_#{message.id}" do %>
-        <%= link_to "Reply", [:reply, :account, message], class: "font-light text-sm text-gray-400 hover:text-gray-500 pt-2" %>
+        <%= link_to "Reply", [:reply, :account, message], class: "font-light text-sm text-slate-400 hover:text-slate-500 pt-2" %>
       <% end %>
     <% end %>
   </div>

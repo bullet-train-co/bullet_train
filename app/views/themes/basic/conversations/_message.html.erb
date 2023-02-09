@@ -74,14 +74,14 @@
           data-action="<%= 'mouseenter->reply#showReplyButton click->reply#showReplyButton' unless placeholder_message || show_as_thread %>" data-show-class="<%= current_user_message ? 'mr-10' : 'ml-10' %>"
           >
           <% if placeholder_message %>
-            <div class="cursor-pointer" data-thread-url="<%= url_for([:thread, :account, message.thread_origin_message || message]) %>" data-action="click->reply#reply"><span class="px-2 py-1 text-xs text-gray-300 rounded-lg inline-block <%= rounding_modifier %> border-primary-300 border break-words sm:max-w-sm max-w-tiny"><%= Nokogiri::HTML.fragment(trix_sanitize(message.body)).text.truncate(80) %></span></div>
+            <div class="cursor-pointer" data-thread-url="<%= url_for([:thread, :account, message.thread_origin_message || message]) %>" data-action="click->reply#reply"><span class="px-2 py-1 text-xs text-slate-300 rounded-lg inline-block <%= rounding_modifier %> border-primary-300 border break-words sm:max-w-sm max-w-tiny"><%= Nokogiri::HTML.fragment(trix_sanitize(message.body)).text.truncate(80) %></span></div>
           <% else %>
-            <div><span class="px-4 py-2 rounded-lg inline-block <%= rounding_modifier %> <%= current_user_message ? ' bg-primary-600 text-white' : ' bg-gray-300 text-gray-600' %> "><%= trix_sanitize(message.body) %></span></div>
+            <div><span class="px-4 py-2 rounded-lg inline-block <%= rounding_modifier %> <%= current_user_message ? ' bg-primary-600 text-white' : ' bg-slate-300 text-slate-600' %> "><%= trix_sanitize(message.body) %></span></div>
           <% end %>
         </div>
         <%= avatar %>
         <% unless placeholder_message || show_as_thread %>
-          <div class="order-2 absolute text-gray-400 bottom-1 hover:text-gray-500 <%= current_user_message ? 'right-10' : 'left-10' %> z-0">
+          <div class="order-2 absolute text-slate-400 bottom-1 hover:text-slate-500 <%= current_user_message ? 'right-10' : 'left-10' %> z-0">
             <button
               data-action="click->reply#reply"
               data-thread-url="<%= url_for([:thread, :account, message.thread_origin_message || message]) %>"
@@ -110,7 +110,7 @@
       <% end %>
 
       <div class="flex flex-grow order-1 <%= current_user_message ? 'justify-end items-end pr-8' : 'justify-start items-start pl-8' %> <%= 'mb-3' unless next_message_in_series %>">
-        <div class="<%= show_as_thread ? 'text-gray-400' : 'text-gray-300' %> text-sm">
+        <div class="<%= show_as_thread ? 'text-slate-400' : 'text-slate-300' %> text-sm">
           <strong><%= message.author.name %></strong>
           <%= timestamp %>
         </div>
@@ -120,14 +120,14 @@
   <% if message.replies.any? && false %>
     <div class="mb-4">
       <% message.replies.each do |reply| %>
-        <div class="flex text-xs font-extralight text-gray-300 ml-12">
+        <div class="flex text-xs font-extralight text-slate-300 ml-12">
           <div class="<%= 'w-full' if current_user_message %>"></div>
-          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 682" class="w-5 h-5 stroke-current mt-4 text-gray-50 fill-current">
+          <svg version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 682" class="w-5 h-5 stroke-current mt-4 text-slate-50 fill-current">
             <path d="M0 57.7c.1 145.1 4.1 224 14.5 281.1 19.4 106.3 65.2 156.4 166.3 181.7 48.7 12.1 111.4 18.8 211.7 22.5 23.8.9 196.6 2.8 268.2 3H683l.2 67.8.3 67.8 170.3-102.1L1024 477.3l-170.2-102-170.3-102-.3 67.8-.2 67.9h-75.8c-184.7 0-266.9-4.8-327.2-19-34.2-8.1-62.8-21.1-81.2-37-36.1-31.3-52.3-76.8-58.8-165.5-2-28-3-69.2-3-127.8V0H0v57.7z"/>
           </svg>
           <div class="flex flex-col mr-10 min-w-max">
             <div class="pt-0 mr-2 ml-4 text-xxs"><%= reply.membership.label_string %> reply: </div>
-            <div class="bg-gray-100 rounded py-2 px-4 mt-0 text-gray-400 max-w-md"><%= reply.body.html_safe %></div>
+            <div class="bg-slate-100 rounded py-2 px-4 mt-0 text-slate-400 max-w-md"><%= reply.body.html_safe %></div>
           </div>
         </div>
       <% end %>

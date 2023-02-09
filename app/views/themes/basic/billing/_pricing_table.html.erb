@@ -9,7 +9,7 @@
         <%= link_to request.path + (i > 0 ? "?duration=#{duration}" : ""), class: "#{duration == current_duration ? "button-alternative" : "button"} rounded-full text-base" do %>
           <%= t("billing/prices.intervals.#{duration}.description") %>
           <% if i > 0 %>
-            <small class="ml-2 uppercase <%= duration == current_duration ? "text-gray-400" : "text-gray-300" %>">
+            <small class="ml-2 uppercase <%= duration == current_duration ? "text-slate-400" : "text-slate-300" %>">
               <%= number_to_percentage(calculate_discount(prices_by_duration[duration].first, prices_by_duration[prices_by_duration.keys.first].first), precision: 0) %> Discount
             </small>
           <% end %>
@@ -20,7 +20,7 @@
 
   <div class="lg:flex flex-row justify-center">
     <% prices_by_duration[current_duration].each_with_index do |price, i| %>
-      <div class="bg-gray-50 flex-1 lg:max-w-md border ml-0 mr-0 mt-0 mb-5 <%= "lg:-ml-px lg:-mr-px lg:-mt-5 lg:mb-0 pricing-table-shadow" if price.highlight? %> <%= price.highlight? ? "z-10" : "z-0" %>">
+      <div class="bg-slate-50 flex-1 lg:max-w-md border ml-0 mr-0 mt-0 mb-5 <%= "lg:-ml-px lg:-mr-px lg:-mt-5 lg:mb-0 pricing-table-shadow" if price.highlight? %> <%= price.highlight? ? "z-10" : "z-0" %>">
         <div class="bg-white <%= "border-t-4 border-primary-500" if price.highlight? %>">
           <div class="text-center py-10 px-5 border-b">
             <%= image_tag image_path("products/#{price.product.image}"), width: 100, height: 100, class: "inline mb-7" %>
@@ -31,7 +31,7 @@
         </div>
         <div class="bg-white text-center py-10 px-5 border-b">
           <div class="text-6xl font-semibold text-black <%= "text-primary-500" if price.highlight? %>"><%= smaller_currency_symbol(number_to_currency(price.currency_amount, precision: 0, locale: :en)) %></div>
-          <div class="mt-3 pt-2 inline-block border-t border-gray-300 uppercase text-lg opacity-40 tracking-wider">
+          <div class="mt-3 pt-2 inline-block border-t border-slate-300 uppercase text-lg opacity-40 tracking-wider">
             <% if price.quantity %>
               <%= t("billing/prices.intervals.#{price.interval}.description") %>
               <%= t("billing/prices.models.#{price.quantity}.per") %>
@@ -45,11 +45,11 @@
         </div>
         <div class="my-12 mx-12">
           <h3 class="text-xs uppercase font-semibold tracking-widest">Description</h3>
-          <p class="text-base mt-3 text-gray-500"><%= price.product.description %></p>
+          <p class="text-base mt-3 text-slate-500"><%= price.product.description %></p>
 
           <h3 class="mt-8 text-xs uppercase font-semibold tracking-widest">Details</h3>
           <% if price.product.features %>
-            <ul class="text-base mt-5 text-gray-500 space-y-3">
+            <ul class="text-base mt-5 text-slate-500 space-y-3">
               <% price.product.features.each do |feature| %>
                 <li class="flex items-start">
                   <div class="flex-shrink-0 text-green-500">

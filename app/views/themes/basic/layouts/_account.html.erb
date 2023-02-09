@@ -3,33 +3,33 @@
   <head>
     <%= render 'shared/layouts/head' %>
   </head>
-  <body class="min-h-screen bg-gradient-to-br from-cyan-500 to-blue-500 dark:from-cyan-900 dark:to-blue-900 text-gray-700 text-sm font-normal dark:text-gray-300">
+  <body class="min-h-screen bg-gradient-to-br from-primary-200 to-primary-400 dark:from-primary-900 dark:to-slate-800 text-slate-700 text-sm font-normal dark:text-slate-300">
     <div class="p-4 bg-primary-900 electron-draggable electron-title-bar hidden electron-mobile-only"></div>
     <div class="md:p-5 main-container-padding">
-      <div class="h-screen md:h-auto md:rounded-lg flex shadow main-container"
+      <div class="md:h-auto md:rounded-lg flex shadow main-container"
         data-controller="mobile-menu"
         data-mobile-menu-hidden-class="hidden"
       >
         <%= render "account/shared/menu/mobile" %>
 
         <% if BulletTrain::Themes::Light.navigation == :left %>
-          <div class="hidden lg:flex lg:flex-shrink-0 bg-gradient-to-b from-primary-700 to-primary-800 dark:from-gray-800 dark:to-gray-800 md:rounded-l-lg">
+          <div class="hidden lg:flex lg:flex-shrink-0 bg-gradient-to-b from-primary-700 to-primary-800 dark:from-slate-800 dark:to-slate-800 md:rounded-l-lg">
             <div class="w-64">
               <%= render "account/shared/menu/sidebar" %>
             </div>
           </div>
         <% end %>
 
-        <div class="flex flex-col w-0 flex-1 bg-gray-100 dark:bg-gray-800 dark:border-gray-500 md:rounded-lg <%= BulletTrain::Themes::Light.navigation == :left ? "lg:border-l lg:rounded-l-none" : "" %>">
+        <div class="flex flex-col w-0 flex-1 bg-slate-100 dark:bg-slate-800 dark:border-slate-500 md:rounded-lg <%= BulletTrain::Themes::Light.navigation == :left ? "lg:border-l lg:rounded-l-none" : "" %>">
 
           <% if BulletTrain::Themes::Light.navigation == :top %>
-            <div class="hidden lg:flex bg-gradient-to-b from-primary-700 to-primary-800 dark:from-gray-800 dark:to-gray-800 md:rounded-t-lg">
+            <div class="hidden lg:flex bg-gradient-to-b from-primary-700 to-primary-800 dark:from-slate-700/50 dark:to-slate-800 dark:shadow md:rounded-t-lg">
               <%= render "account/shared/menu/top" %>
             </div>
           <% end %>
 
           <main class="flex-1 relative z-0 focus:outline-none" tabindex="0">
-            <div class="flex flex-row items-center shadow-sm electron-draggable">
+            <div class="flex flex-row items-center shadow-sm dark:shadow electron-draggable">
               <%= render "account/shared/menu/open" %>
 
               <nav class="flex px-1 lg:px-4 py-2 select-none" aria-label="Breadcrumb">

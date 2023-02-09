@@ -23,8 +23,8 @@
 
   /*   
   // TODO Get rid of all of these in theme component partials.
-  --dark-primary-*: var(--theme-gray-*);
-  --dark-secondary-*: var(--theme-gray-*);
+  --dark-primary-*: var(--theme-slate-*);
+  --dark-secondary-*: var(--theme-slate-*);
   --dark-accent-*: #b3bcde;
   --light-gradient-from: #D7BBEA;
   --light-gradient-to: #65A8F1;

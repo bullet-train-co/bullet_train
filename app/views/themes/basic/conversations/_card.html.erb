@@ -2,17 +2,17 @@
 
 <div class="<%= 'border-l-primary-500 border-l-4 border-primary-600' if subscription.unread? %>">
 
-  <%= link_to [:account, current_user, :conversations, :subscriptions, conversation_id: subscription.conversation.id], class: "#{current_conversation ? 'bg-gray-100 border-l ' : 'bg-white'} h-28 p-1 flex border-b-2 cursor-pointer hover:no-underline  hover:bg-gray-50 relative items-center" do %>
+  <%= link_to [:account, current_user, :conversations, :subscriptions, conversation_id: subscription.conversation.id], class: "#{current_conversation ? 'bg-slate-100 border-l ' : 'bg-white'} h-28 p-1 flex border-b-2 cursor-pointer hover:no-underline  hover:bg-slate-50 relative items-center" do %>
     <div class="md:w-1/4 w-1/5 lg:inline-block md:hidden flex-shrink-0">
       <img src="<%= membership_profile_photo_url(conversation.last_message&.membership || current_membership)  %>" title="<%= current_membership.name %>" alt="<%= current_membership.name %>" class="md:w-14 md:h-14 w-12 h-12 rounded-full mx-auto border-1 border-white border-2 flex-none">
     </div>
     <div class="w-4/5 md:w-full lg:w-4/5 pl-4 pr-1 flex-initial truncate">
-      <p class="text-xs text-gray-300 text-right hover:no-underline"><%= "#{time_ago_in_words conversation.last_message.created_at} ago" unless conversation.last_message.nil? %></p>
-      <h2 class="<%= subscription.unread? ? 'font-bold text-gray-800' : 'font-semibold text-gray-600' %> "><%= conversation.subject&.label_string %></h2>
-      <div class="text-gray-300">
+      <p class="text-xs text-slate-300 text-right hover:no-underline"><%= "#{time_ago_in_words conversation.last_message.created_at} ago" unless conversation.last_message.nil? %></p>
+      <h2 class="<%= subscription.unread? ? 'font-bold text-slate-800' : 'font-semibold text-slate-600' %> "><%= conversation.subject&.label_string %></h2>
+      <div class="text-slate-300">
         <%= conversation.last_message&.user&.label_string %>
       </div>
-      <div class="h-8 text-gray-400 text-sm pt-1 hover:no-underline truncate">
+      <div class="h-8 text-slate-400 text-sm pt-1 hover:no-underline truncate">
         <%= Nokogiri::HTML.fragment(conversation.last_message.body).text unless conversation.last_message.nil? %>
       </div>
     </div>

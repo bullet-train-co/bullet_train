@@ -14,12 +14,12 @@ other_options[:help] = [other_options[:help], labels.help].compact.join(" ")
 errors = [method, method.to_s.gsub(/_id$/, '').to_sym].uniq.map { |attribute| form.object.errors.full_messages_for(attribute) }.flatten
 has_errors = errors.any? || content_for(:error).present? || other_options[:error].present?
 
-options[:class] = "#{options[:class]} block w-full rounded-md shadow-sm font-light text-base md:text-sm"
+options[:class] = "#{options[:class]} block w-full rounded-md shadow-sm font-light text-sm dark:bg-slate-800 dark:text-slate-300"
 
 options[:class] += if has_errors
-  " pr-10 border-red-500 text-red-900 placeholder-red-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:bg-gray-800 dark:text-gray-300"
+  " pr-10 border-red-500 text-red-900 placeholder-red-500 focus:outline-none focus:ring-red-500 focus:border-red-500 dark:text-slate-300"
 else
-  " focus:ring-primary-500 focus:border-primary-500 border-gray-300 dark:bg-gray-800 dark:border-gray-900 dark:text-gray-300"
+  " focus:ring-primary-500 focus:border-primary-500 border-slate-300 dark:border-slate-900"
 end
 
 %>
@@ -65,7 +65,7 @@ end
 
   <% # any help text. %>
   <% if content_for?(:help) || other_options[:help].present? || content_for?(:after_help) %>
-    <p class="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
+    <p class="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
       <%= yield :help %>
       <% flush_content_for :help %>
       <%= other_options[:help]&.html_safe %>

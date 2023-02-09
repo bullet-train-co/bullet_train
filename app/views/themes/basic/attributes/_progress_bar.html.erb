@@ -11,7 +11,7 @@
       <% if completion_percent == 100 %>
         <i class="fal fa-check ti ti-check text-green-500"></i>
       <% else %>
-        <div class="h-4 bg-gray-100 shadow-inner rounded w-full">
+        <div class="h-4 bg-slate-100 shadow-inner rounded w-full">
           <div class="h-4 <%= 'animate-pulse' unless completion_percent == 100 %> bg-primary-500 rounded" style="width: <%= completion_percent %>%"></div>
         </div>
       <% end %>

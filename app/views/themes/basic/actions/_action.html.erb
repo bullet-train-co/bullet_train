@@ -35,22 +35,22 @@
 
       <% if action.completed? %>
         <% if action.is_a?(Actions::HasProgress) %>
-          <div class="uppercase text-xs text-gray-400">
+          <div class="uppercase text-xs text-slate-400">
             Processed <%= action.performed_count %> of <%= action.target_count %> <%= display_date_and_time(action.completed_at) %>
           </div>
         <% else %>
-          <div class="uppercase text-xs text-gray-400">
+          <div class="uppercase text-xs text-slate-400">
             Processed <%= display_date_and_time(action.completed_at) %>
           </div>
         <% end %>
 
       <% elsif action.is_a?(Actions::RequiresApproval) && !action.approved? %>
-        <div class="uppercase text-xs text-gray-400">
+        <div class="uppercase text-xs text-slate-400">
           Awaiting approval
         </div>
 
       <% elsif action.is_a?(Actions::SupportsScheduling) && action.scheduled_for && !action.started? %>
-        <div class="uppercase text-xs text-gray-400">
+        <div class="uppercase text-xs text-slate-400">
           Scheduled for <%= display_date_and_time(action.scheduled_for) %>
         </div>
 
@@ -59,17 +59,17 @@
           <%= render "shared/attributes/progress_bar", object: action, attribute: :performed_count, total: :target_count %>
         </div>
 
-        <div class="mt-2 uppercase text-xs text-gray-400">
+        <div class="mt-2 uppercase text-xs text-slate-400">
           Processing <%= action.performed_count %> of <%= action.target_count %>
         </div>
 
       <% elsif action.is_a?(Actions::HasProgress) %>
-        <div class="uppercase text-xs text-gray-400">
+        <div class="uppercase text-xs text-slate-400">
           Preparing to process <%= action.performed_count %> of <%= action.target_count %>
         </div>
 
       <% else %>
-        <div class="uppercase text-xs text-gray-400">
+        <div class="uppercase text-xs text-slate-400">
           Preparing to process
         </div>
 

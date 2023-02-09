@@ -4,27 +4,27 @@
      * General
      **/
     .button {
-      @apply ring-offset-gray-700;
+      @apply ring-offset-slate-700;
     }
 
     .table {
       th {
-        @apply text-gray-400;
+        @apply text-slate-400;
       }
 
       tbody {
-        @apply border-gray-500;
+        @apply border-slate-500;
 
         tr {
           border-top: 1px solid theme('colors.slate.500');
         }
 
         td {
-          @apply text-gray-400;
+          @apply text-slate-400;
 
           a,
           input[type="submit"] {
-            @apply text-gray-200;
+            @apply text-slate-200;
           }
         }
       }
@@ -34,14 +34,14 @@
      * Form components
      **/
     .button-secondary {
-      @apply text-gray-200;
+      @apply text-slate-200;
     }
 
     .button-alternative {
-      @apply bg-gray-400 border-gray-400 text-white;
+      @apply bg-slate-400 border-slate-400 text-white;
 
       &:hover {
-        @apply bg-gray-300 border-gray-200 text-white;
+        @apply bg-slate-300 border-slate-200 text-white;
       }
     }
 
@@ -50,10 +50,10 @@
      **/
     /* Color picker */
     .pcr-app {
-      @apply bg-gray-800 border border-solid border-gray-900;
+      @apply bg-slate-800 border border-solid border-slate-900;
 
       .pcr-interaction .pcr-result {
-        @apply text-gray-300 border border-solid border-gray-900 bg-gray-800;
+        @apply text-slate-300 border border-solid border-slate-900 bg-slate-800;
 
         &:focus {
           box-shadow: 0 0 0 1px theme('colors.primary.500'), 0 0 0 3px theme('colors.primary.500');
@@ -63,7 +63,7 @@
 
     /* Date range picker */
     .daterangepicker {
-      @apply bg-gray-800 border-gray-900;
+      @apply bg-slate-800 border-slate-900;
 
       &::before {
         border-bottom-color: theme('colors.slate.900');
@@ -74,7 +74,7 @@
       }
 
       .calendar-table {
-        @apply bg-gray-800 text-gray-300;
+        @apply bg-slate-800 text-slate-300;
 
         /* navigation arrows */
         .available {
@@ -87,52 +87,52 @@
       /* Clear and Apply buttons wrapper */
       .drp-buttons {
         border-top-color: theme('colors.slate.900');
-        @apply text-gray-300;
+        @apply text-slate-300;
       }
 
       th {
         &.available:hover {
-          @apply bg-gray-600;
+          @apply bg-slate-600;
         }
       }
 
       td {
         &.off {
-          @apply bg-gray-800 text-white;
+          @apply bg-slate-800 text-white;
         }
 
         &.available:hover {
-          @apply bg-gray-600;
+          @apply bg-slate-600;
         }
       }
 
       .hourselect, .minuteselect, .ampmselect {
-        @apply text-gray-300 border-gray-900 bg-gray-800 !important;
+        @apply text-slate-300 border-slate-900 bg-slate-800 !important;
       }
     }
 
     /* Phone field */
     .iti__country-list {
-      @apply bg-gray-800 border border-solid border-gray-900;
+      @apply bg-slate-800 border border-solid border-slate-900;
     }
 
     /* Select2 */
     .select2-container {
       .select2-selection__rendered {
-        @apply text-gray-300 !important;
+        @apply text-slate-300 !important;
       }
 
       .select2-dropdown {
-        @apply bg-gray-700;
+        @apply bg-slate-700;
       }
 
       .select2-search__field {
-        @apply bg-gray-800 border-gray-900 !important;
+        @apply bg-slate-800 border-slate-900 !important;
       }
 
       .select2-selection--multiple, .select2-selection--single {
-        @apply bg-gray-800 focus:ring-primary-500 border-gray-900 !important;
-        @apply text-gray-300;
+        @apply bg-slate-800 focus:ring-primary-500 border-slate-900 !important;
+        @apply text-slate-300;
       }
 
       /* For the selected options in the multiple select2 component */
@@ -150,13 +150,13 @@
       }
 
       .select2-results__option {
-        @apply text-gray-300;
+        @apply text-slate-300;
       }
     }
 
     /* Trix Editor */
     trix-editor {
-      @apply bg-gray-800 border-gray-900 !important;
+      @apply bg-slate-800 border-slate-900 !important;
 
       &:focus, &:active {
         @apply border-primary-500 !important;
@@ -171,7 +171,7 @@
       }
 
       .trix-button-group, .trix-button {
-        @apply border-gray-400 !important;
+        @apply border-slate-400 !important;
       }
 
       .trix-button:disabled::before {
@@ -181,16 +181,16 @@
 
     .tribute-container {
       ul {
-        @apply bg-gray-800 border-gray-900 !important;
+        @apply bg-slate-800 border-slate-900 !important;
       }
     }
 
     .trix-dialogs {
-      @apply bg-gray-800 border-gray-900 !important;
+      @apply bg-slate-800 border-slate-900 !important;
     }
 
     .trix-content a[href^="bullettrain://"] {
-      @apply text-white bg-gray-500;
+      @apply text-white bg-slate-500;
     }
 
     /* CKEditor */

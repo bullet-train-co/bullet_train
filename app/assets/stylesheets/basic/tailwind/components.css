@@ -42,7 +42,7 @@
   }
 
   .button-alternative {
-    @apply border-gray-300 rounded-md shadow-sm bg-white text-gray-500 hover:bg-gray-50 no-underline hover:no-underline;
+    @apply border-slate-300 rounded-md shadow-sm bg-white text-slate-500 hover:bg-slate-50 no-underline hover:no-underline;
   }
 
   .button-color {
@@ -111,7 +111,7 @@
   }
 
   .table {
-    @apply w-full divide-y divide-gray-900 divide-opacity-5 text-left;
+    @apply w-full divide-y divide-slate-900 divide-opacity-5 text-left;
 
     & th {
       @apply px-3 py-3 text-2xs font-semibold font-normal;
@@ -126,7 +126,7 @@
     }
 
     & tbody {
-      @apply divide-y divide-gray-900 divide-opacity-5;
+      @apply divide-y divide-slate-900 divide-opacity-5;
     }
 
     & td {
