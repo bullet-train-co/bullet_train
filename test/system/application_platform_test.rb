@@ -40,7 +40,6 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
 
-      @team = Team.find_by(name: "The Testing Team")
 
       # Create a new Platform Application
       within_developers_menu_for(display_details) do
@@ -50,6 +49,8 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Test Platform Application"
       click_on "Provision Platform Application"
       assert page.has_content?("Platform Application was successfully created.")
+
+      @team = Team.find_by(name: "The Testing Team")
 
       # Ensure that Platform Application is present in the Memberships list.
       visit account_team_memberships_path(@team)
