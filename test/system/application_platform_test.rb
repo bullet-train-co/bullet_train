@@ -40,6 +40,8 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
 
+      @team = Team.find_by(name: "The Testing Team")
+
       # Create a new Platform Application
       within_developers_menu_for(display_details) do
         click_on "API"
@@ -50,9 +52,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Platform Application was successfully created.")
 
       # Ensure that Platform Application is present in the Memberships list.
-      within_team_menu_for(display_details) do
-        click_on "Team Members"
-      end
+      visit account_team_memberships_path(@team)
       within_current_memberships_table do
         assert page.has_content?("Test Platform Application")
       end
@@ -64,9 +64,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       end
       accept_alert { click_on("Delete") }
 
-      within_team_menu_for(display_details) do
-        click_on "Team Members"
-      end
+      visit account_team_memberships_path(@team)
       within_current_memberships_table do
         refute page.has_content?("Test Platform Application")
       end
