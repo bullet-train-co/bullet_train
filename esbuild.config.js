@@ -1,6 +1,6 @@
 const path = require('path');
 const { execSync } = require("child_process");
-const glob  = require('glob').sync
+const glob = require('glob').sync
 
 // Glob plugin derived from:
 // https://github.com/thomaschaaf/esbuild-plugin-import-glob
@@ -56,19 +56,24 @@ if (process.env.THEME) {
 const otherEntrypoints = {}
 glob("app/javascript/entrypoints/**/*.js")
   .forEach((file) => {
-  	// strips app/javascript/entrypoints from the key.
+    // strips app/javascript/entrypoints from the key.
     const key = path.join(path.dirname(file), path.basename(file)).split(path.sep + "entrypoints" + path.sep)[1]
     const value = "." + path.sep + path.join(path.dirname(file), path.basename(file), path.extname(file))
     otherEntrypoints[key] = value
   });
+
+const themeEntrypoints = {}
+if (process.env.THEME) {
+  themeEntrypoints[`application.${process.env.THEME}`] = themeFile
+}
 
 require("esbuild").build({
   entryPoints: {
     ...otherEntrypoints,
     "application": path.join(process.cwd(), "app/javascript/application.js"),
     "intl-tel-input-utils": path.join(process.cwd(), "app/javascript/intl-tel-input-utils.js"),
-    [`application.${process.env.THEME}`]: themeFile,
-},
+    ...themeEntrypoints,
+  },
   define: {
     global: "window"
   },
