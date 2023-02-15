@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/bullet-train-co/bullet_train-core.git
-  revision: 5d8ff9b6e24dd67718e90dfef0a179243669a5c5
+  revision: f87143fbc2dd41a5e97b76be22971f95fb22cbca
   specs:
-    bullet_train (1.2.10)
+    bullet_train (1.2.11)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -30,7 +30,8 @@ GIT
       sidekiq
       unicode-emoji
       valid_email
-    bullet_train-api (1.2.10)
+      xxhash
+    bullet_train-api (1.2.11)
       bullet_train
       doorkeeper
       jbuilder-schema (>= 2.0.0)
@@ -38,37 +39,51 @@ GIT
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.2.10)
+    bullet_train-fields (1.2.11)
+      chronic
+      cloudinary
+      phonelib
+      rails (>= 6.0.0)
+    bullet_train-has_uuid (1.2.11)
+      rails (>= 7.0.0)
+    bullet_train-incoming_webhooks (1.2.11)
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.2.10)
+    bullet_train-integrations (1.2.11)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.2.10)
+    bullet_train-integrations-stripe (1.2.11)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.2.10)
+    bullet_train-obfuscates_id (1.2.11)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.2.10)
+    bullet_train-outgoing_webhooks (1.2.11)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.2.10)
+    bullet_train-roles (1.2.11)
+      active_hash
+      activesupport
+      cancancan
+    bullet_train-scope_questions (1.2.11)
       rails (>= 6.0.0)
-    bullet_train-sortable (1.2.10)
+    bullet_train-scope_validator (1.2.11)
+    bullet_train-sortable (1.2.11)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.2.10)
+    bullet_train-super_load_and_authorize_resource (1.2.11)
+      rails (>= 7.0.0)
+    bullet_train-super_scaffolding (1.2.11)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.2.10)
+    bullet_train-themes (1.2.11)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.10)
+    bullet_train-themes-light (1.2.11)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.2.10)
+    bullet_train-themes-tailwind_css (1.2.11)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
@@ -185,22 +200,8 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train-fields (1.2.10)
-      chronic
-      cloudinary
-      phonelib
-      rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.10)
-      rails (>= 7.0.0)
-    bullet_train-roles (1.2.10)
-      active_hash
-      activesupport
-      cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.10)
-    bullet_train-super_load_and_authorize_resource (1.2.10)
-      rails (>= 7.0.0)
     cable_ready (5.0.0.pre9)
       actioncable (>= 5.2)
       actionpack (>= 5.2)
