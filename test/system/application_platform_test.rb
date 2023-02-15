@@ -40,7 +40,6 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
 
-
       # Create a new Platform Application
       within_developers_menu_for(display_details) do
         click_on "API"
