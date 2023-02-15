@@ -163,7 +163,7 @@ group :production do
 end
 
 # TODO: Eventually just use `gem "active_hash"`
-gem "active_hash", git: "git@github.com:active-hash/active_hash.git"
+gem "active_hash", github: "active-hash/active_hash"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
