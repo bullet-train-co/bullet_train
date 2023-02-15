@@ -45,6 +45,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       fill_in "Name", with: "Test File Name"
       assert page.has_content?("Upload New Document")
+      fill_in "Name", with: "Foo"
       attach_file("test/support/foo.txt", make_visible: true)
       click_on "Create Test File"
 
@@ -58,6 +59,11 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       assert page.has_content?("Test File was successfully updated.")
       assert TestFile.first.foo.blank?
+
+      # This test consistently adds a new text file,
+      # so we clear out all instances of foo from the storage directory.
+      storage = Dir.glob("tmp/storage/**")
+      storage.each { |dir| FileUtils.rm_r(dir) if dir.match?(/\/([0-9]|[a-z]){2}$/) }
     end
   end
 

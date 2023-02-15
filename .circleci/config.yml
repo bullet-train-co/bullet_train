@@ -163,6 +163,9 @@ jobs:
       - run:
           name: 'Run Super Scaffolding Test'
           command: bundle exec rails test test/system/super_scaffolding_test.rb
+      - run:
+          name: 'Run Super Scaffolding Partial Test'
+          command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
 
   'System Tests with Cuprite':
     docker:
