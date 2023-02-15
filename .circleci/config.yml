@@ -92,9 +92,9 @@ jobs:
     executor: ruby/default
     parallelism: 16
     steps:
+      - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
@@ -139,9 +139,9 @@ jobs:
     executor: ruby/default
     parallelism: 7
     steps:
+      - checkout
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
-      - checkout
 
       # Restore dependency caches
       - restore_cache: *restore_bundler_cache
