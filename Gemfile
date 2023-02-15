@@ -174,6 +174,9 @@ gem "active_hash"
 # A great debugger.
 gem "pry"
 
+# TODO Remove this?
+gem "xxhash"
+
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
 # that you run into a merge conflict in the future.
