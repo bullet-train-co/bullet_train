@@ -95,20 +95,21 @@ end
 # This section is the list of Ruby gems included by default for Bullet Train.
 
 # Core packages.
-gem "bullet_train"
-gem "bullet_train-super_scaffolding"
-gem "bullet_train-api"
-gem "bullet_train-outgoing_webhooks"
-gem "bullet_train-incoming_webhooks"
-gem "bullet_train-themes"
-gem "bullet_train-themes-light"
-gem "bullet_train-integrations"
-gem "bullet_train-integrations-stripe"
+gem "bullet_train", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-super_scaffolding", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-api", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-outgoing_webhooks", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-incoming_webhooks", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-themes", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-themes-tailwind_css", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-themes-light", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-integrations", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-integrations-stripe", github: "bullet-train-co/bullet_train-core"
 
 # Optional support packages.
-gem "bullet_train-sortable"
-gem "bullet_train-scope_questions"
-gem "bullet_train-obfuscates_id"
+gem "bullet_train-sortable", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-scope_questions", github: "bullet-train-co/bullet_train-core"
+gem "bullet_train-obfuscates_id", github: "bullet-train-co/bullet_train-core"
 
 gem "devise"
 gem "devise-two-factor"
