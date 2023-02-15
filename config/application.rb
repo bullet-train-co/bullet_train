@@ -28,6 +28,6 @@ module UntitledApplication
     config.i18n.default_locale = config.i18n.available_locales.first
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
 
-    BulletTrain::Api.set_configuration(self)
+    BulletTrain::Api.set_configuration(self) if BulletTrain::Api.respond_to?(:set_configuration)
   end
 end
