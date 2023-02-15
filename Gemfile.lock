@@ -641,7 +641,6 @@ DEPENDENCIES
   tzinfo-data
   web-console
   webdrivers
-  xxhash
 
 RUBY VERSION
    ruby 3.2.0
