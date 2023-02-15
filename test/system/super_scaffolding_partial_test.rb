@@ -44,6 +44,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Add New Test File"
 
       assert page.has_content?("Upload New Document")
+      fill_in "Name", with: "Foo"
       attach_file("test/support/foo.txt", make_visible: true)
       click_on "Create Test File"
 
