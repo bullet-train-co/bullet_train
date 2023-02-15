@@ -43,6 +43,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Test Files")
       click_on "Add New Test File"
 
+      fill_in "Name", with: "Test File Name"
       assert page.has_content?("Upload New Document")
       attach_file("test/support/foo.txt", make_visible: true)
       click_on "Create Test File"
@@ -135,7 +136,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Partial Test was successfully created.")
 
       # Text field
-      click_on "Test Text"
       partial_test = PartialTest.first
       assert_equal partial_test.text_field_test, "Test Text"
       # Boolean Button

@@ -57,6 +57,9 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           perform_enqueued_jobs
         end
 
+        # Go to index page.
+        click_on "Back"
+
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
           click_on "Add New Tangible Thing"
           fill_in "Text Field Value", with: "Some Other Thing"
@@ -67,7 +70,6 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
-          click_on "Some Thing"
           assert page.has_content? "Tangible Thing Details"
           click_on "Edit Tangible Thing"
           assert page.has_content? "Edit Tangible Thing Details"
