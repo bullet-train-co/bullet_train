@@ -259,9 +259,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def find_stimulus_controller_for_label(label, stimulus_controller, wrapper = false)
     if wrapper
       wrapper_el = find("label", text: /\A#{label}\z/).first(:xpath, ".//..//..")
-      wrapper_el if wrapper_el["data-controller"] == stimulus_controller
+      wrapper_el if wrapper_el["data-controller"].split(" ").include?(stimulus_controller)
     else
-      find("label", text: /\A#{label}\z/).first(:xpath, ".//..").first('[data-controller="' + stimulus_controller + '"]')
+      find("label", text: /\A#{label}\z/).first(:xpath, ".//..").first('[data-controller~="' + stimulus_controller + '"]')
     end
   end
 
