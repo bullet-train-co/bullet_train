@@ -137,6 +137,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
       # Text Area partial
       fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # Number Field Partial
+      fill_in "Number Field Test", with: 47
 
       click_on "Create Partial Test"
       assert page.has_content?("Partial Test was successfully created.")
@@ -180,6 +182,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text Area
       refute_nil partial_test.text_area_test
       assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # Number Field
+      refute_nil partial_test.number_field_test
+      assert_equal partial_test.number_field_test, 47
     end
   end
 end
