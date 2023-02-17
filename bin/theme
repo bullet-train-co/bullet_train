@@ -4,7 +4,6 @@
 
 require "active_support"
 require "fileutils"
-require "pry"
 
 if ARGV.size < 2
   puts "Please make sure you write both the the file type you're looking for along with the theme, in that order."

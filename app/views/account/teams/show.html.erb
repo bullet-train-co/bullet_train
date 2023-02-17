@@ -1,19 +1,18 @@
 <%= render 'account/shared/page' do |p| %>
   <% p.content_for :title, t('.header', teams_possessive: possessive_string(@team.name)) %>
 
-  <% p.content_for :actions do %>
-    <%= link_to edit_account_team_path(@team), class: 'button-secondary button-smaller' do %>
-      <%= t('teams.buttons.edit') %>
-    <% end if can? :edit, @team %>
-  <% end %>
-
   <% p.content_for :body do %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
 
     <% unless scaffolding_things_disabled? %>
       <%= render 'account/shared/commentary/box' do |p| %>
         <% p.content_for :content do %>
-          <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts.accessible_by(current_ability), hide_back: true unless scaffolding_things_disabled? %>
+          <% creative_concepts = @team.scaffolding_absolutely_abstract_creative_concepts.accessible_by(current_ability) %>
+          <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: creative_concepts, hide_back: true do %>
+            <% creative_concepts.each do |creative_concept| %>
+              <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/creative_concept', creative_concepts: creative_concepts, creative_concept: creative_concept %>
+            <% end %>
+          <% end %>
         <% end %>
 
         <% p.content_for :commentary do %>

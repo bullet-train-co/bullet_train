@@ -1,4 +1,5 @@
 ignore:
+  - 'local/**/*'
   - '**/*':
     - Style/TrailingCommaInArguments
     - Style/TrailingCommaInArrayLiteral
@@ -6,5 +7,3 @@ ignore:
     - Style/CommentedKeyword
   - 'app/controllers/**/*':
     - Style/RedundantAssignment
-  - 'config/routes.rb':
-    - Lint/UselessAssignment

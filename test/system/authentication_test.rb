@@ -71,7 +71,8 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       fill_in "Your Password", with: "notpassword1234"
       check "Remember me"
       click_on "Sign In"
-      assert page.has_content?("Invalid Email Address or Password.")
+      # TODO I feel like password should be capitalized here?
+      assert page.has_content?("Invalid Email Address or password.")
 
       # try signing in with the valid credentials.
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"

@@ -2,6 +2,7 @@ import { Application } from "@hotwired/stimulus"
 import { identifierForContextKey } from "stimulus/webpack-helpers"
 import { controllerDefinitions as bulletTrainControllers } from "@bullet-train/bullet-train"
 import { controllerDefinitions as bulletTrainFieldControllers } from "@bullet-train/fields"
+import { controllerDefinitions as bulletTrainSortableControllers } from "@bullet-train/bullet-train-sortable"
 import RevealController from 'stimulus-reveal'
 import CableReady from 'cable_ready'
 import consumer from '../channels/consumer'
@@ -14,6 +15,7 @@ import { context as controllersContext } from './**/*_controller.js';
 
 application.load(bulletTrainControllers)
 application.load(bulletTrainFieldControllers)
+application.load(bulletTrainSortableControllers)
 
 application.register('reveal', RevealController)
 

@@ -8,7 +8,8 @@ RUN _ruby_version=ruby-3.1.2 \
     && printf '{ rvm use $(rvm current); } >/dev/null 2>&1\n' >> "$HOME/.bashrc.d/70-ruby"
 
 # Install Redis.
-RUN sudo apt-get update \
- && sudo apt-get install -y \
-  redis-server \
+RUN curl https://packages.redis.io/gpg | sudo apt-key add - \
+ && echo "deb https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list \
+ && sudo apt-get update \
+ && sudo apt-get install -y redis \
  && sudo rm -rf /var/lib/apt/lists/*

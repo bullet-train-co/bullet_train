@@ -51,7 +51,7 @@ end
 def check_package(package)
   if not_installed?(package)
     puts "#{package} is not installed via Homebrew. Try running `brew install #{package}`.".red
-    input = ask "Try proceeding without #{package}?"
+    input = ask "Try proceeding without #{package}? [y/n]"
     if input.downcase[0] == "n"
       exit
     end
@@ -71,7 +71,7 @@ if actual_ruby.include?(required_ruby)
   puts message.green
 else
   puts message.red
-  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y]"
+  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -81,13 +81,13 @@ if `brew info 2> /dev/null`.length > 0
   puts "Homebrew is installed.".green
 else
   puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
-  input = ask "Try proceeding without Homebrew?"
+  input = ask "Try proceeding without Homebrew? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
 end
 
-check_package("postgresql@13")
+check_package("postgresql@14")
 check_package("redis")
 check_package("icu4c")
 check_package("node")
@@ -107,7 +107,7 @@ if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
   puts message.green
 else
   puts message.red
-  input = ask "Try proceeding with Node #{actual_node} anyway? [y]"
+  input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
@@ -143,6 +143,10 @@ if skip_github.downcase[0] == "y"
     `#{command} https://github.com/new`
 
     ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+    while ssh_path == ""
+      puts "You must provide a path for your new repository.".red
+      ssh_path = ask "What was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+    end
     puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
     puts `git remote add origin #{ssh_path}`.chomp
   end
@@ -160,8 +164,12 @@ puts "Running `yarn install`.".green
 stream "yarn install"
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+while human == ""
+  puts "You must provide a name for your application.".red
+  human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+end
 
-require "rails"
+require "active_support/inflector"
 
 variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
 environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
@@ -183,7 +191,16 @@ replace_in_file("./config/locales/en/application.en.yml", "Untitled Application"
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
 replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
 replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
+replace_in_file("./zapier/package.json", "untitled-application", kebab_case)
+replace_in_file("./zapier/package.json", "Untitled Application", human)
+
 puts ""
+
+unless skip_github
+  original_repo_link = "https://github.com/bullet-train-co/bullet_train"
+  new_repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
+  replace_in_file("README.example.md", original_repo_link, new_repo_link, /repo=#{original_repo_link}/)
+end
 
 puts "Moving `./README.example.md` to `./README.md`.".green
 puts `mv ./README.example.md ./README.md`.chomp
@@ -206,5 +223,5 @@ end
 puts ""
 puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
 puts ""
-puts "Next you can run `bin/setup` and then `bin/dev`.".green
+puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
 puts ""

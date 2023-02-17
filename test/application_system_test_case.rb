@@ -104,26 +104,32 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def within_team_menu_for(display_details)
-    within_primary_menu_for(display_details) do
-      yield
-    end
+    first("#team").hover
+    yield
+  end
+
+  def within_user_menu_for(display_details)
+    find("#user").hover
+    yield
+  end
+
+  def within_developers_menu_for(display_details)
+    find("#developers").hover
+    yield
   end
 
   def open_mobile_menu
-    find(".mobile-menu-trigger").click
+    find("#mobile-menu-open").click
   end
 
   # sign out.
   def sign_out_for(display_details)
     if display_details[:mobile]
       open_mobile_menu
-      click_on "Logout"
     else
-      within ".menu" do
-        # first(".logged-user-i").hover
-        click_on "Logout"
-      end
+      find("#user").hover
     end
+    click_on "Logout"
 
     # make sure we're actually signed out.
     # (this will vary depending on where you send people when they sign out.)
@@ -204,13 +210,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   private def assert_no_js_errors_cuprite &block
-    last_timestamp = page.driver.browser.logger.logs
+    last_timestamp = page.driver.browser.options.logger.logs
       .map(&:timestamp)
       .last || 0
 
     yield
 
-    errors = page.driver.browser.logger.logs
+    errors = page.driver.browser.options.logger.logs
 
     errors = errors.reject { |e| e.timestamp.blank? || e.timestamp < last_timestamp } if last_timestamp > 0
     errors = errors.filter { |e| e.level == "error" }
@@ -275,6 +281,78 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def calculate_resolution(display_details)
     # cut the display's pixel count in half if we're mimicking a high dpi display.
     display_details[:resolution].map { |pixel_count| pixel_count / (display_details[:high_dpi] ? 2 : 1) }
+  end
+
+  def complete_pricing_page(card = nil)
+    assert page.has_content?("Select Your Plan")
+    sleep 0.5
+    within(".pricing-plan.highlight") do
+      start_subscription
+    end
+
+    complete_payment_page(card)
+  end
+
+  def complete_payment_page(card = nil)
+    # we should be on the credit card page.
+    if free_trial?
+      assert page.has_content?("Start Your Free Trial")
+      assert page.has_content?("30-Day Free Trial".upcase)
+    else
+      assert page.has_content?("Upgrade Your Account")
+      assert page.has_content?("It Will Work For You!".upcase)
+    end
+
+    fill_in_stripe_elements(card)
+
+    if free_trial?
+      click_on "Start Free Trial"
+    else
+      click_on "Upgrade Now"
+    end
+  end
+
+  def start_subscription
+    if free_trial?
+      click_on "Start Trial"
+    else
+      click_on "Sign Up"
+    end
+  end
+
+  def fill_in_stripe_elements(card = nil)
+    # default card.
+    card ||= {
+      card_number: "4242424242424242",
+      expiration_month: "12",
+      expiration_year: "29",
+      security_code: "234",
+      zip: "93063"
+    }
+
+    using_wait_time(10) do
+      card_number_frame = find("#card-number iframe")
+      cvc_frame = find("#card-cvc iframe")
+      card_exp = find("#card-exp iframe")
+
+      within_frame(card_number_frame) do
+        card[:card_number].chars.each do |digit|
+          find_field("cardnumber").send_keys(digit)
+        end
+      end
+
+      within_frame(cvc_frame) do
+        card[:security_code].chars.each do |digit|
+          find_field("cvc").send_keys(digit)
+        end
+      end
+
+      within_frame(card_exp) do
+        (card[:expiration_month] + card[:expiration_year]).chars.each do |digit|
+          find_field("exp-date").send_keys(digit)
+        end
+      end
+    end
   end
 
   if !use_cuprite?

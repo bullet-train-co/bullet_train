@@ -36,7 +36,7 @@ FileUtils.chdir APP_ROOT do
   system!("bin/link")
 
   puts "== Building assets =="
-  system!("yarn run build && yarn run build:css && yarn run light:build && yarn light:build:css")
+  system!("yarn run build && yarn run build:css && yarn light:build:css")
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")

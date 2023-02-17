@@ -18,16 +18,11 @@ ActiveStorage.start()
 // at the end of the file. This helps avoid merge conflicts in the future, should we need to change our own includes.
 
 import "./support/jstz";
-import "./support/turn";
 
 import "@bullet-train/bullet-train"
 import "@bullet-train/bullet-train-sortable"
 
 require("@icon/themify-icons/themify-icons.css")
-
-// For inline use in `app/views/account/onboarding/user_details/edit.html.erb`.
-import jstz from 'jstz';
-global.jstz = require("jstz");
 
 import { trixEditor } from "@bullet-train/fields"
 trixEditor()

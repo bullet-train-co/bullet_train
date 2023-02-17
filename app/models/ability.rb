@@ -13,14 +13,15 @@ class Ability
       permit user, through: :memberships, parent: :team
       permit user, through: :scaffolding_absolutely_abstract_creative_concepts_collaborators, parent: :creative_concept
 
-      # TODO is this even used?
-      can :dashboard, User, user_id: user.id
-
       # INDIVIDUAL USER PERMISSIONS.
       can :manage, User, id: user.id
+      can :read, User, id: user.collaborating_user_ids
       can :destroy, Membership, user_id: user.id
 
       can :create, Team
+
+      # We only allow users to work with the access tokens they've created, e.g. those not created via OAuth2.
+      can :manage, Platform::AccessToken, application: {team_id: user.team_ids}, provisioned: true
 
       if stripe_enabled?
         can [:read, :create, :destroy], Oauth::StripeAccount, user_id: user.id

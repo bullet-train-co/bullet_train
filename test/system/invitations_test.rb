@@ -150,6 +150,11 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: another_example_password
       click_on "Sign Up"
 
+      # The email was sent to takashi.yamaguchi@gmail.com,
+      # but since the user signed up with the email takashi@yamaguchi.com,
+      # we have to confirm that we actually want to join the team under this account.
+      click_on "Join The Testing Team"
+
       # this first name is purposefully different than the name they were invited with.
       # assert page.has_content?('Create Your Account')
       assert page.has_content?("Tell us about you")
@@ -179,7 +184,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       # Users cannot create another team in invitation-only mode.
       unless invitation_only?
-        within_team_menu_for(display_details) do
+        within_user_menu_for(display_details) do
           click_on "Add New Team"
         end
 
@@ -262,7 +267,9 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: example_password
       click_on "Sign In"
-      click_on "Team Members"
+      within_team_menu_for(display_details) do
+        click_on "Team Members"
+      end
 
       assert page.has_content?("The Testing Team Team Members")
       within_current_memberships_table do
