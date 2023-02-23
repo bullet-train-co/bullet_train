@@ -105,6 +105,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       # Text Field partial
       fill_in "Text Field Test", with: "Test Text"
+      # Number Field Partial
+      fill_in "Number Field Test", with: "47"
       # Boolean Button partial
       choose "No"
       # Single Button partial
@@ -144,6 +146,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text field
       partial_test = PartialTest.first
       assert_equal partial_test.text_field_test, "Test Text"
+      # Number Field
+      assert_equal partial_test.number_field_test, 47
       # Boolean Button
       assert_equal partial_test.boolean_test, false
       # Single Button
