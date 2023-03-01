@@ -470,6 +470,7 @@ GEM
       netrc (~> 0.8)
     rexml (3.2.5)
     rotp (6.2.2)
+    rouge (4.1.0)
     rqrcode (2.1.2)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
@@ -505,6 +506,8 @@ GEM
       sentry-ruby (~> 5.8.0)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
+    showcase-rails (0.2.5)
+      rails (>= 6.1.0)
     sidekiq (7.0.4)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
@@ -623,11 +626,13 @@ DEPENDENCIES
   rails_autoscale_agent
   rails_best_practices
   redis (~> 5.0.5)
+  rouge (~> 4.1)
   rqrcode
   selenium-webdriver
   sentry-rails
   sentry-ruby
   sentry-sidekiq
+  showcase-rails (~> 0.2.5)
   simplecov
   sprockets-rails
   standard

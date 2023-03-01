@@ -178,3 +178,6 @@ gem "pry"
 # that you run into a merge conflict in the future.
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
+
+gem "showcase-rails" # TODO: Remove after shipping >= 1.2.11 of bullet_train, where showcase-rails is a dependency.
+gem "rouge", "~> 4.1"
