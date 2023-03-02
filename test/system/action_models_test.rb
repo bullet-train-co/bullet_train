@@ -69,7 +69,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
         click_on "Add New Project"
         fill_in "Name", with: "Project #{n}"
         click_on "Create Project"
-        assert page.has_content? 'Project was successfully created.' 
+        assert page.has_content? "Project was successfully created."
         click_on "Back"
       end
 

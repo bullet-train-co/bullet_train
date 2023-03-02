@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+file, old_string, new_string = ARGV
+
+unless new_string
+  puts "Usage: portable-string-replace <file> \"<original string>\" \"<string to replace>\""
+  exit 1
+end
+
+content = File.read(file)
+new_content = content.gsub(old_string, new_string)
+File.open(file, "w") { |file| file.puts new_content }
