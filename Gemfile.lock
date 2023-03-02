@@ -87,13 +87,13 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.711.0)
+    aws-partitions (1.719.0)
     aws-sdk-core (3.170.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.62.0)
+    aws-sdk-kms (1.63.0)
       aws-sdk-core (~> 3, >= 3.165.0)
       aws-sigv4 (~> 1.1)
     aws-sdk-s3 (1.119.1)
@@ -110,7 +110,7 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.11)
+    bullet_train (1.2.13)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -135,11 +135,12 @@ GEM
       possessive
       premailer-rails
       rails (>= 6.0.0)
+      showcase-rails
       sidekiq
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-api (1.2.11)
+    bullet_train-api (1.2.13)
       bullet_train
       doorkeeper
       jbuilder-schema (>= 2.0.0)
@@ -147,53 +148,53 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.2.11)
+    bullet_train-fields (1.2.13)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.11)
+    bullet_train-has_uuid (1.2.13)
       rails (>= 7.0.0)
-    bullet_train-incoming_webhooks (1.2.11)
+    bullet_train-incoming_webhooks (1.2.13)
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.2.11)
+    bullet_train-integrations (1.2.13)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.2.11)
+    bullet_train-integrations-stripe (1.2.13)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.2.11)
+    bullet_train-obfuscates_id (1.2.13)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.2.11)
+    bullet_train-outgoing_webhooks (1.2.13)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.2.11)
+    bullet_train-roles (1.2.13)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.2.11)
+    bullet_train-scope_questions (1.2.13)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.11)
-    bullet_train-sortable (1.2.11)
+    bullet_train-scope_validator (1.2.13)
+    bullet_train-sortable (1.2.13)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.11)
+    bullet_train-super_load_and_authorize_resource (1.2.13)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.2.11)
+    bullet_train-super_scaffolding (1.2.13)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.2.11)
+    bullet_train-themes (1.2.13)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.11)
+    bullet_train-themes-light (1.2.13)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.2.11)
+    bullet_train-themes-tailwind_css (1.2.13)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
@@ -220,7 +221,7 @@ GEM
     coderay (1.1.3)
     colorize (0.8.1)
     commonmarker (0.23.8)
-    concurrent-ruby (1.2.0)
+    concurrent-ruby (1.2.2)
     connection_pool (2.3.0)
     crass (1.0.6)
     css_parser (1.14.0)
@@ -249,7 +250,7 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    doorkeeper (5.6.4)
+    doorkeeper (5.6.5)
       railties (>= 5)
     email_reply_parser (0.5.10)
     erubi (1.12.0)
@@ -277,7 +278,7 @@ GEM
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
-    honeybadger (5.1.0)
+    honeybadger (5.2.0)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -301,7 +302,7 @@ GEM
       railties (>= 6.0.0)
     json (2.6.3)
     jwt (2.7.0)
-    knapsack_pro (3.7.0)
+    knapsack_pro (3.8.0)
       rake
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
@@ -329,7 +330,7 @@ GEM
       activesupport (>= 4.1.0)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2022.0105)
+    mime-types-data (3.2023.0218.1)
     mini_mime (1.1.2)
     minitest (5.17.0)
     minitest-retry (0.2.2)
@@ -381,7 +382,7 @@ GEM
     parallel (1.22.1)
     parser (3.2.1.0)
       ast (~> 2.4.1)
-    pg (1.4.5)
+    pg (1.4.6)
     phonelib (0.7.7)
     possessive (1.0.1)
     postmark (1.23.0)
@@ -404,7 +405,7 @@ GEM
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
     public_suffix (5.0.1)
-    puma (6.1.0)
+    puma (6.1.1)
       nio4r (~> 2.0)
     pwned (2.0.2)
     racc (1.6.2)
@@ -454,7 +455,7 @@ GEM
     rake (13.0.6)
     redis (5.0.6)
       redis-client (>= 0.9.0)
-    redis-client (0.12.1)
+    redis-client (0.13.0)
       connection_pool
     regexp_parser (2.7.0)
     reline (0.3.2)
@@ -484,15 +485,15 @@ GEM
       rubocop-ast (>= 1.24.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.26.0)
+    rubocop-ast (1.27.0)
       parser (>= 3.2.1.0)
     rubocop-performance (1.15.2)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    ruby-progressbar (1.11.0)
+    ruby-progressbar (1.12.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    selenium-webdriver (4.8.0)
+    selenium-webdriver (4.8.1)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -505,7 +506,9 @@ GEM
       sentry-ruby (~> 5.8.0)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
-    sidekiq (7.0.4)
+    showcase-rails (0.2.5)
+      rails (>= 6.1.0)
+    sidekiq (7.0.6)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -534,11 +537,11 @@ GEM
       rubocop-performance (= 1.15.2)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    stripe (8.2.0)
+    stripe (8.3.0)
     thor (1.2.1)
     thread-local (1.1.0)
-    timeout (0.3.1)
-    turbo-rails (1.3.3)
+    timeout (0.3.2)
+    turbo-rails (1.4.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
