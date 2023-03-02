@@ -3,22 +3,7 @@
 
   <% p.content_for :body do %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
-
-    <% unless scaffolding_things_disabled? %>
-      <%= render 'account/shared/commentary/box' do |p| %>
-        <% p.content_for :content do %>
-          <% creative_concepts = @team.scaffolding_absolutely_abstract_creative_concepts.accessible_by(current_ability) %>
-          <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: creative_concepts, hide_back: true do %>
-            <% creative_concepts.each do |creative_concept| %>
-              <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/creative_concept', creative_concepts: creative_concepts, creative_concept: creative_concept %>
-            <% end %>
-          <% end %>
-        <% end %>
-
-        <% p.content_for :commentary do %>
-          <%= t('scaffolding/absolutely_abstract/creative_concepts.index.commentary').html_safe %>
-        <% end %>
-      <% end %>
-    <% end %>
+    
+    <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts, hide_back: true unless scaffolding_things_disabled? %>
   <% end %>
 <% end %>
