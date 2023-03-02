@@ -9,7 +9,7 @@ FactoryBot.define do
       sequence(:name) { |n| "EXAMPLE Generic Team #{n}" }
       sequence(:slug) { |n| "EXAMPLE team_#{n}" }
       time_zone { ActiveSupport::TimeZone.all.first.name }
-      locale { 'en' }
+      locale { "en" }
     end
   end
 end
