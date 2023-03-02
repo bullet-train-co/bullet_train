@@ -20,6 +20,10 @@ FactoryBot.define do
         otp_secret { User.generate_otp_secret }
         otp_required_for_login { true }
       end
+
+      factory :user_example do
+        first_name { "EXAMPLE First Name" }
+      end
     end
   end
 end
