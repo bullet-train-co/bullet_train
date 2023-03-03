@@ -126,19 +126,30 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # performs-import action
   if defined?(Articles::CsvImportAction)
     test "developers can import CSV file information to their records" do
-      skip "This needs to be fixed in Action Models first"
-
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
+      assert page.has_content? "No Articles have been added for Your Team."
 
-      click_on "Add New Article"
-      fill_in "Name", with: "Test Article"
-      click_on "Create Article"
-
-      # Test import logic
       click_on "Csv Import"
+      assert page.has_content? "Csv Import Articles"
 
-      # TODO: From here, upload new document and configure field mappings, etc.
+      attach_file("test/support/articles.csv", make_visible: true)
+      click_on "Configure Csv Import Action"
+
+      assert page.has_content? "Csv Import Action was successfully created."
+      click_on "Preview Csv Import Action"
+
+      assert page.has_content? "Csv Import Action was successfully updated."
+      click_on "Perform Csv Import Action"
+
+      assert page.has_content? "Csv Import Action was approved."
+      click_on "Back"
+
+      assert page.has_content? "Below is a list of Articles that have been added for Your Team."
+      assert page.has_content? "Three"
+      # We do this because the default Bullet Train team stylizes this text in capital letters.
+      assert_match(/processed 3 of 3/i, page.text)
+      assert page.has_content? "articles.csv"
     end
   end
 end
