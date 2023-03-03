@@ -217,7 +217,7 @@ jobs:
       - <<: *postgres_docker_image
       - image: cimg/redis:6.2.6
     executor: ruby/default
-    parallelism: 16
+    parallelism: 4
 
     steps:
       - browser-tools/install-chrome

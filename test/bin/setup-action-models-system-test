@@ -38,10 +38,17 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   bin/super-scaffold crud Article Team name:text_field --sidebar="ti.ti-world"
   rails db:migrate
   bin/super-scaffold action-model:performs-import CsvImport Article Team
-
-  # TODO: We need to either make a CSV file here or in the system test itself.
 else
-  echo "Skipping the \`targets-one-parent\` action on this CI node."
+  echo "Skipping the \`performs-import\` action on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+  bundle exec spring rails g model Visitor team:references email:string first_name:string last_name:string
+  bin/super-scaffold crud Visitor Team email:text_field first_name:text_field last_name:text_field --sidebar="ti.ti-world"
+  rails db:migrate
+  bin/super-scaffold action-model:performs-export CsvExport Visitor Team
+else
+  echo "Skipping the \`performs-export\` action on this CI node."
 fi
 
 rails db:migrate

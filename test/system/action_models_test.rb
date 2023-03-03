@@ -152,4 +152,37 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       assert page.has_content? "articles.csv"
     end
   end
+
+  # performs-export action
+  if defined?(Visitors::CsvExportAction)
+    test "developers can export a CSV file from their records" do
+      @jane.current_team.visitors.create(email: "one@example.com", first_name: "Liam", last_name: "Patel")
+      @jane.current_team.visitors.create(email: "two@example.com", first_name: "Ava", last_name: "Brown")
+      @jane.current_team.visitors.create(email: "three@example.com", first_name: "Ethan", last_name: "Kim")
+
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      click_on "one@example.com"
+      assert page.has_content? "Below are the details we have for one@example.com"
+      click_on "Back"
+
+      click_on "Select Multiple"
+      find(:xpath, '/HTML[1]/BODY[1]/DIV[2]/DIV[1]/DIV[2]/MAIN[1]/DIV[2]/DIV[1]/DIV[3]/DIV[1]/UPDATES-FOR[1]/DIV[1]/DIV[2]/DIV[1]/TABLE[1]/THEAD[1]/TR[1]/TH[1]/LABEL[1]/INPUT[1]').click 
+      click_on "Csv Export (All)"
+      assert page.has_content? 'We\'re preparing to Export all Visitors of Your Team.' 
+
+      click_on "Perform Csv Export Action"
+      assert page.has_content? 'Csv Export Action was successfully created.' 
+
+      # This is a lot easier than trying to actually download the file via the browser.
+      csv_export_action = Visitors::CsvExportAction.order(:id).last
+      csv_data = csv_export_action.file.download 
+
+      assert_match(/id,email,first_name,last_name/, csv_data)
+      assert_match(/one@example.com,Liam,Patel/, csv_data)
+      assert_match(/two@example.com,Ava,Brown/, csv_data)
+      assert_match(/three@example.com,Ethan,Kim/, csv_data)
+    end
+  end
 end
