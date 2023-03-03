@@ -159,7 +159,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       @jane.current_team.visitors.create(email: "one@example.com", first_name: "Liam", last_name: "Patel")
       @jane.current_team.visitors.create(email: "two@example.com", first_name: "Ava", last_name: "Brown")
       @jane.current_team.visitors.create(email: "three@example.com", first_name: "Ethan", last_name: "Kim")
-      250.times do 
+      250.times do
         @jane.current_team.visitors.create(email: "random+#{SecureRandom.uuid}@example.com", first_name: SecureRandom.hex.first(5), last_name: SecureRandom.hex.first(5))
       end
 
