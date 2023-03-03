@@ -159,6 +159,9 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       @jane.current_team.visitors.create(email: "one@example.com", first_name: "Liam", last_name: "Patel")
       @jane.current_team.visitors.create(email: "two@example.com", first_name: "Ava", last_name: "Brown")
       @jane.current_team.visitors.create(email: "three@example.com", first_name: "Ethan", last_name: "Kim")
+      250.times do
+        @jane.current_team.visitors.create(email: "random+#{SecureRandom.uuid}@example.com", first_name: SecureRandom.hex.first(5), last_name: SecureRandom.hex.first(5))
+      end
 
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
@@ -179,10 +182,18 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       csv_export_action = Visitors::CsvExportAction.order(:id).last
       csv_data = csv_export_action.file.download
 
-      assert_match(/id,email,first_name,last_name/, csv_data)
-      assert_match(/one@example.com,Liam,Patel/, csv_data)
+      # Ensure the header is in the right spot.
+      assert_match(/id,email,first_name,last_name/, csv_data.lines.first)
+
+      # Ensure the first record is where we expect it.
+      assert_match(/one@example.com,Liam,Patel/, csv_data.lines[1])
+
+      # Ensure the other records are in the CSV.
       assert_match(/two@example.com,Ava,Brown/, csv_data)
       assert_match(/three@example.com,Ethan,Kim/, csv_data)
+
+      # Ensure all records and headers were exported.
+      assert_equal csv_data.lines.count, 254
     end
   end
 end
