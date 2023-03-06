@@ -22,7 +22,7 @@ unless scaffolding_things_disabled?
 
         # We should be on the account dashboard with no Creative Concepts listed.
         assert page.has_content? "My Super Team’s Dashboard"
-        assert page.has_content? "There are no Creative Concepts for you to see on My Super Team yet."
+        assert page.has_content? "If you're wondering what this"
 
         # Open a new window. We'll bounce back and forth between these two to ensure updates are happening in both places.
         current_url = page.current_url
@@ -35,7 +35,7 @@ unless scaffolding_things_disabled?
 
           # Ensure we're on a page with no Creative Concepts listed.
           # (This sets us up to confirm that an entire table manifests out of nowhere.)
-          assert page.has_content? "There are no Creative Concepts for you to see on My Super Team yet."
+          assert page.has_content? "If you're wondering what this"
         end
 
         # We're now back on the regular window to take additional actions.
@@ -75,7 +75,7 @@ unless scaffolding_things_disabled?
           click_on "Back"
 
           # Confirm that we're still looking at a populated list of Creative Concepts.
-          assert page.has_content? "Below is a list of Creative Concepts you can see"
+          assert page.has_content? "If you're wondering what this"
         end
 
         # Now that someone is looking at the index, let's destroy the Creative Concept.
@@ -90,12 +90,12 @@ unless scaffolding_things_disabled?
         accept_alert { click_on "Delete" }
 
         assert page.has_content? "Creative Concept was successfully destroyed."
-        assert page.has_content? "There are no Creative Concepts for you to see on My Super Team yet."
+        assert page.has_content? "If you're wondering what this"
 
         # Now for the final test, we need one of the tabs to be looking at the index.
         within_window second_window do
           # Confirm that we're no longer looking at a populated list of Creative Concepts.
-          assert page.has_content? "There are no Creative Concepts for you to see on My Super Team yet."
+          assert page.has_content? "If you're wondering what this"
         end
       end
     end
