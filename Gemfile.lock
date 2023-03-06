@@ -1,4 +1,15 @@
 GIT
+  remote: git@github.com:bullet-train-co/bullet_train-core.git/
+  revision: c0271aa956afde704ab930773f1faa77e741f0c5
+  branch: audit_logs_tests
+  glob: bullet_train-super_scaffolding/*.gemspec
+  specs:
+    bullet_train-super_scaffolding (1.2.14)
+      bullet_train
+      indefinite_article
+      rails (>= 6.0.0)
+
+GIT
   remote: https://github.com/teamcapybara/capybara.git
   revision: f857a99ff0699a194b1ac6dc89fbd8e6f0e99507
   specs:
@@ -185,10 +196,6 @@ GEM
       rails (>= 6.0.0)
     bullet_train-super_load_and_authorize_resource (1.2.14)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.2.14)
-      bullet_train
-      indefinite_article
-      rails (>= 6.0.0)
     bullet_train-themes (1.2.14)
       rails (>= 6.0.0)
     bullet_train-themes-light (1.2.14)
@@ -597,7 +604,7 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
   bullet_train-sortable
-  bullet_train-super_scaffolding
+  bullet_train-super_scaffolding!
   bullet_train-themes
   bullet_train-themes-light
   capybara!
