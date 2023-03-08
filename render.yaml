@@ -46,8 +46,6 @@ services:
 envVarGroups:
   - name: settings
     envVars:
-      - key: BASE_URL
-        generateValue: true
       - key: FONTAWESOME_NPM_AUTH_TOKEN
         sync: false
       - key: POSTMARK_API_TOKEN

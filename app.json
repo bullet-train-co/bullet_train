@@ -2,7 +2,7 @@
   "name": "New Bullet Train Application",
   "description": "The Ruby on Rails SaaS-in-a-Box",
   "repository": "https://github.com/bullet-train-co/bullet_train",
-  "logo": "https://tailwind.bullettrain.co/heroku-logo.png",
+  "logo": "https://bullettrain.co/heroku-logo.png",
   "keywords": ["ruby", "rails"],
   "buildpacks": [
     { "url": "heroku/ruby" },
@@ -31,10 +31,6 @@
     "realemail:free"
   ],
   "env": {
-    "BASE_URL": {
-      "description": "Supply the fully-qualified URL for this Heroku app, e.g. `https://your-app.herokuapp.com`. You'll update this later after configuring a custom domain.",
-      "value": "https://ENTER_YOUR_APP_NAME_HERE.herokuapp.com"
-    },
     "FONTAWESOME_NPM_AUTH_TOKEN": {
       "description": "We recommend using Font Awesome Pro for icons. To use it, fetch your token from `https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers` and enter it here.",
       "required": false
