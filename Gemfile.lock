@@ -110,7 +110,7 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.18)
+    bullet_train (1.2.19)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -140,7 +140,7 @@ GEM
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-api (1.2.18)
+    bullet_train-api (1.2.19)
       bullet_train
       doorkeeper
       jbuilder-schema (>= 2.0.0)
@@ -148,53 +148,53 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.2.18)
+    bullet_train-fields (1.2.19)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.18)
+    bullet_train-has_uuid (1.2.19)
       rails (>= 7.0.0)
-    bullet_train-incoming_webhooks (1.2.18)
+    bullet_train-incoming_webhooks (1.2.19)
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.2.18)
+    bullet_train-integrations (1.2.19)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.2.18)
+    bullet_train-integrations-stripe (1.2.19)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.2.18)
+    bullet_train-obfuscates_id (1.2.19)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.2.18)
+    bullet_train-outgoing_webhooks (1.2.19)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.2.18)
+    bullet_train-roles (1.2.19)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.2.18)
+    bullet_train-scope_questions (1.2.19)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.18)
-    bullet_train-sortable (1.2.18)
+    bullet_train-scope_validator (1.2.19)
+    bullet_train-sortable (1.2.19)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.18)
+    bullet_train-super_load_and_authorize_resource (1.2.19)
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.2.18)
+    bullet_train-super_scaffolding (1.2.19)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.2.18)
+    bullet_train-themes (1.2.19)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.18)
+    bullet_train-themes-light (1.2.19)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.2.18)
+    bullet_train-themes-tailwind_css (1.2.19)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
