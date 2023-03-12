@@ -229,7 +229,9 @@ GEM
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.3)
-    debug (1.7.1)
+    debug (1.7.0)
+      irb (>= 1.5.0)
+      reline (>= 0.3.1)
     debug_inspector (1.1.0)
     devise (4.9.0)
       bcrypt (~> 3.0)
@@ -286,6 +288,9 @@ GEM
       concurrent-ruby (~> 1.0)
     indefinite_article (0.2.5)
       activesupport
+    io-console (0.6.0)
+    irb (1.6.3)
+      reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -453,6 +458,8 @@ GEM
     redis-client (0.14.0)
       connection_pool
     regexp_parser (2.7.0)
+    reline (0.3.2)
+      io-console (~> 0.5)
     require_all (3.0.0)
     responders (3.1.0)
       actionpack (>= 5.2)
@@ -598,7 +605,7 @@ DEPENDENCIES
   chronic
   colorize
   cssbundling-rails
-  debug
+  debug (= 1.7.0)
   devise
   devise-two-factor
   factory_bot_rails
@@ -637,4 +644,4 @@ RUBY VERSION
    ruby 3.2.1p31
 
 BUNDLED WITH
-   2.4.1
+   2.4.8

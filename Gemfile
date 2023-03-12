@@ -58,7 +58,9 @@ gem "chronic"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[mri mingw x64_mingw]
+  # TODO: Remove version restriction once Ruby 3.2.2 is released.
+  # See: https://github.com/ruby/debug/issues/898#issuecomment-1451804022
+  gem "debug", "1.7.0", platforms: %i[mri mingw x64_mingw]
 
   # A gem for generating test coverage results in your browser.
   gem "simplecov", require: false
