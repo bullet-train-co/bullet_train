@@ -148,12 +148,12 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.2.20)
+    bullet_train-fields (1.2.21)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.20)
+    bullet_train-has_uuid (1.2.21)
       rails (>= 6.0.0)
     bullet_train-incoming_webhooks (1.2.21)
       bullet_train-super_scaffolding
@@ -172,7 +172,7 @@ GEM
     bullet_train-outgoing_webhooks (1.2.21)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.2.20)
+    bullet_train-roles (1.2.21)
       active_hash
       activesupport
       cancancan
@@ -180,16 +180,16 @@ GEM
       rails (>= 6.0.0)
     bullet_train-scope_questions (1.2.21)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.20)
+    bullet_train-scope_validator (1.2.21)
     bullet_train-sortable (1.2.21)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.20)
+    bullet_train-super_load_and_authorize_resource (1.2.21)
       rails (>= 6.0.0)
     bullet_train-super_scaffolding (1.2.21)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.2.20)
+    bullet_train-themes (1.2.21)
       rails (>= 6.0.0)
     bullet_train-themes-light (1.2.21)
       bullet_train-themes-tailwind_css
