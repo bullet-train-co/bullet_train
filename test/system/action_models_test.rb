@@ -29,7 +29,8 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   [
     "Projects::ArchiveAction",
     "Listings::PublishAction",
-    "Articles::CsvImportAction"
+    "Articles::CsvImportAction",
+    "Visitors::CsvExportAction",
   ].each do |class_name|
     class_name.constantize
   rescue
@@ -148,7 +149,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       assert page.has_content? "Below is a list of Articles that have been added for Your Team."
       assert page.has_content? "Three"
       # We do this because the default Bullet Train team stylizes this text in capital letters.
-      assert_match(/processed 3 of 3/i, page.text)
+      assert_match(/processed 179 of 179/i, page.text)
       assert page.has_content? "articles.csv"
     end
   end
