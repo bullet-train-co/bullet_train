@@ -147,10 +147,35 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Back"
 
       assert page.has_content? "Below is a list of Articles that have been added for Your Team."
-      assert page.has_content? "Three"
+
       # We do this because the default Bullet Train team stylizes this text in capital letters.
       assert_match(/processed 179 of 179/i, page.text)
       assert page.has_content? "articles.csv"
+
+      assert @jane.current_team.articles.find_by(name: "One").present?
+      assert @jane.current_team.articles.find_by(name: "Fifty-seven").present?
+      assert @jane.current_team.articles.find_by(name: "One hundred seventy-nine").present?
+
+      # We set up some validations to fail some records in `test/bin/setup-action-models-system-test`.
+      assert_nil @jane.current_team.articles.find_by(name: "Twenty-five")
+      assert_nil @jane.current_team.articles.find_by(name: "One hundred forty")
+
+      click_on 'Details'
+      assert page.has_content? 'Below is a summary of the import and its results.'
+
+      # Make sure we're reporting that two rows, and only two rows, were rejected.
+      assert_match(/unprocessable rows\n2/i, page.text)
+
+      # This is a lot easier than trying to actually download the file via the browser.
+      csv_import_action = Articles::CsvImportAction.order(:id).last
+      rejected_csv_data = csv_import_action.rejected_file.download.force_encoding(Encoding::UTF_8)
+
+      # Ensure the header is in the right spot.
+      assert_match(/name,rejected_reason/, rejected_csv_data.lines[0])
+
+      # Ensure rejecting records works and works across pages.
+      assert_match(/Twenty-five,Name is not allowed./, rejected_csv_data.lines[1])
+      assert_match(/One hundred forty,Name is not allowed./, rejected_csv_data.lines[2])
     end
   end
 

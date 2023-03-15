@@ -38,6 +38,9 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   bin/super-scaffold crud Article Team name:text_field --sidebar="ti.ti-world"
   rails db:migrate
   bin/super-scaffold action-model:performs-import CsvImport Article Team
+
+  test/bin/portable-string-replace app/models/article.rb "# 🚅 add validations above." "validates :name, exclusion: { in: ['Twenty-five', 'One hundred forty'], message: 'is not allowed' }
+  # 🚅 add validations above."
 else
   echo "Skipping the \`performs-import\` action on this CI node."
 fi
