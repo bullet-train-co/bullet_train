@@ -1,7 +1,7 @@
 # Bullet Train theme configuration.
 
 # Main color
-BulletTrain::Themes::Light.color = :slate
+BulletTrain::Themes::Light.color = :blue
 
 # Navbar orientation
 # BulletTrain::Themes::Light.navigation = :left
