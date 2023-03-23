@@ -1,10 +1,10 @@
 # Bullet Train theme configuration.
 
-# Main color
+# The application's main color scheme.
 BulletTrain::Themes::Light.color = :blue
 
-# Navbar orientation
+# The orientation of the navbar.
 # BulletTrain::Themes::Light.navigation = :left
 #
-# Logo
+# The logo shown in the navbar.
 # BulletTrain::Themes::Light.show_logo_in_account = true
