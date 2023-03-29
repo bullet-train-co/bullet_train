@@ -230,7 +230,7 @@ GEM
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.3)
-    debug (1.7.0)
+    debug (1.7.2)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     debug_inspector (1.1.0)
@@ -466,7 +466,7 @@ GEM
     redis-client (0.14.0)
       connection_pool
     regexp_parser (2.7.0)
-    reline (0.3.2)
+    reline (0.3.3)
       io-console (~> 0.5)
     require_all (3.0.0)
     responders (3.1.0)
@@ -616,7 +616,7 @@ DEPENDENCIES
   chronic
   colorize
   cssbundling-rails
-  debug (= 1.7.0)
+  debug (= 1.7.2)
   devise
   devise-two-factor
   factory_bot_rails
