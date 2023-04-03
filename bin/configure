@@ -114,7 +114,7 @@ else
 end
 
 File.open('.github/workflows/main.yml', 'w') do |f|
-  f.write("# Use GitHub Actions to automate development workflows for your application: https://docs.github.com/en/actions")
+  f.write("# Use GitHub Actions to automate development workflows for your application: https://docs.github.com/en/actions\n")
 end
 
 puts "Next, let's push your application to GitHub."
