@@ -32,6 +32,9 @@ class DatesHelperTest < ApplicationSystemTestCase
 
       time = Scaffolding::CompletelyConcrete::TangibleThing.first.created_at
 
+      # Go to the Tangible Thing's index page.
+      click_on "Back"
+
       # Assert today's date is displayed correctly.
       assert page.has_text? "Today at #{time.strftime("%l:%M %p").strip}"
 
@@ -43,7 +46,10 @@ class DatesHelperTest < ApplicationSystemTestCase
       # Assert the month and day is shown for anything before then.
       travel_to time + 2.days
       visit current_url
-      assert page.has_text? "#{time.strftime("%B %-d").strip} at #{time.strftime("%l:%M %p").strip}"
+
+      # We have to assert these two things separately so it doesn't fail on the last day of the year when the year is present.
+      assert page.has_text? time.strftime("%B %-d").strip.to_s
+      assert page.has_text? "at #{time.strftime("%l:%M %p").strip}"
 
       # Create a new record in a different time zone.
       Time.zone = "Tokyo"
