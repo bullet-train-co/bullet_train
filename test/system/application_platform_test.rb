@@ -69,7 +69,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
         refute page.has_content?("Test Platform Application")
       end
       # The tombstones partial won't be rendered if there aren't any tombstoned memberships.
-      refute all("h2").map { |tag| tag.text }.include?("Former Team Members")
+      assert_no_selector "h2", text: "Former Team Members"
 
       # The Membership was archived but not destroyed.
       test_app_membership = Membership.find_by(user_first_name: "Test Platform Application")
