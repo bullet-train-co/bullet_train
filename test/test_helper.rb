@@ -27,3 +27,9 @@ ActiveSupport::TestCase.class_eval do
 
   # Add more helper methods to be used by all tests here...
 end
+
+if defined?(FactoryBot)
+  class ActiveSupport::TestCase
+    include FactoryBot::Syntax::Methods
+  end
+end
