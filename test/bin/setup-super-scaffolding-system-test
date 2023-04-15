@@ -111,7 +111,6 @@ else
 fi
 
 # TODO: Generate these in parallel.
-# TODO: Super Scaffold password_field partials correctly.
 bundle exec spring rails g model PartialTest team:references \
   text_field_test:string \
   boolean_test:boolean \
