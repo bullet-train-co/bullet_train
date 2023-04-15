@@ -283,6 +283,41 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     end
   end
 
+   if defined?(TestFile)
+    test "developers can Super Scaffold a file partial and perform crud actions on the record" do
+      display_details = @@test_devices[:macbook_pro_15_inch]
+      resize_for(display_details)
+
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      assert page.has_content?("Test Files")
+      click_on "Add New Test File"
+
+      fill_in "Name", with: "Test File Name"
+      assert page.has_content?("Upload New Document")
+      fill_in "Name", with: "Foo"
+      attach_file("test/support/foo.txt", make_visible: true)
+      click_on "Create Test File"
+
+      assert page.has_content?("Test File was successfully created.")
+      refute TestFile.first.foo.blank?
+
+      click_on "Edit"
+      assert page.has_content?("Remove Current Document")
+      find("span", text: "Remove Current Document").click
+      click_on "Update Test File"
+
+      assert page.has_content?("Test File was successfully updated.")
+      assert TestFile.first.foo.blank?
+
+      # This test consistently adds a new text file,
+      # so we clear out all instances of foo from the storage directory.
+      storage = Dir.glob("tmp/storage/**")
+      storage.each { |dir| FileUtils.rm_r(dir) if dir.match?(/\/([0-9]|[a-z]){2}$/) }
+    end
+  end
+
   test "OpenAPI V3 document is still valid" do
     visit "http://localhost:3001/api/v1/openapi.yaml"
     puts(output = `yarn exec redocly lint http://localhost:3001/api/v1/openapi.yaml 1> /dev/stdout 2> /dev/stdout; rm openapi.yaml`)
