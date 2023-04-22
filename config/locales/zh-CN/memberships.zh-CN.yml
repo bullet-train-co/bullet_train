@@ -2,9 +2,9 @@ zh-CN:
   memberships:
     fields:
       _:
-      # 🚅 超级脚手架将在此行上方插入新的字段。
+      # 🚅 super scaffolding will insert new fields above this line.
   activerecord:
     attributes:
       membership:
         _:
-        # 🚅 超级脚手架将在此行上方插入新的activerecord属性。
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.

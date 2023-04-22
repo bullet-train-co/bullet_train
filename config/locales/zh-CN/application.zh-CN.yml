@@ -11,4 +11,4 @@ zh-CN:
       api_version:
         options:
           1: V1
-          # 🚅 超级脚手架将在此行上方插入新的API版本。
+          # 🚅 super scaffolding will insert new api versions above this line.
