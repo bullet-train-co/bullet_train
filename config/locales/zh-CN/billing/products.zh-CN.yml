@@ -1,0 +1,17 @@
+zh-CN:
+  billing/products:
+    free:
+      name: 免费
+    basic:
+      name: 基础
+      description: 这是一种示例月付费计划，包含免费试用期。
+      features:
+        - 可以按团队成员数定价。
+        - 允许创建最多五十个”创意概念”。
+        - 超出限制后会提醒限制。
+    pro:
+      name: 高级
+      description: 这是一个改进的示例计划，拥有不同的功能。
+      features:
+        - 固定价格，最多包含十名团队成员。
+        - 允许创建无限数量的“创意概念”。
