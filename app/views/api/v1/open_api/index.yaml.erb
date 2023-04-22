@@ -52,7 +52,7 @@ paths:
   <%= paths_for Team %>
   <%= paths_for User %>
   <%= automatic_paths_for Membership, Team %>
-  <%= automatic_paths_for Invitation, Team %>
+  <%= automatic_paths_for Invitation, Team, except: %i[update] %>
   <%= automatic_paths_for Webhooks::Outgoing::Endpoint, Team %>
   <%= automatic_paths_for Webhooks::Outgoing::Event, Team, except: %i[create update delete] %>
   <%= automatic_paths_for Scaffolding::CompletelyConcrete::TangibleThing, Scaffolding::AbsolutelyAbstract::CreativeConcept unless scaffolding_things_disabled? %>
