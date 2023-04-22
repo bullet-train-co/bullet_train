@@ -1,6 +1,6 @@
 zh-CN:
   user_mailer:
-    signature: &SIGNATURE
+    signature: &signature_zhcn
       html:
         <p>如果您有任何疑问，请随时<a href="mailto:%{support_email}">给我们发送电子邮件</a>。</p>
         <p>谢谢<br>Untitled Application团队</p>
@@ -17,7 +17,7 @@ zh-CN:
       cta:
         label: 加入%{team_name}
       signature:
-        <<: *SIGNATURE
+        <<: *signature_zhcn
     welcome:
       subject: 欢迎使用Untitled Application！
       preview: 此电子邮件包含有关如何开始使用您的帐户的详细信息。
@@ -31,4 +31,4 @@ zh-CN:
         body: 您可以使用以下链接返回您的仪表盘。
         label: 查看您的仪表盘
       signature:
-        <<: *SIGNATURE
+        <<: *signature_zhcn
