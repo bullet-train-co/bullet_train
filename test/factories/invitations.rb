@@ -7,6 +7,7 @@ FactoryBot.define do
 
     factory :invitation_example do
       team { FactoryBot.example(:team) }
+      membership { FactoryBot.example(:membership) }
     end
   end
 end
