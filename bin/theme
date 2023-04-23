@@ -3,6 +3,7 @@
 # We use this script to find Tailwind and JavaScript-related files according to the theme specified.
 
 require "active_support"
+require "active_support/core_ext"
 require "fileutils"
 
 if ARGV.size < 2
