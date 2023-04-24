@@ -100,7 +100,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       # Resend the invite
       assert page.has_content?("Resend")
-      assert_difference 'all_emails.count', 1 do
+      assert_difference "all_emails.count", 1 do
         perform_enqueued_jobs do
           click_on "Resend"
           assert page.has_content?("Invitation was successfully resent.")
@@ -161,7 +161,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       end
 
       # Make sure we can resend the invitation for memberships that come back to the team.
-      assert_difference 'all_emails.count', 1 do
+      assert_difference "all_emails.count", 1 do
         perform_enqueued_jobs do
           click_on "Resend"
           assert page.has_content?("Invitation was successfully resent.")
