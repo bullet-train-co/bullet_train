@@ -8,5 +8,14 @@ FactoryBot.define do
     after(:initialize) do |event|
       event.data = {}
     end
+
+    factory :webhooks_outgoing_event_example do
+      data {
+        {id: 1,
+         created_at: Time.now.utc,
+         updated_at: Time.now.utc,
+         value: "one"}.to_json
+      }
+    end
   end
 end
