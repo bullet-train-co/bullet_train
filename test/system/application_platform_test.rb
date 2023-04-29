@@ -71,8 +71,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
         refute page.has_content?("Test Platform Application")
       end
       # The tombstones partial won't be rendered if there aren't any tombstoned memberships.
-      # TODO: This eats up a lot of time, look for a better way to check for this.
-      refute page.has_css?("tbody[data-model='Membership'][data-scope='tombstones']")
+      assert_no_selector "h2", text: "Former Team Members"
 
       # The Membership was archived but not destroyed.
       test_app_membership = Membership.find_by(user_first_name: "Test Platform Application")
