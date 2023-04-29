@@ -3,5 +3,9 @@ FactoryBot.define do
     association :team, factory: :team
     name { "Example Endpoint" }
     url { "https://example.com/some-endpoint-url" }
+
+    factory :webhooks_outgoing_endpoint_example do
+      name { "Example Endpoint" }
+    end
   end
 end

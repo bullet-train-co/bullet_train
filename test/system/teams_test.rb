@@ -18,7 +18,7 @@ class TeamsTest < ApplicationSystemTestCase
       click_on "Create Team"
 
       # we only see the plans page if payments are enabled.
-      if billing_enabled?
+      if billing_enabled? && !freemium_enabled?
         assert page.has_content?("Select Your Plan")
       else
         assert page.has_content?("Team Jane")

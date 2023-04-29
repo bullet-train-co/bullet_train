@@ -3,5 +3,9 @@ FactoryBot.define do
     team
     name { "MyString" }
     description { "MyText" }
+
+    factory :scaffolding_absolutely_abstract_creative_concept_example do
+      name { "Example" }
+    end
   end
 end
