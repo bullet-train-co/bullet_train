@@ -1,3 +1,17 @@
+GIT
+  remote: https://github.com/teamcapybara/capybara.git
+  revision: c2760553376ad3a76be7b50e87a2eef43a031755
+  specs:
+    capybara (3.39.0)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -195,15 +209,6 @@ GEM
       railties (>= 5.2)
       thread-local (>= 1.1.0)
     cancancan (3.5.0)
-    capybara (3.39.0)
-      addressable
-      matrix
-      mini_mime (>= 0.1.3)
-      nokogiri (~> 1.8)
-      rack (>= 1.6.0)
-      rack-test (>= 0.6.3)
-      regexp_parser (>= 1.5, < 3.0)
-      xpath (~> 3.2)
     capybara-email (3.0.2)
       capybara (>= 2.4, < 4.0)
       mail
@@ -607,7 +612,7 @@ DEPENDENCIES
   bullet_train-super_scaffolding
   bullet_train-themes
   bullet_train-themes-light
-  capybara (= 3.39.0)
+  capybara!
   capybara-email
   chronic
   colorize
