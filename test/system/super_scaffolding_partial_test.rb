@@ -121,7 +121,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # File partial
       attach_file("test/support/foo.txt", make_visible: true)
       # Single Option partial
-      page.all('input').select {|node| node.value == "one"}.first.click
+      page.all("input").find { |node| node.value == "one" }.click
       # Multiple Option partial
       check("One")
       check("Three")
