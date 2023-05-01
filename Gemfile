@@ -6,7 +6,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.1"
+ruby(File.read(File.expand_path(".ruby-version", __dir__)))
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
@@ -64,6 +64,9 @@ group :development, :test do
 
   # A gem for generating test coverage results in your browser.
   gem "simplecov", require: false
+
+  # Generate test objects.
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -139,9 +142,6 @@ group :test do
 
   # Interact with emails during testing.
   gem "capybara-email"
-
-  # Generate test objects.
-  gem "factory_bot_rails", group: :development
 
   # Write system tests by pointing and clicking in your browser.
   gem "magic_test"
