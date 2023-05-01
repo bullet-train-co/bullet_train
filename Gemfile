@@ -6,7 +6,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.0"
+ruby "3.2.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
@@ -58,7 +58,9 @@ gem "chronic"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[mri mingw x64_mingw]
+  # TODO: Remove version restriction once Ruby 3.2.2 is released.
+  # See: https://github.com/ruby/debug/issues/898#issuecomment-1451804022
+  gem "debug", "1.7.2", platforms: %i[mri mingw x64_mingw]
 
   # A gem for generating test coverage results in your browser.
   gem "simplecov", require: false

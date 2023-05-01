@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if [ $(cat Gemfile.lock | grep action_models | wc -l | tr -d " ") == "0" ]; then
+    echo "\`bullet_train-action_models\` must be installed in \`Gemfile.lock\`." 1>&2
+    exit 1
+fi
+
 export SPRING=true
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
@@ -11,7 +16,8 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
   PERFORM_METHOD="  def perform_on_target(project)"
   TARGETS_MANY_ACTION='project.update(name: "#{project.name} archived")'
   PERFORM_METHOD_WITH_CONTENT="  def perform_on_target(project)\n    ${TARGETS_MANY_ACTION}"
-  sed -i "s/${PERFORM_METHOD}/${PERFORM_METHOD_WITH_CONTENT}/g" app/models/projects/archive_action.rb
+
+  test/bin/portable-string-replace app/models/projects/archive_action.rb "# This is where you implement the operation you want to perform on each target." "project.update(name: \"#{project.name} archived\")"
 else
   echo "Skipping the \`targets-many\` action on this CI node."
 fi
@@ -22,10 +28,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   rails db:migrate
   bin/super-scaffold action-model:targets-one Publish Listing Team
 
-  PERFORM_METHOD="  def perform_on_target(listing)"
-  TARGETS_ONE_ACTION='listing.update(name: "#{listing.name} published")'
-  PERFORM_METHOD_WITH_CONTENT="  def perform_on_target(listing)\n    ${TARGETS_ONE_ACTION}"
-  sed -i "s/${PERFORM_METHOD}/${PERFORM_METHOD_WITH_CONTENT}/g" app/models/listings/publish_action.rb
+  test/bin/portable-string-replace app/models/projects/archive_action.rb "# This is where you implement the operation you want to perform on each target." "listing.update(name: \"#{listing.name} published\")"
 else
   echo "Skipping the \`targets-one\` action on this CI node."
 fi
@@ -35,10 +38,17 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   bin/super-scaffold crud Article Team name:text_field --sidebar="ti.ti-world"
   rails db:migrate
   bin/super-scaffold action-model:performs-import CsvImport Article Team
-
-  # TODO: We need to either make a CSV file here or in the system test itself.
 else
-  echo "Skipping the \`targets-one-parent\` action on this CI node."
+  echo "Skipping the \`performs-import\` action on this CI node."
+fi
+
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+  bundle exec spring rails g model Visitor team:references email:string first_name:string last_name:string
+  bin/super-scaffold crud Visitor Team email:text_field first_name:text_field last_name:text_field --sidebar="ti.ti-world"
+  rails db:migrate
+  bin/super-scaffold action-model:performs-export CsvExport Visitor Team
+else
+  echo "Skipping the \`performs-export\` action on this CI node."
 fi
 
 rails db:migrate

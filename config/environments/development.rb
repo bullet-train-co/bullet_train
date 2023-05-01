@@ -80,11 +80,14 @@ Rails.application.configure do
   config.assets.enabled = false
 
   # generate full urls using the base url configuration setting.
-  Rails.application.routes.default_url_options = default_url_options_from_base_url
-  config.action_mailer.default_url_options = default_url_options_from_base_url
+  unless default_url_options_from_base_url.empty?
+    Rails.application.routes.default_url_options = default_url_options_from_base_url
+    config.action_mailer.default_url_options = default_url_options_from_base_url
 
-  # allow users to access this application via the configured application domain.
-  config.hosts << default_url_options_from_base_url[:host]
+    # allow users to access this application via the configured application domain.
+    config.hosts << default_url_options_from_base_url[:host]
+  end
+
   if (gitpod_workspace_url = ENV["GITPOD_WORKSPACE_URL"])
     config.hosts << /.*#{URI.parse(gitpod_workspace_url).host}/
   end

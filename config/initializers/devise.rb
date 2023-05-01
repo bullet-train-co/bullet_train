@@ -1,6 +1,9 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  config.responder.error_status = :unprocessable_entity
+  config.responder.redirect_status = :see_other
+
   config.omniauth :stripe_connect, ENV["STRIPE_CLIENT_ID"], ENV["STRIPE_SECRET_KEY"], scope: "read_write"
   # 🚅 super scaffolding will insert new oauth providers above this line.
 
@@ -32,7 +35,6 @@ Devise.setup do |config|
 
   # NOTE: This is a workaround to get Devise working with Turbo
   # Configure the parent controller.
-  config.parent_controller = "TurboDeviseController"
   config.navigational_formats = ["*/*", :html, :turbo_stream]
 
   # ==> ORM configuration
