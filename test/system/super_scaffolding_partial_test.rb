@@ -33,7 +33,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   end
 
   if defined?(TestFile)
-    test "developers can Super Scaffold a file partial and perfrom crud actions on the record" do
+    test "developers can Super Scaffold a file partial and perform crud actions on the record" do
       display_details = @@test_devices[:macbook_pro_15_inch]
       resize_for(display_details)
 

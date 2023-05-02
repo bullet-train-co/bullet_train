@@ -28,7 +28,9 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       click_on "Sign Up"
 
       if billing_enabled?
-        complete_pricing_page
+        unless freemium_enabled?
+          complete_pricing_page
+        end
       end
 
       # we should now be on an onboarding step.

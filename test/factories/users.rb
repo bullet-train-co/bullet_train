@@ -22,7 +22,8 @@ FactoryBot.define do
       end
 
       factory :user_example do
-        first_name { "EXAMPLE First Name" }
+        first_name { "Example First Name" }
+        last_name { "Example Last Name" }
       end
     end
   end
