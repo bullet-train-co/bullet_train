@@ -52,8 +52,8 @@ GEM
       rails-html-sanitizer (~> 1.6)
     active_hash (3.2.1)
       activesupport (>= 5.0.0)
-    activejob (7.1.2)
-      activesupport (= 7.1.2)
+    activejob (7.0.8)
+      activesupport (= 7.0.8)
       globalid (>= 0.3.6)
     activemodel (7.1.2)
       activesupport (= 7.1.2)
@@ -81,6 +81,20 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     ansi (1.5.0)
     ast (2.4.2)
+    avo (2.38.0)
+      actionview (>= 6.0)
+      active_link_to
+      activerecord (>= 6.0)
+      addressable
+      docile
+      dry-initializer
+      httparty
+      inline_svg
+      meta-tags
+      pagy
+      turbo-rails
+      view_component (>= 2.54.0)
+      zeitwerk (>= 2.6.2)
     awesome_print (1.9.2)
     aws-eventstream (1.3.0)
     aws-partitions (1.865.0)
@@ -270,8 +284,6 @@ GEM
     domain_name (0.6.20231109)
     doorkeeper (5.6.8)
       railties (>= 5)
-    drb (2.2.0)
-      ruby2_keywords
     email_reply_parser (0.5.11)
     erubi (1.12.0)
     erubis (2.7.0)
@@ -309,6 +321,9 @@ GEM
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     http_accept_language (2.1.1)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -316,8 +331,8 @@ GEM
       ruby-vips (>= 2.0.17, < 3)
     indefinite_article (0.2.5)
       activesupport
-    io-console (0.7.0)
-    irb (1.10.1)
+    io-console (0.6.0)
+    irb (1.8.3)
       rdoc
       reline (>= 0.3.8)
     jbuilder (2.11.5)
@@ -358,6 +373,8 @@ GEM
       activesupport
       prism (>= 0.14.0)
     matrix (0.4.2)
+    meta-tags (2.18.0)
+      actionpack (>= 3.2.0, < 7.1)
     method_source (1.0.0)
     microscope (1.1.1)
       activerecord (>= 4.1.0)
@@ -367,7 +384,7 @@ GEM
     mime-types-data (3.2023.1205)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.5)
+    mini_portile2 (2.8.4)
     minitest (5.20.0)
     minitest-reporters (1.6.1)
       ansi
@@ -392,11 +409,11 @@ GEM
     netrc (0.11.0)
     nice_partials (0.10.0)
       actionview (>= 4.2.6)
-    nio4r (2.7.0)
-    nokogiri (1.15.5)
+    nio4r (2.5.9)
+    nokogiri (1.15.4)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.15.5-arm64-darwin)
+    nokogiri (1.15.4-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
@@ -641,6 +658,10 @@ GEM
       mail (>= 2.6.1)
       simpleidn
     version_gem (1.1.3)
+    view_component (3.5.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -661,11 +682,12 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
-  ruby
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
   active_hash
+  avo
   aws-sdk-s3
   bootsnap
   bullet_train (= 1.6.22)

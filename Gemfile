@@ -140,6 +140,8 @@ gem "devise"
 gem "devise-two-factor"
 gem "rqrcode"
 
+gem "avo"
+
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
   gem "letter_opener"
