@@ -1,0 +1,126 @@
+---
+ar:
+  avo:
+    action_ran_successfully: 'تم تنفيذ الأمر بنجاح!'
+    actions: أوامر
+    and_x_other_resources: و %{count} موارد أخرى
+    are_you_sure: هل أنت متأكد؟
+    are_you_sure_detach_item: هل أنت متأكد أنك تريد فصل هذا الـ٪{item}؟
+    are_you_sure_you_want_to_run_this_option: هل أنت متأكد أنك تريد تشغيل هذا الخيار؟
+    attach: ربط
+    attach_and_attach_another: ربط وربط آخر
+    attach_item: ربط %{item}
+    attachment_class_attached: '%{attachment_class} تم ربط'
+    attachment_class_detached: '%{attachment_class} تم فصل'
+    attachment_destroyed: تم حذف المرفق
+    cancel: إلغاء
+    choose_a_country: اختر دولة
+    choose_an_option: اختر خيارًا
+    choose_item: اختر %{item}
+    clear_value: مسح القيمة
+    click_to_reveal_filters: انقر لإظهار المرشحات
+    confirm: تأكيد
+    create_new_item: إنشاء %{item} جديد
+    dashboard: لوحة القيادة
+    dashboards: لوحات القيادة
+    delete: حذف
+    delete_file: حذف الملف
+    delete_item: حذف %{item}
+    detach_item: فصل %{item}
+    details: تفاصيل
+    download: تنزيل
+    download_file: تنزيل الملف
+    download_item: تنزيل %{item}
+    edit: تعديل
+    edit_item: تعديل %{item}
+    empty_dashboard_message: أضف بطاقات إلى هذه اللوحة
+    failed: فشل
+    failed_to_find_attachment: فشل في العثور على المرفق
+    failed_to_load: فشل التحميل
+    field_translations:
+      file:
+        one: ملف
+        other: ملفات
+        zero: ملفات
+      people:
+        one: شخص
+        other: أشخاص
+        zero: أشخاص
+    filter_by: تصفية حسب
+    filters: مرشحات
+    go_back: العودة للخلف
+    grid_view: عرض الشبكة
+    hide_content: إخفاء المحتوى
+    home: الصفحة الرئيسية
+    key_value_field:
+      add_row: إضافة صف
+      delete_row: حذف صف
+      key: المفتاح
+      value: القيمة
+    list_is_empty: القائمة فارغة
+    loading: جاري التحميل
+    more: المزيد
+    new: جديد
+    next_page: الصفحة التالية
+    no_cards_present: لا توجد بطاقات
+    no_item_found: لا يوجد سجلات
+    no_options_available: لا توجد خيارات متاحة
+    no_related_item_found: لم يتم العثور على سجلات متعلقة
+    not_authorized: ليس لديك الصلاحية للقيام بهذا الإجراء.
+    number_of_items:
+      one: سجل %{item} واحد
+      other: "%{count} سجل %{item}"
+      zero: لا يوجد %{item}
+    oops_nothing_found: عذراً! لم يتم العثور على شيء...
+    order:
+      higher: حرك السجل للأعلى
+      lower: حرك السجل للأسفل
+      reorder_record: إعادة ترتيب السجل
+      to_bottom: حرك السجل للأسفل بشكل كامل
+      to_top: حرك السجل للأعلى بشكل كامل
+    per_page: لكل صفحة
+    prev_page: الصفحة السابقة
+    remove_selection: إزالة التحديد
+    reset_filters: إعادة تعيين الفلاتر
+    resource_created: تم إنشاء السجل
+    resource_destroyed: تم حذف السجل
+    resource_translations:
+      team_members:
+        one: عضو فريق
+        other: أعضاء الفريق
+        zero: أعضاء الفريق
+      user:
+        one: مستخدم
+        other: مستخدمين
+        zero: مستخدمين
+    resource_updated: تم تحديث السجل
+    resources: المصادر
+    run: تشغيل
+    save: حفظ
+    search:
+      cancel_button: إلغاء
+      placeholder: البحث
+    select_all: تحديد الكل
+    select_all_matching: تحديد كل المطابق
+    select_item: تحديد العنصر
+    show_content: عرض المحتوى
+    sign_out: تسجيل الخروج
+    switch_to_view: التبديل إلى عرض %{view_type}
+    table_view: عرض الجدول
+    tools: الأدوات
+    type_to_search: اكتب للبحث.
+    unauthorized: غير مصرح به
+    undo: تراجع
+    view: عرض
+    view_item: عرض %{item}
+    was_successfully_created: تم إنشاؤه بنجاح
+    was_successfully_updated: تم تحديثه بنجاح
+    x_items_more:
+      one: عنصر واحد إضافي
+      other: "%{count} عناصر إضافية"
+      zero: لا توجد عناصر إضافية
+    x_records_selected_from_a_total_of_x_html: <span class="font-bold text-gray-700">%{selected}</span> السجلات المحددة في هذه الصفحة من إجمالي<span class="font-bold text-gray-700">%{count}</span>
+    x_records_selected_from_all_pages_html: <span class="font-bold text-gray-700">%{count}</span> السجلات المحددة من كل الصفحات
+    you_missed_something_check_form: ربما نسيت شيئًا، يرجى التحقق من البيانات.
+
+
