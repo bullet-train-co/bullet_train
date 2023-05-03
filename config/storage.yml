@@ -8,9 +8,7 @@ test:
 
 amazon:
   service: S3
-  # TODO I wouldn't mind replacing these with functions that figure out the right place to get these values.
-  # This would make it easier to add support for other providers than just Bucketeer.
-  # See `aws.rake` as well.
+  # If you update this, you also have to update `config/environments/production.rb`.
   access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] || ENV['BUCKETEER_AWS_ACCESS_KEY_ID'] %>
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] || ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY'] %>
   bucket: <%= ENV['AWS_S3_BUCKET'] || ENV['BUCKETEER_BUCKET_NAME'] %>
