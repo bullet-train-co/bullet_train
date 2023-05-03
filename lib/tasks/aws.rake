@@ -3,18 +3,15 @@ require "aws-sdk-s3"
 namespace :aws do
   desc "Set default CORS permissions on your S3 bucket"
   task set_cors: :environment do |_t|
+    # Fetch the settings defined in `config/storage.yml`.
+    s3_config = Rails.configuration.active_storage.service_configurations.with_indifferent_access[:amazon]
+
     # Create an S3 client
     s3_client = Aws::S3::Client.new(
-      # TODO I wouldn't mind replacing these with functions that figure out the right place to get these values.
-      # This would make it easier to add support for other providers than just Bucketeer.
-      # See `storage.yml` as well.
-      region: ENV["AWS_S3_REGION"] || ENV["BUCKETEER_AWS_REGION"],
-      access_key_id: ENV["AWS_ACCESS_KEY_ID"] || ENV["BUCKETEER_AWS_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"] || ENV["BUCKETEER_AWS_SECRET_ACCESS_KEY"]
+      region: s3_config[:region],
+      access_key_id: s3_config[:access_key_id],
+      secret_access_key: s3_config[:secret_access_key]
     )
-
-    # Specify the bucket name.
-    bucket_name = ENV["AWS_S3_BUCKET"] || ENV["BUCKETEER_BUCKET_NAME"]
 
     # Define the CORS configuration
     cors_configuration = {
@@ -33,10 +30,10 @@ namespace :aws do
 
     # Set the CORS configuration on the bucket
     s3_client.put_bucket_cors(
-      bucket: bucket_name,
+      bucket: s3_config[:bucket],
       cors_configuration: cors_configuration
     )
 
-    puts "CORS configuration set successfully for bucket '#{bucket_name}'"
+    puts "CORS configuration set successfully for bucket '#{s3_config[:bucket]}'"
   end
 end
