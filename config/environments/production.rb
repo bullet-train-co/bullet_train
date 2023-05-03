@@ -106,7 +106,7 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :sidekiq
 
-  if ENV["AWS_S3_BUCKET"].present?
+  if Rails.configuration.active_storage.service_configurations.with_indifferent_access[:amazon].present?
     config.active_storage.service = :amazon
   end
 
