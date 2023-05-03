@@ -863,7 +863,7 @@ __metadata:
     "@tailwindcss/forms": ^0.5.3
     "@tailwindcss/typography": ^0.5.8
     autoprefixer: ^10.4.14
-    cable_ready: ^5.0.0
+    cable_ready: ^5.0.0-pre9
     dragula: ^3.7.3
     esbuild: ^0.16.17
     glob: ^10.2.2
@@ -1033,7 +1033,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cable_ready@npm:^5.0.0":
+"cable_ready@npm:^5.0.0-pre9":
   version: 5.0.0
   resolution: "cable_ready@npm:5.0.0"
   dependencies:
