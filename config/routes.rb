@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   draw "concerns"
   draw "devise"
   draw "sidekiq"
+  draw "avo"
 
   # This is helpful to have around when working with shallow routes and complicated model namespacing. We don't use this
   # by default, but sometimes Super Scaffolding will generate routes that use this for `only` and `except` options.
