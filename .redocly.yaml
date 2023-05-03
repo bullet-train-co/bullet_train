@@ -1,0 +1,10 @@
+organization: untitled_application
+
+extends:
+  - recommended
+
+apis:
+  api@v1:
+    root: ./tmp/openapi.yaml
+    rules:
+      no-ambiguous-paths: off
