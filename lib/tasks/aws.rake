@@ -2,8 +2,9 @@ require "aws-sdk-s3"
 
 namespace :aws do
   desc "Set default CORS permissions on your S3 bucket"
-  task set_cors: :environment do |_t|
+  task set_cors: :environment do
     # Fetch the settings defined in `config/storage.yml`.
+    Rails.application.eager_load!
     s3_config = Rails.configuration.active_storage.service_configurations.with_indifferent_access[:amazon]
 
     # Create an S3 client
