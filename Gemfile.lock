@@ -517,7 +517,7 @@ GEM
     sentry-sidekiq (5.9.0)
       sentry-ruby (~> 5.9.0)
       sidekiq (>= 3.0)
-    sexp_processor (4.16.1)
+    sexp_processor (4.17.0)
     showcase-rails (0.4.2)
       rails (>= 6.1.0)
     sidekiq (7.1.0)
