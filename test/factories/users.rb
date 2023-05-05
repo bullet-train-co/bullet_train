@@ -24,7 +24,6 @@ FactoryBot.define do
       factory :user_example do
         first_name { "Example First Name" }
         last_name { "Example Last Name" }
-        locale { "en" }
       end
     end
   end

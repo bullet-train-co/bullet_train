@@ -133,7 +133,7 @@ GEM
       bullet_train
       doorkeeper
       factory_bot
-      jbuilder-schema (>= 2.0.0)
+      jbuilder-schema (>= 2.2.0)
       pagy
       pagy_cursor
       rack-cors
@@ -612,8 +612,8 @@ DEPENDENCIES
   active_hash
   aws-sdk-s3
   bootsnap
-  bullet_train!
-  bullet_train-api!
+  bullet_train
+  bullet_train-api
   bullet_train-incoming_webhooks
   bullet_train-integrations
   bullet_train-integrations-stripe
@@ -621,7 +621,7 @@ DEPENDENCIES
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
   bullet_train-sortable
-  bullet_train-super_scaffolding!
+  bullet_train-super_scaffolding
   bullet_train-themes
   bullet_train-themes-light
   capybara (~> 3.39)
