@@ -62,8 +62,7 @@ class MembershipSystemTest < ApplicationSystemTestCase
 
       assert page.has_content?("Invitation was successfully created.")
 
-      # we need the id of the membership that's created so we can address it's row in the table specifically.
-      invited_membership = Membership.order(:id).last
+      invited_membership = Membership.find_by(user_email: "takashi.yamaguchi@gmail.com")
 
       within_current_memberships_table do
         assert page.has_content?("Takashi Yamaguchi")
