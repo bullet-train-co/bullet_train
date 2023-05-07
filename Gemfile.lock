@@ -241,7 +241,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-pwned_password (0.1.9)
+    devise-pwned_password (0.1.10)
       devise (~> 4)
       pwned (~> 2.0.0)
     devise-two-factor (5.0.0)
