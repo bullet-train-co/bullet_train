@@ -42,6 +42,7 @@ yarn-debug.log*
 .yarn-integrity
 .yalc
 yalc.lock
+.yarn/
 
 # 🚅 this is bullet train's list of files to ignore.
 # please add yours at the end of the file.
