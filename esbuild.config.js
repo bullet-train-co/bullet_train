@@ -67,36 +67,45 @@ if (process.env.THEME) {
   themeEntrypoints[`application.${process.env.THEME}`] = themeFile
 }
 
-require("esbuild").build({
-  entryPoints: {
-    ...otherEntrypoints,
-    "application": path.join(process.cwd(), "app/javascript/application.js"),
-    "intl-tel-input-utils": path.join(process.cwd(), "app/javascript/intl-tel-input-utils.js"),
-    ...themeEntrypoints,
-  },
-  define: {
-    global: "window"
-  },
-  bundle: true,
-  // ESM + Splitting will only work if the script is type="module"
-  // splitting: true,
-  // format: "esm",
-  format: "iife",
-  sourcemap: true,
-  outdir: path.join(process.cwd(), "app/assets/builds"),
-  loader: {
-    ".png": "file",
-    ".jpg": "file",
-    ".svg": "file",
-    ".woff": "file",
-    ".woff2": "file",
-    ".ttf": "file",
-    ".eot": "file",
-  },
-  watch: process.argv.includes("--watch"),
-  plugins: [
-    ImportGlobPlugin()
-  ],
-  // TODO: Silencing warnings until the charset warning is fixed.
-  logLevel: 'error',
-}).catch(() => process.exit(1));
+async function serve_with_esbuild() {
+  let ctx = await require("esbuild").context({
+    entryPoints: {
+      ...otherEntrypoints,
+      "application": path.join(process.cwd(), "app/javascript/application.js"),
+      "intl-tel-input-utils": path.join(process.cwd(), "app/javascript/intl-tel-input-utils.js"),
+      ...themeEntrypoints,
+    },
+    define: {
+      global: "window"
+    },
+    bundle: true,
+    // ESM + Splitting will only work if the script is type="module"
+    // splitting: true,
+    // format: "esm",
+    format: "iife",
+    sourcemap: true,
+    outdir: path.join(process.cwd(), "app/assets/builds"),
+    loader: {
+      ".png": "file",
+      ".jpg": "file",
+      ".svg": "file",
+      ".woff": "file",
+      ".woff2": "file",
+      ".ttf": "file",
+      ".eot": "file",
+    },
+    plugins: [
+      ImportGlobPlugin()
+    ],
+    // TODO: Silencing warnings until the charset warning is fixed.
+    logLevel: 'error'
+  })
+
+  await ctx.watch()
+
+  let { host, port } = await ctx.serve({
+    servedir: path.join(process.cwd(), "app/assets/builds")
+  })
+}
+
+serve_with_esbuild()
