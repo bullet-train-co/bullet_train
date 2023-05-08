@@ -101,6 +101,7 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bin/link
+      - run: yarn set version stable
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
@@ -150,6 +151,7 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bin/link
+      - run: yarn set version stable
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
@@ -184,6 +186,7 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bin/link
+      - run: yarn set version stable
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
@@ -229,6 +232,7 @@ jobs:
       # Install dependencies
       - ruby/bundle-install
       - run: bin/link
+      - run: yarn set version stable
       - run: yarn install
       - run: yarn build
       - run: yarn build:css
