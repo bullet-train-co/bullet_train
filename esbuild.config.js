@@ -99,7 +99,7 @@ async function serve_with_esbuild() {
     ],
     // TODO: Silencing warnings until the charset warning is fixed.
     logLevel: 'error'
-  })
+  }).catch(() => process.exit(1));
 
   await ctx.watch()
 
