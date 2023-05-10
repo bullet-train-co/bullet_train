@@ -82,7 +82,7 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara", github: "teamcapybara/capybara"
+  gem "capybara", github: "teamcapybara/capybara", branch: "master"
 
   # Selenium is the default default Capybara driver for system tests that ships with
   # Rails. Cuprite is an alternative driver that uses Chrome's native DevTools protocol
