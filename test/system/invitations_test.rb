@@ -25,7 +25,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       be_invited_to_sign_up
 
-      visit root_path
+      visit user_session_path
       sign_up_from_homepage_for(display_details)
 
       # try non-matching passwords.
@@ -35,7 +35,9 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       click_on "Sign Up"
 
       if billing_enabled?
-        complete_pricing_page
+        unless freemium_enabled?
+          complete_pricing_page
+        end
       end
 
       # we should now be on an onboarding step.

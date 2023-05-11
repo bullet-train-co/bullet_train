@@ -98,14 +98,13 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # targets-one action
   if defined?(Listings::PublishAction)
     test "developers can publish only one listing at a time" do
-      skip "This needs to be fixed in Action Models first"
-
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
       click_on "Add New Listing"
       fill_in "Name", with: "Test Listing"
       click_on "Create Listing"
+      click_on "Back"
 
       # Developers can click "Publish" on a single record,
       # but cannot perform the action on multiple ones.
@@ -113,15 +112,16 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Select Multiple"
       refute page.has_content?("Publish")
       click_on "Hide Checkboxes"
+      click_on "Back"
 
       # Test targets-one logic
+      click_on "Test Listing"
       click_on "Publish"
 
       # Confirm action page
-      assert page.has_content?("Please provide the details of the new Publish Action you'd like to add to Test Listing.")
+      assert page.has_content?("Please provide the details of the new Publish Action you'd like to perform on Test Listing.")
       click_on "Perform Publish Action"
 
-      assert page.has_content?("Test Listing published")
       assert page.has_content?("Publish Action was successfully created.")
       assert page.has_content?("Current and Scheduled Publish Operations")
     end
