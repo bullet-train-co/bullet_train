@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_31_003438) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_190007) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -235,6 +235,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_31_003438) do
     t.boolean "being_destroyed"
     t.string "time_zone"
     t.string "locale"
+    t.string "webhooks_signing_secret"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -319,6 +320,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_31_003438) do
     t.string "name"
     t.jsonb "event_type_ids", default: []
     t.bigint "scaffolding_absolutely_abstract_creative_concept_id"
+    t.boolean "disabled_from_failure", default: false, null: false
     t.integer "api_version", null: false
     t.index ["scaffolding_absolutely_abstract_creative_concept_id"], name: "index_endpoints_on_abstract_creative_concept_id"
     t.index ["team_id"], name: "index_webhooks_outgoing_endpoints_on_team_id"
