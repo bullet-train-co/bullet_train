@@ -320,7 +320,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_190007) do
     t.string "name"
     t.jsonb "event_type_ids", default: []
     t.bigint "scaffolding_absolutely_abstract_creative_concept_id"
-    t.boolean "disabled_from_failure", default: false, null: false
     t.integer "api_version", null: false
     t.index ["scaffolding_absolutely_abstract_creative_concept_id"], name: "index_endpoints_on_abstract_creative_concept_id"
     t.index ["team_id"], name: "index_webhooks_outgoing_endpoints_on_team_id"
