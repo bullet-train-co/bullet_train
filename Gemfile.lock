@@ -13,6 +13,20 @@ GIT
       xpath (~> 3.2)
 
 PATH
+  remote: local/bullet_train-billing-stripe
+  specs:
+    bullet_train-billing-stripe (1.0.1)
+      bullet_train-billing
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-billing
+  specs:
+    bullet_train-billing (1.0.3)
+      bullet_train
+      rails (>= 6.0)
+
+PATH
   remote: local/bullet_train-core/bullet_train-api
   specs:
     bullet_train-api (1.2.25)
@@ -678,6 +692,8 @@ DEPENDENCIES
   bootsnap
   bullet_train!
   bullet_train-api!
+  bullet_train-billing!
+  bullet_train-billing-stripe!
   bullet_train-fields!
   bullet_train-has_uuid!
   bullet_train-incoming_webhooks!
