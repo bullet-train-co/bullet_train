@@ -115,9 +115,6 @@ gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
 
-gem "bullet_train-billing", path: "local/bullet_train-billing"
-gem "bullet_train-billing-stripe", path: "local/bullet_train-billing-stripe"
-
 gem "devise"
 gem "devise-two-factor"
 gem "rqrcode"
