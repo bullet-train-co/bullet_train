@@ -12,6 +12,158 @@ GIT
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
 
+PATH
+  remote: local/bullet_train-core/bullet_train-api
+  specs:
+    bullet_train-api (1.2.25)
+      bullet_train
+      doorkeeper
+      factory_bot
+      jbuilder-schema (>= 2.0.0)
+      pagy
+      pagy_cursor
+      rack-cors
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-fields
+  specs:
+    bullet_train-fields (1.2.25)
+      chronic
+      cloudinary
+      phonelib
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-has_uuid
+  specs:
+    bullet_train-has_uuid (1.2.25)
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-incoming_webhooks
+  specs:
+    bullet_train-incoming_webhooks (1.2.25)
+      bullet_train-super_scaffolding
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-integrations-stripe
+  specs:
+    bullet_train-integrations-stripe (1.2.25)
+      omniauth
+      omniauth-rails_csrf_protection
+      omniauth-stripe-connect
+      rails (>= 6.0.0)
+      stripe
+
+PATH
+  remote: local/bullet_train-core/bullet_train-integrations
+  specs:
+    bullet_train-integrations (1.2.25)
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-obfuscates_id
+  specs:
+    bullet_train-obfuscates_id (1.2.25)
+      hashids
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-outgoing_webhooks
+  specs:
+    bullet_train-outgoing_webhooks (1.2.25)
+      public_suffix
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-scope_questions
+  specs:
+    bullet_train-scope_questions (1.2.25)
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-scope_validator
+  specs:
+    bullet_train-scope_validator (1.2.25)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-sortable
+  specs:
+    bullet_train-sortable (1.2.25)
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-super_load_and_authorize_resource
+  specs:
+    bullet_train-super_load_and_authorize_resource (1.2.25)
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-super_scaffolding
+  specs:
+    bullet_train-super_scaffolding (1.2.25)
+      bullet_train
+      indefinite_article
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-themes-light
+  specs:
+    bullet_train-themes-light (1.2.25)
+      bullet_train-themes-tailwind_css
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-themes-tailwind_css
+  specs:
+    bullet_train-themes-tailwind_css (1.2.25)
+      bullet_train
+      bullet_train-themes
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train-themes
+  specs:
+    bullet_train-themes (1.2.25)
+      rails (>= 6.0.0)
+
+PATH
+  remote: local/bullet_train-core/bullet_train
+  specs:
+    bullet_train (1.2.25)
+      awesome_print
+      bullet_train-fields
+      bullet_train-has_uuid
+      bullet_train-roles
+      bullet_train-routes
+      bullet_train-scope_validator
+      bullet_train-super_load_and_authorize_resource
+      bullet_train-themes
+      cable_ready (= 5.0.0.pre9)
+      cancancan
+      commonmarker
+      devise
+      devise-pwned_password
+      extended_email_reply_parser
+      fastimage
+      figaro
+      hiredis
+      http_accept_language
+      microscope
+      nice_partials (~> 0.9)
+      pagy
+      possessive
+      premailer-rails
+      rails (>= 6.0.0)
+      ruby-openai
+      showcase-rails
+      sidekiq
+      unicode-emoji
+      valid_email
+      xxhash
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -110,95 +262,11 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.25)
-      awesome_print
-      bullet_train-fields
-      bullet_train-has_uuid
-      bullet_train-roles
-      bullet_train-routes
-      bullet_train-scope_validator
-      bullet_train-super_load_and_authorize_resource
-      bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
-      cancancan
-      commonmarker
-      devise
-      devise-pwned_password
-      extended_email_reply_parser
-      fastimage
-      figaro
-      hiredis
-      http_accept_language
-      microscope
-      nice_partials (~> 0.9)
-      pagy
-      possessive
-      premailer-rails
-      rails (>= 6.0.0)
-      ruby-openai
-      showcase-rails
-      sidekiq
-      unicode-emoji
-      valid_email
-      xxhash
-    bullet_train-api (1.2.25)
-      bullet_train
-      doorkeeper
-      factory_bot
-      jbuilder-schema (>= 2.0.0)
-      pagy
-      pagy_cursor
-      rack-cors
-      rails (>= 6.0.0)
-    bullet_train-fields (1.2.25)
-      chronic
-      cloudinary
-      phonelib
-      rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.25)
-      rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.2.25)
-      bullet_train-super_scaffolding
-      rails (>= 6.0.0)
-    bullet_train-integrations (1.2.25)
-      rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.2.25)
-      omniauth
-      omniauth-rails_csrf_protection
-      omniauth-stripe-connect
-      rails (>= 6.0.0)
-      stripe
-    bullet_train-obfuscates_id (1.2.25)
-      hashids
-      rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.2.25)
-      public_suffix
-      rails (>= 6.0.0)
     bullet_train-roles (1.2.25)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
-      rails (>= 6.0.0)
-    bullet_train-scope_questions (1.2.25)
-      rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.25)
-    bullet_train-sortable (1.2.25)
-      rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.25)
-      rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.2.25)
-      bullet_train
-      indefinite_article
-      rails (>= 6.0.0)
-    bullet_train-themes (1.2.25)
-      rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.25)
-      bullet_train-themes-tailwind_css
-      rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.2.25)
-      bullet_train
-      bullet_train-themes
       rails (>= 6.0.0)
     cable_ready (5.0.0.pre9)
       actioncable (>= 5.2)
@@ -608,18 +676,23 @@ DEPENDENCIES
   active_hash
   aws-sdk-s3
   bootsnap
-  bullet_train
-  bullet_train-api
-  bullet_train-incoming_webhooks
-  bullet_train-integrations
-  bullet_train-integrations-stripe
-  bullet_train-obfuscates_id
-  bullet_train-outgoing_webhooks
-  bullet_train-scope_questions
-  bullet_train-sortable
-  bullet_train-super_scaffolding
-  bullet_train-themes
-  bullet_train-themes-light
+  bullet_train!
+  bullet_train-api!
+  bullet_train-fields!
+  bullet_train-has_uuid!
+  bullet_train-incoming_webhooks!
+  bullet_train-integrations!
+  bullet_train-integrations-stripe!
+  bullet_train-obfuscates_id!
+  bullet_train-outgoing_webhooks!
+  bullet_train-scope_questions!
+  bullet_train-scope_validator!
+  bullet_train-sortable!
+  bullet_train-super_load_and_authorize_resource!
+  bullet_train-super_scaffolding!
+  bullet_train-themes!
+  bullet_train-themes-light!
+  bullet_train-themes-tailwind_css!
   capybara!
   capybara-email
   chronic
