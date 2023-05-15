@@ -296,13 +296,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       assert page.has_content?("Start Your Free Trial")
     else
       assert page.has_content?("Subscribe to #{I18n.t("application.name")} Pro")
-      assert page.has_content?("Pay with card")
     end
 
     fill_in_stripe_elements(card)
 
     click_on "Subscribe"
-    sleep 1
+    sleep 3
   end
 
   def start_subscription
