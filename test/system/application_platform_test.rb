@@ -29,18 +29,18 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
-      if billing_enabled?
-        unless freemium_enabled?
-          complete_pricing_page
-        end
-      end
-
       # we should now be on an onboarding step.
       assert page.has_content?("Tell us about you")
       fill_in "First Name", with: "Jane"
       fill_in "Last Name", with: "Smith"
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
+
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+        end
+      end
 
       # Create a new Platform Application
       within_developers_menu_for(display_details) do
