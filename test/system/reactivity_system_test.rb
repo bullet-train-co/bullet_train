@@ -20,6 +20,12 @@ unless scaffolding_things_disabled?
         page.select "Brisbane", from: "Your Time Zone"
         click_on "Next"
 
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+          end
+        end
+
         # We should be on the account dashboard with no Creative Concepts listed.
         assert page.has_content? "My Super Team’s Dashboard"
         assert page.has_content? "If you're wondering what this"

@@ -20,6 +20,12 @@ unless scaffolding_things_disabled?
         page.select "Brisbane", from: "Your Time Zone"
         click_on "Next"
 
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+          end
+        end
+
         click_on "Add New Creative Concept"
         fill_in "Name", with: "My Generic Creative Concept"
         fill_in "Description", with: "Dummy description for my creative concept"

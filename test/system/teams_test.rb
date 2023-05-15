@@ -102,12 +102,11 @@ class TeamsTest < ApplicationSystemTestCase
       if billing_enabled?
         unless freemium_enabled?
           complete_pricing_page
+          # TODO: For some reason, this test needs to sleep
+          # longer than usual to complete the pricing page.
+          sleep 5
         end
       end
-
-      # TODO: For some reason, this test needs to sleep
-      # longer than usual to complete the pricing page.
-      sleep 5
 
       # Shows invited admins
       assert_difference "team.admins.size" do
