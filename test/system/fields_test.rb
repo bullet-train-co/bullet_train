@@ -6,6 +6,9 @@ unless scaffolding_things_disabled?
       test "simulate restoring behavior of form fields on page restore on #{device_name}" do
         resize_for(display_details)
 
+        # Ensure no one is logged in when running the entire test suite.
+        sign_out_for(display_details)
+
         visit root_path
 
         invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
