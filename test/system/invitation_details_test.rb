@@ -11,9 +11,9 @@ class InvitationsTest < ApplicationSystemTestCase
     if billing_enabled?
       unless freemium_enabled?
         complete_pricing_page
+        sleep 2
       end
     end
-    sleep 3
   end
 
   @@test_devices.each do |device_name, display_details|

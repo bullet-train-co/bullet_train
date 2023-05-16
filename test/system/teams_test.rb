@@ -102,9 +102,7 @@ class TeamsTest < ApplicationSystemTestCase
       if billing_enabled?
         unless freemium_enabled?
           complete_pricing_page
-          # TODO: For some reason, this test needs to sleep
-          # longer than usual to complete the pricing page.
-          sleep 5
+          sleep 2
         end
       end
 

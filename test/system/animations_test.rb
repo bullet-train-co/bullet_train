@@ -20,7 +20,7 @@ class AnimationsTest < ApplicationSystemTestCase
     if billing_enabled?
       unless freemium_enabled?
         complete_pricing_page
-        sleep 5
+        sleep 2
       end
     end
 

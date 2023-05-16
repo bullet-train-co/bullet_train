@@ -292,24 +292,14 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def complete_payment_page(card = nil)
     # we should be on the credit card page.
-    if free_trial?
-      assert page.has_content?("Start Your Free Trial")
-    else
-      assert page.has_content?("Subscribe to #{I18n.t("application.name")} Pro")
-    end
-
+    assert page.has_content?("Subscribe to #{I18n.t("application.name")} Pro")
     fill_in_stripe_elements(card)
-
     click_on "Subscribe"
     sleep 3
   end
 
   def start_subscription
-    if free_trial?
-      click_on "7-Day Free Trial"
-    else
-      click_on "Select"
-    end
+    click_on "Select"
   end
 
   def fill_in_stripe_elements(card = nil)
