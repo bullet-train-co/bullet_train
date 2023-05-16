@@ -11,8 +11,7 @@ unless scaffolding_things_disabled?
         # TODO: This is an ugly hack to ensure the default test user isn't logged in.
         # This is happening when billing is enabled and the entire test suite is run.
         if page.text.match?("Jane Smith")
-          puts "Running here."
-          sign_out_for(display_details) 
+          sign_out_for(display_details)
           visit root_path
         end
 
