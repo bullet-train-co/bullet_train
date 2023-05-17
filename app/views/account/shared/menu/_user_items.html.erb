@@ -18,6 +18,14 @@
   <% end %>
 <% end %>
 
+<% if current_user.developer? %>
+  <%= render 'account/shared/menu/item', url: main_app.avo_path, label: "Admin" do |p| %>
+    <% p.content_for :icon do %>
+      <i class="ti ti-key"></i>
+    <% end %>
+  <% end %>
+<% end %>
+
 <div data-turbo="false">
   <%= render 'account/shared/menu/item', url: main_app.destroy_user_session_path, method: :delete, label: t('menus.main.labels.logout') do |p| %>
     <% p.content_for :icon do %>
