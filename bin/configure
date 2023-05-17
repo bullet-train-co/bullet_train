@@ -45,11 +45,14 @@ def ask(string)
 end
 
 def not_installed?(package)
+  return unless Gem::Platform.local.os == "darwin"
   `brew info #{package} | grep "Not installed"`.strip.length > 0
 end
 
 def check_package(package)
-  if not_installed?(package)
+  if Gem::Platform.local.os != "darwin"
+    puts "Skipping check for #{package}, please check manually if you have this package installed on your machine.".yellow
+  elsif not_installed?(package)
     puts "#{package} is not installed via Homebrew. Try running `brew install #{package}`.".red
     input = ask "Try proceeding without #{package}? [y/n]"
     if input.downcase[0] == "n"
