@@ -1,7 +1,7 @@
 # For more information regarding these settings check out our docs https://docs.avohq.io
 Avo.configure do |config|
   ## == Routing ==
-  config.root_path = '/avo'
+  config.root_path = "/avo"
   # used only when you have custom `map` configuration in your config.ru
   # config.prefix_path = "/internal"
 
@@ -9,7 +9,7 @@ Avo.configure do |config|
   # config.home_path = nil
 
   ## == Licensing ==
-  config.license = 'community' # change this to 'pro' when you add the license key
+  config.license = "community" # change this to 'pro' when you add the license key
   # config.license_key = ENV['AVO_LICENSE_KEY']
 
   ## == Set the context ==
