@@ -18,7 +18,7 @@ Avo.configure do |config|
   end
 
   ## == Authentication ==
-  # config.current_user_method = {}
+  config.current_user_method = :current_user
   # config.authenticate_with do
   # end
 
@@ -46,7 +46,7 @@ Avo.configure do |config|
   # config.per_page = 24
   # config.per_page_steps = [12, 24, 48, 72]
   # config.via_per_page = 8
-  # config.id_links_to_resource = false
+  config.id_links_to_resource = true
   # config.cache_resources_on_index_view = true
   ## permanent enable or disable cache_resource_filters, default value is false
   # config.cache_resource_filters = false
@@ -54,7 +54,7 @@ Avo.configure do |config|
   # config.cache_resource_filters = ->(current_user:, resource:) { current_user.cache_resource_filters?}
 
   ## == Customization ==
-  # config.app_name = 'Avocadelicious'
+  config.app_name = -> { I18n.t "application.name" }
   # config.timezone = 'UTC'
   # config.currency = 'USD'
   # config.hide_layout_when_printing = false
@@ -64,7 +64,7 @@ Avo.configure do |config|
   # config.view_component_path = "app/components"
   # config.display_license_request_timeout_error = true
   # config.disabled_features = []
-  # config.tabs_style = :tabs # can be :tabs or :pills
+  config.tabs_style = :pills
   # config.buttons_on_form_footers = true
   # config.field_wrapper_layout = true
 

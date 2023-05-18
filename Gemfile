@@ -140,7 +140,11 @@ gem "devise"
 gem "devise-two-factor"
 gem "rqrcode"
 
-gem "avo"
+gem "avo", ">= 2.32.6", "< 3.0.0"
+
+# Search
+# add this gem to enable search in Avo
+# gem "ransack"
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
