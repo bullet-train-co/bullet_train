@@ -32,7 +32,11 @@ FileUtils.chdir APP_ROOT do
   puts "== Installing dependencies =="
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
-  system("yarn check") || system!("yarn install")
+  if command?("yarn") && `yarn -v`.to_f < 2
+    system("yarn check") || system!("yarn install")
+  else
+    system!("yarn install")
+  end
   system!("bin/link")
 
   puts "== Building assets =="
