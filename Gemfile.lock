@@ -657,7 +657,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_hash
-  avo (>= 2.32.6, < 3.0.0)
+  avo (>= 2.33.1, < 3.0.0)
   aws-sdk-s3
   bootsnap
   bullet_train (= 1.6.6)
