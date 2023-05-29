@@ -623,7 +623,7 @@ DEPENDENCIES
   chronic
   colorize
   cssbundling-rails
-  debug (= 1.8.0)
+  debug
   devise
   devise-two-factor
   factory_bot_rails
