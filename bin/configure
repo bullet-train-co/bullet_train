@@ -71,11 +71,6 @@ def check_package(package)
   end
 end
 
-def api_mode?
-  options[:api]
-end
-
-
 
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
 # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
@@ -105,9 +100,9 @@ end
 check_package("postgresql@14")
 check_package("redis")
 check_package("icu4c")
-check_package("node") unless api_mode?
+check_package("node") unless options[:api]
 
-unless api_mode?
+unless options[:api]
   if `yarn -v 2> /dev/null`.length > 0
     puts "Yarn is installed.".green
   else
@@ -182,7 +177,7 @@ end
 puts "Running `bundle install`.".green
 stream "bundle install"
 
-unless api_mode?
+unless options[:api]
   puts "Running `yarn install`.".green
   stream "yarn install"
 end
@@ -246,7 +241,7 @@ else
   stream "git push origin #{local_branch}:main"
 end
 
-if api_mode?
+if options[:api]
   require 'file_utils'
   removal_list = []
   removal_list << Dir.glob("app/controllers/**").reject {|dir| dir.match?(/api$/)}
