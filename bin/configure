@@ -11,7 +11,6 @@ puts ""
 require 'optparse'
 require 'colorize'
 require 'active_support'
-require "pry"
 
 options = {}
 OptionParser.new do |opts|
