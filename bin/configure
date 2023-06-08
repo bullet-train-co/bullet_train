@@ -248,7 +248,7 @@ if options[:api]
   removal_list << "app/javascript"
   removal_list << Dir.glob("app/views/**").reject {|dir| dir.match?(/api$/)}
   removal_list << "public"
-  removal_list << Dir.glob("test/controllers/**").reject{|dir| match?(/api$/)}
+  removal_list << Dir.glob("test/controllers/**").reject{|dir| dir.match?(/api$/)}
   removal_list << Dir.glob("test/system/**")
   removal_list << "test/bin"
 
