@@ -8,8 +8,19 @@ puts ""
 puts `gem install activesupport`
 puts ""
 
+require 'optparse'
 require 'colorize'
 require 'active_support'
+require "pry"
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: bin/configure [options]"
+
+  opts.on("-a", "--api", "Create application in API mode") do |api|
+    options[:api] = api
+  end
+end.parse!
 
 def replace_in_file(file, before, after, target_regexp = nil)
   puts "Replacing in '#{file}'."
@@ -60,6 +71,10 @@ def check_package(package)
   end
 end
 
+def api_mode?
+  options[:api]
+end
+
 
 
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
@@ -90,26 +105,28 @@ end
 check_package("postgresql@14")
 check_package("redis")
 check_package("icu4c")
-check_package("node")
+check_package("node") unless api_mode?
 
-if `yarn -v 2> /dev/null`.length > 0
-  puts "Yarn is installed.".green
-else
-  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
-  exit
-end
-
-
-required_node = `cat ./.nvmrc`.strip
-actual_node = `node -v`.strip.gsub("v", "")
-message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
-if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
-  puts message.green
-else
-  puts message.red
-  input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
-  if input.downcase[0] == "n"
+unless api_mode?
+  if `yarn -v 2> /dev/null`.length > 0
+    puts "Yarn is installed.".green
+  else
+    puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
     exit
+  end
+
+
+  required_node = `cat ./.nvmrc`.strip
+  actual_node = `node -v`.strip.gsub("v", "")
+  message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
+  if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
+    puts message.green
+  else
+    puts message.red
+    input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
+    if input.downcase[0] == "n"
+      exit
+    end
   end
 end
 
@@ -165,8 +182,10 @@ end
 puts "Running `bundle install`.".green
 stream "bundle install"
 
-puts "Running `yarn install`.".green
-stream "yarn install"
+unless api_mode?
+  puts "Running `yarn install`.".green
+  stream "yarn install"
+end
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 while human == ""
@@ -225,6 +244,22 @@ else
   stream "git add -A"
   stream "git commit -m \"Run configuration script.\""
   stream "git push origin #{local_branch}:main"
+end
+
+if api_mode?
+  require 'file_utils'
+  removal_list = []
+  removal_list << Dir.glob("app/controllers/**").reject {|dir| dir.match?(/api$/)}
+  removal_list << "app/javascript"
+  removal_list << Dir.glob("app/views/**").reject {|dir| dir.match?(/api$/)}
+  removal_list << "public"
+  removal_list << Dir.glob("test/controllers/**").reject{|dir| match?(/api$/)}
+  removal_list << Dir.glob("test/system/**")
+  removal_list << "test/bin"
+
+  removal_list.each do |file_or_dir|
+    puts FileUtil.rm_rf(file_or_dir)
+  end
 end
 
 puts ""
