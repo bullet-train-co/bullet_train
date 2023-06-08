@@ -253,7 +253,7 @@ if options[:api]
   removal_list << "test/bin"
 
   removal_list.each do |file_or_dir|
-    puts FileUtil.rm_rf(file_or_dir)
+    puts FileUtils.rm_rf(file_or_dir)
   end
 end
 
