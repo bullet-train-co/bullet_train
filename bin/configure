@@ -244,7 +244,7 @@ end
 if options[:api]
   require 'fileutils'
 
-  puts "Removing the following files.".blue
+  puts "Removing files unneeded in API mode.".blue
   removal_list = []
   removal_list << Dir.glob("app/controllers/**").reject {|dir| dir.match?(/[api|rb]$/)}
   removal_list << "app/javascript"
@@ -257,6 +257,42 @@ if options[:api]
   removal_list.each do |file_or_dir|
     puts FileUtils.rm_rf(file_or_dir)
   end
+
+  puts "Editing the CircleCI test flow for API mode.".blue
+  new_lines = []
+  File.open(".circleci/config.yml", "r") do |file|
+    lines = file.readlines
+
+    # Skip these lines inbetween these indices.
+    start = nil
+    finish = nil
+
+    # Also skip unneeded test invocations after workflow declaration.
+    workflow_start = nil
+
+    lines.each_with_index do |line, idx|
+      if line.match?(/\s*'Minitest for Super Scaffolding'/)
+        start ||= idx
+      elsif line.match?("test/system/action_models_test.rb")
+        finish ||= idx
+      elsif line.match?(/^workflows/)
+        workflow_start = idx
+      end
+    end
+    tests_to_skip = (start..finish)
+
+    new_lines = lines.map.with_index do |line, idx|
+      if tests_to_skip.include?(idx)
+        next
+      elsif idx >= workflow_start && (line.match?(/System/) || line.match?(/Scaffolding/))
+        next
+      else
+        line
+      end
+    end.compact
+  end
+
+  File.write(".circleci/config.yml", new_lines.join)
 end
 
 puts ""
