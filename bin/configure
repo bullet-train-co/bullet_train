@@ -243,8 +243,10 @@ end
 
 if options[:api]
   require 'fileutils'
+
+  puts "Removing the following files.".blue
   removal_list = []
-  removal_list << Dir.glob("app/controllers/**").reject {|dir| dir.match?(/api$/)}
+  removal_list << Dir.glob("app/controllers/**").reject {|dir| dir.match?(/[api|rb]$/)}
   removal_list << "app/javascript"
   removal_list << Dir.glob("app/views/**").reject {|dir| dir.match?(/api$/)}
   removal_list << "public"
