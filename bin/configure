@@ -242,7 +242,7 @@ else
 end
 
 if options[:api]
-  require 'file_utils'
+  require 'fileutils'
   removal_list = []
   removal_list << Dir.glob("app/controllers/**").reject {|dir| dir.match?(/api$/)}
   removal_list << "app/javascript"
