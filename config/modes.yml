@@ -1,6 +1,13 @@
 ui:
   files:
   gems:
+    - jbuilder
+    - rack-cors
+    # Bullet Train
+    - bullet_train-api
+api:
+  files:
+  gems:
     - sprockets-rails
     - importmap-rails
     - turbo-rails
@@ -21,10 +28,3 @@ ui:
     - bullet_train-themes
     - bullet_train-themes-light
     - bullet_train-sortable
-api:
-  files:
-  gems:
-    - jbuilder
-    - rack-cors
-    # Bullet Train
-    - bullet_train-api
