@@ -1,0 +1,30 @@
+ui:
+  files:
+  gems:
+    - sprockets-rails
+    - importmap-rails
+    - turbo-rails
+    - stimulus-rails
+    - jsbundling-rails
+    - cssbundling-rails
+    - sassc-rails
+    - web-console
+    - rack-mini-profiler
+    # Test env
+    - capybara
+    - selenium-webdriver
+    - webdrivers
+    - cuprite
+    - magic_test
+    # Bullet Train
+    - bullet_train
+    - bullet_train-themes
+    - bullet_train-themes-light
+    - bullet_train-sortable
+api:
+  files:
+  gems:
+    - jbuilder
+    - rack-cors
+    # Bullet Train
+    - bullet_train-api

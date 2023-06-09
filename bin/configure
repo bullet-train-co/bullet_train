@@ -11,6 +11,7 @@ puts ""
 require 'optparse'
 require 'colorize'
 require 'active_support'
+require 'yaml'
 
 options = {}
 OptionParser.new do |opts|
@@ -18,6 +19,9 @@ OptionParser.new do |opts|
 
   opts.on("-a", "--api", "Create application in API mode") do |api|
     options[:api] = api
+  end
+  opts.on("-u", "--ui", "Create application in UI mode") do |ui|
+    options[:ui] = ui
   end
 end.parse!
 
@@ -70,6 +74,41 @@ def check_package(package)
   end
 end
 
+def remove_gems(mode)
+  config = YAML.load_file('./config/modes.yml') # Load the yaml config
+  gems_to_remove = config[mode]['gems'] # Extract the gem names
+  gemfile_lines = File.readlines('./Gemfile') # Read the Gemfile
+
+  # Identify indexes of lines to be removed
+  lines_to_remove = []
+  gemfile_lines.each_with_index do |line, index|
+    if (line.strip.start_with?('gem') || line.strip.start_with?('# gem')) &&
+      gems_to_remove.any? { |gem_name| line.include?("\"#{gem_name}\"") }
+
+      lines_to_remove << index
+      # Check for related comments above this gem
+      i = index - 1
+      while i >= 0 && gemfile_lines[i].strip.start_with?('#') &&
+        !gemfile_lines[i].include?("Core packages.") &&
+        !gemfile_lines[i].include?("Optional support packages.")
+
+        lines_to_remove << i
+        i -= 1
+      end
+      # Remove an empty line before the comments
+      lines_to_remove << i if i >= 0 && gemfile_lines[i].strip.empty?
+    end
+  end
+
+  # Filter the Gemfile
+  filtered_gemfile_lines = gemfile_lines.reject.with_index { |_, index| lines_to_remove.include?(index) }
+
+  # Write the new Gemfile
+  File.open('./Gemfile1', 'w') do |file|
+    file.puts filtered_gemfile_lines
+  end
+end
+
 
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
 # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
@@ -109,7 +148,6 @@ unless options[:api]
     exit
   end
 
-
   required_node = `cat ./.nvmrc`.strip
   actual_node = `node -v`.strip.gsub("v", "")
   message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
@@ -124,6 +162,7 @@ unless options[:api]
   end
 end
 
+# TODO: Why is that here? Can't we just remove that file?
 if File.exist?('.github/workflows/main.yml')
   puts "Removing default GitHub workflow.".yellow
   File.delete('.github/workflows/main.yml')
@@ -171,6 +210,12 @@ if skip_github.downcase[0] == "y"
 
   puts "Pushing repository to `origin`.".green
   stream "git push origin #{local_branch}:main 2>&1"
+end
+
+if options[:api]
+  remove_gems("ui")
+elsif options[:ui]
+  remove_gems("api")
 end
 
 puts "Running `bundle install`.".green
