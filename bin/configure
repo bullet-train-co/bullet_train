@@ -6,7 +6,11 @@ require 'active_support'
 require 'yaml'
 require 'fileutils'
 
-def install_necessary_gems!
+##############################
+# Main `step` methods
+##############################
+
+def install_necessary_gems
   puts ""
   puts `gem install colorize -N`
   puts ""
@@ -16,7 +20,7 @@ def install_necessary_gems!
   puts ""
 end
 
-def check_options!
+def check_options
   @options = {}
   OptionParser.new do |opts|
     opts.banner = "Usage: bin/configure [options]"
@@ -33,7 +37,7 @@ def check_options!
   @modes_config = YAML.load_file('./config/modes.yml') if @options[:mode] # Load the yaml config
 end
 
-def check_ruby!
+def check_ruby
   # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
   # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
   required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
@@ -50,7 +54,7 @@ def check_ruby!
   end
 end
 
-def check_homebrew!
+def check_homebrew
   if `brew info 2> /dev/null`.length > 0
     puts "Homebrew is installed.".green
   else
@@ -62,14 +66,14 @@ def check_homebrew!
   end
 end
 
-def check_packages!
+def check_packages
   check_package("postgresql@14")
   check_package("redis")
   check_package("icu4c")
   check_package("node") unless @options[:mode] == "api"
 end
 
-def check_yarn!
+def check_yarn
   if `yarn -v 2> /dev/null`.length > 0
     puts "Yarn is installed.".green
   else
@@ -99,7 +103,7 @@ def remove_main_github_workflow!
   end
 end
 
-def set_github!
+def set_github
   remove_main_github_workflow!
 
   puts "Next, let's push your application to GitHub."
@@ -182,17 +186,17 @@ def remove_gems!
   end
 end
 
-def run_bundle_install!
+def run_bundle_install
   puts "Running `bundle install`.".green
   stream "bundle install"
 end
 
-def run_yarn_install!
+def run_yarn_install
   puts "Running `yarn install`.".green
   stream "yarn install"
 end
 
-def set_app_name!
+def set_app_name
   human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
   while human == ""
     puts "You must provide a name for your application.".red
@@ -290,7 +294,7 @@ def edit_ci!
   File.write(".circleci/config.yml", new_lines.join)
 end
 
-def save_to_github!
+def save_to_github
   if @skip_github
     puts ""
     puts "Make sure you save your changes with Git.".yellow
@@ -306,13 +310,17 @@ def delete_modes_config!
   File.delete('./config/modes.yml')
 end
 
-def show_success_message!
+def show_success_message
   puts ""
   puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
   puts ""
   puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
   puts ""
 end
+
+##############################
+# Secondary methods
+##############################
 
 def replace_in_file(file, before, after, target_regexp = nil)
   puts "Replacing in '#{file}'."
@@ -364,22 +372,22 @@ def check_package(package)
 end
 
 ##############################
-# All actions take place here:
+# All actions take place here
 ##############################
 
-install_necessary_gems!
-check_options!
-check_ruby!
-check_homebrew!
-check_packages!
-check_yarn! unless @options[:mode] == "api"
-set_github!
+install_necessary_gems
+check_options
+check_ruby
+check_homebrew
+check_packages
+check_yarn unless @options[:mode] == "api"
+set_github
 remove_gems! if @options[:mode]
-run_bundle_install!
-run_yarn_install! unless @options[:mode] == "api"
-set_app_name!
+run_bundle_install
+run_yarn_install unless @options[:mode] == "api"
+set_app_name
 remove_files! if @options[:mode]
 edit_ci! if @options[:mode] == "api"
-save_to_github!
+save_to_github
 delete_modes_config! if @options[:mode]
-show_success_message!
+show_success_message
