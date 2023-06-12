@@ -174,6 +174,8 @@ def remove_gems!
   # Filter the Gemfile
   filtered_gemfile_lines = gemfile_lines.reject.with_index { |_, index| lines_to_remove.include?(index) }
 
+  puts "Removing gems unneeded in #{@options[:mode].upcase} mode.".blue
+
   # Write the new Gemfile
   File.open('./Gemfile', 'w') do |file|
     file.puts filtered_gemfile_lines
@@ -242,23 +244,16 @@ def set_app_name!
 end
 
 def remove_files!
-  puts "Removing files unneeded in #{@options[:mode].upcase} mode.".blue
-  removal_list = []
-  removal_list << Dir.glob("app/controllers/**").reject {|dir| dir.match?(/[api|rb]$/)}
-  removal_list << "app/javascript"
-  removal_list << Dir.glob("app/views/**").reject {|dir| dir.match?(/api$/)}
-  removal_list << "public"
-  removal_list << Dir.glob("test/controllers/**").reject{|dir| dir.match?(/api$/)}
-  removal_list << Dir.glob("test/system/**")
-  removal_list << "test/bin"
+  removal_list = @modes_config[@options[:mode]]['files'] # Extract the file names
 
+  puts "Removing files unneeded in #{@options[:mode].upcase} mode:".blue
   removal_list.each do |file_or_dir|
     puts FileUtils.rm_rf(file_or_dir)
   end
 end
 
 def edit_ci!
-  puts "Editing the CircleCI test flow for #{@options[:mode].upcase} mode.".blue
+  puts "Editing the CircleCI test flow for API mode.".blue
   new_lines = []
   File.open(".circleci/config.yml", "r") do |file|
     lines = file.readlines
@@ -368,10 +363,9 @@ def check_package(package)
   end
 end
 
-
-
-
-
+##############################
+# All actions take place here:
+##############################
 
 install_necessary_gems!
 check_options!
@@ -385,7 +379,7 @@ run_bundle_install!
 run_yarn_install! unless @options[:mode] == "api"
 set_app_name!
 remove_files! if @options[:mode]
-edit_ci! if @options[:mode]
+edit_ci! if @options[:mode] == "api"
 save_to_github!
 delete_modes_config! if @options[:mode]
 show_success_message!
