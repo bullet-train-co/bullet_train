@@ -1,0 +1,36 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/universal:2",
+    "features": {
+        "ghcr.io/devcontainers/features/ruby:1.0.10": {}
+    },
+    "hostRequirements": {
+        "cpus": 2
+    },
+    "waitFor": "onCreateCommand",
+    "updateContentCommand": "bundle install",
+    "postCreateCommand": "ruby -v;echo ' ----- DOUBLE CHECK RUBY VERSION!'",
+    "postAttachCommand": {
+        "server": "bin/dev"
+    },
+    "customizations": {
+        "codespaces": {
+            "openFiles": [
+                "README.md"
+            ]
+        },
+        "vscode": {
+            "extensions": [
+                "rebornix.Ruby"
+            ]
+        }
+    },
+    "portsAttributes": {
+        "3000": {
+            "label": "Application",
+            "onAutoForward": "openPreview"
+        }
+    },
+    "forwardPorts": [
+        3000
+    ]
+}
