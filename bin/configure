@@ -187,6 +187,8 @@ def remove_gems!
 end
 
 def run_bundle_install
+  remove_gems! if @options[:mode]
+
   puts "Running `bundle install`.".green
   stream "bundle install"
 end
@@ -254,9 +256,12 @@ def remove_files!
   removal_list.each do |file_or_dir|
     puts FileUtils.rm_rf(file_or_dir)
   end
+
+  replace_content if @options[:mode] == "api"
 end
 
 def replace_content
+  # config/application.rb
   puts ""
   puts "Replacing assets path with api-only configuration in application.rb.".green
   assets_path = 'config.assets.paths << Rails.root.join("app", "assets", "fonts")'
@@ -267,8 +272,66 @@ def replace_content
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
   CODE
-
   replace_in_file("./config/application.rb", assets_path, api_only)
+
+  # config/environments/development.rb
+  puts ""
+  puts "Replacing code in config/environments.".green
+
+  code_to_remove = <<-CODE
+  # disable asset pipeline.
+  config.assets.enabled = false
+
+  CODE
+  replace_in_file("./config/environments/development.rb", code_to_remove, "")
+
+  code_to_remove = <<-CODE
+  # Annotate rendered view with file names.
+  config.action_view.annotate_rendered_view_with_filenames = true
+
+  CODE
+  replace_in_file("./config/environments/development.rb", code_to_remove, "")
+
+  # config/environments/test.rb
+  code_to_remove = <<-CODE
+  if ENV["SPRING"]
+    # We don't use Spring by default, but we use it in `test/bin/setup-super-scaffolding-system-test`.
+    config.cache_classes = false
+    config.action_view.cache_template_loading = true
+  else
+    # Turn false under Spring and add config.action_view.cache_template_loading = true
+    config.cache_classes = true
+  end
+
+  CODE
+  replacement_code = <<-CODE
+  # Turn false under Spring and add config.action_view.cache_template_loading = true
+  config.cache_classes = true
+
+  CODE
+  replace_in_file("./config/environments/test.rb", code_to_remove, replacement_code)
+
+  code_to_remove = <<-CODE
+  # Annotate rendered view with file names.
+  # We only enable this for a specific test.
+  config.action_view.annotate_rendered_view_with_filenames = ENV["ENABLE_VIEW_ANNOTATION"] || false
+
+  CODE
+  replace_in_file("./config/environments/test.rb", code_to_remove, "")
+
+  # config/environments/production.rb
+  code_to_remove = <<-CODE
+  # Compress CSS using a preprocessor.
+  # config.assets.css_compressor = :sass
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
+  # config.asset_host = "http://assets.example.com"
+
+  CODE
+  replace_in_file("./config/environments/production.rb", code_to_remove, "")
 end
 
 def edit_ci!
@@ -397,12 +460,10 @@ check_homebrew
 check_packages
 check_yarn unless @options[:mode] == "api"
 set_github
-remove_gems! if @options[:mode]
 run_bundle_install
 run_yarn_install unless @options[:mode] == "api"
 set_app_name
 remove_files! if @options[:mode]
-replace_content if @options[:mode] == "api"
 edit_ci! if @options[:mode] == "api"
 save_to_github
 delete_modes_config! if @options[:mode]
