@@ -256,6 +256,21 @@ def remove_files!
   end
 end
 
+def replace_content
+  puts ""
+  puts "Replacing assets path with api-only configuration in application.rb.".green
+  assets_path = 'config.assets.paths << Rails.root.join("app", "assets", "fonts")'
+  api_only = <<-CODE.chop
+
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
+  CODE
+
+  replace_in_file("./config/application.rb", assets_path, api_only)
+end
+
 def edit_ci!
   puts "Editing the CircleCI test flow for API mode.".blue
   new_lines = []
@@ -387,6 +402,7 @@ run_bundle_install
 run_yarn_install unless @options[:mode] == "api"
 set_app_name
 remove_files! if @options[:mode]
+replace_content if @options[:mode] == "api"
 edit_ci! if @options[:mode] == "api"
 save_to_github
 delete_modes_config! if @options[:mode]
