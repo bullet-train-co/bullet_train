@@ -49,6 +49,7 @@ api: # Files and Gems to remove in API-only mode
     - rack-mini-profiler
     # Test env
     - capybara
+    - capybara-email
     - selenium-webdriver
     - webdrivers
     - cuprite
