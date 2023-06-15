@@ -21,6 +21,8 @@ api: # Files and Gems to remove in API-only mode
     - app/views/layout
     - app/views/public
     - app/views/shared
+    - config/initializers/logo.rb
+    - config/initializers/theme.rb
     - public
     - test/bin
     - test/controllers/account
