@@ -332,6 +332,15 @@ def replace_content
 
   CODE
   replace_in_file("./config/environments/production.rb", code_to_remove, "")
+
+  code_to_remove = <<-CODE
+  system("yarn check") || system!("yarn install")
+  system!("bin/link")
+
+  puts "== Building assets =="
+  system!("yarn run build && yarn run build:css && yarn light:build:css")
+  CODE
+  replace_in_file("./bin/setup", code_to_remove, "")
 end
 
 def edit_ci!
