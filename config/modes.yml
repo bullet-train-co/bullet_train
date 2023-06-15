@@ -52,7 +52,6 @@ api: # Files and Gems to remove in API-only mode
     - cuprite
     - magic_test
     # Bullet Train
-    - bullet_train
     - bullet_train-themes
     - bullet_train-themes-light
     - bullet_train-sortable
