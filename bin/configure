@@ -1,25 +1,404 @@
 #!/usr/bin/env ruby
 
-puts ""
-puts `gem install colorize`
-puts ""
-
-puts ""
-puts `gem install activesupport`
-puts ""
-
 require 'optparse'
 require 'colorize'
 require 'active_support'
+require 'yaml'
+require 'fileutils'
 
-options = {}
-OptionParser.new do |opts|
-  opts.banner = "Usage: bin/configure [options]"
+##############################
+# Main `step` methods
+##############################
 
-  opts.on("-a", "--api", "Create application in API mode") do |api|
-    options[:api] = api
+def install_necessary_gems
+  puts ""
+  puts `gem install colorize -N`
+  puts ""
+
+  puts ""
+  puts `gem install activesupport -N`
+  puts ""
+end
+
+def check_options
+  @options = {}
+  OptionParser.new do |opts|
+    opts.banner = "Usage: bin/configure [options]"
+
+    opts.on("-a", "--api", "Create application in API mode") do
+      @options[:mode] = "api"
+    end
+    opts.on("-u", "--ui", "Create application in UI mode") do
+      @options[:mode] = "ui"
+    end
+
+  end.parse!
+
+  @modes_config = YAML.load_file('./config/modes.yml') if @options[:mode] # Load the yaml config
+end
+
+def check_ruby
+  # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
+  # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
+  required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
+  actual_ruby = `ruby -v`.strip
+  message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
+  if actual_ruby.include?(required_ruby)
+    puts message.green
+  else
+    puts message.red
+    input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
+    if input.downcase[0] == "n"
+      exit
+    end
   end
-end.parse!
+end
+
+def check_homebrew
+  if `brew info 2> /dev/null`.length > 0
+    puts "Homebrew is installed.".green
+  else
+    puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
+    input = ask "Try proceeding without Homebrew? [y/n]"
+    if input.downcase[0] == "n"
+      exit
+    end
+  end
+end
+
+def check_packages
+  check_package("postgresql@14")
+  check_package("redis")
+  check_package("icu4c")
+  check_package("node") unless @options[:mode] == "api"
+end
+
+def check_yarn
+  if `yarn -v 2> /dev/null`.length > 0
+    puts "Yarn is installed.".green
+  else
+    puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
+    exit
+  end
+
+  required_node = `cat ./.nvmrc`.strip
+  actual_node = `node -v`.strip.gsub("v", "")
+  message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
+  if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
+    puts message.green
+  else
+    puts message.red
+    input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
+    if input.downcase[0] == "n"
+      exit
+    end
+  end
+end
+
+def remove_main_github_workflow!
+  # TODO: Why is that here? Can't we just remove that file?
+  if File.exist?('.github/workflows/main.yml')
+    puts "Removing default GitHub workflow.".yellow
+    File.delete('.github/workflows/main.yml')
+  end
+end
+
+def set_github
+  remove_main_github_workflow!
+
+  puts "Next, let's push your application to GitHub."
+  puts "If you would like to use another service like Gitlab to manage your repository,"
+  puts "you can opt out of this step and set up the repository manually."
+  puts "(If you're not sure, we suggest going with GitHub)"
+  @skip_github = ask "Continue setting up with GitHub? [y/n]"
+  if @skip_github.downcase[0] == "y"
+    if `git remote | grep bullet-train`.strip.length > 0
+      puts "Repository already has a \`bullet-train`\ remote.".yellow
+    else
+      if `git remote | grep origin`.strip.length > 0
+        puts "Renaming repository `origin` remote to `bullet-train`.".green
+        `git remote rename origin bullet-train`
+      else
+        puts "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?".red
+      end
+    end
+
+    if `git remote | grep origin`.strip.length > 0
+      puts "Repository already has a \`origin`\ remote.".yellow
+    else
+      ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
+      command = if Gem::Platform.local.os == "linux"
+                  "xdg-open"
+                else
+                  "open"
+                end
+      `#{command} https://github.com/new`
+
+      ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+      while ssh_path == ""
+        puts "You must provide a path for your new repository.".red
+        ssh_path = ask "What was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+      end
+      puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
+      puts `git remote add origin #{ssh_path}`.chomp
+    end
+
+    local_branch = `git branch | grep "*"`.split.last
+
+    puts "Pushing repository to `origin`.".green
+    stream "git push origin #{local_branch}:main 2>&1"
+  end
+end
+
+def remove_gems!
+  gems_to_remove = @modes_config[@options[:mode]]['gems'] # Extract the gem names
+  gemfile_lines = File.readlines('./Gemfile') # Read the Gemfile
+
+  # Identify indexes of lines to be removed
+  lines_to_remove = []
+  gemfile_lines.each_with_index do |line, index|
+    if (line.strip.start_with?('gem') || line.strip.start_with?('# gem')) &&
+      gems_to_remove.any? { |gem_name| line.include?("\"#{gem_name}\"") }
+
+      lines_to_remove << index
+      # Check for related comments above this gem
+      i = index - 1
+      while i >= 0 && gemfile_lines[i].strip.start_with?('#') &&
+        !gemfile_lines[i].include?("Core packages.") &&
+        !gemfile_lines[i].include?("Optional support packages.")
+
+        lines_to_remove << i
+        i -= 1
+      end
+      # Remove an empty line before the comments
+      lines_to_remove << i if i >= 0 && gemfile_lines[i].strip.empty?
+    end
+  end
+
+  # Filter the Gemfile
+  filtered_gemfile_lines = gemfile_lines.reject.with_index { |_, index| lines_to_remove.include?(index) }
+
+  puts "Removing gems unneeded in #{@options[:mode].upcase} mode.".blue
+
+  # Write the new Gemfile
+  File.open('./Gemfile', 'w') do |file|
+    file.puts filtered_gemfile_lines
+  end
+end
+
+def run_bundle_install
+  remove_gems! if @options[:mode]
+
+  puts "Running `bundle install`.".green
+  stream "bundle install"
+end
+
+def run_yarn_install
+  puts "Running `yarn install`.".green
+  stream "yarn install"
+end
+
+def set_app_name
+  human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+  while human == ""
+    puts "You must provide a name for your application.".red
+    human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+  end
+
+  require "active_support/inflector"
+
+  variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
+  environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
+  class_name = variable.classify
+  kebab_case = variable.tr("_", "-")
+  connected_name = variable.gsub("_", "") # i.e. `bullettrain` as opposed to `bullet_train`
+
+  puts ""
+  puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
+  replace_in_file("./.circleci/config.yml", "untitled_application", variable)
+  replace_in_file("./config/application.rb", "untitled_application", connected_name)
+  replace_in_file("./config/database.yml", "untitled_application", variable)
+  replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
+  replace_in_file("./config/cable.yml", "untitled_application", variable)
+  replace_in_file("./config/initializers/session_store.rb", "untitled_application", variable)
+  replace_in_file("./config/environments/production.rb", "untitled_application", variable)
+  replace_in_file("./config/application.rb", "UntitledApplication", class_name)
+  replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
+  replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
+  replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
+  replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
+  replace_in_file("./zapier/package.json", "untitled-application", kebab_case)
+  replace_in_file("./zapier/package.json", "Untitled Application", human)
+  replace_in_file("./app/views/api/v1/open_api/index.yaml.erb", "Untitled Application", human)
+  replace_in_file("./app.json", "Untitled Application", human)
+
+  puts ""
+
+  unless @skip_github
+    original_repo_link = "https://github.com/bullet-train-co/bullet_train"
+    new_repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
+    replace_in_file("README.example.md", original_repo_link, new_repo_link, /repo=#{original_repo_link}/)
+  end
+
+  puts "Moving `./README.example.md` to `./README.md`.".green
+  puts `mv ./README.example.md ./README.md`.chomp
+
+  puts `rm .github/FUNDING.yml`.chomp
+
+  # We can only do this after the README is moved into place.
+  replace_in_file("./README.md", "Untitled Application", human)
+end
+
+def remove_files!
+  removal_list = @modes_config[@options[:mode]]['files'] # Extract the file names
+
+  puts "Removing files unneeded in #{@options[:mode].upcase} mode:".blue
+  removal_list.each do |file_or_dir|
+    puts FileUtils.rm_rf(file_or_dir)
+  end
+
+  replace_content if @options[:mode] == "api"
+end
+
+def replace_content
+  # config/application.rb
+  puts ""
+  puts "Replacing assets path with api-only configuration in application.rb.".green
+  assets_path = 'config.assets.paths << Rails.root.join("app", "assets", "fonts")'
+  api_only = <<-CODE.chop
+
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
+  CODE
+  replace_in_file("./config/application.rb", assets_path, api_only)
+
+  # config/environments/development.rb
+  puts ""
+  puts "Replacing code in config/environments.".green
+
+  code_to_remove = <<-CODE
+  # disable asset pipeline.
+  config.assets.enabled = false
+
+  CODE
+  replace_in_file("./config/environments/development.rb", code_to_remove, "")
+
+  code_to_remove = <<-CODE
+  # Annotate rendered view with file names.
+  config.action_view.annotate_rendered_view_with_filenames = true
+
+  CODE
+  replace_in_file("./config/environments/development.rb", code_to_remove, "")
+
+  # config/environments/test.rb
+  code_to_remove = <<-CODE
+  if ENV["SPRING"]
+    # We don't use Spring by default, but we use it in `test/bin/setup-super-scaffolding-system-test`.
+    config.cache_classes = false
+    config.action_view.cache_template_loading = true
+  else
+    # Turn false under Spring and add config.action_view.cache_template_loading = true
+    config.cache_classes = true
+  end
+
+  CODE
+  replacement_code = <<-CODE
+  # Turn false under Spring and add config.action_view.cache_template_loading = true
+  config.cache_classes = true
+
+  CODE
+  replace_in_file("./config/environments/test.rb", code_to_remove, replacement_code)
+
+  code_to_remove = <<-CODE
+  # Annotate rendered view with file names.
+  # We only enable this for a specific test.
+  config.action_view.annotate_rendered_view_with_filenames = ENV["ENABLE_VIEW_ANNOTATION"] || false
+
+  CODE
+  replace_in_file("./config/environments/test.rb", code_to_remove, "")
+
+  # config/environments/production.rb
+  code_to_remove = <<-CODE
+  # Compress CSS using a preprocessor.
+  # config.assets.css_compressor = :sass
+
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = false
+
+  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
+  # config.asset_host = "http://assets.example.com"
+
+  CODE
+  replace_in_file("./config/environments/production.rb", code_to_remove, "")
+end
+
+def edit_ci!
+  puts "Editing the CircleCI test flow for API mode.".blue
+  new_lines = []
+  File.open(".circleci/config.yml", "r") do |file|
+    lines = file.readlines
+
+    # Skip these lines inbetween these indices.
+    start = nil
+    finish = nil
+
+    # Also skip unneeded test invocations after workflow declaration.
+    workflow_start = nil
+
+    lines.each_with_index do |line, index|
+      if line.match?(/\s*'Minitest for Super Scaffolding'/)
+        start ||= index
+      elsif line.match?("test/system/action_models_test.rb")
+        finish ||= index
+      elsif line.match?(/^workflows/)
+        workflow_start = index
+      end
+    end
+    tests_to_skip = (start..finish)
+
+    new_lines = lines.map.with_index do |line, index|
+      if tests_to_skip.include?(index)
+        next
+      elsif index >= workflow_start && (line.match?(/System/) || line.match?(/Scaffolding/))
+        next
+      else
+        line
+      end
+    end.compact
+  end
+
+  File.write(".circleci/config.yml", new_lines.join)
+end
+
+def save_to_github
+  if @skip_github
+    puts ""
+    puts "Make sure you save your changes with Git.".yellow
+  else
+    puts "Committing all these changes to the repository.".green
+    stream "git add -A"
+    stream "git commit -m \"Run configuration script.\""
+    stream "git push origin #{local_branch}:main"
+  end
+end
+
+def delete_modes_config!
+  File.delete('./config/modes.yml')
+end
+
+def show_success_message
+  puts ""
+  puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
+  puts ""
+  puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
+  puts ""
+end
+
+##############################
+# Secondary methods
+##############################
 
 def replace_in_file(file, before, after, target_regexp = nil)
   puts "Replacing in '#{file}'."
@@ -70,232 +449,22 @@ def check_package(package)
   end
 end
 
+##############################
+# All actions take place here
+##############################
 
-# Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
-# rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
-required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
-actual_ruby = `ruby -v`.strip
-message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
-if actual_ruby.include?(required_ruby)
-  puts message.green
-else
-  puts message.red
-  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
-  if input.downcase[0] == "n"
-    exit
-  end
-end
-
-if `brew info 2> /dev/null`.length > 0
-  puts "Homebrew is installed.".green
-else
-  puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
-  input = ask "Try proceeding without Homebrew? [y/n]"
-  if input.downcase[0] == "n"
-    exit
-  end
-end
-
-check_package("postgresql@14")
-check_package("redis")
-check_package("icu4c")
-check_package("node") unless options[:api]
-
-unless options[:api]
-  if `yarn -v 2> /dev/null`.length > 0
-    puts "Yarn is installed.".green
-  else
-    puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
-    exit
-  end
-
-
-  required_node = `cat ./.nvmrc`.strip
-  actual_node = `node -v`.strip.gsub("v", "")
-  message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
-  if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
-    puts message.green
-  else
-    puts message.red
-    input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
-    if input.downcase[0] == "n"
-      exit
-    end
-  end
-end
-
-if File.exist?('.github/workflows/main.yml')
-  puts "Removing default GitHub workflow.".yellow
-  File.delete('.github/workflows/main.yml')
-end
-
-
-puts "Next, let's push your application to GitHub."
-puts "If you would like to use another service like Gitlab to manage your repository,"
-puts "you can opt out of this step and set up the repository manually."
-puts "(If you're not sure, we suggest going with GitHub)"
-skip_github = ask "Continue setting up with GitHub? [y/n]"
-if skip_github.downcase[0] == "y"
-  if `git remote | grep bullet-train`.strip.length > 0
-    puts "Repository already has a \`bullet-train`\ remote.".yellow
-  else
-    if `git remote | grep origin`.strip.length > 0
-      puts "Renaming repository `origin` remote to `bullet-train`.".green
-      `git remote rename origin bullet-train`
-    else
-      puts "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?".red
-    end
-  end
-
-  if `git remote | grep origin`.strip.length > 0
-    puts "Repository already has a \`origin`\ remote.".yellow
-  else
-    ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
-    command = if Gem::Platform.local.os == "linux"
-      "xdg-open"
-    else
-      "open"
-    end
-    `#{command} https://github.com/new`
-
-    ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
-    while ssh_path == ""
-      puts "You must provide a path for your new repository.".red
-      ssh_path = ask "What was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
-    end
-    puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
-    puts `git remote add origin #{ssh_path}`.chomp
-  end
-
-  local_branch = `git branch | grep "*"`.split.last
-
-  puts "Pushing repository to `origin`.".green
-  stream "git push origin #{local_branch}:main 2>&1"
-end
-
-puts "Running `bundle install`.".green
-stream "bundle install"
-
-unless options[:api]
-  puts "Running `yarn install`.".green
-  stream "yarn install"
-end
-
-human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
-while human == ""
-  puts "You must provide a name for your application.".red
-  human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
-end
-
-require "active_support/inflector"
-
-variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
-environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
-class_name = variable.classify
-kebab_case = variable.tr("_", "-")
-connected_name = variable.gsub("_", "") # i.e. `bullettrain` as opposed to `bullet_train`
-
-puts ""
-puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
-replace_in_file("./.circleci/config.yml", "untitled_application", variable)
-replace_in_file("./config/application.rb", "untitled_application", connected_name)
-replace_in_file("./config/database.yml", "untitled_application", variable)
-replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
-replace_in_file("./config/cable.yml", "untitled_application", variable)
-replace_in_file("./config/initializers/session_store.rb", "untitled_application", variable)
-replace_in_file("./config/environments/production.rb", "untitled_application", variable)
-replace_in_file("./config/application.rb", "UntitledApplication", class_name)
-replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
-replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
-replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
-replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
-replace_in_file("./zapier/package.json", "untitled-application", kebab_case)
-replace_in_file("./zapier/package.json", "Untitled Application", human)
-replace_in_file("./app/views/api/v1/open_api/index.yaml.erb", "Untitled Application", human)
-replace_in_file("./app.json", "Untitled Application", human)
-
-puts ""
-
-unless skip_github
-  original_repo_link = "https://github.com/bullet-train-co/bullet_train"
-  new_repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
-  replace_in_file("README.example.md", original_repo_link, new_repo_link, /repo=#{original_repo_link}/)
-end
-
-puts "Moving `./README.example.md` to `./README.md`.".green
-puts `mv ./README.example.md ./README.md`.chomp
-
-puts `rm .github/FUNDING.yml`.chomp
-
-# We can only do this after the README is moved into place.
-replace_in_file("./README.md", "Untitled Application", human)
-
-if skip_github
-  puts ""
-  puts "Make sure you save your changes with Git.".yellow
-else
-  puts "Committing all these changes to the repository.".green
-  stream "git add -A"
-  stream "git commit -m \"Run configuration script.\""
-  stream "git push origin #{local_branch}:main"
-end
-
-if options[:api]
-  require 'fileutils'
-
-  puts "Removing files unneeded in API mode.".blue
-  removal_list = []
-  removal_list << Dir.glob("app/controllers/**").reject {|dir| dir.match?(/[api|rb]$/)}
-  removal_list << "app/javascript"
-  removal_list << Dir.glob("app/views/**").reject {|dir| dir.match?(/api$/)}
-  removal_list << "public"
-  removal_list << Dir.glob("test/controllers/**").reject{|dir| dir.match?(/api$/)}
-  removal_list << Dir.glob("test/system/**")
-  removal_list << "test/bin"
-
-  removal_list.each do |file_or_dir|
-    puts FileUtils.rm_rf(file_or_dir)
-  end
-
-  puts "Editing the CircleCI test flow for API mode.".blue
-  new_lines = []
-  File.open(".circleci/config.yml", "r") do |file|
-    lines = file.readlines
-
-    # Skip these lines inbetween these indices.
-    start = nil
-    finish = nil
-
-    # Also skip unneeded test invocations after workflow declaration.
-    workflow_start = nil
-
-    lines.each_with_index do |line, idx|
-      if line.match?(/\s*'Minitest for Super Scaffolding'/)
-        start ||= idx
-      elsif line.match?("test/system/action_models_test.rb")
-        finish ||= idx
-      elsif line.match?(/^workflows/)
-        workflow_start = idx
-      end
-    end
-    tests_to_skip = (start..finish)
-
-    new_lines = lines.map.with_index do |line, idx|
-      if tests_to_skip.include?(idx)
-        next
-      elsif idx >= workflow_start && (line.match?(/System/) || line.match?(/Scaffolding/))
-        next
-      else
-        line
-      end
-    end.compact
-  end
-
-  File.write(".circleci/config.yml", new_lines.join)
-end
-
-puts ""
-puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
-puts ""
-puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
-puts ""
+install_necessary_gems
+check_options
+check_ruby
+check_homebrew
+check_packages
+check_yarn unless @options[:mode] == "api"
+set_github
+run_bundle_install
+run_yarn_install unless @options[:mode] == "api"
+set_app_name
+remove_files! if @options[:mode]
+edit_ci! if @options[:mode] == "api"
+save_to_github
+delete_modes_config! if @options[:mode]
+show_success_message

@@ -1,0 +1,58 @@
+ui: # Files and Gems to remove in UI-only mode
+  files:
+    - app/controllers/api
+    - app/views/api
+    - test/controllers/api
+  gems:
+    - jbuilder
+    - rack-cors
+    # Bullet Train
+    - bullet_train-api
+api: # Files and Gems to remove in API-only mode
+  files:
+    - app/assets
+    - app/controllers/account
+    - app/controllers/public
+    - app/controllers/application_controller.rb
+    - app/helpers
+    - app/javascript
+    - app/views/account
+    - app/views/devise
+    - app/views/layout
+    - app/views/public
+    - app/views/shared
+    - public
+    - test/bin
+    - test/controllers/account
+    - test/controllers/application
+    - test/system
+    - test/application_system_test_case.rb
+    - vendor/assets
+    - zapier
+    - .nvmrc
+    - esbuild.config.js
+    - package.json
+    - postcss.config.js
+    - tailwind.config.js
+    - yarn.lock
+  gems:
+    - sprockets-rails
+    - importmap-rails
+    - turbo-rails
+    - stimulus-rails
+    - jsbundling-rails
+    - cssbundling-rails
+    - sassc-rails
+    - web-console
+    - rack-mini-profiler
+    # Test env
+    - capybara
+    - selenium-webdriver
+    - webdrivers
+    - cuprite
+    - magic_test
+    # Bullet Train
+    - bullet_train
+    - bullet_train-themes
+    - bullet_train-themes-light
+    - bullet_train-sortable
