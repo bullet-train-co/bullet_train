@@ -265,6 +265,7 @@ def replace_content
   puts ""
   puts "Replacing assets path with api-only configuration in application.rb.".green
   assets_path = 'config.assets.paths << Rails.root.join("app", "assets", "fonts")'
+
   api_only = <<-CODE.chop
 
     # Only loads a smaller set of middleware suitable for API only apps.
@@ -272,7 +273,10 @@ def replace_content
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
   CODE
-  replace_in_file("./config/application.rb", assets_path, api_only)
+  # TODO: I would like to implement this, but it's causing some tests to fail
+  # saying we need to provide a session to use OmniAuth.
+  # replace_in_file("./config/application.rb", assets_path, api_only)
+  replace_in_file("./config/application.rb", assets_path, "")
 
   # config/environments/development.rb
   puts ""
