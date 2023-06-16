@@ -11,10 +11,10 @@ ui: # Files and Gems to remove in UI-only mode
 api: # Files and Gems to remove in API-only mode
   files:
     - app/assets
-    - app/controllers/account
+    - app/controllers/account/memberships_controller.rb
+    - app/controllers/account/teams_controller.rb
+    - app/controllers/account/users_controller.rb
     - app/controllers/public
-    - app/controllers/application_controller.rb
-    - app/helpers
     - app/javascript
     - app/views/account
     - app/views/devise
