@@ -18,7 +18,7 @@ api: # Files and Gems to remove in API-only mode
     - app/javascript
     - app/views/account
     - app/views/devise
-    - app/views/layout
+    - app/views/layouts
     - app/views/public
     - app/views/shared
     - config/initializers/logo.rb
