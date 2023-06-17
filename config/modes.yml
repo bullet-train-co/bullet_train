@@ -54,6 +54,8 @@ api: # Files and Gems to remove in API-only mode
     - webdrivers
     - cuprite
     - magic_test
+    # Development env
+    - showcase-rails
     # Bullet Train
     - bullet_train-themes
     - bullet_train-themes-light
