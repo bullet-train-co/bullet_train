@@ -649,6 +649,7 @@ DEPENDENCIES
   sentry-rails
   sentry-ruby
   sentry-sidekiq
+  showcase-rails
   simplecov
   sprockets-rails
   standard

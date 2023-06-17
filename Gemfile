@@ -134,6 +134,9 @@ group :development do
 
   # For colorizing text in command line scripts.
   gem "colorize"
+
+  # Allow users to document and showcase their partials, components, view helpers, etc.
+  gem "showcase-rails"
 end
 
 group :test do
