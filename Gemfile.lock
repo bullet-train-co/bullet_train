@@ -1,4 +1,41 @@
 GIT
+  remote: https://github.com/bullet-train-co/bullet_train-core.git
+  revision: d6a73a1cf9eadf7781b341d91fb19c19c20732b7
+  branch: teams-base-load-hook
+  specs:
+    bullet_train (1.2.26)
+      awesome_print
+      bullet_train-fields
+      bullet_train-has_uuid
+      bullet_train-roles
+      bullet_train-routes
+      bullet_train-scope_validator
+      bullet_train-super_load_and_authorize_resource
+      bullet_train-themes
+      cable_ready (~> 5.0.0)
+      cancancan
+      commonmarker
+      devise
+      devise-pwned_password
+      extended_email_reply_parser
+      fastimage
+      figaro
+      hiredis
+      http_accept_language
+      microscope
+      nice_partials (~> 0.9)
+      pagy
+      possessive
+      premailer-rails
+      rails (>= 6.0.0)
+      ruby-openai
+      showcase-rails
+      sidekiq
+      unicode-emoji
+      valid_email
+      xxhash
+
+GIT
   remote: https://github.com/teamcapybara/capybara.git
   revision: b211300c1656b7d1f7eb61e274609768a4c5779f
   specs:
@@ -110,37 +147,6 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.26)
-      awesome_print
-      bullet_train-fields
-      bullet_train-has_uuid
-      bullet_train-roles
-      bullet_train-routes
-      bullet_train-scope_validator
-      bullet_train-super_load_and_authorize_resource
-      bullet_train-themes
-      cable_ready (~> 5.0.0)
-      cancancan
-      commonmarker
-      devise
-      devise-pwned_password
-      extended_email_reply_parser
-      fastimage
-      figaro
-      hiredis
-      http_accept_language
-      microscope
-      nice_partials (~> 0.9)
-      pagy
-      possessive
-      premailer-rails
-      rails (>= 6.0.0)
-      ruby-openai
-      showcase-rails
-      sidekiq
-      unicode-emoji
-      valid_email
-      xxhash
     bullet_train-api (1.2.26)
       bullet_train
       doorkeeper
@@ -606,7 +612,7 @@ DEPENDENCIES
   active_hash
   aws-sdk-s3
   bootsnap
-  bullet_train
+  bullet_train!
   bullet_train-api
   bullet_train-incoming_webhooks
   bullet_train-integrations
