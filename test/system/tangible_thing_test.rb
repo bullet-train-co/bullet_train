@@ -20,13 +20,18 @@ unless scaffolding_things_disabled?
         page.select "Brisbane", from: "Your Time Zone"
         click_on "Next"
 
+        visit edit_account_user_path(User.find_by!(email: "me@acme.com"))
+        page.select "Tokyo", from: "Your Time Zone"
+        click_on "Update Profile"
+        visit account_teams_path(Team.find_by!(name: "My Super Team"))
+
         click_on "Add New Creative Concept"
         fill_in "Name", with: "My Generic Creative Concept"
         fill_in "Description", with: "Dummy description for my creative concept"
         click_on "Create Creative Concept"
-
         click_on "Add New Tangible Thing"
         fill_in "Text Field Value", with: "My value for this text field"
+
         click_on "Yes"
         click_on "Two" # this should never make it to the database, because of what comes next.
         click_on "Three"
@@ -62,9 +67,23 @@ unless scaffolding_things_disabled?
         fill_in "Text Field Value", with: "My new value for this text field"
         click_on "No"
         click_on "One"
-        fill_in "Date Field Value", with: "02/17/2021"
-        fill_in "Email Field Value", with: "not-me@acme.com"
 
+        # note : daterangepicker is not running properly with capybara
+        page.execute_script('document.getElementById("scaffolding_completely_concrete_tangible_thing_date_field_value").value = "2021-02-17"')
+        fill_in "Date Field Value", with: "02/17/2021"
+        page.execute_script('document.getElementById("scaffolding_completely_concrete_tangible_thing_date_and_time_field_value").value = "2023-06-14T13:45:00+09:00"')
+        fill_in "Date and Time Field Value", with: "06/14/2023 1:45 PM"
+
+        # note : date_controller is not running properly with capybara
+        click_on "Tokyo"
+        click_on "Brisbane"
+        click_on "Brisbane"
+        click_on "Other"
+        page.select "Paris", from: "time_zone"
+        click_on "Paris"
+        click_on "Tokyo"
+
+        fill_in "Email Field Value", with: "not-me@acme.com"
         fill_in "Password Field Value", with: "insecure-password"
         fill_in "Phone Field Value", with: "(231) 832-5512"
         page.select "Two", from: "Super Select Value"
@@ -80,6 +99,8 @@ unless scaffolding_things_disabled?
         assert page.has_content? "+1 231-832-5512"
         assert page.has_content? "Two"
         assert page.has_content? "New long text for this text area field"
+        assert page.has_content? "February 17, 2021"
+        assert page.has_content? "June 14 at 1:45 PM"
       end
     end
   end
