@@ -17,7 +17,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
   TARGETS_MANY_ACTION='project.update(name: "#{project.name} archived")'
   PERFORM_METHOD_WITH_CONTENT="  def perform_on_target(project)\n    ${TARGETS_MANY_ACTION}"
 
-  test/bin/portable-string-replace app/models/projects/archive_action.rb "# This is where you implement the operation you want to perform on each target." "project.update(name: \"#{project.name} archived\")"
+  test/bin/portable-string-replace app/models/projects/archive_action.rb "# This is where you implement the operation you want to perform on the action's target." "project.update(name: \"#{project.name} archived\")"
 else
   echo "Skipping the \`targets-many\` action on this CI node."
 fi
@@ -28,7 +28,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   rails db:migrate
   bin/super-scaffold action-model:targets-one Publish Listing Team
 
-  test/bin/portable-string-replace app/models/projects/archive_action.rb "# This is where you implement the operation you want to perform on each target." "listing.update(name: \"#{listing.name} published\")"
+  test/bin/portable-string-replace app/models/projects/archive_action.rb "# This is where you implement the operation you want to perform on the action's target." "listing.update(name: \"#{listing.name} published\")"
 else
   echo "Skipping the \`targets-one\` action on this CI node."
 fi
