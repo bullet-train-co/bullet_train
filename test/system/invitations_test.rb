@@ -88,6 +88,22 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         assert page.has_content?("Invitation was successfully created.")
       end
 
+      # Confirm that we can't send an invitation to an email that has already received one.
+      visit new_account_team_invitation_path(hanakos_team)
+      fill_in "Email Address", with: "takashi.yamaguchi@gmail.com"
+      fill_in "First Name", with: "Takashi"
+      fill_in "Last Name", with: "Yamaguchi"
+      click_on "Create Invitation"
+      assert page.has_content?("Sorry, a member with the email takashi.yamaguchi@gmail.com has already been invited.")
+
+      # However, we can resend the initial invite by pressing the "Resend" button.
+      visit account_team_memberships_path(hanakos_team)
+      perform_enqueued_jobs do
+        clear_emails
+        click_on "Resend"
+        assert page.has_content?("Invitation was successfully resent.")
+      end
+
       # we need the id of the membership that's created so we can address it's row in the table specifically.
       invited_membership = Membership.order(:id).last
       invited_membership.invitation
