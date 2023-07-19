@@ -136,7 +136,6 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
         click_on "Create Customer"
         assert page.has_content? "Customer was successfully created."
 
-
         3.times do |i|
           click_on "Add New Notification"
           fill_in "Text", with: "Test Notification #{i}"
