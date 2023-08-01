@@ -60,64 +60,83 @@ def check_package(package)
   end
 end
 
+# Dockerized development (opt-in)
+# https://evilmartians.com/chronicles/ruby-on-whales-docker-for-ruby-rails-development
+use_dip = ask "Would you like to use Docker for development?"
+if use_dip
+  puts ""
+  puts `gem install dip`
+  puts ""
 
-
-# Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
-# rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
-required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
-actual_ruby = `ruby -v`.strip
-message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
-if actual_ruby.include?(required_ruby)
-  puts message.green
-else
-  puts message.red
-  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
-  if input.downcase[0] == "n"
-    exit
-  end
+  # Switch to Cuprite, which is the only supported with Docker for now
+  replace_in_file('Gemfile', '  gem "selenium-webdriver"', '  # gem "selenium-webdriver"')
+  replace_in_file('Gemfile', '  gem "webdrivers"', '  # gem "webdrivers"')
+  replace_in_file('Gemfile', '  # gem "cuprite"', '  gem "cuprite"')
 end
 
-if `brew info 2> /dev/null`.length > 0
-  puts "Homebrew is installed.".green
-else
-  puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
-  input = ask "Try proceeding without Homebrew? [y/n]"
-  if input.downcase[0] == "n"
-    exit
+unless use_dip
+  # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
+  # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
+  required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
+  actual_ruby = `ruby -v`.strip
+  message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
+  if actual_ruby.include?(required_ruby)
+    puts message.green
+  else
+    puts message.red
+    input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
+    if input.downcase[0] == "n"
+      exit
+    end
   end
-end
 
+  if `brew info 2> /dev/null`.length > 0
+    puts "Homebrew is installed.".green
+  else
+    puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
+    input = ask "Try proceeding without Homebrew? [y/n]"
+    if input.downcase[0] == "n"
+      exit
+    end
+  end
+
+<<<<<<< HEAD
 check_package("postgresql@14")
 check_package("redis")
 check_package("icu4c")
 check_package("node")
+=======
+  check_package("postgresql@14")
+  check_package("redis")
+  check_package("icu4c")
+  check_package("node")
+>>>>>>> c01cc4b (feat: docker for development)
 
-if `yarn -v 2> /dev/null`.length > 0
-  puts "Yarn is installed.".green
-else
-  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
-  exit
-end
-
-
-required_node = `cat ./.nvmrc`.strip
-actual_node = `node -v`.strip.gsub("v", "")
-message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
-if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
-  puts message.green
-else
-  puts message.red
-  input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
-  if input.downcase[0] == "n"
+  if `yarn -v 2> /dev/null`.length > 0
+    puts "Yarn is installed.".green
+  else
+    puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
     exit
   end
-end
 
 if File.exist?('.github/workflows/main.yml')
   puts "Removing default GitHub workflow.".yellow
   File.delete('.github/workflows/main.yml')
 end
 
+
+  actual_node = `node -v`.strip.gsub("v", "")
+  message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
+  if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
+    puts message.green
+  else
+    puts message.red
+    input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
+    if input.downcase[0] == "n"
+      exit
+    end
+  end
+end
 
 puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"
@@ -162,11 +181,13 @@ if skip_github.downcase[0] == "y"
   stream "git push origin #{local_branch}:main 2>&1"
 end
 
-puts "Running `bundle install`.".green
-stream "bundle install"
+unless use_dip
+  puts "Running `bundle install`.".green
+  stream "bundle install"
 
-puts "Running `yarn install`.".green
-stream "yarn install"
+  puts "Running `yarn install`.".green
+  stream "yarn install"
+end
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 while human == ""
@@ -201,6 +222,9 @@ replace_in_file("./zapier/package.json", "Untitled Application", human)
 replace_in_file("./app/views/api/v1/open_api/index.yaml.erb", "Untitled Application", human)
 replace_in_file("./app.json", "Untitled Application", human)
 
+replace_in_file("./.dockerdev/compose.yml", "untitled-application", kebab_case)
+replace_in_file("./dip.yml", "untitled-application", kebab_case)
+replace_in_file("./dip.yml", "untitled_application", variable)
 puts ""
 
 unless skip_github
@@ -230,5 +254,10 @@ end
 puts ""
 puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
 puts ""
-puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
+
+if use_dip
+  puts "Next you can run `dip provision` and then `dip rails s`".green
+else
+  puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
+end
 puts ""
