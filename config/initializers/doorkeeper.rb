@@ -368,7 +368,7 @@ Doorkeeper.configure do
   # Password Grant:
   # Allows a client to request an access token using a user id and password
   # along with its own credential, and is often used for legacy/migration reasons.
-  # This grant has a higher risk because it maintains the UID/password anti-pattern. 
+  # This grant has a higher risk because it maintains the UID/password anti-pattern.
   # The user doesn't have control over the authorization process, so clients
   # aren't limited by scope, and could potentially have the same capabilities
   # as the user themselves. See the second link above for countermeasures.
