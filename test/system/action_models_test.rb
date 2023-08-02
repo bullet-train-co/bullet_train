@@ -171,7 +171,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Back"
 
       click_on "Select Multiple"
-      find(:xpath, "/HTML[1]/BODY[1]/DIV[2]/DIV[1]/DIV[2]/MAIN[1]/DIV[2]/DIV[1]/DIV[3]/DIV[1]/UPDATES-FOR[1]/DIV[1]/DIV[2]/DIV[1]/TABLE[1]/THEAD[1]/TR[1]/TH[1]/LABEL[1]/INPUT[1]").click
+      find(:xpath, "/HTML[1]/BODY[1]/DIV[2]/DIV[1]/DIV[2]/MAIN[1]/DIV[2]/DIV[1]/DIV[3]/DIV[1]/CABLE-READY-UPDATES-FOR[1]/DIV[1]/DIV[2]/DIV[1]/TABLE[1]/THEAD[1]/TR[1]/TH[1]/LABEL[1]/INPUT[1]").click
       click_on "Csv Export (All)"
       assert page.has_content? "We're preparing to Export all Visitors of Your Team."
 

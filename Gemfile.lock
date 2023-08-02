@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/teamcapybara/capybara.git
-  revision: c2760553376ad3a76be7b50e87a2eef43a031755
+  revision: b211300c1656b7d1f7eb61e274609768a4c5779f
   specs:
-    capybara (3.39.0)
+    capybara (3.39.1)
       addressable
       matrix
       mini_mime (>= 0.1.3)
@@ -87,8 +87,8 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.760.0)
-    aws-sdk-core (3.171.1)
+    aws-partitions (1.765.0)
+    aws-sdk-core (3.172.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -110,7 +110,7 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.24)
+    bullet_train (1.2.26)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -119,7 +119,7 @@ GEM
       bullet_train-scope_validator
       bullet_train-super_load_and_authorize_resource
       bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
+      cable_ready (~> 5.0.0)
       cancancan
       commonmarker
       devise
@@ -141,7 +141,7 @@ GEM
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-api (1.2.24)
+    bullet_train-api (1.2.26)
       bullet_train
       doorkeeper
       factory_bot
@@ -150,61 +150,59 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.2.24)
+    bullet_train-fields (1.2.26)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.24)
+    bullet_train-has_uuid (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.2.24)
+    bullet_train-incoming_webhooks (1.2.26)
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.2.24)
+    bullet_train-integrations (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.2.24)
+    bullet_train-integrations-stripe (1.2.26)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.2.24)
+    bullet_train-obfuscates_id (1.2.26)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.2.24)
+    bullet_train-outgoing_webhooks (1.2.26)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.2.24)
+    bullet_train-roles (1.2.26)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.2.24)
+    bullet_train-scope_questions (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.24)
-    bullet_train-sortable (1.2.24)
+    bullet_train-scope_validator (1.2.26)
+    bullet_train-sortable (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.24)
+    bullet_train-super_load_and_authorize_resource (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.2.24)
+    bullet_train-super_scaffolding (1.2.26)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.2.24)
+    bullet_train-themes (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.24)
+    bullet_train-themes-light (1.2.26)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.2.24)
+    bullet_train-themes-tailwind_css (1.2.26)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
-    cable_ready (5.0.0.pre9)
-      actioncable (>= 5.2)
+    cable_ready (5.0.0)
       actionpack (>= 5.2)
       actionview (>= 5.2)
-      activerecord (>= 5.2)
       activesupport (>= 5.2)
       railties (>= 5.2)
       thread-local (>= 1.1.0)
@@ -231,7 +229,7 @@ GEM
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.3)
-    debug (1.7.2)
+    debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     debug_inspector (1.1.0)
@@ -241,7 +239,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-pwned_password (0.1.9)
+    devise-pwned_password (0.1.10)
       devise (~> 4)
       pwned (~> 2.0.0)
     devise-two-factor (5.0.0)
@@ -254,7 +252,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.6.6)
       railties (>= 5)
-    email_reply_parser (0.5.10)
+    email_reply_parser (0.5.11)
     erubi (1.12.0)
     erubis (2.7.0)
     extended_email_reply_parser (0.5.1)
@@ -314,9 +312,9 @@ GEM
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
     lint_roller (1.0.0)
-    loofah (2.20.0)
+    loofah (2.21.3)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     magic_test (0.0.9)
       capybara (>= 3.0)
       pry
@@ -357,12 +355,12 @@ GEM
     nice_partials (0.9.3)
       actionview (>= 4.2.6)
     nio4r (2.5.9)
-    nokogiri (1.14.3)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.15.0)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.14.3-arm64-darwin)
+    nokogiri (1.15.0-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.3-x86_64-linux)
+    nokogiri (1.15.0-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -478,9 +476,9 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rotp (6.2.2)
-    rqrcode (2.1.2)
+    rqrcode (2.2.0)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
@@ -499,13 +497,13 @@ GEM
     rubocop-performance (1.16.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    ruby-openai (4.0.0)
+    ruby-openai (4.1.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    selenium-webdriver (4.9.0)
+    selenium-webdriver (4.11.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
@@ -557,7 +555,7 @@ GEM
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     stripe (8.5.0)
-    thor (1.2.1)
+    thor (1.2.2)
     thread-local (1.1.0)
     timeout (0.3.2)
     turbo-rails (1.4.0)
@@ -585,10 +583,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (5.2.0)
-      nokogiri (~> 1.6)
-      rubyzip (>= 1.3.0)
-      selenium-webdriver (~> 4.0)
     websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
@@ -625,7 +619,7 @@ DEPENDENCIES
   chronic
   colorize
   cssbundling-rails
-  debug (= 1.7.2)
+  debug (= 1.8.0)
   devise
   devise-two-factor
   factory_bot_rails
@@ -658,7 +652,6 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
-  webdrivers
 
 RUBY VERSION
    ruby 3.2.2
