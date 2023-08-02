@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
-require "fileutils"
-require "colorize"
+
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  require 'fileutils'
+  require 'colorize'
+end
 
 # path to your application root.
 APP_ROOT = File.expand_path("..", __dir__)
