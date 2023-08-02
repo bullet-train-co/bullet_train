@@ -13,15 +13,15 @@ class Api::V1::Platform::ApplicationsControllerTest < Api::Test
     test "provision" do
       get "/testing/provision", params: {key: nil}
       assert_equal(response.parsed_body, {"message" => "You must provide the proper testing provision key to create a test application."})
- 
+
       get "/testing/provision", params: {key: "not_the_correct_key"}
       assert_equal(response.parsed_body, {"message" => "You must provide the proper testing provision key to create a test application."})
 
       # Providing the proper key creates a new Team and Platform::Application
-      assert_difference('Team.count', 1) do
+      assert_difference("Team.count", 1) do
         get "/testing/provision", params: {key: ENV["TESTING_PROVISION_KEY"]}
       end
-      assert_difference('Platform::Application.count', 1) do
+      assert_difference("Platform::Application.count", 1) do
         get "/testing/provision", params: {key: ENV["TESTING_PROVISION_KEY"]}
       end
     end
