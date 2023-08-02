@@ -54,11 +54,11 @@ if (process.env.THEME) {
 
 // Could also swap to packs?
 const otherEntrypoints = {}
-glob("app/javascript/entrypoints/**/*.js")
+glob("app/javascript/entrypoints/**/*.*")
   .forEach((file) => {
     // strips app/javascript/entrypoints from the key.
-    const key = path.join(path.dirname(file), path.basename(file)).split(path.sep + "entrypoints" + path.sep)[1]
-    const value = "." + path.sep + path.join(path.dirname(file), path.basename(file), path.extname(file))
+    const key = path.join(path.dirname(file), path.parse(file).name).split(path.sep + "entrypoints" + path.sep)[1]
+    const value = "." + path.sep + path.join(path.dirname(file), path.basename(file))
     otherEntrypoints[key] = value
   });
 
