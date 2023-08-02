@@ -29,6 +29,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   [
     "Projects::ArchiveAction",
     "Listings::PublishAction",
+    "Notifications::MarkAllAsReadAction",
     "Articles::CsvImportAction"
   ].each do |class_name|
     class_name.constantize
@@ -120,6 +121,43 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
 
       assert page.has_content?("Publish Action was successfully created.")
       assert page.has_content?("Current and Scheduled Publish Operations")
+    end
+  end
+
+  # targets-one-parent action
+  if defined?(Notifications::MarkAllAsReadAction)
+    test "developers can mark as read all notifications of a customer" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      3.times do |n|
+        click_on "Add New Customer"
+        fill_in "Name", with: "Test Customer #{n}"
+        click_on "Create Customer"
+        assert page.has_content? "Customer was successfully created."
+
+        3.times do |i|
+          click_on "Add New Notification"
+          fill_in "Text", with: "Test Notification #{i}"
+          click_on "Create Notification"
+          assert page.has_content? "Notification was successfully created."
+          click_on "Back"
+        end
+
+        # TODO: "Back" button didn't work here
+        click_on "Customers"
+      end
+
+      click_on "Test Customer 1"
+
+      # Developers can click "Mark All As Read" on a multiple records.
+      assert page.has_content?("Mark All As Read")
+      click_on "Mark All As Read"
+
+      # Confirm action page
+      click_on "Perform Mark All As Read Action"
+
+      assert page.has_content?("Mark All As Read Action was successfully created.")
     end
   end
 

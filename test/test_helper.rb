@@ -3,6 +3,9 @@ require_relative "../config/environment"
 require "rails/test_help"
 require "simplecov"
 
+# Set the default language we test in to English.
+I18n.default_locale = :en
+
 # Open coverage/index.html in your browser after
 # running your tests for test coverage results.
 SimpleCov.start "rails"

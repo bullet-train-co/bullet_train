@@ -14,7 +14,7 @@ basic:
   limits:
     memberships:
       have:
-        count: nil
+        count: null
     scaffolding/absolutely_abstract/creative_concepts:
       have:
         count: 50
@@ -45,7 +45,7 @@ pro:
         enforcement: soft
     scaffolding/absolutely_abstract/creative_concepts:
       have:
-        count: nil
+        count: null
   prices:
     pro_monthly_2022:
       amount: 10000
