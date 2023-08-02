@@ -65,7 +65,7 @@ class DatesHelperTest < ApplicationSystemTestCase
         assert page.has_text? "Tangible Thing was successfully created."
 
         # Compare by hours instead of seconds/minutes for accuracy.
-        tokyo_time = Scaffolding::CompletelyConcrete::TangibleThing.last.created_at
+        tokyo_time = Scaffolding::CompletelyConcrete::TangibleThing.find_by(text_field_value: "Another Test Tangible Thing").created_at
         refute time.strftime("%l").to_i == tokyo_time.strftime("%l").to_i
 
         # Even if we push UTC time forward by an hour,
