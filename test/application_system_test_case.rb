@@ -196,7 +196,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       active_element.send_keys(digit)
     end
   end
-  
+
   def active_element
     page.driver.browser.switch_to.active_element
   end
