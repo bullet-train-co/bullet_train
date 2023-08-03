@@ -880,7 +880,7 @@ __metadata:
     "@tailwindcss/forms": ^0.5.3
     "@tailwindcss/typography": ^0.5.8
     autoprefixer: ^10.4.14
-    cable_ready: 5.0.0-pre8
+    cable_ready: ^5.0.0
     dragula: ^3.7.3
     esbuild: 0.17.18
     glob: ^10.2.2
@@ -1050,12 +1050,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cable_ready@npm:5.0.0-pre8":
-  version: 5.0.0-pre8
-  resolution: "cable_ready@npm:5.0.0-pre8"
+"cable_ready@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "cable_ready@npm:5.0.1"
   dependencies:
-    morphdom: ^2.6.1
-  checksum: 53c00c7cb6e47981993c49f7fe96dd7ac478ced4fe417c0123ce125903d8ca0b9e69df8f6ffa1840df8686709ac986cb08c6c96a764946ce2dc71ba22eda6c1a
+    morphdom: 2.6.1
+  checksum: a6807b106e745e27cb68fc27f8c5ffc4fafa60716e23b0a873869856d030bfa9eba183fd55608ea079636ff27689f689b78f719946eb744075328f9c7ce69830
   languageName: node
   linkType: hard
 
@@ -2546,10 +2546,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"morphdom@npm:^2.6.1":
-  version: 2.7.0
-  resolution: "morphdom@npm:2.7.0"
-  checksum: de18e5b04b0a6222913e70d7a578eb0c15156a4501db3e8d9620ce9e5d998cd926418901b49726b6cc9344b05ea2df945ef77b0b49e3949f818c48d54f43d3c7
+"morphdom@npm:2.6.1":
+  version: 2.6.1
+  resolution: "morphdom@npm:2.6.1"
+  checksum: 8930281b27df2c918a168872a650931d92ac728b9177ed6d74779acf40a4bf6a1c62482a267496a1007f9658d0c6a4125e7080ec1194c6b937ff55f903235ad0
   languageName: node
   linkType: hard
 
