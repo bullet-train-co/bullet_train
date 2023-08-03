@@ -9,6 +9,13 @@ import consumer from '../channels/consumer'
 
 const application = Application.start()
 
+// In the browser console:
+// * Type `window.Stimulus.debug = true` to log actions and lifecycle hooks
+//   on subsequent user interactions and Turbo page views.
+// * Type `window.Stimulus.router.modulesByIdentifier` for a list of loaded controllers.
+// See https://stimulus.hotwired.dev/handbook/installing#debugging
+window.Stimulus = application
+
 // Load all the controllers within this directory and all subdirectories.
 // Controller files must be named *_controller.js.
 import { context as controllersContext } from './**/*_controller.js';
