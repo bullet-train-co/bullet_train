@@ -20,6 +20,12 @@ class DatesHelperTest < ApplicationSystemTestCase
         select "(GMT+00:00) UTC", from: "Your Time Zone"
         click_on "Next"
 
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+          end
+        end
+
         # Create a Tangible Thing
         click_on "Creative Concepts"
         click_on "Add New Creative Concept"
