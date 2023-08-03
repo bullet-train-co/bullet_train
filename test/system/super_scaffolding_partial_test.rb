@@ -121,7 +121,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # File partial
       attach_file("test/support/foo.txt", make_visible: true)
       # Single Option partial
-      choose("One")
+      # TODO: Not sure why we have to specify this, but not the other button with "one".
+      page.all("input").find { |node| node.value == "one" }.click
       # Multiple Option partial
       check("One")
       check("Three")
