@@ -118,6 +118,24 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     yield
   end
 
+  def within_membership_row(membership)
+    within "tr[data-id='#{membership.id}']" do
+      yield
+    end
+  end
+
+  def within_current_memberships_table
+    within "tbody[data-model='Membership'][data-scope='current']" do
+      yield
+    end
+  end
+
+  def within_former_memberships_table
+    within "tbody[data-model='Membership'][data-scope='tombstones']" do
+      yield
+    end
+  end
+
   def open_mobile_menu
     find("#mobile-menu-open").click
   end

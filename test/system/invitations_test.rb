@@ -1,24 +1,6 @@
 require "application_system_test_case"
 
 class InvitationDetailsTest < ApplicationSystemTestCase
-  def within_membership_row(membership)
-    within "tr[data-id='#{membership.id}']" do
-      yield
-    end
-  end
-
-  def within_current_memberships_table
-    within "tbody[data-model='Membership'][data-scope='current']" do
-      yield
-    end
-  end
-
-  def within_former_memberships_table
-    within "tbody[data-model='Membership'][data-scope='tombstones']" do
-      yield
-    end
-  end
-
   @@test_devices.each do |device_name, display_details|
     test "visitors can sign-up and manage team members with subscriptions #{billing_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
       resize_for(display_details)
@@ -52,13 +34,14 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         click_on "Team Members"
       end
 
-      first_membership = Membership.order(:id).last
+      membership_user = User.find_by(email: "hanako.tanaka@gmail.com")
+      first_membership = Membership.find_by(user: membership_user)
 
       assert page.has_content?("The Testing Team Team Members")
 
       # Paths that begin with "/account/" are whitelisted when accessing
       # invitation#new while passing a cancel_path to the params.
-      hanakos_team = Team.first
+      hanakos_team = membership_user.current_team
       path_for_new_invitation = /invitations\/new/
       path_with_cancel_path_params = /invitations\/new\?cancel_path=/
       visit new_account_team_invitation_path(hanakos_team, cancel_path: account_team_memberships_path(hanakos_team))
@@ -88,8 +71,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         assert page.has_content?("Invitation was successfully created.")
       end
 
-      # we need the id of the membership that's created so we can address it's row in the table specifically.
-      invited_membership = Membership.order(:id).last
+      invited_membership = Membership.find_by(user_email: "takashi.yamaguchi@gmail.com")
       invited_membership.invitation
 
       within_current_memberships_table do
@@ -171,7 +153,8 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       assert page.has_content?("Hanako Tanaka")
 
-      last_membership = Membership.order(:id).last
+      membership_user = User.find_by(first_name: "Taka", last_name: "Yamaguchi")
+      last_membership = Membership.find_by(user: membership_user)
 
       within_current_memberships_table do
         assert page.has_content?("Taka Yamaguchi")
@@ -222,8 +205,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         # sign out.
         sign_out_for(display_details)
 
-        # we need the id of the membership that's created so we can address it's row in the table specifically.
-        invited_membership = Membership.order(:id).last
+        invited_membership = Membership.find_by(user_email: "hanako@some-company.com")
 
         # # click the link in the email.
         open_email "hanako@some-company.com"
@@ -250,7 +232,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
           click_on "Team Members"
         end
 
-        last_membership = Membership.order(:id).last
+        last_membership = Membership.find_by(user_email: "hanako@some-company.com")
 
         within_current_memberships_table do
           assert page.has_content?("Hanako Tanaka")
