@@ -127,7 +127,8 @@ bundle exec spring rails g model PartialTest team:references \
   phone_field_test:string \
   super_select_test:string \
   multiple_super_select_test:jsonb \
-  text_area_test:text
+  text_area_test:text \
+  number_field_test:integer
 bin/super-scaffold crud PartialTest Team \
   text_field_test:text_field \
   boolean_test:boolean \
@@ -142,6 +143,7 @@ bin/super-scaffold crud PartialTest Team \
   phone_field_test:phone_field \
   super_select_test:super_select \
   multiple_super_select_test:super_select{multiple} \
-  text_area_test:text_area --sidebar="ti.ti-layout"
+  text_area_test:text_area --sidebar="ti.ti-layout" \
+  number_field_test:number_field
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare

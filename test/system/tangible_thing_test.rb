@@ -6,7 +6,7 @@ unless scaffolding_things_disabled?
       test "create a new tangible thing on a #{device_name} and update it" do
         resize_for(display_details)
 
-        visit root_path
+        visit user_session_path
 
         invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
         assert page.has_content?("Create Your Account")

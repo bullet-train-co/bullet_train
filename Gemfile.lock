@@ -1,17 +1,3 @@
-GIT
-  remote: https://github.com/teamcapybara/capybara.git
-  revision: 96a8baab1df6159a4c0790b1b21e875ee946fa7d
-  specs:
-    capybara (3.39.0)
-      addressable
-      matrix
-      mini_mime (>= 0.1.3)
-      nokogiri (~> 1.8)
-      rack (>= 1.6.0)
-      rack-test (>= 0.6.3)
-      regexp_parser (>= 1.5, < 3.0)
-      xpath (~> 3.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -60,7 +46,7 @@ GEM
       erubi (~> 1.4)
       rails-dom-testing (~> 2.0)
       rails-html-sanitizer (~> 1.1, >= 1.2.0)
-    active_hash (3.1.1)
+    active_hash (3.2.0)
       activesupport (>= 5.0.0)
     activejob (7.0.4.3)
       activesupport (= 7.0.4.3)
@@ -82,21 +68,21 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    addressable (2.8.2)
+    addressable (2.8.4)
       public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.739.0)
-    aws-sdk-core (3.171.0)
+    aws-partitions (1.765.0)
+    aws-sdk-core (3.172.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.63.0)
+    aws-sdk-kms (1.64.0)
       aws-sdk-core (~> 3, >= 3.165.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.120.0)
+    aws-sdk-s3 (1.122.0)
       aws-sdk-core (~> 3, >= 3.165.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.4)
@@ -110,7 +96,7 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.24)
+    bullet_train (1.2.26)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -119,7 +105,7 @@ GEM
       bullet_train-scope_validator
       bullet_train-super_load_and_authorize_resource
       bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
+      cable_ready (~> 5.0.0)
       cancancan
       commonmarker
       devise
@@ -141,7 +127,7 @@ GEM
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-api (1.2.24)
+    bullet_train-api (1.2.26)
       bullet_train
       doorkeeper
       factory_bot
@@ -150,65 +136,72 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.2.24)
+    bullet_train-fields (1.2.26)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.24)
+    bullet_train-has_uuid (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.2.24)
+    bullet_train-incoming_webhooks (1.2.26)
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.2.24)
+    bullet_train-integrations (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.2.24)
+    bullet_train-integrations-stripe (1.2.26)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.2.24)
+    bullet_train-obfuscates_id (1.2.26)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.2.24)
+    bullet_train-outgoing_webhooks (1.2.26)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.2.24)
+    bullet_train-roles (1.2.26)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.2.24)
+    bullet_train-scope_questions (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.24)
-    bullet_train-sortable (1.2.24)
+    bullet_train-scope_validator (1.2.26)
+    bullet_train-sortable (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.24)
+    bullet_train-super_load_and_authorize_resource (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.2.24)
+    bullet_train-super_scaffolding (1.2.26)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.2.24)
+    bullet_train-themes (1.2.26)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.24)
+    bullet_train-themes-light (1.2.26)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.2.24)
+    bullet_train-themes-tailwind_css (1.2.26)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
-    cable_ready (5.0.0.pre9)
-      actioncable (>= 5.2)
+    cable_ready (5.0.0)
       actionpack (>= 5.2)
       actionview (>= 5.2)
-      activerecord (>= 5.2)
       activesupport (>= 5.2)
       railties (>= 5.2)
       thread-local (>= 1.1.0)
     cancancan (3.5.0)
+    capybara (3.39.2)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
     capybara-email (3.0.2)
       capybara (>= 2.4, < 4.0)
       mail
@@ -222,7 +215,7 @@ GEM
       sexp_processor
     coderay (1.1.3)
     colorize (0.8.1)
-    commonmarker (0.23.8)
+    commonmarker (0.23.9)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.0)
     crass (1.0.6)
@@ -231,17 +224,17 @@ GEM
     cssbundling-rails (1.1.2)
       railties (>= 6.0.0)
     date (3.3.3)
-    debug (1.7.2)
+    debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
     debug_inspector (1.1.0)
-    devise (4.9.1)
+    devise (4.9.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-pwned_password (0.1.9)
+    devise-pwned_password (0.1.10)
       devise (~> 4)
       pwned (~> 2.0.0)
     devise-two-factor (5.0.0)
@@ -254,7 +247,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.6.6)
       railties (>= 5)
-    email_reply_parser (0.5.10)
+    email_reply_parser (0.5.11)
     erubi (1.12.0)
     erubis (2.7.0)
     extended_email_reply_parser (0.5.1)
@@ -270,6 +263,8 @@ GEM
     faraday (2.7.4)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
     faraday-net_http (3.0.2)
     fastimage (2.2.6)
     figaro (1.2.0)
@@ -286,20 +281,17 @@ GEM
     http-cookie (1.0.5)
       domain_name (~> 0.5)
     http_accept_language (2.1.1)
-    httparty (0.21.0)
-      mini_mime (>= 1.0.0)
-      multi_xml (>= 0.5.2)
-    i18n (1.12.0)
+    i18n (1.13.0)
       concurrent-ruby (~> 1.0)
     indefinite_article (0.2.5)
       activesupport
     io-console (0.6.0)
-    irb (1.6.3)
+    irb (1.6.4)
       reline (>= 0.3.0)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (2.1.0)
+    jbuilder-schema (2.2.0)
       jbuilder
       rails (>= 5.0.0)
     jmespath (1.6.2)
@@ -307,16 +299,17 @@ GEM
       railties (>= 6.0.0)
     json (2.6.3)
     jwt (2.7.0)
-    knapsack_pro (3.9.0)
+    knapsack_pro (3.11.0)
       rake
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
       addressable (~> 2.8)
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
-    loofah (2.20.0)
+    lint_roller (1.0.0)
+    loofah (2.21.3)
       crass (~> 1.0.2)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.12.0)
     magic_test (0.0.9)
       capybara (>= 3.0)
       pry
@@ -337,12 +330,13 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2023.0218.1)
     mini_mime (1.1.2)
-    mini_portile2 (2.8.1)
+    mini_portile2 (2.8.2)
     minitest (5.18.0)
     minitest-retry (0.2.2)
       minitest (>= 5.0)
     msgpack (1.7.0)
     multi_xml (0.6.0)
+    multipart-post (2.3.0)
     net-imap (0.3.4)
       date
       net-protocol
@@ -356,12 +350,12 @@ GEM
     nice_partials (0.9.3)
       actionview (>= 4.2.6)
     nio4r (2.5.9)
-    nokogiri (1.14.3)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.15.2)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.14.3-arm64-darwin)
+    nokogiri (1.15.2-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.14.3-x86_64-linux)
+    nokogiri (1.15.2-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -383,18 +377,17 @@ GEM
       omniauth (~> 1.3)
       omniauth-oauth2 (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (5.10.1)
-      activesupport
-    pagy_cursor (0.5.0)
+    pagy (6.0.4)
+    pagy_cursor (0.6.0)
       activerecord (>= 5)
-      pagy (>= 5, < 6)
-    parallel (1.22.1)
-    parser (3.2.2.0)
+      pagy (>= 6, < 7)
+    parallel (1.23.0)
+    parser (3.2.2.1)
       ast (~> 2.4.1)
-    pg (1.4.6)
-    phonelib (0.7.7)
+    pg (1.5.3)
+    phonelib (0.8.1)
     possessive (1.0.1)
-    postmark (1.23.0)
+    postmark (1.24.0)
       json
     postmark-rails (0.22.1)
       actionmailer (>= 3.0.0)
@@ -414,14 +407,14 @@ GEM
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
     public_suffix (5.0.1)
-    puma (6.2.1)
+    puma (6.2.2)
       nio4r (~> 2.0)
     pwned (2.0.2)
-    racc (1.6.2)
-    rack (2.2.6.4)
+    racc (1.7.1)
+    rack (2.2.7)
     rack-cors (2.0.1)
       rack (>= 2.0.0)
-    rack-mini-profiler (3.0.0)
+    rack-mini-profiler (3.1.0)
       rack (>= 1.2.0)
     rack-test (2.1.0)
       rack (>= 1.3)
@@ -466,7 +459,7 @@ GEM
       redis-client (>= 0.9.0)
     redis-client (0.14.1)
       connection_pool
-    regexp_parser (2.7.0)
+    regexp_parser (2.8.1)
     reline (0.3.3)
       io-console (~> 0.5)
     require_all (3.0.0)
@@ -478,52 +471,53 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.2.5)
+    rexml (3.2.6)
     rotp (6.2.2)
-    rqrcode (2.1.2)
+    rqrcode (2.2.0)
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.48.1)
+    rubocop (1.50.2)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.2.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
-      rubocop-ast (>= 1.26.0, < 2.0)
+      rubocop-ast (>= 1.28.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.28.0)
+    rubocop-ast (1.28.1)
       parser (>= 3.2.1.0)
     rubocop-performance (1.16.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    ruby-openai (3.7.0)
-      httparty (>= 0.18.1)
+    ruby-openai (4.1.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    selenium-webdriver (4.8.6)
+    selenium-webdriver (4.11.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.8.0)
+    sentry-rails (5.9.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.8.0)
-    sentry-ruby (5.8.0)
+      sentry-ruby (~> 5.9.0)
+    sentry-ruby (5.9.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sentry-sidekiq (5.8.0)
-      sentry-ruby (~> 5.8.0)
+    sentry-sidekiq (5.9.0)
+      sentry-ruby (~> 5.9.0)
       sidekiq (>= 3.0)
-    sexp_processor (4.16.1)
+    sexp_processor (4.17.0)
     showcase-rails (0.4.2)
       rails (>= 6.1.0)
-    sidekiq (7.0.7)
+    sidekiq (7.1.0)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
-      redis-client (>= 0.11.0)
+      redis-client (>= 0.14.0)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -542,14 +536,21 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    standard (1.26.0)
+    standard (1.28.2)
       language_server-protocol (~> 3.17.0.2)
-      rubocop (~> 1.48.1)
+      lint_roller (~> 1.0)
+      rubocop (~> 1.50.2)
+      standard-custom (~> 1.0.0)
+      standard-performance (~> 1.0.1)
+    standard-custom (1.0.0)
+      lint_roller (~> 1.0)
+    standard-performance (1.0.1)
+      lint_roller (~> 1.0)
       rubocop-performance (~> 1.16.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
     stripe (8.5.0)
-    thor (1.2.1)
+    thor (1.2.2)
     thread-local (1.1.0)
     timeout (0.3.2)
     turbo-rails (1.4.0)
@@ -562,7 +563,7 @@ GEM
       unf_ext
     unf_ext (0.0.8.2)
     unicode-display_width (2.4.2)
-    unicode-emoji (3.3.1)
+    unicode-emoji (3.3.2)
       unicode-version (~> 1.0)
     unicode-version (1.3.0)
     valid_email (0.1.4)
@@ -577,10 +578,6 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
-    webdrivers (5.2.0)
-      nokogiri (~> 1.6)
-      rubyzip (>= 1.3.0)
-      selenium-webdriver (~> 4.0)
     websocket (1.2.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
@@ -588,7 +585,7 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     xxhash (0.5.0)
-    zeitwerk (2.6.7)
+    zeitwerk (2.6.8)
 
 PLATFORMS
   arm64-darwin-21
@@ -612,12 +609,12 @@ DEPENDENCIES
   bullet_train-super_scaffolding
   bullet_train-themes
   bullet_train-themes-light
-  capybara!
+  capybara (~> 3.39)
   capybara-email
   chronic
   colorize
   cssbundling-rails
-  debug (= 1.7.2)
+  debug
   devise
   devise-two-factor
   factory_bot_rails
@@ -650,7 +647,6 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
-  webdrivers
 
 RUBY VERSION
    ruby 3.2.2
