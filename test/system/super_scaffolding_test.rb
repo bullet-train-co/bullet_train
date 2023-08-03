@@ -25,7 +25,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   [
     "TestSite",
     "TestPage",
-    "TestFile",
     "Project",
     "Projects::Deliverable",
     "Projects::Tag",
