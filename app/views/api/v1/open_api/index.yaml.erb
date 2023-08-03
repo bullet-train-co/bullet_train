@@ -1,0 +1,55 @@
+openapi: 3.1.0
+info:
+  title: <%= t("application.name") %> API
+  description: |
+    <%= t("application.description") %>
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: "<%= @version.upcase %>"
+servers:
+  - url: <%= ENV["BASE_URL"] %>/api/<%= @version %>
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    <%= automatic_components_for Team %>
+    <%= automatic_components_for User %>
+    <%= automatic_components_for Webhooks::Outgoing::Endpoint %>
+    <%= automatic_components_for Webhooks::Outgoing::Event %>
+    <%= automatic_components_for Scaffolding::CompletelyConcrete::TangibleThing unless scaffolding_things_disabled? %>
+    <%# 🚅 super scaffolding will insert new components above this line. %>
+  parameters:
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    after:
+      name: after
+      in: query
+      required: false
+      schema:
+        type: integer
+      description: "ID of item after which the collection should be returned"
+  headers:
+    PaginationNext:
+      description: "ID of next item in collection if exists, to be used in `after` route param for cursor-style paignation"
+      schema:
+        type: integer
+    Link:
+      description: "Link to the next page"
+      schema:
+        type: string
+security:
+  - BearerAuth: []
+paths:
+  <%= paths_for Team %>
+  <%= paths_for User %>
+  <%= automatic_paths_for Webhooks::Outgoing::Endpoint, Team %>
+  <%= automatic_paths_for Webhooks::Outgoing::Event, Team, except: %i[create update delete] %>
+  <%= automatic_paths_for Scaffolding::CompletelyConcrete::TangibleThing, Scaffolding::AbsolutelyAbstract::CreativeConcept unless scaffolding_things_disabled? %>
+  <%# 🚅 super scaffolding will insert new paths above this line. %>

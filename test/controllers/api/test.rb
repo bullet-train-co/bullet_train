@@ -1,9 +1,4 @@
 class Api::Test < ActionDispatch::IntegrationTest
-  # Since response.parsed_body only works with :json out of the box,
-  # we register this encoder so rails knows how to parse a JSON:API response.
-  ActionDispatch::IntegrationTest.register_encoder :jsonapi,
-    response_parser: ->(body) { JSON.parse(body) }
-
   def access_token
     params = {
       client_id: @platform_application.uid,
@@ -28,13 +23,6 @@ class Api::Test < ActionDispatch::IntegrationTest
     post "/oauth/token", params: params
     assert_response :success
     response.parsed_body["access_token"]
-  end
-
-  def assert_response_specific_not_found
-    assert_response :not_found
-    # Some invalid token errors also return 404, so it's important that we assert for the actual error message,
-    # otherwise we're not testing the right thing.
-    assert response.parsed_body["error"].include?("could not be found")
   end
 
   def setup

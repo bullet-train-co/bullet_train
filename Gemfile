@@ -6,7 +6,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.1.2"
+ruby(File.read(File.expand_path(".ruby-version", __dir__)))
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
@@ -18,7 +18,7 @@ gem "sprockets-rails"
 gem "pg", ">= 0.18", "< 2.0"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
+gem "puma", "~> 6.0"
 
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
@@ -36,7 +36,7 @@ gem "cssbundling-rails"
 gem "jbuilder"
 
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.0.5"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
@@ -53,9 +53,18 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# A natural language date/time parser.
+gem "chronic"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[mri mingw x64_mingw]
+
+  # A gem for generating test coverage results in your browser.
+  gem "simplecov", require: false
+
+  # Generate test objects.
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -71,17 +80,21 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara", github: "teamcapybara/capybara"
+  gem "capybara", "~> 3.39"
+
+  # Selenium is the default default Capybara driver for system tests that ships with
+  # Rails. Cuprite is an alternative driver that uses Chrome's native DevTools protocol
+  # and offers improved speed and reliability, but only works with Chrome. If you want
+  # to switch to Cuprite, you can comment out the `selenium-webdriver` gem
+  # and uncomment the `cuprite` gem below. Bullet Train will automatically load
+  # the correct configuration based on which gem is included.
   gem "selenium-webdriver"
-  gem "webdrivers"
+
+  # gem "cuprite"
 end
 
 # BULLET TRAIN GEMS
 # This section is the list of Ruby gems included by default for Bullet Train.
-
-# TODO We have to reference `devise` in the local application Gemfile before `bullet_train`, otherwise our overrides of
-# its views don't take effect. Is there another way around this?
-gem "devise"
 
 # Core packages.
 gem "bullet_train"
@@ -89,6 +102,7 @@ gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
+gem "bullet_train-themes"
 gem "bullet_train-themes-light"
 gem "bullet_train-integrations"
 gem "bullet_train-integrations-stripe"
@@ -98,11 +112,9 @@ gem "bullet_train-sortable"
 gem "bullet_train-scope_questions"
 gem "bullet_train-obfuscates_id"
 
-# source "https://BULLET_TRAIN_PRO_TOKEN@gem.fury.io/bullettrain" do
-#   gem "bullet_train-action_models"
-#   gem "bullet_train-conversations"
-#   gem "bullet_train-audit_logs"
-# end
+gem "devise"
+gem "devise-two-factor"
+gem "rqrcode"
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
@@ -116,6 +128,9 @@ group :development do
 
   # Rails doesn't include this by default, but we depend on it.
   gem "foreman"
+
+  # For colorizing text in command line scripts.
+  gem "colorize"
 end
 
 group :test do
@@ -124,9 +139,6 @@ group :test do
 
   # Interact with emails during testing.
   gem "capybara-email"
-
-  # Generate test objects.
-  gem "factory_bot_rails", group: :development
 
   # Write system tests by pointing and clicking in your browser.
   gem "magic_test"
@@ -154,14 +166,11 @@ group :production do
   gem "aws-sdk-s3", require: false
 end
 
-# TODO Have to specify this dependency here until our changes are in the original package.
-gem "active_hash", github: "bullet-train-co/active_hash"
+# Use Ruby hashes as readonly datasources for ActiveRecord-like models.
+gem "active_hash"
 
-# TODO Have to specify this dependency here until our changes are in the original package or properly forked.
-gem "wine_bouncer", github: "bullet-train-co/wine_bouncer"
-
-# # TODO Have to specify this dependency here until a fix is in the original package.
-# gem "xray-rails", github: "brentd/xray-rails", ref: "4f6cca0"
+# A great debugger.
+gem "pry"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood

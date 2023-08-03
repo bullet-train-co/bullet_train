@@ -1,5 +1,16 @@
 #!/usr/bin/env ruby
 
+puts ""
+puts `gem install colorize`
+puts ""
+
+puts ""
+puts `gem install activesupport`
+puts ""
+
+require 'colorize'
+require 'active_support'
+
 def replace_in_file(file, before, after, target_regexp = nil)
   puts "Replacing in '#{file}'."
   if target_regexp
@@ -28,24 +39,8 @@ def stream(command, prefix = "  ")
   puts ""
 end
 
-def red(string)
-  "\e[1;31m#{string}\e[0m"
-end
-
-def green(string)
-  "\e[1;32m#{string}\e[0m"
-end
-
-def blue(string)
-  "\e[1;34m#{string}\e[0m"
-end
-
-def yellow(string)
-  "\e[1;33m#{string}\e[0m"
-end
-
 def ask(string)
-  puts blue string
+  puts string.blue
   return gets.strip
 end
 
@@ -53,77 +48,81 @@ def not_installed?(package)
   `brew info #{package} | grep "Not installed"`.strip.length > 0
 end
 
-# Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
-required_ruby = `cat ./.ruby-version`.strip
-actual_ruby = `ruby -v`.strip
-message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
-if actual_ruby.include?(required_ruby)
-  puts green(message)
-else
-  puts red(message)
-  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y]"
-  if input.downcase[0] == "n"
-    exit
+def check_package(package)
+  if not_installed?(package)
+    puts "#{package} is not installed via Homebrew. Try running `brew install #{package}`.".red
+    input = ask "Try proceeding without #{package}? [y/n]"
+    if input.downcase[0] == "n"
+      exit
+    end
+  else
+    puts "#{package} is installed via Homebrew.".green
   end
 end
 
-required_node = `cat ./.nvmrc`.strip
-actual_node = `node -v`.strip.gsub("v", "")
-message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
-if Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
-  puts green(message)
+
+
+# Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
+# rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
+required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
+actual_ruby = `ruby -v`.strip
+message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
+if actual_ruby.include?(required_ruby)
+  puts message.green
 else
-  puts red(message)
-  input = ask "Try proceeding with Node #{actual_node} anyway? [y]"
+  puts message.red
+  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
 end
 
 if `brew info 2> /dev/null`.length > 0
-  puts green "Homebrew is installed."
+  puts "Homebrew is installed.".green
 else
-  puts red "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it."
-  input = ask "Try proceeding without Homebrew?"
+  puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
+  input = ask "Try proceeding without Homebrew? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
 end
 
-if not_installed?("postgresql@13")
-  puts red "PostgreSQL 13 is not installed via Homebrew. Try running `brew install postgresql@13`."
-  input = ask "Try proceeding without PostgreSQL 13?"
-  if input.downcase[0] == "n"
-    exit
-  end
-else
-  puts green "PostgreSQL 13 is installed via Homebrew."
-end
+check_package("postgresql@14")
+check_package("redis")
+check_package("icu4c")
 
-if not_installed?("redis")
-  puts red "Redis is not installed via Homebrew. Try running `brew install redis`."
-  input = ask "Try proceeding without Redis?"
-  if input.downcase[0] == "n"
-    exit
-  end
+required_node = `cat ./.nvmrc`.strip
+actual_node = begin
+                `node -v`.strip.gsub("v", "")
+              rescue
+                :not_found
+              end
+message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
+if actual_node == :not_found
+  puts "You don't have Node installed. We can't proceed without it. Try `brew install node`.".red
+  exit
+elsif Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
+  puts message.green
 else
-  puts green "Redis is installed via Homebrew."
-end
-
-if not_installed?("icu4c")
-  puts red "icu4c is not installed via Homebrew. Try running `brew install icu4c`."
-  input = ask "Try proceeding without icu4c?"
+  puts message.red
+  input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
   if input.downcase[0] == "n"
     exit
   end
 end
 
 if `yarn -v 2> /dev/null`.length > 0
-  puts green "Yarn is installed."
+  puts "Yarn is installed.".green
 else
-  puts red "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install ."
+  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
   exit
 end
+
+if File.exist?('.github/workflows/main.yml')
+  puts "Removing default GitHub workflow.".yellow
+  File.delete('.github/workflows/main.yml')
+end
+
 
 puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"
@@ -132,18 +131,18 @@ puts "(If you're not sure, we suggest going with GitHub)"
 skip_github = ask "Continue setting up with GitHub? [y/n]"
 if skip_github.downcase[0] == "y"
   if `git remote | grep bullet-train`.strip.length > 0
-    puts yellow "Repository already has a \`bullet-train`\ remote."
+    puts "Repository already has a \`bullet-train`\ remote.".yellow
   else
     if `git remote | grep origin`.strip.length > 0
-      puts green "Renaming repository `origin` remote to `bullet-train`."
+      puts "Renaming repository `origin` remote to `bullet-train`.".green
       `git remote rename origin bullet-train`
     else
-      puts red "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?"
+      puts "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?".red
     end
   end
 
   if `git remote | grep origin`.strip.length > 0
-    puts yellow "Repository already has a \`origin`\ remote."
+    puts "Repository already has a \`origin`\ remote.".yellow
   else
     ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
     command = if Gem::Platform.local.os == "linux"
@@ -154,33 +153,34 @@ if skip_github.downcase[0] == "y"
     `#{command} https://github.com/new`
 
     ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
-    puts green "Setting repository's `origin` remote to `#{ssh_path}`."
+    while ssh_path == ""
+      puts "You must provide a path for your new repository.".red
+      ssh_path = ask "What was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+    end
+    puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
     puts `git remote add origin #{ssh_path}`.chomp
   end
 
   local_branch = `git branch | grep "*"`.split.last
 
-  puts green "Pushing repository to `origin`."
+  puts "Pushing repository to `origin`.".green
   stream "git push origin #{local_branch}:main 2>&1"
 end
 
-puts green "Running `bundle install`."
+puts "Running `bundle install`.".green
 stream "bundle install"
 
-if `yarn -v 2> /dev/null`.strip.length > 0
-  puts green "Yarn is installed."
-else
-  puts red "Yarn is not installed. Try `brew install yarn`."
-  exit
-end
-
-puts green "Running `yarn install`."
+puts "Running `yarn install`.".green
 stream "yarn install"
 
-# This should be available now.
+human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+while human == ""
+  puts "You must provide a name for your application.".red
+  human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+end
+
 require "active_support/inflector"
 
-human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
 environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
 class_name = variable.classify
@@ -188,7 +188,7 @@ kebab_case = variable.tr("_", "-")
 connected_name = variable.gsub("_", "") # i.e. `bullettrain` as opposed to `bullet_train`
 
 puts ""
-puts green "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase."
+puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
 replace_in_file("./.circleci/config.yml", "untitled_application", variable)
 replace_in_file("./config/application.rb", "untitled_application", connected_name)
 replace_in_file("./config/database.yml", "untitled_application", variable)
@@ -201,9 +201,20 @@ replace_in_file("./config/locales/en/application.en.yml", "Untitled Application"
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
 replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
 replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
+replace_in_file("./zapier/package.json", "untitled-application", kebab_case)
+replace_in_file("./zapier/package.json", "Untitled Application", human)
+replace_in_file("./app/views/api/v1/open_api/index.yaml.erb", "Untitled Application", human)
+replace_in_file("./app.json", "Untitled Application", human)
+
 puts ""
 
-puts green "Moving `./README.example.md` to `./README.md`."
+unless skip_github
+  original_repo_link = "https://github.com/bullet-train-co/bullet_train"
+  new_repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
+  replace_in_file("README.example.md", original_repo_link, new_repo_link, /repo=#{original_repo_link}/)
+end
+
+puts "Moving `./README.example.md` to `./README.md`.".green
 puts `mv ./README.example.md ./README.md`.chomp
 
 puts `rm .github/FUNDING.yml`.chomp
@@ -213,16 +224,16 @@ replace_in_file("./README.md", "Untitled Application", human)
 
 if skip_github
   puts ""
-  puts yellow("Make sure you save your changes with Git.")
+  puts "Make sure you save your changes with Git.".yellow
 else
-  puts green "Committing all these changes to the repository."
+  puts "Committing all these changes to the repository.".green
   stream "git add -A"
   stream "git commit -m \"Run configuration script.\""
   stream "git push origin #{local_branch}:main"
 end
 
 puts ""
-puts yellow "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!"
+puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
 puts ""
-puts green "Next you can run `bin/setup` and then `bin/dev`."
+puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
 puts ""

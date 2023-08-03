@@ -5,10 +5,13 @@ class WebhooksSystemTest < ApplicationSystemTestCase
     super
     @user = create :onboarded_user, first_name: "Andrew", last_name: "Culver"
     @another_user = create :onboarded_user, first_name: "John", last_name: "Smith"
+    return unless Rails.configuration.respond_to?(:outgoing_webhooks)
+
+    Rails.configuration.outgoing_webhooks[:allowed_hostnames] = [URI.parse(Capybara.app_host).host]
+    Rails.configuration.outgoing_webhooks[:blocked_hostnames] = []
   end
 
   unless scaffolding_things_disabled?
-
     @@test_devices.each do |device_name, display_details|
       test "team member registers for webhooks and then receives them on #{device_name}" do
         resize_for(display_details)
@@ -16,7 +19,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         visit account_dashboard_path
 
         # create the endpoint.
-        within_primary_menu_for(display_details) do
+        within_developers_menu_for(display_details) do
           click_on "Webhooks"
         end
         click_on "Add New Endpoint"
@@ -40,6 +43,8 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           fill_in "Name", with: "Testing"
           click_on "Create Creative Concept"
           assert page.has_content? "Creative Concept was successfully created"
+
+          perform_enqueued_jobs
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook delivery should be issued" do
@@ -48,24 +53,31 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           fill_in "Text Field Value", with: "Some Thing"
           click_on "Create Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully created"
+
+          perform_enqueued_jobs
         end
+
+        # Go to index page.
+        click_on "Back"
 
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
           click_on "Add New Tangible Thing"
           fill_in "Text Field Value", with: "Some Other Thing"
           click_on "Create Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully created"
-          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+
+          perform_enqueued_jobs
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
-          click_on "Some Thing"
           assert page.has_content? "Tangible Thing Details"
           click_on "Edit Tangible Thing"
           assert page.has_content? "Edit Tangible Thing Details"
           fill_in "Text Field Value", with: "Some Updated Thing"
           click_on "Update Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully updated"
+
+          perform_enqueued_jobs
         end
 
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
@@ -73,18 +85,19 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           fill_in "Text Field Value", with: "One Last Updated Thing"
           click_on "Update Tangible Thing"
           assert page.has_content? "Tangible Thing was successfully updated"
-          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+
+          perform_enqueued_jobs
         end
 
         click_on "Back"
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 0, "an outbound webhook should not be issued" do
           within("table tr:first-child[data-id]") do
-            click_on "Delete"
+            accept_alert { click_on "Delete" }
           end
-          page.driver.browser.switch_to.alert.accept
           assert page.has_content?("Tangible Thing was successfully destroyed.")
-          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+
+          perform_enqueued_jobs
         end
 
         sign_out_for(display_details)
@@ -114,10 +127,12 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           fill_in "Text Field Value", with: "Some Thing"
           click_on "Create Tangible Thing"
           assert page.has_content?("Tangible Thing was successfully created.")
+
+          perform_enqueued_jobs
         end
 
         # create the endpoint.
-        within_primary_menu_for(display_details) do
+        within_developers_menu_for(display_details) do
           click_on "Webhooks"
         end
         click_on "Add New Endpoint"
@@ -137,15 +152,39 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         assert page.has_content? "Creative Concept Details"
 
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
-          assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should not be issued" do
+          assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
             within("table tr:first-child[data-id]") do
-              click_on "Delete"
+              accept_alert { click_on "Delete" }
             end
-            page.driver.browser.switch_to.alert.accept
             assert page.has_content?("Tangible Thing was successfully destroyed.")
+            perform_enqueued_jobs
           end
-          Webhooks::Outgoing::Delivery.order(:id).last.deliver
+
+          perform_enqueued_jobs
         end
+
+        within_developers_menu_for(display_details) do
+          click_on "Webhooks"
+        end
+
+        within("table tr:first-child[data-id]") do
+          find("td:first-child a").click
+        end
+
+        assert page.has_content?("Webhooks Endpoint Details")
+
+        within("table tr:first-child[data-id]") do
+          find("td:first-child a").click
+        end
+
+        assert page.has_content?("Webhook Delivery Details")
+
+        # View a delivery attempt.
+        within("table tr:first-child[data-id]") do
+          find("td:first-child a").click
+        end
+
+        assert page.has_content?("Delivery Attempt Details")
       end
     end
 

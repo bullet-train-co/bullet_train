@@ -106,7 +106,7 @@ Rails.application.configure do
 
   config.active_job.queue_adapter = :sidekiq
 
-  if ENV["AWS_S3_BUCKET"].present?
+  if (ENV["AWS_ACCESS_KEY_ID"] || ENV["BUCKETEER_AWS_ACCESS_KEY_ID"]).present?
     config.active_storage.service = :amazon
   end
 
@@ -114,8 +114,10 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   # generate full urls using the base url configuration setting.
-  Rails.application.routes.default_url_options = default_url_options_from_base_url
-  config.action_mailer.default_url_options = default_url_options_from_base_url
+  unless default_url_options_from_base_url.empty?
+    Rails.application.routes.default_url_options = default_url_options_from_base_url
+    config.action_mailer.default_url_options = default_url_options_from_base_url
+  end
 
   # if you want to use some other smtp configuration, please don't
   # modify this configuration, as it will cause merge conflicts

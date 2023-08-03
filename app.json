@@ -1,12 +1,12 @@
 {
-  "name": "New Bullet Train Application",
+  "name": "Untitled Application",
   "description": "The Ruby on Rails SaaS-in-a-Box",
   "repository": "https://github.com/bullet-train-co/bullet_train",
-  "logo": "https://tailwind.bullettrain.co/heroku-logo.png",
+  "logo": "https://bullettrain.co/heroku-logo.png",
   "keywords": ["ruby", "rails"],
   "buildpacks": [
-    { "url": "heroku/nodejs" },
-    { "url": "heroku/ruby" }
+    { "url": "heroku/ruby" },
+    { "url": "heroku/nodejs" }
   ],
   "formation": {
     "web": {
@@ -22,11 +22,11 @@
     "heroku-postgresql:standard-0",
     "heroku-redis:premium-0",
     "memcachier:100",
-    "hdrive:starter-s3",
+    "bucketeer:hobbyist",
     "cloudinary:starter",
     "scheduler:standard",
-    "rails-autoscale:free",
-    "honeybadger:free",
+    "rails-autoscale:white",
+    "honeybadger:basic",
     "sentry:f1",
     "realemail:free"
   ],

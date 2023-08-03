@@ -8,7 +8,7 @@ FactoryBot.define do
     last_sign_in_at { 1.day.ago }
     current_sign_in_ip { "127.0.0.1" }
     last_sign_in_ip { "127.0.0.2" }
-    time_zone { nil }
+    time_zone { ActiveSupport::TimeZone.all.first.name }
     locale { nil }
     factory :onboarded_user do
       first_name { "First Name" }
@@ -19,6 +19,11 @@ FactoryBot.define do
       factory :two_factor_user do
         otp_secret { User.generate_otp_secret }
         otp_required_for_login { true }
+      end
+
+      factory :user_example do
+        first_name { "Example First Name" }
+        last_name { "Example Last Name" }
       end
     end
   end

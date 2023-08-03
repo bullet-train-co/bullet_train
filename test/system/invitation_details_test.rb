@@ -51,8 +51,9 @@ class InvitationsTest < ApplicationSystemTestCase
       within "tbody[data-model='Membership'] tr[data-id='#{membership.id}']" do
         click_link "Details"
       end
-      click_on "Remove from Team"
-      page.driver.browser.switch_to.alert.accept
+      accept_alert do
+        click_on "Remove from Team"
+      end
       assert page.has_content?("That user has been successfully removed from the team.")
       within "tbody[data-model='Membership'][data-scope='current']" do
         assert page.has_no_content?("john@bullettrain.co")

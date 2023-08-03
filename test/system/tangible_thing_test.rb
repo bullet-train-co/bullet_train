@@ -6,12 +6,13 @@ unless scaffolding_things_disabled?
       test "create a new tangible thing on a #{device_name} and update it" do
         resize_for(display_details)
 
-        visit root_path
+        visit user_session_path
 
-        click_on "Don't have an account?"
+        invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
+        assert page.has_content?("Create Your Account")
         fill_in "Your Email Address", with: "me@acme.com"
-        fill_in "Set Password", with: "password123"
-        fill_in "Confirm Password", with: "password123"
+        fill_in "Set Password", with: example_password
+        fill_in "Confirm Password", with: example_password
         click_on "Sign Up"
         fill_in "Your First Name", with: "John"
         fill_in "Your Last Name", with: "Doe"
@@ -41,7 +42,7 @@ unless scaffolding_things_disabled?
         click_on "Create Tangible Thing"
         assert page.has_content? "Tangible Thing was successfully created."
 
-        click_on "My value for this text field"
+        # Creating a Tangible Thing redirects to its show page.
         assert page.has_content? "Tangible Thing Details"
 
         assert page.has_content? "My value for this text field"

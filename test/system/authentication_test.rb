@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class AuthenticationSystemTest < ApplicationSystemTestCase
   @@test_devices.each do |device_name, display_details|
-    test "visitors can sign-up, sign-out, sign-in, reset passwords, etc. with subscriptions #{subscriptions_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
+    test "visitors can sign-up, sign-out, sign-in, reset passwords, etc. with subscriptions #{billing_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
       resize_for(display_details)
 
       be_invited_to_sign_up
@@ -17,17 +17,21 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
 
       # try non-matching passwords.
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"
-      fill_in "Set Password", with: "password123"
-      fill_in "Confirm Password", with: "password1234"
+      fill_in "Set Password", with: example_password
+      fill_in "Confirm Password", with: another_example_password
       click_on "Sign Up"
       assert page.has_content?("Password Confirmation doesn't match Password.")
 
       # assume the fields have been properly re-populated and try again.
-      fill_in "Set Password", with: "password123"
-      fill_in "Confirm Password", with: "password123"
+      fill_in "Set Password", with: example_password
+      fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
-      complete_pricing_page if subscriptions_enabled?
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+        end
+      end
 
       # we should now be on an onboarding step.
       assert page.has_content?("Tell us about you")
@@ -48,8 +52,8 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
 
       # try to register as that same user again.
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"
-      fill_in "Set Password", with: "password123"
-      fill_in "Confirm Password", with: "password123"
+      fill_in "Set Password", with: example_password
+      fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
       assert page.has_content?("Email Address has already been taken.")
 
@@ -69,12 +73,13 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       fill_in "Your Password", with: "notpassword1234"
       check "Remember me"
       click_on "Sign In"
-      assert page.has_content?("Invalid Email Address or Password.")
+      # TODO I feel like password should be capitalized here?
+      assert page.has_content?("Invalid Email Address or password.")
 
       # try signing in with the valid credentials.
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"
       click_on "Next" if two_factor_authentication_enabled?
-      fill_in "Your Password", with: "password123"
+      fill_in "Your Password", with: example_password
       click_on "Sign In"
 
       # we should be on the team's dashboard.
@@ -123,8 +128,8 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       visit edit_user_password_path(reset_password_token: "invalid-token")
       assert page.has_content?("Change Your Password")
 
-      fill_in "New Password", with: "password123"
-      fill_in "Confirm Password", with: "password1234"
+      fill_in "New Password", with: example_password
+      fill_in "Confirm Password", with: another_example_password
       click_on "Change My Password"
 
       # it should recognize that the token is invalid.
@@ -136,15 +141,15 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       # this token should be outdated.
       visit edit_user_password_path(reset_password_token: token)
 
-      fill_in "New Password", with: "password123"
-      fill_in "Confirm Password", with: "password1234"
+      fill_in "New Password", with: example_password
+      fill_in "Confirm Password", with: another_example_password
       click_on "Change My Password"
 
       assert page.has_content?("Password Confirmation doesn't match Password.")
 
       # ok, finally try to actually update the password properly and it should work.
-      fill_in "New Password", with: "password123"
-      fill_in "Confirm Password", with: "password123"
+      fill_in "New Password", with: example_password
+      fill_in "Confirm Password", with: example_password
       click_on "Change My Password"
 
       # we should be on the dashboard.

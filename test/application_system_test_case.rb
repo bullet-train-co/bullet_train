@@ -4,12 +4,30 @@ require "support/waiting"
 require "minitest/retry"
 
 Minitest::Retry.use!(retry_count: 3, verbose: true, exceptions_to_retry: [Net::ReadTimeout])
-
 OmniAuth.config.test_mode = true
 
+# Configure Capybara with either cuprite or selenium based on what gems are installed
+if Bundler.locked_gems.dependencies.has_key? "cuprite"
+  require "capybara/cuprite"
+  require "support/ferrum_console_logger"
+
+  Capybara.register_driver(:bt_cuprite) do |app|
+    Capybara::Cuprite::Driver.new(
+      app,
+      logger: FerrumConsoleLogger.new,
+      window_size: [1400, 1400],
+      process_timeout: 10,
+      inspector: true,
+      headless: !ENV["HEADLESS"].in?(%w[n 0 no false]) && !ENV["MAGIC_TEST"].in?(%w[y 1 yes true]),
+    )
+  end
+  Capybara.default_driver = Capybara.javascript_driver = :bt_cuprite
+else # Selenium
+  Capybara.javascript_driver = ENV["MAGIC_TEST"].present? ? :selenium_chrome : :selenium_chrome_headless
+  Capybara.default_driver = ENV["MAGIC_TEST"].present? ? :selenium_chrome : :selenium_chrome_headless
+end
+
 Capybara.default_max_wait_time = ENV.fetch("CAPYBARA_DEFAULT_MAX_WAIT_TIME", ENV["MAGIC_TEST"].present? ? 5 : 15)
-Capybara.javascript_driver = ENV["MAGIC_TEST"].present? ? :selenium_chrome : :selenium_chrome_headless
-Capybara.default_driver = ENV["MAGIC_TEST"].present? ? :selenium_chrome : :selenium_chrome_headless
 
 Capybara.register_server :puma do |app, port, host|
   require "rack/handler/puma"
@@ -22,7 +40,16 @@ Capybara.server_port = 3001
 Capybara.app_host = "http://localhost:3001"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
-  driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
+  def self.use_cuprite?
+    Bundler.locked_gems.dependencies.has_key? "cuprite"
+  end
+  delegate :use_cuprite?, to: :class
+
+  if use_cuprite?
+    driven_by :bt_cuprite
+  else
+    driven_by :selenium, using: :chrome, screen_size: [1400, 1400]
+  end
   include ActiveJob::TestHelper
   include MagicTest::Support
   include Capybara::DSL
@@ -32,6 +59,14 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include Devise::Test::IntegrationHelpers
   include Warden::Test::Helpers
   include Waiting
+
+  def example_password
+    @example_password ||= SecureRandom.hex
+  end
+
+  def another_example_password
+    @another_example_password ||= SecureRandom.hex
+  end
 
   def setup
     ENV["BASE_URL"] = "http://localhost:3001"
@@ -61,30 +96,58 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def resize_for(display_details)
-    page.driver.browser.manage.window.resize_to(*calculate_resolution(display_details))
+    if use_cuprite?
+      page.driver.resize(*calculate_resolution(display_details))
+    else
+      page.driver.browser.manage.window.resize_to(*calculate_resolution(display_details))
+    end
   end
 
   def within_team_menu_for(display_details)
-    within_primary_menu_for(display_details) do
+    first("#team").hover
+    yield
+  end
+
+  def within_user_menu_for(display_details)
+    find("#user").hover
+    yield
+  end
+
+  def within_developers_menu_for(display_details)
+    find("#developers").hover
+    yield
+  end
+
+  def within_membership_row(membership)
+    within "tr[data-id='#{membership.id}']" do
+      yield
+    end
+  end
+
+  def within_current_memberships_table
+    within "tbody[data-model='Membership'][data-scope='current']" do
+      yield
+    end
+  end
+
+  def within_former_memberships_table
+    within "tbody[data-model='Membership'][data-scope='tombstones']" do
       yield
     end
   end
 
   def open_mobile_menu
-    find(".mobile-menu-trigger").click
+    find("#mobile-menu-open").click
   end
 
   # sign out.
   def sign_out_for(display_details)
     if display_details[:mobile]
       open_mobile_menu
-      click_on "Logout"
     else
-      within ".menu" do
-        # first(".logged-user-i").hover
-        click_on "Logout"
-      end
+      find("#user").hover
     end
+    click_on "Logout"
 
     # make sure we're actually signed out.
     # (this will vary depending on where you send people when they sign out.)
@@ -129,6 +192,21 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def select2_select(label, string)
+    if use_cuprite?
+      select2_select_cuprite(label, string)
+    else
+      select2_select_selenium(label, string)
+    end
+  end
+
+  private def select2_select_cuprite(label, string)
+    string = string.join("\n") if string.is_a?(Array)
+    field = find("label", text: /\A#{label}\z/)
+    field.click
+    page.driver.browser.keyboard.type(string, :Enter)
+  end
+
+  private def select2_select_selenium(label, string)
     string = string.join("\n") if string.is_a?(Array)
     field = find("label", text: /\A#{label}\z/)
     field.click
@@ -140,7 +218,31 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   # https://stackoverflow.com/a/50794401/2414273
-  def assert_no_js_errors
+
+  def assert_no_js_errors &block
+    if use_cuprite?
+      assert_no_js_errors_cuprite(&block)
+    else
+      assert_no_js_errors_selenium(&block)
+    end
+  end
+
+  private def assert_no_js_errors_cuprite &block
+    last_timestamp = page.driver.browser.options.logger.logs
+      .map(&:timestamp)
+      .last || 0
+
+    yield
+
+    errors = page.driver.browser.options.logger.logs
+
+    errors = errors.reject { |e| e.timestamp.blank? || e.timestamp < last_timestamp } if last_timestamp > 0
+    errors = errors.filter { |e| e.level == "error" }
+
+    assert errors.length.zero?, "Expected no js errors, but these errors where found: #{errors.map(&:message).join(", ")}"
+  end
+
+  private def assert_no_js_errors_selenium &block
     last_timestamp = page.driver.browser.logs.get(:browser)
       .map(&:timestamp)
       .last || 0
@@ -199,23 +301,95 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     display_details[:resolution].map { |pixel_count| pixel_count / (display_details[:high_dpi] ? 2 : 1) }
   end
 
-  # We monkey patch #execute when headless browser system tests
-  # are finicky and need to sleep to reflect changes.
-  module ::Selenium::WebDriver::Remote
-    class Bridge
-      @@execute_sleep_time = 0
-      alias_method :patched_execute, :execute
-      def execute(*args)
-        sleep @@execute_sleep_time
-        patched_execute(*args)
+  def complete_pricing_page(card = nil)
+    assert page.has_content?("Select Your Plan")
+    sleep 0.5
+    within(".pricing-plan.highlight") do
+      start_subscription
+    end
+
+    complete_payment_page(card)
+  end
+
+  def complete_payment_page(card = nil)
+    # we should be on the credit card page.
+    if free_trial?
+      assert page.has_content?("Start Your Free Trial")
+      assert page.has_content?("30-Day Free Trial".upcase)
+    else
+      assert page.has_content?("Upgrade Your Account")
+      assert page.has_content?("It Will Work For You!".upcase)
+    end
+
+    fill_in_stripe_elements(card)
+
+    if free_trial?
+      click_on "Start Free Trial"
+    else
+      click_on "Upgrade Now"
+    end
+  end
+
+  def start_subscription
+    if free_trial?
+      click_on "Start Trial"
+    else
+      click_on "Sign Up"
+    end
+  end
+
+  def fill_in_stripe_elements(card = nil)
+    # default card.
+    card ||= {
+      card_number: "4242424242424242",
+      expiration_month: "12",
+      expiration_year: "29",
+      security_code: "234",
+      zip: "93063"
+    }
+
+    using_wait_time(10) do
+      card_number_frame = find("#card-number iframe")
+      cvc_frame = find("#card-cvc iframe")
+      card_exp = find("#card-exp iframe")
+
+      within_frame(card_number_frame) do
+        card[:card_number].chars.each do |digit|
+          find_field("cardnumber").send_keys(digit)
+        end
       end
 
-      def self.slow_down_execute_time
-        @@execute_sleep_time = 0.5
+      within_frame(cvc_frame) do
+        card[:security_code].chars.each do |digit|
+          find_field("cvc").send_keys(digit)
+        end
       end
 
-      def self.reset_execute_time
+      within_frame(card_exp) do
+        (card[:expiration_month] + card[:expiration_year]).chars.each do |digit|
+          find_field("exp-date").send_keys(digit)
+        end
+      end
+    end
+  end
+
+  if !use_cuprite?
+    module ::Selenium::WebDriver::Remote
+      class Bridge
         @@execute_sleep_time = 0
+        alias_method :patched_execute, :execute
+        def execute(*args)
+          sleep @@execute_sleep_time
+          patched_execute(*args)
+        end
+
+        def self.slow_down_execute_time
+          @@execute_sleep_time = 0.1
+        end
+
+        def self.reset_execute_time
+          @@execute_sleep_time = 0
+        end
       end
     end
   end

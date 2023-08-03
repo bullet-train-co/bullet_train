@@ -47,7 +47,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
         }
       end
 
-      assert_redirected_to url_for([:account, @absolutely_abstract_creative_concept, :completely_concrete_tangible_things])
+      assert_redirected_to url_for([:account, Scaffolding::CompletelyConcrete::TangibleThing.last])
     end
 
     test "should show tangible_thing" do

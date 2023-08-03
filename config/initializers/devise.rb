@@ -1,6 +1,9 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  config.responder.error_status = :unprocessable_entity
+  config.responder.redirect_status = :see_other
+
   config.omniauth :stripe_connect, ENV["STRIPE_CLIENT_ID"], ENV["STRIPE_SECRET_KEY"], scope: "read_write"
   # 🚅 super scaffolding will insert new oauth providers above this line.
 
@@ -29,6 +32,10 @@ Devise.setup do |config|
 
   # Configure the parent class responsible to send e-mails.
   config.parent_mailer = "ApplicationMailer"
+
+  # NOTE: This is a workaround to get Devise working with Turbo
+  # Configure the parent controller.
+  config.navigational_formats = ["*/*", :html, :turbo_stream]
 
   # ==> ORM configuration
   # Load and configure the ORM. Supports :active_record (default) and
@@ -150,7 +157,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :rememberable
   # The time the user will be remembered without asking for credentials again.
-  # config.remember_for = 2.weeks
+  config.remember_for = 2.weeks
 
   # Invalidates all the remember me tokens when the user signs out.
   config.expire_all_remember_me_on_sign_out = true
@@ -267,6 +274,9 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(scope: :user).unshift :some_external_strategy
   # end
+  config.warden do |manager|
+    manager.failure_app = TurboFailureApp
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine

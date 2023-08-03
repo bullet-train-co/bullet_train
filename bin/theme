@@ -1,18 +1,52 @@
 #!/usr/bin/env ruby
 
-require "pry"
+# We use this script to find Tailwind and JavaScript-related files according to the theme specified.
 
-case ARGV.shift
-when "tailwind-config"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/tailwind.#{theme}.config.js"
-when "tailwind-stylesheet"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/app/assets/stylesheets/#{theme}.tailwind.css"
-when "javascript"
-  theme = ARGV.shift
-  # TODO Check that the file actually exists before reporting it back?
-  puts "#{`bundle show bullet_train-themes-#{theme}`.chomp}/app/javascript/application.#{theme}.js"
+require "active_support"
+require "active_support/core_ext"
+require "fileutils"
+
+if ARGV.size < 2
+  puts "Please make sure you write both the the file type you're looking for along with the theme, in that order."
+  puts "\ti.e. - `bin/theme tailwind-config light`"
+  puts ""
+  puts "File type options:"
+  puts "\t\"tailwind-config\""
+  puts "\t\"tailwind-mailer-config\""
+  puts "\t\"tailwind-stylesheet\""
+  puts "\t\"javascript\""
 end
+
+file_type = ARGV.shift
+theme = ARGV.shift
+gem_path = `bundle show bullet_train-themes-#{theme} 2> /dev/null`.chomp
+
+file_path, fallback_file_path = case file_type
+when "tailwind-config"
+  ["/tailwind.#{theme}.config.js", nil]
+when "tailwind-mailer-config"
+  ["/tailwind.mailer.#{theme}.config.js", "/tailwind.#{theme}.config.js"]
+when "tailwind-stylesheet"
+  ["/app/assets/stylesheets/#{theme}.tailwind.css", nil]
+when "javascript"
+  ["/app/javascript/application.#{theme}.js", nil]
+else
+  raise "Sorry, we couldn't recognize the file you're looking for: \"#{file_type}\""
+end
+
+@candidate_paths = [Dir.pwd, gem_path].select(&:present?)
+
+def find_file(file_path)
+  @candidate_paths.each do |candidate_path|
+    full_file_path = candidate_path + file_path
+    if File.exist?(full_file_path)
+      puts full_file_path
+      exit
+    end
+  end
+end
+
+find_file(file_path)
+find_file(fallback_file_path) if fallback_file_path
+
+raise "Sorry, we couldn't find `#{file_path}` in any of the following paths: #{@candidate_paths.join(", ")}"

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include Users::Base
+  include Roles::User
   # 🚅 add concerns above.
 
   # 🚅 add belongs_to associations above.

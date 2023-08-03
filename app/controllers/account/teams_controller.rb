@@ -5,7 +5,6 @@ class Account::TeamsController < Account::ApplicationController
 
   def permitted_fields
     [
-      :description,
       # 🚅 super scaffolding will insert new fields above this line.
     ]
   end
