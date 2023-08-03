@@ -1,24 +1,6 @@
 require "application_system_test_case"
 
 class MembershipSystemTest < ApplicationSystemTestCase
-  def within_membership_row(membership)
-    within "tr[data-id='#{membership.id}']" do
-      yield
-    end
-  end
-
-  def within_current_memberships_table
-    within "tbody[data-model='Membership'][data-scope='current']" do
-      yield
-    end
-  end
-
-  def within_former_memberships_table
-    within "tbody[data-model='Membership'][data-scope='tombstones']" do
-      yield
-    end
-  end
-
   @@test_devices.each do |device_name, display_details|
     test "visitors can sign-up and manage team members with subscriptions #{billing_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
       resize_for(display_details)
@@ -62,8 +44,7 @@ class MembershipSystemTest < ApplicationSystemTestCase
 
       assert page.has_content?("Invitation was successfully created.")
 
-      # we need the id of the membership that's created so we can address it's row in the table specifically.
-      invited_membership = Membership.order(:id).last
+      invited_membership = Membership.find_by(user_email: "takashi.yamaguchi@gmail.com")
 
       within_current_memberships_table do
         assert page.has_content?("Takashi Yamaguchi")

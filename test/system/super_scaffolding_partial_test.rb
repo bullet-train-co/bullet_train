@@ -138,6 +138,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
       # Text Area partial
       fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # Number Field Partial
+      fill_in "Number Field Test", with: 47
 
       click_on "Create Partial Test"
       assert page.has_content?("Partial Test was successfully created.")
@@ -167,8 +169,14 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       refute_nil partial_test.multiple_options_test
       assert_equal partial_test.multiple_options_test, ["one", "three"]
       # Password
+<<<<<<< HEAD
       # refute_nil partial_test.password_test
       assert_equal partial_test.password_test, "testpassword123"
+=======
+      refute_nil partial_test.password_test
+      assert_equal partial_test.password_test, "testpassword123"
+      assert page.has_content?("●" * partial_test.password_test.length)
+>>>>>>> main
       # Phone Field
       refute_nil partial_test.phone_field_test
       assert_equal partial_test.phone_field_test, "(000)000-0000"
@@ -181,9 +189,15 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text Area
       refute_nil partial_test.text_area_test
       assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+<<<<<<< HEAD
 
       # Check if the password is hidden.
       assert page.has_content?("●" * partial_test.password_test.length)
+=======
+      # Number Field
+      refute_nil partial_test.number_field_test
+      assert_equal partial_test.number_field_test, 47
+>>>>>>> main
     end
   end
 end
