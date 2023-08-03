@@ -169,14 +169,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       refute_nil partial_test.multiple_options_test
       assert_equal partial_test.multiple_options_test, ["one", "three"]
       # Password
-<<<<<<< HEAD
-      # refute_nil partial_test.password_test
-      assert_equal partial_test.password_test, "testpassword123"
-=======
       refute_nil partial_test.password_test
       assert_equal partial_test.password_test, "testpassword123"
       assert page.has_content?("●" * partial_test.password_test.length)
->>>>>>> main
       # Phone Field
       refute_nil partial_test.phone_field_test
       assert_equal partial_test.phone_field_test, "(000)000-0000"
@@ -189,15 +184,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text Area
       refute_nil partial_test.text_area_test
       assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-<<<<<<< HEAD
-
-      # Check if the password is hidden.
-      assert page.has_content?("●" * partial_test.password_test.length)
-=======
       # Number Field
       refute_nil partial_test.number_field_test
       assert_equal partial_test.number_field_test, 47
->>>>>>> main
     end
   end
 end
