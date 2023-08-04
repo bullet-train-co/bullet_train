@@ -16,6 +16,15 @@ class WebhooksSystemTest < ApplicationSystemTestCase
       test "team member registers for webhooks and then receives them on #{device_name}" do
         resize_for(display_details)
         login_as(@user, scope: :user)
+
+        visit root_path
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+            sleep 2
+          end
+        end
+
         visit account_dashboard_path
 
         # create the endpoint.
@@ -104,6 +113,14 @@ class WebhooksSystemTest < ApplicationSystemTestCase
 
         # create a thing as another user and confirm no webhooks are issued to the original user.
         login_as(@another_user, scope: :user)
+        visit root_path
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+            sleep 2
+          end
+        end
+
         visit account_dashboard_path
 
         # trigger the webhook event.

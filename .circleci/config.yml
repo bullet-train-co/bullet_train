@@ -26,7 +26,7 @@ aliases:
       paths:
         - node_modules
   - &ruby_node_browsers_docker_image
-      - image: cimg/ruby:3.2.1-browsers
+      - image: cimg/ruby:3.2.2-browsers
         environment:
           PGHOST: localhost
           PGUSER: untitled_application
@@ -123,6 +123,54 @@ jobs:
       # - run:
       #     name: Run system tests
       #     command: bundle exec rails test:system
+      #
+      # If you want to gather test results in CircleCI when not running tests in parallel,
+      # include `minitest-ci` in your Gemfile and uncomment the following step.
+      # You can access the test results via the "Tests" tab within each build in CircleCI.
+      #
+      # - store_test_results:
+      #     path: test/reports
+
+  'Minitest with HIDE_THINGS':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: circleci/redis
+    executor: ruby/default
+    parallelism: 16
+    steps:
+      - browser-tools/install-browser-tools
+      - checkout
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bundle clean --force
+      - run: bundle exec rake bt:link
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      - *wait_for_docker
+
+      - run:
+          name: Run tests with Knapsack Pro
+          command: |
+            export RAILS_ENV=test
+            bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
+          environment:
+            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+            HIDE_THINGS: true
+
+      # If you don't want to use Knapsack Pro, then use this configuration:
+      #
+      # - run:
+      #     name: Run unit tests with HIDE_THINGS
+      #     command: HIDE_THINGS=true bundle exec rails test
+      # - run:
+      #     name: Run system tests with HIDE_THINGS
+      #     command: HIDE_THINGS=true bundle exec rails test:system
       #
       # If you want to gather test results in CircleCI when not running tests in parallel,
       # include `minitest-ci` in your Gemfile and uncomment the following step.
@@ -250,6 +298,7 @@ workflows:
       - 'Standard Ruby'
       - 'Database Schema Check'
       - 'Minitest'
+      - 'Minitest with HIDE_THINGS'
       - 'Minitest for Super Scaffolding'
       # - 'System Tests with Cuprite'
       # - 'System Tests for Action Models'

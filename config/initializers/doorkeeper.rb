@@ -354,7 +354,20 @@ Doorkeeper.configure do
   #   http://tools.ietf.org/html/rfc6819#section-4.4.2
   #   http://tools.ietf.org/html/rfc6819#section-4.4.3
   #
-  # TODO What are the implications of each of these?
+  # Implicit Grant:
+  # The access token is directly returned to the client as a fragment part
+  # of the redirect URI. It is not sent to the redirect URI target.
+  # Because the token is sent from the server to the client via a URI fragment,
+  # an attacker can eavesdrop on the token if the communication or the
+  # endpoint is not secured. See the first link above for countermeasures.
+  #
+  # Password Grant:
+  # Allows a client to request an access token using a user id and password
+  # along with its own credential, and is often used for legacy/migration reasons.
+  # This grant has a higher risk because it maintains the UID/password anti-pattern.
+  # The user doesn't have control over the authorization process, so clients
+  # aren't limited by scope, and could potentially have the same capabilities
+  # as the user themselves. See the second link above for countermeasures.
   grant_flows %w[authorization_code password implicit client_credentials]
 
   # Allows to customize OAuth grant flows that +each+ application support.
