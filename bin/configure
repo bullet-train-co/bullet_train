@@ -87,9 +87,60 @@ else
   end
 end
 
-check_package("postgresql@14")
-check_package("redis")
-check_package("icu4c")
+case Gem::Platform.local.os
+when "darwin"
+  check_package("postgresql@14")
+  check_package("redis")
+  check_package("icu4c")
+when "linux"
+  system_packages = `dpkg -l | grep '^ii'`.split("\n").map do |package_information|
+    package_information.split("\s")[1]
+  end
+
+  psql_installed = system_packages.include?("postgresql")
+  if psql_installed
+    psql_version = `psql --version`.split("\s")[2]
+    if psql_version.match?(/^14/)
+      puts "You have PostgreSQL 14 installed.".green
+    else
+      puts "You have PostgreSQL installed, but you're using v#{psql_version} and not v14.".red
+      input = ask "Try proceeding without PostgreSQL 14? [y/n]"
+      if input.downcase[0] == "n"
+        exit
+      end
+    end
+  else
+    puts "You don't have PostgreSQL installed. Please see the installation instructions at https://ubuntu.com/server/docs/databases-postgresql".red
+    exit
+  end
+
+  if system_packages.include?("redis") && system_packages.include?("redis-server")
+    version_information = `redis-server --version`
+    redis_version = version_information.split("\s")[2]
+    puts "Redis #{redis_version} is installed.".green
+  else
+    puts "You don't have Redis installed. Please see the installation instructions at https://redis.io/docs/getting-started/installation/install-redis-on-linux/ .".red
+    exit
+  end
+
+  if system_packages.select{|pkg| pkg.match?(/^libicu/)}.any?
+    puts "You have icu4c installed.".green
+  else
+    puts "You don't have icu4c installed. Please run `sudo apt-get install libicu-dev`.".red
+    exit
+  end
+else
+  puts "We currently don't support this platform to check if you have the following libraries installed:".red
+  puts "1. PostgreSQL"
+  puts "2. Redis"
+  puts "3. icu4c"
+  puts ""
+  puts "Please ensure they are installed before proceeding."
+  input = ask "Proceed? [y/n]"
+  if input.downcase[0] == "n"
+    exit
+  end
+end
 
 required_node = `cat ./.nvmrc`.strip
 actual_node = begin
