@@ -142,14 +142,6 @@ else
   end
 end
 
-if `yarn -v 2> /dev/null`.length > 0
-  puts "Yarn is installed.".green
-else
-  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
-  exit
-end
-
-
 required_node = `cat ./.nvmrc`.strip
 actual_node = begin
                 `node -v`.strip.gsub("v", "")
