@@ -9,8 +9,8 @@ class Api::V1::Platform::ApplicationsControllerTest < Api::Test
     sign_in @user
   end
 
-  if ENV["TESTING_PROVISION_KEY"].present?
-    test "provision" do
+  test "provision" do
+    if ENV["TESTING_PROVISION_KEY"].present?
       get "/testing/provision", params: {key: nil}
       assert_equal(response.parsed_body, {"message" => "You must provide the proper testing provision key to create a test application."})
 
@@ -24,11 +24,8 @@ class Api::V1::Platform::ApplicationsControllerTest < Api::Test
       assert_difference("Platform::Application.count", 1) do
         get "/testing/provision", params: {key: ENV["TESTING_PROVISION_KEY"]}
       end
-    end
-  else
-    test "provision" do
-      # A test application shouldn't be created when the key is empty.
-      get "/testing/provision"
+    else
+      # A test application shouldn't be created when the key is empty nor the environment variable provided.
       assert_equal(response.parsed_body, {"message" => "You must provide the proper testing provision key to create a test application."})
     end
   end
