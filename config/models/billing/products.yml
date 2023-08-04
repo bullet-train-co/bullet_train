@@ -41,7 +41,7 @@ pro:
   limits:
     memberships:
       have:
-        count: 10
+        count: null
         enforcement: soft
     scaffolding/absolutely_abstract/creative_concepts:
       have:
