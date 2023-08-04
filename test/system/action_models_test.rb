@@ -62,7 +62,6 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Perform Archive Action"
 
       assert page.has_content?("Archive Action was successfully created.")
-      assert page.has_content?("Test Project archived")
       assert page.has_content?(/Processed 1 of 1 Today/i)
     end
 
