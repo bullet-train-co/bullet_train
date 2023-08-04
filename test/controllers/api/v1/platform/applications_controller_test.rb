@@ -26,6 +26,7 @@ class Api::V1::Platform::ApplicationsControllerTest < Api::Test
       end
     else
       # A test application shouldn't be created when the key is empty nor the environment variable provided.
+      get "/testing/provision"
       assert_equal(response.parsed_body, {"message" => "You must provide the proper testing provision key to create a test application."})
     end
   end
