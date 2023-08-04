@@ -79,14 +79,38 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         within_membership_row(invited_membership) do
           assert page.has_content?("Invited")
           assert page.has_content?("Team Administrator")
-          click_on "Details"
         end
+      end
+
+      # Resend the invite
+      assert page.has_content?("Resend")
+      assert_difference "all_emails.count", 1 do
+        perform_enqueued_jobs do
+          click_on "Resend"
+          assert page.has_content?("Invitation was successfully resent.")
+        end
+      end
+
+      # Prep a new window for making sure we can't resend invitations for tombstoned memberships.
+      new_window = open_new_window
+      within_window new_window do
+        visit account_team_memberships_path(hanakos_team)
+      end
+
+      within_membership_row(invited_membership) do
+        click_on "Details"
       end
 
       assert page.has_content?("Invitation Details")
 
       accept_alert { click_on "Remove from Team" }
       assert page.has_content?("That user has been successfully removed from the team.")
+
+      # We shouldn't be able to resend invitations for memberships that aren't on the team anymore.
+      within_window new_window do
+        click_on "Resend"
+        assert page.has_content?("Sorry, we couldn't find an invitation to resend.")
+      end
 
       # click the link in the email.
       # yes, this is a totally valid thing to do if you have access to the invitation email.
@@ -118,6 +142,14 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
         accept_alert { click_on "Re-Invite to Team" }
         assert page.has_content?("The user has been successfully re-invited. They will receive an email to rejoin the team.")
+      end
+
+      # Make sure we can resend the invitation for memberships that come back to the team.
+      assert_difference "all_emails.count", 1 do
+        perform_enqueued_jobs do
+          click_on "Resend"
+          assert page.has_content?("Invitation was successfully resent.")
+        end
       end
 
       # sign out.
