@@ -6,7 +6,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "3.2.1"
+ruby(File.read(File.expand_path(".ruby-version", __dir__)))
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.0"
@@ -58,12 +58,13 @@ gem "chronic"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  # TODO: Remove version restriction once Ruby 3.2.2 is released.
-  # See: https://github.com/ruby/debug/issues/898#issuecomment-1451804022
-  gem "debug", "1.7.0", platforms: %i[mri mingw x64_mingw]
+  gem "debug", platforms: %i[mri mingw x64_mingw]
 
   # A gem for generating test coverage results in your browser.
   gem "simplecov", require: false
+
+  # Generate test objects.
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -79,16 +80,15 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara", github: "teamcapybara/capybara"
+  gem "capybara", "~> 3.39"
 
   # Selenium is the default default Capybara driver for system tests that ships with
   # Rails. Cuprite is an alternative driver that uses Chrome's native DevTools protocol
   # and offers improved speed and reliability, but only works with Chrome. If you want
-  # to switch to Cuprite, you can comment out the `selenium-webdriver` and `webdrivers`
-  # gems and uncomment the `cuprite` gem below. Bullet Train will automatically load
+  # to switch to Cuprite, you can comment out the `selenium-webdriver` gem
+  # and uncomment the `cuprite` gem below. Bullet Train will automatically load
   # the correct configuration based on which gem is included.
   gem "selenium-webdriver"
-  gem "webdrivers"
 
   # gem "cuprite"
 end
@@ -139,9 +139,6 @@ group :test do
 
   # Interact with emails during testing.
   gem "capybara-email"
-
-  # Generate test objects.
-  gem "factory_bot_rails", group: :development
 
   # Write system tests by pointing and clicking in your browser.
   gem "magic_test"

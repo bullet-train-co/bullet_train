@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+export SPRING=true
+
+bundle exec spring rake bullet_train:audit_logs:install
+bundle exec spring rails db:migrate
+
+bundle exec spring rails g model Book team:references title:string author:string
+bundle exec spring rails g model Chapter book:references title:string
+bundle exec spring rails db:migrate
+
+bin/super-scaffold crud Book Team title:text_field author:text_field --sidebar="ti.ti-book"
+bin/super-scaffold crud Chapter Book,Team title:text_field
+
+bin/super-scaffold audit_logs Book Team title:text_field author:text_field
+bin/super-scaffold audit_logs Chapter Book,Team title:text_field
+
+bundle exec spring rails db:migrate

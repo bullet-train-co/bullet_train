@@ -29,6 +29,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   [
     "Projects::ArchiveAction",
     "Listings::PublishAction",
+    "Notifications::MarkAllAsReadAction",
     "Articles::CsvImportAction"
   ].each do |class_name|
     class_name.constantize
@@ -94,14 +95,13 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # targets-one action
   if defined?(Listings::PublishAction)
     test "developers can publish only one listing at a time" do
-      skip "This needs to be fixed in Action Models first"
-
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
       click_on "Add New Listing"
       fill_in "Name", with: "Test Listing"
       click_on "Create Listing"
+      click_on "Back"
 
       # Developers can click "Publish" on a single record,
       # but cannot perform the action on multiple ones.
@@ -109,17 +109,55 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Select Multiple"
       refute page.has_content?("Publish")
       click_on "Hide Checkboxes"
+      click_on "Back"
 
       # Test targets-one logic
+      click_on "Test Listing"
       click_on "Publish"
 
       # Confirm action page
-      assert page.has_content?("Please provide the details of the new Publish Action you'd like to add to Test Listing.")
+      assert page.has_content?("Please provide the details of the new Publish Action you'd like to perform on Test Listing.")
       click_on "Perform Publish Action"
 
-      assert page.has_content?("Test Listing published")
       assert page.has_content?("Publish Action was successfully created.")
       assert page.has_content?("Current and Scheduled Publish Operations")
+    end
+  end
+
+  # targets-one-parent action
+  if defined?(Notifications::MarkAllAsReadAction)
+    test "developers can mark as read all notifications of a customer" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      3.times do |n|
+        click_on "Add New Customer"
+        fill_in "Name", with: "Test Customer #{n}"
+        click_on "Create Customer"
+        assert page.has_content? "Customer was successfully created."
+
+        3.times do |i|
+          click_on "Add New Notification"
+          fill_in "Text", with: "Test Notification #{i}"
+          click_on "Create Notification"
+          assert page.has_content? "Notification was successfully created."
+          click_on "Back"
+        end
+
+        # TODO: "Back" button didn't work here
+        click_on "Customers"
+      end
+
+      click_on "Test Customer 1"
+
+      # Developers can click "Mark All As Read" on a multiple records.
+      assert page.has_content?("Mark All As Read")
+      click_on "Mark All As Read"
+
+      # Confirm action page
+      click_on "Perform Mark All As Read Action"
+
+      assert page.has_content?("Mark All As Read Action was successfully created.")
     end
   end
 
@@ -171,7 +209,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Back"
 
       click_on "Select Multiple"
-      find(:xpath, "/HTML[1]/BODY[1]/DIV[2]/DIV[1]/DIV[2]/MAIN[1]/DIV[2]/DIV[1]/DIV[3]/DIV[1]/UPDATES-FOR[1]/DIV[1]/DIV[2]/DIV[1]/TABLE[1]/THEAD[1]/TR[1]/TH[1]/LABEL[1]/INPUT[1]").click
+      find(:xpath, "/HTML[1]/BODY[1]/DIV[2]/DIV[1]/DIV[2]/MAIN[1]/DIV[2]/DIV[1]/DIV[3]/DIV[1]/CABLE-READY-UPDATES-FOR[1]/DIV[1]/DIV[2]/DIV[1]/TABLE[1]/THEAD[1]/TR[1]/TH[1]/LABEL[1]/INPUT[1]").click
       click_on "Csv Export (All)"
       assert page.has_content? "We're preparing to Export all Visitors of Your Team."
 

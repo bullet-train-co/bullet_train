@@ -13,5 +13,9 @@ FactoryBot.define do
     text_area_value { "MyText" }
     action_text_value { "MyText" }
     sort_order { 1 }
+
+    factory :scaffolding_completely_concrete_tangible_thing_example do
+      text_field_value { "Example" }
+    end
   end
 end

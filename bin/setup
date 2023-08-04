@@ -1,6 +1,12 @@
 #!/usr/bin/env ruby
-require "fileutils"
-require "colorize"
+
+require 'bundler/inline'
+
+gemfile do
+  source 'https://rubygems.org'
+  require 'fileutils'
+  require 'colorize'
+end
 
 # path to your application root.
 APP_ROOT = File.expand_path("..", __dir__)
@@ -32,7 +38,11 @@ FileUtils.chdir APP_ROOT do
   puts "== Installing dependencies =="
   system! "gem install bundler --conservative"
   system("bundle check") || system!("bundle install")
-  system("yarn check") || system!("yarn install")
+  if command?("yarn") && `yarn -v`.to_f < 2
+    system("yarn check") || system!("yarn install")
+  else
+    system!("yarn install")
+  end
   system!("bin/link")
 
   puts "== Building assets =="
