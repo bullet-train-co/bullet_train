@@ -16,10 +16,19 @@ class WebhooksSystemTest < ApplicationSystemTestCase
       test "team member registers for webhooks and then receives them on #{device_name}" do
         resize_for(display_details)
         login_as(@user, scope: :user)
+
+        visit root_path
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+            sleep 2
+          end
+        end
+
         visit account_dashboard_path
 
         # create the endpoint.
-        within_primary_menu_for(display_details) do
+        within_developers_menu_for(display_details) do
           click_on "Webhooks"
         end
         click_on "Add New Endpoint"
@@ -57,6 +66,9 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           perform_enqueued_jobs
         end
 
+        # Go to index page.
+        click_on "Back"
+
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
           click_on "Add New Tangible Thing"
           fill_in "Text Field Value", with: "Some Other Thing"
@@ -67,7 +79,6 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
-          click_on "Some Thing"
           assert page.has_content? "Tangible Thing Details"
           click_on "Edit Tangible Thing"
           assert page.has_content? "Edit Tangible Thing Details"
@@ -102,6 +113,14 @@ class WebhooksSystemTest < ApplicationSystemTestCase
 
         # create a thing as another user and confirm no webhooks are issued to the original user.
         login_as(@another_user, scope: :user)
+        visit root_path
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+            sleep 2
+          end
+        end
+
         visit account_dashboard_path
 
         # trigger the webhook event.
@@ -130,7 +149,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         end
 
         # create the endpoint.
-        within_primary_menu_for(display_details) do
+        within_developers_menu_for(display_details) do
           click_on "Webhooks"
         end
         click_on "Add New Endpoint"
@@ -161,7 +180,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           perform_enqueued_jobs
         end
 
-        within_primary_menu_for(display_details) do
+        within_developers_menu_for(display_details) do
           click_on "Webhooks"
         end
 

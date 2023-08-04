@@ -14,10 +14,12 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
       # 🚅 stop any skipping we're doing now.
       # 🚅 super scaffolding will insert factory setup in place of this line.
       @other_tangible_things = create_list(:scaffolding_completely_concrete_tangible_thing, 3)
-      # 🚅 super scaffolding will insert file-related logic above this line.
-      @tangible_thing.save
 
       @another_tangible_thing = create(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: @absolutely_abstract_creative_concept)
+
+      # 🚅 super scaffolding will insert file-related logic above this line.
+      @tangible_thing.save
+      @another_tangible_thing.save
     end
 
     # This assertion is written in such a way that new attributes won't cause the tests to start failing, but removing
@@ -77,7 +79,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     test "create" do
       # Use the serializer to generate a payload, but strip some attributes out.
       params = {access_token: access_token}
-      tangible_thing_data = JSON.parse(build(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: nil).to_api_json)
+      tangible_thing_data = JSON.parse(build(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: nil).to_api_json.to_json)
       tangible_thing_data.except!("id", "absolutely_abstract_creative_concept_id", "created_at", "updated_at")
       params[:scaffolding_completely_concrete_tangible_thing] = tangible_thing_data
 

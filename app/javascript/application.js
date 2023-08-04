@@ -18,7 +18,6 @@ ActiveStorage.start()
 // at the end of the file. This helps avoid merge conflicts in the future, should we need to change our own includes.
 
 import "./support/jstz";
-import "./support/turn";
 
 import "@bullet-train/bullet-train"
 import "@bullet-train/bullet-train-sortable"

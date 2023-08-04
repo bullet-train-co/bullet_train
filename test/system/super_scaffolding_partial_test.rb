@@ -33,7 +33,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   end
 
   if defined?(TestFile)
-    test "developers can Super Scaffold a file partial and perfrom crud actions on the record" do
+    test "developers can Super Scaffold a file partial and perform crud actions on the record" do
       display_details = @@test_devices[:macbook_pro_15_inch]
       resize_for(display_details)
 
@@ -43,7 +43,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert page.has_content?("Test Files")
       click_on "Add New Test File"
 
+      fill_in "Name", with: "Test File Name"
       assert page.has_content?("Upload New Document")
+      fill_in "Name", with: "Foo"
       attach_file("test/support/foo.txt", make_visible: true)
       click_on "Create Test File"
 
@@ -57,6 +59,11 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       assert page.has_content?("Test File was successfully updated.")
       assert TestFile.first.foo.blank?
+
+      # This test consistently adds a new text file,
+      # so we clear out all instances of foo from the storage directory.
+      storage = Dir.glob("tmp/storage/**")
+      storage.each { |dir| FileUtils.rm_r(dir) if dir.match?(/\/([0-9]|[a-z]){2}$/) }
     end
   end
 
@@ -114,12 +121,13 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # File partial
       attach_file("test/support/foo.txt", make_visible: true)
       # Single Option partial
-      choose("One")
+      # TODO: Not sure why we have to specify this, but not the other button with "one".
+      page.all("input").find { |node| node.value == "one" }.click
       # Multiple Option partial
       check("One")
       check("Three")
       # Password partial
-      # fill_in "Password Test", with: "testpassword123"
+      fill_in "Password Test", with: "testpassword123"
       # Phone Field Partial
       fill_in "Phone Field Test", with: "(000)000-0000"
       # Super Select partial
@@ -130,12 +138,13 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_super_select_test").find("option[value='two']").select_option
       # Text Area partial
       fill_in "Text Area Test", with: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # Number Field Partial
+      fill_in "Number Field Test", with: 47
 
       click_on "Create Partial Test"
       assert page.has_content?("Partial Test was successfully created.")
 
       # Text field
-      click_on "Test Text"
       partial_test = PartialTest.first
       assert_equal partial_test.text_field_test, "Test Text"
       # Boolean Button
@@ -160,8 +169,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       refute_nil partial_test.multiple_options_test
       assert_equal partial_test.multiple_options_test, ["one", "three"]
       # Password
-      # refute_nil partial_test.password_test
-      # assert_equal partial_test.password_test, "testpassword123"
+      refute_nil partial_test.password_test
+      assert_equal partial_test.password_test, "testpassword123"
+      assert page.has_content?("●" * partial_test.password_test.length)
       # Phone Field
       refute_nil partial_test.phone_field_test
       assert_equal partial_test.phone_field_test, "(000)000-0000"
@@ -174,6 +184,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Text Area
       refute_nil partial_test.text_area_test
       assert_equal partial_test.text_area_test, "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+      # Number Field
+      refute_nil partial_test.number_field_test
+      assert_equal partial_test.number_field_test, 47
     end
   end
 end

@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
-  browser-tools: circleci/browser-tools@1.1
+  browser-tools: circleci/browser-tools@1.4.1
 aliases:
   - &restore_bundler_cache
       name: Restore Bundler cache
@@ -26,7 +26,7 @@ aliases:
       paths:
         - node_modules
   - &ruby_node_browsers_docker_image
-      - image: cimg/ruby:3.1.2-browsers
+      - image: cimg/ruby:3.2.2-browsers
         environment:
           PGHOST: localhost
           PGUSER: untitled_application
@@ -131,6 +131,54 @@ jobs:
       # - store_test_results:
       #     path: test/reports
 
+  'Minitest with HIDE_THINGS':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: circleci/redis
+    executor: ruby/default
+    parallelism: 16
+    steps:
+      - browser-tools/install-browser-tools
+      - checkout
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bundle clean --force
+      - run: bundle exec rake bt:link
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      - *wait_for_docker
+
+      - run:
+          name: Run tests with Knapsack Pro
+          command: |
+            export RAILS_ENV=test
+            bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
+          environment:
+            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+            HIDE_THINGS: true
+
+      # If you don't want to use Knapsack Pro, then use this configuration:
+      #
+      # - run:
+      #     name: Run unit tests with HIDE_THINGS
+      #     command: HIDE_THINGS=true bundle exec rails test
+      # - run:
+      #     name: Run system tests with HIDE_THINGS
+      #     command: HIDE_THINGS=true bundle exec rails test:system
+      #
+      # If you want to gather test results in CircleCI when not running tests in parallel,
+      # include `minitest-ci` in your Gemfile and uncomment the following step.
+      # You can access the test results via the "Tests" tab within each build in CircleCI.
+      #
+      # - store_test_results:
+      #     path: test/reports
+
   'Minitest for Super Scaffolding':
     docker:
       - <<: *ruby_node_browsers_docker_image
@@ -163,6 +211,9 @@ jobs:
       - run:
           name: 'Run Super Scaffolding Test'
           command: bundle exec rails test test/system/super_scaffolding_test.rb
+      - run:
+          name: 'Run Super Scaffolding Partial Test'
+          command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
 
   'System Tests with Cuprite':
     docker:
@@ -207,6 +258,39 @@ jobs:
             KNAPSACK_PRO_CI_NODE_TOTAL: 16
             KNAPSACK_PRO_TEST_FILE_PATTERN: "test/system/**{,/*/**}/*_test.rb"
 
+  # Uncomment the job at the bottom of this file to run these system tests.
+  'System Tests for Action Models':
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: cimg/redis:6.2.6
+    executor: ruby/default
+    parallelism: 4
+
+    steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - checkout
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bin/link
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      - *wait_for_docker
+
+      - run: bundle add spring
+      - run:
+          name: 'Setup Action Models System Test'
+          command: bundle exec test/bin/setup-action-models-system-test
+      - run:
+          name: 'Run Action Models Test'
+          command: bundle exec rails test test/system/action_models_test.rb
+
 workflows:
   version: 2
   build:
@@ -214,6 +298,7 @@ workflows:
       - 'Standard Ruby'
       - 'Database Schema Check'
       - 'Minitest'
+      - 'Minitest with HIDE_THINGS'
       - 'Minitest for Super Scaffolding'
-      # TODO Re-enable this after https://github.com/bullet-train-co/bullet_train/issues/527 is fixed.
       # - 'System Tests with Cuprite'
+      # - 'System Tests for Action Models'
