@@ -103,7 +103,6 @@ fi
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
   bundle exec spring rails g model TestFile team:references name:string foo:attachment
   bin/super-scaffold crud TestFile Team name:text_field foo:file_field --sidebar="ti.ti-tag"
-  # TODO Write an actual test for this in `test/system/super_scaffolding_test.rb`.
 
   bundle exec spring rails g model ColorPicker team:references color_picker_value:string
   bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --sidebar="ti.ti-tag"
@@ -112,7 +111,6 @@ else
 fi
 
 # TODO: Generate these in parallel.
-# TODO: Super Scaffold password_field partials correctly.
 bundle exec spring rails g model PartialTest team:references \
   text_field_test:string \
   boolean_test:boolean \
@@ -127,7 +125,8 @@ bundle exec spring rails g model PartialTest team:references \
   phone_field_test:string \
   super_select_test:string \
   multiple_super_select_test:jsonb \
-  text_area_test:text
+  text_area_test:text \
+  number_field_test:integer
 bin/super-scaffold crud PartialTest Team \
   text_field_test:text_field \
   boolean_test:boolean \
@@ -142,6 +141,7 @@ bin/super-scaffold crud PartialTest Team \
   phone_field_test:phone_field \
   super_select_test:super_select \
   multiple_super_select_test:super_select{multiple} \
-  text_area_test:text_area --sidebar="ti.ti-layout"
+  text_area_test:text_area --sidebar="ti.ti-layout" \
+  number_field_test:number_field
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare

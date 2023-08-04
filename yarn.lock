@@ -665,12 +665,12 @@ browserslist@^4.21.4:
     node-releases "^2.0.8"
     update-browserslist-db "^1.0.10"
 
-cable_ready@^5.0.0-pre8:
-  version "5.0.0-pre9"
-  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.0-pre9.tgz#9c082b796f7b7add7965ce637a8d8717726be5ab"
-  integrity sha512-m7XggG+LRPFLsbH78G603F3AAYpkv+VfGCouN6RrP20Mgz9H0+xr7v2DN2F1CeJBBAliYPKcAt/48uTGjSrBaA==
+cable_ready@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.0.tgz#a789fc9bcdab07fd7a8073e8159ff7a05ad452d3"
+  integrity sha512-34unrYrSq5fgmGMjPh0SHLOD8v0z/xxqPI4kFUDkLa+P29UarjgIWL6DKPUibWn2MBzU/S2pIfEDQPlrv7+mrg==
   dependencies:
-    morphdom "^2.6.1"
+    morphdom "2.6.1"
 
 call-me-maybe@^1.0.1:
   version "1.0.2"
@@ -1391,10 +1391,10 @@ moment@^2.9.0:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
 
-morphdom@^2.6.1:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/morphdom/-/morphdom-2.7.0.tgz#9ef0c4bc15ac8725df398d127c6984f62e7f89e8"
-  integrity sha512-8L8DwbdjjWwM/aNqj7BSoSn4G7SQLNiDcxCnMWbf506jojR6lNQ5YOmQqXEIE8u3C492UlkN4d0hQwz97+M1oQ==
+morphdom@2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/morphdom/-/morphdom-2.6.1.tgz#e868e24f989fa3183004b159aed643e628b4306e"
+  integrity sha512-Y8YRbAEP3eKykroIBWrjcfMw7mmwJfjhqdpSvoqinu8Y702nAwikpXcNFDiIkyvfCLxLM9Wu95RZqo4a9jFBaA==
 
 ms@2.1.2:
   version "2.1.2"

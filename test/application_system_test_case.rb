@@ -118,6 +118,24 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     yield
   end
 
+  def within_membership_row(membership)
+    within "tr[data-id='#{membership.id}']" do
+      yield
+    end
+  end
+
+  def within_current_memberships_table
+    within "tbody[data-model='Membership'][data-scope='current']" do
+      yield
+    end
+  end
+
+  def within_former_memberships_table
+    within "tbody[data-model='Membership'][data-scope='tombstones']" do
+      yield
+    end
+  end
+
   def open_mobile_menu
     find("#mobile-menu-open").click
   end
@@ -284,40 +302,22 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def complete_pricing_page(card = nil)
-    assert page.has_content?("Select Your Plan")
+    assert page.has_content?("The Pricing Page")
     sleep 0.5
-    within(".pricing-plan.highlight") do
-      start_subscription
-    end
-
+    start_subscription
     complete_payment_page(card)
   end
 
   def complete_payment_page(card = nil)
     # we should be on the credit card page.
-    if free_trial?
-      assert page.has_content?("Start Your Free Trial")
-      assert page.has_content?("30-Day Free Trial".upcase)
-    else
-      assert page.has_content?("Upgrade Your Account")
-      assert page.has_content?("It Will Work For You!".upcase)
-    end
-
+    assert page.has_content?("Subscribe to #{I18n.t("application.name")} Pro")
     fill_in_stripe_elements(card)
-
-    if free_trial?
-      click_on "Start Free Trial"
-    else
-      click_on "Upgrade Now"
-    end
+    click_on "Subscribe"
+    sleep 3
   end
 
   def start_subscription
-    if free_trial?
-      click_on "Start Trial"
-    else
-      click_on "Sign Up"
-    end
+    click_on "Select"
   end
 
   def fill_in_stripe_elements(card = nil)
@@ -331,27 +331,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     }
 
     using_wait_time(10) do
-      card_number_frame = find("#card-number iframe")
-      cvc_frame = find("#card-cvc iframe")
-      card_exp = find("#card-exp iframe")
-
-      within_frame(card_number_frame) do
-        card[:card_number].chars.each do |digit|
-          find_field("cardnumber").send_keys(digit)
-        end
-      end
-
-      within_frame(cvc_frame) do
-        card[:security_code].chars.each do |digit|
-          find_field("cvc").send_keys(digit)
-        end
-      end
-
-      within_frame(card_exp) do
-        (card[:expiration_month] + card[:expiration_year]).chars.each do |digit|
-          find_field("exp-date").send_keys(digit)
-        end
-      end
+      fill_in placeholder: "1234 1234 1234 1234", with: card[:card_number]
+      fill_in placeholder: "MM / YY", with: card[:expiration_month] + card[:expiration_year]
+      fill_in placeholder: "CVC", with: card[:security_code]
+      fill_in "Name on card", with: "Hanako"
     end
   end
 
