@@ -46,6 +46,8 @@ then
   echo "Cloning from ${CORE_REPO_BRANCH}..."
   git clone -b $CORE_REPO_BRANCH --depth 1 https://github.com/bullet-train-co/bullet_train.git ./core
 
+  ls -al ./core
+
   # TODO: Maybe generate this list automatically based on the subdirectories in core that contain a .gemspec?
   packages=(
     "bullet_train"
@@ -75,6 +77,10 @@ then
     mv Gemfile.tmp Gemfile
     echo "gem \"$package\", path: \"./core/$package\"" >> Gemfile
   done
+
+  echo "============================================================="
+  cat Gemfile
+  echo "============================================================="
 
   updates="${packages[@]}"
   bundle lock --update $updates
