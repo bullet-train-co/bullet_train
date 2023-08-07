@@ -25,11 +25,8 @@ then
 fi
 
 
-if [ $CORE_REPO_BRANCH == "main" ]
+if [ $CORE_REPO_BRANCH != "main" ]
 then
-  # Do nothing and use the published version of the gems?
-else
-
   echo "Cloning from ${CORE_REPO_BRANCH}..."
   git clone -b $CORE_REPO_BRANCH --depth 1 https://github.com/bullet-train-co/bullet_train.git .
 
@@ -65,7 +62,6 @@ else
 
   updates="${packages[@]}"
   bundle lock --update $updates
-
 fi
 
 
