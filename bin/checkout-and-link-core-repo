@@ -13,29 +13,10 @@ then
   echo "Branch response ===================="
   echo $BRANCH_RESPONSE
 
-  echo "---------------"
-  echo $BRANCH_RESPONSE | grep "$CIRCLE_BRANCH"
-  echo "---------------"
-
+  # If the branch is missing in the repo the response will not contain the branch name
   if echo $BRANCH_RESPONSE | grep "$CIRCLE_BRANCH"; then
     CORE_REPO_BRANCH=$CI_BRANCH
   fi
-
-  # Default to the main branch if we don't find a matching branch on the starter repository.
-  #BRANCH_NAMES_JSON=$(curl -H "Accept: application.vnd.github+json" "https://api.github.com/repos/bullet-train-co/bullet_train-core/branches?per_page=100")
-  #echo "This is what we're getting from the GitHub API:"
-  #echo "${BRANCH_NAMES_JSON}"
-  #BRANCH_NAMES=$(echo $BRANCH_NAMES_JSON | jq -r '.[].name')
-  #echo "These are the branches on the core repo:"
-  #echo "${BRANCH_NAMES}"
-
-  #for BRANCH in $BRANCH_NAMES; do
-    #if [ ${BRANCH} == $CIRCLE_BRANCH ]
-    #then
-      #CORE_REPO_BRANCH=$BRANCH
-      #break
-    #fi
-  #done
 fi
 
 
@@ -45,10 +26,6 @@ then
 
   echo "Cloning from ${CORE_REPO_BRANCH}..."
   git clone -b $CORE_REPO_BRANCH --depth 1 https://github.com/bullet-train-co/bullet_train-core.git ./core
-
-  echo "------------------------------"
-  ls -al ./core
-  echo "------------------------------"
 
   # TODO: Maybe generate this list automatically based on the subdirectories in core that contain a .gemspec?
   packages=(
@@ -79,10 +56,6 @@ then
     mv Gemfile.tmp Gemfile
     echo "gem \"$package\", path: \"./core/$package\"" >> Gemfile
   done
-
-  echo "============================================================="
-  cat Gemfile
-  echo "============================================================="
 
   updates="${packages[@]}"
   bundle lock --update $updates
