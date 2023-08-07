@@ -8,7 +8,7 @@ CI_BRANCH=$CIRCLE_BRANCH
 if [[ -v CI_BRANCH ]]
 then
 
-  BRANCH_RESPONSE=$(curl --head -H "Accept: application.vnd.github+json" https://api.github.com/repos/bullet-train-co/bullet_train-core/branches/$CI_BRANCH)
+  BRANCH_RESPONSE=$(curl --verbose -H "Accept: application.vnd.github+json" https://api.github.com/repos/bullet-train-co/bullet_train-core/branches/$CI_BRANCH)
 
   echo "Branch response ===================="
   echo $BRANCH_RESPONSE
