@@ -41,8 +41,10 @@ fi
 
 if [ $CORE_REPO_BRANCH != "main" ]
 then
+  mkdir core
+
   echo "Cloning from ${CORE_REPO_BRANCH}..."
-  git clone -b $CORE_REPO_BRANCH --depth 1 https://github.com/bullet-train-co/bullet_train.git .
+  git clone -b $CORE_REPO_BRANCH --depth 1 https://github.com/bullet-train-co/bullet_train.git ./core
 
   # TODO: Maybe generate this list automatically based on the subdirectories in core that contain a .gemspec?
   packages=(
@@ -71,7 +73,7 @@ then
     :
     grep -v "gem \"$package\"" Gemfile > Gemfile.tmp
     mv Gemfile.tmp Gemfile
-    echo "gem \"$package\", path: \"../../$package\"" >> Gemfile
+    echo "gem \"$package\", path: \"./core/$package\"" >> Gemfile
   done
 
   updates="${packages[@]}"
