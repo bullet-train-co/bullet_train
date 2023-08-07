@@ -98,9 +98,6 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
-      - run: pwd
-      - run: ls -al
-
       - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies

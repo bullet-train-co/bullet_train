@@ -3,11 +3,10 @@
 # Default to the main branch if we don't find a matching branch on the starter repository.
 CORE_REPO_BRANCH="main"
 
-# Look for a matching branch on the starter repository when running tests on CircleCI.
+# Look for a matching branch on the core repository when running tests on CircleCI.
 CI_BRANCH=$CIRCLE_BRANCH
 if [[ -v CI_BRANCH ]]
 then
-
   BRANCH_RESPONSE=$(curl --verbose -H "Accept: application.vnd.github+json" https://api.github.com/repos/bullet-train-co/bullet_train-core/branches/$CI_BRANCH)
 
   echo "Branch response ===================="
