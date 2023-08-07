@@ -8,10 +8,18 @@ CI_BRANCH=$CIRCLE_BRANCH
 if [[ -v CI_BRANCH ]]
 then
 
-  BRANCH_RESPONSE=$(curl --verbose -LI -H "Accept: application.vnd.github+json" https://api.github.com/repos/bullet-train-co/bullet_train-core/branches/$CI_BRANCH)
+  BRANCH_RESPONSE=$(curl --verbose -H "Accept: application.vnd.github+json" https://api.github.com/repos/bullet-train-co/bullet_train-core/branches/$CI_BRANCH)
 
   echo "Branch response ===================="
   echo $BRANCH_RESPONSE
+
+  echo "---------------"
+  echo $BRANCH_RESPONSE | grep "$CIRCLE_BRANCH"
+  echo "---------------"
+
+  if echo $BRANCH_RESPONSE | grep "$CIRCLE_BRANCH"; then
+    CORE_REPO_BRANCH=$CI_BRANCH
+  fi
 
   # Default to the main branch if we don't find a matching branch on the starter repository.
   #BRANCH_NAMES_JSON=$(curl -H "Accept: application.vnd.github+json" "https://api.github.com/repos/bullet-train-co/bullet_train-core/branches?per_page=100")
