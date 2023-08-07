@@ -98,6 +98,8 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
+      - run: ./bin/checkout-and-link-core-repo
+
       # Install dependencies
       - ruby/bundle-install
       - run: bin/link
@@ -143,6 +145,8 @@ jobs:
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
+
+      - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -195,6 +199,8 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
+      - run: ./bin/checkout-and-link-core-repo
+
       # Install dependencies
       - ruby/bundle-install
       - run: bin/link
@@ -228,6 +234,8 @@ jobs:
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
+
+      - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -273,6 +281,8 @@ jobs:
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
+
+      - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
