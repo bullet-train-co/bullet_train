@@ -317,7 +317,7 @@ jobs:
           command: bundle exec rails test test/system/action_models_test.rb
 
 workflows:
-  version: 2
+  version: 2.1
   build:
     jobs:
       - 'Standard Ruby'
