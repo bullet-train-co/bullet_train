@@ -338,9 +338,9 @@ workflows:
       - 'Standard Ruby'
       - 'Database Schema Check'
       - 'Minitest':
-        use-core-repo: true
+          use-core-repo: true
       - 'Minitest':
-        use-core-repo: false
+          use-core-repo: false
       - 'Minitest with HIDE_THINGS':
         use-core-repo: true
       - 'Minitest with HIDE_THINGS':
