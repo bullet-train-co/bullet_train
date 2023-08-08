@@ -85,6 +85,9 @@ jobs:
           command: bash ./.circleci/db_schema_check
 
   'Minitest':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -137,6 +140,9 @@ jobs:
       #     path: test/reports
 
   'Minitest with HIDE_THINGS':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -190,6 +196,9 @@ jobs:
       #     path: test/reports
 
   'Minitest for Super Scaffolding':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -231,6 +240,9 @@ jobs:
           command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
 
   'System Tests with Cuprite':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -280,6 +292,9 @@ jobs:
 
   # Uncomment the job at the bottom of this file to run these system tests.
   'System Tests for Action Models':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
