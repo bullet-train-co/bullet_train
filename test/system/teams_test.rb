@@ -18,8 +18,8 @@ class TeamsTest < ApplicationSystemTestCase
       click_on "Create Team"
 
       # we only see the plans page if payments are enabled.
-      if billing_enabled?
-        assert page.has_content?("Select Your Plan")
+      if billing_enabled? && !freemium_enabled?
+        assert page.has_content?("The Pricing Page")
       else
         assert page.has_content?("Team Jane")
       end
@@ -52,6 +52,13 @@ class TeamsTest < ApplicationSystemTestCase
       resize_for(display_details)
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
+
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+        end
+      end
+
       within_team_menu_for(display_details) do
         click_link "Team Settings"
       end
@@ -66,6 +73,13 @@ class TeamsTest < ApplicationSystemTestCase
       resize_for(display_details)
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
+
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+        end
+      end
+
       within_team_menu_for(display_details) do
         click_link "Team Settings"
       end
@@ -82,6 +96,15 @@ class TeamsTest < ApplicationSystemTestCase
       team = @jane.current_team
 
       assert team.admins.include?(@jane.memberships.first)
+
+      # Ensure user has subscribed to billing plan.
+      visit root_path
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+          sleep 2
+        end
+      end
 
       # Shows invited admins
       assert_difference "team.admins.size" do

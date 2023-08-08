@@ -1,31 +1,13 @@
 require "application_system_test_case"
 
 class InvitationDetailsTest < ApplicationSystemTestCase
-  def within_membership_row(membership)
-    within "tr[data-id='#{membership.id}']" do
-      yield
-    end
-  end
-
-  def within_current_memberships_table
-    within "tbody[data-model='Membership'][data-scope='current']" do
-      yield
-    end
-  end
-
-  def within_former_memberships_table
-    within "tbody[data-model='Membership'][data-scope='tombstones']" do
-      yield
-    end
-  end
-
   @@test_devices.each do |device_name, display_details|
     test "visitors can sign-up and manage team members with subscriptions #{billing_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
       resize_for(display_details)
 
       be_invited_to_sign_up
 
-      visit root_path
+      visit user_session_path
       sign_up_from_homepage_for(display_details)
 
       # try non-matching passwords.
@@ -34,10 +16,6 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
-      if billing_enabled?
-        complete_pricing_page
-      end
-
       # we should now be on an onboarding step.
       assert page.has_content?("Tell us about you")
       fill_in "First Name", with: "Hanako"
@@ -45,18 +23,25 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
 
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+        end
+      end
+
       assert page.has_content?("The Testing Team’s Dashboard")
       within_team_menu_for(display_details) do
         click_on "Team Members"
       end
 
-      first_membership = Membership.order(:id).last
+      membership_user = User.find_by(email: "hanako.tanaka@gmail.com")
+      first_membership = Membership.find_by(user: membership_user)
 
       assert page.has_content?("The Testing Team Team Members")
 
       # Paths that begin with "/account/" are whitelisted when accessing
       # invitation#new while passing a cancel_path to the params.
-      hanakos_team = Team.first
+      hanakos_team = membership_user.current_team
       path_for_new_invitation = /invitations\/new/
       path_with_cancel_path_params = /invitations\/new\?cancel_path=/
       visit new_account_team_invitation_path(hanakos_team, cancel_path: account_team_memberships_path(hanakos_team))
@@ -86,8 +71,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         assert page.has_content?("Invitation was successfully created.")
       end
 
-      # we need the id of the membership that's created so we can address it's row in the table specifically.
-      invited_membership = Membership.order(:id).last
+      invited_membership = Membership.find_by(user_email: "takashi.yamaguchi@gmail.com")
       invited_membership.invitation
 
       within_current_memberships_table do
@@ -95,14 +79,38 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         within_membership_row(invited_membership) do
           assert page.has_content?("Invited")
           assert page.has_content?("Team Administrator")
-          click_on "Details"
         end
+      end
+
+      # Resend the invite
+      assert page.has_content?("Resend")
+      assert_difference "all_emails.count", 1 do
+        perform_enqueued_jobs do
+          click_on "Resend"
+          assert page.has_content?("Invitation was successfully resent.")
+        end
+      end
+
+      # Prep a new window for making sure we can't resend invitations for tombstoned memberships.
+      new_window = open_new_window
+      within_window new_window do
+        visit account_team_memberships_path(hanakos_team)
+      end
+
+      within_membership_row(invited_membership) do
+        click_on "Details"
       end
 
       assert page.has_content?("Invitation Details")
 
       accept_alert { click_on "Remove from Team" }
       assert page.has_content?("That user has been successfully removed from the team.")
+
+      # We shouldn't be able to resend invitations for memberships that aren't on the team anymore.
+      within_window new_window do
+        click_on "Resend"
+        assert page.has_content?("Sorry, we couldn't find an invitation to resend.")
+      end
 
       # click the link in the email.
       # yes, this is a totally valid thing to do if you have access to the invitation email.
@@ -134,6 +142,14 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
         accept_alert { click_on "Re-Invite to Team" }
         assert page.has_content?("The user has been successfully re-invited. They will receive an email to rejoin the team.")
+      end
+
+      # Make sure we can resend the invitation for memberships that come back to the team.
+      assert_difference "all_emails.count", 1 do
+        perform_enqueued_jobs do
+          click_on "Resend"
+          assert page.has_content?("Invitation was successfully resent.")
+        end
       end
 
       # sign out.
@@ -169,7 +185,8 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       assert page.has_content?("Hanako Tanaka")
 
-      last_membership = Membership.order(:id).last
+      membership_user = User.find_by(first_name: "Taka", last_name: "Yamaguchi")
+      last_membership = Membership.find_by(user: membership_user)
 
       within_current_memberships_table do
         assert page.has_content?("Taka Yamaguchi")
@@ -191,6 +208,12 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         assert page.has_content?("Create a New Team")
         fill_in "Team Name", with: "Another Team"
         click_on "Create Team"
+
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+          end
+        end
 
         assert page.has_content?("Another Team’s Dashboard")
         within_team_menu_for(display_details) do
@@ -214,8 +237,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         # sign out.
         sign_out_for(display_details)
 
-        # we need the id of the membership that's created so we can address it's row in the table specifically.
-        invited_membership = Membership.order(:id).last
+        invited_membership = Membership.find_by(user_email: "hanako@some-company.com")
 
         # # click the link in the email.
         open_email "hanako@some-company.com"
@@ -242,7 +264,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
           click_on "Team Members"
         end
 
-        last_membership = Membership.order(:id).last
+        last_membership = Membership.find_by(user_email: "hanako@some-company.com")
 
         within_current_memberships_table do
           assert page.has_content?("Hanako Tanaka")
