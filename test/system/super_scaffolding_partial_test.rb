@@ -153,10 +153,11 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       refute_nil partial_test.multiple_buttons_test
       assert_equal partial_test.multiple_buttons_test, ["two", "three"]
       # Date
-      assert_equal partial_test.date_test, Date.today
+      assert_equal partial_test.date_test, Date.new(2021, 2, 17)
       # DateTime
       refute_nil partial_test.date_time_test
       assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
+      assert_equal partial_test.date_time_test, DateTime.parse("2023-06-14T13:45:00+09:00")
       # File
       refute_nil partial_test.file_test
       assert_equal partial_test.file_test.class, ActiveStorage::Attached::One
