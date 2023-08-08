@@ -36,12 +36,12 @@ class DatesHelperTest < ApplicationSystemTestCase
       click_on "Back"
 
       # Assert today's date is displayed correctly.
-      assert page.has_text? I18n.l(time, format: :default)
+      assert_text I18n.l(time, format: :default)
 
       # Assert yesterday's date is displayed correctly.
       travel_to time + 1.day
       visit current_url # Refresh the page
-      assert page.has_text? I18n.l(time, format: :default)
+      assert_text I18n.l(time, format: :default)
 
       # Create a new record in a different time zone.
       Time.zone = "Tokyo"
