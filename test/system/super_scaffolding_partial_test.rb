@@ -113,11 +113,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_buttons_test_two+button", visible: :all).click
       find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
       # Date partial
-      find("#partial_test_date_test").click
-      find(".daterangepicker").click_on("Apply") # Chooses today's date.
+      page.execute_script('document.getElementById("partial_test_date_test").value = "2021-02-17"')
       # DateTime partial
-      find("#partial_test_date_time_test").click
-      find(".daterangepicker").click_on("Apply")
+      page.execute_script('document.getElementById("partial_test_date_time_test").value = "2023-06-14T13:45:00+09:00"')
       # File partial
       attach_file("test/support/foo.txt", make_visible: true)
       # Single Option partial
