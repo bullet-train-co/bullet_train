@@ -342,12 +342,12 @@ workflows:
       - 'Minitest':
           use-core-repo: false
       - 'Minitest with HIDE_THINGS':
-        use-core-repo: true
+          use-core-repo: true
       - 'Minitest with HIDE_THINGS':
-        use-core-repo: false
+          use-core-repo: false
       - 'Minitest for Super Scaffolding':
-        use-core-repo: true
+          use-core-repo: true
       - 'Minitest for Super Scaffolding':
-        use-core-repo: false
+          use-core-repo: false
       # - 'System Tests with Cuprite'
       # - 'System Tests for Action Models'
