@@ -6,14 +6,19 @@ require "yaml"
 
 begin
   response = JSON.parse(Net::HTTP.get(URI("http://localhost:4040/api/tunnels")))
-  ngrok_url = response.dig("tunnels", 1, "public_url")
+  ngrok_url = response.dig("tunnels", 0, "public_url")
 rescue Errno::ECONNREFUSED
   puts "*******NGROK not running*******".yellow
   return
 end
 
 if ngrok_url
-  config_data = Psych.load_file("config/application.yml")
+  begin
+    config_data = Psych.load_file("config/application.yml")
+  rescue Errno::ENOENT
+    puts "config/application.yml not found".red
+  end
+
   if config_data["BASE_URL"] == ngrok_url
     puts "ngrok url has not changed".green
   else
