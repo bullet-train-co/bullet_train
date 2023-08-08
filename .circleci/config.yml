@@ -98,7 +98,10 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
-      - run: ./bin/checkout-and-link-core-repo
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -146,7 +149,10 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
-      - run: ./bin/checkout-and-link-core-repo
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -199,7 +205,10 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
-      - run: ./bin/checkout-and-link-core-repo
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -235,7 +244,10 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
-      - run: ./bin/checkout-and-link-core-repo
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -282,7 +294,10 @@ jobs:
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
 
-      - run: ./bin/checkout-and-link-core-repo
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -307,8 +322,17 @@ workflows:
     jobs:
       - 'Standard Ruby'
       - 'Database Schema Check'
-      - 'Minitest'
+      - 'Minitest':
+        use-core-repo: true
+      - 'Minitest':
+        use-core-repo: false
       - 'Minitest with HIDE_THINGS'
+        use-core-repo: true
+      - 'Minitest with HIDE_THINGS'
+        use-core-repo: false
       - 'Minitest for Super Scaffolding'
+        use-core-repo: true
+      - 'Minitest for Super Scaffolding'
+        use-core-repo: false
       # - 'System Tests with Cuprite'
       # - 'System Tests for Action Models'
