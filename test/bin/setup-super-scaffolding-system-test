@@ -141,7 +141,8 @@ bin/super-scaffold crud PartialTest Team \
   phone_field_test:phone_field \
   super_select_test:super_select \
   multiple_super_select_test:super_select{multiple} \
-  text_area_test:text_area --navbar="ti-layout" \
-  number_field_test:number_field
+  number_field_test:number_field \
+  text_area_test:text_area --navbar="ti-layout"
+  
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare
