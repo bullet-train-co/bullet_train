@@ -15,10 +15,6 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
-      if billing_enabled?
-        complete_pricing_page
-      end
-
       # we should now be on an onboarding step.
       assert page.has_content?("Tell us about you")
       fill_in "First Name", with: "Testy"
@@ -26,6 +22,12 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
       fill_in "Your Team Name", with: "The Testing Team"
       page.select "Brisbane", from: "Your Time Zone"
       click_on "Next"
+
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+        end
+      end
 
       assert page.has_content?("The Testing Team’s Dashboard")
 

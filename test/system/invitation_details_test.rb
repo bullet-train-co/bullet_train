@@ -5,12 +5,20 @@ class InvitationsTest < ApplicationSystemTestCase
     super
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
     @john = create :onboarded_user, first_name: "John", last_name: "Smith", email: "john@bullettrain.co"
+
+    login_as(@jane, scope: :user)
+    visit root_path
+    if billing_enabled?
+      unless freemium_enabled?
+        complete_pricing_page
+        sleep 2
+      end
+    end
   end
 
   @@test_devices.each do |device_name, display_details|
     test "admin can create new non admin invitation on a #{device_name}" do
       resize_for(display_details)
-      login_as(@jane, scope: :user)
       visit new_account_team_invitation_path(@jane.current_team)
       fill_in "Email", with: "someone@bullettrain.co"
       click_on "Create Invitation"
@@ -21,7 +29,6 @@ class InvitationsTest < ApplicationSystemTestCase
 
     test "admin can create new admin invitation on a #{device_name}" do
       resize_for(display_details)
-      login_as(@jane, scope: :user)
       visit new_account_team_invitation_path(@jane.current_team)
       fill_in "Email", with: "someone@bullettrain.co"
       check "Invite as Team Administrator"
@@ -33,7 +40,6 @@ class InvitationsTest < ApplicationSystemTestCase
 
     test "admin can't create invalid invitation on a #{device_name}" do
       resize_for(display_details)
-      login_as(@jane, scope: :user)
       visit new_account_team_invitation_path(@jane.current_team)
       fill_in "Email", with: ""
       click_on "Create Invitation"
@@ -43,7 +49,6 @@ class InvitationsTest < ApplicationSystemTestCase
 
     test "admin can cancel invitation on a #{device_name}" do
       resize_for(display_details)
-      login_as(@jane, scope: :user)
       membership = Membership.new(team: @jane.current_team, user_email: @john.email)
       create :invitation, team: @jane.current_team, from_membership: @jane.memberships.first, email: @john.email, membership: membership
       visit account_team_invitations_path(@jane.current_team)

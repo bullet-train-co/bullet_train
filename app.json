@@ -1,5 +1,5 @@
 {
-  "name": "New Bullet Train Application",
+  "name": "Untitled Application",
   "description": "The Ruby on Rails SaaS-in-a-Box",
   "repository": "https://github.com/bullet-train-co/bullet_train",
   "logo": "https://bullettrain.co/heroku-logo.png",
@@ -22,7 +22,7 @@
     "heroku-postgresql:standard-0",
     "heroku-redis:premium-0",
     "memcachier:100",
-    "hdrive:starter-s3",
+    "bucketeer:hobbyist",
     "cloudinary:starter",
     "scheduler:standard",
     "rails-autoscale:white",

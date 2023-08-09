@@ -1,19 +1,6 @@
 require "application_system_test_case"
 
 class ApplicationPlatformSystemTest < ApplicationSystemTestCase
-  # TODO: Duplicate code, add to application_system_test.rb
-  def within_membership_row(membership)
-    within "tr[data-id='#{membership.id}']" do
-      yield
-    end
-  end
-
-  def within_current_memberships_table
-    within "tbody[data-model='Membership'][data-scope='current']" do
-      yield
-    end
-  end
-
   @@test_devices.each do |device_name, display_details|
     test "visitors can sign-up and manage team members with subscriptions #{billing_enabled? ? "enabled" : "disabled"} on a #{device_name}" do
       resize_for(display_details)
@@ -29,16 +16,18 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
-      if billing_enabled?
-        complete_pricing_page
-      end
-
       # we should now be on an onboarding step.
       assert page.has_content?("Tell us about you")
       fill_in "First Name", with: "Jane"
       fill_in "Last Name", with: "Smith"
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
+
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+        end
+      end
 
       # Create a new Platform Application
       within_developers_menu_for(display_details) do
@@ -69,8 +58,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
         refute page.has_content?("Test Platform Application")
       end
       # The tombstones partial won't be rendered if there aren't any tombstoned memberships.
-      # TODO: This eats up a lot of time, look for a better way to check for this.
-      refute page.has_css?("tbody[data-model='Membership'][data-scope='tombstones']")
+      assert_no_selector "h2", text: "Former Team Members"
 
       # The Membership was archived but not destroyed.
       test_app_membership = Membership.find_by(user_first_name: "Test Platform Application")
