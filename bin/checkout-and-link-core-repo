@@ -60,7 +60,6 @@ bundle lock --update $updates
 
 packages=(
   "bullet_train"
-  "bullet_train-fields"
   "bullet_train-sortable"
 )
 
@@ -79,28 +78,29 @@ do
   yarn build
   npx yalc publish
 
-  echo "------------"
-  ls -al /home/circleci/.yalc/
-  echo "------------"
-  ls -al /home/circleci/.yalc/packages
-  echo "------------"
-  ls -al /home/circleci/.yalc/packages/@bullet-train
-  echo "------------"
-  ls -al /home/circleci/.yalc/packages/@bullet-train/*
-  echo "------------"
-  ls -al /home/circleci/.yalc/packages/@bullet-train/*/*
-  echo "------------"
-  ls -al /home/circleci/.yalc/packages/@bullet-train/*/*/*
-  echo "------------"
-  cat /home/circleci/.yalc/packages/@bullet-train/*/*/package.json
-
   cd ../../
   npx yalc add @bullet-train/$npm_package
-  #grep -v "@bullet-train/$package" package.json > package.tmp
-  #mv package.tmp package.json
-  #yarn add file:./core/$package
-  #echo "gem \"$package\", path: \"./core/$package\"" >> Gemfile
 done
+
+
+# For some reason the fields package is called bullet-train/field and doesn't match the pattern for other packages.
+# If it did match other packages it would be   bullet-train/bullet-train-fields.
+# Since it's different we have to treat it special. It would be nice to standardize, but that's likely to have
+# impacts beyond just fixing CI, so I'm doing the messy thing for now.
+
+package="bullet_train-fields"
+npm_package="fields"
+echo "linking package: $package"
+echo "npm package: $npm_package"
+
+cd ./core/$package
+yarn install
+yarn build
+npx yalc publish
+
+cd ../../
+npx yalc add @bullet-train/$npm_package
+
 
 cat package.json
 
