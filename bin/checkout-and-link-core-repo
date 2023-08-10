@@ -7,7 +7,7 @@ CORE_REPO_BRANCH="main"
 CI_BRANCH=$CIRCLE_BRANCH
 if [[ -v CI_BRANCH ]]
 then
-  BRANCH_RESPONSE=$(curl --verbose -H "Accept: application.vnd.github+json" https://api.github.com/repos/bullet-train-co/bullet_train-core/branches/$CI_BRANCH)
+  BRANCH_RESPONSE=$(curl -H "Accept: application.vnd.github+json" https://api.github.com/repos/bullet-train-co/bullet_train-core/branches/$CI_BRANCH)
 
   echo "Branch response ===================="
   echo $BRANCH_RESPONSE
@@ -95,8 +95,8 @@ do
   cat /home/circleci/.yalc/packages/@bullet-train/*/*/package.json
 
   cd ../../
-  npx yalc add @bullect-train/$npm_package
-  #grep -v "@bullect-train/$package" package.json > package.tmp
+  npx yalc add @bullet-train/$npm_package
+  #grep -v "@bullet-train/$package" package.json > package.tmp
   #mv package.tmp package.json
   #yarn add file:./core/$package
   #echo "gem \"$package\", path: \"./core/$package\"" >> Gemfile
