@@ -77,6 +77,10 @@ do
   echo "------------"
   ls -al /home/circleci/.yalc/packages/@bullet-train
   echo "------------"
+  ls -al /home/circleci/.yalc/packages/@bullet-train/$package
+  echo "------------"
+  ls -al /home/circleci/.yalc/packages/@bullet-train/$package/*
+  echo "------------"
 
   cd ../../
   npx yalc add @bullect-train/$package
