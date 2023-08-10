@@ -64,10 +64,16 @@ packages=(
   "bullet_train-sortable"
 )
 
+echo "yalc dir ======"
+npx yalc dir
+
 for package in "${packages[@]}"
 do
   :
+  npm_package=${package/_/-}
   echo "linking package: $package"
+  echo "npm package: $npm_package"
+
   cd ./core/$package
   yarn install
   yarn build
@@ -89,7 +95,7 @@ do
   cat /home/circleci/.yalc/packages/@bullet-train/*/*/package.json
 
   cd ../../
-  npx yalc add @bullect-train/$package
+  npx yalc add @bullect-train/$npm_package
   #grep -v "@bullect-train/$package" package.json > package.tmp
   #mv package.tmp package.json
   #yarn add file:./core/$package
