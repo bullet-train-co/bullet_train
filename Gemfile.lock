@@ -588,14 +588,9 @@ GEM
     zeitwerk (2.6.8)
 
 PLATFORMS
-<<<<<<< HEAD
   arm64-darwin-21
   arm64-darwin-22
   ruby
-||||||| parent of 9495313 (remove snail gem)
-=======
-  x86_64-darwin-22
->>>>>>> 9495313 (remove snail gem)
   x86_64-linux
 
 DEPENDENCIES
