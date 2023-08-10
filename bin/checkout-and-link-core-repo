@@ -69,6 +69,15 @@ do
   :
   cd ./core/$package
   npx yalc publish
+
+  echo "------------"
+  ls -al /home/circleci/.yalc/
+  echo "------------"
+  ls -al /home/circleci/.yalc/packages
+  echo "------------"
+  ls -al /home/circleci/.yalc/packages/@bullet-train
+  echo "------------"
+
   cd ../../
   npx yalc add @bullect-train/$package
   #grep -v "@bullect-train/$package" package.json > package.tmp
