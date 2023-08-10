@@ -67,9 +67,13 @@ packages=(
 for package in "${packages[@]}"
 do
   :
-  grep -v "@bullect-train/$package" package.json > package.tmp
-  mv package.tmp package.json
-  yarn add file:./core/$package
+  cd ./core/$package
+  npx yalc publish
+  cd ../../
+  npx yalc add @bullect-train/$package
+  #grep -v "@bullect-train/$package" package.json > package.tmp
+  #mv package.tmp package.json
+  #yarn add file:./core/$package
   #echo "gem \"$package\", path: \"./core/$package\"" >> Gemfile
 done
 
