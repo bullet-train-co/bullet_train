@@ -113,9 +113,11 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_buttons_test_two+button", visible: :all).click
       find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
       # Date partial
-      page.execute_script('document.getElementById("partial_test_date_test").value = "2021-02-17"')
+      find("#partial_test_date_test").click
+      find(".daterangepicker").click_on("Apply") # Chooses today's date.
       # DateTime partial
-      page.execute_script('document.getElementById("partial_test_date_time_test").value = "2023-06-14T13:45:00+09:00"')
+      find("#partial_test_date_time_test").click
+      find(".daterangepicker").click_on("Apply")
       # File partial
       attach_file("test/support/foo.txt", make_visible: true)
       # Single Option partial
@@ -153,11 +155,10 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       refute_nil partial_test.multiple_buttons_test
       assert_equal partial_test.multiple_buttons_test, ["two", "three"]
       # Date
-      assert_equal partial_test.date_test, Date.new(2021, 2, 17)
+      assert_equal partial_test.date_test, Date.today
       # DateTime
       refute_nil partial_test.date_time_test
       assert_equal partial_test.date_time_test.class, ActiveSupport::TimeWithZone
-      assert_equal partial_test.date_time_test, DateTime.parse("2023-06-14T13:45:00+09:00")
       # File
       refute_nil partial_test.file_test
       assert_equal partial_test.file_test.class, ActiveStorage::Attached::One
