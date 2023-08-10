@@ -68,6 +68,8 @@ for package in "${packages[@]}"
 do
   :
   cd ./core/$package
+  yarn install
+  yarn build
   npx yalc publish
 
   echo "------------"
@@ -77,10 +79,13 @@ do
   echo "------------"
   ls -al /home/circleci/.yalc/packages/@bullet-train
   echo "------------"
-  ls -al /home/circleci/.yalc/packages/@bullet-train/$package
+  ls -al /home/circleci/.yalc/packages/@bullet-train/*
   echo "------------"
-  ls -al /home/circleci/.yalc/packages/@bullet-train/$package/*
+  ls -al /home/circleci/.yalc/packages/@bullet-train/*/*
   echo "------------"
+  ls -al /home/circleci/.yalc/packages/@bullet-train/*/*/*
+  echo "------------"
+  cat /home/circleci/.yalc/packages/@bullet-train/*/*/package.json
 
   cd ../../
   npx yalc add @bullect-train/$package
