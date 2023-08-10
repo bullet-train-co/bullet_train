@@ -104,8 +104,6 @@ npx yalc add @bullet-train/$npm_package
 
 cat package.json
 
-#updates="${packages[@]}"
-#bundle lock --update $updates
 
 
 
