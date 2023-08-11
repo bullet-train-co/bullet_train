@@ -26,6 +26,11 @@ unless scaffolding_things_disabled?
           end
         end
 
+        visit edit_account_user_path(User.find_by!(email: "me@acme.com"))
+        page.select "Tokyo", from: "Your Time Zone"
+        click_on "Update Profile"
+        visit account_teams_path(Team.find_by!(name: "My Super Team"))
+
         click_on "Add New Creative Concept"
         fill_in "Name", with: "My Generic Creative Concept"
         fill_in "Description", with: "Dummy description for my creative concept"
@@ -38,6 +43,10 @@ unless scaffolding_things_disabled?
         click_on "Three"
         click_on "Four"
         click_on "Five"
+        find("#scaffolding_completely_concrete_tangible_thing_date_field_value_display").click
+        find(".daterangepicker").click_on("Apply")
+        find("#scaffolding_completely_concrete_tangible_thing_date_and_time_field_value_display").click
+        find(".daterangepicker").click_on("Apply")
         fill_in "Email Field Value", with: "me@acme.com"
         fill_in "Password Field Value", with: "secure-password"
         fill_in "Phone Field Value", with: "(201) 551-8321"
@@ -69,8 +78,9 @@ unless scaffolding_things_disabled?
         click_on "No"
         click_on "One"
         fill_in "Date Field Value", with: "02/17/2021"
-        fill_in "Email Field Value", with: "not-me@acme.com"
+        fill_in "Date and Time Field Value", with: "08/15/2023 8:00 PM"
 
+        fill_in "Email Field Value", with: "not-me@acme.com"
         fill_in "Password Field Value", with: "insecure-password"
         fill_in "Phone Field Value", with: "(231) 832-5512"
         page.select "Two", from: "Super Select Value"
@@ -81,6 +91,8 @@ unless scaffolding_things_disabled?
         assert page.has_content? "My new value for this text field"
         assert page.has_content? "No"
         assert page.has_content? "One"
+        assert page.has_content? I18n.l(Date.iso8601("2021-02-17"), format: :default)
+        assert page.has_content? I18n.l(Time.iso8601("2023-08-15T20:00:00+09:00"), format: :default)
         assert page.has_content? "not-me@acme.com"
         assert page.has_content? "insecure-password"
         assert page.has_content? "+1 231-832-5512"
