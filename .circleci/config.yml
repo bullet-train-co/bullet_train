@@ -85,6 +85,9 @@ jobs:
           command: bash ./.circleci/db_schema_check
 
   'Minitest':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -97,6 +100,11 @@ jobs:
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
+
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -132,6 +140,9 @@ jobs:
       #     path: test/reports
 
   'Minitest with HIDE_THINGS':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -143,6 +154,11 @@ jobs:
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
+
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -180,6 +196,9 @@ jobs:
       #     path: test/reports
 
   'Minitest for Super Scaffolding':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -194,6 +213,11 @@ jobs:
       # Restore dependency caches
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
+
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -216,6 +240,9 @@ jobs:
           command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
 
   'System Tests with Cuprite':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -228,6 +255,11 @@ jobs:
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
+
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -260,6 +292,9 @@ jobs:
 
   # Uncomment the job at the bottom of this file to run these system tests.
   'System Tests for Action Models':
+    parameters:
+      use-core-repo:
+        type: boolean
     docker:
       - <<: *ruby_node_browsers_docker_image
       - <<: *postgres_docker_image
@@ -273,6 +308,11 @@ jobs:
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
+
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -292,13 +332,28 @@ jobs:
           command: bundle exec rails test test/system/action_models_test.rb
 
 workflows:
-  version: 2
+  version: 2.1
   build:
     jobs:
       - 'Standard Ruby'
       - 'Database Schema Check'
-      - 'Minitest'
-      - 'Minitest with HIDE_THINGS'
-      - 'Minitest for Super Scaffolding'
+      - 'Minitest':
+          name: 'Core: Minitest'
+          use-core-repo: true
+      - 'Minitest':
+          name: 'Release: Minitest'
+          use-core-repo: false
+      - 'Minitest with HIDE_THINGS':
+          name: 'Core: Minitest with HIDE_THINGS'
+          use-core-repo: true
+      - 'Minitest with HIDE_THINGS':
+          name: 'Release: Minitest with HIDE_THINGS'
+          use-core-repo: false
+      - 'Minitest for Super Scaffolding':
+          name: 'Core: Minitest for Super Scaffolding'
+          use-core-repo: true
+      - 'Minitest for Super Scaffolding':
+          name: 'Release: Minitest for Super Scaffolding'
+          use-core-repo: false
       # - 'System Tests with Cuprite'
       # - 'System Tests for Action Models'

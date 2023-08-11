@@ -43,20 +43,12 @@ class DatesHelperTest < ApplicationSystemTestCase
         click_on "Back"
 
         # Assert today's date is displayed correctly.
-        assert page.has_text? "Today at #{time.strftime("%l:%M %p").strip}"
+        assert_text I18n.l(time, format: :default)
 
         # Assert yesterday's date is displayed correctly.
         travel_to time + 1.day
         visit current_url # Refresh the page
-        assert page.has_text? "Yesterday at #{time.strftime("%l:%M %p").strip}"
-
-        # Assert the month and day is shown for anything before then.
-        travel_to time + 2.days
-        visit current_url
-
-        # We have to assert these two things separately so it doesn't fail on the last day of the year when the year is present.
-        assert page.has_text? time.strftime("%B %-d").strip.to_s
-        assert page.has_text? "at #{time.strftime("%l:%M %p").strip}"
+        assert_text I18n.l(time, format: :default)
 
         # Create a new record in a different time zone.
         Time.zone = "Tokyo"

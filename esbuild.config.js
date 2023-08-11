@@ -67,7 +67,7 @@ if (process.env.THEME) {
   themeEntrypoints[`application.${process.env.THEME}`] = themeFile
 }
 
-require("esbuild").build({
+let build_details = {
   entryPoints: {
     ...otherEntrypoints,
     "application": path.join(process.cwd(), "app/javascript/application.js"),
@@ -93,10 +93,25 @@ require("esbuild").build({
     ".ttf": "file",
     ".eot": "file",
   },
-  watch: process.argv.includes("--watch"),
   plugins: [
     ImportGlobPlugin()
   ],
   // TODO: Silencing warnings until the charset warning is fixed.
-  logLevel: 'error',
-}).catch(() => process.exit(1));
+  logLevel: 'error'
+}
+
+async function serve_with_esbuild() {
+  let ctx = await require("esbuild").context(build_details)
+
+  await ctx.watch()
+
+  let { host, port } = await ctx.serve({
+    servedir: path.join(process.cwd(), "app/assets/builds")
+  })
+}
+
+if(process.argv.includes("--watch")) {
+  serve_with_esbuild()
+} else {
+  require("esbuild").build(build_details)
+}

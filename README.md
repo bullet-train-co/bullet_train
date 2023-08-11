@@ -96,6 +96,12 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
     bin/dev
     ```
 
+    > [!NOTE]
+    > Optional: If you have [ngrok](https://ngrok.com/) installed, uncomment `ngrok: ngrok http 3000` from `Procfile.dev` and run
+    > `bin/set-ngrok-url` to set `BASE_URL` to a publically accessible domain.
+    > Run `bin/set-ngrok-url` after restarting `ngrok` to update `BASE_URL` to
+    > the current public url.
+
 8. Visit http://localhost:3000.
 
 ---
