@@ -61,7 +61,9 @@ class AccountTest < ApplicationSystemTestCase
       click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: another_example_password
       click_on "Sign In"
-      # TODO I feel like password should be capitalized here?
+      # TODO: At some point when devise is updated their translations should capitalize password.
+      # That will make this next line fail. At that point we should capitalize 'password' below and remove these comments.
+      # See: https://github.com/heartcombo/devise/pull/5454
       assert page.has_content?("Invalid Email Address or password.")
     end
   end
