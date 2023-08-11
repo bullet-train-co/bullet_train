@@ -73,7 +73,9 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       fill_in "Your Password", with: "notpassword1234"
       check "Remember me"
       click_on "Sign In"
-      # TODO I feel like password should be capitalized here?
+      # TODO: At some point when devise is updated their translations should capitalize password.
+      # That will make this next line fail. At that point we should capitalize 'password' below and remove these comments.
+      # See: https://github.com/heartcombo/devise/pull/5454
       assert page.has_content?("Invalid Email Address or password.")
 
       # try signing in with the valid credentials.
