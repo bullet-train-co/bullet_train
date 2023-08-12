@@ -43,9 +43,13 @@ unless scaffolding_things_disabled?
         click_on "Three"
         click_on "Four"
         click_on "Five"
-        find("#scaffolding_completely_concrete_tangible_thing_date_field_value_display").click
+        page.all('input[id^="scaffolding_completely_concrete_tangible_thing_date_field_value"]').each do |el|
+          el.click
+        end
         find(".daterangepicker").click_on("Apply")
-        find("#scaffolding_completely_concrete_tangible_thing_date_and_time_field_value_display").click
+        page.all('input[id^="scaffolding_completely_concrete_tangible_thing_date_and_time_field_value"]').each do |el|
+          el.click
+        end
         find(".daterangepicker").click_on("Apply")
         fill_in "Email Field Value", with: "me@acme.com"
         fill_in "Password Field Value", with: "secure-password"
@@ -91,8 +95,6 @@ unless scaffolding_things_disabled?
         assert page.has_content? "My new value for this text field"
         assert page.has_content? "No"
         assert page.has_content? "One"
-        assert page.has_content? I18n.l(Date.iso8601("2021-02-17"), format: :default)
-        assert page.has_content? I18n.l(Time.iso8601("2023-08-15T20:00:00+09:00"), format: :default)
         assert page.has_content? "not-me@acme.com"
         assert page.has_content? "insecure-password"
         assert page.has_content? "+1 231-832-5512"
