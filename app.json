@@ -22,7 +22,7 @@
     "heroku-postgresql:standard-0",
     "heroku-redis:premium-0",
     "memcachier:100",
-    "hdrive:starter-s3",
+    "bucketeer:hobbyist",
     "cloudinary:starter",
     "scheduler:standard",
     "rails-autoscale:white",

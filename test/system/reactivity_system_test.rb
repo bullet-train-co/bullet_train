@@ -6,7 +6,7 @@ unless scaffolding_things_disabled?
       test "create a new tangible thing on a #{device_name} and update it" do
         resize_for(display_details)
 
-        visit root_path
+        visit user_session_path
 
         invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
         assert page.has_content?("Create Your Account")
@@ -19,6 +19,12 @@ unless scaffolding_things_disabled?
         fill_in "Your Team Name", with: "My Super Team"
         page.select "Brisbane", from: "Your Time Zone"
         click_on "Next"
+
+        if billing_enabled?
+          unless freemium_enabled?
+            complete_pricing_page
+          end
+        end
 
         # We should be on the account dashboard with no Creative Concepts listed.
         assert page.has_content? "My Super Team’s Dashboard"

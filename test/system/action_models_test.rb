@@ -29,6 +29,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   [
     "Projects::ArchiveAction",
     "Listings::PublishAction",
+    "Notifications::MarkAllAsReadAction",
     "Articles::CsvImportAction"
   ].each do |class_name|
     class_name.constantize
@@ -123,6 +124,43 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
     end
   end
 
+  # targets-one-parent action
+  if defined?(Notifications::MarkAllAsReadAction)
+    test "developers can mark as read all notifications of a customer" do
+      login_as(@jane, scope: :user)
+      visit account_team_path(@jane.current_team)
+
+      3.times do |n|
+        click_on "Add New Customer"
+        fill_in "Name", with: "Test Customer #{n}"
+        click_on "Create Customer"
+        assert page.has_content? "Customer was successfully created."
+
+        3.times do |i|
+          click_on "Add New Notification"
+          fill_in "Text", with: "Test Notification #{i}"
+          click_on "Create Notification"
+          assert page.has_content? "Notification was successfully created."
+          click_on "Back"
+        end
+
+        # TODO: "Back" button didn't work here
+        click_on "Customers"
+      end
+
+      click_on "Test Customer 1"
+
+      # Developers can click "Mark All As Read" on a multiple records.
+      assert page.has_content?("Mark All As Read")
+      click_on "Mark All As Read"
+
+      # Confirm action page
+      click_on "Perform Mark All As Read Action"
+
+      assert page.has_content?("Mark All As Read Action was successfully created.")
+    end
+  end
+
   # performs-import action
   if defined?(Articles::CsvImportAction)
     test "developers can import CSV file information to their records" do
@@ -171,7 +209,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Back"
 
       click_on "Select Multiple"
-      find(:xpath, "/HTML[1]/BODY[1]/DIV[2]/DIV[1]/DIV[2]/MAIN[1]/DIV[2]/DIV[1]/DIV[3]/DIV[1]/UPDATES-FOR[1]/DIV[1]/DIV[2]/DIV[1]/TABLE[1]/THEAD[1]/TR[1]/TH[1]/LABEL[1]/INPUT[1]").click
+      find(:xpath, "/HTML[1]/BODY[1]/DIV[2]/DIV[1]/DIV[2]/MAIN[1]/DIV[2]/DIV[1]/DIV[3]/DIV[1]/CABLE-READY-UPDATES-FOR[1]/DIV[1]/DIV[2]/DIV[1]/TABLE[1]/THEAD[1]/TR[1]/TH[1]/LABEL[1]/INPUT[1]").click
       click_on "Csv Export (All)"
       assert page.has_content? "We're preparing to Export all Visitors of Your Team."
 

@@ -27,18 +27,18 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       fill_in "Confirm Password", with: example_password
       click_on "Sign Up"
 
-      if billing_enabled?
-        unless freemium_enabled?
-          complete_pricing_page
-        end
-      end
-
       # we should now be on an onboarding step.
       assert page.has_content?("Tell us about you")
       fill_in "First Name", with: "Testy"
       fill_in "Last Name", with: "McTesterson"
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
+
+      if billing_enabled?
+        unless freemium_enabled?
+          complete_pricing_page
+        end
+      end
 
       # sign out.
       sign_out_for(display_details)
@@ -73,7 +73,9 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       fill_in "Your Password", with: "notpassword1234"
       check "Remember me"
       click_on "Sign In"
-      # TODO I feel like password should be capitalized here?
+      # TODO: At some point when devise is updated their translations should capitalize password.
+      # That will make this next line fail. At that point we should capitalize 'password' below and remove these comments.
+      # See: https://github.com/heartcombo/devise/pull/5454
       assert page.has_content?("Invalid Email Address or password.")
 
       # try signing in with the valid credentials.

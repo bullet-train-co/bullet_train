@@ -54,11 +54,11 @@ if (process.env.THEME) {
 
 // Could also swap to packs?
 const otherEntrypoints = {}
-glob("app/javascript/entrypoints/**/*.js")
+glob("app/javascript/entrypoints/**/*.*")
   .forEach((file) => {
     // strips app/javascript/entrypoints from the key.
-    const key = path.join(path.dirname(file), path.basename(file)).split(path.sep + "entrypoints" + path.sep)[1]
-    const value = "." + path.sep + path.join(path.dirname(file), path.basename(file), path.extname(file))
+    const key = path.join(path.dirname(file), path.parse(file).name).split(path.sep + "entrypoints" + path.sep)[1]
+    const value = "." + path.sep + path.join(path.dirname(file), path.basename(file))
     otherEntrypoints[key] = value
   });
 
@@ -67,7 +67,7 @@ if (process.env.THEME) {
   themeEntrypoints[`application.${process.env.THEME}`] = themeFile
 }
 
-require("esbuild").build({
+let build_details = {
   entryPoints: {
     ...otherEntrypoints,
     "application": path.join(process.cwd(), "app/javascript/application.js"),
@@ -93,10 +93,25 @@ require("esbuild").build({
     ".ttf": "file",
     ".eot": "file",
   },
-  watch: process.argv.includes("--watch"),
   plugins: [
     ImportGlobPlugin()
   ],
   // TODO: Silencing warnings until the charset warning is fixed.
-  logLevel: 'error',
-}).catch(() => process.exit(1));
+  logLevel: 'error'
+}
+
+async function serve_with_esbuild() {
+  let ctx = await require("esbuild").context(build_details)
+
+  await ctx.watch()
+
+  let { host, port } = await ctx.serve({
+    servedir: path.join(process.cwd(), "app/assets/builds")
+  })
+}
+
+if(process.argv.includes("--watch")) {
+  serve_with_esbuild()
+} else {
+  require("esbuild").build(build_details)
+}

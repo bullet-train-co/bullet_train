@@ -7,10 +7,13 @@
     <% # added by super scaffolding. %>
   <% end %>
 
+  <% @last_menu_orientation = @menu_orientation %>
+  <% @menu_orientation = :side %>
   <% integrations = capture do %>
     <%= render 'account/integrations/stripe_installations/menu_item' if stripe_enabled? %>
     <%# 🚅 super scaffolding will insert new oauth providers above this line. %>
   <% end %>
+  <% @menu_orientation = @last_menu_orientation %>
 
   <%# We don't want to show this menu section if the menu items only rendered annotations. %>
   <% if integrations.gsub(/<!--(.*)-->/, "").present? %>

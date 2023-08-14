@@ -4,12 +4,19 @@ class AccountTest < ApplicationSystemTestCase
   def setup
     super
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
+    login_as(@jane, scope: :user)
+    visit root_path
+    if billing_enabled?
+      unless freemium_enabled?
+        complete_pricing_page
+        sleep 2
+      end
+    end
   end
 
   @@test_devices.each do |device_name, display_details|
     test "user can edit their account on a #{device_name}" do
       resize_for(display_details)
-      login_as(@jane, scope: :user)
       visit edit_account_user_path(@jane)
       fill_in "First Name", with: "Another"
       fill_in "Last Name", with: "Person"
@@ -23,7 +30,6 @@ class AccountTest < ApplicationSystemTestCase
 
     test "user can edit password on a #{device_name} with valid current password" do
       resize_for(display_details)
-      login_as(@jane, scope: :user)
       visit edit_account_user_path(@jane)
       fill_in "Current Password", with: @jane.password
       fill_in "New Password", with: another_example_password
@@ -42,7 +48,6 @@ class AccountTest < ApplicationSystemTestCase
 
     test "user cannot edit password on a #{device_name} with invalid current password" do
       resize_for(display_details)
-      login_as(@jane, scope: :user)
       visit edit_account_user_path(@jane)
       fill_in "Current Password", with: "invalid"
       fill_in "New Password", with: another_example_password
@@ -56,7 +61,9 @@ class AccountTest < ApplicationSystemTestCase
       click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: another_example_password
       click_on "Sign In"
-      # TODO I feel like password should be capitalized here?
+      # TODO: At some point when devise is updated their translations should capitalize password.
+      # That will make this next line fail. At that point we should capitalize 'password' below and remove these comments.
+      # See: https://github.com/heartcombo/devise/pull/5454
       assert page.has_content?("Invalid Email Address or password.")
     end
   end

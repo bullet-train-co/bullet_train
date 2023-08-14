@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require "colorize"
+require "json"
+require "net/http"
+require "yaml"
+
+begin
+  response = JSON.parse(Net::HTTP.get(URI("http://localhost:4040/api/tunnels")))
+  ngrok_url = response.dig("tunnels", 0, "public_url")
+rescue Errno::ECONNREFUSED
+  puts "*******NGROK not running*******".yellow
+  return
+end
+
+if ngrok_url
+  begin
+    config_data = Psych.load_file("config/application.yml")
+  rescue Errno::ENOENT
+    puts "config/application.yml not found".red
+  end
+
+  if config_data["BASE_URL"] == ngrok_url
+    puts "ngrok url has not changed".green
+  else
+    updated_config_data = config_data.merge("BASE_URL" => ngrok_url)
+    File.open("config/application.yml", "w" ) do |file|
+      if updated_config_data
+        file.write(Psych.dump(updated_config_data).sub("---\n", ""))
+      end
+    end
+    puts "config/application.yml has been updated with new ngrok_url: #{ngrok_url}".green
+  end
+else
+  puts "Something went wrong, can not find ngrok url".red
+end
