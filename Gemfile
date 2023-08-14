@@ -100,7 +100,7 @@ end
 gem "bullet_train"
 gem "bullet_train-super_scaffolding"
 gem "bullet_train-api"
-gem "bullet_train-internationalization", git: "git@github.com:bullet-train-co/bullet_train-core.git", branch: "features/internationalization", glob: "bullet_train-internationalization/*.gemspec"
+# gem "bullet_train-internationalization" Uncomment and bundle install after release.
 gem "bullet_train-outgoing_webhooks"
 gem "bullet_train-incoming_webhooks"
 gem "bullet_train-themes"
