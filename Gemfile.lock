@@ -1,4 +1,12 @@
 GIT
+  remote: git@github.com:bullet-train-co/bullet_train-core.git
+  revision: cbcf5d07d91c5907ef8a50cf903849eaf733a63b
+  branch: features/internationalization
+  glob: bullet_train-internationalization/*.gemspec
+  specs:
+    bullet_train-internationalization (0.1.0)
+
+GIT
   remote: https://github.com/teamcapybara/capybara.git
   revision: c2760553376ad3a76be7b50e87a2eef43a031755
   specs:
@@ -110,7 +118,7 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.2.24)
+    bullet_train (1.3.0)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -119,7 +127,7 @@ GEM
       bullet_train-scope_validator
       bullet_train-super_load_and_authorize_resource
       bullet_train-themes
-      cable_ready (= 5.0.0.pre9)
+      cable_ready (~> 5.0.0)
       cancancan
       commonmarker
       devise
@@ -129,6 +137,7 @@ GEM
       figaro
       hiredis
       http_accept_language
+      image_processing
       microscope
       nice_partials (~> 0.9)
       pagy
@@ -141,7 +150,7 @@ GEM
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-api (1.2.24)
+    bullet_train-api (1.3.0)
       bullet_train
       doorkeeper
       factory_bot
@@ -150,61 +159,59 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.2.24)
+    bullet_train-fields (1.3.0)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.2.24)
+    bullet_train-has_uuid (1.3.0)
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.2.24)
+    bullet_train-incoming_webhooks (1.3.0)
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.2.24)
+    bullet_train-integrations (1.3.0)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.2.24)
+    bullet_train-integrations-stripe (1.3.0)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.2.24)
+    bullet_train-obfuscates_id (1.3.0)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.2.24)
+    bullet_train-outgoing_webhooks (1.3.0)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.2.24)
+    bullet_train-roles (1.3.0)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.2.24)
+    bullet_train-scope_questions (1.3.0)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.2.24)
-    bullet_train-sortable (1.2.24)
+    bullet_train-scope_validator (1.3.0)
+    bullet_train-sortable (1.3.0)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.2.24)
+    bullet_train-super_load_and_authorize_resource (1.3.0)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.2.24)
+    bullet_train-super_scaffolding (1.3.0)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.2.24)
+    bullet_train-themes (1.3.0)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.2.24)
+    bullet_train-themes-light (1.3.0)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.2.24)
+    bullet_train-themes-tailwind_css (1.3.0)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
-    cable_ready (5.0.0.pre9)
-      actioncable (>= 5.2)
+    cable_ready (5.0.1)
       actionpack (>= 5.2)
       actionview (>= 5.2)
-      activerecord (>= 5.2)
       activesupport (>= 5.2)
       railties (>= 5.2)
       thread-local (>= 1.1.0)
@@ -215,14 +222,14 @@ GEM
     charlock_holmes (0.7.7)
     chronic (0.10.2)
     chunky_png (1.4.0)
-    cloudinary (1.25.0)
+    cloudinary (1.27.0)
       aws_cf_signer
       rest-client (>= 2.0.0)
     code_analyzer (0.5.5)
       sexp_processor
     coderay (1.1.3)
     colorize (0.8.1)
-    commonmarker (0.23.9)
+    commonmarker (0.23.10)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.0)
     crass (1.0.6)
@@ -241,7 +248,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-pwned_password (0.1.9)
+    devise-pwned_password (0.1.10)
       devise (~> 4)
       pwned (~> 2.0.0)
     devise-two-factor (5.0.0)
@@ -254,7 +261,7 @@ GEM
       unf (>= 0.0.5, < 1.0.0)
     doorkeeper (5.6.6)
       railties (>= 5)
-    email_reply_parser (0.5.10)
+    email_reply_parser (0.5.11)
     erubi (1.12.0)
     erubis (2.7.0)
     extended_email_reply_parser (0.5.1)
@@ -267,13 +274,14 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (2.7.4)
+    faraday (2.7.10)
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
     faraday-multipart (1.0.4)
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
-    fastimage (2.2.6)
+    fastimage (2.2.7)
+    ffi (1.15.5)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     foreman (0.87.2)
@@ -290,6 +298,9 @@ GEM
     http_accept_language (2.1.1)
     i18n (1.13.0)
       concurrent-ruby (~> 1.0)
+    image_processing (1.12.2)
+      mini_magick (>= 4.9.5, < 5)
+      ruby-vips (>= 2.0.17, < 3)
     indefinite_article (0.2.5)
       activesupport
     io-console (0.6.0)
@@ -298,14 +309,14 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (2.1.0)
+    jbuilder-schema (2.2.0)
       jbuilder
       rails (>= 5.0.0)
     jmespath (1.6.2)
     jsbundling-rails (1.1.1)
       railties (>= 6.0.0)
     json (2.6.3)
-    jwt (2.7.0)
+    jwt (2.7.1)
     knapsack_pro (3.9.0)
       rake
     language_server-protocol (3.17.0.3)
@@ -333,9 +344,10 @@ GEM
     microscope (1.1.1)
       activerecord (>= 4.1.0)
       activesupport (>= 4.1.0)
-    mime-types (3.4.1)
+    mime-types (3.5.0)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.0218.1)
+    mime-types-data (3.2023.0808)
+    mini_magick (4.12.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.2)
     minitest (5.18.0)
@@ -384,7 +396,7 @@ GEM
       omniauth (~> 1.3)
       omniauth-oauth2 (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (6.0.3)
+    pagy (6.0.4)
     pagy_cursor (0.6.0)
       activerecord (>= 5)
       pagy (>= 6, < 7)
@@ -392,7 +404,7 @@ GEM
     parser (3.2.2.1)
       ast (~> 2.4.1)
     pg (1.5.3)
-    phonelib (0.8.1)
+    phonelib (0.8.2)
     possessive (1.0.1)
     postmark (1.24.0)
       json
@@ -499,10 +511,12 @@ GEM
     rubocop-performance (1.16.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    ruby-openai (4.0.0)
+    ruby-openai (4.3.1)
       faraday (>= 1)
       faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
+    ruby-vips (2.1.4)
+      ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
     selenium-webdriver (4.9.0)
@@ -518,7 +532,7 @@ GEM
       sentry-ruby (~> 5.9.0)
       sidekiq (>= 3.0)
     sexp_processor (4.16.1)
-    showcase-rails (0.4.2)
+    showcase-rails (0.4.6)
       rails (>= 6.1.0)
     sidekiq (7.0.9)
       concurrent-ruby (< 2)
@@ -556,7 +570,7 @@ GEM
       rubocop-performance (~> 1.16.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    stripe (8.5.0)
+    stripe (8.7.0)
     thor (1.2.1)
     thread-local (1.1.0)
     timeout (0.3.2)
@@ -577,7 +591,7 @@ GEM
       activemodel
       mail (>= 2.6.1)
       simpleidn
-    version_gem (1.1.2)
+    version_gem (1.1.3)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -613,6 +627,7 @@ DEPENDENCIES
   bullet_train-incoming_webhooks
   bullet_train-integrations
   bullet_train-integrations-stripe
+  bullet_train-internationalization!
   bullet_train-obfuscates_id
   bullet_train-outgoing_webhooks
   bullet_train-scope_questions
