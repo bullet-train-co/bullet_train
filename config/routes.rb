@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   draw "devise"
   draw "sidekiq"
 
+  # `collection_actions` is automatically super scaffolded to your routes file when creating certain objects.
   # This is helpful to have around when working with shallow routes and complicated model namespacing. We don't use this
   # by default, but sometimes Super Scaffolding will generate routes that use this for `only` and `except` options.
-  # TODO Would love to get this out of the application routes file.
   collection_actions = [:index, :new, :create] # standard:disable Lint/UselessAssignment
 
   # This helps mark `resources` definitions below as not actually defining the routes for a given resource, but just
