@@ -19,10 +19,9 @@ class Api::V1::Platform::ApplicationsControllerTest < Api::Test
 
       # Providing the proper key creates a new Team and Platform::Application
       assert_difference("Team.count", 1) do
-        get "/testing/provision", params: {key: ENV["TESTING_PROVISION_KEY"]}
-      end
-      assert_difference("Platform::Application.count", 1) do
-        get "/testing/provision", params: {key: ENV["TESTING_PROVISION_KEY"]}
+        assert_difference("Platform::Application.count", 1) do
+          get "/testing/provision", params: {key: ENV["TESTING_PROVISION_KEY"]}
+        end
       end
     else
       # A test application shouldn't be created when the key is empty nor the environment variable provided.
