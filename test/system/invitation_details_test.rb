@@ -53,7 +53,7 @@ class InvitationsTest < ApplicationSystemTestCase
       create :invitation, team: @jane.current_team, from_membership: @jane.memberships.first, email: @john.email, membership: membership
 
       # Cannot create a duplicate invitation
-      assert_raises(ActiveRecord::RecordInvalid, 'Email Address has already been taken') do
+      assert_raises(ActiveRecord::RecordInvalid, "Email Address has already been taken") do
         create :invitation, team: @jane.current_team, from_membership: @jane.memberships.first, email: @john.email, membership: membership
       end
 
