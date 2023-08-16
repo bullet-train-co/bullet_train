@@ -1,0 +1,25 @@
+name: "Tag on Pull Request merge"
+on:
+  # Should trigger only when a Pull Request is Merged
+  # (the action will not create the Tag if the Pull Request is discarded - closed without merge)
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  TagOnPR:
+    name: Tag on Pull Request merge
+    runs-on: ubuntu-latest
+    # This 'if' condition is important for ensuring the workflow only runs for merged PRs
+    #  (avoid running when a PR is discarded - closed without merging)
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Tag on PR merge
+        id: tag-on-pr-merge
+        uses: David-Lor/action-tag-on-pr-merge@main
+        with:
+          push-tag: true
+      - name: Print fetched tag
+        run: echo "${{ steps.tag-on-pr-merge.outputs.tag }}"
