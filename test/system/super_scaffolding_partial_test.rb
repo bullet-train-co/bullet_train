@@ -113,10 +113,14 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_buttons_test_two+button", visible: :all).click
       find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
       # Date partial
-      find("#partial_test_date_test").click
+      page.all('input[id^="partial_test_date_test"]').each do |el|
+        el.click
+      end
       find(".daterangepicker").click_on("Apply") # Chooses today's date.
       # DateTime partial
-      find("#partial_test_date_time_test").click
+      page.all('input[id^="partial_test_date_time_test"]').each do |el|
+        el.click
+      end
       find(".daterangepicker").click_on("Apply")
       # File partial
       attach_file("test/support/foo.txt", make_visible: true)
