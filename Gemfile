@@ -143,8 +143,7 @@ gem "rqrcode"
 gem "avo", ">= 3.0.1.beta7", source: "https://packager.dev/avo-hq"
 
 # Search
-# add this gem to enable search in Avo
-# gem "ransack"
+gem "ransack"
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.

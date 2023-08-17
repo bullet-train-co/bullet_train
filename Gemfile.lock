@@ -740,6 +740,7 @@ DEPENDENCIES
   rails-erd
   rails_autoscale_agent
   rails_best_practices
+  ransack
   redis (~> 5.0.5)
   rqrcode
   ruby-vips
@@ -756,7 +757,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.2.1p31
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.4.10
