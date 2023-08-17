@@ -23,3 +23,18 @@ jobs:
           push-tag: true
       - name: Print fetched tag
         run: echo "${{ steps.tag-on-pr-merge.outputs.tag }}"
+      # If we created a `v*` tag then we checkout the repo and tag a release.
+      - name: Checkout
+        if: ${{ startsWith(steps.tag-on-pr-merge.outputs.tag, 'v') }}
+        uses: actions/checkout@v3
+      - name: Release
+        if: ${{ startsWith(steps.tag-on-pr-merge.outputs.tag, 'v') }}
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.tag-on-pr-merge.outputs.tag }}
+          generate_release_notes: true
+          body: |
+            ## What's changed in `bullet_train-core`
+            Also check the corresponding release for the `bullet_train-core` repo:
+            https://github.com/bullet-train-co/bullet_train-core/releases
+
