@@ -510,6 +510,10 @@ GEM
       zeitwerk (~> 2.5)
     rainbow (3.1.1)
     rake (13.0.6)
+    ransack (4.0.0)
+      activerecord (>= 6.1.5)
+      activesupport (>= 6.1.5)
+      i18n
     rdoc (6.5.0)
       psych (>= 4.0.0)
     redis (5.0.7)
@@ -709,6 +713,7 @@ DEPENDENCIES
   rails (~> 7.0.0)
   rails_autoscale_agent
   rails_best_practices
+  ransack
   redis (~> 5.0.5)
   rqrcode
   ruby-vips
@@ -725,7 +730,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.2.1p31
+   ruby 3.2.2p53
 
 BUNDLED WITH
    2.4.10
