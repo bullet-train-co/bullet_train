@@ -140,7 +140,7 @@ gem "devise"
 gem "devise-two-factor"
 gem "rqrcode"
 
-gem "avo", ">= 2.33.1", "< 3.0.0"
+gem "avo", ">= 3.0.1.beta7", source: "https://packager.dev/avo-hq"
 
 # Search
 # add this gem to enable search in Avo
