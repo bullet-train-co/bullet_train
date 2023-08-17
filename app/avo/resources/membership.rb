@@ -14,7 +14,7 @@ class Avo::Resources::Membership < Avo::BaseResource
     field :id, as: :id
     field :name, as: :text, hide_on: :forms
     field :user_email, as: :text
-    field :role_ids, as: :tags, suggestions: -> {[:admin, :editor]}, enforce_suggestions: true
+    field :role_ids, as: :tags, suggestions: -> { [:admin, :editor] }, enforce_suggestions: true
     field :user, as: :belongs_to, searchable: true
     field :team, as: :belongs_to, searchable: true
     field :invitation, as: :belongs_to, searchable: true
