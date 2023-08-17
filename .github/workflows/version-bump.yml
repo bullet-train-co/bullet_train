@@ -38,7 +38,7 @@ jobs:
         branch: "version-bump/${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
         delete-branch: true
         title: "Version bump: ${{ inputs.versionBump }} - ${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
-        add-paths: "bullet_train*,lib*,CHANGELOG.md"
+        add-paths: "Gemfile.lock,yarn.lock"
         body: |
           Version bump of the `core` ruby gems and npm packages`
 
