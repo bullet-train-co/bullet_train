@@ -21,11 +21,10 @@ packages=%w(
   bullet_train-themes-tailwind_css
 )
 
-# First we run `bump` at the top level, mainly to have it update
-# the CHANGELOG. We have a fake version file in `lib`, just to keep
-# `bump` happy.
 
-puts `bundle update #{packages.join(" ")}`
+puts output = `bundle outdated`
+
+puts output = `bundle update #{packages.join(" ")}`
 
 npm_packages=%w(
   @bullet-train/bullet-train
