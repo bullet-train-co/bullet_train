@@ -144,25 +144,25 @@
     to-fast-properties "^2.0.0"
 
 "@bullet-train/bullet-train-sortable@^1.3.0":
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.3.6.tgz#08522833a98bc6ed47f43cd389aff09fc40ea25b"
-  integrity sha512-i8YXBojibG+wQFFI9vV3O2UHdXekfdVuuRbI+OSe3pQsAH8A3U/ad6OLMhqma5iev4bG0Icqo++Wu4Ob15lnlw==
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.3.7.tgz#c279c26c548f5c046d7cf3fe05413f07aec2bdaf"
+  integrity sha512-8K3q6lDFDBDTvbL/jY6bagXatgjbBDLE2f4bLHBtU75KdLVnOm1tzBbbnLi1BwWgY4Bu6T8JYYA7E5Nbs92lTg==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
 
 "@bullet-train/bullet-train@^1.3.0":
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.3.6.tgz#b5444e172b76bea44dd521fb3755c1734bed3769"
-  integrity sha512-7/+6qRt+CjFCFiH4aQuS6d3HEEW2gVlQ3SWbfjjbcUh1/A96GVTpwtHw8frTRET7cEDjmD/Gj3+U8kbBQb7e5Q==
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.3.7.tgz#67ae97cb0e54850d3258a9b76a64411c0943a03b"
+  integrity sha512-AuTr/09Scu6LLvnpwebk9NCbHvJYRpBESDMv2jiZP2NVg7txIcreJ8+jfWTYGv6FmwStJVVAjcbh7Giuc+aGuA==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
 "@bullet-train/fields@^1.3.0":
-  version "1.3.6"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.3.6.tgz#0ab4799865b4f21c35fbcf06f11e1c96fba87eb5"
-  integrity sha512-pD54r6mqg/mmdbYW+o9vC4eq3bLl9CrR0k+7D0+MMOZqNhTpTT3oio7aFinAzzCYFjn5OTJMrpF6sKrizzaENQ==
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.3.7.tgz#b32102ff418755999e57e34418b34896996ff935"
+  integrity sha512-wuHt4+v/kn1O9/fh/tAxsEt9vavoZE0moC+fO5sUxtss41VWnJEPdtzmwJGJ6sZLVFO2jFj/OZX7thz3c36hqw==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
