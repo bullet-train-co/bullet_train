@@ -33,7 +33,7 @@ npm_packages=%w(
   @bullet-train/bullet-train-sortable
 )
 
-puts `yarn upgrade #{packages.join(" ")}`
+puts output = `yarn upgrade #{npm_packages.join(" ")}`
 
 puts output = `bundle show bullet_train` # => /some/path/bullet_train-1.3.2
 
