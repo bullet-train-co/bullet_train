@@ -20,4 +20,8 @@ class User < ApplicationRecord
   # 🚅 add delegations above.
 
   # 🚅 add methods above.
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["email", "first_name", "last_name"]
+  end
 end

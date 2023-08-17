@@ -19,4 +19,8 @@ class Membership < ApplicationRecord
   # 🚅 add delegations above.
 
   # 🚅 add methods above.
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["name", "user_email"]
+  end
 end

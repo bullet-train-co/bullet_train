@@ -6,7 +6,6 @@ class Avo::Resources::Membership < Avo::BaseResource
     item: -> {
       {
         title: record.name,
-        description: "Membership of #{team.name}"
       }
     }
   }
@@ -14,10 +13,8 @@ class Avo::Resources::Membership < Avo::BaseResource
   def fields
     field :id, as: :id
     field :name, as: :text, hide_on: :forms
-    field :user_profile_photo_id, as: :text
     field :user_email, as: :text
-    field :added_by_id, as: :number
-    field :role_ids, as: :tags
+    field :role_ids, as: :tags, suggestions: -> {[:admin, :editor]}, enforce_suggestions: true
     field :user, as: :belongs_to, searchable: true
     field :team, as: :belongs_to, searchable: true
     field :invitation, as: :belongs_to, searchable: true
