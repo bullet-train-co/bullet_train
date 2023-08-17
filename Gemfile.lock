@@ -561,7 +561,7 @@ GEM
       rubocop-performance (~> 1.18.0)
     stimulus-rails (1.2.2)
       railties (>= 6.0.0)
-    stripe (8.7.0)
+    stripe (9.0.0)
     thor (1.2.2)
     thread-local (1.1.0)
     timeout (0.4.0)
