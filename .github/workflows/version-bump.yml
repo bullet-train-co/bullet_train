@@ -37,13 +37,13 @@ jobs:
       with:
         author: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
         committer: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
-        commit-message: "Version bump: ${{ inputs.versionBump }} - ${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
-        branch: "version-bump/${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
+        commit-message: "BT-Core version bump: ${{ inputs.versionBump }} - ${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
+        branch: "core-version-bump/${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
         delete-branch: true
-        title: "Version bump: ${{ inputs.versionBump }} - ${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
+        title: "BT-Core version bump: ${{ inputs.versionBump }} - ${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
         add-paths: "Gemfile.lock,yarn.lock"
         body: |
-          Version bump of the `core` ruby gems and npm packages`
+          Version bump of the `core` ruby gems and npm packages to version `{{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}`
 
           Tag v${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}
 
