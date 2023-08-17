@@ -5,7 +5,7 @@ class Avo::Resources::Invitation < Avo::BaseResource
     query: -> { query.ransack(id_eq: params[:q], email_cont: params[:q], m: "or").result(distinct: false) },
     item: -> {
       {
-        title: record.title
+        title: record.email
       }
     }
   }
@@ -13,9 +13,9 @@ class Avo::Resources::Invitation < Avo::BaseResource
   def fields
     field :id, as: :id
     field :email, as: :text
-    field :uuid, as: :text
     field :team, as: :belongs_to, searchable: true
     field :from_membership, as: :belongs_to, searchable: true
     field :membership, as: :has_one
+    field :uuid, as: :text
   end
 end
