@@ -134,6 +134,7 @@ gem "devise"
 gem "devise-two-factor"
 gem "rqrcode"
 
+# Admin panel
 gem "avo", ">= 3.0.1.beta7", source: "https://packager.dev/avo-hq"
 
 # Search
