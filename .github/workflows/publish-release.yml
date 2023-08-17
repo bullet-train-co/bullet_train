@@ -1,12 +1,26 @@
 name: Publish release after tagging
 
+# Ideally we'd like to be able to do this to only fire the action
+# when a tag is pushed. But it looks like tags that are created via
+# the API in a workflow don't count as being "pushed". So this doesn't work.
+# on:
+#   push:
+#     tags:
+#       - "v*.*.*"
+#
+# So instead we have to run this action on every `create`
+# and then use an if statement on the job to skip it if
+# we don't have a `v*` tag on that create action.
 on:
-  push:
-    tags:
-      - "v*.*.*"
+  # Triggers the workflow on push or pull request events but only for the main branch
+  # TODO: Is the above statement about the main branch accurate?
+  create:
 
 jobs:
   build:
+    # This if statement prevents the job from running unless
+    # there's a version tag at that SHA
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
