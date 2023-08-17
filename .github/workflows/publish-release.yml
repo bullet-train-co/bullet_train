@@ -29,3 +29,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
+          body: |
+            ## What's changed in `bullet_train-core`
+            Also check the corresponding release for the `bullet_train-core` repo:
+            https://github.com/bullet-train-co/bullet_train-core/releases
+
