@@ -33,7 +33,9 @@ Avo.configure do |config|
   #   search: 'search?',
   # }
   # config.raise_error_on_missing_policy = false
-  # config.authorization_client = :pundit
+  # Change this to :pundit when using the authorization feature
+  config.authorization_client = nil
+
 
   ## == Localization ==
   # config.locale = 'en-US'
