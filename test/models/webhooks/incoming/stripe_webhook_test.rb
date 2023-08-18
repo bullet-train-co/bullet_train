@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 if defined?(BulletTrain::Billing::Stripe)
 
@@ -12,8 +12,7 @@ if defined?(BulletTrain::Billing::Stripe)
         "data" => {
           "object" => {
             "id" => stripe_subscription_id,
-            "plan" => {
-            },
+            "plan" => {},
             "items" => {
               "data" => [],
             },
@@ -45,8 +44,7 @@ if defined?(BulletTrain::Billing::Stripe)
         "data" => {
           "object" => {
             "id" => stripe_subscription_id,
-            "plan" => {
-            },
+            "plan" => {},
             "items" => {
               "data" => [],
             },
@@ -76,7 +74,6 @@ if defined?(BulletTrain::Billing::Stripe)
         team = create :team
         stripe_subscription = create :billing_stripe_subscription, team: team
         @generic_subscription = create :billing_subscription, provider_subscription: stripe_subscription, status: nil
-        #create :billing_subscriptions_included_price, subscription: @generic_subscription
         @subscription_created_webhook = create :webhooks_incoming_stripe_webhook,
           data: customer_subscription_created_data(Time.now - 2.minutes, stripe_subscription.stripe_subscription_id)
         @subscription_updated_webhook = create :webhooks_incoming_stripe_webhook,
@@ -100,7 +97,6 @@ if defined?(BulletTrain::Billing::Stripe)
         team = create :team
         stripe_subscription = create :billing_stripe_subscription, team: team
         @generic_subscription = create :billing_subscription, provider_subscription: stripe_subscription, status: nil
-        #create :billing_subscriptions_included_price, subscription: @generic_subscription
         @subscription_updated_webhook = create :webhooks_incoming_stripe_webhook,
           data: customer_subscription_updated_data(Time.now - 2.minutes, stripe_subscription.stripe_subscription_id)
         @subscription_created_webhook = create :webhooks_incoming_stripe_webhook,
@@ -114,7 +110,5 @@ if defined?(BulletTrain::Billing::Stripe)
         assert_equal "active", @generic_subscription.reload.status
       end
     end
-
-
   end
 end
