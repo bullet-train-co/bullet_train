@@ -22,6 +22,21 @@ knapsack_pro_adapter.set_test_helper_path(__FILE__)
 require "sidekiq/testing"
 Sidekiq::Testing.inline!
 
+begin
+  require "bullet_train/billing/test_support"
+  FactoryBot.definition_file_paths << BulletTrain::Billing::TestSupport::FACTORY_PATH
+  FactoryBot.reload
+rescue LoadError
+end
+
+begin
+  require "bullet_train/billing/stripe/test_support"
+  FactoryBot.definition_file_paths << BulletTrain::Billing::Stripe::TestSupport::FACTORY_PATH
+  FactoryBot.reload
+rescue LoadError
+end
+
+
 ActiveSupport::TestCase.class_eval do
   # Run tests in parallel with specified workers
   # parallelize(workers: :number_of_processors)
