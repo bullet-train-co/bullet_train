@@ -12,15 +12,12 @@ if defined?(BulletTrain::Billing::Stripe)
         "data" => {
           "object" => {
             "id" => stripe_subscription_id,
-            "plan" => {},
             "items" => { "data" => [] },
-            "object" => "subscription",
             "status" => "active",
             "created" => created_at.to_i,
           }
         },
         "type" => "customer.subscription.updated",
-        "object" => "event",
         "created" => created_at.to_i,
       }
     end
@@ -33,15 +30,12 @@ if defined?(BulletTrain::Billing::Stripe)
         "data" => {
           "object" => {
             "id" => stripe_subscription_id,
-            "plan" => {},
             "items" => { "data" => [] },
-            "object" => "subscription",
             "status" => "incomplete",
             "created" => created_at.to_i,
           }
         },
         "type" => "customer.subscription.created",
-        "object" => "event",
         "created" => created_at.to_i,
       }
     end
