@@ -3,7 +3,9 @@ require "test_helper"
 if defined?(BulletTrain::Billing::Stripe)
   class Webhooks::Incoming::StripeWebhookTest < ActiveSupport::TestCase
     include ::FactoryBot::Syntax::Methods
-    # TODO: Cut this down to just the attributes we need
+
+    # This is a _very_ minimal representation of a webhook payload. It's just
+    # enough for the purposes of these tests.
     def customer_subscription_updated_data(created_at, stripe_subscription_id)
       {
         "id" => "evt_1NgIq2BiWqhbiHpFXvtRJZtY",
@@ -11,31 +13,20 @@ if defined?(BulletTrain::Billing::Stripe)
           "object" => {
             "id" => stripe_subscription_id,
             "plan" => {},
-            "items" => {
-              "data" => [],
-            },
+            "items" => { "data" => [] },
             "object" => "subscription",
             "status" => "active",
             "created" => created_at.to_i,
-            "cancel_at_period_end" => false,
-            "cancellation_details" => {
-              "reason" => nil, "comment" => nil, "feedback" => nil
-            },
           }
         },
         "type" => "customer.subscription.updated",
         "object" => "event",
         "created" => created_at.to_i,
-        "request" => {
-          "id" => "req_xecKk5kzBB6YxH", "idempotency_key" => "4b0d30d5-4bbd-400b-87ae-f551e3be0748"
-        },
-        "livemode" => true,
-        "api_version" => "2022-11-15",
-        "pending_webhooks" => 2
       }
     end
 
-    # TODO: Cut this down to just the attributes we need
+    # This is a _very_ minimal representation of a webhook payload. It's just
+    # enough for the purposes of these tests.
     def customer_subscription_created_data(created_at, stripe_subscription_id)
       {
         "id" => "evt_1NgIq1BiWqhbiHpFTeqASYDz",
@@ -43,27 +34,15 @@ if defined?(BulletTrain::Billing::Stripe)
           "object" => {
             "id" => stripe_subscription_id,
             "plan" => {},
-            "items" => {
-              "data" => [],
-            },
+            "items" => { "data" => [] },
             "object" => "subscription",
             "status" => "incomplete",
             "created" => created_at.to_i,
-            "cancel_at_period_end" => false,
-            "cancellation_details" => {
-              "reason" => nil, "comment" => nil, "feedback" => nil
-            },
           }
         },
         "type" => "customer.subscription.created",
         "object" => "event",
         "created" => created_at.to_i,
-        "request" => {
-          "id" => "req_xecKk5kzBB6YxH", "idempotency_key" => "4b0d30d5-4bbd-400b-87ae-f551e3be0748"
-        },
-        "livemode" => true,
-        "api_version" => "2022-11-15",
-        "pending_webhooks" => 2
       }
     end
 
