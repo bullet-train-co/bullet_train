@@ -111,6 +111,10 @@ if defined?(BulletTrain::Billing::Stripe)
         @subscription_created_webhook.process
         assert_equal "active", @generic_subscription.reload.status
       end
+
+      test "watch it fail in CI" do
+        assert_equal "are we running in CI?", "if so, this should fail"
+      end
     end
 
 
