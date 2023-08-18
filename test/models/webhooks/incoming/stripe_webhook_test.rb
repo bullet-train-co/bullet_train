@@ -1,8 +1,6 @@
 require "test_helper"
 
 if defined?(BulletTrain::Billing::Stripe)
-
-  puts Rails.configuration.factory_bot.definition_file_paths
   class Webhooks::Incoming::StripeWebhookTest < ActiveSupport::TestCase
     include ::FactoryBot::Syntax::Methods
     # TODO: Cut this down to just the attributes we need
