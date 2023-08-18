@@ -1,6 +1,8 @@
 require 'test_helper'
 
 if defined?(BulletTrain::Billing::Stripe)
+
+  puts Rails.configuration.factory_bot.definition_file_paths
   class Webhooks::Incoming::StripeWebhookTest < ActiveSupport::TestCase
     include ::FactoryBot::Syntax::Methods
     # TODO: Cut this down to just the attributes we need
@@ -110,10 +112,6 @@ if defined?(BulletTrain::Billing::Stripe)
         assert_equal "active", @generic_subscription.reload.status
         @subscription_created_webhook.process
         assert_equal "active", @generic_subscription.reload.status
-      end
-
-      test "watch it fail in CI" do
-        assert_equal "are we running in CI?", "if so, this should fail"
       end
     end
 
