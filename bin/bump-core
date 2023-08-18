@@ -30,10 +30,7 @@ class CoreBumpCLI < Thor
 
     bundle_update
     yarn_upgrade
-
-    if github_output_file
-      write_to_github_output_file
-    end
+    write_to_github_output_file
   end
 
   # This allows us to define helper methods that aren't attached to thor commands
@@ -51,11 +48,15 @@ class CoreBumpCLI < Thor
     end
 
     def write_to_github_output_file
-      # This block allows us to pass the new bump version out to the workflow.
-      output = `bundle show bullet_train` # => /some/path/bullet_train-1.3.2
-      version = output.split('-').last
-      puts "The new version to pass to the GitHub output file = #{version}"
-      IO.write(github_output_file, "NEW_VERSION_NUMBER=#{version}\n", mode: 'a')
+      if github_output_file
+        # This block allows us to pass the new bump version out to the workflow.
+        output = `bundle show bullet_train` # => /some/path/bullet_train-1.3.2
+        version = output.split('-').last
+        puts "The new version to pass to the GitHub output file = #{version}"
+        IO.write(github_output_file, "NEW_VERSION_NUMBER=#{version}\n", mode: 'a')
+      else
+        say "We don't seem to be running in GitHub actions. Skipping the GitHub output file."
+      end
     end
 
     def ruby_gems
