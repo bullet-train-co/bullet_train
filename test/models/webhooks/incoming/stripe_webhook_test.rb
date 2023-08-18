@@ -12,7 +12,7 @@ if defined?(BulletTrain::Billing::Stripe)
         "data" => {
           "object" => {
             "id" => stripe_subscription_id,
-            "items" => { "data" => [] },
+            "items" => {"data" => []},
             "status" => "active",
             "created" => created_at.to_i,
           }
@@ -30,7 +30,7 @@ if defined?(BulletTrain::Billing::Stripe)
         "data" => {
           "object" => {
             "id" => stripe_subscription_id,
-            "items" => { "data" => [] },
+            "items" => {"data" => []},
             "status" => "incomplete",
             "created" => created_at.to_i,
           }
