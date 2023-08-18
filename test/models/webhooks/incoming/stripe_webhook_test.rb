@@ -73,7 +73,6 @@ if defined?(BulletTrain::Billing::Stripe)
       def setup
         team = create :team
         stripe_subscription = create :billing_stripe_subscription, team: team
-        puts stripe_subscription.as_json
         @generic_subscription = create :billing_subscription, provider_subscription: stripe_subscription, status: nil
         #create :billing_subscriptions_included_price, subscription: @generic_subscription
         @subscription_created_webhook = create :webhooks_incoming_stripe_webhook,
@@ -90,11 +89,14 @@ if defined?(BulletTrain::Billing::Stripe)
       end
     end
 
+    # Sometimes we recieve a subscription.updated webhook _before_ we recieve
+    # the subscription.created webhook for the same subscription. In that case
+    # we want to make sure that we don't erroneously set the subscription status
+    # back to 'pending' becasue that's confusing for everyone especially customers.
     class SubscriptionInvalidOrderTests < Webhooks::Incoming::StripeWebhookTest
       def setup
         team = create :team
         stripe_subscription = create :billing_stripe_subscription, team: team
-        puts stripe_subscription.as_json
         @generic_subscription = create :billing_subscription, provider_subscription: stripe_subscription, status: nil
         #create :billing_subscriptions_included_price, subscription: @generic_subscription
         @subscription_updated_webhook = create :webhooks_incoming_stripe_webhook,
