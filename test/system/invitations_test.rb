@@ -179,12 +179,41 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "Last Name", with: "Yamaguchi"
       click_on "Next"
 
+      # Click on next to show that bulk invitations will raise an error if not filled out properly.
+      click_on "Next"
+      assert page.has_content?("Please correct the errors below.")
+
+      # Fill in the email addresses.
+      email_fields = page.all('label', text: 'Email Address')
+      email_fields.each_with_index do |field, idx|
+        field.sibling('div').find('input').fill_in with: "test-#{idx}@some-company.com"
+      end
+
+      # Select roles
+      role_ids = ["Default", "Editor", "Admin"]
+      role_fields = page.all('label', text: 'Role ids')
+      role_fields.each_with_index do |role_field, idx|
+        select_field = role_field.sibling('div').find('select')
+        select_field.all('option').find {|opt| opt.text == role_ids[idx]}.select_option
+      end
+
+      assert_difference(['Invitation.count', 'Membership.count'], 3) do
+        click_on "Next"
+        sleep 2
+      end
+
       assert page.has_content?("The Testing Team’s Dashboard")
       within_team_menu_for(display_details) do
         click_on "Team Members"
       end
 
       assert page.has_content?("Hanako Tanaka")
+
+      3.times do |idx|
+        assert page.has_content?("test-#{idx}@some-company.com")
+        invitation = Invitation.find_by(email: "test-#{idx}@some-company.com")
+        assert_equal invitation.membership.role_ids, [role_ids[idx].downcase]
+      end
 
       membership_user = User.find_by(first_name: "Taka", last_name: "Yamaguchi")
       last_membership = Membership.find_by(user: membership_user)
