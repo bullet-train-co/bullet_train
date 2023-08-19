@@ -182,6 +182,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       # Click on next to show that bulk invitations will raise an error if not filled out properly.
       click_on "Next"
       assert page.has_content?("Please correct the errors below.")
+      assert page.has_content?("Invitations email can't be blank")
 
       # Fill in the email addresses.
       email_fields = page.all("label", text: "Email Address")
