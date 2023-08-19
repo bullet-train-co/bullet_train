@@ -184,20 +184,20 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       assert page.has_content?("Please correct the errors below.")
 
       # Fill in the email addresses.
-      email_fields = page.all('label', text: 'Email Address')
+      email_fields = page.all("label", text: "Email Address")
       email_fields.each_with_index do |field, idx|
-        field.sibling('div').find('input').fill_in with: "test-#{idx}@some-company.com"
+        field.sibling("div").find("input").fill_in with: "test-#{idx}@some-company.com"
       end
 
       # Select roles
       role_ids = ["Default", "Editor", "Admin"]
-      role_fields = page.all('label', text: 'Role ids')
+      role_fields = page.all("label", text: "Role ids")
       role_fields.each_with_index do |role_field, idx|
-        select_field = role_field.sibling('div').find('select')
-        select_field.all('option').find {|opt| opt.text == role_ids[idx]}.select_option
+        select_field = role_field.sibling("div").find("select")
+        select_field.all("option").find { |opt| opt.text == role_ids[idx] }.select_option
       end
 
-      assert_difference(['Invitation.count', 'Membership.count'], 3) do
+      assert_difference(["Invitation.count", "Membership.count"], 3) do
         click_on "Next"
         sleep 2
       end
