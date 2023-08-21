@@ -144,25 +144,25 @@
     to-fast-properties "^2.0.0"
 
 "@bullet-train/bullet-train-sortable@^1.3.0":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.3.7.tgz#c279c26c548f5c046d7cf3fe05413f07aec2bdaf"
-  integrity sha512-8K3q6lDFDBDTvbL/jY6bagXatgjbBDLE2f4bLHBtU75KdLVnOm1tzBbbnLi1BwWgY4Bu6T8JYYA7E5Nbs92lTg==
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.3.8.tgz#8749b70f924a2cc62cd146d25036389dc9d30612"
+  integrity sha512-ll+QOEEiIPHv0mMPd5lFbkKT4+VPCXKe7oBxzmV6/M5uVYKgf6uiuG8Z3AA2ka0uSxr8rFtbNzLaiufbtWq2Ew==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
 
 "@bullet-train/bullet-train@^1.3.0":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.3.7.tgz#67ae97cb0e54850d3258a9b76a64411c0943a03b"
-  integrity sha512-AuTr/09Scu6LLvnpwebk9NCbHvJYRpBESDMv2jiZP2NVg7txIcreJ8+jfWTYGv6FmwStJVVAjcbh7Giuc+aGuA==
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.3.8.tgz#a163f04e5111b158f01912855849a121e45681e4"
+  integrity sha512-Tn8Zr9OL3dz7stT07g1njkoutAc2xTpmVw+ojB4Hbqj/GugUetU9LDfsynZ1A8Ho6P8/4JXrxy9EOGfiW682rA==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
 "@bullet-train/fields@^1.3.0":
-  version "1.3.7"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.3.7.tgz#b32102ff418755999e57e34418b34896996ff935"
-  integrity sha512-wuHt4+v/kn1O9/fh/tAxsEt9vavoZE0moC+fO5sUxtss41VWnJEPdtzmwJGJ6sZLVFO2jFj/OZX7thz3c36hqw==
+  version "1.3.8"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.3.8.tgz#26b703427ee75f72c2ef073ef6ea207d7eecb895"
+  integrity sha512-GHusJqEnYYmfbKsOJcuXETWn20ewwKs5uPykrO455i90JKfANwUulgmDx4t8DDnQw86eBcJkenvcJ4vObgWOVA==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
@@ -817,9 +817,9 @@ contra@1.9.4:
     ticky "1.0.1"
 
 core-js@^3.15.1:
-  version "3.32.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.0.tgz#7643d353d899747ab1f8b03d2803b0312a0fb3b6"
-  integrity sha512-rd4rYZNlF3WuoYuRIDEmbR/ga9CeuWX9U05umAvgrrZoHY4Z++cp/xwPQMvUpBB4Ag6J8KfD80G0zwCyaSxDww==
+  version "3.32.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.1.tgz#a7d8736a3ed9dd05940c3c4ff32c591bb735be77"
+  integrity sha512-lqufgNn9NLnESg5mQeYsxQP5w7wrViSj0jr/kv6ECQiByzQkrn1MKvV0L3acttpDqfQrHLwr2KCMgX5b8X+lyQ==
 
 cross-spawn@^7.0.0:
   version "7.0.3"

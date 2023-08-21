@@ -96,7 +96,7 @@ GEM
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.3.7)
+    bullet_train (1.3.8)
       awesome_print
       bullet_train-fields
       bullet_train-has_uuid
@@ -128,7 +128,7 @@ GEM
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-api (1.3.7)
+    bullet_train-api (1.3.8)
       bullet_train
       doorkeeper
       factory_bot
@@ -137,53 +137,53 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.3.7)
+    bullet_train-fields (1.3.8)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.3.7)
+    bullet_train-has_uuid (1.3.8)
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.3.7)
+    bullet_train-incoming_webhooks (1.3.8)
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.3.7)
+    bullet_train-integrations (1.3.8)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.3.7)
+    bullet_train-integrations-stripe (1.3.8)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.3.7)
+    bullet_train-obfuscates_id (1.3.8)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.3.7)
+    bullet_train-outgoing_webhooks (1.3.8)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.3.7)
+    bullet_train-roles (1.3.8)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.3.7)
+    bullet_train-scope_questions (1.3.8)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.3.7)
-    bullet_train-sortable (1.3.7)
+    bullet_train-scope_validator (1.3.8)
+    bullet_train-sortable (1.3.8)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.3.7)
+    bullet_train-super_load_and_authorize_resource (1.3.8)
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.3.7)
+    bullet_train-super_scaffolding (1.3.8)
       bullet_train
       indefinite_article
       rails (>= 6.0.0)
-    bullet_train-themes (1.3.7)
+    bullet_train-themes (1.3.8)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.3.7)
+    bullet_train-themes-light (1.3.8)
       bullet_train-themes-tailwind_css
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.3.7)
+    bullet_train-themes-tailwind_css (1.3.8)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
@@ -392,7 +392,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.3)
-    phonelib (0.8.2)
+    phonelib (0.8.3)
     possessive (1.0.1)
     postmark (1.24.0)
       json
@@ -501,7 +501,7 @@ GEM
     rubocop-performance (1.18.0)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    ruby-openai (5.0.0)
+    ruby-openai (5.1.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
     ruby-progressbar (1.13.0)
