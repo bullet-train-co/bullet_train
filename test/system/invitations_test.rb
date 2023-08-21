@@ -178,6 +178,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "First Name", with: "Taka"
       fill_in "Last Name", with: "Yamaguchi"
       click_on "Next"
+      click_on "Skip"
 
       assert page.has_content?("The Testing Team’s Dashboard")
       within_team_menu_for(display_details) do
