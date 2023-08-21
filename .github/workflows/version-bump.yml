@@ -27,6 +27,9 @@ jobs:
     - name: "Configure bundler"
       run: bundle config unset deployment
 
+    - name: "Install thor"
+      run: gem install thor
+
     - name: "Bump core"
       id: bump-core
       run: ./bin/bump-core
