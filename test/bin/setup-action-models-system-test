@@ -35,9 +35,9 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
   bundle exec spring rails g model Customer team:references name:string
-  bin/super-scaffold crud Customer Team name:text_field --sidebar="ti.ti-user"
+  bin/super-scaffold crud Customer Team name:text_field --navbar="ti-user"
   bundle exec spring rails g model Notification customer:references text:string read:boolean
-  bin/super-scaffold crud Notification Customer,Team text:text_field read:boolean --sidebar="ti.ti-email"
+  bin/super-scaffold crud Notification Customer,Team text:text_field read:boolean --navbar="ti-email"
   rails db:migrate
   bin/super-scaffold action-model:targets-one-parent MarkAllAsRead Notification Customer
 
