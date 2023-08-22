@@ -112,11 +112,11 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       # Sometimes that check passes because capybara evaluates the state of the page _before_
       # the click aciton succeeds. I don't find "Select Multiple" being available anywhere within
       # the listings heirarchy of pages. Someone who knows more about the action models gem probably
-      # needs to rewrite the remainder of this test to be a valid scenario. In order to get the test
-      # suite passing I'm just returning early.
+      # needs to rewrite the remainder of this section of the test to be a valid scenario.
 
       # Developers can click "Publish" on a single record,
       # but cannot perform the action on multiple ones.
+      #
       # assert page.has_content?("Publish")
       # click_on "Select Multiple"
       # refute page.has_content?("Publish")
