@@ -33,20 +33,18 @@ else
   echo "Skipping the \`targets-one\` action on this CI node."
 fi
 
-# TODO: This causes problems
-# Might be able to turn it back on after merging: https://github.com/bullet-train-pro/bullet_train-action_models/pull/80
-#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
-  #bundle exec spring rails g model Customer team:references name:string
-  #bin/super-scaffold crud Customer Team name:text_field --navbar="ti-user"
-  #bundle exec spring rails g model Notification customer:references text:string read:boolean
-  #bin/super-scaffold crud Notification Customer,Team text:text_field read:boolean --navbar="ti-email"
-  #rails db:migrate
-  #bin/super-scaffold action-model:targets-one-parent MarkAllAsRead Notification Customer
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+  bundle exec spring rails g model Customer team:references name:string
+  bin/super-scaffold crud Customer Team name:text_field --navbar="ti-user"
+  bundle exec spring rails g model Notification customer:references text:string read:boolean
+  bin/super-scaffold crud Notification Customer,Team text:text_field read:boolean --navbar="ti-email"
+  rails db:migrate
+  bin/super-scaffold action-model:targets-one-parent MarkAllAsRead Notification Customer
 
-  #test/bin/portable-string-replace app/models/notifications/mark_all_as_read_action.rb "# This is where you implement the operation you want to perform on the target." "customer.notifications.update(read: true)"
-#else
-  #echo "Skipping the \`targets-one-parent\` action on this CI node."
-#fi
+  test/bin/portable-string-replace app/models/notifications/mark_all_as_read_action.rb "# This is where you implement the operation you want to perform on the target." "customer.notifications.update(read: true)"
+else
+  echo "Skipping the \`targets-one-parent\` action on this CI node."
+fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   bundle exec spring rails g model Article team:references name:string

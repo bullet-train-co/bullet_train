@@ -48,13 +48,19 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Add New Project"
       fill_in "Name", with: "Test Project"
       click_on "Create Project"
+      click_on "Back"
+      click_on "Add New Project"
+      fill_in "Name", with: "Another Test Project"
+      click_on "Create Project"
 
       # Test targets-many logic
-      click_on "Archive"
+      click_on "Back"
+      click_on "Select Multiple"
+      check "Test Project"
+      click_on "Archive (1)"
 
       # Confirm action page
-      # TODO: `Projects` shouldn't be plural here.
-      assert page.has_content?("We're preparing to Archive 1 Projects of Your Team")
+      assert page.has_content?("We're preparing to Archive 1 Project of Your Team")
       click_on "Perform Archive Action"
 
       assert page.has_content?("Archive Action was successfully created.")
@@ -85,12 +91,6 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Perform Archive Action"
 
       assert page.has_content?("Archive Action was successfully created.")
-
-      # TODO: The following two assertions don't seem to be valid.
-      # Maybe some of the action models partials have changed?
-      # assert page.has_content?("Project 1 archived")
-      # assert page.has_content?("Project 2 archived")
-
       assert page.has_content?("Archive Action on 2 Projects")
       assert page.has_content?(/Processed 2 of 2 Today/i)
     end
