@@ -40,7 +40,7 @@ class CoreBumpCLI < Thor
     end
 
     def bundle_update
-      puts `bundle update #{ruby_gems.join(" ")}`
+      puts `bundle update --conservative #{ruby_gems.join(" ")}`
     end
 
     def yarn_upgrade
