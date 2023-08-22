@@ -28,8 +28,12 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         visit account_dashboard_path
 
         # create the endpoint.
-        within_developers_menu_for(display_details) do
-          click_on "Webhooks"
+        if disable_developer_menu?
+          visit account_team_webhooks_outgoing_endpoints_path(User.find_by(first_name: "Andrew").current_team)
+        else
+          within_developers_menu_for(display_details) do
+            click_on "Webhooks"
+          end
         end
         click_on "Add New Endpoint"
         fill_in "Name", with: "Some Bullet Train App"
@@ -149,8 +153,12 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         end
 
         # create the endpoint.
-        within_developers_menu_for(display_details) do
-          click_on "Webhooks"
+        if disable_developer_menu?
+          visit account_team_webhooks_outgoing_endpoints_path(User.find_by(first_name: "Andrew").current_team)
+        else
+          within_developers_menu_for(display_details) do
+            click_on "Webhooks"
+          end
         end
         click_on "Add New Endpoint"
         fill_in "Name", with: "Some Bullet Train App"
@@ -180,8 +188,12 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           perform_enqueued_jobs
         end
 
-        within_developers_menu_for(display_details) do
-          click_on "Webhooks"
+        if disable_developer_menu?
+          visit account_team_webhooks_outgoing_endpoints_path(User.find_by(first_name: "Andrew").current_team)
+        else
+          within_developers_menu_for(display_details) do
+            click_on "Webhooks"
+          end
         end
 
         within("table tr:first-child[data-id]") do

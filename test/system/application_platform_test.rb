@@ -30,8 +30,12 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       end
 
       # Create a new Platform Application
-      within_developers_menu_for(display_details) do
-        click_on "API"
+      if disable_developer_menu?
+        visit account_team_platform_applications_path(User.find_by(email: "jane.smith@gmail.com").current_team)
+      else
+        within_developers_menu_for(display_details) do
+          click_on "API"
+        end
       end
       click_on "Provision New Platform Application"
       fill_in "Name", with: "Test Platform Application"
@@ -48,8 +52,12 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
 
       # Remove the Platform Application and ensure it's
       # not present in the tombstoned Memberships list.
-      within_developers_menu_for(display_details) do
-        click_on "API"
+      if disable_developer_menu?
+        visit account_team_platform_applications_path(User.find_by(email: "jane.smith@gmail.com").current_team)
+      else
+        within_developers_menu_for(display_details) do
+          click_on "API"
+        end
       end
       accept_alert { click_on("Delete") }
 
