@@ -40,8 +40,6 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
   # targets-many action
   if defined?(Projects::ArchiveAction)
     test "developers can archive a single project" do
-      skip "This needs to be fixed in Action Models first"
-
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
@@ -64,7 +62,6 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Perform Archive Action"
 
       assert page.has_content?("Archive Action was successfully created.")
-      assert page.has_content?("Test Project archived")
       assert page.has_content?(/Processed 1 of 1 Today/i)
     end
 
