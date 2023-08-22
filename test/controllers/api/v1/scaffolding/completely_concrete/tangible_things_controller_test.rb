@@ -79,7 +79,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     test "create" do
       # Use the serializer to generate a payload, but strip some attributes out.
       params = {access_token: access_token}
-      tangible_thing_data = JSON.parse(build(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: nil).to_api_json.to_json)
+      tangible_thing_data = JSON.parse(build(:scaffolding_completely_concrete_tangible_thing, absolutely_abstract_creative_concept: nil).api_attributes.to_json)
       tangible_thing_data.except!("id", "absolutely_abstract_creative_concept_id", "created_at", "updated_at")
       params[:scaffolding_completely_concrete_tangible_thing] = tangible_thing_data
 
