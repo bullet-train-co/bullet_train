@@ -31,7 +31,7 @@ class PaginationTest < ApplicationSystemTestCase
       visit account_scaffolding_absolutely_abstract_creative_concept_path(creative_concept)
 
       assert_text("Test 1")
-      refute page.has_content?("Test #{Pagy::DEFAULT[:items] + 1}")
+      refute_text("Test #{Pagy::DEFAULT[:items] + 1}")
 
       click_on "Next"
       assert_text("Test #{Pagy::DEFAULT[:items] + 1}")

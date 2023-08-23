@@ -116,7 +116,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       #
       # assert_text("Publish")
       # click_on "Select Multiple"
-      # refute page.has_content?("Publish")
+      # refute_text("Publish")
       # click_on "Hide Checkboxes"
       # click_on "Back"
 

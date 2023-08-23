@@ -37,7 +37,7 @@ class TwoFactorAuthentication < ApplicationSystemTestCase
 
         click_on "Sign In"
 
-        refute page.has_content?("Dashboard")
+        refute_text("Dashboard")
       end
 
       test "OTP input is invisible to a user with OTP authentication disabled on a #{device_name}" do
@@ -50,7 +50,7 @@ class TwoFactorAuthentication < ApplicationSystemTestCase
         click_on "Next"
         fill_in "Your Password", with: @john.password
 
-        refute page.has_content?("Two-Factor Authentication Code")
+        refute_text("Two-Factor Authentication Code")
       end
     end
   end

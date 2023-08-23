@@ -63,7 +63,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
 
       visit account_team_memberships_path(@team)
       within_current_memberships_table do
-        refute page.has_content?("Test Platform Application")
+        refute_text("Test Platform Application")
       end
       # The tombstones partial won't be rendered if there aren't any tombstoned memberships.
       assert_no_selector "h2", text: "Former Team Members"
