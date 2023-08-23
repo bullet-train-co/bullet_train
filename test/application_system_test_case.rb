@@ -343,9 +343,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       class Bridge
         @@execute_sleep_time = 0
         alias_method :patched_execute, :execute
-        def execute(*args)
+        def execute(*)
           sleep @@execute_sleep_time
-          patched_execute(*args)
+          patched_execute(*)
         end
 
         def self.slow_down_execute_time
