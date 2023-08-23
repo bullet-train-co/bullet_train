@@ -12,7 +12,7 @@ class TwoFactorAuthentication < ApplicationSystemTestCase
         resize_for(display_details)
 
         visit new_user_session_path
-        assert page.has_content?("Sign In")
+        assert_text("Sign In")
 
         fill_in "Your Email Address", with: @jane.email
         click_on "Next"
@@ -21,14 +21,14 @@ class TwoFactorAuthentication < ApplicationSystemTestCase
 
         click_on "Sign In"
 
-        assert page.has_content?("Dashboard")
+        assert_text("Dashboard")
       end
 
       test "a user cannot log in with an invalid OTP a #{device_name}" do
         resize_for(display_details)
 
         visit new_user_session_path
-        assert page.has_content?("Sign In")
+        assert_text("Sign In")
 
         fill_in "Your Email Address", with: @jane.email
         click_on "Next"
@@ -44,7 +44,7 @@ class TwoFactorAuthentication < ApplicationSystemTestCase
         resize_for(display_details)
 
         visit new_user_session_path
-        assert page.has_content?("Sign In")
+        assert_text("Sign In")
 
         fill_in "Your Email Address", with: @john.email
         click_on "Next"

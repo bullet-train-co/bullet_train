@@ -9,7 +9,7 @@ unless scaffolding_things_disabled?
         visit user_session_path
 
         invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
-        assert page.has_content?("Create Your Account")
+        assert_text("Create Your Account")
         fill_in "Your Email Address", with: "me@acme.com"
         fill_in "Set Password", with: example_password
         fill_in "Confirm Password", with: example_password
@@ -59,22 +59,22 @@ unless scaffolding_things_disabled?
         fill_in "Text Area Value", with: "Long text for this text area field"
 
         click_on "Create Tangible Thing"
-        assert page.has_content? "Tangible Thing was successfully created."
+        assert_text "Tangible Thing was successfully created."
 
         # Creating a Tangible Thing redirects to its show page.
-        assert page.has_content? "Tangible Thing Details"
+        assert_text "Tangible Thing Details"
 
-        assert page.has_content? "My value for this text field"
-        assert page.has_content? "Yes"
+        assert_text "My value for this text field"
+        assert_text "Yes"
         assert page.has_no_content? "Two"
-        assert page.has_content? "Three"
-        assert page.has_content? "Four and Five"
-        assert page.has_content? "me@acme.com"
-        assert page.has_content? "secure-password"
-        assert page.has_content? "+1 201-551-8321"
-        assert page.has_content? "One"
-        assert page.has_content? "Five and Six"
-        assert page.has_content? "Long text for this text area field"
+        assert_text "Three"
+        assert_text "Four and Five"
+        assert_text "me@acme.com"
+        assert_text "secure-password"
+        assert_text "+1 201-551-8321"
+        assert_text "One"
+        assert_text "Five and Six"
+        assert_text "Long text for this text area field"
 
         click_on "Edit Tangible Thing"
 
@@ -92,14 +92,14 @@ unless scaffolding_things_disabled?
 
         click_on "Update Tangible Thing"
 
-        assert page.has_content? "My new value for this text field"
-        assert page.has_content? "No"
-        assert page.has_content? "One"
-        assert page.has_content? "not-me@acme.com"
-        assert page.has_content? "insecure-password"
-        assert page.has_content? "+1 231-832-5512"
-        assert page.has_content? "Two"
-        assert page.has_content? "New long text for this text area field"
+        assert_text "My new value for this text field"
+        assert_text "No"
+        assert_text "One"
+        assert_text "not-me@acme.com"
+        assert_text "insecure-password"
+        assert_text "+1 231-832-5512"
+        assert_text "Two"
+        assert_text "New long text for this text area field"
       end
     end
   end

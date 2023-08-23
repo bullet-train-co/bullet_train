@@ -48,10 +48,10 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
-      assert page.has_content?("Test Sites")
+      assert_text("Test Sites")
       click_on "Add New Test Site"
 
-      assert page.has_content?("New Test Site Details")
+      assert_text("New Test Site Details")
       fill_in "Name", with: "Some New Example Site"
       fill_in "Other Attribute", with: "Some Other Value"
       fill_in "Url", with: "http://example.org/test"
@@ -59,14 +59,14 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Create Test Site"
       click_on "Back"
 
-      assert page.has_content? "Below is a list of Test Sites that have been added for Your Team."
+      assert_text "Below is a list of Test Sites that have been added for Your Team."
 
       # Edit the first test site.
       within "table", match: :first do
         click_on "Edit", match: :first
       end
 
-      assert page.has_content? "Edit Test Site Details"
+      assert_text "Edit Test Site Details"
 
       # Select the membership we created.
       find("#select2-test_site_membership_id-container").click
@@ -74,29 +74,29 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Update Test Site"
 
       # Test the has-many-through scaffolding.
-      assert page.has_content? "Test Site was successfully updated."
+      assert_text "Test Site was successfully updated."
 
       # make sure the content is being displayed on the show partial.
-      assert page.has_content?("Test Site Details")
-      assert page.has_content?("Some New Example Site")
-      assert page.has_content?("http://example.org/test")
+      assert_text("Test Site Details")
+      assert_text("Some New Example Site")
+      assert_text("http://example.org/test")
       click_on "Back"
 
       # we're now looking at the index on the team dashboard.
-      assert page.has_content?("Some New Example Site")
-      assert page.has_content?("http://example.org/test")
+      assert_text("Some New Example Site")
+      assert_text("http://example.org/test")
       click_on "Some New Example Site"
 
-      assert page.has_content?("Test Pages")
+      assert_text("Test Pages")
       click_on "Add New Test Page"
 
-      assert page.has_content?("New Test Page Details")
+      assert_text("New Test Page Details")
       fill_in "Name", with: "Some New Example Site"
       fill_in "Path", with: "/test"
       click_on "Create Test Page"
 
-      assert page.has_content?("Some New Example Site")
-      assert page.has_content?("/test")
+      assert_text("Some New Example Site")
+      assert_text("/test")
     end
   end
 
@@ -107,91 +107,91 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       click_on "Add New Project"
       click_on "Create Project"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Project"
       click_on "Create Project"
 
-      assert page.has_content?("Project was successfully created.")
+      assert_text("Project was successfully created.")
 
       click_on "Add New Deliverable"
       click_on "Create Deliverable"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Deliverable"
       click_on "Create Deliverable"
-      assert page.has_content?("Deliverable was successfully created.")
+      assert_text("Deliverable was successfully created.")
 
       within "ol.breadcrumb" do
         click_on "Projects"
       end
 
-      assert page.has_content?("Your Team’s Projects")
+      assert_text("Your Team’s Projects")
 
       # this is ensuring cascading deletes generate properly.
       accept_alert do
         click_on "Delete"
       end
 
-      assert page.has_content?("Project was successfully destroyed.")
+      assert_text("Project was successfully destroyed.")
 
       click_on "Add New Project"
-      assert page.has_content? "New Project Details"
+      assert_text "New Project Details"
       fill_in "Name", with: "Example Project"
       click_on "Create Project"
-      assert page.has_content? "Project was successfully created."
+      assert_text "Project was successfully created."
 
       within "ol.breadcrumb" do
         click_on "Dashboard"
       end
 
       click_on "Example Project"
-      assert page.has_content? "Below are the details we have for Example Project"
+      assert_text "Below are the details we have for Example Project"
 
       click_on "Back"
-      assert page.has_content? "Below is a list of Projects"
+      assert_text "Below is a list of Projects"
 
       click_on "Back"
-      assert page.has_content? "No Tags have been added"
+      assert_text "No Tags have been added"
 
       click_on "Add New Tag"
-      assert page.has_content? "Please provide the details of the new Tag"
+      assert_text "Please provide the details of the new Tag"
 
       fill_in "Name", with: "One"
       click_on "Create Tag"
-      assert page.has_content? "Tag was successfully created"
+      assert_text "Tag was successfully created"
 
       click_on "Back"
 
       click_on "Add New Tag"
-      assert page.has_content? "Please provide the details of the new Tag"
+      assert_text "Please provide the details of the new Tag"
 
       fill_in "Name", with: "Two"
       click_on "Create Tag"
-      assert page.has_content? "Tag was successfully created"
+      assert_text "Tag was successfully created"
 
       click_on "Back"
 
       click_on "Add New Tag"
-      assert page.has_content? "Please provide the details of the new Tag"
+      assert_text "Please provide the details of the new Tag"
 
       fill_in "Name", with: "Three"
       click_on "Create Tag"
-      assert page.has_content? "Tag was successfully created"
+      assert_text "Tag was successfully created"
 
       click_on "Back"
-      assert page.has_content? "Your Team’s Tags"
+      assert_text "Your Team’s Tags"
       click_on "Back"
-      assert page.has_content? "Your Team’s Dashboard"
+      assert_text "Your Team’s Dashboard"
 
       click_on "Add New Project"
-      assert page.has_content? "Please provide the details of the new Project"
+      assert_text "Please provide the details of the new Project"
 
       fill_in "Name", with: "New Project with Tags"
       select2_select "Tags", ["One", "Two"]
       click_on "Create Project"
-      assert page.has_content? "Project was successfully created"
+      assert_text "Project was successfully created"
 
-      assert page.has_content? "Below are the details we have for New Project with Tags"
-      assert page.has_content? "One and Two"
+      assert_text "Below are the details we have for New Project with Tags"
+      assert_text "One and Two"
     end
   end
 
@@ -202,18 +202,18 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       click_on "Add New Step"
       click_on "Create Step"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Step"
       click_on "Create Step"
 
-      assert page.has_content?("Step was successfully created.")
+      assert_text("Step was successfully created.")
 
       click_on "Add New Objective"
       click_on "Create Objective"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Objective"
       click_on "Create Objective"
-      assert page.has_content?("Objective was successfully created.")
+      assert_text("Objective was successfully created.")
     end
   end
 
@@ -224,18 +224,18 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       click_on "Add New Insight"
       click_on "Create Insight"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Insight"
       click_on "Create Insight"
 
-      assert page.has_content?("Insight was successfully created.")
+      assert_text("Insight was successfully created.")
 
       click_on "Add New Character Trait"
       click_on "Create Character Trait"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Character Trait"
       click_on "Create Character Trait"
-      assert page.has_content?("Character Trait was successfully created.")
+      assert_text("Character Trait was successfully created.")
     end
   end
 
@@ -246,18 +246,18 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       click_on "Add New Disposition"
       click_on "Create Disposition"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Disposition"
       click_on "Create Disposition"
 
-      assert page.has_content?("Disposition was successfully created.")
+      assert_text("Disposition was successfully created.")
 
       click_on "Add New Note"
       click_on "Create Note"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Note"
       click_on "Create Note"
-      assert page.has_content?("Note was successfully created.")
+      assert_text("Note was successfully created.")
     end
   end
 
@@ -268,18 +268,18 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       click_on "Add New Observation"
       click_on "Create Observation"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Observation"
       click_on "Create Observation"
 
-      assert page.has_content?("Observation was successfully created.")
+      assert_text("Observation was successfully created.")
 
       click_on "Add New Response"
       click_on "Create Response"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
       fill_in "Name", with: "Some New Example Response"
       click_on "Create Response"
-      assert page.has_content?("Response was successfully created.")
+      assert_text("Response was successfully created.")
     end
   end
 
