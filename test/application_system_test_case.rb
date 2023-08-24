@@ -151,7 +151,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     # make sure we're actually signed out.
     # (this will vary depending on where you send people when they sign out.)
-    assert page.has_content? "Sign In"
+    assert_text "Sign In"
   end
 
   def sign_in_from_homepage_for(display_details)
@@ -160,7 +160,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     # this forces capybara to wait until the proper page loads.
     # otherwise our tests will immediately start trying to match things before the page even loads.
-    assert page.has_content?("Sign In")
+    assert_text("Sign In")
   end
 
   def sign_up_from_homepage_for(display_details)
@@ -169,7 +169,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
     # this forces capybara to wait until the proper page loads.
     # otherwise our tests will immediately start trying to match things before the page even loads.
-    assert page.has_content?("Create Your Account")
+    assert_text("Create Your Account")
   end
 
   def within_homepage_navigation_for(display_details)
@@ -302,7 +302,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def complete_pricing_page(card = nil)
-    assert page.has_content?("The Pricing Page")
+    assert_text("The Pricing Page")
     sleep 0.5
     start_subscription
     complete_payment_page(card)
@@ -310,7 +310,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def complete_payment_page(card = nil)
     # we should be on the credit card page.
-    assert page.has_content?("Subscribe to #{I18n.t("application.name")} Pro")
+    assert_text("Subscribe to #{I18n.t("application.name")} Pro")
     fill_in_stripe_elements(card)
     click_on "Subscribe"
     sleep 3

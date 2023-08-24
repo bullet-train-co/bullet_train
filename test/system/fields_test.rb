@@ -16,7 +16,7 @@ unless scaffolding_things_disabled?
         end
 
         invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
-        assert page.has_content?("Create Your Account")
+        assert_text("Create Your Account")
         fill_in "Your Email Address", with: "me@acme.com"
         fill_in "Set Password", with: example_password
         fill_in "Confirm Password", with: example_password

@@ -40,32 +40,32 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         fill_in "URL", with: "#{Capybara.app_host}/webhooks/incoming/bullet_train_webhooks"
         select2_select "Event Types", ["thing.create", "thing.update"]
         click_on "Create Endpoint"
-        assert page.has_content?("Endpoint was successfully created.")
+        assert_text("Endpoint was successfully created.")
 
         # trigger the webhook event.
         within_primary_menu_for(display_details) do
           click_on "Creative Concepts"
         end
 
-        assert page.has_content? "Your Team’s Creative Concepts"
+        assert_text "Your Team’s Creative Concepts"
 
         click_on "Add New Creative Concept"
-        assert page.has_content? "New Creative Concept Details"
+        assert_text "New Creative Concept Details"
 
         assert_difference "Webhooks::Outgoing::Event.count", 0, "an outbound webhook event should not be issued" do
           fill_in "Name", with: "Testing"
           click_on "Create Creative Concept"
-          assert page.has_content? "Creative Concept was successfully created"
+          assert_text "Creative Concept was successfully created"
 
           perform_enqueued_jobs
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook delivery should be issued" do
           click_on "Add New Tangible Thing"
-          assert page.has_content? "New Tangible Thing Details"
+          assert_text "New Tangible Thing Details"
           fill_in "Text Field Value", with: "Some Thing"
           click_on "Create Tangible Thing"
-          assert page.has_content? "Tangible Thing was successfully created"
+          assert_text "Tangible Thing was successfully created"
 
           perform_enqueued_jobs
         end
@@ -77,18 +77,18 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           click_on "Add New Tangible Thing"
           fill_in "Text Field Value", with: "Some Other Thing"
           click_on "Create Tangible Thing"
-          assert page.has_content? "Tangible Thing was successfully created"
+          assert_text "Tangible Thing was successfully created"
 
           perform_enqueued_jobs
         end
 
         assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
-          assert page.has_content? "Tangible Thing Details"
+          assert_text "Tangible Thing Details"
           click_on "Edit Tangible Thing"
-          assert page.has_content? "Edit Tangible Thing Details"
+          assert_text "Edit Tangible Thing Details"
           fill_in "Text Field Value", with: "Some Updated Thing"
           click_on "Update Tangible Thing"
-          assert page.has_content? "Tangible Thing was successfully updated"
+          assert_text "Tangible Thing was successfully updated"
 
           perform_enqueued_jobs
         end
@@ -97,7 +97,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           click_on "Edit Tangible Thing"
           fill_in "Text Field Value", with: "One Last Updated Thing"
           click_on "Update Tangible Thing"
-          assert page.has_content? "Tangible Thing was successfully updated"
+          assert_text "Tangible Thing was successfully updated"
 
           perform_enqueued_jobs
         end
@@ -108,7 +108,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           within("table tr:first-child[data-id]") do
             accept_alert { click_on "Delete" }
           end
-          assert page.has_content?("Tangible Thing was successfully destroyed.")
+          assert_text("Tangible Thing was successfully destroyed.")
 
           perform_enqueued_jobs
         end
@@ -132,14 +132,14 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           click_on "Creative Concepts"
         end
 
-        assert page.has_content? "Your Team’s Creative Concepts"
+        assert_text "Your Team’s Creative Concepts"
 
         click_on "Add New Creative Concept"
-        assert page.has_content? "New Creative Concept Details"
+        assert_text "New Creative Concept Details"
 
         fill_in "Name", with: "Testing"
         click_on "Create Creative Concept"
-        assert page.has_content? "Creative Concept was successfully created"
+        assert_text "Creative Concept was successfully created"
 
         # make sure that when a user takes an action that would trigger a webhook event that another user's has an
         # endpoint configured to receive, that the webhooks don't bleed across teams.
@@ -147,7 +147,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           click_on "Add New Tangible Thing"
           fill_in "Text Field Value", with: "Some Thing"
           click_on "Create Tangible Thing"
-          assert page.has_content?("Tangible Thing was successfully created.")
+          assert_text("Tangible Thing was successfully created.")
 
           perform_enqueued_jobs
         end
@@ -164,24 +164,24 @@ class WebhooksSystemTest < ApplicationSystemTestCase
         fill_in "Name", with: "Some Bullet Train App"
         fill_in "URL", with: "#{Capybara.app_host}/webhooks/incoming/bullet_train_webhooks"
         click_on "Create Endpoint"
-        assert page.has_content?("Endpoint was successfully created.")
+        assert_text("Endpoint was successfully created.")
 
         # trigger the webhook event.
         within_primary_menu_for(display_details) do
           click_on "Creative Concepts"
         end
 
-        assert page.has_content? "Your Team’s Creative Concepts"
+        assert_text "Your Team’s Creative Concepts"
 
         click_on "Testing"
-        assert page.has_content? "Creative Concept Details"
+        assert_text "Creative Concept Details"
 
         assert_difference "Webhooks::Incoming::BulletTrainWebhook.count", 1, "an inbound webhook should be received" do
           assert_difference "Webhooks::Outgoing::Delivery.count", 1, "an outbound webhook should be issued" do
             within("table tr:first-child[data-id]") do
               accept_alert { click_on "Delete" }
             end
-            assert page.has_content?("Tangible Thing was successfully destroyed.")
+            assert_text("Tangible Thing was successfully destroyed.")
             perform_enqueued_jobs
           end
 
@@ -200,20 +200,20 @@ class WebhooksSystemTest < ApplicationSystemTestCase
           find("td:first-child a").click
         end
 
-        assert page.has_content?("Webhooks Endpoint Details")
+        assert_text("Webhooks Endpoint Details")
 
         within("table tr:first-child[data-id]") do
           find("td:first-child a").click
         end
 
-        assert page.has_content?("Webhook Delivery Details")
+        assert_text("Webhook Delivery Details")
 
         # View a delivery attempt.
         within("table tr:first-child[data-id]") do
           find("td:first-child a").click
         end
 
-        assert page.has_content?("Delivery Attempt Details")
+        assert_text("Delivery Attempt Details")
       end
     end
 

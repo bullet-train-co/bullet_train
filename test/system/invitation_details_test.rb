@@ -23,8 +23,8 @@ class InvitationsTest < ApplicationSystemTestCase
       fill_in "Email", with: "someone@bullettrain.co"
       click_on "Create Invitation"
       assert page.has_no_css?('div[data-title="Admin"]')
-      assert page.has_content?("Invitation was successfully created.")
-      assert page.has_content?("someone@bullettrain.co")
+      assert_text("Invitation was successfully created.")
+      assert_text("someone@bullettrain.co")
     end
 
     test "admin can create new admin invitation on a #{device_name}" do
@@ -33,9 +33,9 @@ class InvitationsTest < ApplicationSystemTestCase
       fill_in "Email", with: "someone@bullettrain.co"
       check "Invite as Team Administrator"
       click_on "Create Invitation"
-      assert page.has_content?("Team Administrator")
-      assert page.has_content?("Invitation was successfully created.")
-      assert page.has_content?("someone@bullettrain.co")
+      assert_text("Team Administrator")
+      assert_text("Invitation was successfully created.")
+      assert_text("someone@bullettrain.co")
     end
 
     test "admin can't create invalid invitation on a #{device_name}" do
@@ -43,8 +43,8 @@ class InvitationsTest < ApplicationSystemTestCase
       visit new_account_team_invitation_path(@jane.current_team)
       fill_in "Email", with: ""
       click_on "Create Invitation"
-      assert page.has_content?("Please correct the errors below.")
-      assert page.has_content?("Email Address can't be blank.")
+      assert_text("Please correct the errors below.")
+      assert_text("Email Address can't be blank.")
     end
 
     test "admin can cancel invitation on a #{device_name}" do
@@ -58,19 +58,19 @@ class InvitationsTest < ApplicationSystemTestCase
       end
 
       visit account_team_invitations_path(@jane.current_team)
-      assert page.has_content?("john@bullettrain.co")
+      assert_text("john@bullettrain.co")
       within "tbody[data-model='Membership'] tr[data-id='#{membership.id}']" do
         click_link "Details"
       end
       accept_alert do
         click_on "Remove from Team"
       end
-      assert page.has_content?("That user has been successfully removed from the team.")
+      assert_text("That user has been successfully removed from the team.")
       within "tbody[data-model='Membership'][data-scope='current']" do
         assert page.has_no_content?("john@bullettrain.co")
       end
       within "tbody[data-model='Membership'][data-scope='tombstones']" do
-        assert page.has_content?("john@bullettrain.co")
+        assert_text("john@bullettrain.co")
       end
     end
   end
