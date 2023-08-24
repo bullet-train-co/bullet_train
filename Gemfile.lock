@@ -133,7 +133,7 @@ GEM
       bullet_train
       doorkeeper
       factory_bot
-      jbuilder-schema (>= 2.2.0)
+      jbuilder-schema (>= 2.0.0)
       pagy
       pagy_cursor
       rack-cors
