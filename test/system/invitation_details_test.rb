@@ -51,6 +51,12 @@ class InvitationsTest < ApplicationSystemTestCase
       resize_for(display_details)
       membership = Membership.new(team: @jane.current_team, user_email: @john.email)
       create :invitation, team: @jane.current_team, from_membership: @jane.memberships.first, email: @john.email, membership: membership
+
+      # Cannot create a duplicate invitation
+      assert_raises(ActiveRecord::RecordInvalid, "Email Address has already been taken") do
+        create :invitation, team: @jane.current_team, from_membership: @jane.memberships.first, email: @john.email, membership: membership
+      end
+
       visit account_team_invitations_path(@jane.current_team)
       assert page.has_content?("john@bullettrain.co")
       within "tbody[data-model='Membership'] tr[data-id='#{membership.id}']" do

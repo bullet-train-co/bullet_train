@@ -17,6 +17,7 @@ components:
   schemas:
     <%= automatic_components_for Team %>
     <%= automatic_components_for User %>
+    <%= automatic_components_for Membership %>
     <%= automatic_components_for Webhooks::Outgoing::Endpoint %>
     <%= automatic_components_for Webhooks::Outgoing::Event %>
     <%= automatic_components_for Scaffolding::CompletelyConcrete::TangibleThing unless scaffolding_things_disabled? %>
@@ -49,6 +50,7 @@ security:
 paths:
   <%= paths_for Team %>
   <%= paths_for User %>
+  <%= automatic_paths_for Membership, Team %>
   <%= automatic_paths_for Webhooks::Outgoing::Endpoint, Team %>
   <%= automatic_paths_for Webhooks::Outgoing::Event, Team, except: %i[create update delete] %>
   <%= automatic_paths_for Scaffolding::CompletelyConcrete::TangibleThing, Scaffolding::AbsolutelyAbstract::CreativeConcept unless scaffolding_things_disabled? %>

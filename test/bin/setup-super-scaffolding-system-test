@@ -7,7 +7,7 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
   bundle exec spring rails g model TestPage test_site:references name:string path:text
   bundle exec spring rails g migration add_membership_id_to_test_sites membership:references
 
-  bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --sidebar="ti.ti-world" --sortable
+  bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --navbar="ti-world" --sortable
   bin/super-scaffold crud TestPage TestSite,Team name:text_field path:text_field
   bin/super-scaffold crud-field TestSite membership_id:super_select{class_name=Membership}
 
@@ -22,14 +22,14 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   bundle exec spring rails g model Project team:references name:string
-  bin/super-scaffold crud Project Team name:text_field description:trix_editor --sidebar="ti.ti-layout"
+  bin/super-scaffold crud Project Team name:text_field description:trix_editor --navbar="ti-layout"
 
   bundle exec spring rails g model Projects::Deliverable project:references name:string
   bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
 
   # Setup for has-many-through test.
   bundle exec spring rails g model Projects::Tag team:references name:string
-  bin/super-scaffold crud Projects::Tag Team name:text_field --sidebar="ti.ti-tag"
+  bin/super-scaffold crud Projects::Tag Team name:text_field --navbar="ti-tag"
 
   bundle exec spring rails g model Projects::AppliedTag project:references tag:references
   bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
@@ -46,7 +46,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   bundle exec spring rails g model Projects::Step team:references name:string
-  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor --sidebar="ti.ti-world"
+  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
 
   bundle exec spring rails g model Objective projects_step:references name:string
   bin/super-scaffold crud Objective Projects::Step,Team name:text_field description:trix_editor
@@ -56,7 +56,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
   bundle exec spring rails g model Insight team:references name:string
-  bin/super-scaffold crud Insight Team name:text_field description:trix_editor --sidebar="ti.ti-world"
+  bin/super-scaffold crud Insight Team name:text_field description:trix_editor --navbar="ti-world"
 
   bundle exec spring rails g model Personality::CharacterTrait insight:references name:string
   bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
@@ -66,7 +66,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
   bundle exec spring rails g model Personality::Disposition team:references name:string
-  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --sidebar="ti.ti-world"
+  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
 
   bundle exec spring rails g model Personality::Note disposition:references name:string
   bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
@@ -86,7 +86,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
   bundle exec spring rails g model Personality::Observation team:references name:string
-  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor --sidebar="ti.ti-world"
+  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
 
   bundle exec spring rails g model Personality::Reactions::Response observation:references name:string
   bin/super-scaffold crud Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
@@ -101,11 +101,11 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
-  bundle exec spring rails g model TestFile team:references name:string foo:attachment
-  bin/super-scaffold crud TestFile Team name:text_field foo:file_field --sidebar="ti.ti-tag"
+  bundle exec spring rails g model TestFile team:references name:string foo:attachment bars:attachments
+  bin/super-scaffold crud TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
 
   bundle exec spring rails g model ColorPicker team:references color_picker_value:string
-  bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --sidebar="ti.ti-tag"
+  bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
 else
   echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
 fi
@@ -141,7 +141,8 @@ bin/super-scaffold crud PartialTest Team \
   phone_field_test:phone_field \
   super_select_test:super_select \
   multiple_super_select_test:super_select{multiple} \
-  text_area_test:text_area --sidebar="ti.ti-layout" \
-  number_field_test:number_field
+  number_field_test:number_field \
+  text_area_test:text_area --navbar="ti-layout"
+  
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare

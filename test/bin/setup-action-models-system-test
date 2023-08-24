@@ -9,7 +9,7 @@ export SPRING=true
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
   bundle exec spring rails g model Project team:references name:string
-  bin/super-scaffold crud Project Team name:text_field --sidebar="ti.ti-world"
+  bin/super-scaffold crud Project Team name:text_field --navbar="ti-world"
   rails db:migrate
   bin/super-scaffold action-model:targets-many Archive Project Team
 
@@ -24,7 +24,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   bundle exec spring rails g model Listing team:references name:string
-  bin/super-scaffold crud Listing Team name:text_field --sidebar="ti.ti-world"
+  bin/super-scaffold crud Listing Team name:text_field --navbar="ti-world"
   rails db:migrate
   bin/super-scaffold action-model:targets-one Publish Listing Team
 
@@ -35,9 +35,9 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
   bundle exec spring rails g model Customer team:references name:string
-  bin/super-scaffold crud Customer Team name:text_field --sidebar="ti.ti-user"
+  bin/super-scaffold crud Customer Team name:text_field --navbar="ti-user"
   bundle exec spring rails g model Notification customer:references text:string read:boolean
-  bin/super-scaffold crud Notification Customer,Team text:text_field read:boolean --sidebar="ti.ti-email"
+  bin/super-scaffold crud Notification Customer,Team text:text_field read:boolean --navbar="ti-email"
   rails db:migrate
   bin/super-scaffold action-model:targets-one-parent MarkAllAsRead Notification Customer
 
@@ -48,7 +48,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   bundle exec spring rails g model Article team:references name:string
-  bin/super-scaffold crud Article Team name:text_field --sidebar="ti.ti-world"
+  bin/super-scaffold crud Article Team name:text_field --navbar="ti-world"
   rails db:migrate
   bin/super-scaffold action-model:performs-import CsvImport Article Team
 else
@@ -57,7 +57,7 @@ fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
   bundle exec spring rails g model Visitor team:references email:string first_name:string last_name:string
-  bin/super-scaffold crud Visitor Team email:text_field first_name:text_field last_name:text_field --sidebar="ti.ti-world"
+  bin/super-scaffold crud Visitor Team email:text_field first_name:text_field last_name:text_field --navbar="ti-world"
   rails db:migrate
   bin/super-scaffold action-model:performs-export CsvExport Visitor Team
 else

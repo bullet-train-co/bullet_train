@@ -46,21 +46,36 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Name", with: "Test File Name"
       assert page.has_content?("Upload New Document")
       fill_in "Name", with: "Foo"
-      attach_file("test/support/foo.txt", make_visible: true)
+      attach_file("Foo", "test/support/foo.txt", make_visible: true)
+      attach_file("Bars", ["test/support/foo.txt", "test/support/foo-two.txt"], make_visible: true)
       click_on "Create Test File"
 
       assert page.has_content?("Test File was successfully created.")
       refute TestFile.first.foo.blank?
+      assert_equal 2, TestFile.first.bars.count
 
       click_on "Edit"
+
       assert page.has_content?("Remove Current Document")
-      find("span", text: "Remove Current Document").click
+      within "[data-fields--file-item-id-value='#{TestFile.first.foo.id}']" do
+        find("span", text: "Remove Current Document").click
+      end
       click_on "Update Test File"
 
       assert page.has_content?("Test File was successfully updated.")
       assert TestFile.first.foo.blank?
 
-      # This test consistently adds a new text file,
+      click_on "Edit"
+      assert page.has_content?("Remove Current Document")
+      within "[data-fields--file-item-id-value='#{TestFile.first.bars.first.id}']" do
+        find("span", text: "Remove Current Document").click
+      end
+      click_on "Update Test File"
+
+      assert page.has_content?("Test File was successfully updated.")
+      assert_equal 1, TestFile.first.bars.count
+
+      # This test consistently adds several new text files,
       # so we clear out all instances of foo from the storage directory.
       storage = Dir.glob("tmp/storage/**")
       storage.each { |dir| FileUtils.rm_r(dir) if dir.match?(/\/([0-9]|[a-z]){2}$/) }

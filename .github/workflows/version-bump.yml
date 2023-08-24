@@ -27,6 +27,9 @@ jobs:
     - name: "Configure bundler"
       run: bundle config unset deployment
 
+    - name: "Install thor"
+      run: gem install thor
+
     - name: "Bump core"
       id: bump-core
       run: ./bin/bump-core
@@ -43,7 +46,7 @@ jobs:
         title: "BT-Core version bump: ${{ inputs.versionBump }} - ${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
         add-paths: "Gemfile.lock,yarn.lock"
         body: |
-          Version bump of the `core` ruby gems and npm packages to version `{{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}`
+          Version bump of the `core` ruby gems and npm packages to version `${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}`
 
           Tag v${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}
 
