@@ -73,7 +73,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.809.0)
+    aws-partitions (1.810.0)
     aws-sdk-core (3.181.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -305,7 +305,7 @@ GEM
       railties (>= 6.0.0)
     json (2.6.3)
     jwt (2.7.1)
-    knapsack_pro (5.4.1)
+    knapsack_pro (5.5.0)
       rake
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
