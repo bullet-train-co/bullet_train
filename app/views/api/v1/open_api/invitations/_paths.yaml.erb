@@ -1,0 +1,19 @@
+/invitations/{id}/resend:
+  post:
+    tags:
+      - Invitation
+    summary: "Resend Invitation"
+    operationId: resendInvitation
+    parameters:
+      - $ref: "#/components/parameters/id"
+    responses:
+      "404":
+        description: "Not Found"
+      "200":
+        description: "OK"
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TeamAttributes"
+            example:
+              <%= FactoryBot.get_example(:invitation, version: @version) %>

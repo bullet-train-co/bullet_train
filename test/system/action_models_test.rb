@@ -58,11 +58,11 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Archive (1)"
 
       # Confirm action page
-      assert page.has_content?("We're preparing to Archive 1 Project of Your Team")
+      assert_text("We're preparing to Archive 1 Project of Your Team")
       click_on "Perform Archive Action"
 
-      assert page.has_content?("Archive Action was successfully created.")
-      assert page.has_content?(/Processed 1 of 1 Today/i)
+      assert_text("Archive Action was successfully created.")
+      assert_text(/Processed 1 of 1 Today/i)
     end
 
     test "developers can archive multiple projects at once" do
@@ -73,7 +73,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
         click_on "Add New Project"
         fill_in "Name", with: "Project #{n}"
         click_on "Create Project"
-        assert page.has_content? "Project was successfully created."
+        assert_text "Project was successfully created."
         click_on "Back"
       end
 
@@ -84,12 +84,12 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Archive (2)"
 
       # Confirm action page
-      assert page.has_content?("We're preparing to Archive 2 Projects of Your Team.")
+      assert_text("We're preparing to Archive 2 Projects of Your Team.")
       click_on "Perform Archive Action"
 
-      assert page.has_content?("Archive Action was successfully created.")
-      assert page.has_content?("Archive Action on 2 Projects")
-      assert page.has_content?(/Processed 2 of 2 Today/i)
+      assert_text("Archive Action was successfully created.")
+      assert_text("Archive Action on 2 Projects")
+      assert_text(/Processed 2 of 2 Today/i)
     end
   end
 
@@ -114,9 +114,9 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       # Developers can click "Publish" on a single record,
       # but cannot perform the action on multiple ones.
       #
-      # assert page.has_content?("Publish")
+      # assert_text("Publish")
       # click_on "Select Multiple"
-      # refute page.has_content?("Publish")
+      # refute_text("Publish")
       # click_on "Hide Checkboxes"
       # click_on "Back"
 
@@ -127,11 +127,11 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Publish"
 
       # Confirm action page
-      assert page.has_content?("Please provide the details of the new Publish Action you'd like to perform on Test Listing.")
+      assert_text("Please provide the details of the new Publish Action you'd like to perform on Test Listing.")
       click_on "Perform Publish Action"
 
-      assert page.has_content?("Publish Action was successfully created.")
-      assert page.has_content?("Current and Scheduled Publish Operations")
+      assert_text("Publish Action was successfully created.")
+      assert_text("Current and Scheduled Publish Operations")
     end
   end
 
@@ -145,13 +145,13 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
         click_on "Add New Customer"
         fill_in "Name", with: "Test Customer #{n}"
         click_on "Create Customer"
-        assert page.has_content? "Customer was successfully created."
+        assert_text "Customer was successfully created."
 
         3.times do |i|
           click_on "Add New Notification"
           fill_in "Text", with: "Test Notification #{i}"
           click_on "Create Notification"
-          assert page.has_content? "Notification was successfully created."
+          assert_text "Notification was successfully created."
           click_on "Back"
         end
 
@@ -162,13 +162,13 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       click_on "Test Customer 1"
 
       # Developers can click "Mark All As Read" on a multiple records.
-      assert page.has_content?("Mark All As Read")
+      assert_text("Mark All As Read")
       click_on "Mark All As Read"
 
       # Confirm action page
       click_on "Perform Mark All As Read Action"
 
-      assert page.has_content?("Mark All As Read Action was successfully created.")
+      assert_text("Mark All As Read Action was successfully created.")
     end
   end
 
@@ -177,28 +177,28 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
     test "developers can import CSV file information to their records" do
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
-      assert page.has_content? "No Articles have been added for Your Team."
+      assert_text "No Articles have been added for Your Team."
 
       click_on "Csv Import"
-      assert page.has_content? "Csv Import Articles"
+      assert_text "Csv Import Articles"
 
       attach_file("test/support/articles.csv", make_visible: true)
       click_on "Configure Csv Import Action"
 
-      assert page.has_content? "Csv Import Action was successfully created."
+      assert_text "Csv Import Action was successfully created."
       click_on "Preview Csv Import Action"
 
-      assert page.has_content? "Csv Import Action was successfully updated."
+      assert_text "Csv Import Action was successfully updated."
       click_on "Perform Csv Import Action"
 
-      assert page.has_content? "Csv Import Action was approved."
+      assert_text "Csv Import Action was approved."
       click_on "Back"
 
-      assert page.has_content? "Below is a list of Articles that have been added for Your Team."
-      assert page.has_content? "Three"
+      assert_text "Below is a list of Articles that have been added for Your Team."
+      assert_text "Three"
       # We do this because the default Bullet Train team stylizes this text in capital letters.
       assert_match(/processed 3 of 3/i, page.text)
-      assert page.has_content? "articles.csv"
+      assert_text "articles.csv"
     end
   end
 
@@ -216,16 +216,16 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
       visit account_team_path(@jane.current_team)
 
       click_on "one@example.com"
-      assert page.has_content? "Below are the details we have for one@example.com"
+      assert_text "Below are the details we have for one@example.com"
       click_on "Back"
 
       click_on "Select Multiple"
       find(:xpath, "/HTML[1]/BODY[1]/DIV[2]/DIV[1]/DIV[2]/MAIN[1]/DIV[2]/DIV[1]/DIV[3]/DIV[1]/CABLE-READY-UPDATES-FOR[1]/DIV[1]/DIV[2]/DIV[1]/TABLE[1]/THEAD[1]/TR[1]/TH[1]/LABEL[1]/INPUT[1]").click
       click_on "Csv Export (All)"
-      assert page.has_content? "We're preparing to Export all Visitors of Your Team."
+      assert_text "We're preparing to Export all Visitors of Your Team."
 
       click_on "Perform Csv Export Action"
-      assert page.has_content? "Csv Export Action was successfully created."
+      assert_text "Csv Export Action was successfully created."
 
       # This is a lot easier than trying to actually download the file via the browser.
       csv_export_action = Visitors::CsvExportAction.order(:id).last

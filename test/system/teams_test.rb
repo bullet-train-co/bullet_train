@@ -19,9 +19,9 @@ class TeamsTest < ApplicationSystemTestCase
 
       # we only see the plans page if payments are enabled.
       if billing_enabled? && !freemium_enabled?
-        assert page.has_content?("The Pricing Page")
+        assert_text("The Pricing Page")
       else
-        assert page.has_content?("Team Jane")
+        assert_text("Team Jane")
       end
     end
 
@@ -32,7 +32,7 @@ class TeamsTest < ApplicationSystemTestCase
       visit new_account_team_path
       fill_in "Name", with: ""
       click_on "Create Team"
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Name can't be blank.")
     end
 
     test "user can see list of teams on a #{device_name}" do
@@ -43,7 +43,7 @@ class TeamsTest < ApplicationSystemTestCase
       @teams.each { |team| team.users << @jane }
       visit account_teams_path
       @teams.each do |team|
-        assert page.has_content?(team.name.upcase)
+        assert_text(team.name.upcase)
       end
       assert page.has_no_content?(@foreign_team.name)
     end
@@ -65,8 +65,8 @@ class TeamsTest < ApplicationSystemTestCase
       fill_in "Name", with: "Changed Team"
       click_on "Update Team"
 
-      assert page.has_content?("Team was successfully updated.")
-      assert page.has_content?("Changed Team")
+      assert_text("Team was successfully updated.")
+      assert_text("Changed Team")
     end
 
     test "user can't save invalid team on a #{device_name}" do
@@ -86,8 +86,8 @@ class TeamsTest < ApplicationSystemTestCase
       fill_in "Name", with: ""
       click_on "Update Team"
 
-      assert page.has_content?("Please correct the errors below.")
-      assert page.has_content?("Name can't be blank.")
+      assert_text("Please correct the errors below.")
+      assert_text("Name can't be blank.")
     end
 
     test "#admins shows current and invited admins only on a #{device_name}" do
@@ -143,7 +143,7 @@ class TeamsTest < ApplicationSystemTestCase
         accept_confirm do
           click_on "Remove from Team"
         end
-        assert page.has_content?("That user has been successfully removed from the team.")
+        assert_text("That user has been successfully removed from the team.")
         tombstoned_membership = Membership.find_by(user_email: "admin@user.com")
         assert tombstoned_membership.tombstone?
       end
