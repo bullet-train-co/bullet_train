@@ -417,4 +417,10 @@ workflows:
       - 'System Tests with Cuprite':
           name: 'Release: System Tests with Cuprite'
           use-core-repo: false
+      - 'Minitest for Super Scaffolding with Cuprite':
+          name: 'Core: Minitest for Super Scaffolding with Cuprite'
+          use-core-repo: true
+      - 'Minitest for Super Scaffolding with Cuprite':
+          name: 'Release: Minitest for Super Scaffolding with Cuprite'
+          use-core-repo: false
       # - 'System Tests for Action Models'
