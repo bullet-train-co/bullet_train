@@ -296,7 +296,7 @@ end
 require "controllers/api/v1/test"
 require "fileutils"
 
-class Api::OpenApiControllerTest < Api::Test
+class Api::OpenApiControllerForSuperScaffoldingTest < Api::Test
   test "OpenAPI document is valid" do
     get api_path(version: "v1")
 
