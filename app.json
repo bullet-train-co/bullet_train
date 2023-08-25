@@ -28,7 +28,6 @@
     "rails-autoscale:white",
     "honeybadger:basic",
     "sentry:f1",
-    "realemail:free"
   ],
   "env": {
     "BASE_URL": {
