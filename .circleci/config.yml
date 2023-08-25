@@ -204,7 +204,7 @@ jobs:
       - <<: *postgres_docker_image
       - image: cimg/redis:6.2.6
     executor: ruby/default
-    parallelism: 7
+    parallelism: 16
     steps:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
@@ -239,7 +239,7 @@ jobs:
             export RAILS_ENV=test
             bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
           environment:
-            KNAPSACK_PRO_CI_NODE_TOTAL: 7
+            KNAPSACK_PRO_CI_NODE_TOTAL: 16
 
       # If you don't want to use Knapsack Pro, then use this configuration:
       #
