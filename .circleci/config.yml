@@ -204,7 +204,7 @@ jobs:
       - <<: *postgres_docker_image
       - image: cimg/redis:6.2.6
     executor: ruby/default
-    parallelism: 16
+    parallelism: 7
     steps:
       - browser-tools/install-chrome
       - browser-tools/install-chromedriver
@@ -234,35 +234,11 @@ jobs:
           command: bundle exec test/bin/setup-super-scaffolding-system-test
 
       - run:
-          name: Run tests with Knapsack Pro
-          command: |
-            export RAILS_ENV=test
-            bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
-          environment:
-            KNAPSACK_PRO_CI_NODE_TOTAL: 16
-
-      # If you don't want to use Knapsack Pro, then use this configuration:
-      #
-      # - run:
-      #     name: Run unit tests
-      #     command: bundle exec rails test
-      # - run:
-      #     name: Run system tests
-      #     command: bundle exec rails test:system
-      #
-      # If you want to gather test results in CircleCI when not running tests in parallel,
-      # include `minitest-ci` in your Gemfile and uncomment the following step.
-      # You can access the test results via the "Tests" tab within each build in CircleCI.
-      #
-      # - store_test_results:
-      #     path: test/reports
-
-      #- run:
-          #name: 'Run Super Scaffolding Test'
-          #command: bundle exec rails test test/system/super_scaffolding_test.rb
-      #- run:
-          #name: 'Run Super Scaffolding Partial Test'
-          #command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
+          name: 'Run Super Scaffolding Test'
+          command: bundle exec rails test test/system/super_scaffolding_test.rb
+      - run:
+          name: 'Run Super Scaffolding Partial Test'
+          command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
 
   'System Tests with Cuprite':
     parameters:
