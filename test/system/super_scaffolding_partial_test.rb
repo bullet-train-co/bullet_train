@@ -37,8 +37,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       display_details = @@test_devices[:macbook_pro_15_inch]
       resize_for(display_details)
 
-      raise "hell"
-
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 

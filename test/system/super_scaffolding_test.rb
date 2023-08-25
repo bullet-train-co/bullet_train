@@ -48,8 +48,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
-      raise "hell"
-
       assert_text("Test Sites")
       click_on "Add New Test Site"
 
