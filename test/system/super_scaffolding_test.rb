@@ -282,10 +282,34 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert_text("Response was successfully created.")
     end
   end
+end
 
-  test "OpenAPI V3 document is still valid" do
-    visit "http://localhost:3001/api/v1/openapi.yaml"
-    puts(output = `yarn exec redocly lint http://localhost:3001/api/v1/openapi.yaml 1> /dev/stdout 2> /dev/stdout; rm openapi.yaml`)
+##########################################################
+# NOTE: It probably seems weird to have a controller test
+# embedded at the bottom of a system test file. And, yeah
+# it's kinda weird. But this system test file is a special
+# one that we run in CI after generating a bunch of models
+# and scaffolds, and we want to validate that the OpenAPI
+# document remains valid after we generate those things.
+##########################################################
+
+require "controllers/api/v1/test"
+require "fileutils"
+
+class Api::OpenApiControllerTest < Api::Test
+  test "OpenAPI document is valid" do
+    get api_path(version: "v1")
+
+    openapi_yaml_path = Rails.root.join("tmp", "openapi.yaml")
+    File.write(openapi_yaml_path, response.body)
+
+    output = `yarn exec redocly lint api@v1 1> /dev/stdout 2> /dev/stdout`
+    FileUtils.rm(openapi_yaml_path)
+
+    warnings = output.match(/You have (\d+) warnings/)
+    puts output if warnings
+    refute warnings
+
     assert output.include?("Woohoo! Your OpenAPI definition is valid.")
   end
 end
