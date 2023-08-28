@@ -70,6 +70,7 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
+    ansi (1.5.0)
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
@@ -339,6 +340,11 @@ GEM
     mini_mime (1.1.5)
     mini_portile2 (2.8.4)
     minitest (5.19.0)
+    minitest-reporters (1.6.1)
+      ansi
+      builder
+      minitest (>= 5.0)
+      ruby-progressbar
     minitest-retry (0.2.2)
       minitest (>= 5.0)
     msgpack (1.7.2)
@@ -640,6 +646,7 @@ DEPENDENCIES
   knapsack_pro
   letter_opener
   magic_test
+  minitest-reporters
   minitest-retry
   pg (>= 0.18, < 2.0)
   postmark-rails
