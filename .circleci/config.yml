@@ -290,6 +290,9 @@ jobs:
       - run:
           name: 'Run Super Scaffolding Test'
           command: bundle exec rails test test/system/super_scaffolding_test.rb
+          environment:
+            FERRUM_INTERMITTENT_SLEEP: 0.2
+            FERRUM_INTERMITTENT_ATTEMPTS: 24
       - run:
           name: 'Run Super Scaffolding Partial Test'
           command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
