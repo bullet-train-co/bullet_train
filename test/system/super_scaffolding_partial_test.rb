@@ -160,8 +160,13 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Number Field Partial
       fill_in "Number Field Test", with: 47
 
-      click_on "Create Partial Test"
       puts "Capybara.default_max_wait_time = #{Capybara.default_max_wait_time}"
+      puts "Time.now = #{Time.now}"
+
+      click_on "Create Partial Test"
+
+      puts "Time.now after click = #{Time.now}"
+
       assert_text("Partial Test was successfully created.")
 
       # Text field
