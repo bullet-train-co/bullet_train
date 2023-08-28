@@ -1,0 +1,8 @@
+<% section ||= @section %>
+<% page ||= @page || section&.page %>
+<%= render 'account/pages/breadcrumbs', page: page %>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, page, :sections] %>
+<% if section&.persisted? %>
+  <%= render 'account/shared/breadcrumb', label: section.label_string, url: [:account, section] %>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'sections' %>

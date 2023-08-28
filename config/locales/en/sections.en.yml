@@ -1,0 +1,91 @@
+en:
+  sections: &sections
+    label: &label Sections
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Section
+      create: Create Section
+      edit: Edit Section
+      update: Update Section
+      destroy: Remove Section
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{section_name}? This will also remove any child resources and can't be undone.
+    section:
+      buttons: *buttons
+    fields: &fields
+      id:
+        heading: Section ID
+      page_id:
+        heading: Page ID
+      title:
+        _: &title Title
+        label: *title
+        heading: *title
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Sections"
+      index: "List Sections"
+      create: "Add a New Section"
+      member_actions: "Actions for an Individual Section"
+      show: "Retrieve a Section"
+      update: "Update a Section"
+      destroy: "Delete a Section"
+      fields: *fields
+    index:
+      section: "%{pages_possessive} Sections"
+      contexts:
+        page:
+          header: Sections
+          description: Below is a list of Sections that have been added for %{page_name}.
+          description_empty: No Sections have been added for %{page_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{section_name}"
+      header: Section Details
+      description: Below are the details we have for %{section_name}.
+      manage_description: You'll also find options for updating these details or removing %{section_name} from %{page_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Section for %{page_name}"
+      header: New Section Details
+      description: Please provide the details of the new Section you'd like to add to %{page_name}.
+      form: *form
+    edit:
+      section: "%{section_name}"
+      header: Edit Section Details
+      description: You can update the details or settings for %{section_name} below.
+      form: *form
+    notifications:
+      created: Section was successfully created.
+      updated: Section was successfully updated.
+      destroyed: Section was successfully destroyed.
+  account:
+    sections: *sections
+  activerecord:
+    attributes:
+      section:
+        title: *title
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

@@ -1,0 +1,96 @@
+en:
+  sites: &sites
+    label: &label Sites
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Site
+      create: Create Site
+      edit: Edit Site
+      update: Update Site
+      destroy: Remove Site
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{site_name}? This will also remove any child resources and can't be undone.
+    site:
+      buttons: *buttons
+    fields: &fields
+      id:
+        heading: Site ID
+      team_id:
+        heading: Team ID
+      name:
+        _: &name Name
+        label: *name
+        heading: *name
+      url:
+        _: &url Url
+        label: *url
+        heading: *url
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Sites"
+      index: "List Sites"
+      create: "Add a New Site"
+      member_actions: "Actions for an Individual Site"
+      show: "Retrieve a Site"
+      update: "Update a Site"
+      destroy: "Delete a Site"
+      fields: *fields
+    index:
+      section: "%{teams_possessive} Sites"
+      contexts:
+        team:
+          header: Sites
+          description: Below is a list of Sites that have been added for %{team_name}.
+          description_empty: No Sites have been added for %{team_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{site_name}"
+      header: Site Details
+      description: Below are the details we have for %{site_name}.
+      manage_description: You'll also find options for updating these details or removing %{site_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Site for %{team_name}"
+      header: New Site Details
+      description: Please provide the details of the new Site you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{site_name}"
+      header: Edit Site Details
+      description: You can update the details or settings for %{site_name} below.
+      form: *form
+    notifications:
+      created: Site was successfully created.
+      updated: Site was successfully updated.
+      destroyed: Site was successfully destroyed.
+  account:
+    sites: *sites
+  activerecord:
+    attributes:
+      site:
+        name: *name
+        url: *url
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

@@ -1,0 +1,8 @@
+<% page ||= @page %>
+<% site ||= @site || page&.site %>
+<%= render 'account/sites/breadcrumbs', site: site %>
+<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, site, :pages] %>
+<% if page&.persisted? %>
+  <%= render 'account/shared/breadcrumb', label: page.label_string, url: [:account, page] %>
+<% end %>
+<%= render 'account/shared/breadcrumbs/actions', only_for: 'pages' %>

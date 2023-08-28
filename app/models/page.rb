@@ -1,19 +1,20 @@
-class Team < ApplicationRecord
-  include Teams::Base
-  include Webhooks::Outgoing::TeamSupport
+class Page < ApplicationRecord
   # 🚅 add concerns above.
 
+  # 🚅 add attribute accessors above.
+
+  belongs_to :site
   # 🚅 add belongs_to associations above.
 
-  has_many :sites, dependent: :destroy
+  has_many :sections, dependent: :destroy
   # 🚅 add has_many associations above.
 
-  # 🚅 add oauth providers above.
-
+  has_one :team, through: :site
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
 
+  validates :name, presence: true
   # 🚅 add validations above.
 
   # 🚅 add callbacks above.
