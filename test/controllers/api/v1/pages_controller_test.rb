@@ -22,7 +22,7 @@ class Api::V1::PagesControllerTest < Api::Test
     # Fetch the page in question and prepare to compare it's attributes.
     page = Page.find(page_data["id"])
 
-    assert_equal_or_nil page_data['name'], page.name
+    assert_equal_or_nil page_data["name"], page.name
     # 🚅 super scaffolding will insert new fields above this line.
 
     assert_equal page_data["site_id"], page.site_id
@@ -81,7 +81,7 @@ class Api::V1::PagesControllerTest < Api::Test
     put "/api/v1/pages/#{@page.id}", params: {
       access_token: access_token,
       page: {
-        name: 'Alternative String Value',
+        name: "Alternative String Value",
         # 🚅 super scaffolding will also insert new fields above this line.
       }
     }
@@ -93,7 +93,7 @@ class Api::V1::PagesControllerTest < Api::Test
 
     # But we have to manually assert the value was properly updated.
     @page.reload
-    assert_equal @page.name, 'Alternative String Value'
+    assert_equal @page.name, "Alternative String Value"
     # 🚅 super scaffolding will additionally insert new fields above this line.
 
     # Also ensure we can't do that same action as another user.

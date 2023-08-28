@@ -23,7 +23,7 @@ class Api::V1::SectionsControllerTest < Api::Test
     # Fetch the section in question and prepare to compare it's attributes.
     section = Section.find(section_data["id"])
 
-    assert_equal_or_nil section_data['title'], section.title
+    assert_equal_or_nil section_data["title"], section.title
     # 🚅 super scaffolding will insert new fields above this line.
 
     assert_equal section_data["page_id"], section.page_id
@@ -82,7 +82,7 @@ class Api::V1::SectionsControllerTest < Api::Test
     put "/api/v1/sections/#{@section.id}", params: {
       access_token: access_token,
       section: {
-        title: 'Alternative String Value',
+        title: "Alternative String Value",
         # 🚅 super scaffolding will also insert new fields above this line.
       }
     }
@@ -94,7 +94,7 @@ class Api::V1::SectionsControllerTest < Api::Test
 
     # But we have to manually assert the value was properly updated.
     @section.reload
-    assert_equal @section.title, 'Alternative String Value'
+    assert_equal @section.title, "Alternative String Value"
     # 🚅 super scaffolding will additionally insert new fields above this line.
 
     # Also ensure we can't do that same action as another user.

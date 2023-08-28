@@ -21,8 +21,8 @@ class Api::V1::SitesControllerTest < Api::Test
     # Fetch the site in question and prepare to compare it's attributes.
     site = Site.find(site_data["id"])
 
-    assert_equal_or_nil site_data['name'], site.name
-    assert_equal_or_nil site_data['url'], site.url
+    assert_equal_or_nil site_data["name"], site.name
+    assert_equal_or_nil site_data["url"], site.url
     # 🚅 super scaffolding will insert new fields above this line.
 
     assert_equal site_data["team_id"], site.team_id
@@ -81,8 +81,8 @@ class Api::V1::SitesControllerTest < Api::Test
     put "/api/v1/sites/#{@site.id}", params: {
       access_token: access_token,
       site: {
-        name: 'Alternative String Value',
-        url: 'Alternative String Value',
+        name: "Alternative String Value",
+        url: "Alternative String Value",
         # 🚅 super scaffolding will also insert new fields above this line.
       }
     }
@@ -94,8 +94,8 @@ class Api::V1::SitesControllerTest < Api::Test
 
     # But we have to manually assert the value was properly updated.
     @site.reload
-    assert_equal @site.name, 'Alternative String Value'
-    assert_equal @site.url, 'Alternative String Value'
+    assert_equal @site.name, "Alternative String Value"
+    assert_equal @site.url, "Alternative String Value"
     # 🚅 super scaffolding will additionally insert new fields above this line.
 
     # Also ensure we can't do that same action as another user.
