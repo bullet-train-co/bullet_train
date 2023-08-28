@@ -77,6 +77,6 @@ FileUtils.chdir APP_ROOT do
     exit 1
   end
 
-  puts "\n== Restarting application server =="
-  system! "bin/rails restart"
+  puts ""
+  puts "You're set! Now you can run bin/dev to boot your server and access your new application.".blue
 end
