@@ -144,25 +144,25 @@
     to-fast-properties "^2.0.0"
 
 "@bullet-train/bullet-train-sortable@^1.3.0":
-  version "1.3.17"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.3.17.tgz#d6e90c156bf4a15cd7a5758e9e9094d84c841a38"
-  integrity sha512-DTFWf26swQAYMTYP753YHlx9M9yWq8TxOT5TeWCIlKxWT+5Yuv1FAeoI53WYtzywZV3+xjNh9CFZGSzTYeWp9w==
+  version "1.3.18"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.3.18.tgz#96c9ef861bc2ded55ce45bd5c9b84f213a876406"
+  integrity sha512-8Gbv+m4rrkNUDiFRkuWv2j83UrRwAf8rM/1AyjjYMJ1+32mNeJhOvOTuR2xbKetnxCJ/OGn6Ep9X0iMjK/ZRvA==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
 
 "@bullet-train/bullet-train@^1.3.0":
-  version "1.3.17"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.3.17.tgz#3c4988dc01c323167a5d93a7f1bd8a8181001e32"
-  integrity sha512-VKDJ0ZP18hBKGvfTMF73FB/FdymijC348jVRIzGlCyCzqIB6hHlQ2lu6eYVR8DX6QcwoplTArBC0KLuKtLdDcw==
+  version "1.3.18"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.3.18.tgz#e8780aabdf41e88534bae1175a8490ac3acb28dd"
+  integrity sha512-AC4J/b0qtTRoRJx8Hc/XBNtxtDSfvJkvfxePtBLF++heQ2g0c+a8VWaOgsLCdwuS8QUpQrtZM5vXbxN9t1s+sQ==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
 "@bullet-train/fields@^1.3.0":
-  version "1.3.17"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.3.17.tgz#5b1060148b97bfc636c7367c5cb3e5f5f4c4697f"
-  integrity sha512-U1R6dg3tcF0aLid1FFhch2t9hzCtFBlngbhAYWX5P1O2ZfAW0vK0YuGRb4l77tDq6EX0/OvMda5Qqj1VHLLoHQ==
+  version "1.3.18"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.3.18.tgz#8b3a0595e2f374ce1cdcdf87b998d3e663a45c92"
+  integrity sha512-bToyTbKDo8zy7rU1A4a54fAVGBiIS+soAFxuua+PhryJopwQkH29a+uicrkhWr/impFJm/irgiC5m6w2cCdzXQ==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
@@ -1284,7 +1284,12 @@ jiti@^1.18.2:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.18.2.tgz#80c3ef3d486ebf2450d9335122b32d121f2a83cd"
   integrity sha512-QAdOptna2NYiSSpv0O/BwoHBSmz4YhpzJHyi+fnMRTXFjp7B8i/YG5Z8IfusxB1ufjcD2Sre1F3R+nX3fvy7gg==
 
-jquery@>=1.10, jquery@^3.7.0:
+jquery@>=1.10:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
+  integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
+
+jquery@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.0.tgz#fe2c01a05da500709006d8790fe21c8a39d75612"
   integrity sha512-umpJ0/k8X0MvD1ds0P9SfowREz2LenHsQaxSohMZ5OMNEU2r0tf8pdeEFTHMFxWVxKNyU9rTtK3CWzUCTKJUeQ==
