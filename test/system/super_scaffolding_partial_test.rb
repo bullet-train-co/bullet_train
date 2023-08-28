@@ -161,7 +161,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Number Field Test", with: 47
 
       click_on "Create Partial Test"
-      page.driver.wait_for_network_idle
       assert_text("Partial Test was successfully created.")
 
       # Text field
