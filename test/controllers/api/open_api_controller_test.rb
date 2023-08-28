@@ -2,6 +2,10 @@ require "controllers/api/v1/test"
 require "fileutils"
 
 class Api::OpenApiControllerTest < Api::Test
+  setup do
+    Rails.application.eager_load!
+  end
+
   test "OpenAPI document is valid" do
     get api_path(version: "v1")
 
