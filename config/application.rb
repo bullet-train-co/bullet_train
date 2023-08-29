@@ -7,7 +7,7 @@ require "pry"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-require_relative "../lib/bullet_train"
+require_relative "../lib/bullet_train_monkey_patch"
 
 module UntitledApplication
   class Application < Rails::Application
