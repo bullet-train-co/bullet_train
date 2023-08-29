@@ -65,6 +65,9 @@ group :development, :test do
 
   # Generate test objects.
   gem "factory_bot_rails"
+
+  # Testing rspec
+  gem 'rspec-rails', '~> 6.0.0'
 end
 
 group :development do
