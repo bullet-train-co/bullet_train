@@ -22,9 +22,11 @@
     <% end %>
   <% end %>
 
-  <%= render 'account/shared/menu/subsection', title: t('menus.main.labels.developers'), expand: expand do %>
-    <%= render 'account/platform/applications/menu_item' %>
-    <%= render 'account/webhooks/outgoing/endpoints/menu_item' if webhooks_enabled? %>
+  <% unless disable_developer_menu? %>
+    <%= render 'account/shared/menu/subsection', title: t('menus.main.labels.developers'), expand: expand do %>
+      <%= render 'account/platform/applications/menu_item' %>
+      <%= render 'account/webhooks/outgoing/endpoints/menu_item' if webhooks_enabled? %>
+    <% end %>
   <% end %>
 
   <%= render 'account/shared/menu/subsection', title: t('menus.main.labels.team'), expand: expand do %>

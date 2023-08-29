@@ -17,7 +17,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       click_on "Sign Up"
 
       # we should now be on an onboarding step.
-      assert page.has_content?("Tell us about you")
+      assert_text("Tell us about you")
       fill_in "First Name", with: "Jane"
       fill_in "Last Name", with: "Smith"
       fill_in "Your Team Name", with: "The Testing Team"
@@ -30,32 +30,40 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       end
 
       # Create a new Platform Application
-      within_developers_menu_for(display_details) do
-        click_on "API"
+      if disable_developer_menu?
+        visit account_team_platform_applications_path(User.find_by(email: "jane.smith@gmail.com").current_team)
+      else
+        within_developers_menu_for(display_details) do
+          click_on "API"
+        end
       end
       click_on "Provision New Platform Application"
       fill_in "Name", with: "Test Platform Application"
       click_on "Provision Platform Application"
-      assert page.has_content?("Platform Application was successfully created.")
+      assert_text("Platform Application was successfully created.")
 
       @team = Team.find_by(name: "The Testing Team")
 
       # Ensure that Platform Application is present in the Memberships list.
       visit account_team_memberships_path(@team)
       within_current_memberships_table do
-        assert page.has_content?("Test Platform Application")
+        assert_text("Test Platform Application")
       end
 
       # Remove the Platform Application and ensure it's
       # not present in the tombstoned Memberships list.
-      within_developers_menu_for(display_details) do
-        click_on "API"
+      if disable_developer_menu?
+        visit account_team_platform_applications_path(User.find_by(email: "jane.smith@gmail.com").current_team)
+      else
+        within_developers_menu_for(display_details) do
+          click_on "API"
+        end
       end
       accept_alert { click_on("Delete") }
 
       visit account_team_memberships_path(@team)
       within_current_memberships_table do
-        refute page.has_content?("Test Platform Application")
+        refute_text("Test Platform Application")
       end
       # The tombstones partial won't be rendered if there aren't any tombstoned memberships.
       assert_no_selector "h2", text: "Former Team Members"

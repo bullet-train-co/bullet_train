@@ -27,8 +27,7 @@
     "scheduler:standard",
     "rails-autoscale:white",
     "honeybadger:basic",
-    "sentry:f1",
-    "realemail:free"
+    "sentry:f1"
   ],
   "env": {
     "BASE_URL": {

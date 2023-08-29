@@ -1,0 +1,46 @@
+name: "Tag & Release"
+on:
+  # Should trigger only when a Pull Request is Merged
+  # (the action will not create the Tag if the Pull Request is discarded - closed without merge)
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  tag:
+    name: Tag
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag-on-pr-merge.outputs.tag }}
+    # This 'if' condition is important for ensuring the workflow only runs for merged PRs
+    #  (avoid running when a PR is discarded - closed without merging)
+    if: github.event.pull_request.merged == true
+    steps:
+      - name: Tag on PR merge
+        id: tag-on-pr-merge
+        uses: David-Lor/action-tag-on-pr-merge@main
+        with:
+          push-tag: true
+      - name: Print fetched tag
+        run: echo "${{ steps.tag-on-pr-merge.outputs.tag }}"
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: tag
+    # If we created a `v*` tag then we checkout the repo and tag a release.
+    if: ${{ startsWith(needs.tag.outputs.tag, 'v') }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ needs.tag.outputs.tag }}
+          generate_release_notes: true
+          body: |
+            ## What's changed in `bullet_train-core`
+            Also check the corresponding release for the `bullet_train-core` repo:
+            https://github.com/bullet-train-co/bullet_train-core/releases
+

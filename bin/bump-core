@@ -1,0 +1,98 @@
+#!/usr/bin/env ruby
+
+require 'thor'
+
+class CoreBumpCLI < Thor
+  desc "bump", "Bump the versions of bullet_train-core gems and npm packages"
+  option :allow_local
+  def bump
+    if !github_output_file && !options[:allow_local]
+      banner = <<~BANNER
+        --------------------------------------------------------------------------------------------------------
+        - It looks like you're running this scirpt locally.
+        - This script was designed to run as part of a GitHub workflow.
+        - The workflow will prepare a speically formatted PR that will kick off other workflows when merged.
+        - We don't recommend using this script locally to make updates directly to the starter repo.
+        -
+        - You can run the workflow by going here:
+        - https://github.com/bullet-train-co/bullet_train/actions/workflows/version-bump.yml
+        -
+        - If you really want to run this locally you should make sure you're not on the `main` branch,
+        - and then you can pass the `--allow-local` flag to skip this notice and run the script.
+        -
+        - For example:
+        - ./bin/bump-core --allow-local
+        -------------------------------------------------------------------------------------------------------
+      BANNER
+      say_error banner, :red
+      return
+    end
+
+    bundle_update
+    yarn_upgrade
+    write_to_github_output_file
+  end
+
+  # This allows us to define helper methods that aren't attached to thor commands
+  no_commands do
+    def github_output_file
+      ENV['GITHUB_OUTPUT']
+    end
+
+    def bundle_update
+      puts `bundle update --conservative #{ruby_gems.join(" ")}`
+    end
+
+    def yarn_upgrade
+      puts `yarn upgrade #{npm_packages.join(" ")}`
+    end
+
+    def write_to_github_output_file
+      if github_output_file
+        # This block allows us to pass the new bump version out to the workflow.
+        output = `bundle show bullet_train` # => /some/path/bullet_train-1.3.2
+        version = output.split('-').last
+        puts "The new version to pass to the GitHub output file = #{version}"
+        IO.write(github_output_file, "NEW_VERSION_NUMBER=#{version}\n", mode: 'a')
+      else
+        say "We don't seem to be running in GitHub actions. Skipping the GitHub output file."
+      end
+    end
+
+    def ruby_gems
+      %w(
+        bullet_train
+        bullet_train-api
+        bullet_train-fields
+        bullet_train-has_uuid
+        bullet_train-incoming_webhooks
+        bullet_train-integrations
+        bullet_train-integrations-stripe
+        bullet_train-obfuscates_id
+        bullet_train-outgoing_webhooks
+        bullet_train-roles
+        bullet_train-scope_questions
+        bullet_train-scope_validator
+        bullet_train-sortable
+        bullet_train-super_load_and_authorize_resource
+        bullet_train-super_scaffolding
+        bullet_train-themes
+        bullet_train-themes-light
+        bullet_train-themes-tailwind_css
+      )
+    end
+
+    def npm_packages
+      %w(
+        @bullet-train/bullet-train
+        @bullet-train/fields
+        @bullet-train/bullet-train-sortable
+      )
+    end
+  end
+end
+
+# We create our own args array so that we don't have to ask the user to include `bump` on the command line
+args = ["bump"] + ARGV
+
+CoreBumpCLI.start(args)

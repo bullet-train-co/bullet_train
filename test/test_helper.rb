@@ -1,14 +1,15 @@
+# Simplecov config has to come before literally everything else
+# Open coverage/index.html in your browser after
+# running your tests for test coverage results.
+require "simplecov"
+SimpleCov.start "rails"
+
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
-require "simplecov"
 
 # Set the default language we test in to English.
 I18n.default_locale = :en
-
-# Open coverage/index.html in your browser after
-# running your tests for test coverage results.
-SimpleCov.start "rails"
 
 # We've started loading seeds by default to try to reduce any duplication of effort trying to get the test
 # environment to look the same as the actual development and production environments. This means a consolidation
@@ -21,6 +22,20 @@ knapsack_pro_adapter.set_test_helper_path(__FILE__)
 
 require "sidekiq/testing"
 Sidekiq::Testing.inline!
+
+begin
+  require "bullet_train/billing/test_support"
+  FactoryBot.definition_file_paths << BulletTrain::Billing::TestSupport::FACTORY_PATH
+  FactoryBot.reload
+rescue LoadError
+end
+
+begin
+  require "bullet_train/billing/stripe/test_support"
+  FactoryBot.definition_file_paths << BulletTrain::Billing::Stripe::TestSupport::FACTORY_PATH
+  FactoryBot.reload
+rescue LoadError
+end
 
 ActiveSupport::TestCase.class_eval do
   # Run tests in parallel with specified workers

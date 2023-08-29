@@ -40,27 +40,42 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
-      assert page.has_content?("Test Files")
+      assert_text("Test Files")
       click_on "Add New Test File"
 
       fill_in "Name", with: "Test File Name"
-      assert page.has_content?("Upload New Document")
+      assert_text("Upload New Document")
       fill_in "Name", with: "Foo"
-      attach_file("test/support/foo.txt", make_visible: true)
+      attach_file("Foo", "test/support/foo.txt", make_visible: true)
+      attach_file("Bars", ["test/support/foo.txt", "test/support/foo-two.txt"], make_visible: true)
       click_on "Create Test File"
 
-      assert page.has_content?("Test File was successfully created.")
+      assert_text("Test File was successfully created.")
       refute TestFile.first.foo.blank?
+      assert_equal 2, TestFile.first.bars.count
 
       click_on "Edit"
-      assert page.has_content?("Remove Current Document")
-      find("span", text: "Remove Current Document").click
+
+      assert_text("Remove Current Document")
+      within "[data-fields--file-item-id-value='#{TestFile.first.foo.id}']" do
+        find("span", text: "Remove Current Document").click
+      end
       click_on "Update Test File"
 
-      assert page.has_content?("Test File was successfully updated.")
+      assert_text("Test File was successfully updated.")
       assert TestFile.first.foo.blank?
 
-      # This test consistently adds a new text file,
+      click_on "Edit"
+      assert_text("Remove Current Document")
+      within "[data-fields--file-item-id-value='#{TestFile.first.bars.first.id}']" do
+        find("span", text: "Remove Current Document").click
+      end
+      click_on "Update Test File"
+
+      assert_text("Test File was successfully updated.")
+      assert_equal 1, TestFile.first.bars.count
+
+      # This test consistently adds several new text files,
       # so we clear out all instances of foo from the storage directory.
       storage = Dir.glob("tmp/storage/**")
       storage.each { |dir| FileUtils.rm_r(dir) if dir.match?(/\/([0-9]|[a-z]){2}$/) }
@@ -75,21 +90,21 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       login_as(@jane, scope: :user)
       visit account_team_path(@jane.current_team)
 
-      assert page.has_content?("Add New Color Picker")
+      assert_text("Add New Color Picker")
       click_on "Add New Color Picker"
 
-      assert page.has_content?("Color Picker Value")
+      assert_text("Color Picker Value")
       color_picker_buttons = all(".button-color")
       assert_equal color_picker_buttons.size, 8
       color_picker_buttons.first.click
       click_on "Create Color Picker"
 
-      assert page.has_content?("Color Picker was successfully created.")
+      assert_text("Color Picker was successfully created.")
 
       # The default value can be found in the color picker's locale.
       color_picker_default_value = "#9C73D2"
       assert_equal ColorPicker.first.color_picker_value, color_picker_default_value
-      assert page.has_content?(color_picker_default_value)
+      assert_text(color_picker_default_value)
     end
   end
 
@@ -113,10 +128,14 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       find("#partial_test_multiple_buttons_test_two+button", visible: :all).click
       find("#partial_test_multiple_buttons_test_three+button", visible: :all).click
       # Date partial
-      find("#partial_test_date_test").click
+      page.all('input[id^="partial_test_date_test"]').each do |el|
+        el.click
+      end
       find(".daterangepicker").click_on("Apply") # Chooses today's date.
       # DateTime partial
-      find("#partial_test_date_time_test").click
+      page.all('input[id^="partial_test_date_time_test"]').each do |el|
+        el.click
+      end
       find(".daterangepicker").click_on("Apply")
       # File partial
       attach_file("test/support/foo.txt", make_visible: true)
@@ -142,7 +161,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Number Field Test", with: 47
 
       click_on "Create Partial Test"
-      assert page.has_content?("Partial Test was successfully created.")
+      assert_text("Partial Test was successfully created.")
 
       # Text field
       partial_test = PartialTest.first
@@ -171,7 +190,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Password
       refute_nil partial_test.password_test
       assert_equal partial_test.password_test, "testpassword123"
-      assert page.has_content?("●" * partial_test.password_test.length)
+      assert_text("●" * partial_test.password_test.length)
       # Phone Field
       refute_nil partial_test.phone_field_test
       assert_equal partial_test.phone_field_test, "(000)000-0000"

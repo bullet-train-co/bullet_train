@@ -18,22 +18,22 @@ module BulletTrainGems
         login_as(@jane, scope: :user)
         visit account_team_path(@jane.current_team)
 
-        assert page.has_content?("Books")
+        assert_text("Books")
         click_on "Add New Book"
 
-        assert page.has_content?("New Book Details")
+        assert_text("New Book Details")
         fill_in "Title", with: "The Stand"
         fill_in "Author", with: "Stephen King"
 
         click_on "Create Book"
         click_on "Back"
 
-        assert page.has_content?("Books")
-        assert page.has_content?("The Stand")
+        assert_text("Books")
+        assert_text("The Stand")
         click_on "The Stand"
-        assert page.has_content?("Edit Book")
+        assert_text("Edit Book")
         click_on "Activity"
-        assert page.has_content?("Created the Book The Stand")
+        assert_text("Created the Book The Stand")
       end
     end
   end

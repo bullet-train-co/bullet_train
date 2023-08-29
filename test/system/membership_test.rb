@@ -17,7 +17,7 @@ class MembershipSystemTest < ApplicationSystemTestCase
       click_on "Sign Up"
 
       # we should now be on an onboarding step.
-      assert page.has_content?("Tell us about you")
+      assert_text("Tell us about you")
       fill_in "First Name", with: "Jane"
       fill_in "Last Name", with: "Smith"
       fill_in "Your Team Name", with: "The Testing Team"
@@ -33,7 +33,7 @@ class MembershipSystemTest < ApplicationSystemTestCase
         click_on "Team Members"
       end
 
-      assert page.has_content?("The Testing Team Team Members")
+      assert_text("The Testing Team Team Members")
       click_on "Invite a New Team Member"
 
       fill_in "Email Address", with: "takashi.yamaguchi@gmail.com"
@@ -42,21 +42,21 @@ class MembershipSystemTest < ApplicationSystemTestCase
       find("label", text: "Invite as Team Administrator").click
       click_on "Create Invitation"
 
-      assert page.has_content?("Invitation was successfully created.")
+      assert_text("Invitation was successfully created.")
 
       invited_membership = Membership.find_by(user_email: "takashi.yamaguchi@gmail.com")
 
       within_current_memberships_table do
-        assert page.has_content?("Takashi Yamaguchi")
+        assert_text("Takashi Yamaguchi")
         within_membership_row(invited_membership) do
-          assert page.has_content?("Invited")
-          assert page.has_content?("Team Administrator")
+          assert_text("Invited")
+          assert_text("Team Administrator")
           click_on "Details"
         end
       end
 
-      assert page.has_content?("SPECIAL PRIVILEGES")
-      assert page.has_content?("Team Administrator")
+      assert_text("SPECIAL PRIVILEGES")
+      assert_text("Team Administrator")
 
       accept_alert do
         click_on "Demote from Admin"
@@ -65,28 +65,28 @@ class MembershipSystemTest < ApplicationSystemTestCase
       within_current_memberships_table do
         within_membership_row(invited_membership) do
           assert page.has_no_content?("Team Administrator")
-          assert page.has_content?("Viewer")
+          assert_text("Viewer")
           click_on "Details"
         end
       end
 
-      assert page.has_content?("SPECIAL PRIVILEGES")
+      assert_text("SPECIAL PRIVILEGES")
       assert page.has_no_content?("Team Administrator")
-      assert page.has_content?("Viewer")
+      assert_text("Viewer")
 
       accept_alert { click_on "Promote to Admin" }
 
       within_current_memberships_table do
         within_membership_row(invited_membership) do
-          assert page.has_content?("Team Administrator")
+          assert_text("Team Administrator")
           click_on "Details"
         end
       end
 
-      assert page.has_content? "Invitation Details"
+      assert_text "Invitation Details"
       click_on "Settings"
 
-      assert page.has_content? "Update Membership Settings"
+      assert_text "Update Membership Settings"
       fill_in "First Name", with: "Yuto"
       fill_in "Last Name", with: "Nishiyama"
       # this is removing their admin privileges.
@@ -96,8 +96,8 @@ class MembershipSystemTest < ApplicationSystemTestCase
       assert page.has_no_content?("Takashi Yamaguchi")
       assert page.has_no_content?("Team Administrator")
 
-      assert page.has_content?("Yuto Nishiyama")
-      assert page.has_content?("Viewer")
+      assert_text("Yuto Nishiyama")
+      assert_text("Viewer")
 
       accept_alert { click_on "Remove from Team" }
 
@@ -113,26 +113,26 @@ class MembershipSystemTest < ApplicationSystemTestCase
       assert unregistered_membership.user_email.present?
 
       within_former_memberships_table do
-        assert page.has_content?("Yuto Nishiyama")
-        assert page.has_content?("Viewer")
+        assert_text("Yuto Nishiyama")
+        assert_text("Viewer")
         accept_alert { click_on "Re-Invite to Team" }
       end
 
-      assert page.has_content?("The user has been successfully re-invited. They will receive an email to rejoin the team.")
+      assert_text("The user has been successfully re-invited. They will receive an email to rejoin the team.")
 
       within_current_memberships_table do
-        assert page.has_content?("Yuto Nishiyama")
+        assert_text("Yuto Nishiyama")
         within_membership_row(invited_membership) do
-          assert page.has_content?("Viewer")
+          assert_text("Viewer")
           click_on "Details"
         end
       end
 
-      assert page.has_content?("Yuto Nishiyama’s Membership on The Testing Team")
-      assert page.has_content?("Invitation Details")
+      assert_text("Yuto Nishiyama’s Membership on The Testing Team")
+      assert_text("Invitation Details")
       click_on "Back"
 
-      assert page.has_content?("The Testing Team Team Members")
+      assert_text("The Testing Team Team Members")
     end
   end
 end

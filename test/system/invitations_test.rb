@@ -17,7 +17,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       click_on "Sign Up"
 
       # we should now be on an onboarding step.
-      assert page.has_content?("Tell us about you")
+      assert_text("Tell us about you")
       fill_in "First Name", with: "Hanako"
       fill_in "Last Name", with: "Tanaka"
       fill_in "Your Team Name", with: "The Testing Team"
@@ -29,7 +29,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         end
       end
 
-      assert page.has_content?("The Testing Team’s Dashboard")
+      assert_text("The Testing Team’s Dashboard")
       within_team_menu_for(display_details) do
         click_on "Team Members"
       end
@@ -37,7 +37,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       membership_user = User.find_by(email: "hanako.tanaka@gmail.com")
       first_membership = Membership.find_by(user: membership_user)
 
-      assert page.has_content?("The Testing Team Team Members")
+      assert_text("The Testing Team Team Members")
 
       # Paths that begin with "/account/" are whitelisted when accessing
       # invitation#new while passing a cancel_path to the params.
@@ -68,26 +68,26 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         fill_in "Last Name", with: "Yamaguchi"
         find("label", text: "Invite as Team Administrator").click
         click_on "Create Invitation"
-        assert page.has_content?("Invitation was successfully created.")
+        assert_text("Invitation was successfully created.")
       end
 
       invited_membership = Membership.find_by(user_email: "takashi.yamaguchi@gmail.com")
       invited_membership.invitation
 
       within_current_memberships_table do
-        assert page.has_content?("Takashi Yamaguchi")
+        assert_text("Takashi Yamaguchi")
         within_membership_row(invited_membership) do
-          assert page.has_content?("Invited")
-          assert page.has_content?("Team Administrator")
+          assert_text("Invited")
+          assert_text("Team Administrator")
         end
       end
 
       # Resend the invite
-      assert page.has_content?("Resend")
+      assert_text("Resend")
       assert_difference "all_emails.count", 1 do
         perform_enqueued_jobs do
           click_on "Resend"
-          assert page.has_content?("Invitation was successfully resent.")
+          assert_text("Invitation was successfully resent.")
         end
       end
 
@@ -101,15 +101,15 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         click_on "Details"
       end
 
-      assert page.has_content?("Invitation Details")
+      assert_text("Invitation Details")
 
       accept_alert { click_on "Remove from Team" }
-      assert page.has_content?("That user has been successfully removed from the team.")
+      assert_text("That user has been successfully removed from the team.")
 
       # We shouldn't be able to resend invitations for memberships that aren't on the team anymore.
       within_window new_window do
         click_on "Resend"
-        assert page.has_content?("Sorry, we couldn't find an invitation to resend.")
+        assert_text("Sorry, we couldn't find an invitation to resend.")
       end
 
       # click the link in the email.
@@ -121,34 +121,34 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       # if we're back on the team's dashboard, then we're *not* on the accept invitation page, which means the
       # invitation wasn't claimable.
-      assert page.has_content?("The Testing Team’s Dashboard")
-      assert page.has_content?("Sorry, but we couldn't find your invitation.")
+      assert_text("The Testing Team’s Dashboard")
+      assert_text("Sorry, but we couldn't find your invitation.")
       within_team_menu_for(display_details) do
         click_on "Team Members"
       end
 
-      assert page.has_content?("The Testing Team Team Members")
+      assert_text("The Testing Team Team Members")
 
       perform_enqueued_jobs do
         clear_emails
 
         within_former_memberships_table do
-          assert page.has_content?("Takashi Yamaguchi")
+          assert_text("Takashi Yamaguchi")
           within_membership_row(invited_membership) do
             assert page.has_no_content?("Invited")
-            assert page.has_content?("Team Administrator")
+            assert_text("Team Administrator")
           end
         end
 
         accept_alert { click_on "Re-Invite to Team" }
-        assert page.has_content?("The user has been successfully re-invited. They will receive an email to rejoin the team.")
+        assert_text("The user has been successfully re-invited. They will receive an email to rejoin the team.")
       end
 
       # Make sure we can resend the invitation for memberships that come back to the team.
       assert_difference "all_emails.count", 1 do
         perform_enqueued_jobs do
           click_on "Resend"
-          assert page.has_content?("Invitation was successfully resent.")
+          assert_text("Invitation was successfully resent.")
         end
       end
 
@@ -159,7 +159,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       open_email "takashi.yamaguchi@gmail.com"
       current_email.click_link "Join The Testing Team"
 
-      assert page.has_content?("Create Your Account")
+      assert_text("Create Your Account")
       # this email address is purposefully different than the one they were invited via.
       fill_in "Your Email Address", with: "takashi@yamaguchi.com"
       fill_in "Set Password", with: another_example_password
@@ -172,32 +172,32 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       click_on "Join The Testing Team"
 
       # this first name is purposefully different than the name they were invited with.
-      # assert page.has_content?('Create Your Account')
-      assert page.has_content?("Tell us about you")
+      # assert_text('Create Your Account')
+      assert_text("Tell us about you")
       fill_in "First Name", with: "Taka"
       fill_in "Last Name", with: "Yamaguchi"
       click_on "Next"
 
-      assert page.has_content?("The Testing Team’s Dashboard")
+      assert_text("The Testing Team’s Dashboard")
       within_team_menu_for(display_details) do
         click_on "Team Members"
       end
 
-      assert page.has_content?("Hanako Tanaka")
+      assert_text("Hanako Tanaka")
 
       membership_user = User.find_by(first_name: "Taka", last_name: "Yamaguchi")
       last_membership = Membership.find_by(user: membership_user)
 
       within_current_memberships_table do
-        assert page.has_content?("Taka Yamaguchi")
+        assert_text("Taka Yamaguchi")
         within_membership_row(last_membership) do
           assert page.has_no_content?("Invited")
-          assert page.has_content?("Team Administrator")
+          assert_text("Team Administrator")
           click_on "Details"
         end
       end
 
-      assert page.has_content?("Taka Yamaguchi’s Membership on The Testing Team")
+      assert_text("Taka Yamaguchi’s Membership on The Testing Team")
 
       # Users cannot create another team in invitation-only mode.
       unless invitation_only?
@@ -205,7 +205,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
           click_on "Add New Team"
         end
 
-        assert page.has_content?("Create a New Team")
+        assert_text("Create a New Team")
         fill_in "Team Name", with: "Another Team"
         click_on "Create Team"
 
@@ -215,15 +215,15 @@ class InvitationDetailsTest < ApplicationSystemTestCase
           end
         end
 
-        assert page.has_content?("Another Team’s Dashboard")
+        assert_text("Another Team’s Dashboard")
         within_team_menu_for(display_details) do
           click_on "Team Members"
         end
 
-        assert page.has_content?("Another Team Team Members")
+        assert_text("Another Team Team Members")
         click_on "Invite a New Team Member"
 
-        assert page.has_content?("New Invitation Details")
+        assert_text("New Invitation Details")
 
         perform_enqueued_jobs do
           clear_emails
@@ -231,7 +231,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
           # this is specifically a different email address than the one they signed up with originally.
           fill_in "Email Address", with: "hanako@some-company.com"
           click_on "Create Invitation"
-          assert page.has_content?("Invitation was successfully created.")
+          assert_text("Invitation was successfully created.")
         end
 
         # sign out.
@@ -243,22 +243,22 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         open_email "hanako@some-company.com"
         current_email.click_link "Join Another Team"
 
-        assert page.has_content?("Create Your Account")
+        assert_text("Create Your Account")
         click_link "Already have an account?"
 
-        assert page.has_content?("Sign In")
+        assert_text("Sign In")
         fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
         click_on "Next" if two_factor_authentication_enabled?
         fill_in "Your Password", with: example_password
         click_on "Sign In"
 
-        assert page.has_content?("Join Another Team")
-        assert page.has_content?("Taka Yamaguchi has invited you to join Another Team")
-        assert page.has_content?("This invitation was emailed to hanako@some-company.com")
-        assert page.has_content?("but you're currently signed in as hanako.tanaka@gmail.com")
+        assert_text("Join Another Team")
+        assert_text("Taka Yamaguchi has invited you to join Another Team")
+        assert_text("This invitation was emailed to hanako@some-company.com")
+        assert_text("but you're currently signed in as hanako.tanaka@gmail.com")
         click_on "Join Another Team"
 
-        assert page.has_content?("Welcome to Another Team!")
+        assert_text("Welcome to Another Team!")
 
         within_team_menu_for(display_details) do
           click_on "Team Members"
@@ -267,19 +267,19 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         last_membership = Membership.find_by(user_email: "hanako@some-company.com")
 
         within_current_memberships_table do
-          assert page.has_content?("Hanako Tanaka")
+          assert_text("Hanako Tanaka")
           within_membership_row(last_membership) do
             assert page.has_no_content?("Invited")
-            assert page.has_content?("Viewer")
+            assert_text("Viewer")
             click_on "Details"
           end
         end
 
         accept_alert { click_on "Leave This Team" }
 
-        assert page.has_content?("You've successfully removed yourself from Another Team.")
+        assert_text("You've successfully removed yourself from Another Team.")
 
-        assert page.has_content?("The Testing Team’s Dashboard")
+        assert_text("The Testing Team’s Dashboard")
       end
 
       # Make sure we're actually signed in as Hanako and on the Team Members page.
@@ -293,31 +293,31 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         click_on "Team Members"
       end
 
-      assert page.has_content?("The Testing Team Team Members")
+      assert_text("The Testing Team Team Members")
       within_current_memberships_table do
-        assert page.has_content?("Hanako Tanaka")
+        assert_text("Hanako Tanaka")
         within_membership_row(first_membership) do
-          assert page.has_content?("Team Administrator")
+          assert_text("Team Administrator")
           click_on "Details"
         end
       end
 
-      assert page.has_content?("Hanako Tanaka’s Membership on The Testing Team")
+      assert_text("Hanako Tanaka’s Membership on The Testing Team")
       accept_alert { click_on "Demote from Admin" }
 
-      assert page.has_content?("The Testing Team Team Members")
+      assert_text("The Testing Team Team Members")
       within_current_memberships_table do
-        assert page.has_content?("Hanako Tanaka")
+        assert_text("Hanako Tanaka")
         within_membership_row(first_membership) do
           assert page.has_no_content?("Team Administrator")
           click_on "Details"
         end
       end
 
-      assert page.has_content?("Hanako Tanaka’s Membership on The Testing Team")
+      assert_text("Hanako Tanaka’s Membership on The Testing Team")
 
       # since the user is no longer an admin, they shouldn't see either of these options anymore.
-      assert page.has_content?("Viewer")
+      assert_text("Viewer")
       assert page.has_no_content?("Promote to Admin")
       assert page.has_no_content?("Demote from Admin")
 
@@ -326,13 +326,13 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       # if this is happening, it shouldn't be.
       assert page.has_no_content?("You are not authorized to access this page.")
 
-      assert page.has_content?("You've successfully removed yourself from The Testing Team.")
+      assert_text("You've successfully removed yourself from The Testing Team.")
 
-      assert page.has_content?("Join a Team")
-      assert page.has_content?("The account hanako.tanaka@gmail.com is not currently a member of any teams.")
-      assert page.has_content?("Accept an invitation")
-      assert page.has_content?("Log out of this account")
-      assert page.has_content?("Create a new team")
+      assert_text("Join a Team")
+      assert_text("The account hanako.tanaka@gmail.com is not currently a member of any teams.")
+      assert_text("Accept an invitation")
+      assert_text("Log out of this account")
+      assert_text("Create a new team")
 
       click_on "Logout"
     end

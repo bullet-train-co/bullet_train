@@ -16,7 +16,7 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
       click_on "Sign Up"
 
       # we should now be on an onboarding step.
-      assert page.has_content?("Tell us about you")
+      assert_text("Tell us about you")
       fill_in "First Name", with: "Testy"
       fill_in "Last Name", with: "McTesterson"
       fill_in "Your Team Name", with: "The Testing Team"
@@ -29,7 +29,7 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
         end
       end
 
-      assert page.has_content?("The Testing Team’s Dashboard")
+      assert_text("The Testing Team’s Dashboard")
 
       user = User.find_by(email: "andrew.culver@gmail.com")
 
@@ -42,7 +42,7 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
 
       click_on "Update Profile"
 
-      assert page.has_content? "User was successfully updated."
+      assert_text "User was successfully updated."
 
       visit edit_account_user_path(user)
 
