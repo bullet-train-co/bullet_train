@@ -221,7 +221,7 @@ GEM
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
     crass (1.0.6)
-    css_parser (1.14.0)
+    css_parser (1.15.0)
       addressable
     cssbundling-rails (1.2.0)
       railties (>= 6.0.0)
@@ -487,7 +487,7 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.56.1)
+    rubocop (1.56.2)
       base64 (~> 0.1.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
