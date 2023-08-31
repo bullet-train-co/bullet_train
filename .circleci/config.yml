@@ -95,10 +95,10 @@ jobs:
     executor: ruby/default
     parallelism: 16
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
           chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
           replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
-      - browser-tools/install-chromedriver
+      - browser-tools/install-chromedriver:
           chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
           replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - checkout
@@ -154,7 +154,7 @@ jobs:
     executor: ruby/default
     parallelism: 16
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-browser-tools:
           chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
           replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - checkout
@@ -212,10 +212,10 @@ jobs:
     executor: ruby/default
     parallelism: 7
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
           chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
           replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
-      - browser-tools/install-chromedriver
+      - browser-tools/install-chromedriver:
           chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
           replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - checkout
@@ -260,10 +260,10 @@ jobs:
     executor: ruby/default
     parallelism: 16
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
           chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
           replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
-      - browser-tools/install-chromedriver
+      - browser-tools/install-chromedriver:
           chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
           replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - checkout
