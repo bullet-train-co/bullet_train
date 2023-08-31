@@ -169,11 +169,6 @@ else
   exit
 end
 
-if File.exist?('.github/workflows/main.yml')
-  puts "Removing default GitHub workflow.".yellow
-  File.delete('.github/workflows/main.yml')
-end
-
 
 puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"
