@@ -54,6 +54,11 @@ unless scaffolding_things_disabled?
         fill_in "Email Field Value", with: "me@acme.com"
         fill_in "Password Field Value", with: "secure-password"
         fill_in "Phone Field Value", with: "(201) 551-8321"
+
+        assert page.has_content? "State / Province"
+        select "Japan", from: "Country"
+        assert page.has_content? "Prefecture"
+
         select "One", from: "Super Select Value"
         select2_select "Multiple Super Select Values", ["Five", "Six"]
         fill_in "Text Area Value", with: "Long text for this text area field"
