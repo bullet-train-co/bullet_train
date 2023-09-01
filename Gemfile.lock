@@ -657,6 +657,7 @@ DEPENDENCIES
   rails_best_practices
   redis (~> 5.0.5)
   rqrcode
+  ruby-vips
   selenium-webdriver
   sentry-rails
   sentry-ruby

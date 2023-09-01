@@ -65,6 +65,10 @@ group :development, :test do
 
   # Generate test objects.
   gem "factory_bot_rails"
+
+  # Workaround to get image process to behave on a Mac in development
+  # https://github.com/libvips/ruby-vips/issues/155#issuecomment-1047370993
+  gem "ruby-vips"
 end
 
 group :development do
