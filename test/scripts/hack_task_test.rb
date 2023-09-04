@@ -1,6 +1,7 @@
 require "test_helper"
 
 class HackTaskTest < ActiveSupport::TestCase
+  # TODO: Try to get these values dynamically.
   FRAMEWORK_PACKAGES = [
     "bullet_train",
     "bullet_train-api",
