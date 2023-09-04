@@ -1,6 +1,30 @@
 require "test_helper"
 
 class HackTaskTest < ActiveSupport::TestCase
+  FRAMEWORK_PACKAGES = [
+    "bullet_train",
+    "bullet_train-api",
+    "bullet_train-fields",
+    "bullet_train-has_uuid",
+    "bullet_train-incoming_webhooks",
+    "bullet_train-integrations",
+    "bullet_train-integrations-stripe",
+    "bullet_train-obfuscates_id",
+    "bullet_train-outgoing_webhooks",
+
+    # TODO: We need to add this with bin/hack --link
+    # "bullet_train-roles",
+
+    "bullet_train-scope_questions",
+    "bullet_train-scope_validator",
+    "bullet_train-sortable",
+    "bullet_train-super_load_and_authorize_resource",
+    "bullet_train-super_scaffolding",
+    "bullet_train-themes",
+    "bullet_train-themes-light",
+    "bullet_train-themes-tailwind_css",
+  ]
+
   def setup
     @original_gemfile_lines = File.open("Gemfile").readlines
     @temp_gemfile_lines = File.open("test/support/temp_gemfile.rb").readlines
@@ -33,11 +57,7 @@ class HackTaskTest < ActiveSupport::TestCase
     # Reload the Gemfile's contents.
     edited_gemfile = File.open("Gemfile").readlines.join
 
-    framework_packages_path = `bundle show bullet_train`.chomp + "/config/locales/en/framework_packages.yml"
-    framework_packages_data = YAML.load(File.open(framework_packages_path))
-    framework_packages = framework_packages_data.dig("en", "framework_packages").map { |k, v| k }
-
-    framework_packages.each do |gem_name|
+    FRAMEWORK_PACKAGES.each do |gem_name|
       next if gem_name == "bullet_train"
       assert edited_gemfile.include?("gem \"#{gem_name}\", path: \"local/bullet_train-core/#{gem_name}\"")
     end
