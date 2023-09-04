@@ -60,6 +60,8 @@ class HackTaskTest < ActiveSupport::TestCase
 
     FRAMEWORK_PACKAGES.each do |gem_name|
       next if gem_name == "bullet_train"
+      p gem_name
+      p File.open("Gemfile").readlines.split("\n")
       assert edited_gemfile.include?("gem \"#{gem_name}\", path: \"local/bullet_train-core/#{gem_name}\"")
     end
   end
