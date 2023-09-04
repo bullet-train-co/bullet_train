@@ -52,17 +52,17 @@ class HackTaskTest < ActiveSupport::TestCase
     `bundle install`
   end
 
-  test "bin/hack --link links gems properly to local/bullet_train-core" do
-    `bin/hack --link`
+  if Dir.exist?("local/bullet_train-core")
+    test "bin/hack --link links gems properly to local/bullet_train-core" do
+      `bin/hack --link`
 
-    # Reload the Gemfile's contents.
-    edited_gemfile = File.open("Gemfile").readlines.join
+      # Reload the Gemfile's contents.
+      edited_gemfile = File.open("Gemfile").readlines.join
 
-    FRAMEWORK_PACKAGES.each do |gem_name|
-      next if gem_name == "bullet_train"
-      p gem_name
-      p File.open("Gemfile").readlines.split("\n")
-      assert edited_gemfile.include?("gem \"#{gem_name}\", path: \"local/bullet_train-core/#{gem_name}\"")
+      FRAMEWORK_PACKAGES.each do |gem_name|
+        next if gem_name == "bullet_train"
+        assert edited_gemfile.include?("gem \"#{gem_name}\", path: \"local/bullet_train-core/#{gem_name}\"")
+      end
     end
   end
 end
