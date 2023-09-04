@@ -35,7 +35,7 @@ class HackTaskTest < ActiveSupport::TestCase
 
     framework_packages_path = `bundle show bullet_train`.chomp + "/config/locales/en/framework_packages.yml"
     framework_packages_data = YAML.load(File.open(framework_packages_path))
-    framework_packages = framework_packages_data.dig("en", "framework_packages").map {|k, v| k}
+    framework_packages = framework_packages_data.dig("en", "framework_packages").map { |k, v| k }
 
     framework_packages.each do |gem_name|
       next if gem_name == "bullet_train"
