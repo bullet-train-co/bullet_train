@@ -15,8 +15,8 @@ FactoryBot.define do
     sort_order { 1 }
 
     factory :scaffolding_completely_concrete_tangible_thing_example do
-      id{ "42" }
-      absolutely_abstract_creative_concept_id{ "42" }
+      id { "42" }
+      absolutely_abstract_creative_concept_id { "42" }
       text_field_value { "Example" }
     end
   end
