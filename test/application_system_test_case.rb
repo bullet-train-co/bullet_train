@@ -89,13 +89,47 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     key = ENV["TEST_DEVICE"].to_sym
     if @@test_devices.key?(key)
       puts "Running tests with the `#{ENV["TEST_DEVICE"]}` device profile specifically.".green
-      @@test_devices = {key => @@test_devices[key]}
+      @@test_devices = @@test_devices.slice(key)
     else
       puts "⚠️ `#{ENV["TEST_DEVICE"]}` isn't a valid device profile in `test/test_helper.rb`, so we'll just run *all* device profiles.".yellow
     end
   end
 
+  def device_name
+    @device_name ||= @@test_devices.each_key.find { name.include?(_1.to_s) } || raise("unknown test device, you probably want to use `device_test` to generate this test")
+  end
+
+  def display_details
+    @@test_devices[device_name]
+  end
+
+  # Generate a device specific test for each device in `@@test_devices`.
+  #
+  # Automatically resizes the display for the test too.
+  #
+  #   device_test "system test" do
+  #     p device_name
+  #     p display_details
+  #   end
+  def self.device_test(name, &block)
+    @@test_devices.each_key do |device_name|
+      test "#{name} on a #{device_name}" do
+        resize_display # TODO: Figure out why the browser window opens if this is done in `setup`.
+        instance_eval(&block)
+      end
+    end
+  end
+
   def resize_for(display_details)
+    ActiveSupport::Deprecation.warn <<~END_OF_MESSAGE
+      `resize_for` is deprecated.
+      Please run the following command to update your tests:
+      ./bin/updates/system_tests/use_device_test
+    END_OF_MESSAGE
+    resize_display(display_details)
+  end
+
+  def resize_display(display_details = self.display_details)
     if use_cuprite?
       page.driver.resize(*calculate_resolution(display_details))
     else
@@ -103,20 +137,23 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     end
   end
 
-  def within_team_menu_for(display_details)
+  def within_team_menu(display_details = self.display_details)
     first("#team").hover
     yield
   end
+  alias_method :within_team_menu_for, :within_team_menu
 
-  def within_user_menu_for(display_details)
+  def within_user_menu(display_details = self.display_details)
     find("#user").hover
     yield
   end
+  alias_method :within_user_menu_for, :within_user_menu
 
-  def within_developers_menu_for(display_details)
+  def within_developers_menu(display_details = self.display_details)
     find("#developers").hover
     yield
   end
+  alias_method :within_developers_menu_for, :within_developers_menu
 
   def within_membership_row(membership)
     within "tr[data-id='#{membership.id}']" do
@@ -141,7 +178,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   # sign out.
-  def sign_out_for(display_details)
+  def sign_out(display_details = self.display_details)
     if display_details[:mobile]
       open_mobile_menu
     else
@@ -152,8 +189,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # make sure we're actually signed out.
     assert_text "Signed out successfully"
   end
+  alias_method :sign_out_for, :sign_out
 
-  def new_session_page_for(display_details)
+  def new_session_page(display_details = self.display_details)
     # We actually want to go straight to the user session and
     # not the home page in case the home page doesn't have new session logic.
     visit new_user_session_path
@@ -162,15 +200,17 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # otherwise our tests will immediately start trying to match things before the page even loads.
     assert_text("Sign In")
   end
+  alias_method :new_session_page_for, :new_session_page
 
-  def sign_in_from_homepage_for(display_details)
-    puts "sign_in_from_homepage_for is deprecated".red
-    puts "  please switch to: new_session_page_for".red
+  def sign_in_from_homepage(display_details = self.display_details)
+    puts "#{__callee__} is deprecated".red
+    puts "  please switch to: new_session_page".red
     puts "  called from #{caller(1..1).first}".red
     new_session_page_for(display_details)
   end
+  alias_method :sign_in_from_homepage_for, :sign_in_from_homepage
 
-  def new_registration_page_for(display_details)
+  def new_registration_page(display_details = self.display_details)
     # TODO the tailwind port of bullet train doesn't currently support a homepage.
     visit new_user_registration_path
 
@@ -178,27 +218,31 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # otherwise our tests will immediately start trying to match things before the page even loads.
     assert_text("Create Your Account")
   end
+  alias_method :new_registration_page_for, :new_registration_page
 
-  def sign_up_from_homepage_for(display_details)
-    puts "sign_up_from_homepage_for is deprecated".red
-    puts "  please switch to: new_registration_page_for".red
+  def sign_up_from_homepage(display_details = self.display_details)
+    puts "#{__callee__} is deprecated".red
+    puts "  please switch to: new_registration_page".red
     puts "  called from #{caller(1..1).first}".red
     new_registration_page_for(display_details)
   end
+  alias_method :sign_up_from_homepage_for, :sign_up_from_homepage
 
-  def within_homepage_navigation_for(display_details)
+  def within_homepage_navigation(display_details = self.display_details)
     if display_details[:mobile]
       open_mobile_menu
     end
     yield
   end
+  alias_method :within_homepage_navigation_for, :within_homepage_navigation
 
-  def within_primary_menu_for(display_details)
+  def within_primary_menu(display_details = self.display_details)
     open_mobile_menu if display_details[:mobile]
     within ".menu" do
       yield
     end
   end
+  alias_method :within_primary_menu_for, :within_primary_menu
 
   def be_invited_to_sign_up
     # if the application is configured to only allow invitation-only sign-ups, visit the invitation url.

@@ -125,6 +125,16 @@ jobs:
           environment:
             KNAPSACK_PRO_CI_NODE_TOTAL: 2
 
+      # Run any update scripts + retest
+      - run: bin/updates/system_tests/use_device_test
+      - run:
+          name: Rerun system tests after update
+          command: |
+            export RAILS_ENV=test
+            KNAPSACK_TEST_FILE_PATTERN="test/system/**/*.rb" bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
+          environment:
+            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+
       # If you don't want to use Knapsack Pro, then use this configuration:
       #
       # - run:
