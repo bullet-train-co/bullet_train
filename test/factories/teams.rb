@@ -6,6 +6,7 @@ FactoryBot.define do
     locale { nil }
 
     factory :team_example do
+      id { "42" }
       sequence(:name) { |n| "EXAMPLE Generic Team #{n}" }
       sequence(:slug) { |n| "EXAMPLE team_#{n}" }
       time_zone { ActiveSupport::TimeZone.all.first.name }

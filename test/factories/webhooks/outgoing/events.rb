@@ -10,6 +10,9 @@ FactoryBot.define do
     end
 
     factory :webhooks_outgoing_event_example do
+      id { "42" }
+      subject_id { "42" }
+      team_id { "42" }
       data {
         {id: 1,
          created_at: Time.now.utc,

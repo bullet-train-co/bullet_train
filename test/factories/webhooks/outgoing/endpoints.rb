@@ -5,6 +5,8 @@ FactoryBot.define do
     url { "https://example.com/some-endpoint-url" }
 
     factory :webhooks_outgoing_endpoint_example do
+      id { "42" }
+      team_id { "42" }
       name { "Example Endpoint" }
     end
   end

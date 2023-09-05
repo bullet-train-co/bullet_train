@@ -4,6 +4,7 @@ FactoryBot.define do
     association :team
 
     factory :membership_example do
+      id { "42" }
       team { FactoryBot.example(:team) }
       user { FactoryBot.example(:user, teams: [team]) }
       invitation_id { nil }

@@ -22,6 +22,7 @@ FactoryBot.define do
       end
 
       factory :user_example do
+        id { "42" }
         first_name { "Example First Name" }
         last_name { "Example Last Name" }
       end
