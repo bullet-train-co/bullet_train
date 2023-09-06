@@ -3,9 +3,9 @@
 require 'thor'
 
 class CoreBumpCLI < Thor
-  desc "bump", "Bump the versions of bullet_train-core gems and npm packages"
+  desc "bump VERSION_NUMBER", "Set the versions of bullet_train-core gems and npm packages to VERSION_NUMBER"
   option :allow_local
-  def bump
+  def bump(version_number)
     if !github_output_file && !options[:allow_local]
       banner = <<~BANNER
         --------------------------------------------------------------------------------------------------------
@@ -28,8 +28,9 @@ class CoreBumpCLI < Thor
       return
     end
 
+    modify_gemfile(version_number)
     bundle_update
-    yarn_upgrade
+    yarn_upgrade(version_number)
     write_to_github_output_file
   end
 
@@ -39,12 +40,19 @@ class CoreBumpCLI < Thor
       ENV['GITHUB_OUTPUT']
     end
 
+    def modify_gemfile(version_number)
+      text = File.read("Gemfile")
+      content = text.gsub(/^BULLET_TRAIN_VERSION = ".*"$/, "BULLET_TRAIN_VERSION = \"#{version_number}\"")
+      File.open("Gemfile", "w") { |file| file << content }
+    end
+
     def bundle_update
       puts `bundle update --conservative #{ruby_gems.join(" ")}`
     end
 
-    def yarn_upgrade
-      puts `yarn upgrade #{npm_packages.join(" ")}`
+    def yarn_upgrade(version_number)
+      yarn_package_string = npm_packages.map{|pkg| "#{pkg}@#{version_number}"}.join(" ")
+      puts `yarn upgrade #{yarn_package_string}`
     end
 
     def write_to_github_output_file
