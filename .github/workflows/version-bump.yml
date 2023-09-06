@@ -49,7 +49,7 @@ jobs:
         branch: "core-version-bump/${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
         delete-branch: true
         title: "BT-Core version bump: ${{ inputs.versionBump }} - ${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
-        add-paths: "Gemfile.lock,yarn.lock"
+        add-paths: "Gemfile, Gemfile.lock, package.json, yarn.lock"
         body: |
           Version bump of the `core` ruby gems and npm packages to version `${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}`
 
