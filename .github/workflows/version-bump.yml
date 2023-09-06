@@ -2,6 +2,11 @@ name: "Create Version Bump PR For Core Gems & NPM Packages"
 
 on:
   workflow_dispatch:
+    inputs:
+      versionNumber:
+        description: 'Version Number'
+        required: true
+        type: string
 
 permissions:
   contents: write
