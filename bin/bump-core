@@ -9,7 +9,7 @@ class CoreBumpCLI < Thor
     if !github_output_file && !options[:allow_local]
       banner = <<~BANNER
         --------------------------------------------------------------------------------------------------------
-        - It looks like you're running this scirpt locally.
+        - It looks like you're running this script locally.
         - This script was designed to run as part of a GitHub workflow.
         - The workflow will prepare a speically formatted PR that will kick off other workflows when merged.
         - We don't recommend using this script locally to make updates directly to the starter repo.
