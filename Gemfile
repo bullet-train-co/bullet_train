@@ -130,7 +130,6 @@ gem "bullet_train-scope_validator", BULLET_TRAIN_VERSION
 gem "bullet_train-super_load_and_authorize_resource", BULLET_TRAIN_VERSION
 gem "bullet_train-themes-tailwind_css", BULLET_TRAIN_VERSION
 
-
 gem "devise"
 gem "devise-two-factor"
 gem "rqrcode"
