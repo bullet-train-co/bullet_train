@@ -37,7 +37,7 @@ jobs:
 
     - name: "Bump core"
       id: bump-core
-      run: ./bin/bump-core
+      run: ./bin/bump-core ${{ inputs.versionNumber }}
 
     - name: "Create Pull Request"
       id: cpr
