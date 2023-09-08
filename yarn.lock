@@ -144,25 +144,25 @@
     to-fast-properties "^2.0.0"
 
 "@bullet-train/bullet-train-sortable@^1.3.0":
-  version "1.3.24"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.3.24.tgz#d3dda9c5dc23792a16a0e32da8281fe9254d57c9"
-  integrity sha512-i1UFYEuaGK8vVHC+P/TNOxGvqrRY2xgctGvMbSLSy/D01cJ/i2mU0vBh0PchgPYzqhehTW4jaZ8CqLgCMy2aLw==
+  version "1.3.25"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.3.25.tgz#cba218e584cde2ce8518b4f84f2710839684bd09"
+  integrity sha512-lfnYLk7mi1OgSfQv4u0CkNVrCGczuag4Kz3sytXxtV27i7JAj2qxlpLbGQ87WvsgdSGgJCYsByzFIfMDvpkuiA==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
 
 "@bullet-train/bullet-train@^1.3.0":
-  version "1.3.24"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.3.24.tgz#21ff2a474de8a1438801b5bb52eb971fd50d4445"
-  integrity sha512-VwvmtXsAJR6U0R6W40m26/0srP5tGpSPp1G5N3dpjwCA4HFU01LDOVyacM682BOgW0m5+cXcdOqld2q8VHnsEQ==
+  version "1.3.25"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.3.25.tgz#d68b19b2c6da43018a273a1944136c70e0ee1b0c"
+  integrity sha512-2CMwaj4yJQixGha6nAxAX2xYagbIvXxkW7/byLBXXK8LZoev8l5aX7SnsE/x69Cosw45Fwy7diMC0K8nowq4mw==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
 "@bullet-train/fields@^1.3.0":
-  version "1.3.24"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.3.24.tgz#71bbf4e5a13255f8a00197e1553a0b188ea46110"
-  integrity sha512-lmFTOv85j3KU5P2L6lgx6jYlunKC8bKJzduTqsP2Iks6f6Gye4f+wm6qiBTHufIHCkv5dkTHz/SuCrDsjo6Pww==
+  version "1.3.25"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.3.25.tgz#e7a96c8d0e5d0ff94a6e86348eae720f1becf215"
+  integrity sha512-Dp3e/xBZzvZNDNt1U+hqEmVNS4p3flPRTo88Xv3WMPFIxGh+zJWb170kLneEMutt55TQbEUKbtg9+BsAHU7i0A==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
@@ -817,9 +817,9 @@ contra@1.9.4:
     ticky "1.0.1"
 
 core-js@^3.15.1:
-  version "3.32.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.1.tgz#a7d8736a3ed9dd05940c3c4ff32c591bb735be77"
-  integrity sha512-lqufgNn9NLnESg5mQeYsxQP5w7wrViSj0jr/kv6ECQiByzQkrn1MKvV0L3acttpDqfQrHLwr2KCMgX5b8X+lyQ==
+  version "3.32.2"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.2.tgz#172fb5949ef468f93b4be7841af6ab1f21992db7"
+  integrity sha512-pxXSw1mYZPDGvTQqEc5vgIb83jGQKFGYWY76z4a7weZXUolw3G+OvpZqSRcfYOoOVUQJYEPsWeQK8pKEnUtWxQ==
 
 cross-spawn@^7.0.0:
   version "7.0.3"
