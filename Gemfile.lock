@@ -389,7 +389,7 @@ GEM
       omniauth-oauth2 (~> 1.4)
     orm_adapter (0.5.0)
     pagy (6.0.4)
-    pagy_cursor (0.6.0)
+    pagy_cursor (0.6.1)
       activerecord (>= 5)
       pagy (>= 6, < 7)
     parallel (1.23.0)
