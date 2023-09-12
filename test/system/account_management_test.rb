@@ -49,7 +49,6 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
       assert page.find("#user_last_name").value == "McTesterson.new"
       assert page.find("#user_time_zone").value == "Tokyo"
 
-
       fill_in "Your Email Address", with: "andrew.culver.new@gmail.com"
       fill_in "Current Password", with: example_password
 
@@ -59,7 +58,6 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
 
       visit edit_account_user_path(user)
       assert page.find("#user_email").value == "andrew.culver.new@gmail.com"
-
     end
   end
 end
