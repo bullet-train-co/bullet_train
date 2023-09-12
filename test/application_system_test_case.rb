@@ -211,10 +211,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     field = find("label", text: /\A#{label}\z/)
     field.click
     "#{string}\n".chars.each do |digit|
-      within(field.find(:xpath, "..")) do
-        find(".select2-search__field").send_keys(digit)
-      end
+      active_element.send_keys(digit)
     end
+  end
+
+  def active_element
+    page.driver.browser.switch_to.active_element
   end
 
   # https://stackoverflow.com/a/50794401/2414273
