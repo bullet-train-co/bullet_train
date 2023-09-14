@@ -2,6 +2,10 @@ require "controllers/api/v1/test"
 require "fileutils"
 
 class Api::OpenApiControllerTest < Api::Test
+  setup do
+    Rails.application.eager_load!
+  end
+
   test "OpenAPI document is valid" do
     get api_path(version: "v1")
 
@@ -13,10 +17,8 @@ class Api::OpenApiControllerTest < Api::Test
 
     warnings = output.match(/You have (\d+) warnings/)
     puts output if warnings
-    # TODO: Turn these back on and address their validation errors.
-    # https://github.com/bullet-train-co/bullet_train/issues/912
-    # refute warnings
-    #
-    # assert output.include?("Woohoo! Your OpenAPI definition is valid.")
+    refute warnings
+
+    assert output.include?("Woohoo! Your OpenAPI definition is valid.")
   end
 end

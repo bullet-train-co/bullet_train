@@ -76,6 +76,10 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # Workaround to get image process to behave on a Mac in development
+  # https://github.com/libvips/ruby-vips/issues/155#issuecomment-1047370993
+  gem "ruby-vips"
 end
 
 group :test do
@@ -96,21 +100,35 @@ end
 # BULLET TRAIN GEMS
 # This section is the list of Ruby gems included by default for Bullet Train.
 
+# We use a constant here so that we can ensure that all of the bullet_train-*
+# packages are on the same version.
+BULLET_TRAIN_VERSION = "1.4.2"
+
 # Core packages.
-gem "bullet_train"
-gem "bullet_train-super_scaffolding"
-gem "bullet_train-api"
-gem "bullet_train-outgoing_webhooks"
-gem "bullet_train-incoming_webhooks"
-gem "bullet_train-themes"
-gem "bullet_train-themes-light"
-gem "bullet_train-integrations"
-gem "bullet_train-integrations-stripe"
+gem "bullet_train", BULLET_TRAIN_VERSION
+gem "bullet_train-super_scaffolding", BULLET_TRAIN_VERSION
+gem "bullet_train-api", BULLET_TRAIN_VERSION
+gem "bullet_train-outgoing_webhooks", BULLET_TRAIN_VERSION
+gem "bullet_train-incoming_webhooks", BULLET_TRAIN_VERSION
+gem "bullet_train-themes", BULLET_TRAIN_VERSION
+gem "bullet_train-themes-light", BULLET_TRAIN_VERSION
+gem "bullet_train-integrations", BULLET_TRAIN_VERSION
+gem "bullet_train-integrations-stripe", BULLET_TRAIN_VERSION
 
 # Optional support packages.
-gem "bullet_train-sortable"
-gem "bullet_train-scope_questions"
-gem "bullet_train-obfuscates_id"
+gem "bullet_train-sortable", BULLET_TRAIN_VERSION
+gem "bullet_train-scope_questions", BULLET_TRAIN_VERSION
+gem "bullet_train-obfuscates_id", BULLET_TRAIN_VERSION
+
+# Core gems that are dependencies of gems listed above. Technically they
+# shouldn't need to be listed here, but we list them so that we can keep
+# verion numbers in sync.
+gem "bullet_train-fields", BULLET_TRAIN_VERSION
+gem "bullet_train-has_uuid", BULLET_TRAIN_VERSION
+gem "bullet_train-roles", BULLET_TRAIN_VERSION
+gem "bullet_train-scope_validator", BULLET_TRAIN_VERSION
+gem "bullet_train-super_load_and_authorize_resource", BULLET_TRAIN_VERSION
+gem "bullet_train-themes-tailwind_css", BULLET_TRAIN_VERSION
 
 gem "devise"
 gem "devise-two-factor"

@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
   ruby: circleci/ruby@0.1.2
-  browser-tools: circleci/browser-tools@1.4.1
+  browser-tools: circleci/browser-tools@1.4.4
 aliases:
   - &restore_bundler_cache
       name: Restore Bundler cache
@@ -93,9 +93,11 @@ jobs:
       - <<: *postgres_docker_image
       - image: cimg/redis:6.2.6
     executor: ruby/default
-    parallelism: 16
+    parallelism: 2
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
+          chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+          replace-existing: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - browser-tools/install-chromedriver
       - checkout
       - restore_cache: *restore_bundler_cache
@@ -121,7 +123,7 @@ jobs:
             export RAILS_ENV=test
             bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
           environment:
-            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+            KNAPSACK_PRO_CI_NODE_TOTAL: 2
 
       # If you don't want to use Knapsack Pro, then use this configuration:
       #
@@ -148,9 +150,11 @@ jobs:
       - <<: *postgres_docker_image
       - image: circleci/redis
     executor: ruby/default
-    parallelism: 16
+    parallelism: 2
     steps:
-      - browser-tools/install-browser-tools
+      - browser-tools/install-browser-tools:
+          chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+          replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
@@ -176,7 +180,7 @@ jobs:
             export RAILS_ENV=test
             bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
           environment:
-            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+            KNAPSACK_PRO_CI_NODE_TOTAL: 2
             HIDE_THINGS: true
 
       # If you don't want to use Knapsack Pro, then use this configuration:
@@ -206,7 +210,9 @@ jobs:
     executor: ruby/default
     parallelism: 7
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
+          chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+          replace-existing: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - browser-tools/install-chromedriver
       - checkout
 
@@ -238,6 +244,9 @@ jobs:
       - run:
           name: 'Run Super Scaffolding Partial Test'
           command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
+      - run:
+          name: 'Run Super Scaffolding Incoming Webhooks Test'
+          command: bundle exec rails test test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
 
   'System Tests with Cuprite':
     parameters:
@@ -248,9 +257,11 @@ jobs:
       - <<: *postgres_docker_image
       - image: cimg/redis:6.2.6
     executor: ruby/default
-    parallelism: 16
+    parallelism: 2
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
+          chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+          replace-existing: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - browser-tools/install-chromedriver
       - checkout
       - restore_cache: *restore_bundler_cache
@@ -287,7 +298,7 @@ jobs:
             fi
           environment:
             RAILS_ENV: test
-            KNAPSACK_PRO_CI_NODE_TOTAL: 16
+            KNAPSACK_PRO_CI_NODE_TOTAL: 2
             KNAPSACK_PRO_TEST_FILE_PATTERN: "test/system/**{,/*/**}/*_test.rb"
 
   # Uncomment the job at the bottom of this file to run these system tests.
@@ -300,10 +311,12 @@ jobs:
       - <<: *postgres_docker_image
       - image: cimg/redis:6.2.6
     executor: ruby/default
-    parallelism: 4
+    parallelism: 2
 
     steps:
-      - browser-tools/install-chrome
+      - browser-tools/install-chrome:
+          chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+          replace-existing: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
       - browser-tools/install-chromedriver
       - checkout
       - restore_cache: *restore_bundler_cache

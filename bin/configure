@@ -169,20 +169,16 @@ else
   exit
 end
 
-if File.exist?('.github/workflows/main.yml')
-  puts "Removing default GitHub workflow.".yellow
-  File.delete('.github/workflows/main.yml')
-end
-
+# TODO: Uncomment this when the enable bulk invitations JS is implemented.
 # Enable the bulk invitations configuration.
-bt_config_lines = File.open("config/initializers/bullet_train.rb").readlines
-new_lines = bt_config_lines.map do |line|
-  if line.match?("config.enable_bulk_invitations")
-    line.gsub!(/#\s*/, "")
-  end
-  line
-end
-File.write("config/initializers/bullet_train.rb", bt_config_lines.join)
+# bt_config_lines = File.open("config/initializers/bullet_train.rb").readlines
+# new_lines = bt_config_lines.map do |line|
+#   if line.match?("config.enable_bulk_invitations")
+#     line.gsub!(/#\s*/, "")
+#   end
+#   line
+# end
+# File.write("config/initializers/bullet_train.rb", bt_config_lines.join)
 
 puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"
@@ -296,5 +292,5 @@ end
 puts ""
 puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
 puts ""
-puts "Next you can run `bin/dev` to spawn a local instance, then navigate to http://localhost:3000.".green
+puts "Next you can run `bin/setup`, then `bin/dev` to spawn a local instance, and then you can navigate to http://localhost:3000 to access your new application.".green
 puts ""

@@ -3,13 +3,13 @@
 require 'thor'
 
 class CoreBumpCLI < Thor
-  desc "bump", "Bump the versions of bullet_train-core gems and npm packages"
+  desc "bump VERSION_NUMBER", "Set the versions of bullet_train-core gems and npm packages to VERSION_NUMBER"
   option :allow_local
-  def bump
+  def bump(version_number)
     if !github_output_file && !options[:allow_local]
       banner = <<~BANNER
         --------------------------------------------------------------------------------------------------------
-        - It looks like you're running this scirpt locally.
+        - It looks like you're running this script locally.
         - This script was designed to run as part of a GitHub workflow.
         - The workflow will prepare a speically formatted PR that will kick off other workflows when merged.
         - We don't recommend using this script locally to make updates directly to the starter repo.
@@ -28,9 +28,10 @@ class CoreBumpCLI < Thor
       return
     end
 
+    modify_gemfile(version_number)
     bundle_update
-    yarn_upgrade
-    write_to_github_output_file
+    yarn_upgrade(version_number)
+    write_to_github_output_file(version_number)
   end
 
   # This allows us to define helper methods that aren't attached to thor commands
@@ -39,21 +40,26 @@ class CoreBumpCLI < Thor
       ENV['GITHUB_OUTPUT']
     end
 
+    def modify_gemfile(version_number)
+      text = File.read("Gemfile")
+      content = text.gsub(/^BULLET_TRAIN_VERSION = ".*"$/, "BULLET_TRAIN_VERSION = \"#{version_number}\"")
+      File.open("Gemfile", "w") { |file| file << content }
+    end
+
     def bundle_update
       puts `bundle update --conservative #{ruby_gems.join(" ")}`
     end
 
-    def yarn_upgrade
-      puts `yarn upgrade #{npm_packages.join(" ")}`
+    def yarn_upgrade(version_number)
+      yarn_package_string = npm_packages.map{|pkg| "#{pkg}@#{version_number}"}.join(" ")
+      puts `yarn upgrade #{yarn_package_string}`
     end
 
-    def write_to_github_output_file
+    def write_to_github_output_file(version_number)
       if github_output_file
         # This block allows us to pass the new bump version out to the workflow.
-        output = `bundle show bullet_train` # => /some/path/bullet_train-1.3.2
-        version = output.split('-').last
-        puts "The new version to pass to the GitHub output file = #{version}"
-        IO.write(github_output_file, "NEW_VERSION_NUMBER=#{version}\n", mode: 'a')
+        puts "The new version to pass to the GitHub output file = #{version_number}"
+        IO.write(github_output_file, "NEW_VERSION_NUMBER=#{version_number}\n", mode: 'a')
       else
         say "We don't seem to be running in GitHub actions. Skipping the GitHub output file."
       end
