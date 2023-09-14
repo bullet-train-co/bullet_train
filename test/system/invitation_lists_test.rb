@@ -68,7 +68,6 @@ class InvitationListsTest < ApplicationSystemTestCase
       assert page.has_content?("test-0@some-company.com")
       invitation = Invitation.find_by(email: "test-0@some-company.com")
       assert_equal invitation.membership.role_ids, ["admin", "editor"]
-      end
     end
   end
 end
