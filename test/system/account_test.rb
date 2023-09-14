@@ -20,11 +20,19 @@ class AccountTest < ApplicationSystemTestCase
       visit edit_account_user_path(@jane)
       fill_in "First Name", with: "Another"
       fill_in "Last Name", with: "Person"
-      fill_in "Email", with: "someone@bullettrain.co"
       click_on "Update Profile"
       assert_text("User was successfully updated.")
       assert page.has_selector?('input[value="Another"]')
       assert page.has_selector?('input[value="Person"]')
+    end
+
+    test "user can edit their email on a #{device_name} with valid current password" do
+      resize_for(display_details)
+      visit edit_account_user_path(@jane)
+      fill_in "Email", with: "someone@bullettrain.co"
+      fill_in "Current Password", with: @jane.password
+      click_on "Update Email & Password"
+      assert_text("User was successfully updated.")
       assert page.has_selector?('input[value="someone@bullettrain.co"]')
     end
 
@@ -33,8 +41,8 @@ class AccountTest < ApplicationSystemTestCase
       visit edit_account_user_path(@jane)
       fill_in "Current Password", with: @jane.password
       fill_in "New Password", with: another_example_password
-      fill_in "Confirm Password", with: another_example_password
-      click_on "Update Password"
+      fill_in "Confirm New Password", with: another_example_password
+      click_on "Update Email & Password"
       @jane.reload
       assert_text("User was successfully updated.")
       sign_out_for(display_details)
@@ -51,8 +59,8 @@ class AccountTest < ApplicationSystemTestCase
       visit edit_account_user_path(@jane)
       fill_in "Current Password", with: "invalid"
       fill_in "New Password", with: another_example_password
-      fill_in "Confirm Password", with: another_example_password
-      click_on "Update Password"
+      fill_in "Confirm New Password", with: another_example_password
+      click_on "Update Email & Password"
       @jane.reload
       assert_text("Current password is invalid.")
       sign_out_for(display_details)
