@@ -48,14 +48,14 @@ class InvitationListsTest < ApplicationSystemTestCase
       end
 
       # Select roles from select element.
-      role_ids = ["Default", "Editor", "Admin"]
       role_fields = page.all("label", text: "Role")
-      role_fields.each_with_index do |role_field, idx|
+      role_fields.each_with_index do |role_field|
         select_field = role_field.sibling("div").find("select")
-        select_field.all("option").find { |opt| opt.text == role_ids[idx] }.select_option
+        select_field.select 'admin'
+        select_field.select 'editor'
       end
 
-      assert_difference(["Invitation.count", "Membership.count"], 3) do
+      assert_difference(["Invitation.count", "Membership.count"], 1) do
         click_on "Next"
         sleep 2
       end
@@ -65,10 +65,9 @@ class InvitationListsTest < ApplicationSystemTestCase
         click_on "Team Members"
       end
 
-      3.times do |idx|
-        assert page.has_content?("test-#{idx}@some-company.com")
-        invitation = Invitation.find_by(email: "test-#{idx}@some-company.com")
-        assert_equal invitation.membership.role_ids, [role_ids[idx].downcase]
+      assert page.has_content?("test-0@some-company.com")
+      invitation = Invitation.find_by(email: "test-0@some-company.com")
+      assert_equal invitation.membership.role_ids, ["admin", "editor"]
       end
     end
   end
