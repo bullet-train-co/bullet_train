@@ -49,10 +49,10 @@ class InvitationListsTest < ApplicationSystemTestCase
 
       # Select roles from select element.
       role_fields = page.all("label", text: "Role")
-      role_fields.each_with_index do |role_field|
+      role_fields.each do |role_field|
         select_field = role_field.sibling("div").find("select")
-        select_field.select 'admin'
-        select_field.select 'editor'
+        select_field.select "admin"
+        select_field.select "editor"
       end
 
       assert_difference(["Invitation.count", "Membership.count"], 1) do
