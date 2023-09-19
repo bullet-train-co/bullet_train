@@ -239,6 +239,7 @@ jobs:
       - run:
           name: 'Setup Super Scaffolding System Test'
           command: bundle exec test/bin/setup-super-scaffolding-system-test
+
       - run:
           name: 'Run Super Scaffolding Test'
           command: bundle exec rails test test/system/super_scaffolding_test.rb
@@ -248,6 +249,67 @@ jobs:
       - run:
           name: 'Run Super Scaffolding Incoming Webhooks Test'
           command: bundle exec rails test test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
+
+  'Minitest for Super Scaffolding with Cuprite':
+    parameters:
+      use-core-repo:
+        type: boolean
+    docker:
+      - <<: *ruby_node_browsers_docker_image
+      - <<: *postgres_docker_image
+      - image: cimg/redis:6.2.6
+    executor: ruby/default
+    parallelism: 7
+    steps:
+      - browser-tools/install-chrome
+      - browser-tools/install-chromedriver
+      - checkout
+
+      # Restore dependency caches
+      - restore_cache: *restore_bundler_cache
+      - restore_cache: *restore_yarn_cache
+
+      - when:
+          condition: << parameters.use-core-repo >>
+          steps:
+            - run: ./bin/checkout-and-link-core-repo
+
+      # Install dependencies
+      - ruby/bundle-install
+      - run: bin/link
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      - *wait_for_docker
+
+      - run: bundle add spring
+      - run:
+          name: Run system tests with cuprite as system test driver
+          command: |
+            echo "Installing Cuprite"
+            sed -i'.orig' 's/# gem "cuprite"/gem "cuprite"/' Gemfile
+            sed -i'.orig' 's/gem "selenium-webdriver"/# gem "selenium-webdriver"/' Gemfile
+            sed -i'.orig' 's/gem "webdrivers"/# gem "webdrivers"/' Gemfile
+            bundle install
+
+      - run:
+          name: 'Setup Super Scaffolding System Test'
+          command: bundle exec test/bin/setup-super-scaffolding-system-test
+
+      - run:
+          name: 'Run Super Scaffolding Test'
+          command: bundle exec rails test test/system/super_scaffolding_test.rb
+          environment:
+            FERRUM_INTERMITTENT_SLEEP: 0.2
+            FERRUM_INTERMITTENT_ATTEMPTS: 24
+      - run:
+          name: 'Run Super Scaffolding Partial Test'
+          command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
+          environment:
+            FERRUM_INTERMITTENT_SLEEP: 0.2
+            FERRUM_INTERMITTENT_ATTEMPTS: 24
+
 
   'System Tests with Cuprite':
     parameters:
@@ -369,5 +431,16 @@ workflows:
       - 'Minitest for Super Scaffolding':
           name: 'Release: Minitest for Super Scaffolding'
           use-core-repo: false
-      # - 'System Tests with Cuprite'
+      - 'System Tests with Cuprite':
+          name: 'Core: System Tests with Cuprite'
+          use-core-repo: true
+      - 'System Tests with Cuprite':
+          name: 'Release: System Tests with Cuprite'
+          use-core-repo: false
+      - 'Minitest for Super Scaffolding with Cuprite':
+          name: 'Core: Minitest for Super Scaffolding with Cuprite'
+          use-core-repo: true
+      - 'Minitest for Super Scaffolding with Cuprite':
+          name: 'Release: Minitest for Super Scaffolding with Cuprite'
+          use-core-repo: false
       # - 'System Tests for Action Models'
