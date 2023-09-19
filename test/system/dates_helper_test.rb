@@ -19,6 +19,7 @@ class DatesHelperTest < ApplicationSystemTestCase
         fill_in "Your Team Name", with: "The Testing Team"
         select "(GMT+00:00) UTC", from: "Your Time Zone"
         click_on "Next"
+        click_on "Skip" if bulk_invitations_enabled?
 
         if billing_enabled?
           unless freemium_enabled?

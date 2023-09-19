@@ -33,6 +33,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       fill_in "Last Name", with: "McTesterson"
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
+      click_on "Skip" if bulk_invitations_enabled?
 
       if billing_enabled?
         unless freemium_enabled?

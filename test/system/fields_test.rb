@@ -26,6 +26,7 @@ unless scaffolding_things_disabled?
         fill_in "Your Team Name", with: "My Super Team"
         page.select "Brisbane", from: "Your Time Zone"
         click_on "Next"
+        click_on "Skip" if bulk_invitations_enabled?
 
         if billing_enabled?
           unless freemium_enabled?
