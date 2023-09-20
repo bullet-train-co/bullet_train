@@ -6,14 +6,14 @@ unless scaffolding_things_disabled?
       test "simulate restoring behavior of form fields on page restore on #{device_name}" do
         resize_for(display_details)
 
-        visit root_path
-
         # TODO: This is an ugly hack to ensure the default test user isn't logged in.
         # This is happening when billing is enabled and the entire test suite is run.
         if page.text.match?("Jane Smith")
           sign_out_for(display_details)
           visit root_path
         end
+
+        new_session_page_for(display_details)
 
         invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
         assert_text("Create Your Account")
