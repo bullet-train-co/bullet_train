@@ -10,7 +10,7 @@ class ResolverSystemTest < ApplicationSystemTestCase
   end
 
   test "bin/resolve can resolve `shared/attributes/text`" do
-    relative_view_path = "app/views/base/attributes/_text.html.erb"
+    relative_view_path = "app/views/themes/base/attributes/_text.html.erb"
     local_view_path = Dir.glob("#{Rails.root}/app/views/**/*/attributes/_text.html.erb").pop
     if local_view_path
       assert `bin/resolve shared/attributes/text`.include?(local_view_path)
