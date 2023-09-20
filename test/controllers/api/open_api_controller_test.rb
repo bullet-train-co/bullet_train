@@ -19,6 +19,9 @@ class Api::OpenApiControllerTest < Api::Test
     puts output if warnings
     refute warnings
 
-    assert output.include?("Woohoo! Your OpenAPI definition is valid.")
+    # redocly/openapi-core changed the format of their success message in version 1.2.0.
+    # https://github.com/Redocly/redocly-cli/pull/1239
+    # We use a robust regex here so that we can match both formats.
+    assert output.match?(/Woohoo! Your (Open)?API (definition|description) is valid./)
   end
 end
