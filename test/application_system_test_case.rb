@@ -150,18 +150,19 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on "Logout"
 
     # make sure we're actually signed out.
-    # (this will vary depending on where you send people when they sign out.)
-    assert_text "Sign In"
+    assert_text "Signed out successfully"
   end
 
   def sign_in_from_homepage_for(display_details)
-    # TODO the tailwind port of bullet train doesn't currently support a homepage.
+    # We actually want to go straight to the user session and
+    # not the home page in case the home page doesn't have new session logic.
     visit new_user_session_path
 
     # this forces capybara to wait until the proper page loads.
     # otherwise our tests will immediately start trying to match things before the page even loads.
     assert_text("Sign In")
   end
+  alias_method :new_session_page_for, :sign_in_from_homepage_for
 
   def sign_up_from_homepage_for(display_details)
     # TODO the tailwind port of bullet train doesn't currently support a homepage.
@@ -171,6 +172,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # otherwise our tests will immediately start trying to match things before the page even loads.
     assert_text("Create Your Account")
   end
+  alias_method :new_registration_page_for, :sign_up_from_homepage_for
 
   def within_homepage_navigation_for(display_details)
     if display_details[:mobile]
