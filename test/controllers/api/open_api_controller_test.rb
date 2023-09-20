@@ -19,6 +19,6 @@ class Api::OpenApiControllerTest < Api::Test
     puts output if warnings
     refute warnings
 
-    assert output.include?("Woohoo! Your OpenAPI definition is valid.")
+    assert output.match?(/Woohoo! Your (Open)?API (definition|description) is valid./)
   end
 end

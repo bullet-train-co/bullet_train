@@ -286,6 +286,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   test "OpenAPI V3 document is still valid" do
     visit "http://localhost:3001/api/v1/openapi.yaml"
     puts(output = `yarn exec redocly lint http://localhost:3001/api/v1/openapi.yaml 1> /dev/stdout 2> /dev/stdout; rm openapi.yaml`)
-    assert output.include?("Woohoo! Your OpenAPI definition is valid.")
+    assert output.match?(/Woohoo! Your (Open)?API (definition|description) is valid./)
   end
 end
