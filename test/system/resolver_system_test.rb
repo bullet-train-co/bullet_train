@@ -10,12 +10,13 @@ class ResolverSystemTest < ApplicationSystemTestCase
   end
 
   test "bin/resolve can resolve `shared/attributes/text`" do
-    view_path = "app/views/themes/base/attributes/_text.html.erb"
-    if File.exist?(view_path)
-      assert `bin/resolve shared/attributes/text`.include?("#{Rails.root}/#{view_path}")
+    relative_view_path = "app/views/themes/base/attributes/_text.html.erb"
+    local_view_path = Dir.glob("#{Rails.root}/app/views/**/*/attributes/_text.html.erb").pop
+    if local_view_path
+      assert `bin/resolve shared/attributes/text`.include?(local_view_path)
     else
       themes_gem = `bundle show bullet_train-themes`.chomp
-      absolute_path = themes_gem + "/" + view_path
+      absolute_path = themes_gem + "/" + relative_view_path
       assert `bin/resolve shared/attributes/text`.include?(absolute_path)
     end
   end
