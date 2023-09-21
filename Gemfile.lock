@@ -73,8 +73,8 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.825.0)
-    aws-sdk-core (3.182.0)
+    aws-partitions (1.826.0)
+    aws-sdk-core (3.183.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -82,7 +82,7 @@ GEM
     aws-sdk-kms (1.71.0)
       aws-sdk-core (~> 3, >= 3.177.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.134.0)
+    aws-sdk-s3 (1.135.0)
       aws-sdk-core (~> 3, >= 3.181.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
@@ -308,7 +308,7 @@ GEM
       railties (>= 6.0.0)
     json (2.6.3)
     jwt (2.7.1)
-    knapsack_pro (5.6.0)
+    knapsack_pro (5.7.0)
       rake
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
@@ -356,7 +356,7 @@ GEM
       net-protocol
     net-protocol (0.2.1)
       timeout
-    net-smtp (0.3.3)
+    net-smtp (0.4.0)
       net-protocol
     netrc (0.11.0)
     nice_partials (0.10.0)
@@ -422,7 +422,7 @@ GEM
     psych (5.1.0)
       stringio
     public_suffix (5.0.3)
-    puma (6.3.1)
+    puma (6.4.0)
       nio4r (~> 2.0)
     pwned (2.0.2)
     racc (1.7.1)
