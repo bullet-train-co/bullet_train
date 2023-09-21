@@ -166,7 +166,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def sign_in_from_homepage_for(display_details)
     puts "sign_in_from_homepage_for is deprecated".red
     puts "  please switch to: new_session_page_for".red
-    puts "  called from #{caller.first}".red
+    puts "  called from #{caller(1..1).first}".red
     new_session_page_for(display_details)
   end
 
@@ -182,7 +182,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def sign_up_from_homepage_for(display_details)
     puts "sign_up_from_homepage_for is deprecated".red
     puts "  please switch to: new_registration_page_for".red
-    puts "  called from #{caller.first}".red
+    puts "  called from #{caller(1..1).first}".red
     new_registration_page_for(display_details)
   end
 
