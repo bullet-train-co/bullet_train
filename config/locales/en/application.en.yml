@@ -1,11 +1,11 @@
 en:
   application:
-    name: Untitled Application
+    name: Bullet Train Latest
     owner: Unidentified Developer
     description: "You can update this description in `config/locales/en/application.en.yml`."
-    keywords: untitled application seo keywords
+    keywords: bullet train latest seo keywords
     support_email: change.me@localhost
-    key: untitled_application
+    key: bullet_train_latest
   webhooks/outgoing/endpoints:
     fields:
       api_version:

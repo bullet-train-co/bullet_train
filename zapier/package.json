@@ -1,7 +1,7 @@
 {
-  "name": "untitled-application",
+  "name": "bullet-train-latest",
   "version": "1.0.0",
-  "description": "Integrate Zapier with Untitled Application",
+  "description": "Integrate Zapier with Bullet Train Latest",
   "main": "index.js",
   "scripts": {
     "test": "mocha --recursive -t 10000"
