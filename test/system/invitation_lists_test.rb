@@ -19,7 +19,7 @@ class InvitationListsTest < ApplicationSystemTestCase
     test "visitors can send bulk invitations upon signing up" do
       resize_for(display_details)
 
-      sign_up_from_homepage_for(display_details)
+      new_registration_page_for(display_details)
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
       fill_in "Set Password", with: example_password
       fill_in "Confirm Password", with: example_password
