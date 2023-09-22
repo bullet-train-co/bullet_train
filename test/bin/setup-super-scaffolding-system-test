@@ -26,7 +26,6 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
 
   # Setup for has-many-through test.
-  bundle exec spring rails g model Projects::Tag team:references name:string
   bin/super-scaffold crud Projects::Tag Team name:text_field --navbar="ti-tag"
 
   # bundle exec spring rails g model Projects::AppliedTag project:references tag:references
