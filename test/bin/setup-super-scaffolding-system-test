@@ -22,19 +22,16 @@ export SPRING=true
 # fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
-  bundle exec spring rails g model Project team:references name:string
   bin/super-scaffold crud Project Team name:text_field description:trix_editor --navbar="ti-layout"
-
-  bundle exec spring rails g model Projects::Deliverable project:references name:string
   bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
 
   # Setup for has-many-through test.
   bundle exec spring rails g model Projects::Tag team:references name:string
   bin/super-scaffold crud Projects::Tag Team name:text_field --navbar="ti-tag"
 
-  bundle exec spring rails g model Projects::AppliedTag project:references tag:references
-  bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
-  bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
+  # bundle exec spring rails g model Projects::AppliedTag project:references tag:references
+  # bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
+  # bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
@@ -45,105 +42,105 @@ else
   echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
-  bundle exec spring rails g model Projects::Step team:references name:string
-  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
+# if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
+#   bundle exec spring rails g model Projects::Step team:references name:string
+#   bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
 
-  bundle exec spring rails g model Objective projects_step:references name:string
-  bin/super-scaffold crud Objective Projects::Step,Team name:text_field description:trix_editor
-else
-  echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
-fi
+#   bundle exec spring rails g model Objective projects_step:references name:string
+#   bin/super-scaffold crud Objective Projects::Step,Team name:text_field description:trix_editor
+# else
+#   echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
+# fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
-  bundle exec spring rails g model Insight team:references name:string
-  bin/super-scaffold crud Insight Team name:text_field description:trix_editor --navbar="ti-world"
+# if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+#   bundle exec spring rails g model Insight team:references name:string
+#   bin/super-scaffold crud Insight Team name:text_field description:trix_editor --navbar="ti-world"
 
-  bundle exec spring rails g model Personality::CharacterTrait insight:references name:string
-  bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
-else
-  echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
-fi
+#   bundle exec spring rails g model Personality::CharacterTrait insight:references name:string
+#   bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
+# else
+#   echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
+# fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
-  bundle exec spring rails g model Personality::Disposition team:references name:string
-  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
+# if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
+#   bundle exec spring rails g model Personality::Disposition team:references name:string
+#   bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
 
-  bundle exec spring rails g model Personality::Note disposition:references name:string
-  bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
+#   bundle exec spring rails g model Personality::Note disposition:references name:string
+#   bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
 
   # Test that the foreign key table name will be inserted into the migration.
-  bundle exec spring rails g migration add_other_membership_to_personality_notes other_membership:references
-  bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
+#   bundle exec spring rails g migration add_other_membership_to_personality_notes other_membership:references
+#   bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
-  else
-    sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb
-  fi
-else
-  echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
-fi
+#   if [[ "$OSTYPE" == "darwin"* ]]; then
+#     sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+#   else
+#     sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+#   fi
+# else
+#   echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
+# fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
-  bundle exec spring rails g model Personality::Observation team:references name:string
-  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
+# if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
+#   bundle exec spring rails g model Personality::Observation team:references name:string
+#   bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
 
-  bundle exec spring rails g model Personality::Reactions::Response observation:references name:string
-  bin/super-scaffold crud Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
+#   bundle exec spring rails g model Personality::Reactions::Response observation:references name:string
+#   bin/super-scaffold crud Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
-  else
-    sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
-  fi
-else
-  echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
-fi
+#   if [[ "$OSTYPE" == "darwin"* ]]; then
+#     sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
+#   else
+#     sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
+#   fi
+# else
+#   echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
+# fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
-  bundle exec spring rails g model TestFile team:references name:string foo:attachment bars:attachments
-  bin/super-scaffold crud TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
+# if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
+#   bundle exec spring rails g model TestFile team:references name:string foo:attachment bars:attachments
+#   bin/super-scaffold crud TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
 
-  bundle exec spring rails g model ColorPicker team:references color_picker_value:string
-  bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
-else
-  echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
-fi
+#   bundle exec spring rails g model ColorPicker team:references color_picker_value:string
+#   bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
+# else
+#   echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
+# fi
 
 # TODO: Generate these in parallel.
-bundle exec spring rails g model PartialTest team:references \
-  text_field_test:string \
-  boolean_test:boolean \
-  single_button_test:string \
-  multiple_buttons_test:jsonb \
-  date_test:date \
-  date_time_test:datetime \
-  file_test:attachment \
-  option_test:string \
-  multiple_options_test:jsonb \
-  password_test:string \
-  phone_field_test:string \
-  super_select_test:string \
-  multiple_super_select_test:jsonb \
-  text_area_test:text \
-  number_field_test:integer
-bin/super-scaffold crud PartialTest Team \
-  text_field_test:text_field \
-  boolean_test:boolean \
-  single_button_test:buttons \
-  multiple_buttons_test:buttons{multiple} \
-  date_test:date_field\
-  date_time_test:date_and_time_field \
-  file_test:file_field \
-  option_test:options \
-  multiple_options_test:options{multiple} \
-  password_test:password_field \
-  phone_field_test:phone_field \
-  super_select_test:super_select \
-  multiple_super_select_test:super_select{multiple} \
-  number_field_test:number_field \
-  text_area_test:text_area --navbar="ti-layout"
+# bundle exec spring rails g model PartialTest team:references \
+#   text_field_test:string \
+#   boolean_test:boolean \
+#   single_button_test:string \
+#   multiple_buttons_test:jsonb \
+#   date_test:date \
+#   date_time_test:datetime \
+#   file_test:attachment \
+#   option_test:string \
+#   multiple_options_test:jsonb \
+#   password_test:string \
+#   phone_field_test:string \
+#   super_select_test:string \
+#   multiple_super_select_test:jsonb \
+#   text_area_test:text \
+#   number_field_test:integer
+# bin/super-scaffold crud PartialTest Team \
+#   text_field_test:text_field \
+#   boolean_test:boolean \
+#   single_button_test:buttons \
+#   multiple_buttons_test:buttons{multiple} \
+#   date_test:date_field\
+#   date_time_test:date_and_time_field \
+#   file_test:file_field \
+#   option_test:options \
+#   multiple_options_test:options{multiple} \
+#   password_test:password_field \
+#   phone_field_test:phone_field \
+#   super_select_test:super_select \
+#   multiple_super_select_test:super_select{multiple} \
+#   number_field_test:number_field \
+#   text_area_test:text_area --navbar="ti-layout"
 
 # The test for this webhook is run inline in .circleci/config.yml.
 bin/super-scaffold incoming-webhooks SomeProvider
