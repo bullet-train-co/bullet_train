@@ -73,7 +73,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.826.0)
+    aws-partitions (1.827.0)
     aws-sdk-core (3.183.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -300,7 +300,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (2.2.0)
+    jbuilder-schema (2.3.0)
       jbuilder
       rails (>= 5.0.0)
     jmespath (1.6.2)
