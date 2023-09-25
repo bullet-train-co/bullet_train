@@ -9,7 +9,7 @@ class DatesHelperTest < ApplicationSystemTestCase
         visit root_path
 
         # Sign up and log in
-        sign_up_from_homepage_for(display_details)
+        new_registration_page_for(display_details)
         fill_in "Your Email Address", with: "bullettrain@gmail.com"
         fill_in "Set Password", with: example_password
         fill_in "Confirm Password", with: example_password
@@ -64,7 +64,7 @@ class DatesHelperTest < ApplicationSystemTestCase
 
         # No need to check the strings on the page if the record
         # is successfully created and the times below are different.
-        visit root_path
+        visit account_team_path(Team.find_by(name: "The Testing Team"))
         click_on "Test Concept"
         click_on "Add New Tangible Thing"
         fill_in "Text Field Value", with: "Another Test Tangible Thing"
