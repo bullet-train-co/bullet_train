@@ -87,15 +87,12 @@ fi
 #   echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
 # fi
 
-# if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
-#   bundle exec spring rails g model TestFile team:references name:string foo:attachment bars:attachments
-#   bin/super-scaffold crud TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
-
-#   bundle exec spring rails g model ColorPicker team:references color_picker_value:string
-#   bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
-# else
-#   echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
-# fi
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
+  bin/super-scaffold crud TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
+  bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
+else
+  echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
+fi
 
 # TODO: Generate these in parallel.
 # bundle exec spring rails g model PartialTest team:references \
