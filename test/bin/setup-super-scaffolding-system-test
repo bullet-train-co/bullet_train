@@ -24,9 +24,9 @@ if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   bin/super-scaffold crud Projects::Tag Team name:text_field --navbar="ti-tag"
 
   # TODO: We'll have to figure out a way to properly automate `rails g model` for the join-model scaffolder.
-  # bundle exec spring rails g model Projects::AppliedTag project:references tag:references
-  # bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
-  # bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
+  bundle exec spring rails g model Projects::AppliedTag project:references tag:references
+  bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
+  bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
