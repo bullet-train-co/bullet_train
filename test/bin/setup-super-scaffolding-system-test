@@ -44,15 +44,12 @@ else
   echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
 fi
 
-# if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
-#   bundle exec spring rails g model Insight team:references name:string
-#   bin/super-scaffold crud Insight Team name:text_field description:trix_editor --navbar="ti-world"
-
-#   bundle exec spring rails g model Personality::CharacterTrait insight:references name:string
-#   bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
-# else
-#   echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
-# fi
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+  bin/super-scaffold crud Insight Team name:text_field description:trix_editor --navbar="ti-world"
+  bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
+else
+  echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
+fi
 
 # if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
 #   bundle exec spring rails g model Personality::Disposition team:references name:string
