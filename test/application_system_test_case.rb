@@ -153,7 +153,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     assert_text "Signed out successfully"
   end
 
-  def sign_in_from_homepage_for(display_details)
+  def new_session_page_for(display_details)
     # We actually want to go straight to the user session and
     # not the home page in case the home page doesn't have new session logic.
     visit new_user_session_path
@@ -162,9 +162,15 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # otherwise our tests will immediately start trying to match things before the page even loads.
     assert_text("Sign In")
   end
-  alias_method :new_session_page_for, :sign_in_from_homepage_for
 
-  def sign_up_from_homepage_for(display_details)
+  def sign_in_from_homepage_for(display_details)
+    puts "sign_in_from_homepage_for is deprecated".red
+    puts "  please switch to: new_session_page_for".red
+    puts "  called from #{caller(1..1).first}".red
+    new_session_page_for(display_details)
+  end
+
+  def new_registration_page_for(display_details)
     # TODO the tailwind port of bullet train doesn't currently support a homepage.
     visit new_user_registration_path
 
@@ -172,7 +178,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     # otherwise our tests will immediately start trying to match things before the page even loads.
     assert_text("Create Your Account")
   end
-  alias_method :new_registration_page_for, :sign_up_from_homepage_for
+
+  def sign_up_from_homepage_for(display_details)
+    puts "sign_up_from_homepage_for is deprecated".red
+    puts "  please switch to: new_registration_page_for".red
+    puts "  called from #{caller(1..1).first}".red
+    new_registration_page_for(display_details)
+  end
 
   def within_homepage_navigation_for(display_details)
     if display_details[:mobile]
