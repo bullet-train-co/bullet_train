@@ -95,38 +95,22 @@ else
 fi
 
 # TODO: Generate these in parallel.
-# bundle exec spring rails g model PartialTest team:references \
-#   text_field_test:string \
-#   boolean_test:boolean \
-#   single_button_test:string \
-#   multiple_buttons_test:jsonb \
-#   date_test:date \
-#   date_time_test:datetime \
-#   file_test:attachment \
-#   option_test:string \
-#   multiple_options_test:jsonb \
-#   password_test:string \
-#   phone_field_test:string \
-#   super_select_test:string \
-#   multiple_super_select_test:jsonb \
-#   text_area_test:text \
-#   number_field_test:integer
-# bin/super-scaffold crud PartialTest Team \
-#   text_field_test:text_field \
-#   boolean_test:boolean \
-#   single_button_test:buttons \
-#   multiple_buttons_test:buttons{multiple} \
-#   date_test:date_field\
-#   date_time_test:date_and_time_field \
-#   file_test:file_field \
-#   option_test:options \
-#   multiple_options_test:options{multiple} \
-#   password_test:password_field \
-#   phone_field_test:phone_field \
-#   super_select_test:super_select \
-#   multiple_super_select_test:super_select{multiple} \
-#   number_field_test:number_field \
-#   text_area_test:text_area --navbar="ti-layout"
+bin/super-scaffold crud PartialTest Team \
+  text_field_test:text_field \
+  boolean_test:boolean \
+  single_button_test:buttons \
+  multiple_buttons_test:buttons{multiple} \
+  date_test:date_field\
+  date_time_test:date_and_time_field \
+  file_test:file_field \
+  option_test:options \
+  multiple_options_test:options{multiple} \
+  password_test:password_field \
+  phone_field_test:phone_field \
+  super_select_test:super_select \
+  multiple_super_select_test:super_select{multiple} \
+  number_field_test:number_field \
+  text_area_test:text_area --navbar="ti-layout"
 
 # The test for this webhook is run inline in .circleci/config.yml.
 bin/super-scaffold incoming-webhooks SomeProvider
