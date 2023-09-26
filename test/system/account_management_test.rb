@@ -8,7 +8,7 @@ class AccountManagementSystemTest < ApplicationSystemTestCase
       be_invited_to_sign_up
 
       visit root_path
-      sign_up_from_homepage_for(display_details)
+      new_registration_page_for(display_details)
 
       fill_in "Email", with: "andrew.culver@gmail.com"
       fill_in "Set Password", with: example_password

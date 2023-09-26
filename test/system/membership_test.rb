@@ -8,7 +8,7 @@ class MembershipSystemTest < ApplicationSystemTestCase
       be_invited_to_sign_up
 
       visit root_path
-      sign_up_from_homepage_for(display_details)
+      new_registration_page_for(display_details)
 
       # try non-matching passwords.
       fill_in "Your Email Address", with: "jane.smith@gmail.com"

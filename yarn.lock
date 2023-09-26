@@ -1061,26 +1061,26 @@
     "@babel/helper-validator-identifier" "^7.22.19"
     to-fast-properties "^2.0.0"
 
-"@bullet-train/bullet-train-sortable@1.4.7":
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.4.7.tgz#4986ceedf12d3e1d293c81bd66892c4f89f6aba5"
-  integrity sha512-RLuDll47RKEDyzriAn5Fx7seiDnD2MYZiMY4F5EyFARx4GIr5e9rRfcxix28/4Ld37xktP71Ty0p2j1WgwUFaQ==
+"@bullet-train/bullet-train-sortable@1.4.8":
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.4.8.tgz#70e4feadcc6a0fbd599a72aac49f985595c9c2e3"
+  integrity sha512-EI/1vnNuliW79A4VLnYfDSTAH/uYozEuo07jsj2AZ+J7f1jWeR7CulXGF2bPhGf8VxLqkNT58S27MMxkvbGSIw==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
 
-"@bullet-train/bullet-train@1.4.7":
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.4.7.tgz#2d75d055a54e49fea67bfc03bbaf96b883ac8264"
-  integrity sha512-elKPixTcduk5/FqqaAr3C0DewmuonSV8fncGQl03tErPBYs9P+Yv9317QPJSC5/urApKTyAcoQd7CRlaWAFqEQ==
+"@bullet-train/bullet-train@1.4.8":
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.4.8.tgz#337d66005d79cce73f8bd0cc20a96ab65194bd92"
+  integrity sha512-nkBnyq7A7sGiut5ATe1kjtI6D9WBjHKV++QTF8NPjByyonEaNDkYufHDjqiex9nFmMCUrCHil958TqJULcD8FA==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
-"@bullet-train/fields@1.4.7":
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.4.7.tgz#08e170f6880fe600b5ff592f23ec735ca129a0c7"
-  integrity sha512-RWElnKIelvJFZu4PGiJExmLkaQ2gJYumhIic6icfmm8UVU3QKH4cfzIeJquMXTSj0fe81G2ng7MlIwIXSnaTeg==
+"@bullet-train/fields@1.4.8":
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.4.8.tgz#83ad7de4ace78837c18d3695b8d47c15624da0cd"
+  integrity sha512-3FkzdA7GeMSkvtduX157LJc6rdwGmJO0zr0PhISAy2pZvt43+8TlgB0RXTm3LxCTlotbATnz7DT19u5/DeF2MQ==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
@@ -2024,10 +2024,10 @@ glob@7.1.6:
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
-glob@^10.3.5:
-  version "10.3.5"
-  resolved "https://registry.yarnpkg.com/glob/-/glob-10.3.5.tgz#4c0e46b5bccd78ac42b06a7eaaeb9ee34062968e"
-  integrity sha512-bYUpUD7XDEHI4Q2O5a7PXGvyw4deKR70kHiDxzQbe925wbZknhOzUt2xBgTkYL6RBcVeXYuD9iNYeqoWbBZQnA==
+glob@^10.3.7:
+  version "10.3.7"
+  resolved "https://registry.yarnpkg.com/glob/-/glob-10.3.7.tgz#d5bd30a529c8c9b262fb4b217941f64ad90e25ac"
+  integrity sha512-wCMbE1m9Nx5yD9LYtgsVWq5VhHlk5WzJirw594qZR6AIvQYuHrdDtIktUVjQItalD53y7dqoedu9xP0u0WaxIQ==
   dependencies:
     foreground-child "^3.1.0"
     jackspeak "^2.0.3"

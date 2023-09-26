@@ -3,6 +3,10 @@ require "application_system_test_case"
 class InvitationListsTest < ApplicationSystemTestCase
   @@test_devices.each do |device_name, display_details|
     def setup
+      # TODO: Capybara.current_driver is returning :selenium,
+      # when it should be either :selenium_chrome or :selenium_chrome_headless.
+      Capybara.current_driver = Capybara.default_driver
+
       @current_bulk_invitations_setting = nil
       BulletTrain.configure do |config|
         @current_bulk_invitations_setting = config.enable_bulk_invitations
@@ -19,7 +23,7 @@ class InvitationListsTest < ApplicationSystemTestCase
     test "visitors can send bulk invitations upon signing up" do
       resize_for(display_details)
 
-      sign_up_from_homepage_for(display_details)
+      new_registration_page_for(display_details)
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
       fill_in "Set Password", with: example_password
       fill_in "Confirm Password", with: example_password
