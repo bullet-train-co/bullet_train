@@ -51,25 +51,21 @@ else
   echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
 fi
 
-# if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
-#   bundle exec spring rails g model Personality::Disposition team:references name:string
-#   bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
-
-#   bundle exec spring rails g model Personality::Note disposition:references name:string
-#   bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
+  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
+  bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
 
   # Test that the foreign key table name will be inserted into the migration.
-#   bundle exec spring rails g migration add_other_membership_to_personality_notes other_membership:references
-#   bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
+  bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
 
-#   if [[ "$OSTYPE" == "darwin"* ]]; then
-#     sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
-#   else
-#     sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb
-#   fi
-# else
-#   echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
-# fi
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+  else
+    sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+  fi
+else
+  echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
+fi
 
 # if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
 #   bundle exec spring rails g model Personality::Observation team:references name:string
