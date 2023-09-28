@@ -150,7 +150,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     click_on "Logout"
 
     # make sure we're actually signed out.
-    assert_text "Signed out successfully"
+    assert_text(/Signed out successfully|You need to sign in or sign up before continuing/)
   end
 
   def new_session_page_for(display_details)
