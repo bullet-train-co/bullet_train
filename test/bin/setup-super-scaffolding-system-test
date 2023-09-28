@@ -144,6 +144,9 @@ bin/super-scaffold crud PartialTest Team \
   number_field_test:number_field \
   text_area_test:text_area \
   address_test:address_field --navbar="ti-layout"
-  
+
+# The test for this webhook is run inline in .circleci/config.yml.
+bin/super-scaffold incoming-webhooks SomeProvider
+>>>>>>> main
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare

@@ -8,7 +8,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       be_invited_to_sign_up
 
       visit user_session_path
-      sign_up_from_homepage_for(display_details)
+      new_registration_page_for(display_details)
 
       # try non-matching passwords.
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
@@ -22,6 +22,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "Last Name", with: "Tanaka"
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
+      click_on "Skip" if bulk_invitations_enabled?
 
       if billing_enabled?
         unless freemium_enabled?
@@ -177,6 +178,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
       fill_in "First Name", with: "Taka"
       fill_in "Last Name", with: "Yamaguchi"
       click_on "Next"
+      click_on "Skip" if bulk_invitations_enabled?
 
       assert_text("The Testing Team’s Dashboard")
       within_team_menu_for(display_details) do
@@ -284,7 +286,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
 
       # Make sure we're actually signed in as Hanako and on the Team Members page.
       sign_out_for(display_details)
-      visit root_url
+      new_session_page_for(display_details)
       fill_in "Your Email Address", with: "hanako.tanaka@gmail.com"
       click_on "Next" if two_factor_authentication_enabled?
       fill_in "Your Password", with: example_password

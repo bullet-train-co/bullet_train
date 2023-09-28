@@ -169,6 +169,16 @@ else
   exit
 end
 
+# TODO: Uncomment this when the enable bulk invitations JS is implemented.
+# Enable the bulk invitations configuration.
+# bt_config_lines = File.open("config/initializers/bullet_train.rb").readlines
+# new_lines = bt_config_lines.map do |line|
+#   if line.match?("config.enable_bulk_invitations")
+#     line.gsub!(/#\s*/, "")
+#   end
+#   line
+# end
+# File.write("config/initializers/bullet_train.rb", bt_config_lines.join)
 
 puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"

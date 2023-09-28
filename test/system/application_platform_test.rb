@@ -8,7 +8,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       be_invited_to_sign_up
 
       visit root_path
-      sign_up_from_homepage_for(display_details)
+      new_registration_page_for(display_details)
 
       # try non-matching passwords.
       fill_in "Your Email Address", with: "jane.smith@gmail.com"
@@ -22,6 +22,7 @@ class ApplicationPlatformSystemTest < ApplicationSystemTestCase
       fill_in "Last Name", with: "Smith"
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
+      click_on "Skip" if bulk_invitations_enabled?
 
       if billing_enabled?
         unless freemium_enabled?

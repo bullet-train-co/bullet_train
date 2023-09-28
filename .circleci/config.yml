@@ -152,9 +152,10 @@ jobs:
     executor: ruby/default
     parallelism: 2
     steps:
-      - browser-tools/install-browser-tools:
+      - browser-tools/install-chrome:
           chrome-version: "116.0.5845.96" # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
-          replace-existing-chrome: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+          replace-existing: true # TODO: remove -> https://github.com/CircleCI-Public/browser-tools-orb/issues/75
+      - browser-tools/install-chromedriver
       - checkout
       - restore_cache: *restore_bundler_cache
       - restore_cache: *restore_yarn_cache
@@ -244,6 +245,9 @@ jobs:
       - run:
           name: 'Run Super Scaffolding Partial Test'
           command: bundle exec rails test test/system/super_scaffolding_partial_test.rb
+      - run:
+          name: 'Run Super Scaffolding Incoming Webhooks Test'
+          command: bundle exec rails test test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
 
   'System Tests with Cuprite':
     parameters:

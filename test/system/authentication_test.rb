@@ -8,7 +8,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       be_invited_to_sign_up
 
       visit root_path
-      sign_up_from_homepage_for(display_details)
+      new_registration_page_for(display_details)
 
       # try to sign-up without providing any information.
       click_on "Sign Up"
@@ -33,6 +33,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       fill_in "Last Name", with: "McTesterson"
       fill_in "Your Team Name", with: "The Testing Team"
       click_on "Next"
+      click_on "Skip" if bulk_invitations_enabled?
 
       if billing_enabled?
         unless freemium_enabled?
@@ -48,7 +49,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       visit root_path
 
       # click the now-visible sign-up link.
-      sign_up_from_homepage_for(display_details)
+      new_registration_page_for(display_details)
 
       # try to register as that same user again.
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"
@@ -65,7 +66,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       visit root_path
 
       # if the marketing site is hosted elsewhere, this just skips straight to the sign-up page.
-      sign_in_from_homepage_for(display_details)
+      new_session_page_for(display_details)
 
       # try to sign in with an invalid password.
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"
@@ -91,7 +92,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
       sign_out_for(display_details)
 
       # click the now-visible sign-up link.
-      sign_in_from_homepage_for(display_details)
+      new_session_page_for(display_details)
 
       fill_in "Your Email Address", with: "andrew.culver@gmail.com"
       click_on "Next" if two_factor_authentication_enabled?

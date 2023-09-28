@@ -10,9 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_23_162616) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_19_123854) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_onboarding_invitation_lists", force: :cascade do |t|
+    t.bigint "team_id", null: false
+    t.jsonb "invitations"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_account_onboarding_invitation_lists_on_team_id"
+  end
 
   create_table "action_mailbox_inbound_emails", force: :cascade do |t|
     t.integer "status", default: 0, null: false
@@ -93,6 +101,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_162616) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.integer "team_id"
+    t.bigint "invitation_list_id"
+    t.index ["invitation_list_id"], name: "index_invitations_on_invitation_list_id"
     t.index ["team_id"], name: "index_invitations_on_team_id"
   end
 
@@ -353,10 +363,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_23_162616) do
     t.index ["team_id"], name: "index_webhooks_outgoing_events_on_team_id"
   end
 
+  add_foreign_key "account_onboarding_invitation_lists", "teams"
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"
   add_foreign_key "integrations_stripe_installations", "teams"
+  add_foreign_key "invitations", "account_onboarding_invitation_lists", column: "invitation_list_id"
   add_foreign_key "invitations", "teams"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "memberships", "memberships", column: "added_by_id"

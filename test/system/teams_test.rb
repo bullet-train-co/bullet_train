@@ -149,5 +149,67 @@ class TeamsTest < ApplicationSystemTestCase
       end
       assert team.admins.exclude?(@jack.memberships.first)
     end
+
+    test "user can delete a team on a #{device_name}" do
+      resize_for(display_details)
+      be_invited_to_sign_up
+      login_as(@jane, scope: :user)
+
+      # Add another team besides the one they were onboarded with.
+      visit new_account_team_path
+      fill_in "Name", with: "Another Team"
+      click_on "Create Team"
+      assert_text "Team was successfully created."
+      User.find_by(first_name: "Jane").teams.size
+
+      visit edit_account_team_path(Team.find_by(name: "Another Team"))
+      assert_text "Edit Team Details"
+
+      assert_difference "Team.count", -1 do
+        accept_alert { click_on "Delete Team" }
+        assert_text "Team was successfully destroyed."
+      end
+    end
+
+    test "user cannot delete the last team they belong to on a #{device_name}" do
+      resize_for(display_details)
+      be_invited_to_sign_up
+      login_as(@jane, scope: :user)
+
+      visit edit_account_team_path(Team.find_by(name: "Your Team"))
+      assert_text "Edit Team Details"
+
+      assert_no_difference "Team.count" do
+        accept_alert { click_on "Delete Team" }
+        assert_text "You cannot delete the last team you belong to."
+      end
+    end
+
+    test "user can delete a team after they have invited someone on a #{device_name}" do
+      resize_for(display_details)
+      be_invited_to_sign_up
+      login_as(@jane, scope: :user)
+
+      # Create another team so we're not deleting the last team.
+      visit new_account_team_path
+      fill_in "Name", with: "Another Team"
+      click_on "Create Team"
+      assert_text "Team was successfully created."
+      User.find_by(first_name: "Jane").teams.size
+
+      # Create a new Membership on the original Team by sending an Invitation
+      visit new_account_team_invitation_path(Team.find_by(name: "Your Team"))
+      fill_in "Email", with: "someone@bullettrain.co"
+      click_on "Create Invitation"
+      assert_text("Invitation was successfully created.")
+
+      # Delete the Team.
+      visit edit_account_team_path(Team.find_by(name: "Your Team"))
+      assert_text "Edit Team Details"
+      assert_difference "Team.count", -1 do
+        accept_alert { click_on "Delete Team" }
+        assert_text "Team was successfully destroyed."
+      end
+    end
   end
 end
