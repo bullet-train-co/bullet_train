@@ -7,51 +7,43 @@ class TwoFactorAuthentication < ApplicationSystemTestCase
       @john = FactoryBot.create :user, first_name: "John", last_name: "Smith"
     end
 
-    @@test_devices.each do |device_name, display_details|
-      test "a user can log in with a valid OTP on a #{device_name}" do
-        resize_for(display_details)
+    device_test "a user can log in with a valid OTP" do
+      visit new_user_session_path
+      assert_text("Sign In")
 
-        visit new_user_session_path
-        assert_text("Sign In")
+      fill_in "Your Email Address", with: @jane.email
+      click_on "Next"
+      fill_in "Your Password", with: @jane.password
+      fill_in "Two-Factor Authentication Code", with: @jane.otp.now
 
-        fill_in "Your Email Address", with: @jane.email
-        click_on "Next"
-        fill_in "Your Password", with: @jane.password
-        fill_in "Two-Factor Authentication Code", with: @jane.otp.now
+      click_on "Sign In"
 
-        click_on "Sign In"
+      assert_text("Dashboard")
+    end
 
-        assert_text("Dashboard")
-      end
+    device_test "a user cannot log in with an invalid OTP a #{device_name}" do
+      visit new_user_session_path
+      assert_text("Sign In")
 
-      test "a user cannot log in with an invalid OTP a #{device_name}" do
-        resize_for(display_details)
+      fill_in "Your Email Address", with: @jane.email
+      click_on "Next"
+      fill_in "Your Password", with: @jane.password
+      fill_in "Two-Factor Authentication Code", with: "000000"
 
-        visit new_user_session_path
-        assert_text("Sign In")
+      click_on "Sign In"
 
-        fill_in "Your Email Address", with: @jane.email
-        click_on "Next"
-        fill_in "Your Password", with: @jane.password
-        fill_in "Two-Factor Authentication Code", with: "000000"
+      refute_text("Dashboard")
+    end
 
-        click_on "Sign In"
+    device_test "OTP input is invisible to a user with OTP authentication disabled" do
+      visit new_user_session_path
+      assert_text("Sign In")
 
-        refute_text("Dashboard")
-      end
+      fill_in "Your Email Address", with: @john.email
+      click_on "Next"
+      fill_in "Your Password", with: @john.password
 
-      test "OTP input is invisible to a user with OTP authentication disabled on a #{device_name}" do
-        resize_for(display_details)
-
-        visit new_user_session_path
-        assert_text("Sign In")
-
-        fill_in "Your Email Address", with: @john.email
-        click_on "Next"
-        fill_in "Your Password", with: @john.password
-
-        refute_text("Two-Factor Authentication Code")
-      end
+      refute_text("Two-Factor Authentication Code")
     end
   end
 end
