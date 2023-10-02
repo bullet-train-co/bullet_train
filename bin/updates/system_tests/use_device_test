@@ -1,0 +1,37 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "pathname"
+
+Pathname.glob("test/system/**/*.rb") do |path|
+  lines = path.readlines
+  if (devices_line = lines.grep(/@@test_devices\.each do/).first)
+    indentation = devices_line.match(/^\s+/).to_s
+    end_line_index = lines.rindex "#{indentation}end\n"
+
+    # Act on all the lines within the `@@test_devices.each` block
+    lines.slice(lines.index(devices_line).succ...end_line_index).each do |line|
+      # Replace `test` with `device_test`
+      if line.sub!(/(\s+)test/, "\\1device_test")
+        # We're on the test line so also delete the device name suffix pattern, if any
+        line.sub!(/ on(?: a)? #\{device_name\}/, "")
+      end
+
+      # Dedent line by two spaces
+      line.delete_prefix! "  "
+    end
+
+    # Remove `@@test_devices.each` and matching `end` line in reverse so `end` line index doesn't shift.
+    lines.delete_at end_line_index
+    lines.delete devices_line
+
+    # Remove now needless `resize_for(display_details)\n\n`
+    lines.grep(/resize_for\(display_details\)\n/m).each do
+      index = lines.index _1
+      lines.delete_at index # Remove `resize_for` line
+      lines.delete_at index if lines[index].match?(/^\s*\n$/) # Remove \n line, now at the same index.
+    end
+
+    path.write lines.join
+  end
+end
