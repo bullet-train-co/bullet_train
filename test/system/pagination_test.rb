@@ -8,9 +8,7 @@ class PaginationTest < ApplicationSystemTestCase
   end
 
   unless scaffolding_things_disabled?
-    test "pagination works properly" do
-      display_details = @@test_devices[:macbook_pro_15_inch]
-      resize_for(display_details)
+    device_test "pagination works properly" do
       login_as(@jane, scope: :user)
 
       creative_concept = @team.scaffolding_absolutely_abstract_creative_concepts.create(name: "Test Name")
