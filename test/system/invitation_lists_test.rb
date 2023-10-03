@@ -26,7 +26,7 @@ class InvitationListsTest < ApplicationSystemTestCase
     fill_in "Confirm Password", with: example_password
     click_on "Sign Up"
 
-    assert page.has_content?("Tell us about you")
+    assert_text("Tell us about you")
     fill_in "First Name", with: "Hanako"
     fill_in "Last Name", with: "Tanaka"
     fill_in "Your Team Name", with: "The Testing Team"
@@ -40,7 +40,7 @@ class InvitationListsTest < ApplicationSystemTestCase
 
     # Click on next to show that bulk invitations will raise an error if not filled out properly.
     click_on "Next"
-    assert page.has_content?("Email can't be blank")
+    assert_text("Email can't be blank")
 
     # Fill in the email addresses.
     email_fields = page.all("label", text: "Email Address")
@@ -61,12 +61,12 @@ class InvitationListsTest < ApplicationSystemTestCase
       sleep 2
     end
 
-    assert page.has_content?("The Testing Team’s Dashboard")
+    assert_text("The Testing Team’s Dashboard")
     within_team_menu_for(display_details) do
       click_on "Team Members"
     end
 
-    assert page.has_content?("test-0@some-company.com")
+    assert_text("test-0@some-company.com")
     invitation = Invitation.find_by(email: "test-0@some-company.com")
     assert_equal invitation.membership.role_ids, ["admin", "editor"]
   end
