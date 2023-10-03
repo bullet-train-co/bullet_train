@@ -86,7 +86,6 @@ unless scaffolding_things_disabled?
       assert_text "One"
       assert_text "Five and Six"
       assert_text "Long text for this text area field"
-      
       assert_text "123 Main St."
       assert_text "New York"
       assert_text "UNITED STATES"
