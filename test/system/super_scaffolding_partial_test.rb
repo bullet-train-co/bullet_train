@@ -160,9 +160,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Number Field Partial
       fill_in "Number Field Test", with: 47
 
-      assert page.has_content? "State / Province / Region"
+      assert_text "State / Province / Region"
       select "United States", from: "Country"
-      assert page.has_content? "State"
+      assert_text "State"
 
       fill_in "Address", with: "123 Main St."
       fill_in "City", with: "New York"
