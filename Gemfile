@@ -80,6 +80,10 @@ group :development do
   # Workaround to get image process to behave on a Mac in development
   # https://github.com/libvips/ruby-vips/issues/155#issuecomment-1047370993
   gem "ruby-vips"
+
+  # Generate a diagram of all the models in the app by running:
+  # bundle exec erd
+  gem "rails-erd"
 end
 
 group :test do
