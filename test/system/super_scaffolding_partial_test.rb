@@ -160,6 +160,15 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Number Field Partial
       fill_in "Number Field Test", with: 47
 
+      assert page.has_content? "State / Province / Region"
+      select "United States", from: "Country"
+      assert page.has_content? "State"
+
+      fill_in "Address", with: "123 Main St."
+      fill_in "City", with: "New York"
+      select "New York", from: "State"
+      fill_in "Zip code", with: "10001"
+
       click_on "Create Partial Test"
       assert_text("Partial Test was successfully created.")
 
@@ -206,6 +215,13 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       # Number Field
       refute_nil partial_test.number_field_test
       assert_equal partial_test.number_field_test, 47
+      # Address Field
+      refute_nil partial_test.address_test
+      assert_equal partial_test.address_test.address_one, "123 Main St."
+      assert_equal partial_test.address_test.city, "New York"
+      assert_equal partial_test.address_test.country_id, 233
+      assert_equal partial_test.address_test.region_id, 1452
+      assert_equal partial_test.address_test.postal_code, "10001"
     end
   end
 end
