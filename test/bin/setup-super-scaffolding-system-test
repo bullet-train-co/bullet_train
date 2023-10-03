@@ -147,6 +147,5 @@ bin/super-scaffold crud PartialTest Team \
 
 # The test for this webhook is run inline in .circleci/config.yml.
 bin/super-scaffold incoming-webhooks SomeProvider
->>>>>>> main
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare
