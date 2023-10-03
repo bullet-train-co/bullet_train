@@ -56,7 +56,6 @@ unless scaffolding_things_disabled?
       assert page.has_content? "State / Province"
       select "Japan", from: "Country"
       assert page.has_content? "Prefecture"
-      
       select "United States", from: "Country"
       assert page.has_content? "State"
 
