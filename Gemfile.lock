@@ -73,7 +73,7 @@ GEM
     ast (2.4.2)
     awesome_print (1.9.2)
     aws-eventstream (1.2.0)
-    aws-partitions (1.832.0)
+    aws-partitions (1.833.0)
     aws-sdk-core (3.185.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
@@ -273,7 +273,7 @@ GEM
       multipart-post (~> 2)
     faraday-net_http (3.0.2)
     fastimage (2.2.7)
-    ffi (1.16.2)
+    ffi (1.16.3)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     foreman (0.87.2)
@@ -351,7 +351,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
-    net-imap (0.3.7)
+    net-imap (0.4.0)
       date
       net-protocol
     net-pop (0.1.2)
@@ -396,7 +396,7 @@ GEM
       activerecord (>= 5)
       pagy (>= 6, < 7)
     parallel (1.23.0)
-    parser (3.2.2.3)
+    parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
