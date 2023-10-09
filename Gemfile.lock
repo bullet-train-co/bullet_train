@@ -302,9 +302,9 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (2.3.0)
+    jbuilder-schema (2.3.1)
       jbuilder
-      rails (>= 5.0.0)
+      rails (>= 5.0.0, < 7.1.0)
     jmespath (1.6.2)
     jsbundling-rails (1.2.1)
       railties (>= 6.0.0)
