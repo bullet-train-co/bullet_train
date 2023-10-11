@@ -13,7 +13,7 @@ class Fields::SuperSelectSupportConcernTest < ActiveSupport::TestCase
 
   test "should not create new model for authorized singular id" do
     creative_concept = FactoryBot.create :creative_concept, team: @team
-    strong_params = { id: creative_concept.id.to_s }
+    strong_params = {id: creative_concept.id.to_s}
 
     strong_params[:id] = @controller.ensure_backing_models_on(@team.scaffolding_absolutely_abstract_creative_concepts, id: strong_params[:id]) do |scope, id|
       scope.find_or_create_by(name: id)
@@ -26,7 +26,7 @@ class Fields::SuperSelectSupportConcernTest < ActiveSupport::TestCase
     @other_user = FactoryBot.create :onboarded_user
     @other_team = @other_user.current_team
     unauthorized_creative_concept = FactoryBot.create :creative_concept, team: @other_team
-    strong_params = { id: unauthorized_creative_concept.id.to_s }
+    strong_params = {id: unauthorized_creative_concept.id.to_s}
 
     strong_params[:id] = @controller.ensure_backing_models_on(@team.scaffolding_absolutely_abstract_creative_concepts, id: strong_params[:id]) do |scope, id|
       scope.find_or_create_by(name: id)
@@ -37,7 +37,7 @@ class Fields::SuperSelectSupportConcernTest < ActiveSupport::TestCase
 
   test "should create new model for unauthorized singular new_text as id" do
     creative_concept = nil
-    strong_params = { id: "creative concept one" }
+    strong_params = {id: "creative concept one"}
 
     strong_params[:id] = @controller.ensure_backing_models_on(@team.scaffolding_absolutely_abstract_creative_concepts, id: strong_params[:id]) do |scope, id|
       creative_concept = scope.find_or_create_by(name: id)
@@ -51,7 +51,7 @@ class Fields::SuperSelectSupportConcernTest < ActiveSupport::TestCase
   test "should handle a list with authorized id and new text string" do
     known_creative_concept = FactoryBot.create :creative_concept, team: @team
     new_creative_concept = nil
-    strong_params = { ids: [known_creative_concept.id.to_s, "creative concept one"] }
+    strong_params = {ids: [known_creative_concept.id.to_s, "creative concept one"]}
 
     strong_params[:ids] = @controller.ensure_backing_models_on(@team.scaffolding_absolutely_abstract_creative_concepts, ids: strong_params[:ids]) do |scope, id|
       new_creative_concept = scope.find_or_create_by(name: id)
