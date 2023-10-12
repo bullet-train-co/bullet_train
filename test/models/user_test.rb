@@ -8,7 +8,6 @@ class UserTest < ActiveSupport::TestCase
   test "details_provided should be true when details are provided" do
     @user = FactoryBot.create :onboarded_user, first_name: "a", last_name: "b"
     assert @user.details_provided?
-    assert_equal "foo", "bar"
   end
 
   test "details_provided should be false when details aren't provided" do
