@@ -29,8 +29,8 @@ Minitest::Reporters.use! [
   # to showing a summary at the end. If you'd like to have more compact "dot" style
   # output as tests are running you can comment out the SpecReporter and enable
   # the DefaultReporter instead.
-  Minitest::Reporters::SpecReporter.new(:print_failure_summary => true),
-  #Minitest::Reporters::DefaultReporter.new(:color => true),
+  Minitest::Reporters::SpecReporter.new(print_failure_summary: true),
+  # Minitest::Reporters::DefaultReporter.new(color: true),
   Minitest::Reporters::JUnitReporter.new
 ]
 
