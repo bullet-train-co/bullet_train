@@ -155,6 +155,9 @@ group :test do
   # Helps smooth over flakiness in system tests.
   gem "minitest-retry"
 
+  # Better test output
+  gem "minitest-reporters"
+
   # Interact with emails during testing.
   gem "capybara-email"
 

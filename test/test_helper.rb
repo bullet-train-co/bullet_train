@@ -23,6 +23,9 @@ knapsack_pro_adapter.set_test_helper_path(__FILE__)
 require "sidekiq/testing"
 Sidekiq::Testing.inline!
 
+require "minitest/reporters"
+Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true), Minitest::Reporters::JUnitReporter.new]
+
 begin
   require "bullet_train/billing/test_support"
   FactoryBot.definition_file_paths << BulletTrain::Billing::TestSupport::FACTORY_PATH
