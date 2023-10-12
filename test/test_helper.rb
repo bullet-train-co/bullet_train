@@ -24,7 +24,15 @@ require "sidekiq/testing"
 Sidekiq::Testing.inline!
 
 require "minitest/reporters"
-Minitest::Reporters.use! [Minitest::Reporters::DefaultReporter.new(:color => true), Minitest::Reporters::JUnitReporter.new]
+Minitest::Reporters.use! [
+  # By default we show which tests we're executing as they happen, in addition
+  # to showing a summary at the end. If you'd like to have more compact "dot" style
+  # output as tests are running you can comment out the SpecReporter and enable
+  # the DefaultReporter instead.
+  Minitest::Reporters::SpecReporter.new(:print_failure_summary => true),
+  #Minitest::Reporters::DefaultReporter.new(:color => true),
+  Minitest::Reporters::JUnitReporter.new
+]
 
 begin
   require "bullet_train/billing/test_support"
