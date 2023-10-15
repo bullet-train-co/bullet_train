@@ -296,7 +296,7 @@ GEM
     indefinite_article (0.2.5)
       activesupport
     io-console (0.6.0)
-    irb (1.8.2)
+    irb (1.8.3)
       rdoc
       reline (>= 0.3.8)
     jbuilder (2.11.5)
