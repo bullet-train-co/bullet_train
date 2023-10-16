@@ -24,15 +24,24 @@ require "sidekiq/testing"
 Sidekiq::Testing.inline!
 
 require "minitest/reporters"
-Minitest::Reporters.use! [
-  # By default we show which tests we're executing as they happen, in addition
-  # to showing a summary at the end. If you'd like to have more compact "dot" style
-  # output as tests are running you can comment out the SpecReporter and enable
-  # the DefaultReporter instead.
-  Minitest::Reporters::SpecReporter.new(print_failure_summary: true),
-  # Minitest::Reporters::DefaultReporter.new(color: true),
+
+reporters = [
+  # This reporter generates XML documents into test/reports that are used by CI services to tally results
   Minitest::Reporters::JUnitReporter.new
 ]
+
+if ENV["BT_TEST_FORMAT"]&.downcase == "dots"
+  # The classic "dot style" output:
+  # ...S..E...F...
+  reporters.push Minitest::Reporters::DefaultReporter.new
+else
+  # "Spec style" output that shows you which tests are executing as they run:
+  # UserTest
+  #   test_details_provided_should_be_true_when_details_are_provided  PASS (0.18s)
+  reporters.push Minitest::Reporters::SpecReporter.new(print_failure_summary: true)
+end
+
+Minitest::Reporters.use! reporters
 
 begin
   require "bullet_train/billing/test_support"
