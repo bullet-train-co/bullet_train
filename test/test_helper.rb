@@ -25,10 +25,7 @@ Sidekiq::Testing.inline!
 
 require "minitest/reporters"
 
-reporters = [
-  # This reporter generates XML documents into test/reports that are used by CI services to tally results
-  Minitest::Reporters::JUnitReporter.new
-]
+reporters = []
 
 if ENV["BT_TEST_FORMAT"]&.downcase == "dots"
   # The classic "dot style" output:
@@ -40,6 +37,10 @@ else
   #   test_details_provided_should_be_true_when_details_are_provided  PASS (0.18s)
   reporters.push Minitest::Reporters::SpecReporter.new(print_failure_summary: true)
 end
+
+# This reporter generates XML documents into test/reports that are used by CI services to tally results.
+# We add it last because doing so make the visible test output a little cleaner.
+reporters.push Minitest::Reporters::JUnitReporter.new
 
 Minitest::Reporters.use! reporters
 
