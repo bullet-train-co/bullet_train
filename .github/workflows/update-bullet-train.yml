@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           # We have to fetch the full history so that the merge step will understand
           # how to properly merge the starter repo with our local changes.
