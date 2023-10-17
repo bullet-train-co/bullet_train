@@ -40,7 +40,7 @@ end
 
 # This reporter generates XML documents into test/reports that are used by CI services to tally results.
 # We add it last because doing so make the visible test output a little cleaner.
-reporters.push Minitest::Reporters::JUnitReporter.new
+reporters.push Minitest::Reporters::JUnitReporter.new if ENV["CI"]
 
 Minitest::Reporters.use! reporters
 
