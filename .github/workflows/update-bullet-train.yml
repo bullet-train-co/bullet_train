@@ -27,6 +27,15 @@ jobs:
         run: |
           git config user.name ${{ github.actor }}
           git config user.email ${{ github.actor }}@users.noreply.github.com
+          # We set this so that any merge conflicts will show a diff in this format:
+          # <<<<<<< HEAD
+          #   changed content in the downstream repo
+          # ||||||| the-sha-of-the-shared-common-ancestor-commit
+          #   original content of the shared common ancestor
+          # =======
+          #   changed content in the starter repo
+          # >>>>>>> bullet-train-update/1.x.x
+          git config --global merge.conflictstyle diff3
 
       - name: Setup Ruby
         uses: "ruby/setup-ruby@v1"
