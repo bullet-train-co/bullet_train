@@ -6,8 +6,8 @@ on:
   workflow_dispatch:
     inputs:
       versionNumber:
-        description: 'Version Number'
-        required: true
+        description: 'Version Number (latest if blank)'
+        required: false
         type: string
 
 jobs:
@@ -34,31 +34,118 @@ jobs:
           bundler-cache: true
           ruby-version: 3.2
 
-      - name: Add Bullet Train Starter Repo git remote
-        run: git remote add bullet-train https://github.com/bullet-train-co/bullet_train.git
-
       - name: Fetch Bullet Train Starter Repo
-        run: git fetch --tags bullet-train
+        run: |
+          git remote add bullet-train https://github.com/bullet-train-co/bullet_train.git
+          git fetch --tags bullet-train
+
+      # This step is run when a version was passed in
+      - name: Target the passed in version
+        run: |
+          echo "TARGET_VERSION=${{ inputs.versionNumber }}" >> "$GITHUB_ENV"
+        if: inputs.versionNumber != ''
+
+      # This step is run if a version was not passed in
+      - name: Target the latest version
+        run: |
+          echo "TARGET_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))" >> "$GITHUB_ENV"
+        if: inputs.versionNumber == ''
+
+      # Allow for versions to be pass in either with or without the leading 'v'
+      - name: Strip leading 'v'
+        run: |
+          echo "TARGET_VERSION=$(echo $TARGET_VERSION | sed 's/v//g')" >> "$GITHUB_ENV"
+        if: startsWith(env.TARGET_VERSION, 'v')
+
+      - name: Check for version
+        id: version-check
+        run: |
+          echo "TAG=$(git tag -l v${{ env.TARGET_VERSION }})" >> $GITHUB_OUTPUT
+
+      - name: Verify version exists
+        if: ${{ steps.version-check.outputs.TAG == '' }}
+        run: |
+          echo >&2 "::error:: Version v${{ env.TARGET_VERSION }} not found in bullet-train repo."
+          exit 1
 
       - name: Merge version tag
-        run: git merge v${{ inputs.versionNumber }} -s ort -X theirs
+        # If there's a merge conflict it exits with an error code and would cause the workflow to fail,
+        # but we don't want that. We want to continue and we'll mark the PR as containing a conflict.
+        continue-on-error: true
+        run: git merge v${{ env.TARGET_VERSION }}
 
-      - name: Config bundler
-        # We have to do this so that a subsequent `bundle install` will work without complaining
-        # that we have changed Gemfile.lock in a deployment context.
-        run: bundle config unset deployment
 
-      - name: Bundle install
-        # We do this to try to avoid clobbering bits of `Gemfile.lock` that may have gotten discarded
-        # during the merge since we're favoring the Starter Repo.
-        run: bundle install
+      # Gemfile.lock is often a source of conflicts, and it's hard to sort out by hand.
+      # Since it's an auto-generated file we can just use whatever is in the downstreadm app
+      # and then run `bundle install` to ensure that it's in sync with Gemfile
+      - name: Fix Gemfile.lock
+        run: |
+          git checkout HEAD -- Gemfile.lock
+          # We have to do this so that a subsequent `bundle install` will work without complaining
+          # that we have changed Gemfile.lock in a deployment context.
+          bundle config unset deployment
+          bundle install
+          # This is an artifact of installing the gems, and we don't want to add it to the PR.
+          rm -rf vendor/bundle
 
-      - name: Remove vendor/bundle
-        # This is an artifact of installing the gems, and we don't want to add it to the PR.
-        run: rm -rf vendor/bundle
+      - name: Check for conflicts
+        id: conflicts
+        run: |
+          echo "FILES=$(git status --porcelain | grep '^UU' | sed 's/UU/*/g')" >> $GITHUB_OUTPUT
 
-      - name: "Create Pull Request"
-        id: cpr
+      # This step is run when there are no conflicts
+      - name: Set PR conflict message for no conflicts
+        run: |
+          {
+            echo 'PR_CONFLICT_MESSAGE<<EOF'
+            echo '🎉 There are no conflicts detected in this PR!'
+            echo EOF
+          } >> "$GITHUB_ENV"
+        if: steps.conflicts.outputs.FILES == ''
+
+      # This step is run when there are conflicts that need to be resolved
+      - name: Set PR conflict message for conflicts
+        run: |
+          {
+            echo 'PR_CONFLICT_MESSAGE<<EOF'
+            echo '⚠️  **There are conflicts in the following files:**'
+            echo '${{ steps.conflicts.outputs.FILES }}'
+            echo ' '
+            echo '**You should pull down this branch, resolve the conflicts, and then push the branch.**'
+            echo ' '
+            echo 'Get started by pulling the branch:'
+            echo '```'
+            echo 'git fetch origin'
+            echo 'git checkout -b bullet-train-update/${{ env.TARGET_VERSION }} --track origin/bullet-train-update/${{ env.TARGET_VERSION }}'
+            echo '```'
+            echo 'Then resolve conflicts. Once you have done that you can commit the changes and then push.'
+            echo '```'
+            echo 'git add .'
+            echo 'git commit -m "resolved conflicts"'
+            echo 'git push origin bullet-train-update/${{ env.TARGET_VERSION }}'
+            echo '```'
+            echo EOF
+          } >> "$GITHUB_ENV"
+        if: ${{ steps.conflicts.outputs.FILES != '' }}
+
+      # This step is run when there are no conflicts
+      - name: Set draft status = false
+        run: |
+          echo "DRAFT_STATUS=false" >> "$GITHUB_ENV"
+        if: steps.conflicts.outputs.FILES == ''
+
+      # This step is run when there are conflicts that need to be resolved
+      - name: Set draft status = true
+        run: |
+          echo "DRAFT_STATUS=true" >> "$GITHUB_ENV"
+        if: ${{ steps.conflicts.outputs.FILES != '' }}
+
+      - name: Finish the merge
+        run: |
+          git add .
+          git commit --no-edit
+
+      - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
           # We use a different token so that the PR that gets created will auto-trigger additional
@@ -67,17 +154,22 @@ jobs:
           token: ${{ secrets.PAT }}
           author: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
           committer: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
-          commit-message: "Bullet Train Update: ${{ inputs.versionNumber }}"
-          branch: "bullet-train-update/${{ inputs.versionNumber }}"
+          commit-message: "Bullet Train Update: ${{ env.TARGET_VERSION }}"
+          branch: "bullet-train-update/${{ env.TARGET_VERSION }}"
           delete-branch: true
-          title: "Bullet Train Update: ${{ inputs.versionNumber }}"
+          title: "Bullet Train Update: ${{ env.TARGET_VERSION }}"
           add-paths: "."
+          # If your repo supports Draft PRs you may want to uncomment this next line so that we can
+          # open the PR as a draft when we detect merge conflicts.
+          # draft: ${{ env.DRAFT_STATUS }}
           body: |
-            Update of the Bullet Train Starter Repo to version `${{ inputs.versionNumber }}`
+            Update of the Bullet Train Starter Repo to version `${{ env.TARGET_VERSION }}`
 
-            **Please note:** You should thorougly review this PR. In order to generate this PR we resolve any conflicts in favor of the Starter Repo. This means that this PR might overwrite some changes that you've made.
+            **Please note:** You should thorougly review this PR.
 
-            - Auto-generated by `.github/workflows/update-bullet-train.yml`
+            ${{env.PR_CONFLICT_MESSAGE}}
+
+            > Auto-generated by `.github/workflows/update-bullet-train.yml`
 
           #labels: |
             #core bump
