@@ -42,7 +42,7 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
     # This error message is displayed for all actions, not just `targets-many`.
     test "the proper error message is displayed for unneeded namespaces" do
       output = `bin/super-scaffold action-model:targets-many Project::Publish Project Team`
-      assert output.include?("When creating an Action Model, you don\'t have to namespace the action")
+      assert output.include?("When creating an Action Model, you don't have to namespace the action")
     end
 
     test "developers can archive a single project" do
