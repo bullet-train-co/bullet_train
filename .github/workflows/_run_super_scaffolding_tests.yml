@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    name: "🏗️"
+    name: ""
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
