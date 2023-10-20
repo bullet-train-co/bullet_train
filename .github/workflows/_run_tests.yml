@@ -12,13 +12,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Set N number of parallel jobs you want to run tests on.
-        # Use higher number if you have slow tests to split them on more parallel jobs.
-        # Remember to update ci_node_index below to 0..N-1
-        ci_node_total: [7]
-        # set N-1 indexes for parallel jobs
-        # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
-        ci_node_index: [0, 1, 2, 3, 4, 5, 6]
+        # Set identifiers for parallel jobs. These can be anything.
+        # For instance if you want a Three Amigos themed pipeline you could use:
+        # ci_node_index: [Dusty, Ned, Lucky]
+        ci_runners: [1,2,3,4]
     services:
       postgres:
         image: postgres:11-alpine
@@ -87,8 +84,8 @@ jobs:
         env:
           AUTH_ENDPOINT: https://no-site.nowhere
           AWS_REGION: us-east-1
-          CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
-          CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+          CI_NODE_TOTAL: ${{ strategy.job-total }}
+          CI_NODE_INDEX: ${{ strategy.job-index }}
         continue-on-error: false
         run : ./bin/parallel-ci
         shell: bash
