@@ -1390,11 +1390,11 @@
     uri-js "^4.2.2"
 
 "@redocly/cli@^1.0.0-beta.111":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@redocly/cli/-/cli-1.2.0.tgz#d0014cbf58c9c4100d974c97dde6058b1e09c9a4"
-  integrity sha512-xfZuRcdDAeal9gyP5Frbmw3R6/HsW7Nh29tiR2b22Cqi/xD5W8wIZw78/1a6rUTfmqrofKdpNUAmSMywbb0Y+g==
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@redocly/cli/-/cli-1.3.0.tgz#47bcb40b0684ca93c7c94658d75453f3c556e905"
+  integrity sha512-1PpqubK/pIij+hvM3fWQunAgAbKclwya6yiQ3qvYwE9GtcfkqoKNI7ZeDbC+pfYKHc2EJVsylnnIRrngV7guoQ==
   dependencies:
-    "@redocly/openapi-core" "1.2.0"
+    "@redocly/openapi-core" "1.3.0"
     chokidar "^3.5.1"
     colorette "^1.2.0"
     core-js "^3.32.1"
@@ -1410,10 +1410,10 @@
     styled-components "^6.0.7"
     yargs "17.0.1"
 
-"@redocly/openapi-core@1.2.0", "@redocly/openapi-core@^1.0.0-rc.2":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.2.0.tgz#de01c2d8d9c8ae70f7b4061ee048a464dd19d602"
-  integrity sha512-Ccft2n/JiF4u2crmj1cdDzPq6C40U7NgLZ+p/BxzAFXbfrddr/5FN0HMJPHT/op329qqv2P2jUrXsV2Bp+rzEQ==
+"@redocly/openapi-core@1.3.0", "@redocly/openapi-core@^1.0.0-rc.2":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.3.0.tgz#b47325d04c72d395ae3456b217799eb5850602aa"
+  integrity sha512-gpUu6bjveF9fuZF4iGdzHLMM3nH+AvtgWB84qPALyrE1Cf2qFed+0SW2cpg46VlgSykMekB86ivOIEqk5SlffA==
   dependencies:
     "@redocly/ajv" "^8.11.0"
     "@types/node" "^14.11.8"
