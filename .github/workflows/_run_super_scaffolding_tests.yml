@@ -1,0 +1,125 @@
+# This workflow will run a few super scaffolding commands and then run tests against the generated code.
+#
+# This workflow is pimarily meant to be called by other workflows, but it can be run manually.
+name: 🏗️ ~ Run super scaffolding tests
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # Set N number of parallel jobs you want to run tests on.
+        # Use higher number if you have slow tests to split them on more parallel jobs.
+        # Remember to update ci_node_index below to 0..N-1
+        ci_node_total: [7]
+        # set N-1 indexes for parallel jobs
+        # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
+        ci_node_index: [0, 1, 2, 3, 4, 5, 6]
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports:
+          - "6379:6379"
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      BUNDLE_JOBS: 2
+      BUNDLE_RETRY: 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache yarn cache directory
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-node-modules-
+
+      - name: asset cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            public/assets
+            tmp/cache/assets/sprockets
+          key: asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+            asset-cache-${{ runner.os }}-${{ github.ref }}-
+            asset-cache-${{ runner.os }}-
+
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+
+      - run: yarn install
+      - run: yarn build
+      - run: yarn build:css
+
+      # TODO: This might be a bad idea. Maybe we should just have spring in the Gemfile all the time.
+      - name: Allow adding of spring
+        run: bundle config unset deployment
+
+      - name: Add spring
+        run: bundle add spring
+
+      - name: 'Setup Super Scaffolding System Test'
+        run: bundle exec test/bin/setup-super-scaffolding-system-test
+        env:
+          CIRCLE_NODE_INDEX: ${{ matrix.ci_node_index }}
+
+      - name: 'Run Super Scaffolding Test'
+        run: bundle exec rails test test/system/super_scaffolding_test.rb
+
+      - name: 'Run Super Scaffolding Partial Test'
+        run: bundle exec rails test test/system/super_scaffolding_partial_test.rb
+
+      - name: 'Run Super Scaffolding Incoming Webhooks Test'
+        run: bundle exec rails test test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "test/reports/**/TEST-*.xml"
+        if: always()
