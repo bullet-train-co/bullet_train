@@ -3,11 +3,13 @@ import { identifierForContextKey } from "stimulus/webpack-helpers"
 import { controllerDefinitions as bulletTrainControllers } from "@bullet-train/bullet-train"
 import { controllerDefinitions as bulletTrainFieldControllers } from "@bullet-train/fields"
 import { controllerDefinitions as bulletTrainSortableControllers } from "@bullet-train/bullet-train-sortable"
+import ScrollReveal from 'stimulus-scroll-reveal'
 import RevealController from 'stimulus-reveal'
 import CableReady from 'cable_ready'
 import consumer from '../channels/consumer'
 
 const application = Application.start()
+application.register('scroll-reveal', ScrollReveal)
 
 // In the browser console:
 // * Type `window.Stimulus.debug = true` to log actions and lifecycle hooks
