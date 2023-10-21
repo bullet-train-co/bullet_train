@@ -1,14 +1,14 @@
 class Avo::Resources::Team < Avo::BaseResource
   self.title = :name
   self.includes = []
-  self.search = {
-    query: -> { query.ransack(id_eq: params[:q], name_cont: params[:q], slug_cont: params[:q], m: "or").result(distinct: false) },
-    item: -> {
-      {
-        title: record.name
-      }
-    }
-  }
+  # self.search = {
+  #   query: -> { query.ransack(id_eq: params[:q], name_cont: params[:q], slug_cont: params[:q], m: "or").result(distinct: false) },
+  #   item: -> {
+  #     {
+  #       title: record.name
+  #     }
+  #   }
+  # }
 
   def fields
     field :id, as: :id

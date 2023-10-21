@@ -1,14 +1,14 @@
 class Avo::Resources::User < Avo::BaseResource
   self.title = :full_name
   self.includes = []
-  self.search = {
-    query: -> { query.ransack(id_eq: params[:q], first_name_cont: params[:q], last_name_cont: params[:q], email_cont: params[:q], m: "or").result(distinct: false) },
-    item: -> {
-      {
-        title: record.full_name,
-      }
-    }
-  }
+  # self.search = {
+  #   query: -> { query.ransack(id_eq: params[:q], first_name_cont: params[:q], last_name_cont: params[:q], email_cont: params[:q], m: "or").result(distinct: false) },
+  #   item: -> {
+  #     {
+  #       title: record.full_name,
+  #     }
+  #   }
+  # }
 
   def fields
     field :id, as: :id
