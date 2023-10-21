@@ -20,8 +20,4 @@ class Team < ApplicationRecord
   # 🚅 add delegations above.
 
   # 🚅 add methods above.
-
-  def self.ransackable_attributes(auth_object = nil)
-    ["name", "slug"]
-  end
 end
