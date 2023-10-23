@@ -102,7 +102,7 @@ end
 
 # We use a constant here so that we can ensure that all of the bullet_train-*
 # packages are on the same version.
-BULLET_TRAIN_VERSION = "1.6.6"
+BULLET_TRAIN_VERSION = "1.6.7"
 
 # Core packages.
 gem "bullet_train", BULLET_TRAIN_VERSION
