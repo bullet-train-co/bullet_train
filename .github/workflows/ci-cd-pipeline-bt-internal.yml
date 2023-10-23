@@ -1,0 +1,20 @@
+# This workflow will run whenever a PR is opened or changed.
+#
+# It will run tests and a few safety checks.
+#
+# If everything passes it can be set to auto-deploy to your staging app on Heroku.
+#
+# This workflow is primarily meant to be triggered automatically, but it can be run manually.
+name: " 🚅 _ BT - Internal CI Pipeline"
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches: [ "main" ]
+
+jobs:
+  super_scaffolding:
+    name: 🏗️ Super Scaffolding Tests
+    uses: ./.github/workflows/_run_super_scaffolding_tests.yml
+    secrets: inherit

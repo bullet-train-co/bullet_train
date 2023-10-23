@@ -16,10 +16,6 @@ jobs:
     name: 🧪 MiniTest
     uses: ./.github/workflows/_run_tests.yml
     secrets: inherit
-  super_scaffolding:
-    name: 🏗️ Super Scaffolding Tests
-    uses: ./.github/workflows/_run_super_scaffolding_tests.yml
-    secrets: inherit
   standardrb:
     name: 🔬 Standardrb
     uses: ./.github/workflows/_standardrb.yml
