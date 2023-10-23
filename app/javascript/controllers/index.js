@@ -9,7 +9,6 @@ import CableReady from 'cable_ready'
 import consumer from '../channels/consumer'
 
 const application = Application.start()
-application.register('scroll-reveal', ScrollReveal)
 
 // In the browser console:
 // * Type `window.Stimulus.debug = true` to log actions and lifecycle hooks
@@ -27,6 +26,7 @@ application.load(bulletTrainFieldControllers)
 application.load(bulletTrainSortableControllers)
 
 application.register('reveal', RevealController)
+application.register('scroll-reveal', ScrollReveal)
 
 const controllers = Object.keys(controllersContext).map((filename) => ({
   identifier: identifierForContextKey(filename),
