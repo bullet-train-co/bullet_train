@@ -40,3 +40,4 @@ jobs:
       - name: Database Schema Check
         id: db-schema-check
         run : bash ./.circleci/db_schema_check
+        continue-on-error: false
