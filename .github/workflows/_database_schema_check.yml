@@ -1,4 +1,4 @@
-1.2.13# This workflow will ensure that when we run `rails db:migrate` that no changes are made to `db/schema.rb`.
+# This workflow will ensure that when we run `rails db:migrate` that no changes are made to `db/schema.rb`.
 #
 # This workflow is pimarily meant to be called by other workflows, but it can be run manually.
 name: "🔎 ~ Database Schema Check"
