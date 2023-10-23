@@ -26,6 +26,7 @@ jobs:
           --health-retries 5
     env:
       RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       BUNDLE_JOBS: 2
       BUNDLE_RETRY: 3
     steps:
@@ -36,9 +37,6 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
-
-      - name: Set up database schema
-        run: bin/rails db:schema:load
 
       - name: Database Schema Check
         id: db-schema-check
