@@ -21,7 +21,7 @@ jobs:
     uses: ./.github/workflows/_standardrb.yml
     secrets: inherit
   db_schema:
-    name: 🔎 DB Schema Check
+    name: 🔎 DB Schema
     uses: ./.github/workflows/_database_schema_check.yml
     secrets: inherit
   # If you'd like to auto-deploy to your staging environment you can uncomment this next block.
@@ -30,7 +30,7 @@ jobs:
   # deploy:
   #   name: 🚢 Deploy to Heroku
   #   uses: ./.github/workflows/_deploy_heroku.yml
-  #   needs: [mini_test, super_scaffolding, standardrb, db_schema]
+  #   needs: [mini_test, standardrb, db_schema]
   #   secrets: inherit
   #   with:
   #     heroku-app-name: ""
