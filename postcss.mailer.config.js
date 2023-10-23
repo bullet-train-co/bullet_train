@@ -4,7 +4,7 @@ module.exports = {
     require('postcss-extend-rule'),
     require('postcss-nested'),
     require('tailwindcss'),
-    require('postcss-css-variables'),
+    //require('postcss-css-variables'),
     require('autoprefixer'),
   ]
 }
