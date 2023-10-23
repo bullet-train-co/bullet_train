@@ -37,7 +37,10 @@ jobs:
         with:
           bundler-cache: true
 
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+
       - name: Database Schema Check
         id: db-schema-check
-        run : bash ./.circleci/db_schema_check
+        run : ./.circleci/db_schema_check
         continue-on-error: false
