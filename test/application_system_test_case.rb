@@ -120,6 +120,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     end
   end
 
+  # The `instance_eval` line in `device_test` adds 2 frames in the backtrace which test errors will erroneously point back to.
+  # So we silence those 2 frames.
+  Rails.backtrace_cleaner.add_silencer { /test\/application_system_test_case\.rb.*?(?:instance_eval|device_test)/.match? _1 }
+
   def resize_for(display_details)
     ActiveSupport::Deprecation.warn <<~END_OF_MESSAGE
       `resize_for` is deprecated.
