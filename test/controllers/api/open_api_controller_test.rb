@@ -15,6 +15,10 @@ class Api::OpenApiControllerTest < Api::Test
     output = `yarn exec redocly lint api@v1 1> /dev/stdout 2> /dev/stdout`
     FileUtils.rm(openapi_yaml_path)
 
+    puts "-------------------"
+    puts output
+    puts "-------------------"
+
     warnings = output.match(/You have (\d+) warnings/)
     puts output if warnings
     refute warnings
