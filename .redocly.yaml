@@ -9,4 +9,4 @@ apis:
     rules:
       no-ambiguous-paths: off
       spec: off
-      #no-server-example.com: off
+      no-server-example.com: off
