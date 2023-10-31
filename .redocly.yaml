@@ -8,3 +8,5 @@ apis:
     root: ./tmp/openapi.yaml
     rules:
       no-ambiguous-paths: off
+      spec: off
+      #no-server-example.com: off
