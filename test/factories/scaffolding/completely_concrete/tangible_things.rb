@@ -15,7 +15,11 @@ FactoryBot.define do
     sort_order { 1 }
 
     factory :scaffolding_completely_concrete_tangible_thing_example do
+      id { 42 }
+      absolutely_abstract_creative_concept_id { 42 }
       text_field_value { "Example" }
+      created_at { DateTime.new(2023, 1, 1) }
+      updated_at { DateTime.new(2023, 1, 2) }
     end
   end
 end
