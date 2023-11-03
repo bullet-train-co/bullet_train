@@ -4,6 +4,7 @@ FactoryBot.define do
     association :team
 
     factory :membership_example do
+      id { 42 }
       team { FactoryBot.example(:team) }
       user { FactoryBot.example(:user, teams: [team]) }
       invitation_id { nil }
@@ -14,6 +15,8 @@ FactoryBot.define do
       platform_agent_of_id { nil }
       platform_agent { false }
       role_ids { ["admin"] }
+      created_at { DateTime.new(2023, 1, 1) }
+      updated_at { DateTime.new(2023, 1, 2) }
 
       # The `added_by` attribute is an optional foreign_key which points
       # to another membership and is automatically populated when someone
