@@ -1061,26 +1061,26 @@
     "@babel/helper-validator-identifier" "^7.22.19"
     to-fast-properties "^2.0.0"
 
-"@bullet-train/bullet-train-sortable@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.6.9.tgz#783417b4113cee2b7ef56a0bf2a87a2413a1189d"
-  integrity sha512-NnOf/AiNtteLyjlsGl502nUF8nzwYJ2bn/sh9UY98Njyx/ub6DIw6GbhpRDdVdYCiNyrFwHckDtT85UnuBaQ0A==
+"@bullet-train/bullet-train-sortable@1.6.10":
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.6.10.tgz#2fb9c4933fbe25a736d07b82aa7bc0ac4dcd9540"
+  integrity sha512-/bZzTWoFWFjmWK2lyhICq1FyVcKXabyFv9ccx/QAxPMo1L3NjqxG9g3aIHx5fDlQzo3s7XeCIC/wxNH7WcYZrg==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
 
-"@bullet-train/bullet-train@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.6.9.tgz#7e27f70b1b9d99aa67de0d0e002b0620d892597b"
-  integrity sha512-ZhMOTVV0WjAHCRuIqQCbxASSpJkQkZELeDzt1ugzsrdCaHKMXGRwObQPPOaP5JhFRL6apU5K65eMW3K5xw6Efw==
+"@bullet-train/bullet-train@1.6.10":
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.6.10.tgz#e72e992d72e9ce61c383ddd1a6955373c05c70c4"
+  integrity sha512-FbmuMS9I5mCvkMiYFtAhttxuBZSiPDQ6YKTvCpbQkhKqXaZe20E1GVO3pVXw/ecpQqzAtm6vPI+3CMMIis8Bng==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
-"@bullet-train/fields@1.6.9":
-  version "1.6.9"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.6.9.tgz#1c1a5ad60221f48bc83dc4660996fbc6c7aba4c4"
-  integrity sha512-Y11eRy4b2YNNMEm3X/5QweLRSI1Csa5feLr/LL/D8HXUc9KVHC5DyhoHOP5Ie0rj+43RBM7HZ2FdciMrsqjYrw==
+"@bullet-train/fields@1.6.10":
+  version "1.6.10"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.6.10.tgz#bcd177f61c39151f185fecfdb729ae9f381a3430"
+  integrity sha512-frRBkeeUXDiWfrkFRtQJNYNvvReQIPlfF1/7CyYYPQMvYfFN6B/mEZv6YcwR/J/MU9U7GxVPHABoBW8UnEp83w==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
