@@ -3109,6 +3109,11 @@ stimulus-reveal@^1.4.2:
   dependencies:
     stimulus "^3.0.1"
 
+stimulus-scroll-reveal@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/stimulus-scroll-reveal/-/stimulus-scroll-reveal-3.2.0.tgz#e9bdf2c0ddce82c24df99ba627f2f3375bc64f41"
+  integrity sha512-KxXHibsGVqvBJ4TqUaTwss36WX543dlUWoNbDXvkAfuddE6H/D7egkVF9v85LEtCVd2h9KkrTNykBnPqyxpAoQ==
+
 stimulus@^3.0.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/stimulus/-/stimulus-3.2.2.tgz#a2e955f43e12e2e5784b175d4df5517ef678aa68"
