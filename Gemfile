@@ -163,9 +163,6 @@ group :test do
 
   # Write system tests by pointing and clicking in your browser.
   gem "magic_test"
-
-  # Increase parallelism to run CircleCI tests across multiple nodes
-  gem "knapsack_pro"
 end
 
 group :production do

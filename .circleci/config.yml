@@ -118,21 +118,11 @@ jobs:
       - *wait_for_docker
 
       - run:
-          name: Run tests with Knapsack Pro
-          command: |
-            export RAILS_ENV=test
-            bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
-          environment:
-            KNAPSACK_PRO_CI_NODE_TOTAL: 2
-
-      # If you don't want to use Knapsack Pro, then use this configuration:
-      #
-      # - run:
-      #     name: Run unit tests
-      #     command: bundle exec rails test
-      # - run:
-      #     name: Run system tests
-      #     command: bundle exec rails test:system
+          name: Run unit tests
+          command: bundle exec rails test
+      - run:
+          name: Run system tests
+          command: bundle exec rails test:system
 
       - store_test_results:
           path: test/reports
@@ -172,22 +162,11 @@ jobs:
       - *wait_for_docker
 
       - run:
-          name: Run tests with Knapsack Pro
-          command: |
-            export RAILS_ENV=test
-            bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
-          environment:
-            KNAPSACK_PRO_CI_NODE_TOTAL: 2
-            HIDE_THINGS: true
-
-      # If you don't want to use Knapsack Pro, then use this configuration:
-      #
-      # - run:
-      #     name: Run unit tests with HIDE_THINGS
-      #     command: HIDE_THINGS=true bundle exec rails test
-      # - run:
-      #     name: Run system tests with HIDE_THINGS
-      #     command: HIDE_THINGS=true bundle exec rails test:system
+          name: Run unit tests with HIDE_THINGS
+          command: HIDE_THINGS=true bundle exec rails test
+      - run:
+          name: Run system tests with HIDE_THINGS
+          command: HIDE_THINGS=true bundle exec rails test:system
 
       - store_test_results:
           path: test/reports
@@ -287,15 +266,13 @@ jobs:
               sed -i'.orig' 's/gem "selenium-webdriver"/# gem "selenium-webdriver"/' Gemfile
               sed -i'.orig' 's/gem "webdrivers"/# gem "webdrivers"/' Gemfile
               bundle install
-              bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
+              bundle exec rails test:system
             else
               echo "Skipping system tests with Cuprite"
               exit 0
             fi
           environment:
             RAILS_ENV: test
-            KNAPSACK_PRO_CI_NODE_TOTAL: 2
-            KNAPSACK_PRO_TEST_FILE_PATTERN: "test/system/**{,/*/**}/*_test.rb"
 
   # Uncomment the job at the bottom of this file to run these system tests.
   'System Tests for Action Models':
