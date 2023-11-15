@@ -44,6 +44,7 @@ class InvitationListsTest < ApplicationSystemTestCase
     puts "##############################"
     puts "Debugging Invitation Lists"
     p page.text.split("\n")
+    p page.text.split("\n")
     puts "##############################"
     assert_text("Email can't be blank")
 
