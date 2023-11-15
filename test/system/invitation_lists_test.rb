@@ -41,7 +41,7 @@ class InvitationListsTest < ApplicationSystemTestCase
     # Click on next to show that bulk invitations will raise an error if not filled out properly.
     click_on "Next"
     assert_text("Invite your team members")
-    assert_text("Email address")
+    assert_text("Email Address")
     assert_text("Email can't be blank")
 
     # Fill in the email addresses.
