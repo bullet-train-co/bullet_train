@@ -5,7 +5,6 @@ class InvitationListsTest < ApplicationSystemTestCase
     # TODO: Capybara.current_driver is returning :selenium,
     # when it should be either :selenium_chrome or :selenium_chrome_headless.
     Capybara.current_driver = Capybara.default_driver
-    p Capybara.current_driver
 
     @current_bulk_invitations_setting = nil
     BulletTrain.configure do |config|
@@ -41,11 +40,8 @@ class InvitationListsTest < ApplicationSystemTestCase
 
     # Click on next to show that bulk invitations will raise an error if not filled out properly.
     click_on "Next"
-    puts "##############################"
-    puts "Debugging Invitation Lists"
-    p page.text.split("\n")
-    p page.text.split("\n")
-    puts "##############################"
+    assert_text("Invite your team members")
+    assert_text("Email address")
     assert_text("Email can't be blank")
 
     # Fill in the email addresses.
