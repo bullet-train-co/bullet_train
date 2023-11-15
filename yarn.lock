@@ -1345,22 +1345,22 @@
   resolved "https://registry.yarnpkg.com/@pkgjs/parseargs/-/parseargs-0.11.0.tgz#a77ea742fab25775145434eb1d2328cf5013ac33"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
-"@rails/actioncable@^7.0", "@rails/actioncable@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.1.1.tgz#e8c49769d41f35a4473133c259cc98adc04dddf8"
-  integrity sha512-ZRJ9rdwFQQjRbtgJnweY0/4UQyxN6ojEGRdib0JkjnuIciv+4ok/aAeZmBJqNreTMaBqS0eHyA9hCArwN58opg==
+"@rails/actioncable@^7.0", "@rails/actioncable@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.1.2.tgz#d261ff4b72844f5af496671346ec478798f4ac2c"
+  integrity sha512-KGziTZfbmGm8/fHOpj515xupbYU+49hsp4etfdpoDJ/CEY2bRZR0cyFcJkpK6n0t/sxOHNWY6bo9vSgXZvT7Mg==
 
-"@rails/actiontext@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.1.1.tgz#01ac458df5eff06c971b48001b03d73c67b50462"
-  integrity sha512-AdDK+gUa+akys1kFNgZXB6+rz3n60Of+c4TyJzUe6p5cBIjTimMaMWPSr76fyORXEBFKsCUH9bigXSAoUZKU0A==
+"@rails/actiontext@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.1.2.tgz#2f7772b33951f76a07e9ff83d54519c362d99fd5"
+  integrity sha512-qiSUtop7rIb9BlwvgU98u+y8erlWhOiV0AveoHQ4EzN11VAWj3Euao9O+Q1iEJfIPcgXRvnsVLIJPrz3ldizFg==
   dependencies:
     "@rails/activestorage" ">= 7.1.0-alpha"
 
-"@rails/activestorage@>= 7.1.0-alpha", "@rails/activestorage@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-7.1.1.tgz#3f12e8ac784f460f6a9d205744354abd79a525f2"
-  integrity sha512-QGBj+y4fbZt/QMMpjqnpKlzCKpDGTYrvJ+qc0QLis34AfbBLVgRo7kPzmdmeOTtwvWqpcivB9CrjTcV/C/7ruA==
+"@rails/activestorage@>= 7.1.0-alpha", "@rails/activestorage@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@rails/activestorage/-/activestorage-7.1.2.tgz#088dce680fa1e0a4f8e0c5ac91073f729204ed06"
+  integrity sha512-evC/xGlpq5XGpcNJina3oNVVB8pUp1GpnN3a84SVA+UNuB6O91OdNRl9BGHNAOo6/jxmFtLb73PIjWqQyVE14w==
   dependencies:
     spark-md5 "^3.0.1"
 
@@ -1374,10 +1374,10 @@
   resolved "https://registry.yarnpkg.com/@rails/request.js/-/request.js-0.0.9.tgz#89e2a575405dc07eb8a9b3d2fe04289e1f057cd0"
   integrity sha512-VleYUyrA3rwKMvYnz7MI9Ada85Vekjb/WVz7NuGgDO24Y3Zy9FFSpDMQW+ea/tlftD+CdX/W/sUosRA9/HkDOQ==
 
-"@rails/ujs@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-7.1.1.tgz#f8df96e406a2a824084b637880e57c257073cb05"
-  integrity sha512-ywGwWNiqXN3Bb1BifVQTrkWEWcAGLHW3D0JNQMQeu57LsoluRzvnenNLPsmdoDPkrmSIASDXNsJiCIpUzFj8CA==
+"@rails/ujs@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@rails/ujs/-/ujs-7.1.2.tgz#ea903bcc0224e17156015d995b6f1b83e27d64b2"
+  integrity sha512-c5x02djEKEVVE4qfN4XgElJS4biM0xxtIVpcJ0ZHLK116U19rowTtmD0AJ/RCb3Xaewa4GPIWLlwgeC0dCQqzw==
 
 "@redocly/ajv@^8.11.0":
   version "8.11.0"
@@ -1434,10 +1434,10 @@
     core-js "^3.15.1"
     nanopop "^2.1.0"
 
-"@tailwindcss/forms@^0.5.6":
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.5.6.tgz#29c6c2b032b363e0c5110efed1499867f6d7e868"
-  integrity sha512-Fw+2BJ0tmAwK/w01tEFL5TiaJBX1NLT1/YbWgvm7ws3Qcn11kiXxzNTEQDMs5V3mQemhB56l3u0i9dwdzSQldA==
+"@tailwindcss/forms@^0.5.7":
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/forms/-/forms-0.5.7.tgz#db5421f062a757b5f828bc9286ba626c6685e821"
+  integrity sha512-QE7X69iQI+ZXwldE+rzasvbJiyV/ju1FGHH0Qn2W3FKbuYtqp8LKcy6iSw79fVUT5/Vvf+0XgLCeYVG+UV6hOw==
   dependencies:
     mini-svg-data-uri "^1.2.3"
 
@@ -1601,10 +1601,10 @@ browserslist@^4.21.10, browserslist@^4.21.9:
     node-releases "^2.0.13"
     update-browserslist-db "^1.0.11"
 
-cable_ready@^5.0.0:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.1.tgz#1cef5991cf7a064d09971ed7d87c614dec2ee1e1"
-  integrity sha512-+t9rKTgYwW5XBx113y97qC8MNEtBZZL84Isdec23HWvjMx0icOQsMzHJE75ycjevgjACTeWZqjRcCdtCHxgZ9g==
+cable_ready@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.2.tgz#9042bddce487c25710492d9d4b27f01ce0f8f90e"
+  integrity sha512-2NUDYACXZuLmnw9q32lGwRQqJaAGU+X/XTLS9lQHojw19l4Py7F2HyeJD6nZ1Rucv96oSlrVQr5kAL/jOB+CpQ==
   dependencies:
     morphdom "2.6.1"
 
