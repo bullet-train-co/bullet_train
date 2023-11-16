@@ -1601,10 +1601,10 @@ browserslist@^4.21.10, browserslist@^4.21.9:
     node-releases "^2.0.13"
     update-browserslist-db "^1.0.11"
 
-cable_ready@^5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.2.tgz#9042bddce487c25710492d9d4b27f01ce0f8f90e"
-  integrity sha512-2NUDYACXZuLmnw9q32lGwRQqJaAGU+X/XTLS9lQHojw19l4Py7F2HyeJD6nZ1Rucv96oSlrVQr5kAL/jOB+CpQ==
+cable_ready@^5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-5.0.3.tgz#99e621005246d846b4ee5fb34cbfb773c88a019a"
+  integrity sha512-0WcXRSwNw6p4SQmcAPk/APkqgfN3MlLCg6N6SUV+xJECWcdPPRIF8bQ7CLZBrch7Q8Fv7NZiokJpQShuSv+yNw==
   dependencies:
     morphdom "2.6.1"
 
