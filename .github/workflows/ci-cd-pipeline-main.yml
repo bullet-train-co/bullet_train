@@ -12,8 +12,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  mini_test:
-    name: 🧪 MiniTest
+  minitest:
+    name: 🧪 Minitest
     uses: ./.github/workflows/_run_tests.yml
     secrets: inherit
   standardrb:
