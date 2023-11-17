@@ -1,4 +1,6 @@
-name: "Create Bullet Train Upgrade PR"
+# This workflow will create a pull request in your repo that will update
+# your app to whatever version of Bullet Train that you specify.
+name: " ↗️  Create Bullet Train Upgrade PR"
 on:
   workflow_dispatch:
     inputs:

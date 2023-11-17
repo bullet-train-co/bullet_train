@@ -1,0 +1,11 @@
+# This is a dummy workflow that's just here to add a bit of organization to the workflow list.
+# Too bad they don't allow you to hide workflows or something.
+name: " 🚫 |----- Reusable Worfklows Below"
+on:
+  workflow_call:
+
+jobs:
+  nothing:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Nothing to see here. Move along. 🎇"
