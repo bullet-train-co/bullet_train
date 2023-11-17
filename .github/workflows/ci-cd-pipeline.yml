@@ -5,7 +5,7 @@
 # If everything passes it can be set to auto-deploy to your staging app on Heroku.
 #
 # This workflow is primarily meant to be triggered automatically, but it can be run manually.
-name: " 💻 PR CI/CD Pipeline (staging)"
+name: " 💻 PR CI (staging)"
 on:
   workflow_dispatch:
   pull_request:
