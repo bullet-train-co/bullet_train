@@ -1390,11 +1390,11 @@
     uri-js "^4.2.2"
 
 "@redocly/cli@^1.0.0-beta.111":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@redocly/cli/-/cli-1.4.0.tgz#917505fd2eef533946192945cb06e2a3559055b6"
-  integrity sha512-MARIbVWG0XlwZwnpcd6IUXekJUxqvQCeU5eJ3RsvYzldFSC07RD0wWgdnem3xTLV+k+fHsgycezNz89D+UjBIA==
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@redocly/cli/-/cli-1.4.1.tgz#6ca3a02a272d0fa33b687ec0a964bca5d4c4c3c7"
+  integrity sha512-c0v8SYyqC1QvImJrGhw6+wIPXn10Zhp1sUGmvXIIXZQzS7fL15+qBH4f19nh3ChpSdO4x0EdBFvvTovrupV4sQ==
   dependencies:
-    "@redocly/openapi-core" "1.4.0"
+    "@redocly/openapi-core" "1.4.1"
     chokidar "^3.5.1"
     colorette "^1.2.0"
     core-js "^3.32.1"
@@ -1402,6 +1402,7 @@
     glob "^7.1.6"
     handlebars "^4.7.6"
     mobx "^6.0.4"
+    node-fetch "^2.6.1"
     react "^17.0.0 || ^18.2.0"
     react-dom "^17.0.0 || ^18.2.0"
     redoc "~2.1.2"
@@ -1410,10 +1411,10 @@
     styled-components "^6.0.7"
     yargs "17.0.1"
 
-"@redocly/openapi-core@1.4.0", "@redocly/openapi-core@^1.0.0-rc.2":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.4.0.tgz#d1ce8e391b32452082f754315c8eb265690b784f"
-  integrity sha512-M4f0H3XExPvJ0dwbEou7YKLzkpz2ZMS9JoNvrbEECO7WCwjGZ4AjbiUjp2p0ZzFMNIiNgTVUJJmkxGxsXW471Q==
+"@redocly/openapi-core@1.4.1", "@redocly/openapi-core@^1.0.0-rc.2":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.4.1.tgz#0620a5e204159626a1d99b88f758e23ef0cb5740"
+  integrity sha512-oAhnG8MKocM9LuP++NGFxdniNKWSLA7hzHPQoOK92LIP/DdvXx8pEeZ68UTNxIXhKonoUcO6s86I3L0zj143zg==
   dependencies:
     "@redocly/ajv" "^8.11.0"
     "@types/node" "^14.11.8"
