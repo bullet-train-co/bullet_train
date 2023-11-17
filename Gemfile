@@ -122,7 +122,7 @@ gem "bullet_train-obfuscates_id", BULLET_TRAIN_VERSION
 
 # Core gems that are dependencies of gems listed above. Technically they
 # shouldn't need to be listed here, but we list them so that we can keep
-# verion numbers in sync.
+# version numbers in sync.
 gem "bullet_train-fields", BULLET_TRAIN_VERSION
 gem "bullet_train-has_uuid", BULLET_TRAIN_VERSION
 gem "bullet_train-roles", BULLET_TRAIN_VERSION
