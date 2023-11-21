@@ -65,7 +65,7 @@ group :development, :test do
 
   # Generate test objects.
   # 6.3.0 and 6.4.0 have a bug https://github.com/thoughtbot/factory_bot_rails/issues/433
-  gem 'factory_bot_rails', '~> 6.2', "!= 6.3.0", "!= 6.4.0"
+  gem "factory_bot_rails", "~> 6.2", "!= 6.3.0", "!= 6.4.0"
 end
 
 group :development do
