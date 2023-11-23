@@ -154,9 +154,9 @@ GEM
       bullet_train-api
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.6.19)
+    bullet_train-integrations (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.6.19)
+    bullet_train-integrations-stripe (1.6.18)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
@@ -165,7 +165,7 @@ GEM
     bullet_train-obfuscates_id (1.6.18)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.6.18)
+    bullet_train-outgoing_webhooks (1.6.19)
       public_suffix
       rails (>= 6.0.0)
     bullet_train-roles (1.6.18)
