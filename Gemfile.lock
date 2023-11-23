@@ -142,7 +142,7 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.6.18)
+    bullet_train-fields (1.6.19)
       chronic
       cloudinary
       phonelib
