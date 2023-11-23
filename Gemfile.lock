@@ -168,7 +168,7 @@ GEM
     bullet_train-outgoing_webhooks (1.6.18)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.6.19)
+    bullet_train-roles (1.6.18)
       active_hash
       activesupport
       cancancan
@@ -176,7 +176,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-scope_questions (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.6.18)
+    bullet_train-scope_validator (1.6.19)
       rails
     bullet_train-sortable (1.6.18)
       rails (>= 6.0.0)
