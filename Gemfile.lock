@@ -131,7 +131,7 @@ GEM
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-api (1.6.18)
+    bullet_train-api (1.6.19)
       bullet_train
       bullet_train-super_scaffolding
       colorizer
@@ -257,7 +257,7 @@ GEM
       rotp (~> 6.0)
     docile (1.4.0)
     domain_name (0.6.20231109)
-    doorkeeper (5.6.6)
+    doorkeeper (5.6.7)
       railties (>= 5)
     email_reply_parser (0.5.11)
     erubi (1.12.0)
