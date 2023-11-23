@@ -174,11 +174,11 @@ GEM
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.6.19)
+    bullet_train-scope_questions (1.6.18)
       rails (>= 6.0.0)
     bullet_train-scope_validator (1.6.18)
       rails
-    bullet_train-sortable (1.6.18)
+    bullet_train-sortable (1.6.19)
       rails (>= 6.0.0)
     bullet_train-super_load_and_authorize_resource (1.6.18)
       cancancan
