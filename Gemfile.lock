@@ -162,13 +162,13 @@ GEM
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.6.19)
+    bullet_train-obfuscates_id (1.6.18)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.6.19)
+    bullet_train-outgoing_webhooks (1.6.18)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.6.18)
+    bullet_train-roles (1.6.19)
       active_hash
       activesupport
       cancancan
