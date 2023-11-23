@@ -142,14 +142,14 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.6.19)
+    bullet_train-fields (1.6.18)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.6.19)
+    bullet_train-has_uuid (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.6.18)
+    bullet_train-incoming_webhooks (1.6.19)
       bullet_train
       bullet_train-api
       bullet_train-super_scaffolding
