@@ -142,12 +142,12 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.6.19)
+    bullet_train-fields (1.6.18)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.6.19)
+    bullet_train-has_uuid (1.6.18)
       rails (>= 6.0.0)
     bullet_train-incoming_webhooks (1.6.18)
       bullet_train
@@ -156,7 +156,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-integrations (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.6.18)
+    bullet_train-integrations-stripe (1.6.19)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
