@@ -175,7 +175,6 @@ class InvitationDetailsTest < ApplicationSystemTestCase
     fill_in "First Name", with: "Taka"
     fill_in "Last Name", with: "Yamaguchi"
     click_on "Next"
-    click_on "Skip" if bulk_invitations_enabled?
 
     assert_text("The Testing Team’s Dashboard")
     within_team_menu_for(display_details) do
