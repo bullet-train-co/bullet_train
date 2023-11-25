@@ -73,34 +73,33 @@ GEM
     ansi (1.5.0)
     ast (2.4.2)
     awesome_print (1.9.2)
-    aws-eventstream (1.2.0)
-    aws-partitions (1.848.0)
-    aws-sdk-core (3.186.0)
+    aws-eventstream (1.3.0)
+    aws-partitions (1.855.0)
+    aws-sdk-core (3.188.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.72.0)
-      aws-sdk-core (~> 3, >= 3.184.0)
+    aws-sdk-kms (1.73.0)
+      aws-sdk-core (~> 3, >= 3.188.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.136.0)
-      aws-sdk-core (~> 3, >= 3.181.0)
+    aws-sdk-s3 (1.139.0)
+      aws-sdk-core (~> 3, >= 3.188.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
-    aws-sigv4 (1.6.1)
+    aws-sigv4 (1.7.0)
       aws-eventstream (~> 1, >= 1.0.2)
     aws_cf_signer (0.1.3)
     base64 (0.2.0)
-    bcrypt (3.1.19)
+    bcrypt (3.1.20)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
     bootsnap (1.17.0)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.6.11)
+    bullet_train (1.6.18)
       awesome_print
-      bullet_train-fields
       bullet_train-has_uuid
       bullet_train-roles
       bullet_train-routes
@@ -109,6 +108,7 @@ GEM
       bullet_train-themes
       cable_ready (~> 5.0.0)
       cancancan
+      colorizer
       commonmarker
       devise
       devise-pwned_password
@@ -120,6 +120,7 @@ GEM
       image_processing
       microscope
       nice_partials (~> 0.9)
+      omniauth
       pagy
       possessive
       premailer-rails
@@ -130,8 +131,10 @@ GEM
       unicode-emoji
       valid_email
       xxhash
-    bullet_train-api (1.6.11)
+    bullet_train-api (1.6.18)
       bullet_train
+      bullet_train-super_scaffolding
+      colorizer
       doorkeeper
       factory_bot
       jbuilder-schema (= 2.6.2)
@@ -139,60 +142,63 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.6.11)
+    bullet_train-fields (1.6.18)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.6.11)
+    bullet_train-has_uuid (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.6.11)
+    bullet_train-incoming_webhooks (1.6.18)
+      bullet_train
+      bullet_train-api
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.6.11)
+    bullet_train-integrations (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.6.11)
+    bullet_train-integrations-stripe (1.6.18)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.6.11)
+    bullet_train-obfuscates_id (1.6.18)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.6.11)
+    bullet_train-outgoing_webhooks (1.6.18)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.6.11)
+    bullet_train-roles (1.6.18)
       active_hash
       activesupport
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.6.11)
+    bullet_train-scope_questions (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-scope_validator (1.6.11)
-    bullet_train-sortable (1.6.11)
+    bullet_train-scope_validator (1.6.18)
+      rails
+    bullet_train-sortable (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.6.11)
+    bullet_train-super_load_and_authorize_resource (1.6.18)
       cancancan
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.6.11)
-      bullet_train
+    bullet_train-super_scaffolding (1.6.18)
+      colorizer
       indefinite_article
       masamune-ast (~> 2.0.2)
       rails (>= 6.0.0)
-    bullet_train-themes (1.6.11)
+    bullet_train-themes (1.6.18)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.6.11)
+    bullet_train-themes-light (1.6.19)
       bullet_train-themes-tailwind_css
       masamune-ast (~> 2.0.2)
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.6.11)
+    bullet_train-themes-tailwind_css (1.6.19)
       bullet_train
       bullet_train-themes
       rails (>= 6.0.0)
-    cable_ready (5.0.2)
+    cable_ready (5.0.3)
       actionpack (>= 5.2)
       actionview (>= 5.2)
       activesupport (>= 5.2)
@@ -221,6 +227,7 @@ GEM
       sexp_processor
     coderay (1.1.3)
     colorize (1.1.0)
+    colorizer (0.0.2)
     commonmarker (0.23.10)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
@@ -249,9 +256,8 @@ GEM
       railties (~> 7.0)
       rotp (~> 6.0)
     docile (1.4.0)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
-    doorkeeper (5.6.6)
+    domain_name (0.6.20231109)
+    doorkeeper (5.6.7)
       railties (>= 5)
     email_reply_parser (0.5.11)
     erubi (1.12.0)
@@ -267,7 +273,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (2.7.11)
+    faraday (2.7.12)
       base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -298,7 +304,7 @@ GEM
     indefinite_article (0.2.5)
       activesupport
     io-console (0.6.0)
-    irb (1.8.3)
+    irb (1.9.1)
       rdoc
       reline (>= 0.3.8)
     jbuilder (2.11.5)
@@ -321,7 +327,7 @@ GEM
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
     lint_roller (1.1.0)
-    loofah (2.21.4)
+    loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     magic_test (0.0.9)
@@ -360,7 +366,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.6.0)
     multipart-post (2.3.0)
-    net-imap (0.4.4)
+    net-imap (0.4.6)
       date
       net-protocol
     net-pop (0.1.2)
@@ -372,13 +378,13 @@ GEM
     netrc (0.11.0)
     nice_partials (0.10.0)
       actionview (>= 4.2.6)
-    nio4r (2.5.9)
-    nokogiri (1.15.4)
+    nio4r (2.6.1)
+    nokogiri (1.15.5)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.15.4-arm64-darwin)
+    nokogiri (1.15.5-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -424,7 +430,7 @@ GEM
       actionmailer (>= 3)
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
-    prism (0.17.1)
+    prism (0.18.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -433,7 +439,7 @@ GEM
       pry (~> 0.13)
     psych (5.1.1.1)
       stringio
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     puma (6.4.0)
       nio4r (~> 2.0)
     pwned (2.0.2)
@@ -524,7 +530,7 @@ GEM
     rubocop-performance (1.19.1)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
-    ruby-openai (6.0.1)
+    ruby-openai (6.2.0)
       event_stream_parser (>= 0.3.0, < 1.0.0)
       faraday (>= 1)
       faraday-multipart (>= 1)
@@ -598,7 +604,7 @@ GEM
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.9)
+    unf_ext (0.0.9.1)
     unicode-display_width (2.5.0)
     unicode-emoji (3.4.0)
       unicode-version (~> 1.0)
@@ -634,24 +640,24 @@ DEPENDENCIES
   active_hash
   aws-sdk-s3
   bootsnap
-  bullet_train (= 1.6.11)
-  bullet_train-api (= 1.6.11)
-  bullet_train-fields (= 1.6.11)
-  bullet_train-has_uuid (= 1.6.11)
-  bullet_train-incoming_webhooks (= 1.6.11)
-  bullet_train-integrations (= 1.6.11)
-  bullet_train-integrations-stripe (= 1.6.11)
-  bullet_train-obfuscates_id (= 1.6.11)
-  bullet_train-outgoing_webhooks (= 1.6.11)
-  bullet_train-roles (= 1.6.11)
-  bullet_train-scope_questions (= 1.6.11)
-  bullet_train-scope_validator (= 1.6.11)
-  bullet_train-sortable (= 1.6.11)
-  bullet_train-super_load_and_authorize_resource (= 1.6.11)
-  bullet_train-super_scaffolding (= 1.6.11)
-  bullet_train-themes (= 1.6.11)
-  bullet_train-themes-light (= 1.6.11)
-  bullet_train-themes-tailwind_css (= 1.6.11)
+  bullet_train (= 1.6.18)
+  bullet_train-api (= 1.6.18)
+  bullet_train-fields (= 1.6.18)
+  bullet_train-has_uuid (= 1.6.18)
+  bullet_train-incoming_webhooks (= 1.6.18)
+  bullet_train-integrations (= 1.6.18)
+  bullet_train-integrations-stripe (= 1.6.18)
+  bullet_train-obfuscates_id (= 1.6.18)
+  bullet_train-outgoing_webhooks (= 1.6.18)
+  bullet_train-roles (= 1.6.18)
+  bullet_train-scope_questions (= 1.6.18)
+  bullet_train-scope_validator (= 1.6.18)
+  bullet_train-sortable (= 1.6.18)
+  bullet_train-super_load_and_authorize_resource (= 1.6.18)
+  bullet_train-super_scaffolding (= 1.6.18)
+  bullet_train-themes (= 1.6.18)
+  bullet_train-themes-light (= 1.6.18)
+  bullet_train-themes-tailwind_css (= 1.6.18)
   capybara (~> 3.39)
   capybara-email
   chronic
@@ -660,7 +666,7 @@ DEPENDENCIES
   debug
   devise
   devise-two-factor
-  factory_bot_rails
+  factory_bot_rails (~> 6.2, != 6.4.0, != 6.3.0)
   foreman
   honeybadger
   jbuilder
