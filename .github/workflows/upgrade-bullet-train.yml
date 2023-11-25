@@ -1,0 +1,22 @@
+# This workflow will create a pull request in your repo that will update
+# your app to whatever version of Bullet Train that you specify.
+name: " ↗️  Create Bullet Train Upgrade PR"
+on:
+  workflow_dispatch:
+    inputs:
+      versionNumber:
+        description: 'Version Number (latest if blank)'
+        type: string
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create update PR
+        uses: bullet-train-co/create-upgrade-pr@v1
+        with:
+          versionNumber: ${{ inputs.versionNumber }}
+          # If you don't have additional workflows that need to be triggered by the PR that we create
+          # then you can comment out this next line. Otherwise, be sure to setup a token as described here:
+          # https://github.com/bullet-train-co/create-upgrade-pr#creating-a-pat
+          token: ${{ secrets.PAT }}

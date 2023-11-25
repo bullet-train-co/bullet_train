@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# https://gist.github.com/vncsna/64825d5609c146e80de8b1fd623011ca
+set -euxo pipefail
+
 bundle exec rails db:migrate
 GIT_STATUS=`git status db/schema.rb`
 echo $GIT_STATUS

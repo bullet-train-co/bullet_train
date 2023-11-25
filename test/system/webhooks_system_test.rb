@@ -27,7 +27,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
 
       # create the endpoint.
       if disable_developer_menu?
-        visit account_team_webhooks_outgoing_endpoints_path(User.find_by(first_name: "Andrew").current_team)
+        visit account_team_webhooks_outgoing_endpoints_path(@user.current_team)
       else
         within_developers_menu_for(display_details) do
           click_on "Webhooks"
@@ -152,7 +152,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
 
       # create the endpoint.
       if disable_developer_menu?
-        visit account_team_webhooks_outgoing_endpoints_path(User.find_by(first_name: "Andrew").current_team)
+        visit account_team_webhooks_outgoing_endpoints_path(@another_user.current_team)
       else
         within_developers_menu_for(display_details) do
           click_on "Webhooks"
@@ -187,7 +187,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
       end
 
       if disable_developer_menu?
-        visit account_team_webhooks_outgoing_endpoints_path(User.find_by(first_name: "Andrew").current_team)
+        visit account_team_webhooks_outgoing_endpoints_path(@another_user.current_team)
       else
         within_developers_menu_for(display_details) do
           click_on "Webhooks"

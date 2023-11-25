@@ -1,0 +1,27 @@
+# This workflow will run standardrb.
+#
+# This workflow is pimarily meant to be called by other workflows, but it can be run manually.
+name: "🔬 ~ Standardrb"
+on:
+  workflow_call:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      BUNDLE_JOBS: 2
+      BUNDLE_RETRY: 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Run Standardrb
+        id: run-standardrb
+        run : bundle exec standardrb

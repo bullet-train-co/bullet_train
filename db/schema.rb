@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_19_123854) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_09_095948) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -127,22 +127,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_123854) do
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
-  create_table "memberships_reassignments_assignments", force: :cascade do |t|
-    t.bigint "membership_id", null: false
-    t.bigint "scaffolding_completely_concrete_tangible_things_reassignments_i"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["membership_id"], name: "index_memberships_reassignments_assignments_on_membership_id"
-    t.index ["scaffolding_completely_concrete_tangible_things_reassignments_i"], name: "index_assignments_on_tangible_things_reassignment_id"
-  end
-
-  create_table "memberships_reassignments_scaffolding_completely_concrete_tangi", force: :cascade do |t|
-    t.bigint "membership_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["membership_id"], name: "index_tangible_things_reassignments_on_membership_id"
-  end
-
   create_table "oauth_access_grants", force: :cascade do |t|
     t.bigint "resource_owner_id", null: false
     t.bigint "application_id", null: false
@@ -207,16 +191,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_123854) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_absolutely_abstract_creative_concepts_on_team_id"
-  end
-
-  create_table "scaffolding_absolutely_abstract_creative_concepts_collaborators", force: :cascade do |t|
-    t.bigint "creative_concept_id", null: false
-    t.bigint "membership_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.jsonb "role_ids", default: []
-    t.index ["creative_concept_id"], name: "index_creative_concepts_collaborators_on_creative_concept_id"
-    t.index ["membership_id"], name: "index_creative_concepts_collaborators_on_membership_id"
   end
 
   create_table "scaffolding_completely_concrete_tangible_things", force: :cascade do |t|
@@ -375,16 +349,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_19_123854) do
   add_foreign_key "memberships", "oauth_applications", column: "platform_agent_of_id"
   add_foreign_key "memberships", "teams"
   add_foreign_key "memberships", "users"
-  add_foreign_key "memberships_reassignments_assignments", "memberships"
-  add_foreign_key "memberships_reassignments_assignments", "memberships_reassignments_scaffolding_completely_concrete_tangi", column: "scaffolding_completely_concrete_tangible_things_reassignments_i"
-  add_foreign_key "memberships_reassignments_scaffolding_completely_concrete_tangi", "memberships"
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_applications", "teams"
   add_foreign_key "oauth_stripe_accounts", "users"
   add_foreign_key "scaffolding_absolutely_abstract_creative_concepts", "teams"
-  add_foreign_key "scaffolding_absolutely_abstract_creative_concepts_collaborators", "memberships"
-  add_foreign_key "scaffolding_absolutely_abstract_creative_concepts_collaborators", "scaffolding_absolutely_abstract_creative_concepts", column: "creative_concept_id"
   add_foreign_key "scaffolding_completely_concrete_tangible_things", "scaffolding_absolutely_abstract_creative_concepts", column: "absolutely_abstract_creative_concept_id"
   add_foreign_key "scaffolding_completely_concrete_tangible_things_assignments", "memberships"
   add_foreign_key "scaffolding_completely_concrete_tangible_things_assignments", "scaffolding_completely_concrete_tangible_things", column: "tangible_thing_id"

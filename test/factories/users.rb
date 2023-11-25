@@ -22,8 +22,11 @@ FactoryBot.define do
       end
 
       factory :user_example do
+        id { 42 }
         first_name { "Example First Name" }
         last_name { "Example Last Name" }
+        created_at { DateTime.new(2023, 1, 1) }
+        updated_at { DateTime.new(2023, 1, 2) }
       end
     end
   end

@@ -125,16 +125,6 @@ jobs:
           environment:
             KNAPSACK_PRO_CI_NODE_TOTAL: 2
 
-      # Run any update scripts + retest
-      - run: bin/updates/system_tests/use_device_test
-      - run:
-          name: Rerun system tests after update
-          command: |
-            export RAILS_ENV=test
-            KNAPSACK_TEST_FILE_PATTERN="test/system/**/*.rb" bundle exec rails "knapsack_pro:queue:minitest[--verbose]"
-          environment:
-            KNAPSACK_PRO_CI_NODE_TOTAL: 16
-
       # If you don't want to use Knapsack Pro, then use this configuration:
       #
       # - run:
@@ -143,13 +133,9 @@ jobs:
       # - run:
       #     name: Run system tests
       #     command: bundle exec rails test:system
-      #
-      # If you want to gather test results in CircleCI when not running tests in parallel,
-      # include `minitest-ci` in your Gemfile and uncomment the following step.
-      # You can access the test results via the "Tests" tab within each build in CircleCI.
-      #
-      # - store_test_results:
-      #     path: test/reports
+
+      - store_test_results:
+          path: test/reports
 
   'Minitest with HIDE_THINGS':
     parameters:
@@ -202,13 +188,9 @@ jobs:
       # - run:
       #     name: Run system tests with HIDE_THINGS
       #     command: HIDE_THINGS=true bundle exec rails test:system
-      #
-      # If you want to gather test results in CircleCI when not running tests in parallel,
-      # include `minitest-ci` in your Gemfile and uncomment the following step.
-      # You can access the test results via the "Tests" tab within each build in CircleCI.
-      #
-      # - store_test_results:
-      #     path: test/reports
+
+      - store_test_results:
+          path: test/reports
 
   'Minitest for Super Scaffolding':
     parameters:
@@ -258,6 +240,9 @@ jobs:
       - run:
           name: 'Run Super Scaffolding Incoming Webhooks Test'
           command: bundle exec rails test test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
+
+      - store_test_results:
+          path: test/reports
 
   'System Tests with Cuprite':
     parameters:

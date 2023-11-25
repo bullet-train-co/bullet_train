@@ -64,7 +64,8 @@ group :development, :test do
   gem "simplecov", require: false
 
   # Generate test objects.
-  gem "factory_bot_rails"
+  # 6.3.0 and 6.4.0 have a bug https://github.com/thoughtbot/factory_bot_rails/issues/433
+  gem "factory_bot_rails", "~> 6.2", "!= 6.3.0", "!= 6.4.0"
 end
 
 group :development do
@@ -106,7 +107,7 @@ end
 
 # We use a constant here so that we can ensure that all of the bullet_train-*
 # packages are on the same version.
-BULLET_TRAIN_VERSION = "1.5.2"
+BULLET_TRAIN_VERSION = "1.6.19"
 
 # Core packages.
 gem "bullet_train", BULLET_TRAIN_VERSION
@@ -126,7 +127,7 @@ gem "bullet_train-obfuscates_id", BULLET_TRAIN_VERSION
 
 # Core gems that are dependencies of gems listed above. Technically they
 # shouldn't need to be listed here, but we list them so that we can keep
-# verion numbers in sync.
+# version numbers in sync.
 gem "bullet_train-fields", BULLET_TRAIN_VERSION
 gem "bullet_train-has_uuid", BULLET_TRAIN_VERSION
 gem "bullet_train-roles", BULLET_TRAIN_VERSION
@@ -158,6 +159,9 @@ end
 group :test do
   # Helps smooth over flakiness in system tests.
   gem "minitest-retry"
+
+  # Better test output
+  gem "minitest-reporters"
 
   # Interact with emails during testing.
   gem "capybara-email"

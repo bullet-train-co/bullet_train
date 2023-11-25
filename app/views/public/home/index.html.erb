@@ -1,7 +1,36 @@
-<%= render 'shared/page' do |p| %>
-  <% p.content_for :title, "Public Index Page" %>
+<div class="background-fade-container">
+  <div class="background-fade large-fade"></div>
+</div>
 
-  <% p.content_for :body do %>
-    <p>Change the contents of `app/views/public/home/index.html.erb` to edit this view.</p>
-  <% end %>
-<% end %>
+<div class="h-screen w-full flex items-center justify-center">
+  <div class="h-2/3 py-10">
+    <div data-controller="scroll-reveal">
+      <div class="grid grid-cols-1">
+        <%= link_to "https://bullettrain.co/", class: "col-span-1", target: '_blank' do %>
+          <%= image_tag image_path("logo/logo.png"), class: 'reveal reveal-from-left h-40 w-auto mx-auto', "data-scroll-reveal-target": "item" %>
+        <% end %>
+
+        <div class="col-span-1 reveal py-2 mt-10 mx-auto rounded-md shadow bg-slate-100" data-scroll-reveal-target="item" data-delay="400ms">
+          <div class="p-2 m-3 shadow rounded-md bg-white">
+            <div class="py-2 text-center">
+              <%= link_to t('bullet_train.name'), "https://bullettrain.co/", class: 'mx-5 mt-3 text-slate-800 text-4xl font-bold hover:text-primary-600 hover:no-underline', target: '_blank' %>
+              <p><%= "v#{BulletTrain::VERSION}" %></p>
+            </div>
+
+            <div class="w-5/6 mx-auto">
+              <%= render 'shared/line' %>
+            </div>
+
+            <p class="text-slate-600 text-lg text-left p-5">
+              Welcome to Bullet Train! Please read the <%= link_to "documentation", "/docs", target: '_blank' %> to get started.
+            </p>
+
+            <div class="py-2 text-center">
+              <%= link_to t('global.buttons.sign_in'), new_user_session_path, class: first_button_primary %>
+            </div>
+          </div>
+        </div>
+      <div>
+    </div>
+  </div>
+</div>

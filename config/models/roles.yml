@@ -32,4 +32,3 @@ admin:
     Membership: manage
     Scaffolding::AbsolutelyAbstract::CreativeConcept: manage
     Platform::Application: manage
-    Scaffolding::AbsolutelyAbstract::CreativeConcepts::Collaborator: manage
