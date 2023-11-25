@@ -1428,12 +1428,12 @@
     yaml-ast-parser "0.0.43"
 
 "@simonwep/pickr@^1.8.1":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@simonwep/pickr/-/pickr-1.8.2.tgz#96dc86675940d7cad63d69c22083dd1cbb9797cb"
-  integrity sha512-/l5w8BIkrpP6n1xsetx9MWPWlU6OblN5YgZZphxan0Tq4BByTCETL6lyIeY8lagalS2Nbt4F2W034KHLIiunKA==
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@simonwep/pickr/-/pickr-1.9.0.tgz#1640651ff04e76b48d805dc186c6513087a704a3"
+  integrity sha512-oEYvv15PyfZzjoAzvXYt3UyNGwzsrpFxLaZKzkOSd0WYBVwLd19iJerePDONxC1iF6+DpcswPdLIM2KzCJuYFg==
   dependencies:
-    core-js "^3.15.1"
-    nanopop "^2.1.0"
+    core-js "3.32.2"
+    nanopop "2.3.0"
 
 "@tailwindcss/forms@^0.5.7":
   version "0.5.7"
@@ -1753,7 +1753,7 @@ core-js-compat@^3.31.0:
   dependencies:
     browserslist "^4.21.10"
 
-core-js@^3.15.1, core-js@^3.32.1:
+core-js@3.32.2, core-js@^3.32.1:
   version "3.32.2"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.32.2.tgz#172fb5949ef468f93b4be7841af6ab1f21992db7"
   integrity sha512-pxXSw1mYZPDGvTQqEc5vgIb83jGQKFGYWY76z4a7weZXUolw3G+OvpZqSRcfYOoOVUQJYEPsWeQK8pKEnUtWxQ==
@@ -2470,7 +2470,7 @@ nanoid@^3.3.6:
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.6.tgz#443380c856d6e9f9824267d960b4236ad583ea4c"
   integrity sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==
 
-nanopop@^2.1.0:
+nanopop@2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/nanopop/-/nanopop-2.3.0.tgz#a5f672fba27d45d6ecbd0b59789c040072915123"
   integrity sha512-fzN+T2K7/Ah25XU02MJkPZ5q4Tj5FpjmIYq4rvoHX4yb16HzFdCO6JxFFn5Y/oBhQ8no8fUZavnyIv9/+xkBBw==
@@ -3311,9 +3311,9 @@ tributejs@^5.1.3:
   integrity sha512-B5CXihaVzXw+1UHhNFyAwUTMDk1EfoLP5Tj1VhD9yybZ1I8DZJEv8tZ1l0RJo0t0tk9ZhR8eG5tEsaCvRigmdQ==
 
 trix@^2.0.1:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.5.tgz#f54880ab38e24d47829a04e04afaf03a8607f772"
-  integrity sha512-OiCbDf17F7JahEwhyL1MvK9DxAAT1vkaW5sn+zpwfemZAcc4RfQB4ku18/1mKP58LRwBhjcy+6TBho7ciXz52Q==
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-2.0.8.tgz#6fff81b9e02c4f60a181febb3f6e862fbb98f1c4"
+  integrity sha512-tPqJl+NjALVUOC8sNfRrY42K7cfp4QBb9svXxmfhxYrspF9fOOzXq+GnDa9l2ZAcfM43msnPpkJ7MrJQA3FgrA==
 
 ts-interface-checker@^0.1.9:
   version "0.1.13"
