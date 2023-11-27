@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+require "active_support/deprecation"
 
-ActiveSupport::Deprecation.warn(
+ActiveSupport::Deprecation.new.warn(
   "`bin/super-scaffold` is deprecated. Please use `rails generate super_scaffold` instead.\n" \
   "You can see which options are available in the Super Scaffolding documentation: https://bullettrain.co/docs/super-scaffolding"
 )
