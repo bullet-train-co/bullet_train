@@ -10,30 +10,8 @@ echo $GIT_STATUS
 if [[ $GIT_STATUS =~ "nothing to commit, working tree clean" ]]; then
   exit 0
 else
-  # This invocation ensures that our arrays split at new lines, and not BOTH new lines AND spaces.
-  # https://unix.stackexchange.com/questions/39473/command-substitution-splitting-on-newline-but-not-space
-  set -f
-  IFS='
-'
-
-  DIFF=`git diff db/schema.rb`
-  readarray -t DIFF_LINES <<<"$DIFF"
-  for line in "${DIFF_LINES[@]}" ; do
-    if [[ $line =~ ^\+ ]] ; then
-      if [[ $line =~ ^\+{3} ]] ; then
-        # +++ designates a file name, so we skip it.
-        echo ""
-      else
-        ADDITIONS+=($line)
-      fi
-    fi
-  done
-
-  # Reset the settings we edited above.
-  unset IFS
-  set +f
-
-  if [[ ${#ADDITIONS[@]} == 1 && ${ADDITIONS[0]} =~ ^\+ActiveRecord ]] ; then
+  `git diff db/schema.rb | grep "^+[^+]" | grep -v "ActiveRecord::Schema\["`
+  if [[ $? == 1 ]] ; then
     echo "Rails version was updated, but there were no changes to any tables."
     exit 0
   fi
