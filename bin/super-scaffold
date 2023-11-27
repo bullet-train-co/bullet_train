@@ -6,5 +6,21 @@ ActiveSupport::Deprecation.new.warn(
   "You can see which options are available in the Super Scaffolding documentation: https://bullettrain.co/docs/super-scaffolding"
 )
 
-# We redirect this script to a rake task because I don't know a better way to boot the Rails environment for this script.
-exec "#{"spring" if ENV["SPRING"]} rake \"bullet_train:super_scaffolding[#{ARGV.join(" ").gsub(",", "\\,")}]\""
+scaffolding_type = case ARGV.first
+when "crud-field"
+  "field"
+when "incoming-webhooks"
+  "incoming_webhooks"
+when "join-model"
+  "join_model"
+when "oauth-provider"
+  "oauth_provider"
+else
+  nil
+end
+
+if scaffolding_type
+  `rails generate super_scaffold:#{scaffolding_type} #{ARGV.join(" ")}`
+else
+  `rails generate super_scaffold #{ARGV.join(" ")}`
+end
