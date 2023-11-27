@@ -23,7 +23,7 @@ else
 end
 
 if scaffolding_type
-  `rails generate super_scaffold:#{scaffolding_type} #{ARGV.join(" ")}`
+  exec "#{"spring" if ENV["SPRING"]} rails generate super_scaffold:#{scaffolding_type} #{ARGV.join(" ")}"
 else
-  `rails generate super_scaffold #{ARGV.join(" ")}`
+  exec "#{"spring" if ENV["SPRING"]} rails generate super_scaffold #{ARGV.join(" ")}"
 end
