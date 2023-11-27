@@ -7,6 +7,9 @@ ActiveSupport::Deprecation.new.warn(
 )
 
 scaffolding_type = case ARGV.first
+when "crud"
+  ARGV.shift
+  nil
 when "crud-field"
   "field"
 when "incoming-webhooks"
