@@ -27,4 +27,4 @@ jobs:
     uses: ./.github/workflows/_run_tests.yml
     secrets: inherit
     with:
-      use_core_repo: true
+      use-core-repo: true
