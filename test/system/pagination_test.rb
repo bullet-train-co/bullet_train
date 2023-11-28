@@ -6,14 +6,14 @@ class PaginationTest < ApplicationSystemTestCase
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
     @team = @jane.current_team
 
-    @original_hide_things = ENV['HIDE_THINGS']
-    ENV['HIDE_THINGS'] = 'false'
+    @original_hide_things = ENV["HIDE_THINGS"]
+    ENV["HIDE_THINGS"] = "false"
     Rails.application.reload_routes!
   end
 
   def teardown
     super
-    ENV['HIDE_THINGS'] = @original_hide_things
+    ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end
 

@@ -10,17 +10,16 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsControllerTest <
     @team = @user.current_team
     @creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
 
-    @original_hide_things = ENV['HIDE_THINGS']
-    ENV['HIDE_THINGS'] = 'false'
+    @original_hide_things = ENV["HIDE_THINGS"]
+    ENV["HIDE_THINGS"] = "false"
     Rails.application.reload_routes!
   end
 
   def teardown
     super
-    ENV['HIDE_THINGS'] = @original_hide_things
+    ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end
-
 
   test "should get index" do
     skip("Controller uses uses temporary redirect")

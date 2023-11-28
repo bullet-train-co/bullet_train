@@ -10,13 +10,13 @@ class Fields::SuperSelectSupportConcernTest < ActiveSupport::TestCase
     @user = FactoryBot.create :onboarded_user
     @team = @user.current_team
 
-    @original_hide_things = ENV['HIDE_THINGS']
-    ENV['HIDE_THINGS'] = 'false'
+    @original_hide_things = ENV["HIDE_THINGS"]
+    ENV["HIDE_THINGS"] = "false"
     Rails.application.reload_routes!
   end
 
   teardown do
-    ENV['HIDE_THINGS'] = @original_hide_things
+    ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end
 

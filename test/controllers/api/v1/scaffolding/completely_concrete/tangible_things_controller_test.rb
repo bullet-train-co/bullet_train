@@ -20,14 +20,14 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     @tangible_thing.save
     @another_tangible_thing.save
 
-    @original_hide_things = ENV['HIDE_THINGS']
-    ENV['HIDE_THINGS'] = 'false'
+    @original_hide_things = ENV["HIDE_THINGS"]
+    ENV["HIDE_THINGS"] = "false"
     Rails.application.reload_routes!
   end
 
   def teardown
     super
-    ENV['HIDE_THINGS'] = @original_hide_things
+    ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end
 
@@ -101,27 +101,27 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     # Also ensure we can't do that same action as another user.
     post "/api/v1/scaffolding/absolutely_abstract/creative_concepts/#{@absolutely_abstract_creative_concept.id}/completely_concrete/tangible_things",
       params: params.merge({access_token: another_access_token})
-      assert_response :not_found
+    assert_response :not_found
   end
 
   test "update" do
     # Post an attribute update ensure nothing is seriously broken.
     put "/api/v1/scaffolding/completely_concrete/tangible_things/#{@tangible_thing.id}", params: {
       access_token: access_token,
-        scaffolding_completely_concrete_tangible_thing: {
-          # 🚅 skip this section when scaffolding.
-          text_field_value: "Alternative String Value",
-          button_value: @tangible_thing.button_value,
-          cloudinary_image_value: @tangible_thing.cloudinary_image_value,
-          date_field_value: @tangible_thing.date_field_value,
-          email_field_value: "another.email@test.com",
-          password_field_value: "Alternative String Value",
-          phone_field_value: "+19053871234",
-          super_select_value: @tangible_thing.super_select_value,
-          text_area_value: "Alternative String Value",
-          # 🚅 stop any skipping we're doing now.
-          # 🚅 super scaffolding will also insert new fields above this line.
-        }
+      scaffolding_completely_concrete_tangible_thing: {
+        # 🚅 skip this section when scaffolding.
+        text_field_value: "Alternative String Value",
+        button_value: @tangible_thing.button_value,
+        cloudinary_image_value: @tangible_thing.cloudinary_image_value,
+        date_field_value: @tangible_thing.date_field_value,
+        email_field_value: "another.email@test.com",
+        password_field_value: "Alternative String Value",
+        phone_field_value: "+19053871234",
+        super_select_value: @tangible_thing.super_select_value,
+        text_area_value: "Alternative String Value",
+        # 🚅 stop any skipping we're doing now.
+        # 🚅 super scaffolding will also insert new fields above this line.
+      }
     }
 
     assert_response :success

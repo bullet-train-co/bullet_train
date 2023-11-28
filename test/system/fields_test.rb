@@ -1,17 +1,16 @@
 require "application_system_test_case"
 
-
 class AccountTest < ApplicationSystemTestCase
   def setup
     super
-    @original_hide_things = ENV['HIDE_THINGS']
-    ENV['HIDE_THINGS'] = 'false'
+    @original_hide_things = ENV["HIDE_THINGS"]
+    ENV["HIDE_THINGS"] = "false"
     Rails.application.reload_routes!
   end
 
   def teardown
     super
-    ENV['HIDE_THINGS'] = @original_hide_things
+    ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end
 

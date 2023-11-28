@@ -14,14 +14,14 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     # 🚅 stop any skipping we're doing now.
     # 🚅 super scaffolding will insert factory setup in place of this line.
 
-    @original_hide_things = ENV['HIDE_THINGS']
-    ENV['HIDE_THINGS'] = 'false'
+    @original_hide_things = ENV["HIDE_THINGS"]
+    ENV["HIDE_THINGS"] = "false"
     Rails.application.reload_routes!
   end
 
   def teardown
     super
-    ENV['HIDE_THINGS'] = @original_hide_things
+    ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end
 

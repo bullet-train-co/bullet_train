@@ -10,14 +10,14 @@ class WebhooksSystemTest < ApplicationSystemTestCase
     Rails.configuration.outgoing_webhooks[:allowed_hostnames] = [URI.parse(Capybara.app_host).host]
     Rails.configuration.outgoing_webhooks[:blocked_hostnames] = []
 
-    @original_hide_things = ENV['HIDE_THINGS']
-    ENV['HIDE_THINGS'] = 'false'
+    @original_hide_things = ENV["HIDE_THINGS"]
+    ENV["HIDE_THINGS"] = "false"
     Rails.application.reload_routes!
   end
 
   def teardown
     super
-    ENV['HIDE_THINGS'] = @original_hide_things
+    ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end
 
@@ -222,5 +222,4 @@ class WebhooksSystemTest < ApplicationSystemTestCase
 
     assert_text("Delivery Attempt Details")
   end
-
 end
