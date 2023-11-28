@@ -6,13 +6,13 @@ on:
   workflow_call:
     inputs:
       use-core-repo:
-        required: true
+        required: false
         type: boolean
         default: false
   workflow_dispatch:
     inputs:
       use-core-repo:
-        required: true
+        required: false
         type: boolean
         default: false
 
