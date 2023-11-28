@@ -4,7 +4,17 @@
 name: "🧪 ~ Run tests"
 on:
   workflow_call:
+    inputs:
+      use-core-repo:
+        required: true
+        type: boolean
+        default: false
   workflow_dispatch:
+    inputs:
+      use-core-repo:
+        required: true
+        type: boolean
+        default: false
 
 jobs:
   test:
@@ -50,23 +60,41 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          path: tmp/starter
+
+      - name: Checkout Core Repo
+        uses: bullet-train-co/checkout-repo-with-matching-branch@v1
+        if: ${{ inputs.use-core-repo == true }}
+        with:
+          target_dir: tmp/core
+          repository: bullet-train-co/bullet_train-core
 
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
+          working-directory: tmp/starter
           bundler-cache: true
 
       - uses: actions/setup-node@v3
         with:
-          node-version-file: .nvmrc
+          node-version-file: tmp/starter/.nvmrc
           cache: 'yarn'
+          cache-dependency-path: tmp/starter/yarn.lock
+
+      - name: Link Core Repo
+        uses: bullet-train-co/link-core-gems@v1
+        if: ${{ inputs.use-core-repo == true }}
+        with:
+          application_dir: tmp/starter
+          core_dir: tmp/core
 
       - name: asset cache
         uses: actions/cache@v3
         with:
           path: |
-            public/assets
-            tmp/cache/assets/sprockets
+            tmp/starter/public/assets
+            tmp/starter/tmp/cache/assets/sprockets
           key: asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
           restore-keys: |
             asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
@@ -75,10 +103,14 @@ jobs:
 
       - name: Set up database schema
         run: bin/rails db:schema:load
+        working-directory: tmp/starter
 
       - run: yarn install
+        working-directory: tmp/starter
       - run: yarn build
+        working-directory: tmp/starter
       - run: yarn build:css
+        working-directory: tmp/starter
 
       - name: Run Tests
         id: run-tests
@@ -89,10 +121,11 @@ jobs:
           CI_NODE_INDEX: ${{ strategy.job-index }}
         continue-on-error: false
         run : ./bin/parallel-ci
+        working-directory: tmp/starter
         shell: bash
 
       - name: Test Summary
         uses: test-summary/action@v2
         with:
-          paths: "test/reports/**/TEST-*.xml"
+          paths: "tmp/starter/test/reports/**/TEST-*.xml"
         if: always()

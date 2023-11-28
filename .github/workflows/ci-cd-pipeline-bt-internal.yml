@@ -22,3 +22,9 @@ jobs:
     name: 🏗️ Super Scaffolding Tests
     uses: ./.github/workflows/_run_super_scaffolding_tests.yml
     secrets: inherit
+  mini_test:
+    name: 🧪 Core: Minitest
+    uses: ./.github/workflows/_run_tests.yml
+    secrets: inherit
+    with:
+      use_core_repo: true
