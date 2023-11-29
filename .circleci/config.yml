@@ -340,29 +340,30 @@ jobs:
           name: 'Run Action Models Test'
           command: bundle exec rails test test/system/action_models_test.rb
 
-#workflows:
-  #version: 2.1
-  #build:
-    #jobs:
-      #- 'Standard Ruby'
-      #- 'Database Schema Check'
-      #- 'Minitest':
-          #name: 'Core: Minitest'
-          #use-core-repo: true
-      #- 'Minitest':
-          #name: 'Release: Minitest'
-          #use-core-repo: false
-      #- 'Minitest with HIDE_THINGS':
-          #name: 'Core: Minitest with HIDE_THINGS'
-          #use-core-repo: true
-      #- 'Minitest with HIDE_THINGS':
-          #name: 'Release: Minitest with HIDE_THINGS'
-          #use-core-repo: false
-      #- 'Minitest for Super Scaffolding':
-          #name: 'Core: Minitest for Super Scaffolding'
-          #use-core-repo: true
-      #- 'Minitest for Super Scaffolding':
-          #name: 'Release: Minitest for Super Scaffolding'
-          #use-core-repo: false
-      ## - 'System Tests with Cuprite'
-      ## - 'System Tests for Action Models'
+workflows:
+  version: 2.1
+  build:
+    when: false
+    jobs:
+      - 'Standard Ruby'
+      - 'Database Schema Check'
+      - 'Minitest':
+          name: 'Core: Minitest'
+          use-core-repo: true
+      - 'Minitest':
+          name: 'Release: Minitest'
+          use-core-repo: false
+      - 'Minitest with HIDE_THINGS':
+          name: 'Core: Minitest with HIDE_THINGS'
+          use-core-repo: true
+      - 'Minitest with HIDE_THINGS':
+          name: 'Release: Minitest with HIDE_THINGS'
+          use-core-repo: false
+      - 'Minitest for Super Scaffolding':
+          name: 'Core: Minitest for Super Scaffolding'
+          use-core-repo: true
+      - 'Minitest for Super Scaffolding':
+          name: 'Release: Minitest for Super Scaffolding'
+          use-core-repo: false
+      # - 'System Tests with Cuprite'
+      # - 'System Tests for Action Models'
