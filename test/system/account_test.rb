@@ -5,7 +5,6 @@ class AccountTest < ApplicationSystemTestCase
     super
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
     login_as(@jane, scope: :user)
-    puts "@jane = #{@jane.as_json}"
     visit root_path
     if billing_enabled?
       unless freemium_enabled?
