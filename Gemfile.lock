@@ -666,7 +666,7 @@ DEPENDENCIES
   debug
   devise
   devise-two-factor
-  factory_bot_rails (~> 6.2, != 6.4.0, != 6.3.0)
+  factory_bot_rails (~> 6.2, != 6.4.2, != 6.4.1, != 6.4.0, != 6.3.0)
   foreman
   honeybadger
   jbuilder
