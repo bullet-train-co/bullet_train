@@ -80,6 +80,13 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: tmp/starter/yarn.lock
 
+      - name: Link Core Repo
+        uses: bullet-train-co/link-core-gems@v1
+        if: ${{ inputs.use-core-repo == true }}
+        with:
+          application_dir: tmp/starter
+          core_dir: tmp/core
+
       - name: asset cache
         uses: actions/cache@v3
         with:
