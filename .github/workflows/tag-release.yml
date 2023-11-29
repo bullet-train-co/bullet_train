@@ -1,4 +1,4 @@
-name: " 🚅 _ BT - Tag & Release"
+name: "🚅 _ BT - Tag & Release"
 on:
   # Should trigger only when a Pull Request is Merged
   # (the action will not create the Tag if the Pull Request is discarded - closed without merge)
