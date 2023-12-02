@@ -257,7 +257,7 @@ GEM
       rotp (~> 6.0)
     docile (1.4.0)
     domain_name (0.6.20231109)
-    doorkeeper (5.6.7)
+    doorkeeper (5.6.8)
       railties (>= 5)
     email_reply_parser (0.5.11)
     erubi (1.12.0)
@@ -317,7 +317,7 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.2.1)
       railties (>= 6.0.0)
-    json (2.6.3)
+    json (2.7.0)
     jwt (2.7.1)
     knapsack_pro (6.0.0)
       rake
