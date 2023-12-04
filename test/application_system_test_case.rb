@@ -211,7 +211,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   alias_method :sign_in_from_homepage_for, :sign_in_from_homepage
 
   def new_registration_page(display_details = self.display_details)
-    # TODO the tailwind port of bullet train doesn't currently support a homepage.
+    # TODO: Adjust tests to start from the home page.
     visit new_user_registration_path
 
     # this forces capybara to wait until the proper page loads.

@@ -1,0 +1,36 @@
+# This workflow will run whenever commits land on the main branch.
+#
+# It will run tests and a few safety checks.
+#
+# If everything passes it can be set to auto-deploy to your production app on Heroku.
+#
+# This workflow is primarily meant to be triggered automatically, but it can be run manually.
+name: " 🎥 Main CI (prod)"
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  minitest:
+    name: 🧪 Minitest
+    uses: ./.github/workflows/_run_tests.yml
+    secrets: inherit
+  standardrb:
+    name: 🔬 Standardrb
+    uses: ./.github/workflows/_standardrb.yml
+    secrets: inherit
+  db_schema:
+    name: 🔎 DB Schema
+    uses: ./.github/workflows/_database_schema_check.yml
+    secrets: inherit
+  # If you'd like to auto-deploy to your production environment you can uncomment this next block.
+  # You'll need to set HEROKU_EMAIL and HEROKU_API_KEY in your repo secrets.
+  # Be sure to set the app name correctly below.
+  # deploy:
+  #   name: 🚢 Deploy to Heroku
+  #   uses: ./.github/workflows/_deploy_heroku.yml
+  #   needs: [mini_test, standardrb, db_schema]
+  #   secrets: inherit
+  #   with:
+  #     heroku-app-name: ""
