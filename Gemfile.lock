@@ -218,6 +218,7 @@ GEM
       capybara (>= 2.4, < 4.0)
       mail
     charlock_holmes (0.7.7)
+    choice (0.2.0)
     chronic (0.10.2)
     chunky_png (1.4.0)
     cloudinary (1.28.0)
@@ -469,6 +470,11 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
+    rails-erd (1.7.2)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
@@ -530,6 +536,8 @@ GEM
     rubocop-performance (1.19.1)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby-openai (6.3.0)
       event_stream_parser (>= 0.3.0, < 2.0.0)
       faraday (>= 1)
@@ -682,6 +690,7 @@ DEPENDENCIES
   puma (~> 6.0)
   rack-mini-profiler
   rails (~> 7.0.0)
+  rails-erd
   rails_autoscale_agent
   rails_best_practices
   redis (~> 5.0.5)
