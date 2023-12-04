@@ -1061,26 +1061,26 @@
     "@babel/helper-validator-identifier" "^7.22.19"
     to-fast-properties "^2.0.0"
 
-"@bullet-train/bullet-train-sortable@1.6.19":
-  version "1.6.19"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.6.19.tgz#a37c15573fda7a612b96051bbd485fb338a4a8aa"
-  integrity sha512-vAX4v86CmSUY1oYcwGStWUw2jYM5Eu2Iie2tN78DXz+9akYpxU+yNKKdYSJxlkoXdrvO7LpgD3b7bbaZJS/CkQ==
+"@bullet-train/bullet-train-sortable@1.6.20":
+  version "1.6.20"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.6.20.tgz#2b51be531585ce7871f5a6f3f4aa0c50ae7eb534"
+  integrity sha512-v8ELk1TlcALCXYIK95/FZZo7lDNNxwAsaJOMIxCgydzFbsTwR4/Y84AOX2OEns5km9jhnz6v984kAsGFdxJh1w==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
 
-"@bullet-train/bullet-train@1.6.19":
-  version "1.6.19"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.6.19.tgz#270dd1cc8f15dd8dbeaee785a2494a2bd3cec8f2"
-  integrity sha512-pDowqrcUVuR3+DBWW5/brDAC1o5sJhoxYoAazRzWR4aD1p+s51yY3gq4Tn5iDEtFSh7dv930Lr14smkg/FiR9w==
+"@bullet-train/bullet-train@1.6.20":
+  version "1.6.20"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.6.20.tgz#e762264b5bf66dfbdcc7d16bbba0bfcaba0859cb"
+  integrity sha512-nhrWDFE9a5JgPd0+Y6qlphQygZoOYWV1MIoOhyPypW5dwF8O/ZOh8iyjwQWDTnMogalotnZSziEwwcNOc0YLYA==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
-"@bullet-train/fields@1.6.19":
-  version "1.6.19"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.6.19.tgz#c6be7a3692e211affbbbf1243742ba0b3aebe9b1"
-  integrity sha512-IUHQ2s1o4l1DHqSPkk0p4H4cK2HpHm8ZOzq77CY+D875fnZvVUIK6BN9+FoUti5vtrX2CcD7FGlKkYlSxMI3Ug==
+"@bullet-train/fields@1.6.20":
+  version "1.6.20"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.6.20.tgz#5c586166568abd132cfcbc77912df46bec6e32ff"
+  integrity sha512-aus+LTgzG5Rou8pvupFFer4a7rgLhbTeRpCWJvilrpc4BBKf6JDe8u2qrBYblnxW4xOEwYfnfCNIi1y+ksFB+A==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
@@ -1390,11 +1390,11 @@
     uri-js "^4.2.2"
 
 "@redocly/cli@^1.0.0-beta.111":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@redocly/cli/-/cli-1.4.1.tgz#6ca3a02a272d0fa33b687ec0a964bca5d4c4c3c7"
-  integrity sha512-c0v8SYyqC1QvImJrGhw6+wIPXn10Zhp1sUGmvXIIXZQzS7fL15+qBH4f19nh3ChpSdO4x0EdBFvvTovrupV4sQ==
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@redocly/cli/-/cli-1.5.0.tgz#60a13abe62303eb0e52980069643f1c2d661698b"
+  integrity sha512-2E6yhYIs/dj6pFM9ahzuyI4AzFOjmOK1dkwYCtTWT1w5kROlW4HVVgHrxnOIUupRDTD5TdScWSH28n2U1VivWQ==
   dependencies:
-    "@redocly/openapi-core" "1.4.1"
+    "@redocly/openapi-core" "1.5.0"
     chokidar "^3.5.1"
     colorette "^1.2.0"
     core-js "^3.32.1"
@@ -1405,16 +1405,16 @@
     node-fetch "^2.6.1"
     react "^17.0.0 || ^18.2.0"
     react-dom "^17.0.0 || ^18.2.0"
-    redoc "~2.1.2"
+    redoc "~2.1.3"
     semver "^7.5.2"
     simple-websocket "^9.0.0"
     styled-components "^6.0.7"
     yargs "17.0.1"
 
-"@redocly/openapi-core@1.4.1", "@redocly/openapi-core@^1.0.0-rc.2":
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.4.1.tgz#0620a5e204159626a1d99b88f758e23ef0cb5740"
-  integrity sha512-oAhnG8MKocM9LuP++NGFxdniNKWSLA7hzHPQoOK92LIP/DdvXx8pEeZ68UTNxIXhKonoUcO6s86I3L0zj143zg==
+"@redocly/openapi-core@1.5.0", "@redocly/openapi-core@^1.0.0-rc.2":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@redocly/openapi-core/-/openapi-core-1.5.0.tgz#aacdb9030a041a53e38c9b5c51b1caa25ab7957b"
+  integrity sha512-AnDLoDl1+a7mZO4+lx0KG8zH04BQx4ez6yh403PuNl9/0ygbicPPc9QG/y0/0OImChOA+knKLpJazNFjzhOAeg==
   dependencies:
     "@redocly/ajv" "^8.11.0"
     "@types/node" "^14.11.8"
@@ -2465,10 +2465,10 @@ mz@^2.7.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nanoid@^3.3.6:
-  version "3.3.6"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.6.tgz#443380c856d6e9f9824267d960b4236ad583ea4c"
-  integrity sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==
+nanoid@^3.3.7:
+  version "3.3.7"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.7.tgz#d0c301a691bc8d54efa0a2226ccf3fe2fd656bd8"
+  integrity sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==
 
 nanopop@2.3.0:
   version "2.3.0"
@@ -2755,12 +2755,12 @@ postcss-value-parser@^4.0.0, postcss-value-parser@^4.0.2, postcss-value-parser@^
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-4.2.0.tgz#723c09920836ba6d3e5af019f92bc0971c02e514"
   integrity sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==
 
-postcss@^8.4.23, postcss@^8.4.31, postcss@^8.4.4:
-  version "8.4.31"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.31.tgz#92b451050a9f914da6755af352bdc0192508656d"
-  integrity sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==
+postcss@^8.4.23, postcss@^8.4.32, postcss@^8.4.4:
+  version "8.4.32"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.32.tgz#1dac6ac51ab19adb21b8b34fd2d93a86440ef6c9"
+  integrity sha512-D/kj5JNu6oo2EIy+XL/26JEDTlIbB8hw85G8StOE6L74RQAVVP5rej6wxCNqyMbR4RkPfqvezVbPw81Ngd6Kcw==
   dependencies:
-    nanoid "^3.3.6"
+    nanoid "^3.3.7"
     picocolors "^1.0.0"
     source-map-js "^1.0.2"
 
@@ -2856,10 +2856,10 @@ readdirp@~3.6.0:
   dependencies:
     picomatch "^2.2.1"
 
-redoc@~2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/redoc/-/redoc-2.1.2.tgz#d7d270caa3726d0e3e84365f7aa457c11fd81984"
-  integrity sha512-pTu+aTdyJAMPVnOBYMesEjvRnh51BKE7bFLDIM6DiUSigli+3LfandSEp2FaaGnoqyvvC9axg/dvKQP16s02ww==
+redoc@~2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/redoc/-/redoc-2.1.3.tgz#612c9fed744993d5fc99cbf39fe9056bd1034fa5"
+  integrity sha512-d7F9qLLxaiFW4GC03VkwlX9wuRIpx9aiIIf3o6mzMnqPfhxrn2IRKGndrkJeVdItgCfmg9jXZiFEowm60f1meQ==
   dependencies:
     "@redocly/openapi-core" "^1.0.0-rc.2"
     classnames "^2.3.1"

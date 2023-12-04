@@ -82,6 +82,10 @@ group :development do
   # Workaround to get image process to behave on a Mac in development
   # https://github.com/libvips/ruby-vips/issues/155#issuecomment-1047370993
   gem "ruby-vips"
+
+  # Generate a diagram of all the models in the app by running:
+  # bundle exec erd
+  gem "rails-erd"
 end
 
 group :test do
@@ -104,7 +108,7 @@ end
 
 # We use a constant here so that we can ensure that all of the bullet_train-*
 # packages are on the same version.
-BULLET_TRAIN_VERSION = "1.6.19"
+BULLET_TRAIN_VERSION = "1.6.20"
 
 # Core packages.
 gem "bullet_train", BULLET_TRAIN_VERSION
