@@ -41,6 +41,7 @@ class TangibleThingTest < ApplicationSystemTestCase
     page.select "Tokyo", from: "Your Time Zone"
     click_on "Update Profile"
     visit account_teams_path(Team.find_by!(name: "My Super Team"))
+    assert_text "My Super Team’s Dashboard"
 
     click_on "Add New Creative Concept"
     fill_in "Name", with: "My Generic Creative Concept"
