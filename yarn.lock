@@ -1093,6 +1093,20 @@
     trix "^2.0.1"
     zxcvbn "^4.4.2"
 
+"@clickfunnels/refine-stimulus@^2.9.0":
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/@clickfunnels/refine-stimulus/-/refine-stimulus-2.9.0.tgz#de3a34c17f1b1aa6131a48110a43c9db0fe8314c"
+  integrity sha512-o9KQWdcvsgRyzTQw02NVqdUdPjKcrT9Ql1qBDnBX3WclSgd2U2H6Spb+QUwTrTlxQb1jh/n68jaFq7FPIiRkHw==
+  dependencies:
+    "@hotwired/stimulus" "^3.1.0"
+    "@rails/request.js" "^0.0.6"
+    daterangepicker "^3.1.0"
+    jquery "^3.5.1"
+    jquery-events-to-dom-events "^1.1.0"
+    lodash "^4.0.8"
+    moment "^2.29.4"
+    stimulus-use "^0.52.0"
+
 "@csstools/selector-specificity@^2.0.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@csstools/selector-specificity/-/selector-specificity-2.2.0.tgz#2cbcf822bf3764c9658c4d2e568bd0c0cb748016"
@@ -1247,7 +1261,7 @@
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz#4cd74487adeca576c9865ac2b9fe5cb20cef16dd"
   integrity sha512-wa/zupVG0eWxRYJjC1IiPBdt3Lruv0RqGN+/DTMmUWUyMAEB27KXmVY6a8YpUVTM7QwVuaLNGW4EqDgrS2upXQ==
 
-"@hotwired/stimulus@^3.0.1", "@hotwired/stimulus@^3.2.2":
+"@hotwired/stimulus@^3.0.1", "@hotwired/stimulus@^3.1.0", "@hotwired/stimulus@^3.2.2":
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.2.2.tgz#071aab59c600fed95b97939e605ff261a4251608"
   integrity sha512-eGeIqNOQpXoPAIP7tC1+1Yc1yl1xnwYqg+3mzqxyrbE5pg5YFBZcA6YoTiByJB6DKAEsiWtl6tjTJS4IYtbB7A==
@@ -2230,7 +2244,12 @@ jiti@^1.19.1:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.20.0.tgz#2d823b5852ee8963585c8dd8b7992ffc1ae83b42"
   integrity sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==
 
-jquery@>=1.10, jquery@^3.7.0:
+jquery-events-to-dom-events@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/jquery-events-to-dom-events/-/jquery-events-to-dom-events-1.1.0.tgz#df038920e05760d9a41e00e2f48ca023f80d5579"
+  integrity sha512-rEgD7wqslktlvPPlQ74QuaQJ7y33kNCGW0bhAKRiJbSm4yg6xiConpzOqrO2qO5a00hpMQZT7YrSElB7K6o9jg==
+
+jquery@>=1.10, jquery@^3.5.1, jquery@^3.7.0:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
   integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
@@ -2325,6 +2344,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash@^4.0.8:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
 
 loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
@@ -2441,7 +2465,7 @@ mobx@^6.0.4:
   resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.10.0.tgz#3537680fe98d45232cc19cc8f76280bd8bb6b0b7"
   integrity sha512-WMbVpCMFtolbB8swQ5E2YRrU+Yu8iLozCVx3CdGjbBKlP7dFiCSuiG06uea3JCFN5DnvtAX7+G5Bp82e2xu0ww==
 
-moment@^2.9.0:
+moment@^2.29.4, moment@^2.9.0:
   version "2.29.4"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
@@ -3114,6 +3138,11 @@ stimulus-scroll-reveal@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/stimulus-scroll-reveal/-/stimulus-scroll-reveal-3.2.0.tgz#e9bdf2c0ddce82c24df99ba627f2f3375bc64f41"
   integrity sha512-KxXHibsGVqvBJ4TqUaTwss36WX543dlUWoNbDXvkAfuddE6H/D7egkVF9v85LEtCVd2h9KkrTNykBnPqyxpAoQ==
+
+stimulus-use@^0.52.0:
+  version "0.52.1"
+  resolved "https://registry.yarnpkg.com/stimulus-use/-/stimulus-use-0.52.1.tgz#f49435b0c7fbde34b9199d5db5e2da57b9db0ed9"
+  integrity sha512-hIZZQJ8mZEYOxmyU8Yr26lj8xiBHuVC5ngvGb/AKA1fBct4vG3JV+QOkCY0jGvWrQ2Nisvg2xsARKTtLLLQrsQ==
 
 stimulus@^3.0.1:
   version "3.2.2"

@@ -25,6 +25,9 @@ application.load(bulletTrainControllers)
 application.load(bulletTrainFieldControllers)
 application.load(bulletTrainSortableControllers)
 
+import { controllerDefinitions as refineControllers } from "@clickfunnels/refine-stimulus"
+application.load(refineControllers)
+
 application.register('reveal', RevealController)
 application.register('scroll-reveal', ScrollReveal)
 
