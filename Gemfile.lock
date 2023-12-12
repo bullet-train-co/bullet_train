@@ -1,23 +1,4 @@
 GEM
-  remote: https://packager.dev/avo-hq/
-  specs:
-    avo (3.0.1.beta22)
-      actionview (>= 6.1)
-      active_link_to
-      activerecord (>= 6.1)
-      activesupport (>= 6.1)
-      addressable
-      docile
-      dry-initializer
-      httparty
-      inline_svg
-      meta-tags
-      pagy
-      turbo-rails
-      view_component (>= 3.0.0)
-      zeitwerk (>= 2.6.2)
-
-GEM
   remote: https://rubygems.org/
   specs:
     actioncable (7.1.2)
@@ -103,31 +84,47 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     ansi (1.5.0)
     ast (2.4.2)
+    avo (3.1.3)
+      actionview (>= 6.1)
+      active_link_to
+      activerecord (>= 6.1)
+      activesupport (>= 6.1)
+      addressable
+      docile
+      dry-initializer
+      httparty
+      inline_svg
+      meta-tags
+      pagy
+      turbo-rails
+      turbo_power (~> 0.5.0)
+      view_component (>= 3.7.0)
+      zeitwerk (>= 2.6.12)
     awesome_print (1.9.2)
-    aws-eventstream (1.2.0)
-    aws-partitions (1.839.0)
-    aws-sdk-core (3.185.1)
-      aws-eventstream (~> 1, >= 1.0.2)
+    aws-eventstream (1.3.0)
+    aws-partitions (1.864.0)
+    aws-sdk-core (3.190.0)
+      aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.651.0)
-      aws-sigv4 (~> 1.5)
+      aws-sigv4 (~> 1.8)
       jmespath (~> 1, >= 1.6.1)
-    aws-sdk-kms (1.72.0)
-      aws-sdk-core (~> 3, >= 3.184.0)
+    aws-sdk-kms (1.74.0)
+      aws-sdk-core (~> 3, >= 3.188.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.136.0)
-      aws-sdk-core (~> 3, >= 3.181.0)
+    aws-sdk-s3 (1.141.0)
+      aws-sdk-core (~> 3, >= 3.189.0)
       aws-sdk-kms (~> 1)
-      aws-sigv4 (~> 1.6)
-    aws-sigv4 (1.6.0)
+      aws-sigv4 (~> 1.8)
+    aws-sigv4 (1.8.0)
       aws-eventstream (~> 1, >= 1.0.2)
     aws_cf_signer (0.1.3)
-    base64 (0.1.1)
-    bcrypt (3.1.19)
+    base64 (0.2.0)
+    bcrypt (3.1.20)
     bigdecimal (3.1.4)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.16.0)
+    bootsnap (1.17.0)
       msgpack (~> 1.2)
     builder (3.2.4)
     bullet_train (1.6.22)
@@ -269,7 +266,7 @@ GEM
       addressable
     cssbundling-rails (1.3.3)
       railties (>= 6.0.0)
-    date (3.3.3)
+    date (3.3.4)
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
@@ -326,7 +323,7 @@ GEM
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
-    honeybadger (5.2.1)
+    honeybadger (5.4.0)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.5)
@@ -346,7 +343,7 @@ GEM
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
     io-console (0.6.0)
-    irb (1.8.3)
+    irb (1.10.1)
       rdoc
       reline (>= 0.3.8)
     jbuilder (2.11.5)
@@ -359,9 +356,9 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.2.1)
       railties (>= 6.0.0)
-    json (2.6.3)
+    json (2.7.1)
     jwt (2.7.1)
-    knapsack_pro (5.7.0)
+    knapsack_pro (6.0.3)
       rake
     language_server-protocol (3.17.0.3)
     launchy (2.5.2)
@@ -369,7 +366,7 @@ GEM
     letter_opener (1.8.1)
       launchy (>= 2.2, < 3)
     lint_roller (1.1.0)
-    loofah (2.21.4)
+    loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     magic_test (0.0.9)
@@ -398,6 +395,7 @@ GEM
     mime-types-data (3.2023.1205)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
+    mini_portile2 (2.8.5)
     minitest (5.20.0)
     minitest-reporters (1.6.1)
       ansi
@@ -410,22 +408,25 @@ GEM
     multi_xml (0.6.0)
     multipart-post (2.3.0)
     mutex_m (0.2.0)
-    net-imap (0.4.2)
+    net-imap (0.4.7)
       date
       net-protocol
     net-pop (0.1.2)
       net-protocol
-    net-protocol (0.2.1)
+    net-protocol (0.2.2)
       timeout
     net-smtp (0.4.0)
       net-protocol
     netrc (0.11.0)
     nice_partials (0.10.0)
       actionview (>= 4.2.6)
-    nio4r (2.5.9)
-    nokogiri (1.15.4-arm64-darwin)
+    nio4r (2.7.0)
+    nokogiri (1.15.5)
+      mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.15.5-arm64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
       faraday (>= 0.17.3, < 3.0)
@@ -447,7 +448,7 @@ GEM
       omniauth (~> 1.3)
       omniauth-oauth2 (~> 1.4)
     orm_adapter (0.5.0)
-    pagy (6.1.0)
+    pagy (6.2.0)
     pagy_cursor (0.6.1)
       activerecord (>= 5)
       pagy (>= 6, < 7)
@@ -480,15 +481,15 @@ GEM
       pry (~> 0.13)
     psych (5.1.1.1)
       stringio
-    public_suffix (5.0.3)
+    public_suffix (5.0.4)
     puma (6.4.0)
       nio4r (~> 2.0)
     pwned (2.0.2)
-    racc (1.7.1)
+    racc (1.7.3)
     rack (2.2.8)
     rack-cors (2.0.1)
       rack (>= 2.0.0)
-    rack-mini-profiler (3.1.1)
+    rack-mini-profiler (3.3.0)
       rack (>= 1.2.0)
     rack-session (1.0.2)
       rack (< 3)
@@ -541,15 +542,15 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
-    rake (13.0.6)
-    rdoc (6.5.0)
+    rake (13.1.0)
+    rdoc (6.6.1)
       psych (>= 4.0.0)
-    redis (5.0.7)
-      redis-client (>= 0.9.0)
-    redis-client (0.17.1)
+    redis (5.0.8)
+      redis-client (>= 0.17.0)
+    redis-client (0.19.0)
       connection_pool
-    regexp_parser (2.8.2)
-    reline (0.3.9)
+    regexp_parser (2.8.3)
+    reline (0.4.1)
       io-console (~> 0.5)
     require_all (3.0.0)
     responders (3.1.1)
@@ -566,19 +567,18 @@ GEM
       chunky_png (~> 1.0)
       rqrcode_core (~> 1.0)
     rqrcode_core (1.2.0)
-    rubocop (1.56.4)
-      base64 (~> 0.1.1)
+    rubocop (1.57.2)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
-      parser (>= 3.2.2.3)
+      parser (>= 3.2.2.4)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
       rubocop-ast (>= 1.28.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.29.0)
+    rubocop-ast (1.30.0)
       parser (>= 3.2.1.0)
     rubocop-performance (1.19.1)
       rubocop (>= 1.7.0, < 2.0)
@@ -594,22 +594,22 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    selenium-webdriver (4.14.0)
+    selenium-webdriver (4.16.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sentry-rails (5.12.0)
+    sentry-rails (5.15.0)
       railties (>= 5.0)
-      sentry-ruby (~> 5.12.0)
-    sentry-ruby (5.12.0)
+      sentry-ruby (~> 5.15.0)
+    sentry-ruby (5.15.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
-    sentry-sidekiq (5.12.0)
-      sentry-ruby (~> 5.12.0)
+    sentry-sidekiq (5.15.0)
+      sentry-ruby (~> 5.15.0)
       sidekiq (>= 3.0)
     sexp_processor (4.17.0)
     showcase-rails (0.4.6)
       rails (>= 6.1.0)
-    sidekiq (7.1.6)
+    sidekiq (7.2.0)
       concurrent-ruby (< 2)
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
@@ -632,10 +632,10 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    standard (1.31.2)
+    standard (1.32.1)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.0)
-      rubocop (~> 1.56.4)
+      rubocop (~> 1.57.2)
       standard-custom (~> 1.0.0)
       standard-performance (~> 1.2)
     standard-custom (1.0.2)
@@ -646,15 +646,17 @@ GEM
       rubocop-performance (~> 1.19.1)
     stimulus-rails (1.3.0)
       railties (>= 6.0.0)
-    stringio (3.0.8)
+    stringio (3.1.0)
     stripe (10.2.0)
     thor (1.3.0)
     thread-local (1.1.0)
-    timeout (0.4.0)
+    timeout (0.4.1)
     turbo-rails (1.5.0)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    turbo_power (0.5.0)
+      turbo-rails (~> 1.3)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -669,7 +671,7 @@ GEM
       mail (>= 2.6.1)
       simpleidn
     version_gem (1.1.3)
-    view_component (3.6.0)
+    view_component (3.8.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -693,12 +695,12 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
-  arm64-darwin-23
+  ruby
   x86_64-linux
 
 DEPENDENCIES
   active_hash
-  avo (>= 3.0.1.beta22)!
+  avo (>= 3.1.0)
   aws-sdk-s3
   bootsnap
   bullet_train (= 1.6.22)
@@ -762,7 +764,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.2.2
 
 BUNDLED WITH
    2.4.10
