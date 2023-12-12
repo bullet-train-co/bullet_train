@@ -1,4 +1,4 @@
-name: "Create Version Bump PR For Core Gems & NPM Packages"
+name: " 🚅 _ BT - Create Version Bump PR For Core Gems & NPM Packages"
 
 on:
   workflow_dispatch:
@@ -50,6 +50,7 @@ jobs:
         delete-branch: true
         title: "BT-Core version bump: ${{ inputs.versionBump }} - ${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}"
         add-paths: "Gemfile, Gemfile.lock, package.json, yarn.lock"
+        token: ${{ secrets.UPGRADE_PR_PAT }}
         body: |
           Version bump of the `core` ruby gems and npm packages to version `${{ steps.bump-core.outputs.NEW_VERSION_NUMBER }}`
 

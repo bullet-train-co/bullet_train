@@ -3,9 +3,9 @@
 export SPRING=true
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-  bin/super-scaffold crud TestSite Team name:text_field other_attribute:text_field url:text_field --navbar="ti-world" --sortable
-  bin/super-scaffold crud TestPage TestSite,Team name:text_field path:text_field
-  bin/super-scaffold crud-field TestSite membership_id:super_select{class_name=Membership}
+  rails g super_scaffold TestSite Team name:text_field other_attribute:text_field url:text_field --navbar="ti-world" --sortable
+  rails g super_scaffold TestPage TestSite,Team name:text_field path:text_field
+  rails g super_scaffold:field TestSite membership_id:super_select{class_name=Membership}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" "s/raise .*/team\.memberships/g" app/models/test_site.rb
@@ -17,14 +17,14 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
-  bin/super-scaffold crud Project Team name:text_field description:trix_editor --navbar="ti-layout"
-  bin/super-scaffold crud Projects::Deliverable Project,Team name:text_field description:trix_editor
+  rails g super_scaffold Project Team name:text_field description:trix_editor --navbar="ti-layout"
+  rails g super_scaffold Projects::Deliverable Project,Team name:text_field description:trix_editor
 
   # Setup for has-many-through test.
-  bin/super-scaffold crud Projects::Tag Team name:text_field --navbar="ti-tag"
+  rails g super_scaffold Projects::Tag Team name:text_field --navbar="ti-tag"
 
-  bin/super-scaffold join-model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
-  bin/super-scaffold crud-field Project tag_ids:super_select{class_name=Projects::Tag}
+  rails g super_scaffold:join_model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
+  rails g super_scaffold:field Project tag_ids:super_select{class_name=Projects::Tag}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
@@ -36,25 +36,25 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
-  bin/super-scaffold crud Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
-  bin/super-scaffold crud Objective Projects::Step,Team name:text_field description:trix_editor
+  rails g super_scaffold Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
+  rails g super_scaffold Objective Projects::Step,Team name:text_field description:trix_editor
 else
   echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
-  bin/super-scaffold crud Insight Team name:text_field description:trix_editor --navbar="ti-world"
-  bin/super-scaffold crud Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
+  rails g super_scaffold Insight Team name:text_field description:trix_editor --navbar="ti-world"
+  rails g super_scaffold Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
 else
   echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
-  bin/super-scaffold crud Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
-  bin/super-scaffold crud Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
+  rails g super_scaffold Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
+  rails g super_scaffold Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
 
   # Test that the foreign key table name will be inserted into the migration.
-  bin/super-scaffold crud-field Personality::Note other_membership_id:super_select{class_name=Membership}
+  rails g super_scaffold:field Personality::Note other_membership_id:super_select{class_name=Membership}
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
@@ -66,8 +66,8 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
-  bin/super-scaffold crud Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
-  bin/super-scaffold crud Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
+  rails g super_scaffold Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
+  rails g super_scaffold Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
   if [[ "$OSTYPE" == "darwin"* ]]; then
     sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
   else
@@ -78,14 +78,14 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
-  bin/super-scaffold crud TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
-  bin/super-scaffold crud ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
+  rails g super_scaffold TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
+  rails g super_scaffold ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
 else
   echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
 fi
 
 # TODO: Generate these in parallel.
-bin/super-scaffold crud PartialTest Team \
+rails g super_scaffold PartialTest Team \
   text_field_test:text_field \
   boolean_test:boolean \
   single_button_test:buttons \
@@ -104,6 +104,6 @@ bin/super-scaffold crud PartialTest Team \
   address_test:address_field --navbar="ti-layout"
 
 # The test for this webhook is run inline in .circleci/config.yml.
-bin/super-scaffold incoming-webhooks SomeProvider
+rails g super_scaffold:incoming_webhooks SomeProvider
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare

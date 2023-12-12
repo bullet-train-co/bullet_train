@@ -3,6 +3,7 @@ import { identifierForContextKey } from "stimulus/webpack-helpers"
 import { controllerDefinitions as bulletTrainControllers } from "@bullet-train/bullet-train"
 import { controllerDefinitions as bulletTrainFieldControllers } from "@bullet-train/fields"
 import { controllerDefinitions as bulletTrainSortableControllers } from "@bullet-train/bullet-train-sortable"
+import ScrollReveal from 'stimulus-scroll-reveal'
 import RevealController from 'stimulus-reveal'
 import CableReady from 'cable_ready'
 import consumer from '../channels/consumer'
@@ -25,6 +26,7 @@ application.load(bulletTrainFieldControllers)
 application.load(bulletTrainSortableControllers)
 
 application.register('reveal', RevealController)
+application.register('scroll-reveal', ScrollReveal)
 
 const controllers = Object.keys(controllersContext).map((filename) => ({
   identifier: identifierForContextKey(filename),

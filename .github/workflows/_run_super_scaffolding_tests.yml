@@ -1,0 +1,136 @@
+# This workflow will run a few super scaffolding commands and then run tests against the generated code.
+#
+# This workflow is pimarily meant to be called by other workflows, but it can be run manually.
+name: 🏗️ ~ Run super scaffolding tests
+on:
+  workflow_call:
+    inputs:
+      use-core-repo:
+        required: false
+        type: boolean
+        default: false
+  workflow_dispatch:
+    inputs:
+      use-core-repo:
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  test:
+    name: "🏗️"
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # For super scaffolding tests we need to have exactly 7 runners.
+        ci_runners: [TestSite, Project, 'Project::Step', Insight, 'Personality::Disposition', 'Personality::Observation', TestFile]
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports:
+          - "6379:6379"
+        # Set health checks to wait until redis has started
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      BUNDLE_JOBS: 2
+      BUNDLE_RETRY: 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: tmp/starter
+
+      - name: Checkout Core Repo
+        uses: bullet-train-co/checkout-repo-with-matching-branch@v1
+        if: ${{ inputs.use-core-repo == true }}
+        with:
+          target_dir: tmp/core
+          repository: bullet-train-co/bullet_train-core
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: tmp/starter
+          bundler-cache: true
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: tmp/starter/.nvmrc
+          cache: 'yarn'
+          cache-dependency-path: tmp/starter/yarn.lock
+
+      - name: Link Core Repo
+        uses: bullet-train-co/link-core-gems@v1
+        if: ${{ inputs.use-core-repo == true }}
+        with:
+          application_dir: tmp/starter
+          core_dir: tmp/core
+
+      - name: asset cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            tmp/starter/public/assets
+            tmp/starter/tmp/cache/assets/sprockets
+          key: asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            asset-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+            asset-cache-${{ runner.os }}-${{ github.ref }}-
+            asset-cache-${{ runner.os }}-
+
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+        working-directory: tmp/starter
+
+      - run: yarn install
+        working-directory: tmp/starter
+      - run: yarn build
+        working-directory: tmp/starter
+      - run: yarn build:css
+        working-directory: tmp/starter
+
+      # TODO: This might be a bad idea. Maybe we should just have spring in the Gemfile all the time.
+      - name: Allow adding of spring
+        run: bundle config unset deployment
+        working-directory: tmp/starter
+
+      - name: Add spring
+        run: bundle add spring
+        working-directory: tmp/starter
+
+      - name: 'Setup Super Scaffolding System Test'
+        run: bundle exec test/bin/setup-super-scaffolding-system-test
+        working-directory: tmp/starter
+        env:
+          CIRCLE_NODE_INDEX: ${{ strategy.job-index }}
+
+      - name: 'Run Super Scaffolding Test'
+        run: bundle exec rails test test/system/super_scaffolding_test.rb test/system/super_scaffolding_partial_test.rb test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
+        working-directory: tmp/starter
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "tmp/starter/test/reports/**/TEST-*.xml"
+        if: always()

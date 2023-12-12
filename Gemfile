@@ -9,7 +9,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby(File.read(File.expand_path(".ruby-version", __dir__)))
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.0.0"
+gem "rails", "~> 7.1.2"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
@@ -64,7 +64,9 @@ group :development, :test do
   gem "simplecov", require: false
 
   # Generate test objects.
-  gem "factory_bot_rails"
+  # 6.3.0 and 6.4.0 have a bug https://github.com/thoughtbot/factory_bot_rails/issues/433
+  # And now 6.4.1 and 6.4.2 break some things: https://github.com/bullet-train-co/bullet_train-core/issues/707
+  gem "factory_bot_rails", "~> 6.2", "!= 6.3.0", "!= 6.4.0", "!= 6.4.1", "!= 6.4.2"
 end
 
 group :development do
@@ -80,6 +82,10 @@ group :development do
   # Workaround to get image process to behave on a Mac in development
   # https://github.com/libvips/ruby-vips/issues/155#issuecomment-1047370993
   gem "ruby-vips"
+
+  # Generate a diagram of all the models in the app by running:
+  # bundle exec erd
+  gem "rails-erd"
 end
 
 group :test do
@@ -102,7 +108,7 @@ end
 
 # We use a constant here so that we can ensure that all of the bullet_train-*
 # packages are on the same version.
-BULLET_TRAIN_VERSION = "1.6.6"
+BULLET_TRAIN_VERSION = "1.6.22"
 
 # Core packages.
 gem "bullet_train", BULLET_TRAIN_VERSION
@@ -122,7 +128,7 @@ gem "bullet_train-obfuscates_id", BULLET_TRAIN_VERSION
 
 # Core gems that are dependencies of gems listed above. Technically they
 # shouldn't need to be listed here, but we list them so that we can keep
-# verion numbers in sync.
+# version numbers in sync.
 gem "bullet_train-fields", BULLET_TRAIN_VERSION
 gem "bullet_train-has_uuid", BULLET_TRAIN_VERSION
 gem "bullet_train-roles", BULLET_TRAIN_VERSION

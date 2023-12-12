@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+sha = ENV['GITHUB_SHA'] || `git rev-parse HEAD`
+node_total = ENV["CI_NODE_TOTAL"] || 1
+node_index = ENV["CI_NODE_INDEX"] || 0
+tests = Dir["test/**/*_test.rb"].
+  sort.
+  # Add randomization seed based on SHA of each commit
+  shuffle(random: Random.new(sha.to_i(16))).
+  select.
+  with_index do |el, i|
+    i % node_total.to_i == node_index.to_i
+  end
+
+system "bundle exec rails test #{tests.join(" ")}", exception: true
