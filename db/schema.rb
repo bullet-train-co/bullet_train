@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_09_095948) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_06_184915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -182,6 +182,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_09_095948) do
     t.datetime "updated_at", precision: nil, null: false
     t.index ["uid"], name: "index_oauth_stripe_accounts_on_uid", unique: true
     t.index ["user_id"], name: "index_oauth_stripe_accounts_on_user_id"
+  end
+
+  create_table "refine_stored_filters", force: :cascade do |t|
+    t.json "state"
+    t.string "filter_type"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "scaffolding_absolutely_abstract_creative_concepts", force: :cascade do |t|

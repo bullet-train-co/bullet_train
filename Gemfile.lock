@@ -521,6 +521,8 @@ GEM
       redis-client (>= 0.17.0)
     redis-client (0.19.0)
       connection_pool
+    refine-rails (2.9.0)
+      rails (>= 6.0)
     regexp_parser (2.8.3)
     reline (0.4.1)
       io-console (~> 0.5)
@@ -714,6 +716,7 @@ DEPENDENCIES
   rails_autoscale_agent
   rails_best_practices
   redis (~> 5.0.5)
+  refine-rails
   rqrcode
   ruby-vips
   selenium-webdriver

@@ -1,0 +1,50 @@
+en:
+  refine:
+    inline:
+      filters:
+        add_first_condition_button:
+          filter: "Filter"
+        load_button:
+          load_filter: "Load Filter"
+        show:
+          filter: "Filter"
+          or: "or"
+        group:
+          and: "and"
+        and_button:
+          condition: "condition"
+          criteria_limit: "You can only create up to %{criteria_limit} filter conditions"
+          add_filter: "Add Filter"
+        or_button:
+          group: "group"
+          criteria_limit: "You can only create up to %{criteria_limit} filter conditions"
+        save_button:
+          save_filter: "Save Filter"
+      criteria:
+        index:
+          saved_filters: "Saved Filters"
+          type_to_search: "Type to search"
+        form_fields:
+          rule: "Rule"
+      inputs:
+        date_condition_days:
+          number_of_days: "Number of Days"
+          days: "Days"
+        date_condition_single:
+          click_to_pick_a_date: "click to pick a date"
+        date_condition_range:
+          min: "min"
+          max: "max"
+          and: "and"
+        numeric_condition:
+          and: "and"
+          min: "min"
+          max: "max"
+
+      stored_filters:
+        index:
+          no_stored_filters: "You have no stored filters"
+        new:
+          save_filter_placeholder: "My New Filter"
+          save_filter_label: "filter:"
+          tooltip: 'Hit <span class="refine--hotkey">return</span> to save, <span class="refine--hotkey">Esc</span> to exit'
