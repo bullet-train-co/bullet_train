@@ -52,8 +52,11 @@ GEM
       rails-html-sanitizer (~> 1.6)
     active_hash (3.2.1)
       activesupport (>= 5.0.0)
-    activejob (7.0.8)
-      activesupport (= 7.0.8)
+    active_link_to (1.0.5)
+      actionpack
+      addressable
+    activejob (7.1.2)
+      activesupport (= 7.1.2)
       globalid (>= 0.3.6)
     activemodel (7.1.2)
       activesupport (= 7.1.2)
@@ -286,6 +289,9 @@ GEM
     domain_name (0.6.20231109)
     doorkeeper (5.6.8)
       railties (>= 5)
+    drb (2.2.0)
+      ruby2_keywords
+    dry-initializer (3.1.1)
     email_reply_parser (0.5.11)
     erubi (1.12.0)
     erubis (2.7.0)
@@ -389,7 +395,6 @@ GEM
     mime-types-data (3.2023.1205)
     mini_magick (4.12.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.4)
     minitest (5.20.0)
     minitest-reporters (1.6.1)
       ansi
@@ -415,10 +420,7 @@ GEM
     nice_partials (0.10.0)
       actionview (>= 4.2.6)
     nio4r (2.5.9)
-    nokogiri (1.15.4)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
-    nokogiri (1.15.4-arm64-darwin)
+    nokogiri (1.15.5-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
@@ -689,7 +691,7 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
-  ruby
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
