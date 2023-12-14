@@ -6,6 +6,10 @@ class FieldsTest < ApplicationSystemTestCase
     @original_hide_things = ENV["HIDE_THINGS"]
     ENV["HIDE_THINGS"] = "false"
     Rails.application.reload_routes!
+
+    # TODO: Capybara.current_driver is returning :selenium,
+    # when it should be either :selenium_chrome or :selenium_chrome_headless.
+    Capybara.current_driver = Capybara.default_driver
   end
 
   def teardown
