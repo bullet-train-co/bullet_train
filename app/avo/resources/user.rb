@@ -15,7 +15,7 @@ class Avo::Resources::User < Avo::BaseResource
     field :email, as: :text
     field :first_name, as: :text
     field :last_name, as: :text
-    field :time_zone, as: :text
+    field :time_zone, as: :select, options: -> { view_context.time_zone_options_for_select(Avo::Current.user.time_zone, nil, ActiveSupport::TimeZone) }
     field :current_team, as: :belongs_to
 
     field :teams, as: :has_many, through: :teams
