@@ -84,7 +84,7 @@ GEM
       public_suffix (>= 2.0.2, < 6.0)
     ansi (1.5.0)
     ast (2.4.2)
-    avo (3.1.3)
+    avo (3.1.7)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -696,7 +696,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_hash
-  avo (>= 3.1.0)
+  avo (>= 3.1.7)
   aws-sdk-s3
   bootsnap
   bullet_train (= 1.6.22)
