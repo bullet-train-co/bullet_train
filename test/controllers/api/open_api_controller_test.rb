@@ -15,9 +15,9 @@ class Api::OpenApiControllerTest < Api::Test
     output = `yarn exec redocly lint api@v1 1> /dev/stdout 2> /dev/stdout`
     FileUtils.rm(openapi_yaml_path)
 
-    warnings = output.match(/You have (\d+) warnings/)
-    puts output if warnings
-    refute warnings
+    failures = output.match(/You have (\d+) warnings/) || output.match("Failed to parse api definition")
+    puts output if failures
+    refute failures
 
     # redocly/openapi-core changed the format of their success message in version 1.2.0.
     # https://github.com/Redocly/redocly-cli/pull/1239
