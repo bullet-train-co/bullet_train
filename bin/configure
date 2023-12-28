@@ -97,30 +97,62 @@ when "linux"
     package_information.split("\s")[1]
   end
 
-  psql_installed = system_packages.include?("postgresql")
-  if psql_installed
-    psql_version = `psql --version`.split("\s")[2]
-    if psql_version.match?(/^14/)
+  docker_packages = 'docker ps -a --format "{{.Names}}"' # This will return a list of all the containers' names.
+  docker_containers = `#{docker_packages}`.split("\n")
+
+  postgres_container_found = false
+
+  if docker_containers.include?("postgres")
+    puts "You have a Docker container named `postgres`.".green
+    postgres_container_found = true
+
+    postgres_version = `docker exec postgres psql --version`.split("\s")[2]
+    if postgres_version.match?(/^14/)
       puts "You have PostgreSQL 14 installed.".green
     else
-      puts "You have PostgreSQL installed, but you're using v#{psql_version} and not v14.".red
+      puts "You have PostgreSQL installed, but you're using v#{postgres_version} and not v14.".red
       input = ask "Try proceeding without PostgreSQL 14? [y/n]"
       if input.downcase[0] == "n"
         exit
       end
     end
-  else
-    puts "You don't have PostgreSQL installed. Please see the installation instructions at https://ubuntu.com/server/docs/databases-postgresql".red
-    exit
   end
 
-  if system_packages.include?("redis") && system_packages.include?("redis-server")
-    version_information = `redis-server --version`
-    redis_version = version_information.split("\s")[2]
-    puts "Redis #{redis_version} is installed.".green
-  else
-    puts "You don't have Redis installed. Please see the installation instructions at https://redis.io/docs/getting-started/installation/install-redis-on-linux/ .".red
-    exit
+  unless postgres_container_found
+    psql_installed = system_packages.include?("postgresql")
+    if psql_installed
+      psql_version = `psql --version`.split("\s")[2]
+      if psql_version.match?(/^14/)
+        puts "You have PostgreSQL 14 installed.".green
+      else
+        puts "You have PostgreSQL installed, but you're using v#{psql_version} and not v14.".red
+        input = ask "Try proceeding without PostgreSQL 14? [y/n]"
+        if input.downcase[0] == "n"
+          exit
+        end
+      end
+    else
+      puts "You don't have PostgreSQL installed. Please see the installation instructions at https://ubuntu.com/server/docs/databases-postgresql".red
+      exit
+    end
+  end
+
+  redis_container_found = false
+
+  if docker_containers.include?("redis")
+    puts "You have a Docker container named `redis`.".green
+    redis_container_found = true
+  end
+
+  unless redis_container_found
+    if system_packages.include?("redis") && system_packages.include?("redis-server")
+      version_information = `redis-server --version`
+      redis_version = version_information.split("\s")[2]
+      puts "Redis #{redis_version} is installed.".green
+    else
+      puts "You don't have Redis installed. Please see the installation instructions at https://redis.io/docs/getting-started/installation/install-redis-on-linux/ .".red
+      exit
+    end
   end
 
   if system_packages.select{|pkg| pkg.match?(/^libicu/)}.any?

@@ -19,10 +19,16 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 3. Run the configuration and setup scripts:
 
     ```
-    bin/configure
-    bin/setup
+    DATABASE_URL=postgres://user:secret@localhost:5432 bin/configure
+    DATABASE_URL=postgres://user:secret@localhost:5432 bin/setup
     ```
-    
+
+4. After setup is done, it'll create `config/application.yml` file. Add your `DATABASE_URL`. Then you won't need to prepend DATABASE_URL in your terminal commands anymore. 😊
+
+    ```
+    DATABASE_URL: postgres://user:secret@localhost:5432
+    ```
+
 4. Boot your application:
 
     ```
