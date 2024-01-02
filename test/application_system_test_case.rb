@@ -112,17 +112,27 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   #     p display_details
   #   end
   def self.device_test(name, &block)
+    # All this is because Rails' `test` method uses `define_method`, which will report this file as the `source_location`
+    # and not the target test file where the test is actually defined.
+    #
+    # `define_method` cannot be passed the correct location, we must use `class_eval` with a source string of Ruby for that.
+    # But using a string means we can't refer to the block, like `define_method(name, &block)` would.
+    #
+    # So we inject a module that we define methods via `test` to pass the block to, then we override that
+    # via `class_eval` to point it to the correct location.
+    location = caller_locations(1, 1).first
+
+    name = name.remove(/[^\w ]/) # `def` is stricter than `define_method` so we have to scrub characters.
+    @device_test_methods ||= Module.new.tap { include _1 }
+
     @@test_devices.each_key do |device_name|
-      test "#{name} on a #{device_name}" do
-        resize_display # TODO: Figure out why the browser window opens if this is done in `setup`.
-        instance_eval(&block)
-      end
+      test_name = ActiveSupport::Testing::Declarative.instance_method(:test).bind_call(@device_test_methods, "#{name} on a #{device_name}", &block)
+
+      class_eval <<~RUBY, location.path, location.lineno
+        def #{test_name}; resize_display; super; end # Use single line to match source line numbers properly.
+      RUBY
     end
   end
-
-  # The `instance_eval` line in `device_test` adds 2 frames in the backtrace which test errors will erroneously point back to.
-  # So we silence those 2 frames.
-  Rails.backtrace_cleaner.add_silencer { /test\/application_system_test_case\.rb.*?(?:instance_eval|device_test)/.match? _1 }
 
   def resize_for(display_details)
     ActiveSupport::Deprecation.warn <<~END_OF_MESSAGE
