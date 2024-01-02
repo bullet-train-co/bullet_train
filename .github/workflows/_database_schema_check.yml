@@ -26,6 +26,8 @@ jobs:
           --health-retries 5
     env:
       RAILS_ENV: test
+      # Manually export your local RAILS_MASTER_KEY if using the credentials system.
+      # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       BUNDLE_JOBS: 2
       BUNDLE_RETRY: 3
