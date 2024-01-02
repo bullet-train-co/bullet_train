@@ -128,8 +128,9 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     @@test_devices.each_key do |device_name|
       test_name = ActiveSupport::Testing::Declarative.instance_method(:test).bind_call(@device_test_methods, "#{name} on a #{device_name}", &block)
 
+      # Standard recommends __FILE__ and __LINE__ + 1 here, which points to `application_system_test_case.rb`. It's wrong.
       # TODO: Figure out why the browser window opens if `resize_display` is done in `setup`.
-      class_eval <<~RUBY, location.path, location.lineno
+      class_eval <<~RUBY, location.path, location.lineno # standard:disable Style/EvalWithLocation
         def #{test_name}; resize_display; super; end # Use single line to match source line numbers properly.
       RUBY
     end
