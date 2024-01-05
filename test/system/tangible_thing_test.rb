@@ -41,7 +41,8 @@ class TangibleThingTest < ApplicationSystemTestCase
     assert_text "Update Your Profile"
     page.select "Tokyo", from: "Your Time Zone"
     click_on "Update Profile"
-    visit account_teams_path(Team.find_by!(name: "My Super Team"))
+    team_path = account_teams_path(Team.find_by!(name: "My Super Team"))
+    visit team_path
     assert_text "My Super Team’s Dashboard"
 
     click_on "Add New Creative Concept"
