@@ -37,7 +37,7 @@ class TangibleThingTest < ApplicationSystemTestCase
     end
 
     edit_user_path = edit_account_user_path(User.find_by!(email: "me@acme.com"))
-    visit edit_account_user_path(edit_user_path)
+    visit edit_user_path
     assert_text "Update Your Profile"
     page.select "Tokyo", from: "Your Time Zone"
     click_on "Update Profile"
