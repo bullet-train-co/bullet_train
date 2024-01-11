@@ -30,6 +30,8 @@ when "tailwind-stylesheet"
   ["/app/assets/stylesheets/#{theme}.tailwind.css", nil]
 when "javascript"
   ["/app/javascript/application.#{theme}.js", nil]
+when "postcss-import-config"
+  ["/postcss-import-config.js", nil]
 else
   raise "Sorry, we couldn't recognize the file you're looking for: \"#{file_type}\""
 end
