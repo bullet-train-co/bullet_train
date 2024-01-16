@@ -92,6 +92,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara", "~> 3.39"
 
+  # Synchronize Capybara commands with client-side JavaScript and AJAX requests to greatly improve
+  # system test stability. Only works on the Selenium Driver though.
+  # gem "capybara-lockstep"
+
   # Selenium is the default default Capybara driver for system tests that ships with
   # Rails. Cuprite is an alternative driver that uses Chrome's native DevTools protocol
   # and offers improved speed and reliability, but only works with Chrome. If you want
