@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require "active_support/deprecation"
+require "colorize"
 
 ActiveSupport::Deprecation.new.warn(
   "`bin/super-scaffold` is deprecated. Please use `rails generate super_scaffold` instead.\n" \
@@ -20,6 +21,17 @@ when "oauth-provider"
   "oauth_provider"
 else
   nil
+end
+
+if ARGV.first.match?(/^action-models/)
+  if defined?(BulletTrain::ActionModels)
+    scaffolding_type = ARGV.first.gsub(/-/, "_")
+  else
+    puts ""
+    puts "You must have Action Models installed if you want to use this generator.".red
+    puts "Please refer to the documentation for more information: https://bullettrain.co/docs/action-models"
+    exit 1
+  end
 end
 
 if scaffolding_type
