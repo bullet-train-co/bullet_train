@@ -425,6 +425,8 @@ GEM
     nio4r (2.7.0)
     nokogiri (1.16.0-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.0-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
@@ -698,6 +700,7 @@ PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
   arm64-darwin-23
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
@@ -767,7 +770,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-   ruby 3.2.2
+   ruby 3.3.0
 
 BUNDLED WITH
    2.4.10
