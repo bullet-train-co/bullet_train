@@ -108,7 +108,7 @@ end
 
 # We use a constant here so that we can ensure that all of the bullet_train-*
 # packages are on the same version.
-BULLET_TRAIN_VERSION = "1.6.23"
+BULLET_TRAIN_VERSION = "1.6.24"
 
 # Core packages.
 gem "bullet_train", BULLET_TRAIN_VERSION
@@ -194,6 +194,8 @@ group :production do
 
   # Use S3 for Active Storage by default.
   gem "aws-sdk-s3", require: false
+
+  gem "terser"
 end
 
 # Use Ruby hashes as readonly datasources for ActiveRecord-like models.

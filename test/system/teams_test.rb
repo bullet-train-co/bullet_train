@@ -154,7 +154,8 @@ class TeamsTest < ApplicationSystemTestCase
     assert_text "Team was successfully created."
     User.find_by(first_name: "Jane").teams.size
 
-    visit edit_account_team_path(Team.find_by(name: "Another Team"))
+    edit_team_path = edit_account_team_path(Team.find_by(name: "Another Team"))
+    visit edit_team_path
     assert_text "Edit Team Details"
 
     assert_difference "Team.count", -1 do
@@ -167,7 +168,8 @@ class TeamsTest < ApplicationSystemTestCase
     be_invited_to_sign_up
     login_as(@jane, scope: :user)
 
-    visit edit_account_team_path(Team.find_by(name: "Your Team"))
+    edit_team_path = edit_account_team_path(Team.find_by(name: "Your Team"))
+    visit edit_team_path
     assert_text "Edit Team Details"
 
     assert_no_difference "Team.count" do
@@ -188,13 +190,15 @@ class TeamsTest < ApplicationSystemTestCase
     User.find_by(first_name: "Jane").teams.size
 
     # Create a new Membership on the original Team by sending an Invitation
-    visit new_account_team_invitation_path(Team.find_by(name: "Your Team"))
+    team_invitation_path = new_account_team_invitation_path(Team.find_by(name: "Your Team"))
+    visit team_invitation_path
     fill_in "Email", with: "someone@bullettrain.co"
     click_on "Create Invitation"
     assert_text("Invitation was successfully created.")
 
     # Delete the Team.
-    visit edit_account_team_path(Team.find_by(name: "Your Team"))
+    edit_team_path = edit_account_team_path(Team.find_by(name: "Your Team"))
+    visit edit_team_path
     assert_text "Edit Team Details"
     assert_difference "Team.count", -1 do
       accept_alert { click_on "Delete Team" }

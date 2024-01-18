@@ -36,11 +36,13 @@ class TangibleThingTest < ApplicationSystemTestCase
       end
     end
 
-    visit edit_account_user_path(User.find_by!(email: "me@acme.com"))
+    edit_user_path = edit_account_user_path(User.find_by!(email: "me@acme.com"))
+    visit edit_user_path
     assert_text "Update Your Profile"
     page.select "Tokyo", from: "Your Time Zone"
     click_on "Update Profile"
-    visit account_teams_path(Team.find_by!(name: "My Super Team"))
+    team_path = account_teams_path(Team.find_by!(name: "My Super Team"))
+    visit team_path
     assert_text "My Super Team’s Dashboard"
 
     click_on "Add New Creative Concept"

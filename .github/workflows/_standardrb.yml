@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
+      # Manually export your local RAILS_MASTER_KEY if using the credentials system.
+      # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       BUNDLE_JOBS: 2
       BUNDLE_RETRY: 3
     steps:

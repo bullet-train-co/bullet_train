@@ -74,7 +74,8 @@ class DatesHelperTest < ApplicationSystemTestCase
 
     # No need to check the strings on the page if the record
     # is successfully created and the times below are different.
-    visit account_team_path(Team.find_by(name: "The Testing Team"))
+    team_path = account_team_path(Team.find_by(name: "The Testing Team"))
+    visit team_path
     click_on "Test Concept"
     click_on "Add New Tangible Thing"
     fill_in "Text Field Value", with: "Another Test Tangible Thing"
