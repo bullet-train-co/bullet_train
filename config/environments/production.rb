@@ -111,6 +111,9 @@ Rails.application.configure do
 
   if (ENV["AWS_ACCESS_KEY_ID"] || ENV["BUCKETEER_AWS_ACCESS_KEY_ID"]).present?
     config.active_storage.service = :amazon
+  else
+    puts "WARNING! : We didn't find an active_storage.service configured so we're falling back to the local store, but it's A VERY BAD IDEA to rely on it in production unless you know what you're doing."
+    config.active_storage.service = :local
   end
 
   config.action_mailer.perform_deliveries = true
