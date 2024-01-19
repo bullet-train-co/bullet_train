@@ -30,7 +30,7 @@ jobs:
   # deploy:
   #   name: 🚢 Deploy to Heroku
   #   uses: ./.github/workflows/_deploy_heroku.yml
-  #   needs: [mini_test, standardrb, db_schema]
+  #   needs: [minitest, standardrb, db_schema]
   #   secrets: inherit
   #   with:
   #     heroku-app-name: ""

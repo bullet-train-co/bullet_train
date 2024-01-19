@@ -22,7 +22,7 @@ jobs:
     name: 🏗️ Super Scaffolding Tests
     uses: ./.github/workflows/_run_super_scaffolding_tests.yml
     secrets: inherit
-  core_mini_test:
+  core_minitest:
     # This makes it so that this job only runs in the starter repo itself, and not in
     # applications started from the starter repo. If you want to run super scaffolding
     # test for your own app you can remove or comment out this next line.
