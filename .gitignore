@@ -16,16 +16,12 @@
 !/log/.keep
 !/tmp/.keep
 
-# 🚅 Uncomment these lines and remove `/storage` from
-# Bullet Train's list of files to ignore below to fallback
-# on Rails' standard handling of Active Storage files.
-#
 # Ignore uploaded files in development.
-# /storage/*
-# !/storage/.keep
-# /tmp/storage/*
-# !/tmp/storage/
-# !/tmp/storage/.keep
+/storage/*
+!/storage/.keep
+/tmp/storage/*
+!/tmp/storage/
+!/tmp/storage/.keep
 
 /public/assets
 
@@ -56,9 +52,6 @@ Untitled
 
 # Ignore application configuration
 /config/application.yml
-
-# Ignore Active Storage
-/storage
 
 # Ignore IDE specific folders
 .idea/
