@@ -77,6 +77,8 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   include Warden::Test::Helpers
   include Waiting
 
+  # Capybara::Lockstep.debug = true # Uncomment to inspect and verify the integration in your app.
+
   def example_password
     @example_password ||= SecureRandom.hex
   end

@@ -26,4 +26,6 @@
 
 <%= render 'magic_test/support' if Rails.env.test? %>
 
+<%= capybara_lockstep if defined?(Capybara::Lockstep) %>
+
 <% # put your application-specific additions below to avoid merge conflicts later. %>

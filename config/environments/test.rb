@@ -82,6 +82,10 @@ Rails.application.configure do
   # TODO for some reason this doesn't seem to be doing anything.
   config.active_job.queue_adapter = :inline
 
+  if defined?(Capybara::Lockstep)
+    config.middleware.insert_before 0, Capybara::Lockstep::Middleware
+  end
+
   # ✅ YOUR APPLICATION'S CONFIGURATION
   # If you need to customize your application's configuration, this is the place to do it. This helps avoid merge
   # conflicts in the future when Rails or Bullet Train update their own default settings.

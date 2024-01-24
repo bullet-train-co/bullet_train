@@ -246,6 +246,11 @@ GEM
     capybara-email (3.0.2)
       capybara (>= 2.4, < 4.0)
       mail
+    capybara-lockstep (2.1.0)
+      activesupport (>= 4.2)
+      capybara (>= 3.0)
+      ruby2_keywords
+      selenium-webdriver (>= 4.0)
     charlock_holmes (0.7.7)
     choice (0.2.0)
     chronic (0.10.2)
@@ -730,6 +735,7 @@ DEPENDENCIES
   bullet_train-themes-tailwind_css (= 1.6.28)
   capybara (~> 3.39)
   capybara-email
+  capybara-lockstep
   chronic
   colorize
   cssbundling-rails
