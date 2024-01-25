@@ -28,6 +28,8 @@ when "tailwind-mailer-config"
   ["/tailwind.mailer.#{theme}.config.js", "/tailwind.#{theme}.config.js"]
 when "tailwind-stylesheet"
   ["/app/assets/stylesheets/#{theme}.tailwind.css", nil]
+when "stylesheets-dir"
+  ["/app/assets/stylesheets/#{theme}/", nil]
 when "javascript"
   ["/app/javascript/application.#{theme}.js", nil]
 when "postcss-import-config"
