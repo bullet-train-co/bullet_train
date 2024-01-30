@@ -1,6 +1,7 @@
 BulletTrain.configure do |config|
   # Ensures that only strong passwords are used when registering a user.
-  # Please note that the password validations for devise are still in place.
+  # Please note that the password validations for devise are still in place
+  # when this is set to false.
   config.strong_passwords = !Rails.env.development?
 
   # Enable bulk invitations on the user onboarding step.
