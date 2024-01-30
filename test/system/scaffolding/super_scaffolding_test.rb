@@ -14,6 +14,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   #   bundle exec test/bin/setup-super-scaffolding-system-test
   #
   # to run this test:
+  #   rails test test/system/super_scaffolding/super_scaffolding_test.rb
+  # to run the super scaffolding test suite as a whole:
   #   rails test test/system/super_scaffolding/
   #
   # after the test you can tear down what we've done here in the db:
