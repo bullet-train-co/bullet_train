@@ -128,7 +128,7 @@ jobs:
           CIRCLE_NODE_INDEX: ${{ strategy.job-index }}
 
       - name: 'Run Super Scaffolding Test'
-        run: bundle exec rails test test/system/super_scaffolding_test.rb test/system/super_scaffolding_partial_test.rb test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
+        run: bundle exec rails test test/system/super_scaffolding/super_scaffolding_test.rb test/system/super_scaffolding/partial_test.rb test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
         working-directory: tmp/starter
 
       - name: Test Summary
