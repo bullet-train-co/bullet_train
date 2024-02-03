@@ -714,7 +714,7 @@ DEPENDENCIES
   active_hash
   avo (>= 3.1.7)
   aws-sdk-s3
-  bootsnap
+  bootsnap (~> 1.18.0)
   bullet_train (= 1.6.28)
   bullet_train-api (= 1.6.28)
   bullet_train-fields (= 1.6.28)
