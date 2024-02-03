@@ -48,7 +48,7 @@ gem "redis", "~> 5.0.5"
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", git: "git@github.com:Shopify/bootsnap.git", require: false
+gem "bootsnap", "1.18.2", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
