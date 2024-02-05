@@ -27,8 +27,6 @@ require("@icon/themify-icons/themify-icons.css")
 import { trixEditor } from "@bullet-train/fields"
 trixEditor()
 
-import "./electron"
-
 // ✅ YOUR APPLICATION'S INCLUDES
 // If you need to customize your application's includes, this is the place to do it. This helps avoid merge
 // conflicts in the future when Rails or Bullet Train update their own default includes.
