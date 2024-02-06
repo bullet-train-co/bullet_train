@@ -169,6 +169,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       select "New York", from: "State"
       fill_in "Zip code", with: "10001"
 
+      # Slug partial
+      fill_in "Slug Test", with: "slug-test"
+
       click_on "Create Partial Test"
       assert_text("Partial Test was successfully created.")
 
@@ -222,6 +225,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert_equal partial_test.address_test.country_id, 233
       assert_equal partial_test.address_test.region_id, 1452
       assert_equal partial_test.address_test.postal_code, "10001"
+      # Slug Test
+      assert_equal partial_test.slug_test, "slug-test" # Is automatically downcased.
+      assert page.current_url.ends_with?("slug-test")
     end
   end
 end
