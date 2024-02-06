@@ -170,7 +170,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       fill_in "Zip code", with: "10001"
 
       # Slug partial
-      fill_in "Slug Test", with: "slug-test"
+      fill_in "Slug Test", with: "Slug-Test"
 
       click_on "Create Partial Test"
       assert_text("Partial Test was successfully created.")
