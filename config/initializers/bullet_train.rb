@@ -1,7 +1,7 @@
 BulletTrain.configure do |config|
   # Use strong passwords when registering a user in non-development environment.
   # Please note that the password validations for devise are still in place
-  # when this is set to false.
+  # in all environments.
   config.strong_passwords = !Rails.env.development?
 
   # Enable bulk invitations on the user onboarding step.
