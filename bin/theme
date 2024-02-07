@@ -28,8 +28,12 @@ when "tailwind-mailer-config"
   ["/tailwind.mailer.#{theme}.config.js", "/tailwind.#{theme}.config.js"]
 when "tailwind-stylesheet"
   ["/app/assets/stylesheets/#{theme}.tailwind.css", nil]
+when "stylesheets-dir"
+  ["/app/assets/stylesheets/#{theme}/", nil]
 when "javascript"
   ["/app/javascript/application.#{theme}.js", nil]
+when "postcss-import-config"
+  ["/postcss-import-config.js", nil]
 else
   raise "Sorry, we couldn't recognize the file you're looking for: \"#{file_type}\""
 end
@@ -49,4 +53,12 @@ end
 find_file(file_path)
 find_file(fallback_file_path) if fallback_file_path
 
-raise "Sorry, we couldn't find `#{file_path}` in any of the following paths: #{@candidate_paths.join(", ")}"
+if file_type == "postcss-import-config" && @candidate_paths.size == 1 && @candidate_paths.first == Dir.pwd
+  raise <<~ERROR
+    It looks like you're using an ejected theme and you don't have a `postcss-import-config.js` file in your project.
+    Use the following command to copy the default `postcss-import-config.js` file to your project:
+    > bin/resolve postcss-import-config.js --eject
+  ERROR
+else
+  raise "Sorry, we couldn't find `#{file_path}` in any of the following paths: #{@candidate_paths.join(", ")}"
+end

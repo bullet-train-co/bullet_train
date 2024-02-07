@@ -1,0 +1,17 @@
+/* The theme's stylesheet initializes tailwindcss and imports the theme's default styles.
+
+   The $ThemeStylesheet path is evaluated via a postcss resolver, which finds the theme's
+   main stylesheet within the theme's gem.
+   
+   To control the order of the tailwindcss imports further, you can eject the theme's
+   stylesheet locally using the following command, which will take precedence.
+   > rake bullet_train:themes:light:eject_css
+
+   Read more: https://bullettrain.co/docs/stylesheets
+*/
+@import "$ThemeStylesheet";
+
+/* ✅ YOUR APPLICATION'S CSS */
+/* If you need to customize your application's CSS, this is the place to do it. This helps
+   avoid merge conflicts in the future when Rails or Bullet Train update their own CSS.
+*/
