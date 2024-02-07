@@ -1,5 +1,5 @@
 BulletTrain.configure do |config|
-  # Ensures that only strong passwords are used when registering a user.
+  # Use strong passwords when registering a user in non-development environment.
   # Please note that the password validations for devise are still in place
   # when this is set to false.
   config.strong_passwords = !Rails.env.development?
