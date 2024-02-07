@@ -15,13 +15,6 @@ class FieldsTest < ApplicationSystemTestCase
   end
 
   device_test "simulate restoring behavior of form fields on page restore" do
-    # TODO: This is an ugly hack to ensure the default device_test user isn't logged in.
-    # This is happening when the entire device_test suite is run.
-    visit account_team_path(Team.first) if Team.first
-    if page.text.match?("Your Team’s Dashboard")
-      sign_out_for(display_details)
-    end
-
     new_session_page_for(display_details)
     invitation_only? ? be_invited_to_sign_up : click_on("Don't have an account?")
     assert_text("Create Your Account")
