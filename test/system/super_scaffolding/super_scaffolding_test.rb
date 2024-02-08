@@ -286,7 +286,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   end
 
   test "OpenAPI V3 document is still valid" do
-    visit "http://127.0.0.1:3001/api/v1/openapi.yaml"
     puts(output = `yarn exec redocly lint http://127.0.0.1:3001/api/v1/openapi.yaml 1> /dev/stdout 2> /dev/stdout; rm openapi.yaml`)
     # redocly/openapi-core changed the format of their success message in version 1.2.0.
     # https://github.com/Redocly/redocly-cli/pull/1239
