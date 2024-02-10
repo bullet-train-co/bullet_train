@@ -552,7 +552,7 @@ GEM
     rake (13.1.0)
     rdoc (6.6.2)
       psych (>= 4.0.0)
-    redis (5.0.8)
+    redis (5.1.0)
       redis-client (>= 0.17.0)
     redis-client (0.19.1)
       connection_pool
@@ -761,7 +761,7 @@ DEPENDENCIES
   rails-erd
   rails_autoscale_agent
   rails_best_practices
-  redis (~> 5.0.5)
+  redis (~> 5.1.0)
   rqrcode
   ruby-vips
   selenium-webdriver
