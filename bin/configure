@@ -114,11 +114,12 @@ when "linux"
     exit
   end
 
-  if system_packages.include?("redis") && system_packages.include?("redis-server")
-    version_information = `redis-server --version`
-    redis_version = version_information.split("\s")[2]
+  # TODO: system_packages should include `redis`.
+  # https://github.com/bullet-train-co/bullet_train/issues/1330
+  begin
+    redis_version = `redis-cli --version`.chomp.split("\s").last
     puts "Redis #{redis_version} is installed.".green
-  else
+  rescue
     puts "You don't have Redis installed. Please see the installation instructions at https://redis.io/docs/getting-started/installation/install-redis-on-linux/ .".red
     exit
   end
