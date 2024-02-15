@@ -230,7 +230,16 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def new_registration_page(display_details = self.display_details)
     # TODO: Adjust tests to start from the home page.
+    # Ensure no one is signed in before trying to register a new account.
+    logout
+
     visit new_user_registration_path
+
+    if invitation_only?
+      assert_text("You need to sign in or sign up before continuing.")
+      refute_text("Create Your Account")
+      visit invitation_path(key: ENV["INVITATION_KEYS"].split(",\s+").first)
+    end
 
     # this forces capybara to wait until the proper page loads.
     # otherwise our tests will immediately start trying to match things before the page even loads.
