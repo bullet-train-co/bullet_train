@@ -36,9 +36,13 @@ class ReactivitySystemTest < ApplicationSystemTestCase
       end
     end
 
-    # We should be on the account dashboard with no Creative Concepts listed.
+    # Ensure the user was able to sign up successfully.
     assert_text "My Super Team’s Dashboard"
+    @team = Team.find_by(name: "My Super Team")
+
+    visit account_team_scaffolding_absolutely_abstract_creative_concepts_path(@team)
     assert_text "If you're wondering what this"
+    assert_text "Add New Creative Concept"
 
     # Open a new window. We'll bounce back and forth between these two to ensure updates are happening in both places.
     current_url = page.current_url
@@ -47,7 +51,7 @@ class ReactivitySystemTest < ApplicationSystemTestCase
     # We're going to do some activity and assertions within the new window.
     within_window second_window do
       visit current_url
-      assert_text "My Super Team’s Dashboard"
+      assert_text "My Super Team’s Creative Concepts"
 
       # Ensure we're on a page with no Creative Concepts listed.
       # (This sets us up to confirm that an entire table manifests out of nowhere.)
@@ -65,7 +69,7 @@ class ReactivitySystemTest < ApplicationSystemTestCase
 
     within_window second_window do
       # Ensure we're still on the same page.
-      assert_text "My Super Team’s Dashboard"
+      assert_text "My Super Team’s Creative Concepts"
 
       # But now the new Creative Concept should be present on the page.
       assert_text "My Generic Creative Concept"
