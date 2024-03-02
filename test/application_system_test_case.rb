@@ -23,23 +23,6 @@ if Bundler.locked_gems.dependencies.has_key? "cuprite"
   end
   Capybara.default_driver = Capybara.javascript_driver = :bt_cuprite
 else # Selenium
-
-  # TODO: Ideally we shouldn't have to register this driver. Once a new version of
-  # capybara > 3.39.2 is released we should be able to remove this entire block.
-  # https://github.com/teamcapybara/capybara/pull/2726
-  Capybara.register_driver :selenium_chrome_headless do |app|
-    version = Capybara::Selenium::Driver.load_selenium
-    options_key = Capybara::Selenium::Driver::CAPS_VERSION.satisfied_by?(version) ? :capabilities : :options
-    browser_options = Selenium::WebDriver::Chrome::Options.new.tap do |opts|
-      opts.add_argument("--headless=new")
-      opts.add_argument("--disable-gpu") if Gem.win_platform?
-      # Workaround https://bugs.chromium.org/p/chromedriver/issues/detail?id=2650&q=load&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary
-      opts.add_argument("--disable-site-isolation-trials")
-    end
-
-    Capybara::Selenium::Driver.new(app, **{:browser => :chrome, options_key => browser_options})
-  end
-
   Capybara.javascript_driver = ENV["MAGIC_TEST"].present? ? :selenium_chrome : :selenium_chrome_headless
   Capybara.default_driver = ENV["MAGIC_TEST"].present? ? :selenium_chrome : :selenium_chrome_headless
 end
@@ -247,7 +230,16 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def new_registration_page(display_details = self.display_details)
     # TODO: Adjust tests to start from the home page.
+    # Ensure no one is signed in before trying to register a new account.
+    logout
+
     visit new_user_registration_path
+
+    if invitation_only?
+      assert_text("You need to sign in or sign up before continuing.")
+      refute_text("Create Your Account")
+      visit invitation_path(key: ENV["INVITATION_KEYS"].split(",\s+").first)
+    end
 
     # this forces capybara to wait until the proper page loads.
     # otherwise our tests will immediately start trying to match things before the page even loads.

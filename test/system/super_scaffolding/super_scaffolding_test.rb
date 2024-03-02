@@ -14,7 +14,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   #   bundle exec test/bin/setup-super-scaffolding-system-test
   #
   # to run this test:
-  #   rails test test/system/super_scaffolding_test.rb
+  #   rails test test/system/super_scaffolding/super_scaffolding_test.rb
+  # to run the super scaffolding test suite as a whole:
+  #   rails test test/system/super_scaffolding/
   #
   # after the test you can tear down what we've done here in the db:
   #   rake db:migrate VERSION=`ls db/migrate | sort | tail -n 9 | head -n 1`
@@ -284,8 +286,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   end
 
   test "OpenAPI V3 document is still valid" do
-    visit "http://127.0.0.1:3001/api/v1/openapi.yaml"
-    puts(output = `yarn exec redocly lint http://127.0.0.1:3001/api/v1/openapi.yaml 1> /dev/stdout 2> /dev/stdout; rm openapi.yaml`)
+    visit "/" # Make sure the test server is running before linting the file.
+    puts(output = `yarn exec redocly lint http://127.0.0.1:3001/api/v1/openapi.yaml 1> /dev/stdout 2> /dev/stdout`)
     # redocly/openapi-core changed the format of their success message in version 1.2.0.
     # https://github.com/Redocly/redocly-cli/pull/1239
     # We use a robust regex here so that we can match both formats.
