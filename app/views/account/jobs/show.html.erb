@@ -15,6 +15,7 @@
             <%= render 'shared/attributes/html', attribute: :description %>
             <%= render 'shared/attributes/belongs_to', attribute: :quoted_by %>
             <%= render 'shared/attributes/belongs_to', attribute: :project_manager %>
+            <%= render 'shared/attributes/has_many', attribute: :resources %>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
           <% end %>
         <% end %>

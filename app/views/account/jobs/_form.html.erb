@@ -11,6 +11,8 @@
         choices: @job.valid_quoted_bys.map { |membership| [membership.label_string, membership.id] } %>
       <%= render 'shared/fields/super_select', method: :project_manager_id, options: {}, html_options: {},
         choices: @job.valid_project_managers.map { |membership| [membership.label_string, membership.id] } %>
+      <%= render 'shared/fields/super_select', method: :resource_ids, html_options: {multiple: true},
+        choices: @job.valid_resources.map { |membership| [membership.label_string, membership.id] } %>
       <%# 🚅 super scaffolding will insert new fields above this line. %>
     <% end %>
 

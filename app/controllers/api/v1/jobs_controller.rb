@@ -50,6 +50,7 @@ if defined?(Api::V1::ApplicationController)
           :project_manager_id,
           # 🚅 super scaffolding will insert new fields above this line.
           *permitted_arrays,
+          resource_ids: [],
           # 🚅 super scaffolding will insert new arrays above this line.
         )
 

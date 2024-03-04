@@ -8,6 +8,8 @@ class Job < ApplicationRecord
   belongs_to :project_manager, class_name: "Membership", optional: true
   # 🚅 add belongs_to associations above.
 
+  has_many :assigned_resources, class_name: "Jobs::AssignedResource", dependent: :destroy
+  has_many :resources, through: :assigned_resources
   # 🚅 add has_many associations above.
 
   has_one :team, through: :department
@@ -32,6 +34,11 @@ class Job < ApplicationRecord
 
   def valid_project_managers
     # TODO - scope this to just project managers
+    team.memberships
+  end
+
+  def valid_resources
+    # TODO - scope this to engineers
     team.memberships
   end
 
