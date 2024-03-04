@@ -7,36 +7,21 @@ prove = Team.find_or_create_by(name: "PROVE") do |team|
 end
 
 puts "Creating some users"
-adam = User.find_or_create_by(email: "adam@test.com") do |user|
-  user.email = "adam@test.com"
+User.find_or_create_by(email: "adam@test.com") do |user|
   user.password = "password"
   user.password_confirmation = "password"
   user.first_name = "Adam"
   user.last_name = "Test"
+  prove.users << user
+  user.memberships.first.roles << Role.admin
 end
-
-paul = User.find_or_create_by(email: "paul@proveng.com.au") do |user|
-  user.email = "paul@proveeng.com.au"
+User.find_or_creat_by(email: "paul@proveng.com.au") do |user|
   user.password = "password"
   user.password_confirmation = "password"
   user.first_name = "Paul"
   user.last_name = "Oliveri"
-  puts "Adding user #{user.email} to the PROVE team"
-end
-
-begin
-  membership = prove.memberships.create(user: adam, user_email: adam.email)
-  membership.roles << Role.admin
-rescue ActiveRecord::RecordInvalid
-  puts "User #{adam.email} already exists"
-end
-
-
-begin
-  membership = prove.memberships.create(user: paul, user_email: paul.email)
-  membership.roles << Role.admin
-rescue ActiveRecord::RecordInvalid
-  puts "User #{paul.email} already exists"
+  prove.users << user
+  user.memberships.first.roles << Role.admin
 end
 
 puts "Creating the departments"
