@@ -1,6 +1,5 @@
 default:
   models:
-    Contact: read
     Client: read
     Job: read
     Department: read
@@ -32,7 +31,6 @@ admin:
     - admin
     - editor
   models:
-    Contact: manage
     Client: manage
     Job: manage
     Department: manage

@@ -6,7 +6,6 @@ class Client < ApplicationRecord
   belongs_to :team
   # 🚅 add belongs_to associations above.
 
-  has_many :contacts, dependent: :destroy
   # 🚅 add has_many associations above.
 
   # 🚅 add has_one associations above.

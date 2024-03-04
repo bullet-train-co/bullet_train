@@ -25,7 +25,6 @@ components:
     <%= automatic_components_for Department %>
     <%= automatic_components_for Job %>
     <%= automatic_components_for Client %>
-    <%= automatic_components_for Contact %>
     <%# 🚅 super scaffolding will insert new components above this line. %>
   parameters:
     id:
@@ -63,5 +62,4 @@ paths:
   <%= automatic_paths_for Department, Team %>
   <%= automatic_paths_for Job, Department %>
   <%= automatic_paths_for Client, Team %>
-  <%= automatic_paths_for Contact, Client %>
   <%# 🚅 super scaffolding will insert new paths above this line. %>

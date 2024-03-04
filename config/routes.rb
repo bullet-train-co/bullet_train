@@ -71,9 +71,7 @@ Rails.application.routes.draw do
           resources :jobs
         end
 
-        resources :clients do
-          resources :contacts
-        end
+        resources :clients
       end
     end
   end
