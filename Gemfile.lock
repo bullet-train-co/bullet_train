@@ -315,8 +315,6 @@ GEM
     factory_bot_rails (6.4.3)
       factory_bot (~> 6.4)
       railties (>= 5.0.0)
-    faker (3.2.3)
-      i18n (>= 1.8.11, < 2)
     faraday (2.9.0)
       faraday-net_http (>= 2.0, < 3.2)
     faraday-multipart (1.0.4)
@@ -747,7 +745,6 @@ DEPENDENCIES
   devise
   devise-two-factor
   factory_bot_rails (~> 6.2, != 6.4.2, != 6.4.1, != 6.4.0, != 6.3.0)
-  faker
   foreman
   honeybadger
   jbuilder

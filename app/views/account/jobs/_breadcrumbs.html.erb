@@ -1,8 +1,0 @@
-<% job ||= @job %>
-<% department ||= @department || job&.department %>
-<%= render 'account/departments/breadcrumbs', department: department %>
-<%= render 'account/shared/breadcrumb', label: t('.label'), url: [:account, department, :jobs] %>
-<% if job&.persisted? %>
-  <%= render 'account/shared/breadcrumb', label: job.label_string, url: [:account, job] %>
-<% end %>
-<%= render 'account/shared/breadcrumbs/actions', only_for: 'jobs' %>

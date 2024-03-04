@@ -4,8 +4,6 @@ class Membership < ApplicationRecord
 
   # 🚅 add belongs_to associations above.
 
-  has_many :jobs_assigned_resources, class_name: "Jobs::AssignedResource", dependent: :destroy
-  has_many :jobs, through: :jobs_assigned_resources
   # 🚅 add has_many associations above.
 
   # 🚅 add oauth providers above.
