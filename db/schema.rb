@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_033301) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_033649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -120,7 +120,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_033301) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "quoted_by_id"
+    t.bigint "project_manager_id"
     t.index ["department_id"], name: "index_jobs_on_department_id"
+    t.index ["project_manager_id"], name: "index_jobs_on_project_manager_id"
+    t.index ["quoted_by_id"], name: "index_jobs_on_quoted_by_id"
   end
 
   create_table "memberships", id: :serial, force: :cascade do |t|
@@ -363,6 +367,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_033301) do
   add_foreign_key "invitations", "account_onboarding_invitation_lists", column: "invitation_list_id"
   add_foreign_key "invitations", "teams"
   add_foreign_key "jobs", "departments"
+  add_foreign_key "jobs", "memberships", column: "project_manager_id"
+  add_foreign_key "jobs", "memberships", column: "quoted_by_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "memberships", "memberships", column: "added_by_id"
   add_foreign_key "memberships", "oauth_applications", column: "platform_agent_of_id"
