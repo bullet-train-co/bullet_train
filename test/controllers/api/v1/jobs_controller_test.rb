@@ -35,7 +35,6 @@ def assert_proper_object_serialization(job_data)
   assert_equal_or_nil job_data['name'], job.name
   assert_equal_or_nil job_data['quoted_by_id'], job.quoted_by_id
   assert_equal_or_nil job_data['project_manager_id'], job.project_manager_id
-  assert_equal_or_nil job_data['resource_ids'], job.resource_ids
   # 🚅 super scaffolding will insert new fields above this line.
 
   assert_equal job_data["department_id"], job.department_id

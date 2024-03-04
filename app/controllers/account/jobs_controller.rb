@@ -66,7 +66,6 @@ class Account::JobsController < Account::ApplicationController
   end
 
   def process_params(strong_params)
-    assign_select_options(strong_params, :resource_ids)
     # 🚅 super scaffolding will insert processing for new fields above this line.
   end
 end

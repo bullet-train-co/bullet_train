@@ -4,7 +4,6 @@ json.extract! job,
   :name,
   :quoted_by_id,
   :project_manager_id,
-  :resource_ids,
   # 🚅 super scaffolding will insert new fields above this line.
   :created_at,
   :updated_at

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_040522) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_033649) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -125,15 +125,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_040522) do
     t.index ["department_id"], name: "index_jobs_on_department_id"
     t.index ["project_manager_id"], name: "index_jobs_on_project_manager_id"
     t.index ["quoted_by_id"], name: "index_jobs_on_quoted_by_id"
-  end
-
-  create_table "jobs_assigned_resources", force: :cascade do |t|
-    t.bigint "job_id", null: false
-    t.bigint "resource_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["job_id"], name: "index_jobs_assigned_resources_on_job_id"
-    t.index ["resource_id"], name: "index_jobs_assigned_resources_on_resource_id"
   end
 
   create_table "memberships", id: :serial, force: :cascade do |t|
@@ -378,8 +369,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_040522) do
   add_foreign_key "jobs", "departments"
   add_foreign_key "jobs", "memberships", column: "project_manager_id"
   add_foreign_key "jobs", "memberships", column: "quoted_by_id"
-  add_foreign_key "jobs_assigned_resources", "jobs"
-  add_foreign_key "jobs_assigned_resources", "memberships", column: "resource_id"
   add_foreign_key "memberships", "invitations"
   add_foreign_key "memberships", "memberships", column: "added_by_id"
   add_foreign_key "memberships", "oauth_applications", column: "platform_agent_of_id"
