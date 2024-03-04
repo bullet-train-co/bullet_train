@@ -70,6 +70,8 @@ Rails.application.routes.draw do
         resources :departments do
           resources :jobs
         end
+
+        resources :clients
       end
     end
   end

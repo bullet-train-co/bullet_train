@@ -1,0 +1,93 @@
+en:
+  clients: &clients
+    label: &label Clients
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: ti ti-agenda
+    buttons: &buttons
+      new: Add New Client
+      create: Create Client
+      edit: Edit Client
+      update: Update Client
+      destroy: Remove Client
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{client_name}? This will also remove any child resources and can't be undone.
+    client:
+      buttons: *buttons
+    fields: &fields
+      id:
+        heading: Client ID
+      team_id:
+        heading: Team ID
+      name:
+        _: &name Name
+        label: *name
+        heading: *name
+        api_title: *name
+        api_description: *name
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Clients"
+      index: "List Clients"
+      create: "Add a New Client"
+      member_actions: "Actions for an Individual Client"
+      show: "Retrieve a Client"
+      update: "Update a Client"
+      destroy: "Delete a Client"
+      fields: *fields
+    index:
+      section: "%{teams_possessive} Clients"
+      contexts:
+        team:
+          header: Clients
+          description: Below is a list of Clients that have been added for %{team_name}.
+          description_empty: No Clients have been added for %{team_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{client_name}"
+      header: Client Details
+      description: Below are the details we have for %{client_name}.
+      manage_description: You'll also find options for updating these details or removing %{client_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Client for %{team_name}"
+      header: New Client Details
+      description: Please provide the details of the new Client you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{client_name}"
+      header: Edit Client Details
+      description: You can update the details or settings for %{client_name} below.
+      form: *form
+    notifications:
+      created: Client was successfully created.
+      updated: Client was successfully updated.
+      destroyed: Client was successfully destroyed.
+  account:
+    clients: *clients
+  activerecord:
+    attributes:
+      client:
+        name: *name
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

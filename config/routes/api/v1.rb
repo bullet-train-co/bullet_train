@@ -34,6 +34,8 @@ shallow do
       resources :departments do
         resources :jobs
       end
+
+      resources :clients
     end
   end
 end
