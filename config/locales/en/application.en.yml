@@ -1,11 +1,11 @@
 en:
   application:
-    name: Job Flow
+    name: Untitled Application
     owner: Unidentified Developer
     description: "You can update this description in `config/locales/en/application.en.yml`."
-    keywords: job flow seo keywords
+    keywords: untitled application seo keywords
     support_email: change.me@localhost
-    key: job_flow
+    key: untitled_application
   webhooks/outgoing/endpoints:
     fields:
       api_version:
