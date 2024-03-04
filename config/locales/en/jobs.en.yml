@@ -1,0 +1,99 @@
+en:
+  jobs: &jobs
+    label: &label Jobs
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Job
+      create: Create Job
+      edit: Edit Job
+      update: Update Job
+      destroy: Remove Job
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{job_name}? This will also remove any child resources and can't be undone.
+    job:
+      buttons: *buttons
+    fields: &fields
+      id:
+        heading: Job ID
+      department_id:
+        heading: Department ID
+      name:
+        _: &name Name
+        label: *name
+        heading: *name
+        api_title: *name
+        api_description: *name
+      description:
+        _: &description Description
+        label: *description
+        heading: *description
+        api_title: *description
+        api_description: *description
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Jobs"
+      index: "List Jobs"
+      create: "Add a New Job"
+      member_actions: "Actions for an Individual Job"
+      show: "Retrieve a Job"
+      update: "Update a Job"
+      destroy: "Delete a Job"
+      fields: *fields
+    index:
+      section: "%{departments_possessive} Jobs"
+      contexts:
+        department:
+          header: Jobs
+          description: Below is a list of Jobs that have been added for %{department_name}.
+          description_empty: No Jobs have been added for %{department_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{job_name}"
+      header: Job Details
+      description: Below are the details we have for %{job_name}.
+      manage_description: You'll also find options for updating these details or removing %{job_name} from %{department_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Job for %{department_name}"
+      header: New Job Details
+      description: Please provide the details of the new Job you'd like to add to %{department_name}.
+      form: *form
+    edit:
+      section: "%{job_name}"
+      header: Edit Job Details
+      description: You can update the details or settings for %{job_name} below.
+      form: *form
+    notifications:
+      created: Job was successfully created.
+      updated: Job was successfully updated.
+      destroyed: Job was successfully destroyed.
+  account:
+    jobs: *jobs
+  activerecord:
+    attributes:
+      job:
+        name: *name
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at
