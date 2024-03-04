@@ -37,22 +37,6 @@ en:
         heading: *description
         api_title: *description
         api_description: *description
-      quoted_by_id: &quoted_by
-        _: &quoted_by_id Quoted By
-        label: *quoted_by_id
-        heading: *quoted_by_id
-        api_title: *quoted_by_id
-        api_description: *quoted_by_id
-        placeholder: None
-      quoted_by: *quoted_by
-      project_manager_id: &project_manager
-        _: &project_manager_id Project Manager
-        label: *project_manager_id
-        heading: *project_manager_id
-        api_title: *project_manager_id
-        api_description: *project_manager_id
-        placeholder: None
-      project_manager: *project_manager
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
         _: &created_at Added
@@ -110,8 +94,6 @@ en:
     attributes:
       job:
         name: *name
-        quoted_by_id: *quoted_by_id
-        project_manager_id: *project_manager_id
         # 🚅 super scaffolding will insert new activerecord attributes above this line.
         created_at: *created_at
         updated_at: *updated_at

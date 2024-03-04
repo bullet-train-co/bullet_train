@@ -13,8 +13,6 @@
           <% with_attribute_settings object: @job, strategy: :label do %>
             <%= render 'shared/attributes/text', attribute: :name %>
             <%= render 'shared/attributes/html', attribute: :description %>
-            <%= render 'shared/attributes/belongs_to', attribute: :quoted_by %>
-            <%= render 'shared/attributes/belongs_to', attribute: :project_manager %>
             <%# 🚅 super scaffolding will insert new fields above this line. %>
           <% end %>
         <% end %>

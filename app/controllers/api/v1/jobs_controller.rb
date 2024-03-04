@@ -46,8 +46,6 @@ if defined?(Api::V1::ApplicationController)
           *permitted_fields,
           :name,
           :description,
-          :quoted_by_id,
-          :project_manager_id,
           # 🚅 super scaffolding will insert new fields above this line.
           *permitted_arrays,
           # 🚅 super scaffolding will insert new arrays above this line.

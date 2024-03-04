@@ -7,10 +7,6 @@
     <% with_field_settings form: form do %>
       <%= render 'shared/fields/text_field', method: :name, options: {autofocus: true} %>
       <%= render 'shared/fields/trix_editor', method: :description %>
-      <%= render 'shared/fields/super_select', method: :quoted_by_id, options: {}, html_options: {},
-        choices: @job.valid_quoted_bys.map { |membership| [membership.label_string, membership.id] } %>
-      <%= render 'shared/fields/super_select', method: :project_manager_id, options: {}, html_options: {},
-        choices: @job.valid_project_managers.map { |membership| [membership.label_string, membership.id] } %>
       <%# 🚅 super scaffolding will insert new fields above this line. %>
     <% end %>
 
