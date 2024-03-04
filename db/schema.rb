@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_04_042332) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_04_042114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -100,9 +100,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_042332) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "department_id"
     t.index ["client_id"], name: "index_contacts_on_client_id"
-    t.index ["department_id"], name: "index_contacts_on_department_id"
   end
 
   create_table "departments", force: :cascade do |t|
@@ -393,7 +391,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_04_042332) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "clients", "teams"
   add_foreign_key "contacts", "clients"
-  add_foreign_key "contacts", "departments"
   add_foreign_key "departments", "teams"
   add_foreign_key "integrations_stripe_installations", "oauth_stripe_accounts"
   add_foreign_key "integrations_stripe_installations", "teams"

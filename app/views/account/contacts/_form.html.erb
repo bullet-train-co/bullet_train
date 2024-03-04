@@ -9,8 +9,6 @@
       <%= render 'shared/fields/text_field', method: :last_name %>
       <%= render 'shared/fields/email_field', method: :email %>
       <%= render 'shared/fields/trix_editor', method: :notes %>
-      <%= render 'shared/fields/super_select', method: :department_id, options: {}, html_options: {},
-        choices: @contact.valid_departments.map { |department| [department.label_string, department.id] } %>
       <%# 🚅 super scaffolding will insert new fields above this line. %>
     <% end %>
 

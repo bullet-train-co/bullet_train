@@ -4,7 +4,6 @@ class Contact < ApplicationRecord
   # 🚅 add attribute accessors above.
 
   belongs_to :client
-  belongs_to :department, optional: true
   # 🚅 add belongs_to associations above.
 
   # 🚅 add has_many associations above.
@@ -16,16 +15,11 @@ class Contact < ApplicationRecord
   # 🚅 add scopes above.
 
   validates :first_name, presence: true
-  validates :department, scope: true
   # 🚅 add validations above.
 
   # 🚅 add callbacks above.
 
   # 🚅 add delegations above.
-
-  def valid_departments
-    team.departments
-  end
 
   # 🚅 add methods above.
 end
