@@ -22,8 +22,6 @@ components:
     <%= automatic_components_for Webhooks::Outgoing::Endpoint %>
     <%= automatic_components_for Webhooks::Outgoing::Event %>
     <%= automatic_components_for Scaffolding::CompletelyConcrete::TangibleThing unless scaffolding_things_disabled? %>
-    <%= automatic_components_for Department %>
-    <%= automatic_components_for Job %>
     <%# 🚅 super scaffolding will insert new components above this line. %>
   parameters:
     id:
@@ -58,6 +56,4 @@ paths:
   <%= automatic_paths_for Webhooks::Outgoing::Endpoint, Team %>
   <%= automatic_paths_for Webhooks::Outgoing::Event, Team, except: %i[create update delete] %>
   <%= automatic_paths_for Scaffolding::CompletelyConcrete::TangibleThing, Scaffolding::AbsolutelyAbstract::CreativeConcept unless scaffolding_things_disabled? %>
-  <%= automatic_paths_for Department, Team %>
-  <%= automatic_paths_for Job, Department %>
   <%# 🚅 super scaffolding will insert new paths above this line. %>

@@ -1,7 +1,5 @@
 default:
   models:
-    Job: read
-    Department: read
     Team: read
     Membership:
       - read
@@ -30,8 +28,6 @@ admin:
     - admin
     - editor
   models:
-    Job: manage
-    Department: manage
     Team: manage
     Membership: manage
     Scaffolding::AbsolutelyAbstract::CreativeConcept: manage
