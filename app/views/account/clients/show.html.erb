@@ -29,6 +29,7 @@
       <% end %>
     <% end %>
 
+    <%= render 'account/contacts/index', contacts: @client.contacts, hide_back: true %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
   <% end %>
 <% end %>

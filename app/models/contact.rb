@@ -1,19 +1,20 @@
-class Client < ApplicationRecord
+class Contact < ApplicationRecord
   # 🚅 add concerns above.
 
   # 🚅 add attribute accessors above.
 
-  belongs_to :team
+  belongs_to :client
   # 🚅 add belongs_to associations above.
 
-  has_many :contacts, dependent: :destroy
   # 🚅 add has_many associations above.
 
+  has_one :team, through: :client
+  has_rich_text :notes
   # 🚅 add has_one associations above.
 
   # 🚅 add scopes above.
 
-  validates :name, presence: true
+  validates :first_name, presence: true
   # 🚅 add validations above.
 
   # 🚅 add callbacks above.

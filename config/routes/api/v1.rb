@@ -35,7 +35,9 @@ shallow do
         resources :jobs
       end
 
-      resources :clients
+      resources :clients do
+        resources :contacts
+      end
     end
   end
 end
