@@ -49,6 +49,14 @@ en:
         heading: *notes
         api_title: *notes
         api_description: *notes
+      department_id: &department
+        _: &department_id Department
+        label: *department_id
+        heading: *department_id
+        api_title: *department_id
+        api_description: *department_id
+        placeholder: None
+      department: *department
       # 🚅 super scaffolding will insert new fields above this line.
       created_at:
         _: &created_at Added
@@ -109,6 +117,7 @@ en:
         last_name: *last_name
         email: *email
         notes: *notes
+        department_id: *department_id
         # 🚅 super scaffolding will insert new activerecord attributes above this line.
         created_at: *created_at
         updated_at: *updated_at

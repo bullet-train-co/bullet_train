@@ -35,6 +35,7 @@ def assert_proper_object_serialization(contact_data)
   assert_equal_or_nil contact_data['first_name'], contact.first_name
   assert_equal_or_nil contact_data['last_name'], contact.last_name
   assert_equal_or_nil contact_data['email'], contact.email
+  assert_equal_or_nil contact_data['department_id'], contact.department_id
   # 🚅 super scaffolding will insert new fields above this line.
 
   assert_equal contact_data["client_id"], contact.client_id
