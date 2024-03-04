@@ -15,21 +15,6 @@ adam = User.find_or_create_by(email: "adam@test.com") do |user|
   user.last_name = "Test"
 end
 
-5.times do |i|
-  first_name = Faker::Name.first_name
-  last_name = Faker::Name.last_name
-  email = "#{first_name}@proveng.com.au"
-  user = User.find_or_create_by(email: email) do |user|
-    user.email = email
-    user.password = "password"
-    user.password_confirmation = "password"
-    user.first_name = first_name
-    user.last_name = last_name
-    puts "Adding user #{user.email} to the PROVE team"
-  end
-  prove.memberships.create(user: user, user_email: user.email)
-end
-
 paul = User.find_or_create_by(email: "paul@proveng.com.au") do |user|
   user.email = "paul@proveeng.com.au"
   user.password = "password"
