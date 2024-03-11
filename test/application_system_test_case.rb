@@ -304,6 +304,10 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   # https://stackoverflow.com/a/50794401/2414273
 
+  # Anonymous block forwarding was introduced in ruby 3.1, and then standardrb
+  # added it as a rule. In case downstream apps are still using ruby 3.0.x
+  # we're going to disable this rule for now.
+  # standard:disable Style/ArgumentsForwarding
   def assert_no_js_errors &block
     if use_cuprite?
       assert_no_js_errors_cuprite(&block)
@@ -311,6 +315,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       assert_no_js_errors_selenium(&block)
     end
   end
+  # standard:enable Style/ArgumentsForwarding
 
   private def assert_no_js_errors_cuprite &block
     last_timestamp = page.driver.browser.options.logger.logs
