@@ -8,7 +8,7 @@ class AddLockableToDeviseUsers < ActiveRecord::Migration[7.1]
 
     unless column_exists?(:users, :unlock_token)
       # Only if unlock strategy is :email or :both
-      add_column :users, :unlock_token, :string 
+      add_column :users, :unlock_token, :string
     end
 
     unless column_exists?(:users, :locked_at)
