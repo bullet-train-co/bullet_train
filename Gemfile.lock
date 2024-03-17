@@ -465,7 +465,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.6)
-    phonelib (0.8.7)
+    phonelib (0.8.8)
     possessive (1.0.1)
     postmark (1.25.0)
       json
@@ -679,7 +679,7 @@ GEM
       unicode-version (~> 1.0)
     unicode-version (1.4.0)
     uri (0.13.0)
-    valid_email (0.2.0)
+    valid_email (0.2.1)
       activemodel
       mail (>= 2.6.1)
       simpleidn
