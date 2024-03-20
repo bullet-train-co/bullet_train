@@ -4,6 +4,8 @@
 
 <div class="h-screen w-full flex items-center justify-center">
   <div class="h-2/3 py-10">
+    <%= render 'account/shared/notices' %>
+
     <div data-controller="scroll-reveal">
       <div class="grid grid-cols-1">
         <%= link_to "https://bullettrain.co/", class: "col-span-1", target: '_blank' do %>
@@ -22,7 +24,8 @@
             </div>
 
             <p class="text-slate-600 text-lg text-left p-5">
-              Welcome to Bullet Train! Please read the <%= link_to "documentation", "/docs", target: '_blank' %> to get started.
+              Welcome to Bullet Train! Please read the <%= link_to "documentation", "/docs", target: '_blank' %> to get started.<br/>
+              You can view this page at app/views/public/home/index.html.erb.
             </p>
 
             <div class="py-2 text-center">
