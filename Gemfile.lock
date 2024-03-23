@@ -285,9 +285,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
-    devise-pwned_password (0.1.10)
+    devise-pwned_password (0.1.11)
       devise (~> 4)
-      pwned (~> 2.0.0)
+      pwned (~> 2.4)
     devise-two-factor (5.0.0)
       activesupport (~> 7.0)
       devise (~> 4.0)
@@ -356,7 +356,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
-    jbuilder-schema (2.6.8)
+    jbuilder-schema (2.6.9)
       jbuilder
       method_source
       rails (>= 5.0.0)
@@ -492,7 +492,7 @@ GEM
     public_suffix (5.0.4)
     puma (6.4.2)
       nio4r (~> 2.0)
-    pwned (2.0.2)
+    pwned (2.4.1)
     racc (1.7.3)
     rack (2.2.9)
     rack-cors (2.0.2)
@@ -555,7 +555,7 @@ GEM
       psych (>= 4.0.0)
     redis (5.1.0)
       redis-client (>= 0.17.0)
-    redis-client (0.21.0)
+    redis-client (0.21.1)
       connection_pool
     regexp_parser (2.9.0)
     reline (0.4.3)
