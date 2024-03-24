@@ -330,7 +330,7 @@ GEM
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
-    honeybadger (5.7.0)
+    honeybadger (5.8.0)
     htmlentities (4.3.4)
     http-accept (1.7.0)
     http-cookie (1.0.5)
