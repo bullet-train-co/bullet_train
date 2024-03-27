@@ -3,7 +3,6 @@
 // includes should be specified at the end of the file, not in this section. This helps avoid merge conflicts in the
 // future should the framework defaults change.
 
-import "./support/jquery";
 import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "@hotwired/turbo-rails"
@@ -26,8 +25,6 @@ require("@icon/themify-icons/themify-icons.css")
 
 import { trixEditor } from "@bullet-train/fields"
 trixEditor()
-
-import "./electron"
 
 // ✅ YOUR APPLICATION'S INCLUDES
 // If you need to customize your application's includes, this is the place to do it. This helps avoid merge
