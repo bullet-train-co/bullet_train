@@ -3,7 +3,9 @@
 
   <% p.content_for :body do %>
     <%# 🚅 super scaffolding will insert new children above this line. %>
-    
+
+    <%= render 'shared/box', title: "Test title" %>
+    <%= render 'shared/box', title: "Test title" do end %>
     <%= render 'account/scaffolding/absolutely_abstract/creative_concepts/index', creative_concepts: @team.scaffolding_absolutely_abstract_creative_concepts, hide_back: true unless scaffolding_things_disabled? %>
   <% end %>
 <% end %>
