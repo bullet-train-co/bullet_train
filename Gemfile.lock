@@ -197,7 +197,7 @@ GEM
     bullet_train-outgoing_webhooks (1.7.1)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.7.0)
+    bullet_train-roles (1.7.1)
       active_hash
       activesupport
       cancancan
