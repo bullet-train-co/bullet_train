@@ -203,7 +203,7 @@ GEM
       cancancan
     bullet_train-routes (1.0.0)
       rails (>= 6.0.0)
-    bullet_train-scope_questions (1.7.0)
+    bullet_train-scope_questions (1.7.1)
       rails (>= 6.0.0)
     bullet_train-scope_validator (1.7.0)
       rails
