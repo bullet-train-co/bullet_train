@@ -171,7 +171,7 @@ GEM
       pagy_cursor
       rack-cors
       rails (>= 6.0.0)
-    bullet_train-fields (1.7.1)
+    bullet_train-fields (1.7.0)
       chronic
       cloudinary
       phonelib
@@ -183,7 +183,7 @@ GEM
       bullet_train-api
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.7.0)
+    bullet_train-integrations (1.7.1)
       rails (>= 6.0.0)
     bullet_train-integrations-stripe (1.7.0)
       omniauth
