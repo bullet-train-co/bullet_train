@@ -127,7 +127,7 @@ GEM
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.2.4)
-    bullet_train (1.7.1)
+    bullet_train (1.7.0)
       awesome_print
       bullet_train-has_uuid
       bullet_train-roles
@@ -176,7 +176,7 @@ GEM
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.7.0)
+    bullet_train-has_uuid (1.7.1)
       rails (>= 6.0.0)
     bullet_train-incoming_webhooks (1.7.0)
       bullet_train
