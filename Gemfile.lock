@@ -178,12 +178,12 @@ GEM
       rails (>= 6.0.0)
     bullet_train-has_uuid (1.7.0)
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.7.1)
+    bullet_train-incoming_webhooks (1.7.0)
       bullet_train
       bullet_train-api
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.7.1)
+    bullet_train-integrations (1.7.0)
       rails (>= 6.0.0)
     bullet_train-integrations-stripe (1.7.0)
       omniauth
@@ -194,7 +194,7 @@ GEM
     bullet_train-obfuscates_id (1.7.0)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.7.0)
+    bullet_train-outgoing_webhooks (1.7.1)
       public_suffix
       rails (>= 6.0.0)
     bullet_train-roles (1.7.0)
