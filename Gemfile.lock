@@ -225,7 +225,7 @@ GEM
       bullet_train-themes-tailwind_css
       masamune-ast (~> 2.0.2)
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.7.0)
+    bullet_train-themes-tailwind_css (1.7.1)
       bullet_train-themes
       rails (>= 6.0.0)
     cable_ready (5.0.3)
