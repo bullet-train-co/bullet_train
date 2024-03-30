@@ -197,7 +197,7 @@ GEM
     bullet_train-outgoing_webhooks (1.7.0)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.7.1)
+    bullet_train-roles (1.7.0)
       active_hash
       activesupport
       cancancan
@@ -212,7 +212,7 @@ GEM
     bullet_train-super_load_and_authorize_resource (1.7.1)
       cancancan
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.7.0)
+    bullet_train-super_scaffolding (1.7.1)
       colorizer
       indefinite_article
       masamune-ast (~> 2.0.2)
