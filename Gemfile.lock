@@ -185,7 +185,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-integrations (1.7.0)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.7.1)
+    bullet_train-integrations-stripe (1.7.0)
       omniauth
       omniauth-rails_csrf_protection
       omniauth-stripe-connect
@@ -194,7 +194,7 @@ GEM
     bullet_train-obfuscates_id (1.7.0)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.7.1)
+    bullet_train-outgoing_webhooks (1.7.0)
       public_suffix
       rails (>= 6.0.0)
     bullet_train-roles (1.7.0)
@@ -207,7 +207,7 @@ GEM
       rails (>= 6.0.0)
     bullet_train-scope_validator (1.7.0)
       rails
-    bullet_train-sortable (1.7.0)
+    bullet_train-sortable (1.7.1)
       rails (>= 6.0.0)
     bullet_train-super_load_and_authorize_resource (1.7.0)
       cancancan
