@@ -1,11 +1,11 @@
 en:
   application:
-    name: NP Tester
+    name: Untitled Application
     owner: Unidentified Developer
     description: "You can update this description in `config/locales/en/application.en.yml`."
-    keywords: np tester seo keywords
+    keywords: untitled application seo keywords
     support_email: change.me@localhost
-    key: np_tester
+    key: untitled_application
   webhooks/outgoing/endpoints:
     fields:
       api_version:
