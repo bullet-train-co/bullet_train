@@ -1061,26 +1061,26 @@
     "@babel/helper-validator-identifier" "^7.22.19"
     to-fast-properties "^2.0.0"
 
-"@bullet-train/bullet-train-sortable@1.6.38":
-  version "1.6.38"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.6.38.tgz#3831f56a3b4aaa1e3070a8215a140949c3417e03"
-  integrity sha512-BZRwwO/3s8V7UDPwOb1QZ1ZXBp6JyAznlGoNtFGTjWd2PzLVYQSdE4HW+BLZs082c91KlaLmssN18Tr9GhPdxw==
+"@bullet-train/bullet-train-sortable@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.7.0.tgz#1cf12205ce50c82d35e4d3e183ae36a6af91846c"
+  integrity sha512-lLAE5JcBwQFgKvnTzeoQwbA+gJi+bEa6p6q0BfKw3IdRwiV96Zjcj2rSAbcynkFId7sHmLsRS1lii+JbEMtIIg==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
 
-"@bullet-train/bullet-train@1.6.38":
-  version "1.6.38"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.6.38.tgz#c8ab36f1bc339945f69f7a688fdcca75124de3ce"
-  integrity sha512-a6Ni2euw7hyAIE2qf7G7wmW1wqYcr3/llpkCKfPJerup7yBYniBpzys2D/8s9+Yc7Yg79ov9kp60Ki5c7nnTqw==
+"@bullet-train/bullet-train@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.7.0.tgz#31593d4f0a7321e3fd7cbafbf211038d5d75ce30"
+  integrity sha512-oHX2Pc0PqDiVYPaZdAF/MN9HD8vqnMBJz5eOAf+Km6Zf57ah1k1031DHdO8YY/6jPsJuv1RxF9tLGfpNJSPbuA==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
-"@bullet-train/fields@1.6.38":
-  version "1.6.38"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.6.38.tgz#887b7d99c828bdcb41a067a80285cf59f293795e"
-  integrity sha512-DOWkviCAJPG8w9JvfHGrzLZFIsxHR0bX2FUOJbTgnR6UmCE+PYQbUsAWBba3NOQMt9wuOEi0O63g9GTaNhawLQ==
+"@bullet-train/fields@1.7.0":
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.7.0.tgz#20dd415eb65f5a7aabc9219da9f3c7eda7a3d231"
+  integrity sha512-UT3tInjHynzyzVtcYMhKFQ7nNs+y3qSx7govdfcPuvsQhKekERU+K9ShslpARxukYxYXfChaSSn8NM4A4CqT1Q==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
@@ -1088,6 +1088,7 @@
     emoji-mart "^5.1.0"
     i18n-js "^3.8.0"
     intl-tel-input "^17.0.8"
+    jquery "^3.7.1"
     select2 "^4.0.13"
     tributejs "^5.1.3"
     trix "^2.0.1"
@@ -2276,7 +2277,7 @@ jiti@^1.19.1:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-1.20.0.tgz#2d823b5852ee8963585c8dd8b7992ffc1ae83b42"
   integrity sha512-3TV69ZbrvV6U5DfQimop50jE9Dl6J8O1ja1dvBbMba/sZ3YBEQqJ2VZRoQPVnhlzjNtU1vaXRZVrVjU4qtm8yA==
 
-jquery@>=1.10:
+jquery@>=1.10, jquery@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.7.1.tgz#083ef98927c9a6a74d05a6af02806566d16274de"
   integrity sha512-m4avr8yL8kmFN8psrbFFFmB/If14iN5o9nw/NgnnM+kybDJpRsAynV2BsfpTYrTRysYUdADVD7CkUUizgkpLfg==
@@ -3190,7 +3191,16 @@ stimulus@^3.0.1:
     "@hotwired/stimulus" "^3.2.2"
     "@hotwired/stimulus-webpack-helpers" "^1.0.0"
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -3215,7 +3225,14 @@ string_decoder@^1.1.1:
   dependencies:
     safe-buffer "~5.2.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -3475,7 +3492,16 @@ wordwrap@^1.0.0:
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
   integrity sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q==
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
+  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
+  dependencies:
+    ansi-styles "^4.0.0"
+    string-width "^4.1.0"
+    strip-ansi "^6.0.0"
+
+wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
