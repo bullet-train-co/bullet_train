@@ -7,9 +7,12 @@ module.exports = {
   plugins: [
     require('postcss-import')(postcssImportConfig),
     require('postcss-extend-rule'),
-    require('postcss-nested'),
-    require('tailwindcss'),
+    // CSS variables aren't currently well supported in email clients.
+    // https://www.caniemail.com/search/?s=variables
+    // Maybe someday we can remove this next plugin for the mailer stylesheet.
     require('postcss-css-variables'),
+    require('tailwindcss/nesting'),
+    require('tailwindcss'),
     require('autoprefixer'),
   ]
 }
