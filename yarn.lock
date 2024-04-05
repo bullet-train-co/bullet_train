@@ -1061,26 +1061,27 @@
     "@babel/helper-validator-identifier" "^7.22.19"
     to-fast-properties "^2.0.0"
 
-"@bullet-train/bullet-train-sortable@1.7.1":
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.7.1.tgz#7c54045412ffb1507bda11f61d069e016ca9a5e5"
-  integrity sha512-W62IVINIDvXiStsHL8qqrS+JtT+9kbnty1WwzDD8JVTxCWir1U31dPqU5JWgz38pNAD4OXxe3elsk0RsGA3JNw==
+"@bullet-train/bullet-train-sortable@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train-sortable/-/bullet-train-sortable-1.7.2.tgz#0d892972b0969cb6871ef505600af3db5988b23e"
+  integrity sha512-ks+ObjfMsHxEmbdYBfzpkahdg3wWR/xNxMMJyyWUb/4lFwC6rEAf7CLfFZQlzPV8p31tBK3cABKBeklBM9TIZg==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@rails/request.js" "^0.0.6"
     dragula "^3.7.3"
+    jquery "^3.7.1"
 
-"@bullet-train/bullet-train@1.7.1":
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.7.1.tgz#44c9519c21f75179e4ea1cd523934bff17c2bdeb"
-  integrity sha512-ouuvI0iQdtjqJ0GkfSe9jsFR9jJV7/Q6D024SrK2pe2CFnJRnug5tCSdPxC3zrXh0XSjs7sKHS7SI7gUjWMAzQ==
+"@bullet-train/bullet-train@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@bullet-train/bullet-train/-/bullet-train-1.7.2.tgz#23102acd128656892ad96db98e343b74d8768f2b"
+  integrity sha512-zKP44f8EajC52iX5kKds1Q3tVtg5K2r8QKYNdOBm56MwCxgv3ArMwahF63t1opAhLW2U2wrdyqN55XYh8WdS7g==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
 
-"@bullet-train/fields@1.7.1":
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.7.1.tgz#24f5267c70c94d49c47f9e584ec22b3ffc28fa8f"
-  integrity sha512-uZX3PnVnF5qNoUUmvKEAGYZZZ8KZzjfpjXt5nzT1Dkv+716GI47y9Z98/7JpXNe+p2W6L/4MYkYKqoWBNPOLUA==
+"@bullet-train/fields@1.7.2":
+  version "1.7.2"
+  resolved "https://registry.yarnpkg.com/@bullet-train/fields/-/fields-1.7.2.tgz#7cf068df64bfc809b0ded736fd71d19550a2c495"
+  integrity sha512-Y+8d99559pWOHCrbPrcckPrLY3RNhLA/1ffwyAXqJUY1N6DdV+2PxV5cAZHbPfSoa4u22v9BHrz5z6GnBzAmJw==
   dependencies:
     "@hotwired/stimulus" "^3.0.1"
     "@simonwep/pickr" "^1.8.1"
@@ -3325,7 +3326,7 @@ swagger2openapi@^7.0.6:
     yaml "^1.10.0"
     yargs "^17.0.1"
 
-tailwindcss@^3.4.2:
+tailwindcss@^3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.3.tgz#be48f5283df77dfced705451319a5dffb8621519"
   integrity sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==
