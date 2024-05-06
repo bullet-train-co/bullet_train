@@ -271,7 +271,7 @@ GEM
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
-    css_parser (1.16.0)
+    css_parser (1.17.0)
       addressable
     cssbundling-rails (1.4.0)
       railties (>= 6.0.0)
