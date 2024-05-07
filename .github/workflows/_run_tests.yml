@@ -93,6 +93,8 @@ jobs:
         with:
           application_dir: tmp/starter
           core_dir: tmp/core
+        env:
+          YARN_ENABLE_HARDENED_MODE: 0
 
       - name: asset cache
         uses: actions/cache@v3
