@@ -78,6 +78,9 @@ jobs:
           working-directory: tmp/starter
           bundler-cache: true
 
+      - name: Enable corepack
+        run: corepack enable
+
       - uses: actions/setup-node@v3
         with:
           node-version-file: tmp/starter/.nvmrc

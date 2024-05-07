@@ -23,6 +23,9 @@ jobs:
       with:
         bundler-cache: true
 
+    - name: Enable corepack
+      run: corepack enable
+
     - uses: "actions/setup-node@v3"
       with:
         node-version: '20.x'
