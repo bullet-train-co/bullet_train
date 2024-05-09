@@ -333,7 +333,7 @@ GEM
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
-    honeybadger (5.8.1)
+    honeybadger (5.9.0)
     htmlentities (4.3.4)
     http_accept_language (2.1.1)
     httparty (0.22.0)
@@ -417,7 +417,7 @@ GEM
     mutex_m (0.2.0)
     net-http (0.4.1)
       uri
-    net-imap (0.4.10)
+    net-imap (0.4.11)
       date
       net-protocol
     net-pop (0.1.2)
