@@ -42,7 +42,16 @@ yarn-debug.log*
 .yarn-integrity
 .yalc
 yalc.lock
-.yarn/
+
+# The non-zero-installs set of ignores for yarn.
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
 
 # 🚅 this is bullet train's list of files to ignore.
 # please add yours at the end of the file.
