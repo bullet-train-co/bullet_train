@@ -51,8 +51,11 @@ class CoreBumpCLI < Thor
     end
 
     def yarn_upgrade(version_number)
+      puts `yarn --version`
+      puts "-------------------"
+      puts `yarn install`
       yarn_package_string = npm_packages.map{|pkg| "#{pkg}@#{version_number}"}.join(" ")
-      puts `yarn upgrade #{yarn_package_string}`
+      puts `yarn up #{yarn_package_string}`
     end
 
     def write_to_github_output_file(version_number)
