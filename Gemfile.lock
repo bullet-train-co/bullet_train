@@ -494,7 +494,7 @@ GEM
     puma (6.4.2)
       nio4r (~> 2.0)
     pwned (2.4.1)
-    racc (1.7.3)
+    racc (1.8.0)
     rack (2.2.9)
     rack-cors (2.0.2)
       rack (>= 2.0.0)
