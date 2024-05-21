@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+
+puts "We are calling utils!!!"
+
+puts ""
+puts `gem install colorize`
+puts ""
+
+
+require 'colorize'
+
+def ask(string)
+  puts string.blue
+  return gets.strip
+end
+
+
