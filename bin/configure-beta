@@ -4,6 +4,7 @@
 require "#{__dir__}/configure-scripts/utils"
 require "#{__dir__}/configure-scripts/check_ruby"
 require "#{__dir__}/configure-scripts/update_configs"
+
 require "#{__dir__}/configure-scripts/rename_origin"
 require "#{__dir__}/configure-scripts/setup_github"
 
@@ -37,16 +38,6 @@ unless skip_github
 end
 
 
-# TODO: This should maybe come after we update the configs, and before
-# we setup GitHub? (Just adding and committing. Not pushing.)
-if skip_github
-  puts ""
-  puts "Make sure you save your changes with Git.".yellow
-else
-  puts "Committing all these changes to the repository.".green
-  stream "git add -A"
-  stream "git commit -m \"Run configuration script.\""
-  stream "git push origin #{local_branch}:main"
-end
+
 
 
