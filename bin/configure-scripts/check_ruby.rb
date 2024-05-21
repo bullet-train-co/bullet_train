@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-puts "calling check_ruby"
-
 require 'colorize'
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
 # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
