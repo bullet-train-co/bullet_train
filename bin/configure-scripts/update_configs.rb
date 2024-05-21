@@ -5,7 +5,7 @@ puts `gem install activesupport`
 puts ""
 
 require "#{__dir__}/utils"
-require 'active_support'
+require "active_support"
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 while human == ""
@@ -15,11 +15,11 @@ end
 
 require "active_support/inflector"
 
-variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
-environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
+variable = ActiveSupport::Inflector.parameterize(human.tr("-", " "), separator: "_")
+environment_variable = ActiveSupport::Inflector.parameterize(human.tr("-", " "), separator: "_").upcase
 class_name = variable.classify
 kebab_case = variable.tr("_", "-")
-connected_name = variable.gsub("_", "") # i.e. `bullettrain` as opposed to `bullet_train`
+connected_name = variable.delete("_") # i.e. `bullettrain` as opposed to `bullet_train`
 
 puts ""
 puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
@@ -60,5 +60,3 @@ puts `rm .github/FUNDING.yml`.chomp
 #   line
 # end
 # File.write("config/initializers/bullet_train.rb", bt_config_lines.join)
-
-

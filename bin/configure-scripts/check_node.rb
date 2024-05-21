@@ -4,10 +4,10 @@ require "#{__dir__}/utils"
 
 required_node = `cat ./.nvmrc`.strip
 actual_node = begin
-                `node -v`.strip.gsub("v", "")
-              rescue
-                :not_found
-              end
+  `node -v`.strip.delete("v")
+rescue
+  :not_found
+end
 message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
 if actual_node == :not_found
   puts "You don't have Node installed. We can't proceed without it. Try `brew install node`.".red
@@ -24,4 +24,3 @@ else
     exit
   end
 end
-

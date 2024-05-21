@@ -11,7 +11,7 @@ setup_github = ask_boolean "Continue setting up with GitHub?", "y"
 puts "setup_github = #{setup_github}"
 if setup_github
   if `git remote | grep origin`.strip.length > 0
-    puts "Repository already has a \`origin`\ remote.".yellow
+    puts "Repository already has a `origin` remote.".yellow
   else
     ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
     command = if Gem::Platform.local.os == "linux"

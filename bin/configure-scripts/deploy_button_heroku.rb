@@ -8,8 +8,8 @@ if add_button
   puts "Adding a 'Deploy to Heroku' button.".green
   new_repo_link = ask "What is the https variant of your repo URL? (Something like: https://github.com/your-org/your-repo)"
 
-  File.open('README.md', 'a') do |readme|
-    button = File.open(button_file, 'r').read
+  File.open("README.md", "a") do |readme|
+    button = File.read(button_file)
     button.each_line do |line|
       readme << line
     end

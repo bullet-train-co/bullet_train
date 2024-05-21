@@ -38,7 +38,7 @@ when "darwin"
     check_package("icu4c")
   else
     puts "You don't have Homebrew installed. This isn't necessarily a problem, but we can't check your dependencies without it.".red
-    continue_anyway = ask_boolean "Try proceeding without Homebrew?", 'y'
+    continue_anyway = ask_boolean "Try proceeding without Homebrew?", "y"
     if continue_anyway
       puts "You've chosen to continue without Homebrew.".yellow
       puts "This means that we can't tell if you have `icu4c` installed.".yellow
@@ -53,7 +53,7 @@ when "linux"
     system_packages = `dpkg -l | grep '^ii'`.split("\n").map do |package_information|
       package_information.split("\s")[1]
     end
-    if system_packages.select{|pkg| pkg.match?(/^libicu/)}.any?
+    if system_packages.select { |pkg| pkg.match?(/^libicu/) }.any?
       puts "You have icu4c installed.".green
     else
       puts "You don't have icu4c installed.".red
@@ -91,4 +91,3 @@ else
 end
 
 puts ""
-

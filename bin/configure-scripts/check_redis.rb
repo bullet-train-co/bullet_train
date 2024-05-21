@@ -5,7 +5,7 @@ require "#{__dir__}/utils"
 redis_version_info = `redis-cli --version`
 
 puts ""
-if redis_version_info.downcase.match(/redis/)
+if /redis/.match?(redis_version_info.downcase)
   redis_version = redis_version_info.split("\s")[1]
   puts "You have redis #{redis_version} installed.".green
 else
@@ -19,4 +19,3 @@ else
   end
 end
 puts ""
-
