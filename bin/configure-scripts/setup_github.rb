@@ -21,12 +21,13 @@ if setup_github
     end
     `#{command} https://github.com/new`
 
-    ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`. You can enter `skip` to skip this step.)"
+    ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`. You can enter `skip` to bail out of GitHub setup.)"
     while ssh_path == ""
       puts "You must provide a path for your new repository.".red
-      ssh_path = ask "What was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
+      ssh_path = ask "What was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`. you can enter `skip` to bail out of GitHub setup.)"
     end
     if ssh_path == "skip"
+      puts "Bailing out of GitHub setup.".yellow
       return
     end
     puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
