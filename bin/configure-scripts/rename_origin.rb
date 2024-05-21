@@ -14,7 +14,10 @@ elsif has_origin_remote
   puts "We recommend renaming the `origin` remote to `bullet-train`.".green
   rename_origin = ask_boolean "Should we rename your `origin` remote to `bullet-train`?", "y"
   if rename_origin
+    puts "Renaming `origin` remote to `bullet-train`".green
     `git remote rename origin bullet-train`
+  else
+    puts "Skipping renaming `origin` remote to `bullet-train`.".yellow
   end
 else
   puts "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?".red
