@@ -11,10 +11,6 @@ require "#{__dir__}/configure-scripts/check_ruby"
 # into strings that represent the actual name of the new project being started.
 require "#{__dir__}/configure-scripts/update_configs"
 
-# Now we ask if you want a `Deploy to Heroku` and/or `Deploy to Render` button
-require "#{__dir__}/configure-scripts/deploy_button_heroku"
-require "#{__dir__}/configure-scripts/deploy_button_render"
-
 # Now that we're finished making changes to the new repo we commit them
 require "#{__dir__}/configure-scripts/commit_changes"
 
@@ -24,6 +20,10 @@ require "#{__dir__}/configure-scripts/rename_origin"
 
 # Now we connect your local repo to GitHub if you want
 require "#{__dir__}/configure-scripts/setup_github"
+
+# Now we ask if you want a `Deploy to Heroku` and/or `Deploy to Render` button
+require "#{__dir__}/configure-scripts/deploy_button_heroku"
+require "#{__dir__}/configure-scripts/deploy_button_render"
 
 # Now we check that you have base-level system dependencies installed.
 require "#{__dir__}/configure-scripts/check_postgres"
