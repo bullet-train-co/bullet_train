@@ -12,7 +12,7 @@ message = "Bullet Train requires Node.js #{required_node} and `node -v` returns 
 if actual_node == :not_found
   puts "You don't have Node installed. We can't proceed without it. Try `brew install node`.".red
   exit
-elsif false && Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
+elsif Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
   puts message.green
 else
   puts message.red

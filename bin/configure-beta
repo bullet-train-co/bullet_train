@@ -12,44 +12,33 @@ require "#{__dir__}/configure-scripts/check_redis"
 require "#{__dir__}/configure-scripts/check_icu"
 require "#{__dir__}/configure-scripts/check_node"
 
-
-puts "bailing out"
-exit
-
-
-
-if `yarn -v 2> /dev/null`.length > 0
-  puts "Yarn is installed.".green
-else
-  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
-  exit
-end
-
-# TODO: Uncomment this when the enable bulk invitations JS is implemented.
-# Enable the bulk invitations configuration.
-# bt_config_lines = File.open("config/initializers/bullet_train.rb").readlines
-# new_lines = bt_config_lines.map do |line|
-#   if line.match?("config.enable_bulk_invitations")
-#     line.gsub!(/#\s*/, "")
-#   end
-#   line
-# end
-# File.write("config/initializers/bullet_train.rb", bt_config_lines.join)
-
-
-
-unless skip_github
-  original_repo_link = "https://github.com/bullet-train-co/bullet_train"
-  new_repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
-  replace_in_file("README.example.md", original_repo_link, new_repo_link, /repo=#{original_repo_link}/)
-end
-
 puts "Running `bundle install`.".green
 stream "bundle install"
 
 puts "Running `yarn install`.".green
 stream "yarn install"
 
+puts ""
+puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
+puts ""
+puts "Next you can run `bin/setup`, then `bin/dev` to spawn a local instance, and then you can navigate to http://localhost:3000 to access your new application.".green
+puts ""
+
+exit
+
+
+# TODO: This was for the "Deploy to Render" button. We should ask explicity
+# about Render instead of assuming that we want it. And it really doesn't
+# have anything to do wit whether or not we setup Github.
+unless skip_github
+  original_repo_link = "https://github.com/bullet-train-co/bullet_train"
+  new_repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
+  replace_in_file("README.example.md", original_repo_link, new_repo_link, /repo=#{original_repo_link}/)
+end
+
+
+# TODO: This should maybe come after we update the configs, and before
+# we setup GitHub? (Just adding and committing. Not pushing.)
 if skip_github
   puts ""
   puts "Make sure you save your changes with Git.".yellow
@@ -60,8 +49,4 @@ else
   stream "git push origin #{local_branch}:main"
 end
 
-puts ""
-puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
-puts ""
-puts "Next you can run `bin/setup`, then `bin/dev` to spawn a local instance, and then you can navigate to http://localhost:3000 to access your new application.".green
-puts ""
+

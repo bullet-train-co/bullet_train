@@ -67,3 +67,16 @@ puts "Moving `./README.example.md` to `./README.md`.".green
 puts `mv ./README.example.md ./README.md`.chomp
 
 puts `rm .github/FUNDING.yml`.chomp
+
+# TODO: Uncomment this when the enable bulk invitations JS is implemented.
+# Enable the bulk invitations configuration.
+# bt_config_lines = File.open("config/initializers/bullet_train.rb").readlines
+# new_lines = bt_config_lines.map do |line|
+#   if line.match?("config.enable_bulk_invitations")
+#     line.gsub!(/#\s*/, "")
+#   end
+#   line
+# end
+# File.write("config/initializers/bullet_train.rb", bt_config_lines.join)
+
+
