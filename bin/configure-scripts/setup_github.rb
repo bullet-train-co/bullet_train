@@ -33,19 +33,4 @@ if setup_github
     puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
     puts `git remote add origin #{ssh_path}`.chomp
   end
-
-  push_to_origin = ask_boolean "Should we push this repo to `origin`?", "y"
-  if push_to_origin
-    puts "Pushing repository to `origin`.".green
-    # TODO: We used to do this to push whatever the current branch is to `main`:
-    # local_branch = `git branch | grep "*"`.split.last
-    # stream "git push origin #{local_branch}:main 2>&1"
-    #
-    # I'm not sure that's a great thing to do, so for now I'm just doing a bare
-    # push. Are there reasons that would be inadequate?
-
-    stream "git push origin 2>&1"
-  else
-    puts "Skipping pushing to origin.".yellow
-  end
 end
