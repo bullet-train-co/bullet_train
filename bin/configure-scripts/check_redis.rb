@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+
+require "#{__dir__}/utils"
+
+redis_version_info = `redis-cli --version`
+
+puts ""
+if redis_version_info.downcase.match(/redis/)
+  redis_version = redis_version_info.split("\s")[1]
+  puts "You have redis #{redis_version} installed.".green
+else
+  puts "You don't seem to have redis installed.".red
+  continue_anyway = ask_boolan "Would you like to try to continue without redis?", "n"
+  if continue_anyway
+    puts "Continuing without redis. This might cause problems in the next steps.".yellow
+  else
+    puts "redis is not installed. And you've chosen not to continue. Goodbye.".red
+    exit
+  end
+end
+puts ""
+

@@ -6,16 +6,13 @@ require "#{__dir__}/configure-scripts/check_ruby"
 require "#{__dir__}/configure-scripts/update_configs"
 require "#{__dir__}/configure-scripts/rename_origin"
 require "#{__dir__}/configure-scripts/setup_github"
+require "#{__dir__}/configure-scripts/check_postgres"
+require "#{__dir__}/configure-scripts/check_redis"
+
+
 
 puts "bailing out"
 exit
-
-
-
-
-
-
-
 
 def not_installed?(package)
   `brew info #{package} | grep "Not installed"`.strip.length > 0
@@ -34,9 +31,7 @@ def check_package(package)
 end
 
 
-
-
-
+# Do we even need to check for homebrew if we can find dependencies in other ways?
 if `brew info 2> /dev/null`.length > 0
   puts "Homebrew is installed.".green
 else
@@ -55,33 +50,6 @@ when "darwin"
 when "linux"
   system_packages = `dpkg -l | grep '^ii'`.split("\n").map do |package_information|
     package_information.split("\s")[1]
-  end
-
-  psql_installed = system_packages.include?("postgresql")
-  if psql_installed
-    psql_version = `psql --version`.split("\s")[2]
-    if psql_version.match?(/^14/)
-      puts "You have PostgreSQL 14 installed.".green
-    else
-      puts "You have PostgreSQL installed, but you're using v#{psql_version} and not v14.".red
-      input = ask "Try proceeding without PostgreSQL 14? [y/n]"
-      if input.downcase[0] == "n"
-        exit
-      end
-    end
-  else
-    puts "You don't have PostgreSQL installed. Please see the installation instructions at https://ubuntu.com/server/docs/databases-postgresql".red
-    exit
-  end
-
-  # TODO: system_packages should include `redis`.
-  # https://github.com/bullet-train-co/bullet_train/issues/1330
-  begin
-    redis_version = `redis-cli --version`.chomp.split("\s").last
-    puts "Redis #{redis_version} is installed.".green
-  rescue
-    puts "You don't have Redis installed. Please see the installation instructions at https://redis.io/docs/getting-started/installation/install-redis-on-linux/ .".red
-    exit
   end
 
   if system_packages.select{|pkg| pkg.match?(/^libicu/)}.any?
