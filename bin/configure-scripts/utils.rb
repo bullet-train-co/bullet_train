@@ -32,5 +32,21 @@ def stream(command, prefix = "  ")
   puts ""
 end
 
-
+def replace_in_file(file, before, after, target_regexp = nil)
+  puts "Replacing in '#{file}'."
+  if target_regexp
+    target_file_content = ""
+    File.open(file).each_line do |l|
+      l.gsub!(before, after) if !!l.match(target_regexp)
+      l if !!l.match(target_regexp)
+      target_file_content += l
+    end
+  else
+    target_file_content = File.open(file).read
+    target_file_content.gsub!(before, after)
+  end
+  File.open(file, "w+") do |f|
+    f.write(target_file_content)
+  end
+end
 

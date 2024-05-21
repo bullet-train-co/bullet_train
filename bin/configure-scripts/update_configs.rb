@@ -7,24 +7,6 @@ puts ""
 require "#{__dir__}/utils"
 require 'active_support'
 
-def replace_in_file(file, before, after, target_regexp = nil)
-  puts "Replacing in '#{file}'."
-  if target_regexp
-    target_file_content = ""
-    File.open(file).each_line do |l|
-      l.gsub!(before, after) if !!l.match(target_regexp)
-      l if !!l.match(target_regexp)
-      target_file_content += l
-    end
-  else
-    target_file_content = File.open(file).read
-    target_file_content.gsub!(before, after)
-  end
-  File.open(file, "w+") do |f|
-    f.write(target_file_content)
-  end
-end
-
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 while human == ""
   puts "You must provide a name for your application.".red
@@ -80,12 +62,3 @@ puts `rm .github/FUNDING.yml`.chomp
 # File.write("config/initializers/bullet_train.rb", bt_config_lines.join)
 
 
-commit_changes = ask_boolean "Would you like to commit the changes to your project?", "y"
-if commit_changes
-  puts "Committing all these changes to the repository.".green
-  stream "git add -A"
-  stream "git commit -m \"Run configuration script.\""
-else
-  puts ""
-  puts "Make sure you save your changes with Git.".yellow
-end
