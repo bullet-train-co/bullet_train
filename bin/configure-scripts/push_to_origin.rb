@@ -2,6 +2,8 @@
 
 require "#{__dir__}/utils"
 
+announce_section "Push to origin"
+
 has_origin_remote = `git remote | grep origin`.strip.length > 0
 if has_origin_remote
   push_to_origin = ask_boolean "Should we push this repo to `origin`?", "y"

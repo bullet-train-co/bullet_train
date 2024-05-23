@@ -1,10 +1,13 @@
 #!/usr/bin/env ruby
 
+require "#{__dir__}/utils"
+
+announce_section "Update project configs"
+
 puts ""
 puts `gem install activesupport`
 puts ""
 
-require "#{__dir__}/utils"
 require "active_support"
 
 human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"

@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
 require "#{__dir__}/utils"
+
+announce_section "Add a 'Deploy to Render' button?"
+
 button_file = "#{__dir__}/deploy-buttons/render.md"
 
 add_button = ask_boolean "Would you like to add a 'Deploy to Render' button to your project.", "y"

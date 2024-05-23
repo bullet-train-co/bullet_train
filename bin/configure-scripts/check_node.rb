@@ -2,6 +2,8 @@
 
 require "#{__dir__}/utils"
 
+announce_section "Checking NodeJS"
+
 required_node = `cat ./.nvmrc`.strip
 actual_node = begin
   `node -v`.strip.delete("v")

@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
 require "#{__dir__}/utils"
+
+announce_section "Add a 'Deploy to Heroku' button?"
+
 button_file = "#{__dir__}/deploy-buttons/heroku.md"
 
 add_button = ask_boolean "Would you like to add a 'Deploy to Heroku' button to your project.", "y"

@@ -2,6 +2,8 @@
 
 require "#{__dir__}/utils"
 
+announce_section "Checking Redis"
+
 redis_version_info = `redis-cli --version`
 
 puts ""

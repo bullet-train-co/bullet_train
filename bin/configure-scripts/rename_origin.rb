@@ -2,6 +2,8 @@
 
 require "#{__dir__}/utils"
 
+announce_section "Rename origin remote"
+
 has_bt_remote = `git remote | grep bullet-train`.strip.length > 0
 has_origin_remote = `git remote | grep origin`.strip.length > 0
 

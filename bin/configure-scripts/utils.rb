@@ -47,3 +47,10 @@ def replace_in_file(file, before, after, target_regexp = nil)
   end
   File.write(file, target_file_content)
 end
+
+def announce_section(section_name)
+  puts ""
+  puts "".ljust(80,'-').cyan
+  puts section_name.cyan
+  puts ""
+end

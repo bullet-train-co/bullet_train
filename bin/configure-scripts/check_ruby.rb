@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
-require "colorize"
+require "#{__dir__}/utils"
+
+announce_section "Checking Ruby"
+
 # Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
 # rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
 required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")

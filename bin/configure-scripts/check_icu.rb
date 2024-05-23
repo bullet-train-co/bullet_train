@@ -2,6 +2,8 @@
 
 require "#{__dir__}/utils"
 
+announce_section "Checking icu4c"
+
 def not_installed?(package)
   `brew info #{package} | grep "Not installed"`.strip.length > 0
 end

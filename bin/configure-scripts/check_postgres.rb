@@ -2,6 +2,8 @@
 
 require "#{__dir__}/utils"
 
+announce_section "Checking PostgreSQL"
+
 postgres_version_info = begin
                           `postgres --version`
                         rescue
@@ -15,7 +17,6 @@ psql_version_info = begin
                     end
 
 
-puts ""
 if /postgres/.match?(postgres_version_info.downcase)
   postgres_version = postgres_version_info.split("\s")[2]
 
@@ -31,7 +32,7 @@ if /postgres/.match?(postgres_version_info.downcase)
       exit
     end
   end
-if /postgres/.match?(psql_version_info.downcase)
+elsif /postgres/.match?(psql_version_info.downcase)
   psql_version = psql_version_info.split("\s")[2]
 
   if psql_version.match?(/^14/)

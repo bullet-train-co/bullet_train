@@ -2,6 +2,8 @@
 
 require "#{__dir__}/utils"
 
+announce_section "Setup GitHub"
+
 puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"
 puts "you can opt out of this step and set up the repository manually."
