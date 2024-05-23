@@ -5,10 +5,10 @@ require "#{__dir__}/utils"
 announce_section "Checking Redis"
 
 redis_version_info = begin
-                       `redis-cli --version`
-                     rescue
-                       'not found'
-                     end
+  `redis-cli --version`
+rescue
+  "not found"
+end
 
 puts ""
 if /redis/.match?(redis_version_info.downcase)

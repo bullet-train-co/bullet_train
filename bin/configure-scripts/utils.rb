@@ -50,7 +50,7 @@ end
 
 def announce_section(section_name)
   puts ""
-  puts "".ljust(80,'-').cyan
+  puts "".ljust(80, "-").cyan
   puts section_name.cyan
   puts ""
 end

@@ -5,17 +5,16 @@ require "#{__dir__}/utils"
 announce_section "Checking PostgreSQL"
 
 postgres_version_info = begin
-                          `postgres --version`
-                        rescue
-                          'not found'
-                        end
+  `postgres --version`
+rescue
+  "not found"
+end
 
 psql_version_info = begin
-                      `psql --version`
-                    rescue
-                      'not found'
-                    end
-
+  `psql --version`
+rescue
+  "not found"
+end
 
 if /postgres/.match?(postgres_version_info.downcase)
   postgres_version = postgres_version_info.split("\s")[2]
