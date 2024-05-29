@@ -16,9 +16,14 @@ I18n.default_locale = :en
 # of setup for things like the plans available for subscriptions and which outgoing webhooks are available to users.
 require File.expand_path("../../db/seeds", __FILE__)
 
-require "knapsack_pro"
-knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
-knapsack_pro_adapter.set_test_helper_path(__FILE__)
+if ENV["KNAPSACK_PRO_CI_NODE_INDEX"].present?
+  require "knapsack_pro"
+  knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
+  knapsack_pro_adapter.set_test_helper_path(__FILE__)
+else
+  puts "Not requiring Knapsack Pro.".yellow
+  puts "If you'd like to use Knapsack Pro make sure that you've set the environment variable KNAPSACK_PRO_CI_NODE_INDEX".yellow
+end
 
 require "sidekiq/testing"
 Sidekiq::Testing.inline!
