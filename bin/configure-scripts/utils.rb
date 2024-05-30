@@ -1,11 +1,11 @@
 #!/usr/bin/env ruby
 
-puts ""
-puts `gem install colorize`
-puts ""
+require "bundler/inline"
 
-require "colorize"
-require "active_support"
+gemfile do
+  gem "colorize"
+  gem "activesupport", require: "active_support"
+end
 
 def ask(string)
   puts string.blue

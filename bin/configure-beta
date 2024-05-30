@@ -35,12 +35,14 @@ require "#{__dir__}/configure-scripts/check_icu"
 require "#{__dir__}/configure-scripts/check_node"
 
 # And finally we `bundle install` & `yarn install`
-puts "Running `bundle install`.".green
+#
+announce_section "Running `bundle install`"
 stream "bundle install"
 
-puts "Running `yarn install`.".green
+announce_section "Running `yarn install`."
 stream "yarn install"
 
+announce_section "Configuration complete!"
 puts ""
 puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
 puts ""
