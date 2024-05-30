@@ -5,8 +5,8 @@
   "logo": "https://bullettrain.co/heroku-logo.png",
   "keywords": ["ruby", "rails"],
   "buildpacks": [
-    { "url": "heroku/ruby" },
-    { "url": "heroku/nodejs" }
+    { "url": "heroku/nodejs" },
+    { "url": "heroku/ruby" }
   ],
   "formation": {
     "web": {
