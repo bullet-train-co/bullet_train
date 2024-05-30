@@ -34,7 +34,7 @@
     "yalc": "^1.0.0-pre.53"
   },
   "scripts": {
-    "heroku-postbuild": "echo 'This step prevents Heroku from trying to run `yarn build` before ruby and bundler are available. We manually run it in the release phase declared in `Procfile`.'",
+    "heroku-postbuild": "echo 'This step prevents Heroku from trying to run `yarn build` before ruby and bundler are available. The asset pipeline will call it as part of asset precompilation.'",
     "build": "THEME=\"light\" node esbuild.config.js",
     "build:css": "bin/link; THEME=\"light\" yarn build; yarn light:build:css; yarn light:build:mailer:css",
     "light:build:css": "THEME=\"light\" NODE_PATH=./node_modules tailwindcss -c tailwind.config.js -i ./app/assets/stylesheets/application.css -o ./app/assets/builds/application.light.css --postcss ./postcss.config.js",
