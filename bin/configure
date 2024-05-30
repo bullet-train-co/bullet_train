@@ -1,295 +1,48 @@
 #!/usr/bin/env ruby
 
-puts ""
-puts `gem install colorize`
-puts ""
+# First we require a util file that will install a few utility gems
+# and define some utility methods used by other scirpts.
+require "#{__dir__}/configure-scripts/utils"
 
-puts ""
-puts `gem install activesupport`
-puts ""
+# Then we check that we have the right ruby version
+require "#{__dir__}/configure-scripts/check_ruby"
 
-require 'colorize'
-require 'active_support'
+# We rename `origin` to `bullet-train` for consistency with documented upgrade
+# procedures. Also to prevent any unintended pushes to the starter repo.
+require "#{__dir__}/configure-scripts/rename_origin"
 
-def replace_in_file(file, before, after, target_regexp = nil)
-  puts "Replacing in '#{file}'."
-  if target_regexp
-    target_file_content = ""
-    File.open(file).each_line do |l|
-      l.gsub!(before, after) if !!l.match(target_regexp)
-      l if !!l.match(target_regexp)
-      target_file_content += l
-    end
-  else
-    target_file_content = File.open(file).read
-    target_file_content.gsub!(before, after)
-  end
-  File.open(file, "w+") do |f|
-    f.write(target_file_content)
-  end
-end
+# Now we connect your local repo to GitHub if you want
+require "#{__dir__}/configure-scripts/setup_github"
 
-def stream(command, prefix = "  ")
-  puts ""
-  IO.popen(command) do |io|
-    while (line = io.gets) do
-      puts "#{prefix}#{line}"
-    end
-  end
-  puts ""
-end
+# Next we change instances of "Untilted Application" and `untitled_application`
+# into strings that represent the actual name of the new project being started.
+require "#{__dir__}/configure-scripts/update_configs"
 
-def ask(string)
-  puts string.blue
-  return gets.strip
-end
+# Now we ask if you want a `Deploy to Heroku` and/or `Deploy to Render` button
+require "#{__dir__}/configure-scripts/deploy_button_heroku"
+require "#{__dir__}/configure-scripts/deploy_button_render"
 
-def not_installed?(package)
-  `brew info #{package} | grep "Not installed"`.strip.length > 0
-end
+# Now that we're finished making changes to the new repo we commit them if you want
+require "#{__dir__}/configure-scripts/commit_changes"
 
-def check_package(package)
-  if not_installed?(package)
-    puts "#{package} is not installed via Homebrew. Try running `brew install #{package}`.".red
-    input = ask "Try proceeding without #{package}? [y/n]"
-    if input.downcase[0] == "n"
-      exit
-    end
-  else
-    puts "#{package} is installed via Homebrew.".green
-  end
-end
+# Now we can push to `origin` (if we have one, and you want to)
+require "#{__dir__}/configure-scripts/push_to_origin"
 
+# Now we check that you have base-level system dependencies installed.
+require "#{__dir__}/configure-scripts/check_postgres"
+require "#{__dir__}/configure-scripts/check_redis"
+require "#{__dir__}/configure-scripts/check_icu"
+require "#{__dir__}/configure-scripts/check_node"
 
-
-# Unless the shell's current version of Ruby is the same as what the application requires, we should flag it.
-# rbenv produces strings like "3.1.2" while rvm produces ones like "ruby-3.1.2", so we account for that here.
-required_ruby = `cat ./.ruby-version`.strip.gsub(/^ruby-/, "")
-actual_ruby = `ruby -v`.strip
-message = "Bullet Train requires Ruby #{required_ruby} and `ruby -v` returns #{actual_ruby}."
-if actual_ruby.include?(required_ruby)
-  puts message.green
-else
-  puts message.red
-  input = ask "Try proceeding with with Ruby #{actual_ruby} anyway? [y/n]"
-  if input.downcase[0] == "n"
-    exit
-  end
-end
-
-if `brew info 2> /dev/null`.length > 0
-  puts "Homebrew is installed.".green
-else
-  puts "You don't have Homebrew installed. This isn't necessarily a problem, you might not even be on macOS, but we can't check your dependencies without it.".red
-  input = ask "Try proceeding without Homebrew? [y/n]"
-  if input.downcase[0] == "n"
-    exit
-  end
-end
-
-case Gem::Platform.local.os
-when "darwin"
-  check_package("postgresql@14")
-  check_package("redis")
-  check_package("icu4c")
-when "linux"
-  system_packages = `dpkg -l | grep '^ii'`.split("\n").map do |package_information|
-    package_information.split("\s")[1]
-  end
-
-  psql_installed = system_packages.include?("postgresql")
-  if psql_installed
-    psql_version = `psql --version`.split("\s")[2]
-    if psql_version.match?(/^14/)
-      puts "You have PostgreSQL 14 installed.".green
-    else
-      puts "You have PostgreSQL installed, but you're using v#{psql_version} and not v14.".red
-      input = ask "Try proceeding without PostgreSQL 14? [y/n]"
-      if input.downcase[0] == "n"
-        exit
-      end
-    end
-  else
-    puts "You don't have PostgreSQL installed. Please see the installation instructions at https://ubuntu.com/server/docs/databases-postgresql".red
-    exit
-  end
-
-  # TODO: system_packages should include `redis`.
-  # https://github.com/bullet-train-co/bullet_train/issues/1330
-  begin
-    redis_version = `redis-cli --version`.chomp.split("\s").last
-    puts "Redis #{redis_version} is installed.".green
-  rescue
-    puts "You don't have Redis installed. Please see the installation instructions at https://redis.io/docs/getting-started/installation/install-redis-on-linux/ .".red
-    exit
-  end
-
-  if system_packages.select{|pkg| pkg.match?(/^libicu/)}.any?
-    puts "You have icu4c installed.".green
-  else
-    puts "You don't have icu4c installed. Please run `sudo apt-get install libicu-dev`.".red
-    exit
-  end
-else
-  puts "We currently don't support this platform to check if you have the following libraries installed:".red
-  puts "1. PostgreSQL"
-  puts "2. Redis"
-  puts "3. icu4c"
-  puts ""
-  puts "Please ensure they are installed before proceeding."
-  input = ask "Proceed? [y/n]"
-  if input.downcase[0] == "n"
-    exit
-  end
-end
-
-required_node = `cat ./.nvmrc`.strip
-actual_node = begin
-                `node -v`.strip.gsub("v", "")
-              rescue
-                :not_found
-              end
-message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
-if actual_node == :not_found
-  puts "You don't have Node installed. We can't proceed without it. Try `brew install node`.".red
-  exit
-elsif Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
-  puts message.green
-else
-  puts message.red
-  input = ask "Try proceeding with Node #{actual_node} anyway? [y/n]"
-  if input.downcase[0] == "n"
-    exit
-  end
-end
-
-if `yarn -v 2> /dev/null`.length > 0
-  puts "Yarn is installed.".green
-else
-  puts "You don't have Yarn installed. We can't proceed without it. Try `brew install yarn` or see the installation instructions at https://yarnpkg.com/getting-started/install .".red
-  exit
-end
-
-# TODO: Uncomment this when the enable bulk invitations JS is implemented.
-# Enable the bulk invitations configuration.
-# bt_config_lines = File.open("config/initializers/bullet_train.rb").readlines
-# new_lines = bt_config_lines.map do |line|
-#   if line.match?("config.enable_bulk_invitations")
-#     line.gsub!(/#\s*/, "")
-#   end
-#   line
-# end
-# File.write("config/initializers/bullet_train.rb", bt_config_lines.join)
-
-puts "Next, let's push your application to GitHub."
-puts "If you would like to use another service like Gitlab to manage your repository,"
-puts "you can opt out of this step and set up the repository manually."
-puts "(If you're not sure, we suggest going with GitHub)"
-skip_github = ask "Continue setting up with GitHub? [y/n]"
-if skip_github.downcase[0] == "y"
-  if `git remote | grep bullet-train`.strip.length > 0
-    puts "Repository already has a \`bullet-train`\ remote.".yellow
-  else
-    if `git remote | grep origin`.strip.length > 0
-      puts "Renaming repository `origin` remote to `bullet-train`.".green
-      `git remote rename origin bullet-train`
-    else
-      puts "Repository has no `origin` remote, but also no `bullet-train` remote. Did something go wrong?".red
-    end
-  end
-
-  if `git remote | grep origin`.strip.length > 0
-    puts "Repository already has a \`origin`\ remote.".yellow
-  else
-    ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
-    command = if Gem::Platform.local.os == "linux"
-      "xdg-open"
-    else
-      "open"
-    end
-    `#{command} https://github.com/new`
-
-    ssh_path = ask "OK, what was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
-    while ssh_path == ""
-      puts "You must provide a path for your new repository.".red
-      ssh_path = ask "What was the SSH path? (It should look like `git@github.com:your-account/your-new-repo.git`.)"
-    end
-    puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
-    puts `git remote add origin #{ssh_path}`.chomp
-  end
-
-  local_branch = `git branch | grep "*"`.split.last
-
-  puts "Pushing repository to `origin`.".green
-  stream "git push origin #{local_branch}:main 2>&1"
-end
-
-puts "Running `bundle install`.".green
+# And finally we `bundle install` & `yarn install`
+#
+announce_section "Running `bundle install`"
 stream "bundle install"
 
-puts "Running `yarn install`.".green
+announce_section "Running `yarn install`."
 stream "yarn install"
 
-human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
-while human == ""
-  puts "You must provide a name for your application.".red
-  human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
-end
-
-require "active_support/inflector"
-
-variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_')
-environment_variable = ActiveSupport::Inflector.parameterize(human.gsub("-", " "), separator: '_').upcase
-class_name = variable.classify
-kebab_case = variable.tr("_", "-")
-connected_name = variable.gsub("_", "") # i.e. `bullettrain` as opposed to `bullet_train`
-
-puts ""
-puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
-replace_in_file("./.circleci/config.yml", "untitled_application", variable)
-replace_in_file("./config/application.rb", "untitled_application", connected_name)
-replace_in_file("./config/database.yml", "untitled_application", variable)
-replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
-replace_in_file("./config/cable.yml", "untitled_application", variable)
-replace_in_file("./config/initializers/session_store.rb", "untitled_application", variable)
-replace_in_file("./config/environments/production.rb", "untitled_application", variable)
-replace_in_file("./config/application.rb", "UntitledApplication", class_name)
-replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
-replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
-replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
-replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
-replace_in_file("./zapier/package.json", "untitled-application", kebab_case)
-replace_in_file("./zapier/package.json", "Untitled Application", human)
-replace_in_file("./app/views/api/v1/open_api/index.yaml.erb", "Untitled Application", human)
-replace_in_file("./app.json", "Untitled Application", human)
-replace_in_file("./.redocly.yaml", "untitled_application", variable)
-
-puts ""
-
-unless skip_github
-  original_repo_link = "https://github.com/bullet-train-co/bullet_train"
-  new_repo_link = ask "What is the link to your repository? We will use this to enable the one-click deploy to Render button for your application."
-  replace_in_file("README.example.md", original_repo_link, new_repo_link, /repo=#{original_repo_link}/)
-end
-
-puts "Moving `./README.example.md` to `./README.md`.".green
-puts `mv ./README.example.md ./README.md`.chomp
-
-puts `rm .github/FUNDING.yml`.chomp
-
-# We can only do this after the README is moved into place.
-replace_in_file("./README.md", "Untitled Application", human)
-
-if skip_github
-  puts ""
-  puts "Make sure you save your changes with Git.".yellow
-else
-  puts "Committing all these changes to the repository.".green
-  stream "git add -A"
-  stream "git commit -m \"Run configuration script.\""
-  stream "git push origin #{local_branch}:main"
-end
-
+announce_section "Configuration complete!"
 puts ""
 puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
 puts ""
