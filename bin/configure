@@ -22,10 +22,10 @@ require "#{__dir__}/configure-scripts/update_configs"
 require "#{__dir__}/configure-scripts/deploy_button_heroku"
 require "#{__dir__}/configure-scripts/deploy_button_render"
 
-# Now that we're finished making changes to the new repo we commit them
+# Now that we're finished making changes to the new repo we commit them if you want
 require "#{__dir__}/configure-scripts/commit_changes"
 
-# Now we can push to `orogin` (if we have one)
+# Now we can push to `origin` (if we have one, and you want to)
 require "#{__dir__}/configure-scripts/push_to_origin"
 
 # Now we check that you have base-level system dependencies installed.
