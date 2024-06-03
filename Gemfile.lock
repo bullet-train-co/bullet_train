@@ -325,7 +325,9 @@ GEM
     faraday-net_http (3.1.0)
       net-http
     fastimage (2.3.1)
-    ffi (1.16.3)
+    ffi (1.17.0-arm64-darwin)
+    ffi (1.17.0-x86_64-darwin)
+    ffi (1.17.0-x86_64-linux-gnu)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     foreman (0.88.1)
