@@ -16,7 +16,7 @@ if /redis/.match?(redis_version_info.downcase)
   puts "You have redis #{redis_version} installed.".green
 else
   puts "You don't seem to have redis installed.".red
-  continue_anyway = ask_boolan "Would you like to try to continue without redis?", "n"
+  continue_anyway = ask_boolean "Would you like to try to continue without redis?", "n"
   if continue_anyway
     puts "Continuing without redis. This might cause problems in the next steps.".yellow
   else
