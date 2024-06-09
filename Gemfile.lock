@@ -463,7 +463,7 @@ GEM
     pagy_cursor (0.6.1)
       activerecord (>= 5)
       pagy (>= 6, < 7)
-    parallel (1.24.0)
+    parallel (1.25.1)
     parser (3.3.2.0)
       ast (~> 2.4.1)
       racc
@@ -567,8 +567,8 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.2.8)
-      strscan (>= 3.0.9)
+    rexml (3.2.9)
+      strscan
     rotp (6.3.0)
     rqrcode (2.2.0)
       chunky_png (~> 1.0)
