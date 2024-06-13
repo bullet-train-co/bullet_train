@@ -6,28 +6,27 @@
   "keywords": ["ruby", "rails"],
   "buildpacks": [
     { "url": "heroku/nodejs" },
+    { "url": "https://github.com/gaffneyc/heroku-buildpack-jemalloc.git" },
     { "url": "heroku/ruby" }
   ],
   "formation": {
     "web": {
       "quantity": 1,
-      "size": "standard-1x"
+      "size": "basic"
     },
     "worker": {
       "quantity": 1,
-      "size": "standard-1x"
+      "size": "basic"
     }
   },
   "addons": [
-    "heroku-postgresql:standard-0",
-    "heroku-redis:premium-0",
-    "memcachier:100",
-    "bucketeer:hobbyist",
+    "heroku-postgresql:essential-0",
+    "heroku-redis:mini",
+    "memcachier:dev",
     "cloudinary:starter",
     "scheduler:standard",
     "rails-autoscale:white",
-    "honeybadger:basic",
-    "sentry:f1"
+    "honeybadger:basic"
   ],
   "env": {
     "BASE_URL": {
@@ -46,6 +45,18 @@
       "description": "This ensures the Super Scaffolding templates don't show up in production.",
       "generator": "secret",
       "required": true
+    },
+    "RAILS_MAX_THREADS": {
+      "description": "The maximum number of threads that puma will fork. https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#recommended-default-puma-process-and-thread-configuration",
+      "value": "5"
+    },
+    "WEB_CONCURRENCY": {
+      "description": "The number of workers per puma thread. We set it low to prevent OOM errors on new heroku apps. If you move to larger dynos you can increase this. https://devcenter.heroku.com/articles/deploying-rails-applications-with-the-puma-web-server#recommended-default-puma-process-and-thread-configuration",
+      "value": "2"
+    },
+    "JEMALLOC_ENABLED": {
+      "description": "Activate the jemalloc buildpack. https://elements.heroku.com/buildpacks/gaffneyc/heroku-buildpack-jemalloc",
+      "value": true
     }
   }
 }
