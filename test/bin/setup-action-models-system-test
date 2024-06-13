@@ -31,7 +31,7 @@ else
   echo "Skipping the \`targets-one\` action on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   rails g super_scaffold Customer Team name:text_field --navbar="ti-user"
   rails g super_scaffold Notification Customer,Team text:text_field read:boolean --navbar="ti-email"
   rails db:migrate
@@ -42,7 +42,7 @@ else
   echo "Skipping the \`targets-one-parent\` action on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
   rails g super_scaffold Article Team name:text_field --navbar="ti-world"
   rails db:migrate
   rails g super_scaffold:action_models:performs_import CsvImport Article Team
@@ -50,7 +50,7 @@ else
   echo "Skipping the \`performs-import\` action on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
   rails g super_scaffold Visitor Team email:text_field first_name:text_field last_name:text_field --navbar="ti-world"
   rails db:migrate
   rails g super_scaffold:action_models:performs_export CsvExport Visitor Team
