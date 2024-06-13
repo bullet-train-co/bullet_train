@@ -30,7 +30,8 @@ class ActionModelsSystemTest < ApplicationSystemTestCase
     "Projects::ArchiveAction",
     "Listings::PublishAction",
     "Notifications::MarkAllAsReadAction",
-    "Articles::CsvImportAction"
+    "Articles::CsvImportAction",
+    "Visitors::CsvExportAction"
   ].each do |class_name|
     class_name.constantize
   rescue
