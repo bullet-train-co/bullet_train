@@ -16,7 +16,7 @@ else
   echo "Skipping \`TestSite\` and \`TestPage\` on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
   rails g super_scaffold Project Team name:text_field description:trix_editor --navbar="ti-layout"
   rails g super_scaffold Projects::Deliverable Project,Team name:text_field description:trix_editor
 
@@ -35,21 +35,21 @@ else
   echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   rails g super_scaffold Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
   rails g super_scaffold Objective Projects::Step,Team name:text_field description:trix_editor
 else
   echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   rails g super_scaffold Insight Team name:text_field description:trix_editor --navbar="ti-world"
   rails g super_scaffold Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
 else
   echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   rails g super_scaffold Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
   rails g super_scaffold Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
 
@@ -65,7 +65,7 @@ else
   echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "5" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   rails g super_scaffold Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
   rails g super_scaffold Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
   if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -77,33 +77,43 @@ else
   echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
 fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "6" ]; then
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
   rails g super_scaffold TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
   rails g super_scaffold ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
 else
   echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
 fi
 
-# TODO: Generate these in parallel.
-rails g super_scaffold PartialTest Team \
-  text_field_test:text_field \
-  boolean_test:boolean \
-  single_button_test:buttons \
-  multiple_buttons_test:buttons{multiple} \
-  date_test:date_field\
-  date_time_test:date_and_time_field \
-  file_test:file_field \
-  option_test:options \
-  multiple_options_test:options{multiple} \
-  password_test:password_field \
-  phone_field_test:phone_field \
-  super_select_test:super_select \
-  multiple_super_select_test:super_select{multiple} \
-  number_field_test:number_field \
-  text_area_test:text_area \
-  address_test:address_field --navbar="ti-layout"
 
-# The test for this webhook is run inline in .circleci/config.yml.
-rails g super_scaffold:incoming_webhooks SomeProvider
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+  # TODO: Generate these in parallel.
+  rails g super_scaffold PartialTest Team \
+    text_field_test:text_field \
+    boolean_test:boolean \
+    single_button_test:buttons \
+    multiple_buttons_test:buttons{multiple} \
+    date_test:date_field\
+    date_time_test:date_and_time_field \
+    file_test:file_field \
+    option_test:options \
+    multiple_options_test:options{multiple} \
+    password_test:password_field \
+    phone_field_test:phone_field \
+    super_select_test:super_select \
+    multiple_super_select_test:super_select{multiple} \
+    number_field_test:number_field \
+    text_area_test:text_area \
+    address_test:address_field --navbar="ti-layout"
+else
+  echo "Skipping \`PartialTest\` on this CI node."
+fi
+
+
+# The test for this webhook is run inline in .github/workflows/_run_super_scaffolding_tests.yml
+if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
+  rails g super_scaffold:incoming_webhooks SomeProvider
+else
+  echo "Skipping \`Webhok\` on this CI node."
+fi
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare
