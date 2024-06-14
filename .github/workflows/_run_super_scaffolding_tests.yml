@@ -23,8 +23,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # For super scaffolding tests we need to have exactly 8 runners.
-        ci_runners: [TestSite, Project, 'Project::Step', Insight, 'Personality::Disposition', 'Personality::Observation', TestFile, PartialTest]
+        # For super scaffolding tests we need to have exactly 5 runners.
+        ci_runners: ["TestSite, Project", "Project::Step, Insight", "Personality::Disposition, Personality::Observation", "TestFile, PartialTest", Webhook]
     services:
       postgres:
         image: postgres:11-alpine
@@ -131,7 +131,12 @@ jobs:
           CIRCLE_NODE_INDEX: ${{ strategy.job-index }}
 
       - name: 'Run Super Scaffolding Test'
-        run: bin/rails test test/system/super_scaffolding/ test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
+        run: bin/rails test test/system/super_scaffolding/
+        working-directory: tmp/starter
+
+      - name: 'Run Super Scaffolding Webhook Test'
+        run: bin/rails test test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
+        if: ${{ strategy.job-index == 5 }}
         working-directory: tmp/starter
 
       - name: Test Summary
