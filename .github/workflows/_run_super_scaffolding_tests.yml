@@ -23,8 +23,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # For super scaffolding tests we need to have exactly 7 runners.
-        ci_runners: [TestSite, Project, 'Project::Step', Insight, 'Personality::Disposition', 'Personality::Observation', TestFile]
+        # For super scaffolding tests we need to have exactly 8 runners.
+        ci_runners: [TestSite, Project, 'Project::Step', Insight, 'Personality::Disposition', 'Personality::Observation', TestFile, PartialTest]
     services:
       postgres:
         image: postgres:11-alpine
