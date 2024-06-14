@@ -109,7 +109,7 @@ else
 fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
-  rails g super_scaffold Task Team name:text_field
+  rails g super_scaffold Task Team name:text_field --navbar="ti ti-list"
   rails generate super_scaffold:join_model TaskAssignment assigned_to_membership_id{class_name=Membership} assigned_task_id{class_name=Task}
 else
   echo "Skipping \`Webhok\` on this CI node."
