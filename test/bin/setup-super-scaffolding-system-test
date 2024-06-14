@@ -109,9 +109,9 @@ else
 fi
 
 
-# The test for this webhook is run inline in .circleci/config.yml.
-# TODO: If we're going to run this setup we should write a test around it.
-# For now I'm just disabling it.
-# rails g super_scaffold:incoming_webhooks SomeProvider
+# The test for this webhook is run inline in .github/workflows/_run_super_scaffolding_tests.yml
+# TODO: We should figure out a way to do this differently so that we don't run this generator
+# and the associated test on _every single_ CI node that runs super scaffolding system tests.
+rails g super_scaffold:incoming_webhooks SomeProvider
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare
