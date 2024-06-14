@@ -291,6 +291,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       team = membership.team
       task = create(:task, team: team)
       assert task
+      task_assignment = create(:task_assignment, assigned_to_membership: membership, assigned_task: task)
+      assert task_assignment
     end
   end
 
