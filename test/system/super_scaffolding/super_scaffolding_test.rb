@@ -285,6 +285,15 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     end
   end
 
+  if defined?(Task)
+    test "relationships with different names" do
+      membership = @jane.memberships.first
+      team = membership.team
+      task = create(:task, team: team)
+      assert task
+    end
+  end
+
   test "OpenAPI V3 document is still valid" do
     visit "/" # Make sure the test server is running before linting the file.
     puts(output = `yarn exec redocly lint http://127.0.0.1:3001/api/v1/openapi.yaml 1> /dev/stdout 2> /dev/stdout`)
