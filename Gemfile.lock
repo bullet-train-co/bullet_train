@@ -420,7 +420,7 @@ GEM
     mutex_m (0.2.0)
     net-http (0.4.1)
       uri
-    net-imap (0.4.12)
+    net-imap (0.4.13)
       date
       net-protocol
     net-pop (0.1.2)
@@ -587,7 +587,7 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.31.3)
       parser (>= 3.3.1.0)
-    rubocop-performance (1.21.0)
+    rubocop-performance (1.21.1)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
     ruby-graphviz (1.2.5)
