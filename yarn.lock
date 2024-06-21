@@ -1992,10 +1992,10 @@ __metadata:
   linkType: hard
 
 "@redocly/cli@npm:^1.0.0-beta.111":
-  version: 1.15.0
-  resolution: "@redocly/cli@npm:1.15.0"
+  version: 1.16.0
+  resolution: "@redocly/cli@npm:1.16.0"
   dependencies:
-    "@redocly/openapi-core": "npm:1.15.0"
+    "@redocly/openapi-core": "npm:1.16.0"
     abort-controller: "npm:^3.0.0"
     chokidar: "npm:^3.5.1"
     colorette: "npm:^1.2.0"
@@ -2016,7 +2016,7 @@ __metadata:
   bin:
     openapi: bin/cli.js
     redocly: bin/cli.js
-  checksum: 10c0/de2a8e01f95a48c9c5f31f4f5b3add8e7a1d2f04ce2a98b6975be089fef18b31b76e444487311d2d1a5abbcb96769c5ff531af2cce686f3bb846388d33a2e27a
+  checksum: 10c0/a56c9b0ef5d1ec679db739f4f4272a597a2dd9bcfca22f5b5bab63ff635daf6e4ff3de895252ecf57f98b9d677d97c165cf136502bb694381ded718005e890ae
   languageName: node
   linkType: hard
 
@@ -2027,13 +2027,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redocly/openapi-core@npm:1.15.0, @redocly/openapi-core@npm:^1.4.0":
-  version: 1.15.0
-  resolution: "@redocly/openapi-core@npm:1.15.0"
+"@redocly/openapi-core@npm:1.16.0, @redocly/openapi-core@npm:^1.4.0":
+  version: 1.16.0
+  resolution: "@redocly/openapi-core@npm:1.16.0"
   dependencies:
     "@redocly/ajv": "npm:^8.11.0"
     "@redocly/config": "npm:^0.6.0"
     colorette: "npm:^1.2.0"
+    https-proxy-agent: "npm:^7.0.4"
     js-levenshtein: "npm:^1.1.6"
     js-yaml: "npm:^4.1.0"
     lodash.isequal: "npm:^4.5.0"
@@ -2041,7 +2042,7 @@ __metadata:
     node-fetch: "npm:^2.6.1"
     pluralize: "npm:^8.0.0"
     yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/9bd458732673c197a3c431f631183466afa3ee838f09f9cca614cc336c734c456294a32c0cb593c0ec50b32107ab5ee6bf790dea6f5fdd042c97f9e3f093ef56
+  checksum: 10c0/8def0c9bdaa8fa3ff23b9355a8e75e78774d16020898ccf0dd7440e03fde9dcfd56abc92658d81c769e8203ea2bcd5f0f3ebad21e95c94f91bbc31caeec5f1c5
   languageName: node
   linkType: hard
 
@@ -3579,7 +3580,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"https-proxy-agent@npm:^7.0.1":
+"https-proxy-agent@npm:^7.0.1, https-proxy-agent@npm:^7.0.4":
   version: 7.0.4
   resolution: "https-proxy-agent@npm:7.0.4"
   dependencies:
