@@ -95,7 +95,7 @@ jobs:
           core_dir: tmp/core
 
       - name: asset cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             tmp/starter/public/assets
