@@ -81,7 +81,7 @@ jobs:
       - name: Enable corepack
         run: corepack enable
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version-file: tmp/starter/.nvmrc
           cache: 'yarn'
@@ -95,7 +95,7 @@ jobs:
           core_dir: tmp/core
 
       - name: asset cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             tmp/starter/public/assets
