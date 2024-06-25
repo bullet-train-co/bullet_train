@@ -6,6 +6,7 @@ gemfile do
   source 'https://rubygems.org'
   require 'fileutils'
   require 'colorize'
+  require 'json'
 end
 
 def system!(*args)
