@@ -4,6 +4,9 @@ require "#{__dir__}/utils"
 
 announce_section "Building assets"
 
+# TODO: Do we still need to this seperately? It's part of `yarn build:css`
+# system!("bin/link")
+
 puts "-------- yarn run build"
 system!("yarn run build")
 
