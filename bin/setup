@@ -16,9 +16,7 @@ APP_ROOT = File.expand_path("..", __dir__)
 FileUtils.chdir APP_ROOT do
   # This script is a way to set up or update your development environment automatically.
   # This script is idempotent, so that you can run it at any time and get an expectable outcome.
-  # Add necessary setup steps to this file.
-
-  puts "== Checking dependencies =="
+  # Add necessary setup steps to individual scripts in `bin/setup-scripts` and then `require` them below.
 
   # We need to check for the same version of ruby as bin/configure, so we
   # reuse this one from the configure-scritps directory.
