@@ -4,9 +4,9 @@ require "#{__dir__}/utils"
 
 announce_section "Checking yarn"
 
-package_json = JSON.parse(File.open('package.json').read)
+package_json = JSON.parse(File.read("package.json"))
 
-required_yarn = package_json['packageManager'].split('@').last
+required_yarn = package_json["packageManager"].split("@").last
 
 actual_yarn = begin
   `yarn -v`.strip

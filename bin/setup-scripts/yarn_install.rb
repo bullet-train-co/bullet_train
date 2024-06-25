@@ -8,4 +8,3 @@ if command?("yarn") && `yarn -v`.to_f < 2
 else
   system!("yarn install")
 end
-

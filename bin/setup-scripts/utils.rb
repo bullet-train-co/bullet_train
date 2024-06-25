@@ -3,10 +3,10 @@
 require "bundler/inline"
 
 gemfile do
-  source 'https://rubygems.org'
-  require 'fileutils'
-  require 'colorize'
-  require 'json'
+  source "https://rubygems.org"
+  require "fileutils"
+  require "colorize"
+  require "json"
 end
 
 def system!(*args)
@@ -15,8 +15,7 @@ end
 
 def command?(name)
   [name,
-   *ENV['PATH'].split(File::PATH_SEPARATOR).map {|p| File.join(p, name)}
-  ].find {|f| File.executable?(f)}
+    *ENV["PATH"].split(File::PATH_SEPARATOR).map { |p| File.join(p, name) }].find { |f| File.executable?(f) }
 end
 
 def announce_section(section_name)
@@ -35,5 +34,3 @@ def ask_boolean(question, default = "y")
   end
   answer == "y"
 end
-
-

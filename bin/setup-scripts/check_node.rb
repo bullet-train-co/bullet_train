@@ -26,4 +26,3 @@ else
     exit
   end
 end
-
