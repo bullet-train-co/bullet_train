@@ -102,7 +102,7 @@ GEM
       zeitwerk (>= 2.6.12)
     awesome_print (1.9.2)
     aws-eventstream (1.3.0)
-    aws-partitions (1.947.0)
+    aws-partitions (1.948.0)
     aws-sdk-core (3.199.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.651.0)
@@ -370,7 +370,7 @@ GEM
     json (2.7.2)
     jwt (2.8.2)
       base64
-    knapsack_pro (7.6.1)
+    knapsack_pro (7.6.2)
       rake
     language_server-protocol (3.17.0.3)
     launchy (3.0.1)
