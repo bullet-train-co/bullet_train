@@ -28,19 +28,7 @@ require "#{__dir__}/configure-scripts/commit_changes"
 # Now we can push to `origin` (if we have one, and you want to)
 require "#{__dir__}/configure-scripts/push_to_origin"
 
-# Now we check that you have base-level system dependencies installed.
-require "#{__dir__}/configure-scripts/check_postgres"
-require "#{__dir__}/configure-scripts/check_redis"
-require "#{__dir__}/configure-scripts/check_icu"
-require "#{__dir__}/configure-scripts/check_node"
 
-# And finally we `bundle install` & `yarn install`
-#
-announce_section "Running `bundle install`"
-stream "bundle install"
-
-announce_section "Running `yarn install`."
-stream "yarn install"
 
 announce_section "Configuration complete!"
 puts ""
