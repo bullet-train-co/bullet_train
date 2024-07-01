@@ -24,6 +24,10 @@ default: &default
 development:
   <<: *default
   database: untitled_application_development
+  # On MacOS some users are reporting crashes when first trying to access
+  # the database. This workaround was suggested in this issue on `ruby-pg`:
+  # https://github.com/ged/ruby-pg/issues/538
+  <% if RUBY_PLATFORM =~ /darwin/ %>gssencmode: disable<% end %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
