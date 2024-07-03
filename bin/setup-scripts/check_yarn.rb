@@ -15,7 +15,7 @@ rescue
 end
 
 message = "Bullet Train requires yarn #{required_yarn} and `yarn -v` returns #{actual_yarn}."
-if actual_yarn == :not_found
+if actual_yarn == :not_found || actual_yarn == ""
   puts "You don't have yarn installed. We can't proceed without it. Try `npm install -g yarn && corepack enable`.".red
   exit
 elsif Gem::Version.new(actual_yarn) >= Gem::Version.new(required_yarn)
