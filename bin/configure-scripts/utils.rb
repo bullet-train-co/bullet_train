@@ -3,6 +3,7 @@
 require "bundler/inline"
 
 gemfile do
+  source 'https://rubygems.org'
   gem "colorize"
   gem "activesupport", require: "active_support"
 end
