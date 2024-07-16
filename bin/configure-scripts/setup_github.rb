@@ -35,7 +35,7 @@ if SETUP_GITHUB
       return
     else
       # We use this variable in the `deploy_button_heroku.rb` and `deploy_button_render.rb` scripts.
-      HTTP_PATH = "https://github.com/#{ssh_path.gsub(/(.*:)(.*)(\.git$)/, "#{$2}")}"
+      HTTP_PATH = "https://github.com/#{ssh_path.gsub(/.*:/, "")}".delete_suffix(".git")
     end
     puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
     puts `git remote add origin #{ssh_path}`.chomp
