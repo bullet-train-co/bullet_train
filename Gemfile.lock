@@ -569,7 +569,7 @@ GEM
     responders (3.1.1)
       actionpack (>= 5.2)
       railties (>= 5.2)
-    rexml (3.3.1)
+    rexml (3.3.2)
       strscan
     rotp (6.3.0)
     rqrcode (2.2.0)
