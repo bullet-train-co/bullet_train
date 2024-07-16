@@ -9,7 +9,11 @@ button_file = "#{__dir__}/deploy-buttons/heroku.md"
 add_button = ask_boolean "Would you like to add a 'Deploy to Heroku' button to your project.", "y"
 if add_button
   puts "Adding a 'Deploy to Heroku' button.".green
-  new_repo_link = ask "What is the https variant of your repo URL? (Something like: https://github.com/your-org/your-repo)"
+  new_repo_link = if SETUP_GITHUB
+    HTTP_PATH
+  else
+    ask "What is the https variant of your repo URL? (Something like: https://github.com/your-org/your-repo)"
+  end
 
   File.open("README.md", "a") do |readme|
     button = File.read(button_file)
