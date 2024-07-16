@@ -8,10 +8,10 @@ puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"
 puts "you can opt out of this step and set up the repository manually."
 puts "(If you're not sure, we suggest going with GitHub)"
-setup_github = ask_boolean "Continue setting up with GitHub?", "y"
+SETUP_GITHUB = ask_boolean "Continue setting up with GitHub?", "y"
 
-puts "setup_github = #{setup_github}"
-if setup_github
+puts "SETUP_GITHUB = #{SETUP_GITHUB}"
+if SETUP_GITHUB
   if `git remote | grep origin`.strip.length > 0
     puts "Repository already has a `origin` remote.".yellow
   else
