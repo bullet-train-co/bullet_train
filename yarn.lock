@@ -1999,10 +1999,10 @@ __metadata:
   linkType: hard
 
 "@redocly/cli@npm:^1.0.0-beta.111":
-  version: 1.18.0
-  resolution: "@redocly/cli@npm:1.18.0"
+  version: 1.18.1
+  resolution: "@redocly/cli@npm:1.18.1"
   dependencies:
-    "@redocly/openapi-core": "npm:1.18.0"
+    "@redocly/openapi-core": "npm:1.18.1"
     abort-controller: "npm:^3.0.0"
     chokidar: "npm:^3.5.1"
     colorette: "npm:^1.2.0"
@@ -2013,6 +2013,7 @@ __metadata:
     handlebars: "npm:^4.7.6"
     mobx: "npm:^6.0.4"
     node-fetch: "npm:^2.6.1"
+    pluralize: "npm:^8.0.0"
     react: "npm:^17.0.0 || ^18.2.0"
     react-dom: "npm:^17.0.0 || ^18.2.0"
     redoc: "npm:~2.1.5"
@@ -2023,23 +2024,23 @@ __metadata:
   bin:
     openapi: bin/cli.js
     redocly: bin/cli.js
-  checksum: 10c0/b9fdf24995283d2e0052a43fdac3126c22ee45d4b3e29ecfa1a825db4597884b00b4c2cf463d303116afad17cb892a867cc47f53b8c63aeb260fd86a9282b706
+  checksum: 10c0/2efdf0d70a6fe0aec242c00eb51207438c2f2acb9db6662baaf281821b2a934e2397f52906da8bd0bd4877465f4be1bc98862f6d4a213e6c715d7a76c4b914f7
   languageName: node
   linkType: hard
 
-"@redocly/config@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "@redocly/config@npm:0.6.2"
-  checksum: 10c0/7cd6b31de9b4fd8016d2374bb59d7dc1be25f3a3d5656f74f403f76472eeefdc1941e999dda7043b00e4a783f4593dfbcd904cf7ce24f4d43b0ab91fdeca1b61
+"@redocly/config@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@redocly/config@npm:0.7.0"
+  checksum: 10c0/ca5ae4dc4b031ada8b22a8c1ec49bedc4d3643779dbf5558e3dcd5f90dab7f962796b5c191897a3989656682dee0c833636cba551052d5f52ec8120f6e63b516
   languageName: node
   linkType: hard
 
-"@redocly/openapi-core@npm:1.18.0, @redocly/openapi-core@npm:^1.4.0":
-  version: 1.18.0
-  resolution: "@redocly/openapi-core@npm:1.18.0"
+"@redocly/openapi-core@npm:1.18.1, @redocly/openapi-core@npm:^1.4.0":
+  version: 1.18.1
+  resolution: "@redocly/openapi-core@npm:1.18.1"
   dependencies:
     "@redocly/ajv": "npm:^8.11.0"
-    "@redocly/config": "npm:^0.6.2"
+    "@redocly/config": "npm:^0.7.0"
     colorette: "npm:^1.2.0"
     https-proxy-agent: "npm:^7.0.4"
     js-levenshtein: "npm:^1.1.6"
@@ -2049,7 +2050,7 @@ __metadata:
     node-fetch: "npm:^2.6.1"
     pluralize: "npm:^8.0.0"
     yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/fb0149e59c222015b4daeed483b802f6d9efa529d5295ed112902b4ecccf3fae93a47cbb9c9562c9207b33a04b8b295f723815a4eef08e9362dba0c2896a990d
+  checksum: 10c0/1bb856ef44d83f829943fdf6f8151ebb8ca24e80168809896184f202af05c94eb68ec9d832fb6bf646a105419f75b0a62e909f7acfaba85ec54685e29e052519
   languageName: node
   linkType: hard
 
