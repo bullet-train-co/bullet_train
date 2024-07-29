@@ -8,10 +8,12 @@ puts "Next, let's push your application to GitHub."
 puts "If you would like to use another service like Gitlab to manage your repository,"
 puts "you can opt out of this step and set up the repository manually."
 puts "(If you're not sure, we suggest going with GitHub)"
-setup_github = ask_boolean "Continue setting up with GitHub?", "y"
 
-puts "setup_github = #{setup_github}"
-if setup_github
+# We use this variable in the `deploy_button_heroku.rb` and `deploy_button_render.rb` scripts.
+SETUP_GITHUB = ask_boolean "Continue setting up with GitHub?", "y"
+
+puts "SETUP_GITHUB = #{SETUP_GITHUB}"
+if SETUP_GITHUB
   if `git remote | grep origin`.strip.length > 0
     puts "Repository already has a `origin` remote.".yellow
   else
@@ -31,6 +33,9 @@ if setup_github
     if ssh_path == "skip"
       puts "Bailing out of GitHub setup.".yellow
       return
+    else
+      # We use this variable in the `deploy_button_heroku.rb` and `deploy_button_render.rb` scripts.
+      HTTP_PATH = "https://github.com/#{ssh_path.gsub(/.*:/, "")}".delete_suffix(".git")
     end
     puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
     puts `git remote add origin #{ssh_path}`.chomp
