@@ -1,5 +1,6 @@
-PATH
-  remote: ../nice_partials
+GIT
+  remote: https://github.com/bullet-train-co/nice_partials.git
+  revision: 3f980257fdedb384ba6724da52f2cdf47dfb2e22
   specs:
     nice_partials (0.10.0)
       actionview (>= 4.2.6)
