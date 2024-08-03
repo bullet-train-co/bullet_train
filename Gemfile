@@ -214,4 +214,4 @@ gem "pry"
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
 
-gem "nice_partials", path: "../nice_partials"
+gem "nice_partials", github: "bullet-train-co/nice_partials"
