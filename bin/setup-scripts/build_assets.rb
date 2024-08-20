@@ -13,5 +13,5 @@ system!("yarn run build")
 puts "-------- yarn run build:css"
 system!("yarn run build:css")
 
-puts "-------- yarn run ligh:build:css"
+puts "-------- yarn run light:build:css"
 system!("yarn run light:build:css")
