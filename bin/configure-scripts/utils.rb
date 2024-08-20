@@ -39,7 +39,10 @@ def replace_in_file(file, before, after, target_regexp = nil)
     target_file_content = ""
     File.open(file).each_line do |l|
       l.gsub!(before, after) if !!l.match(target_regexp)
+      # standard:disable Lint/Void
+      # TODO: Does this line even do anything for us?
       l if !!l.match(target_regexp)
+      # standard:enable Lint/Void
       target_file_content += l
     end
   else
