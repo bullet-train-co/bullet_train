@@ -1999,10 +1999,10 @@ __metadata:
   linkType: hard
 
 "@redocly/cli@npm:^1.0.0-beta.111":
-  version: 1.21.0
-  resolution: "@redocly/cli@npm:1.21.0"
+  version: 1.21.1
+  resolution: "@redocly/cli@npm:1.21.1"
   dependencies:
-    "@redocly/openapi-core": "npm:1.21.0"
+    "@redocly/openapi-core": "npm:1.21.1"
     abort-controller: "npm:^3.0.0"
     chokidar: "npm:^3.5.1"
     colorette: "npm:^1.2.0"
@@ -2024,23 +2024,23 @@ __metadata:
   bin:
     openapi: bin/cli.js
     redocly: bin/cli.js
-  checksum: 10c0/e704e48983917ea81503ff93354b56c04230db5d198c97db62c84d063d4b0f63292ef165b91bf8f6a1b390082354e51c8e070c63cf16365a67d9f26f4a1bb86f
+  checksum: 10c0/298f1a973bcad246ed2e5e7bef44a4d476947d12ca39dd4cf447a93be5e99e9a59878a15e0023ffd14e46279a1eefaa96356bd0288a0b5b77118543827f7c272
   languageName: node
   linkType: hard
 
-"@redocly/config@npm:^0.9.0":
-  version: 0.9.0
-  resolution: "@redocly/config@npm:0.9.0"
-  checksum: 10c0/74c8efe421f28bf658c5f2372460ba695adefa9808c48fc0c0a9e0efbb8a612d32303d71088a24b9ca11ed441f8ed7a939d1048b82d458445d9938c9c476f293
+"@redocly/config@npm:^0.10.0":
+  version: 0.10.1
+  resolution: "@redocly/config@npm:0.10.1"
+  checksum: 10c0/c9dc37578b19a97ceccf5a7ee38f772cfbbb81093f3d6b1714b46434616c8242403d64648e3e1b184b604f5740020baba4d95ec53446b05be89c1366b8a6cae1
   languageName: node
   linkType: hard
 
-"@redocly/openapi-core@npm:1.21.0, @redocly/openapi-core@npm:^1.4.0":
-  version: 1.21.0
-  resolution: "@redocly/openapi-core@npm:1.21.0"
+"@redocly/openapi-core@npm:1.21.1, @redocly/openapi-core@npm:^1.4.0":
+  version: 1.21.1
+  resolution: "@redocly/openapi-core@npm:1.21.1"
   dependencies:
     "@redocly/ajv": "npm:^8.11.0"
-    "@redocly/config": "npm:^0.9.0"
+    "@redocly/config": "npm:^0.10.0"
     colorette: "npm:^1.2.0"
     https-proxy-agent: "npm:^7.0.4"
     js-levenshtein: "npm:^1.1.6"
@@ -2050,7 +2050,7 @@ __metadata:
     node-fetch: "npm:^2.6.1"
     pluralize: "npm:^8.0.0"
     yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/12e33ad4d8c6ba988db4cbd354bf7f6ec2c187bffd626f19ec9814f4e86699e6f3a0ef956a66f1427d5849aaa6623a921f0df1470beb4255121cc35f93569e31
+  checksum: 10c0/50ecb410a3f892d6fda3251c14bed7010c30dbfcb25aa418dc2a7e354438c20d548af17c630e88fac0dceaf1130cf3210e37828ba3469390f60aa0f69a543f0e
   languageName: node
   linkType: hard
 
