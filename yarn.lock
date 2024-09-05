@@ -1965,17 +1965,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rails/request.js@npm:^0.0.11":
+  version: 0.0.11
+  resolution: "@rails/request.js@npm:0.0.11"
+  checksum: 10c0/983f7278bed81d00f64e44183a4d3e3f98fd9488592da2f6446b1dc5ab89a466d1686722dce16d0c8defb4aba976bb2202885f84ab7bb3256768996f9aaea291
+  languageName: node
+  linkType: hard
+
 "@rails/request.js@npm:^0.0.6":
   version: 0.0.6
   resolution: "@rails/request.js@npm:0.0.6"
   checksum: 10c0/46e946d6d8a1148a70dc19a54062bd25cbb8aa271fd5b55939d58172b83b204e24c42a7f5a4e5834c538bfb72166b3e92979c9ab66c29568c2e2dd8abb8421f4
-  languageName: node
-  linkType: hard
-
-"@rails/request.js@npm:^0.0.9":
-  version: 0.0.9
-  resolution: "@rails/request.js@npm:0.0.9"
-  checksum: 10c0/a2a5fe0da8633fdeb6e884718dc9c1a84504cf195ae5c4840d175fec69ab7ab33d0c8f42df3f11cba1a1a37e9a3bbcaf2d12f60dfdf4f0273fe91d500b357a6e
   languageName: node
   linkType: hard
 
@@ -2208,7 +2208,7 @@ __metadata:
     "@rails/actioncable": "npm:^7.1.3"
     "@rails/actiontext": "npm:^7.2.100"
     "@rails/activestorage": "npm:^7.1.3"
-    "@rails/request.js": "npm:^0.0.9"
+    "@rails/request.js": "npm:^0.0.11"
     "@rails/ujs": "npm:^7.1.400"
     "@redocly/cli": "npm:^1.0.0-beta.111"
     "@tailwindcss/forms": "npm:^0.5.8"
