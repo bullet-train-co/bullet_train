@@ -293,7 +293,7 @@ GEM
     devise-pwned_password (0.1.12)
       devise (~> 4)
       pwned (~> 2.4)
-    devise-two-factor (5.1.0)
+    devise-two-factor (6.0.0)
       activesupport (~> 7.0)
       devise (~> 4.0)
       railties (~> 7.0)
