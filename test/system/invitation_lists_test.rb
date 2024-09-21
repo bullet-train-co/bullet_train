@@ -46,14 +46,15 @@ class InvitationListsTest < ApplicationSystemTestCase
 
     # Fill in the email addresses.
     email_fields = page.all("label", text: "Email Address")
-    email_fields.each_with_index do |field, idx|
-      field.sibling("div").find("input").fill_in with: "test-#{idx}@some-company.com"
+    email_fields.each_with_index do |label, idx|
+      input_id = label[:for]
+      find_field(input_id).fill_in with: "test-#{idx}@some-company.com"
     end
 
     # Select roles from select element.
     role_fields = page.all("label", text: "Role")
-    role_fields.each do |role_field|
-      select_field = role_field.sibling("div").find("select")
+    role_fields.each do |role_label|
+      select_field = find_field(role_label[:for])
       select_field.select "admin"
       select_field.select "editor"
     end

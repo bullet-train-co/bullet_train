@@ -296,7 +296,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     field = find("label", text: /\A#{label}\z/)
     field.click
     "#{string}\n".chars.each do |digit|
-      within(field.find(:xpath, "..")) do
+      within(field.find(:xpath, "../..")) do
         find(".select2-search__field").send_keys(digit)
       end
     end
@@ -347,11 +347,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def find_stimulus_controller_for_label(label, stimulus_controller, wrapper = false)
+    label_element = find("label", text: /\A#{label}\z/)
+
     if wrapper
-      wrapper_el = find("label", text: /\A#{label}\z/).first(:xpath, ".//..//..")
-      wrapper_el if wrapper_el["data-controller"].split(" ").include?(stimulus_controller)
+      label_element.ancestor("[data-controller~='#{stimulus_controller}']")
     else
-      find("label", text: /\A#{label}\z/).first(:xpath, ".//..").first('[data-controller~="' + stimulus_controller + '"]')
+      label_element.first(:xpath, ".//../..").first("[data-controller~='#{stimulus_controller}']")
     end
   end
 
