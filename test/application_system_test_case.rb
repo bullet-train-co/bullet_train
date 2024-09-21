@@ -351,7 +351,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
       wrapper_el = find("label", text: /\A#{label}\z/).first(:xpath, ".//..//..")
       wrapper_el if wrapper_el["data-controller"].split(" ").include?(stimulus_controller)
     else
-      find("label", text: /\A#{label}\z/).first(:xpath, ".//..").first('[data-controller~="' + stimulus_controller + '"]')
+      find("label", text: /\A#{label}\z/).first(:xpath, ".//../..").first('[data-controller~="' + stimulus_controller + '"]')
     end
   end
 
