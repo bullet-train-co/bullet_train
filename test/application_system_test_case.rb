@@ -352,7 +352,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     if wrapper
       label_element.ancestor("[data-controller~='#{stimulus_controller}']")
     else
-      label_element.find(:xpath, "../..//[data-controller~='#{stimulus_controller}']")
+      label_element.first(:xpath, ".//../..").first("[data-controller~='#{stimulus_controller}']")
     end
   end
 
