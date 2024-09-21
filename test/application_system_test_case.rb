@@ -296,7 +296,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     field = find("label", text: /\A#{label}\z/)
     field.click
     "#{string}\n".chars.each do |digit|
-      within(field.find(:xpath, "..")) do
+      within(field.find(:xpath, "../..")) do
         find(".select2-search__field").send_keys(digit)
       end
     end
