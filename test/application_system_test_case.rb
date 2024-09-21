@@ -348,7 +348,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
 
   def find_stimulus_controller_for_label(label, stimulus_controller, wrapper = false)
     label_element = find("label", text: /\A#{label}\z/)
-  
+
     if wrapper
       label_element.ancestor("[data-controller~='#{stimulus_controller}']")
     else
