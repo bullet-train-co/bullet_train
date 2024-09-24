@@ -1,0 +1,60 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+  "name": "Untitled Application",
+  "dockerComposeFile": "compose.yaml",
+  "service": "rails",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+  
+  // Features to add to the dev container. More info: https://containers.dev/features.
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {},
+    "ghcr.io/rails/devcontainer/features/activestorage": {},
+    "ghcr.io/rails/devcontainer/features/postgres-client": {}
+  },
+  
+  // https://code.visualstudio.com/remote/advancedcontainers/environment-variables
+  // https://containers.dev/implementors/json_reference/#variables-in-devcontainerjson
+  "containerEnv": {
+		"PGHOST": "postgres",
+		"PGUSER": "postgres",
+		"PGPASSWORD": "postgres",
+		"REDIS_URL": "redis://redis/0",
+    "CAPYBARA_SERVER_PORT": "45678",
+    "SELENIUM_HOST": "selenium",
+		// "MEMCACHE_SERVERS": "memcached:11211"
+	},
+  
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "forwardPorts": [
+    3000,
+    5432,
+    6379
+  ],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "corepack enable && yarn set version 4.2.2 && bin/setup-devcontainer",
+
+	// Configure tool-specific properties.
+  "customizations": {
+    "vscode": {
+        // Add the IDs of extensions you want installed when the container is created.
+      "extensions": [
+        "marcoroth.stimulus-lsp",
+        "bradlc.vscode-tailwindcss",
+        // "manuelpuyol.erb-linter",
+        // "setobiralo.erb-commenter",
+        // "streetsidesoftware.code-spell-checker",
+        // "GitHub.copilot",
+        // "GitHub.copilot-chat",
+        // "donjayamanne.githistory",
+        // "esbenp.prettier-vscode",
+        // "jemmyw.rails-fast-nav",
+        // "tmikoss.rails-latest-migration"
+      ]
+    }
+  }
+
+  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
