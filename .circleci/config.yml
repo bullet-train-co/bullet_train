@@ -29,14 +29,14 @@ aliases:
       - image: cimg/ruby:3.3.4-browsers
         environment:
           PGHOST: localhost
-          PGUSER: untitled_application
+          PGUSER: kleo
           RAILS_ENV: test
   - &postgres_docker_image
       - image: cimg/postgres:14.2
         environment:
           POSTGRES_HOST_AUTH_METHOD: trust
-          POSTGRES_DB: untitled_application_test
-          POSTGRES_USER: untitled_application
+          POSTGRES_DB: kleo_test
+          POSTGRES_USER: kleo
   - &wait_for_docker
       # We run this because the DB might not be available for a while due to a race condition.
       run: dockerize -wait tcp://localhost:5432 -timeout 1m

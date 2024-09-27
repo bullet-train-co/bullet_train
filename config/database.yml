@@ -23,7 +23,7 @@ default: &default
 
 development:
   <<: *default
-  database: untitled_application_development
+  database: kleo_development
   # On MacOS some users are reporting crashes when first trying to access
   # the database. This workaround was suggested in this issue on `ruby-pg`:
   # https://github.com/ged/ruby-pg/issues/538
@@ -33,7 +33,7 @@ development:
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  #username: untitled_application-app
+  #username: kleo-app
 
   # The password associated with the postgres role (username).
   #password:
@@ -61,7 +61,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: untitled_application_test
+  database: kleo_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -84,7 +84,7 @@ test:
 #
 production:
   <<: *default
-  database: untitled_application_production
-  username: untitled_application
-  password: <%= ENV['UNTITLED_APPLICATION_DATABASE_PASSWORD'] %>
+  database: kleo_production
+  username: kleo
+  password: <%= ENV['KLEO_DATABASE_PASSWORD'] %>
   url: <%= ENV['DATABASE_URL'] %>

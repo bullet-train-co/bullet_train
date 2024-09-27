@@ -3,15 +3,15 @@ en:
     signature: &SIGNATURE
       html:
         <p>If you have any questions, please don't hesitate to <a href="mailto:%{support_email}">send us an email</a>.</p>
-        <p>Thanks,<br>The Untitled Application Team</p>
+        <p>Thanks,<br>The Kleo Team</p>
     invited:
-      subject: Invitation to join %{team_name} on Untitled Application!
+      subject: Invitation to join %{team_name} on Kleo!
       preview: '%{inviter_name} has sent you this invitation.'
       heading: You're invited!
       body:
         html:
           <p>
-            %{inviter_name} has invited you to join %{team_name} on Untitled Application.
+            %{inviter_name} has invited you to join %{team_name} on Kleo.
             You can join %{team_name} by clicking the button below.
           </p>
       cta:
@@ -19,9 +19,9 @@ en:
       signature:
         <<: *SIGNATURE
     welcome:
-      subject: Welcome to Untitled Application!
+      subject: Welcome to Kleo!
       preview: This email contains details on how to get started using your account.
-      heading: Welcome to Untitled Application!
+      heading: Welcome to Kleo!
       body:
         html:
           <p>This is the default welcome email! The content of this welcome email can be updated in `config/locales/en/user_mailer.en.yml`.</p>
