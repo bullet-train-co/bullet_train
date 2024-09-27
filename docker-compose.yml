@@ -1,0 +1,31 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: "${COMPOSE_PROJECT_NAME}-redis"
+    restart: always
+    ports:
+      - 6379:6379
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: redis-cli ping
+      interval: 1s
+      timeout: 3s
+      retries: 30
+
+  postgres:
+    image: postgres:14
+    container_name: "${COMPOSE_PROJECT_NAME}-postgres"
+    restart: always
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: pg_isready -U postgres -h 127.0.0.1
+      interval: 5s
+volumes:
+  redis-data:
+  postgres-data:

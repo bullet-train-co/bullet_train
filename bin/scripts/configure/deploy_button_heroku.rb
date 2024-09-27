@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require "#{__dir__}/utils"
+require_relative "../utils"
 
 announce_section "Add a 'Deploy to Heroku' button?"
 

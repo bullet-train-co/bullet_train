@@ -1,11 +1,14 @@
 #!/usr/bin/env ruby
 
-require "#{__dir__}/utils"
+require_relative "../utils"
 
 announce_section "Preparing local app files"
 
 puts "\n== Preparing database =="
+
+start_container "postgres"
 system! "bin/rails db:prepare"
+stop_container "postgres"
 
 puts "\n== Removing old logs and tempfiles =="
 system! "bin/rails log:clear tmp:clear"

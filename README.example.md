@@ -8,8 +8,7 @@
           - See [`.ruby-version`](.ruby-version) for the specific version.
      - Node 19
           - See [`.nvmrc`](.nvmrc) for the specific version.
-     - PostgreSQL 14
-     - Redis 6.2
+     - [Docker](https://docs.docker.com/get-docker/) (for postgres and redis services)
      - [Chrome](https://www.google.com/search?q=chrome) (for headless browser tests)
 
     If you don't have these installed, you can use [rails.new](https://rails.new) to help with the process.

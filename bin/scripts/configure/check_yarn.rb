@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 
-require "#{__dir__}/utils"
+require_relative "../utils"
+
+announce_section "Checking Yarn"
+
 if `yarn -v 2> /dev/null`.length > 0
   puts "Yarn is installed.".green
 else
