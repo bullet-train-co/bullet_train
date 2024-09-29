@@ -4,14 +4,10 @@ require 'bundler/inline'
 
 # First we require a util file that will install a few utility gems
 # and define some utility methods used by other scirpts.
-require "#{__dir__}/setup-scripts/utils"
-
-
+require "#{__dir__}/scripts/utils"
 
 # path to your application root.
-APP_ROOT = File.expand_path("..", __dir__)
-
-
+APP_ROOT = File.expand_path('..', __dir__)
 
 FileUtils.chdir APP_ROOT do
   # This script is a way to set up or update your development environment automatically.
@@ -20,24 +16,24 @@ FileUtils.chdir APP_ROOT do
 
   # We need to check for the same version of ruby as bin/configure, so we
   # reuse this one from the configure-scritps directory.
-  require "#{__dir__}/configure-scripts/check_ruby"
-  require "#{__dir__}/setup-scripts/bundle_install"
+  require "#{__dir__}/scripts/configure/check_ruby"
+  require "#{__dir__}/scripts/setup/bundle_install"
 
-  require "#{__dir__}/setup-scripts/check_node"
-  require "#{__dir__}/setup-scripts/check_yarn"
-  require "#{__dir__}/setup-scripts/yarn_install"
+  require "#{__dir__}/scripts/setup/check_node"
+  require "#{__dir__}/scripts/setup/check_yarn"
+  require "#{__dir__}/scripts/setup/yarn_install"
 
   # Now we check that you have base-level system dependencies installed.
-  require "#{__dir__}/setup-scripts/check_postgres"
-  require "#{__dir__}/setup-scripts/check_redis"
-  require "#{__dir__}/setup-scripts/check_icu"
+  require "#{__dir__}/scripts/setup/check_postgres"
+  require "#{__dir__}/scripts/setup/check_redis"
+  require "#{__dir__}/scripts/setup/check_icu"
 
-  require "#{__dir__}/setup-scripts/prepare_local_app"
+  require "#{__dir__}/scripts/setup/prepare_local_app"
 
-  require "#{__dir__}/setup-scripts/build_assets"
+  require "#{__dir__}/scripts/setup/build_assets"
 
-  require "#{__dir__}/setup-scripts/check_overmind"
+  require "#{__dir__}/scripts/setup/check_overmind"
 
-  puts ""
+  puts ''
   puts "You're set! Now you can run bin/dev to boot your server and access your new application.".blue
 end

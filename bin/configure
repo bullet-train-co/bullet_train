@@ -2,37 +2,35 @@
 
 # First we require a util file that will install a few utility gems
 # and define some utility methods used by other scirpts.
-require "#{__dir__}/configure-scripts/utils"
+require "#{__dir__}/scripts/utils"
 
 # Then we check that we have the right ruby version
-require "#{__dir__}/configure-scripts/check_ruby"
+require "#{__dir__}/scripts/configure/check_ruby"
 
 # We rename `origin` to `bullet-train` for consistency with documented upgrade
 # procedures. Also to prevent any unintended pushes to the starter repo.
-require "#{__dir__}/configure-scripts/rename_origin"
+require "#{__dir__}/scripts/configure/rename_origin"
 
 # Now we connect your local repo to GitHub if you want
-require "#{__dir__}/configure-scripts/setup_github"
+require "#{__dir__}/scripts/configure/setup_github"
 
 # Next we change instances of "Untilted Application" and `untitled_application`
 # into strings that represent the actual name of the new project being started.
-require "#{__dir__}/configure-scripts/update_configs"
+require "#{__dir__}/scripts/configure/update_configs"
 
 # Now we ask if you want a `Deploy to Heroku` and/or `Deploy to Render` button
-require "#{__dir__}/configure-scripts/deploy_button_heroku"
-require "#{__dir__}/configure-scripts/deploy_button_render"
+require "#{__dir__}/scripts/configure/deploy_button_heroku"
+require "#{__dir__}/scripts/configure/deploy_button_render"
 
 # Now that we're finished making changes to the new repo we commit them if you want
-require "#{__dir__}/configure-scripts/commit_changes"
+require "#{__dir__}/scripts/configure/commit_changes"
 
 # Now we can push to `origin` (if we have one, and you want to)
-require "#{__dir__}/configure-scripts/push_to_origin"
+require "#{__dir__}/scripts/configure/push_to_origin"
 
-
-
-announce_section "Configuration complete!"
-puts ""
+announce_section 'Configuration complete!'
+puts ''
 puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
-puts ""
-puts "Next you can run `bin/setup`, then `bin/dev` to spawn a local instance, and then you can navigate to http://localhost:3000 to access your new application.".green
-puts ""
+puts ''
+puts 'Next you can run `bin/setup`, then `bin/dev` to spawn a local instance, and then you can navigate to http://localhost:3000 to access your new application.'.green
+puts ''

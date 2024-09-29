@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-require "#{__dir__}/utils"
+require File.expand_path('../utils', __dir__)
 
-announce_section "Checking NodeJS"
+announce_section 'Checking NodeJS'
 
 required_node = `cat ./.nvmrc`.strip
 actual_node = begin
-  `node -v`.strip.delete("v")
-rescue
+  `node -v`.strip.delete('v')
+rescue StandardError
   :not_found
 end
 message = "Bullet Train requires Node.js #{required_node} and `node -v` returns #{actual_node}."
@@ -18,7 +18,7 @@ elsif Gem::Version.new(actual_node) >= Gem::Version.new(required_node)
   puts message.green
 else
   puts message.red
-  continue_anyway = ask_boolean "Try proceeding with Node #{actual_node} anyway?", "y"
+  continue_anyway = ask_boolean "Try proceeding with Node #{actual_node} anyway?", 'y'
   if continue_anyway
     puts "You've chosen to continue with Node #{actual_node}.".yellow
   else
