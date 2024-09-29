@@ -7,7 +7,7 @@
     "@bullet-train/fields": "1.7.22",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@fullhuman/postcss-purgecss": "6.0.0",
-    "@hotwired/turbo-rails": "^8.0.5",
+    "@hotwired/turbo-rails": "^8.0.9",
     "@icon/themify-icons": "^1.0.1-alpha.3",
     "@rails/actioncable": "^7.1.3",
     "@rails/actiontext": "^7.2.100",
