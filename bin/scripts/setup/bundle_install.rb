@@ -1,6 +1,8 @@
-require File.expand_path("../utils", __dir__)
+#!/usr/bin/env ruby
 
-announce_section 'Bundler setup'
+require_relative "../utils"
 
-system! 'gem install bundler --conservative'
-system('bundle check') || system!('bundle install')
+announce_section "Bundler setup"
+
+system! "gem install bundler --conservative"
+system("bundle check") || system!("bundle install")

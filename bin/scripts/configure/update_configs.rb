@@ -1,48 +1,48 @@
 #!/usr/bin/env ruby
 
-require File.expand_path("../utils", __dir__)
+require_relative "../utils"
 
-announce_section 'Update project configs'
+announce_section "Update project configs"
 
-human = ask 'What is the name of your new application in title case? (e.g. "Some Great Application")'
-while human == ''
-  puts 'You must provide a name for your application.'.red
-  human = ask 'What is the name of your new application in title case? (e.g. "Some Great Application")'
+human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
+while human == ""
+  puts "You must provide a name for your application.".red
+  human = ask "What is the name of your new application in title case? (e.g. \"Some Great Application\")"
 end
 
-require 'active_support/inflector'
+require "active_support/inflector"
 
-variable = ActiveSupport::Inflector.parameterize(human.tr('-', ' '), separator: '_')
-environment_variable = ActiveSupport::Inflector.parameterize(human.tr('-', ' '), separator: '_').upcase
+variable = ActiveSupport::Inflector.parameterize(human.tr("-", " "), separator: "_")
+environment_variable = ActiveSupport::Inflector.parameterize(human.tr("-", " "), separator: "_").upcase
 class_name = variable.classify
-kebab_case = variable.tr('_', '-')
-connected_name = variable.delete('_') # i.e. `bullettrain` as opposed to `bullet_train`
+kebab_case = variable.tr("_", "-")
+connected_name = variable.delete("_") # i.e. `bullettrain` as opposed to `bullet_train`
 
-puts ''
+puts ""
 puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
-replace_in_file('./.circleci/config.yml', 'untitled_application', variable)
-replace_in_file('./config/application.rb', 'untitled_application', connected_name)
-replace_in_file('./config/database.yml', 'untitled_application', variable)
-replace_in_file('./config/database.yml', 'UNTITLED_APPLICATION', environment_variable)
-replace_in_file('./config/cable.yml', 'untitled_application', variable)
-replace_in_file('./config/initializers/session_store.rb', 'untitled_application', variable)
-replace_in_file('./config/environments/production.rb', 'untitled_application', variable)
-replace_in_file('./config/application.rb', 'UntitledApplication', class_name)
-replace_in_file('./config/locales/en/application.en.yml', 'Untitled Application', human, /name/)
-replace_in_file('./config/locales/en/application.en.yml', 'untitled_application', variable)
-replace_in_file('./config/locales/en/application.en.yml', 'untitled application', human.downcase, /keywords/)
-replace_in_file('./config/locales/en/user_mailer.en.yml', 'Untitled Application', human)
-replace_in_file('./zapier/package.json', 'untitled-application', kebab_case)
-replace_in_file('./zapier/package.json', 'Untitled Application', human)
-replace_in_file('./app/views/api/v1/open_api/index.yaml.erb', 'Untitled Application', human)
-replace_in_file('./app.json', 'Untitled Application', human)
-replace_in_file('./.redocly.yaml', 'untitled_application', variable)
+replace_in_file("./.circleci/config.yml", "untitled_application", variable)
+replace_in_file("./config/application.rb", "untitled_application", connected_name)
+replace_in_file("./config/database.yml", "untitled_application", variable)
+replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
+replace_in_file("./config/cable.yml", "untitled_application", variable)
+replace_in_file("./config/initializers/session_store.rb", "untitled_application", variable)
+replace_in_file("./config/environments/production.rb", "untitled_application", variable)
+replace_in_file("./config/application.rb", "UntitledApplication", class_name)
+replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
+replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
+replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
+replace_in_file("./config/locales/en/user_mailer.en.yml", "Untitled Application", human)
+replace_in_file("./zapier/package.json", "untitled-application", kebab_case)
+replace_in_file("./zapier/package.json", "Untitled Application", human)
+replace_in_file("./app/views/api/v1/open_api/index.yaml.erb", "Untitled Application", human)
+replace_in_file("./app.json", "Untitled Application", human)
+replace_in_file("./.redocly.yaml", "untitled_application", variable)
 
-replace_in_file('./README.example.md', 'Untitled Application', human)
+replace_in_file("./README.example.md", "Untitled Application", human)
 
-puts ''
+puts ""
 
-puts 'Moving `./README.example.md` to `./README.md`.'.green
+puts "Moving `./README.example.md` to `./README.md`.".green
 puts `mv ./README.example.md ./README.md`.chomp
 
 puts `rm .github/FUNDING.yml`.chomp

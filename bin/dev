@@ -1,10 +1,22 @@
-#!/usr/bin/env bash
+#!/usr/bin/env ruby
 
-bin/link
+require_relative "scripts/utils"
 
-if [ -x "$(command -v overmind)" ]
-then
-  overmind start -f Procfile.dev "$@"
+start_docker
+start_containers
+system!("bin/link")
+
+trap("INT") do
+  stop_containers
+  overmind_quit
+  sleep 1
+  puts "Goodbye."
+  exit
+end
+
+if command?("overmind")
+  overmind_quit
+  system("overmind start -f Procfile.dev #{ARGV.join(' ')}")
 else
-  foreman start -f Procfile.dev "$@"
-fi
+  system("foreman start -f Procfile.dev #{ARGV.join(' ')}")
+end

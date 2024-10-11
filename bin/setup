@@ -1,13 +1,11 @@
 #!/usr/bin/env ruby
 
-require 'bundler/inline'
-
 # First we require a util file that will install a few utility gems
-# and define some utility methods used by other scirpts.
+# and define some utility methods used by other scripts.
 require "#{__dir__}/scripts/utils"
 
 # path to your application root.
-APP_ROOT = File.expand_path('..', __dir__)
+APP_ROOT = File.expand_path("".."", __dir__)
 
 FileUtils.chdir APP_ROOT do
   # This script is a way to set up or update your development environment automatically.
@@ -24,8 +22,8 @@ FileUtils.chdir APP_ROOT do
   require "#{__dir__}/scripts/setup/yarn_install"
 
   # Now we check that you have base-level system dependencies installed.
-  require "#{__dir__}/scripts/setup/check_postgres"
-  require "#{__dir__}/scripts/setup/check_redis"
+  require "#{__dir__}/scripts/setup/check_docker"
+
   require "#{__dir__}/scripts/setup/check_icu"
 
   require "#{__dir__}/scripts/setup/prepare_local_app"

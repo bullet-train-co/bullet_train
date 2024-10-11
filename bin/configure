@@ -28,9 +28,9 @@ require "#{__dir__}/scripts/configure/commit_changes"
 # Now we can push to `origin` (if we have one, and you want to)
 require "#{__dir__}/scripts/configure/push_to_origin"
 
-announce_section 'Configuration complete!'
-puts ''
+announce_section "Configuration complete!"
+puts ""
 puts "OK, we're done, but at some point you should edit `config/locales/en/application.en.yml`!".yellow
-puts ''
-puts 'Next you can run `bin/setup`, then `bin/dev` to spawn a local instance, and then you can navigate to http://localhost:3000 to access your new application.'.green
-puts ''
+puts ""
+puts "Next you can run `bin/setup`, then `bin/dev` to spawn a local instance, and then you can navigate to http://localhost:3000 to access your new application.".green
+puts ""

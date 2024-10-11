@@ -1,10 +1,12 @@
-require File.expand_path('../utils', __dir__)
+#!/usr/bin/env ruby
 
-announce_section 'Yarn setup'
+require_relative "../utils"
+
+announce_section "Yarn setup"
 
 # TODO: Robustify this. What if node isn't even installed? Include `corepack enable`. Etc...
-if command?('yarn') && `yarn -v`.to_f < 2
-  system('yarn check') || system!('yarn install')
+if command?("yarn") && `yarn -v`.to_f < 2
+  system("yarn check") || system!("yarn install")
 else
-  system!('yarn install')
+  system!("yarn install")
 end
