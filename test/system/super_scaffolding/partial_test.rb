@@ -46,7 +46,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       click_on "Add New Test File"
 
       fill_in "Name", with: "Test File Name"
-      assert_text("Upload New Document")
+      assert_text("Upload New File")
       fill_in "Name", with: "Foo"
       attach_file("Foo", "test/support/foo.txt", make_visible: true)
       attach_file("Bars", ["test/support/foo.txt", "test/support/foo-two.txt"], make_visible: true)
@@ -58,9 +58,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
       click_on "Edit"
 
-      assert_text("Remove Current Document")
+      assert_text("Remove Current File")
       within "[data-fields--file-item-id-value='#{TestFile.first.foo.id}']" do
-        find("span", text: "Remove Current Document").click
+        find("span", text: "Remove Current File").click
       end
       click_on "Update Test File"
 
@@ -68,9 +68,9 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
       assert TestFile.first.foo.blank?
 
       click_on "Edit"
-      assert_text("Remove Current Document")
+      assert_text("Remove Current File")
       within "[data-fields--file-item-id-value='#{TestFile.first.bars.first.id}']" do
-        find("span", text: "Remove Current Document").click
+        find("span", text: "Remove Current File").click
       end
       click_on "Update Test File"
 
