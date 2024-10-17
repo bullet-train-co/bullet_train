@@ -12,7 +12,8 @@ tasks:
     init: |
       gp sync-await redis-started
       bundle install &&
-      bin/setup &&
+      corepack enable &&
+      yes | bin/setup &&
       rails db:setup &&
       gp sync-done bundle # 'bundle' is an arbitrary name
     command: bin/dev
