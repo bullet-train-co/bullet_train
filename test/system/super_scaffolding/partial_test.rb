@@ -20,7 +20,7 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
   #
   # after the test you can tear down what we've done here in the db:
   #   rake db:migrate VERSION=`ls db/migrate | sort | tail -n 21 | head -n 1`
-  #   git checkout .
+  #   git checkout app config
   #   git clean -d -f app config db test
 
   # force autoload.
