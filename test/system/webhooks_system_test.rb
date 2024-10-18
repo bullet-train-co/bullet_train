@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class WebhooksSystemTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
   def setup
     super
     @user = create :onboarded_user, first_name: "Andrew", last_name: "Culver"
@@ -19,6 +21,10 @@ class WebhooksSystemTest < ApplicationSystemTestCase
     super
     ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
+  end
+
+  def queue_adapter_for_test
+    ActiveJob::QueueAdapters::TestAdapter.new
   end
 
   device_test "team member registers for webhooks and then receives them" do
