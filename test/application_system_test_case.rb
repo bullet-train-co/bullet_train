@@ -45,6 +45,11 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
   delegate :use_cuprite?, to: :class
 
+  def self.deprecator
+    @deprecator ||= ActiveSupport::Deprecation.new("2.0", "BulletTrain")
+  end
+  delegate :deprecator, to: :class
+
   if use_cuprite?
     driven_by :bt_cuprite
   else
@@ -139,7 +144,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def resize_for(display_details)
-    ActiveSupport::Deprecation.warn <<~END_OF_MESSAGE
+    deprecator.warn <<~END_OF_MESSAGE
       `resize_for` is deprecated.
       Please run the following command to update your tests:
       ./bin/updates/system_tests/use_device_test
