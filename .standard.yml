@@ -7,3 +7,11 @@ ignore:
     - Style/CommentedKeyword
   - 'app/controllers/**/*':
     - Style/RedundantAssignment
+  - 'config/environments/*':
+    # We ignore tese in the config/environments files because the defaults for rails differ from what
+    # standardrb expects. To minimize merge conflicts as we update rails it's easier to stick with the
+    # defaults than to impose our formatting rules on files that are updates in rails core.
+    - Layout/SpaceInsideHashLiteralBraces
+    - Style/GlobalStdStream
+    - Layout/ExtraSpacing
+    - Layout/SpaceInsideArrayLiteralBrackets
