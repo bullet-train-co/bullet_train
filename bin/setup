@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+require "fileutils"
 
 require 'bundler/inline'
 
