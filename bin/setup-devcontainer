@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+
+require 'bundler/inline'
+
+# First we require a util file that will install a few utility gems
+# and define some utility methods used by other scirpts.
+require "#{__dir__}/setup-scripts/utils"
+
+
+
+# path to your application root.
+APP_ROOT = File.expand_path("..", __dir__)
+
+
+
+FileUtils.chdir APP_ROOT do
+  # This script is a way to set up or update your development environment automatically.
+  # This script is idempotent, so that you can run it at any time and get an expectable outcome.
+  # Add necessary setup steps to individual scripts in `bin/setup-scripts` and then `require` them below.
+
+  # We need to check for the same version of ruby as bin/configure, so we
+  # reuse this one from the configure-scritps directory.
+  require "#{__dir__}/configure-scripts/check_ruby"
+  require "#{__dir__}/setup-scripts/bundle_install"
+
+  require "#{__dir__}/setup-scripts/check_node"
+  require "#{__dir__}/setup-scripts/check_yarn"
+  require "#{__dir__}/setup-scripts/yarn_install"
+
+  # Now we check that you have base-level system dependencies installed.
+  # Not needed for devcontainer, as we have a compose file with postgres and redis.
+  # require "#{__dir__}/setup-scripts/check_postgres"
+  # require "#{__dir__}/setup-scripts/check_redis"
+  # require "#{__dir__}/setup-scripts/check_icu"
+
+  require "#{__dir__}/setup-scripts/prepare_local_app"
+
+  require "#{__dir__}/setup-scripts/build_assets"
+
+  require "#{__dir__}/setup-scripts/check_overmind"
+
+  puts ""
+  puts "You're set! Now you can run bin/dev to boot your server and access your new application.".blue
+end
