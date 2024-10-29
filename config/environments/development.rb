@@ -85,7 +85,7 @@ Rails.application.configure do
   # TODO: Eventually we should enable this by default. Currently enabling it causes problems.
   # Related issue: https://github.com/bullet-train-co/bullet_train-core/issues/926
   # Once that issue has been resolved we should remove this comment block and the following config line.
-  config.action_controller.raise_on_missing_callback_actions = false
+  config.action_controller.raise_on_missing_callback_actions = true
 
   # disable asset pipeline.
   config.assets.enabled = false
