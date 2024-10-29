@@ -1,25 +1,25 @@
 class Account::ApplicationController < ApplicationController
   include Account::Controllers::Base
 
-  def reorder
-    raise "dummy reorder action on account controller"
-  end
+  #def reorder
+    #raise "dummy reorder action on account controller"
+  #end
 
-  def new
-    raise "dummy new action on account controller"
-  end
+  #def new
+    #raise "dummy new action on account controller"
+  #end
 
-  def edit
-    raise "dummy edit action on account controller"
-  end
+  #def edit
+    #raise "dummy edit action on account controller"
+  #end
 
-  def create
-    raise "dummy create action on account controller"
-  end
+  #def create
+    #raise "dummy create action on account controller"
+  #end
 
-  def update
-    raise "dummy update action on account controller"
-  end
+  #def update
+    #raise "dummy update action on account controller"
+  #end
 
   def ensure_onboarding_is_complete
     # First check that Bullet Train doesn't have any onboarding steps it needs to enforce.
