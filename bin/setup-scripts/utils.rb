@@ -5,7 +5,7 @@ require "bundler/inline"
 gemfile do
   source "https://rubygems.org"
   require "fileutils"
-  require "colorize"
+  gem "colorize"
   require "json"
 end
 
