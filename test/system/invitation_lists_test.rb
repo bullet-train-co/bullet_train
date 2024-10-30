@@ -38,6 +38,9 @@ class InvitationListsTest < ApplicationSystemTestCase
       end
     end
 
+    # Call assert text to make sure that we're on the invitations list page before proceeding
+    assert_text("Invite your team members")
+
     # Click on next to show that bulk invitations will raise an error if not filled out properly.
     click_on "Next"
     assert_text("Invite your team members")
