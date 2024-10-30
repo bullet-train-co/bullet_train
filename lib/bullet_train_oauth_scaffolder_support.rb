@@ -1,4 +1,13 @@
-# TODO This file is going away, but we need it temporarily for compatibility with the integration scaffolder.
+# This file exists to serve as an "integration target" for super scaffolding oauth providers.
+# Whenever you generate an oauth provider this file will be modified to include some utility
+# methods that allow the integration to work smoothly.
+#
+# For more info about super scaffolding oauth providers see the documentation here:
+# https://bullettrain.co/docs/oauth#oauth-providers
+#
+# For more info about this file and what happens to it when you generate a provider
+# see this GitHub issue:
+# https://github.com/bullet-train-co/bullet_train/issues/941#issuecomment-2447355572
 
 # 🚅 super scaffolding will insert new oauth providers above this line.
 
@@ -13,8 +22,5 @@ end
 # started to throw this error:
 # Minitest::UnexpectedError: NameError: uninitialized constant BulletTrainOauthScaffolderSupport
 # We define an empty module here to make that error go away.
-# We really need to get around to fixing whatever problem makes it necessary to have this file in the first place.
-# We define `any_oauth_enabled?` in the main `bullet_train` gem. Why is that not sufficient?
-# https://github.com/bullet-train-co/bullet_train-core/blob/00fdeb275888c88c9a396714c5a7acebbef2e56f/bullet_train/lib/bullet_train.rb#L135-L141
 module BulletTrainOauthScaffolderSupport
 end
