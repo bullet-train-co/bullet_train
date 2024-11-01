@@ -114,6 +114,14 @@ Rails.application.configure do
   # configuration right now, i'm making them the default here as well.
   config.action_mailbox.ingress = :mailgun
 
+  if (ENV["AWS_ACCESS_KEY_ID"] || ENV["BUCKETEER_AWS_ACCESS_KEY_ID"]).present?
+    config.active_storage.service = :amazon
+  elsif ENV["CLOUDINARY_URL"].present?
+    config.active_storage.service = :cloudinary
+  else
+    config.active_storage.service = :local
+  end
+
   # ✅ YOUR APPLICATION'S CONFIGURATION
   # If you need to customize your application's configuration, this is the place to do it. This helps avoid merge
   # conflicts in the future when Rails or Bullet Train update their own default settings.
