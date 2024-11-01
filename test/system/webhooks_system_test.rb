@@ -3,8 +3,7 @@ require "application_system_test_case"
 class WebhooksSystemTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper
 
-  def setup
-    super
+  setup do
     @user = create :onboarded_user, first_name: "Andrew", last_name: "Culver"
     @another_user = create :onboarded_user, first_name: "John", last_name: "Smith"
     return unless Rails.configuration.respond_to?(:outgoing_webhooks)
@@ -17,8 +16,7 @@ class WebhooksSystemTest < ApplicationSystemTestCase
     Rails.application.reload_routes!
   end
 
-  def teardown
-    super
+  teardown do
     ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end

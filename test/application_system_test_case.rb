@@ -75,13 +75,13 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     @another_example_password ||= SecureRandom.hex
   end
 
-  def setup
+  setup do
     ENV["BASE_URL"] = "http://localhost:3001"
     Capybara.use_default_driver
     Capybara.reset_sessions!
   end
 
-  def teardown
+  teardown do
     Capybara.use_default_driver
     Capybara.reset_sessions!
   end

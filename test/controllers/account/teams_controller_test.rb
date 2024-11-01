@@ -3,8 +3,7 @@ require "test_helper"
 class Account::TeamsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
-  def setup
-    super
+  setup do
     @user = FactoryBot.create(:onboarded_user)
     sign_in @user
     @team = @user.current_team

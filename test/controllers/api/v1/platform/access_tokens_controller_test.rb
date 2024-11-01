@@ -1,9 +1,8 @@
 require "controllers/api/v1/test"
 
 class Api::V1::Platform::AccessTokensControllerTest < Api::Test
-  def setup
+  setup do
     # See `test/controllers/api/test.rb` for common set up for API tests.
-    super
 
     @application = create(:platform_application, team: @team)
     @access_token = build(:platform_access_token, application: @application)

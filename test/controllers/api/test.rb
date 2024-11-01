@@ -25,9 +25,7 @@ class Api::Test < ActionDispatch::IntegrationTest
     response.parsed_body["access_token"]
   end
 
-  def setup
-    super
-
+  setup do
     @user = create(:onboarded_user)
     @team = @user.current_team
     @platform_application = create(:platform_application, team: @team)

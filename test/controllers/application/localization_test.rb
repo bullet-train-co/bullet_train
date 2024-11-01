@@ -21,7 +21,7 @@ class ApplicationControllerTest < ActionController::TestCase
     @user = create(:onboarded_user)
   end
 
-  def teardown
+  teardown do
     I18n.available_locales = @actual_locales
   end
 

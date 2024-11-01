@@ -3,8 +3,7 @@ require "test_helper"
 class Account::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
-  def setup
-    super
+  setup do
     @user = create(:onboarded_user)
     sign_in @user
     @team = @user.current_team
@@ -19,8 +18,7 @@ class Account::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     Rails.application.reload_routes!
   end
 
-  def teardown
-    super
+  teardown do
     ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end

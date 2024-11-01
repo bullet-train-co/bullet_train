@@ -1,8 +1,7 @@
 require "application_system_test_case"
 
 class AccountTest < ApplicationSystemTestCase
-  def setup
-    super
+  setup do
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
     login_as(@jane, scope: :user)
     visit root_path

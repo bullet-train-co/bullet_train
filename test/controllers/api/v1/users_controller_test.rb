@@ -1,9 +1,8 @@
 require "controllers/api/v1/test"
 
 class Api::V1::UsersControllerTest < Api::Test
-  def setup
+  setup do
     # See `test/controllers/api/test.rb` for common set up for API tests.
-    super
 
     @users = create_list(:user, 3)
     # 🚅 super scaffolding will insert file-related logic above this line.
