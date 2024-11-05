@@ -370,7 +370,7 @@ GEM
     jmespath (1.6.2)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (2.7.5)
+    json (2.7.6)
     jwt (2.9.3)
       base64
     knapsack_pro (7.12.1)
@@ -587,7 +587,7 @@ GEM
       rubocop-ast (>= 1.32.2, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 3.0)
-    rubocop-ast (1.33.1)
+    rubocop-ast (1.34.0)
       parser (>= 3.3.1.0)
     rubocop-performance (1.22.1)
       rubocop (>= 1.48.1, < 2.0)
@@ -623,7 +623,7 @@ GEM
     sexp_processor (4.17.2)
     showcase-rails (0.4.6)
       rails (>= 6.1.0)
-    sidekiq (7.3.4)
+    sidekiq (7.3.5)
       connection_pool (>= 2.3.0)
       logger
       rack (>= 2.2.4)
