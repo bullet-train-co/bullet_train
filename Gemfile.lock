@@ -338,7 +338,7 @@ GEM
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
-    honeybadger (5.19.1)
+    honeybadger (5.19.2)
       logger
     htmlentities (4.3.4)
     http_accept_language (2.1.1)
@@ -468,7 +468,7 @@ GEM
       activerecord (>= 5)
       pagy (>= 6, < 9)
     parallel (1.26.3)
-    parser (3.3.5.1)
+    parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
