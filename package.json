@@ -11,7 +11,7 @@
     "@icon/themify-icons": "^1.0.1-alpha.3",
     "@rails/actioncable": "^7.1.3",
     "@rails/actiontext": "^8.0.0",
-    "@rails/activestorage": "^7.1.3",
+    "@rails/activestorage": "^8.0.0",
     "@rails/request.js": "^0.0.11",
     "@rails/ujs": "^7.1.500",
     "@redocly/cli": "^1.0.0-beta.111",
