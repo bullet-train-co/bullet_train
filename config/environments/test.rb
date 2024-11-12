@@ -71,11 +71,6 @@ Rails.application.configure do
   # if you want to change a default value specified here. Instead, simply re-specify the value in the section that
   # follows this section.
 
-  # TODO: Eventually we should enable this by default. Currently enabling it causes problems.
-  # Related issue: https://github.com/bullet-train-co/bullet_train-core/issues/926
-  # Once that issue has been resolved we should remove this comment block and the following config line.
-  config.action_controller.raise_on_missing_callback_actions = false
-
   # We only enable this for a specific test.
   config.action_view.annotate_rendered_view_with_filenames = ENV["ENABLE_VIEW_ANNOTATION"] || false
 
