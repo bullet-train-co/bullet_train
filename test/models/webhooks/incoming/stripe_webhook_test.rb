@@ -41,7 +41,7 @@ if defined?(BulletTrain::Billing::Stripe)
     end
 
     class SubscriptionValidOrderTests < Webhooks::Incoming::StripeWebhookTest
-      def setup
+      setup do
         team = create :team
         stripe_subscription = create :billing_stripe_subscription, team: team
         @generic_subscription = create :billing_subscription, provider_subscription: stripe_subscription, status: nil
@@ -64,7 +64,7 @@ if defined?(BulletTrain::Billing::Stripe)
     # we want to make sure that we don't erroneously set the subscription status
     # back to 'pending' becasue that's confusing for everyone especially customers.
     class SubscriptionInvalidOrderTests < Webhooks::Incoming::StripeWebhookTest
-      def setup
+      setup do
         team = create :team
         stripe_subscription = create :billing_stripe_subscription, team: team
         @generic_subscription = create :billing_subscription, provider_subscription: stripe_subscription, status: nil

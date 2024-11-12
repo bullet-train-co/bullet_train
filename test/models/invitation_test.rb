@@ -1,7 +1,7 @@
 require "test_helper"
 
 class InvitationTest < ActiveSupport::TestCase
-  def setup
+  setup do
     @user = create(:onboarded_user)
     @membership = Membership.new(team: @user.current_team)
     @invitation = Invitation.create(team: @user.current_team, email: "test@user.com", from_membership: @user.memberships.first, membership: @membership)

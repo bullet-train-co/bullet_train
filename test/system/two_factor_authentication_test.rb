@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 class TwoFactorAuthentication < ApplicationSystemTestCase
   if two_factor_authentication_enabled?
-    def setup
+    setup do
       @jane = FactoryBot.create :two_factor_user, first_name: "Jane", last_name: "Smith"
       @john = FactoryBot.create :user, first_name: "John", last_name: "Smith"
     end

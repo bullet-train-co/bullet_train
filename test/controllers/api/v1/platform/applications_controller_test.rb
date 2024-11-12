@@ -3,9 +3,8 @@ require "controllers/api/v1/test"
 class Api::V1::Platform::ApplicationsControllerTest < Api::Test
   include Devise::Test::IntegrationHelpers
 
-  def setup
+  setup do
     # See `test/controllers/api/test.rb` for common set up for API tests.
-    super
     sign_in @user
   end
 

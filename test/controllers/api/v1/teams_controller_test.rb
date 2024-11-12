@@ -1,9 +1,8 @@
 require "controllers/api/v1/test"
 
 class Api::V1::TeamsControllerTest < Api::Test
-  def setup
+  setup do
     # See `test/controllers/api/test.rb` for common set up for API tests.
-    super
 
     @teams = create_list(:team, 3)
     # 🚅 super scaffolding will insert file-related logic above this line.

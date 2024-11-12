@@ -1,8 +1,7 @@
 require "application_system_test_case"
 
 class PaginationTest < ApplicationSystemTestCase
-  def setup
-    super
+  setup do
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
     @team = @jane.current_team
 
@@ -11,8 +10,7 @@ class PaginationTest < ApplicationSystemTestCase
     Rails.application.reload_routes!
   end
 
-  def teardown
-    super
+  teardown do
     ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end

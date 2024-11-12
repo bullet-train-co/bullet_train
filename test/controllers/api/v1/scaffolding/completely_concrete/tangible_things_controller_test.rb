@@ -1,9 +1,8 @@
 require "controllers/api/v1/test"
 
 class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < Api::Test
-  def setup
+  setup do
     # See `test/controllers/api/test.rb` for common set up for API tests.
-    super
 
     # 🚅 skip this section when scaffolding.
     @absolutely_abstract_creative_concept = create(:scaffolding_absolutely_abstract_creative_concept, team: @team)
@@ -25,8 +24,7 @@ class Api::V1::Scaffolding::CompletelyConcrete::TangibleThingsControllerTest < A
     Rails.application.reload_routes!
   end
 
-  def teardown
-    super
+  teardown do
     ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end

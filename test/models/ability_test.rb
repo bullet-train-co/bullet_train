@@ -2,7 +2,7 @@ require "test_helper"
 
 module AbilityTest
   class TeamMemberScenarios < ActiveSupport::TestCase
-    def setup
+    setup do
       @user = FactoryBot.create :onboarded_user
       @another_user = FactoryBot.create :onboarded_user
       @membership = FactoryBot.create :membership, user: @user, team: @user.current_team
@@ -29,7 +29,7 @@ module AbilityTest
   end
 
   class NonTeamMemberScenarios < ActiveSupport::TestCase
-    def setup
+    setup do
       @user = FactoryBot.create :user
       @another_user = FactoryBot.create :user
       @team = FactoryBot.create :team
@@ -54,7 +54,7 @@ module AbilityTest
   end
 
   class TeamAdminScenarios < ActiveSupport::TestCase
-    def setup
+    setup do
       @admin = FactoryBot.create :onboarded_user
       @another_user = FactoryBot.create :onboarded_user
       @membership = FactoryBot.create :membership, user: @admin, team: @admin.current_team, role_ids: [Role.admin.id]

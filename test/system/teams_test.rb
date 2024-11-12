@@ -1,8 +1,7 @@
 require "application_system_test_case"
 
 class TeamsTest < ApplicationSystemTestCase
-  def setup
-    super
+  setup do
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
     @john = create :onboarded_user, first_name: "John", last_name: "Smith"
     @jack = create :user, first_name: "Jack", last_name: "Smith"

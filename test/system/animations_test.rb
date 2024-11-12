@@ -1,8 +1,7 @@
 require "application_system_test_case"
 
 class AnimationsTest < ApplicationSystemTestCase
-  def setup
-    super
+  setup do
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
     @team = @jane.current_team
   end

@@ -3,8 +3,7 @@ require "test_helper"
 class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
-  def setup
-    super
+  setup do
     @user = create(:onboarded_user)
     sign_in @user
     @team = @user.current_team
@@ -15,8 +14,7 @@ class Account::Scaffolding::AbsolutelyAbstract::CreativeConceptsControllerTest <
     Rails.application.reload_routes!
   end
 
-  def teardown
-    super
+  teardown do
     ENV["HIDE_THINGS"] = @original_hide_things
     Rails.application.reload_routes!
   end
