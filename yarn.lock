@@ -1495,30 +1495,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bullet-train/bullet-train-sortable@npm:1.8.1":
-  version: 1.8.1
-  resolution: "@bullet-train/bullet-train-sortable@npm:1.8.1"
+"@bullet-train/bullet-train-sortable@npm:1.8.2":
+  version: 1.8.2
+  resolution: "@bullet-train/bullet-train-sortable@npm:1.8.2"
   dependencies:
     "@hotwired/stimulus": "npm:^3.0.1"
     "@rails/request.js": "npm:^0.0.6"
     dragula: "npm:^3.7.3"
     jquery: "npm:^3.7.1"
-  checksum: 10c0/98c53647dc083d856c7065c7458e0399114ef1eb6fdacaec6e40cfdd91d76545fe723d76879c9eb54ad43f57480819504ef942ff1c6608e0113683a42edeebac
+  checksum: 10c0/ddffabcd7aae12c581d40e65c5fc1d4cf04ab9a50681dffca849a1936d2846e4f4c6142be4921629c4e526e91193c15e2604b31348794c21bb4549662c85a426
   languageName: node
   linkType: hard
 
-"@bullet-train/bullet-train@npm:1.8.1":
-  version: 1.8.1
-  resolution: "@bullet-train/bullet-train@npm:1.8.1"
+"@bullet-train/bullet-train@npm:1.8.2":
+  version: 1.8.2
+  resolution: "@bullet-train/bullet-train@npm:1.8.2"
   dependencies:
     "@hotwired/stimulus": "npm:^3.0.1"
-  checksum: 10c0/390e02afe664580902bb93488488f10fdd82195202447d04eb7497078c0087fd51b1fa48e100ea3a2a005696c5141fa5415848e15a0a17c97aaa90d935779dda
+  checksum: 10c0/28db1562a4f00c87e85d76c9e16b17362b0d0e73964ec58fbff2fe5043d7e44ab214fc551c73f84e6f57a2e33726472686e9cecadee0f2821eecd8eefed4983d
   languageName: node
   linkType: hard
 
-"@bullet-train/fields@npm:1.8.1":
-  version: 1.8.1
-  resolution: "@bullet-train/fields@npm:1.8.1"
+"@bullet-train/fields@npm:1.8.2":
+  version: 1.8.2
+  resolution: "@bullet-train/fields@npm:1.8.2"
   dependencies:
     "@hotwired/stimulus": "npm:^3.0.1"
     "@simonwep/pickr": "npm:^1.8.1"
@@ -1531,7 +1531,7 @@ __metadata:
     tributejs: "npm:^5.1.3"
     trix: "npm:^2.0.1"
     zxcvbn: "npm:^4.4.2"
-  checksum: 10c0/13fa31c68ec37b67583bc1f5926445b2c1b5c35d79ed7d6608238fcb66289914bdb2d1dbf09204b3b26275fcf937c37ad7ee64b2fda349541d5bed6d21abf1fd
+  checksum: 10c0/04bad9bf2486e69cd95fd7fb554d662990605605c3216cbc64267bc8981f167544f0609ed055945f75581c34ba73b450822cd4d837870f3a5c1f1f667135c2a6
   languageName: node
   linkType: hard
 
@@ -2198,9 +2198,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "app@workspace:."
   dependencies:
-    "@bullet-train/bullet-train": "npm:1.8.1"
-    "@bullet-train/bullet-train-sortable": "npm:1.8.1"
-    "@bullet-train/fields": "npm:1.8.1"
+    "@bullet-train/bullet-train": "npm:1.8.2"
+    "@bullet-train/bullet-train-sortable": "npm:1.8.2"
+    "@bullet-train/fields": "npm:1.8.2"
     "@esbuild-plugins/node-globals-polyfill": "npm:^0.2.3"
     "@fullhuman/postcss-purgecss": "npm:6.0.0"
     "@hotwired/turbo-rails": "npm:^8.0.12"
