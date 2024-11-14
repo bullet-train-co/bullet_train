@@ -13,3 +13,6 @@ amazon:
   secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] || ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY'] %>
   bucket: <%= ENV['AWS_S3_BUCKET'] || ENV['BUCKETEER_BUCKET_NAME'] %>
   region: <%= ENV['AWS_S3_REGION'] || ENV['BUCKETEER_AWS_REGION'] %>
+
+cloudinary:
+  service: Cloudinary
