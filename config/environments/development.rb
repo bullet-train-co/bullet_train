@@ -114,12 +114,11 @@ Rails.application.configure do
   # configuration right now, i'm making them the default here as well.
   config.action_mailbox.ingress = :mailgun
 
+  # Rails defaults to :local in development. Set any of these ENV vars to use non-local options.
   if (ENV["AWS_ACCESS_KEY_ID"] || ENV["BUCKETEER_AWS_ACCESS_KEY_ID"]).present?
     config.active_storage.service = :amazon
   elsif ENV["CLOUDINARY_URL"].present?
     config.active_storage.service = :cloudinary
-  else
-    config.active_storage.service = :local
   end
 
   # ✅ YOUR APPLICATION'S CONFIGURATION
