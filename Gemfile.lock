@@ -752,7 +752,6 @@ DEPENDENCIES
   magic_test
   minitest-reporters
   minitest-retry
-  pagy (< 7)
   pg (>= 0.18, < 2.0)
   postmark-rails
   pry
