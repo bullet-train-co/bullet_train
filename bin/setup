@@ -7,12 +7,8 @@ require 'bundler/inline'
 # and define some utility methods used by other scirpts.
 require "#{__dir__}/setup-scripts/utils"
 
-
-
 # path to your application root.
 APP_ROOT = File.expand_path("..", __dir__)
-
-
 
 FileUtils.chdir APP_ROOT do
   # This script is a way to set up or update your development environment automatically.
@@ -32,6 +28,7 @@ FileUtils.chdir APP_ROOT do
   require "#{__dir__}/setup-scripts/check_postgres"
   require "#{__dir__}/setup-scripts/check_redis"
   require "#{__dir__}/setup-scripts/check_icu"
+  require "#{__dir__}/setup-scripts/check_image_dependencies"  # Updated this line
 
   require "#{__dir__}/setup-scripts/prepare_local_app"
 
