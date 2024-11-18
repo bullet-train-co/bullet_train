@@ -11,10 +11,10 @@ def check_dependency(name, version_command)
   if $?.success?
     version = version_info.split("\n").first
     puts "#{name} is installed: #{version}".green
-    return true
+    true
   else
     puts "#{name} is not installed or not found in PATH.".red
-    return false
+    false
   end
 end
 
