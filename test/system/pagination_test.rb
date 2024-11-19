@@ -38,7 +38,7 @@ class PaginationTest < ApplicationSystemTestCase
     assert_text("Test 1")
     refute_text("Test #{Pagy::DEFAULT[:items] + 1}")
 
-    click_on ">"
+    click_on "2"
     assert_text("Test #{Pagy::DEFAULT[:items] + 1}")
   end
 end
