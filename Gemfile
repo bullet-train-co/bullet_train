@@ -110,9 +110,6 @@ end
 # BULLET TRAIN GEMS
 # This section is the list of Ruby gems included by default for Bullet Train.
 
-# TODO: Remove this after updating the core gems to 1.7.21
-gem "pagy", "< 7"
-
 # We use a constant here so that we can ensure that all of the bullet_train-*
 # packages are on the same version.
 BULLET_TRAIN_VERSION = "1.8.5"
