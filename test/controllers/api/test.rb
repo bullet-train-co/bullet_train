@@ -1,17 +1,21 @@
 class Api::Test < ActionDispatch::IntegrationTest
   def access_token
-    access_token = Doorkeeper::AccessToken.create!(resource_owner_id: @user.id,
-                                             token: SecureRandom.hex,
-                                             application: @platform_application,
-                                             scopes: "read write delete")
+    access_token = Doorkeeper::AccessToken.create!(
+      resource_owner_id: @user.id,
+      token: SecureRandom.hex,
+      application: @platform_application,
+      scopes: "read write delete"
+    )
     access_token.token
   end
 
   def another_access_token
-    access_token = Doorkeeper::AccessToken.create!(resource_owner_id: @another_user.id,
-                                             token: SecureRandom.hex,
-                                             application: @another_platform_application,
-                                             scopes: "read write delete")
+    access_token = Doorkeeper::AccessToken.create!(
+      resource_owner_id: @another_user.id,
+      token: SecureRandom.hex,
+      application: @another_platform_application,
+      scopes: "read write delete"
+    )
     access_token.token
   end
 
