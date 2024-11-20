@@ -59,6 +59,8 @@ jobs:
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       BUNDLE_JOBS: 2
       BUNDLE_RETRY: 3
+      FERRUM_INTERMITTENT_SLEEP: 0.2
+      FERRUM_INTERMITTENT_ATTEMPTS: 24
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
