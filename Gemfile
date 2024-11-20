@@ -102,9 +102,9 @@ group :test do
   # to switch to Cuprite, you can comment out the `selenium-webdriver` gem
   # and uncomment the `cuprite` gem below. Bullet Train will automatically load
   # the correct configuration based on which gem is included.
-  gem "selenium-webdriver"
+  # gem "selenium-webdriver"
 
-  # gem "cuprite"
+  gem "cuprite"
 end
 
 # BULLET TRAIN GEMS
