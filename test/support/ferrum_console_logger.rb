@@ -11,6 +11,11 @@ class FerrumConsoleLogger
       # @logs << { message: selenium_compatible_log_message, level: log_body["params"]["entry"]["level"] }
       @logs << message
     end
+  rescue => e
+    Kernel.puts "log_str = #{log_str}"
+    Kernel.puts "e = #{e}"
+    Kernel.puts "message = #{message}"
+    raise
   end
 
   def logs(include_unparsed: false)
@@ -30,6 +35,7 @@ class FerrumConsoleLogger
 
     def initialize(log_str)
       _symbol, _time, body_raw = log_str.strip.split(" ", 3)
+      @body_raw = body_raw
       @body = JSON.parse body_raw
     rescue JSON::ParserError => e
       @parser_error = e
@@ -66,7 +72,11 @@ class FerrumConsoleLogger
     end
 
     def method
-      body["method"]
+      if body.blank?
+        Kernel.puts "body = #{body}"
+        Kernel.puts "body_raw = #{body_raw}"
+      end
+      body&.dig "method"
     end
 
     def parser_error?
