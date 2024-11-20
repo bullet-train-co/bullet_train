@@ -16,9 +16,11 @@ if Bundler.locked_gems.dependencies.has_key? "cuprite"
       app,
       logger: FerrumConsoleLogger.new,
       window_size: [1400, 1400],
-      process_timeout: 10,
+      process_timeout: 60,
+      timeout: 60,
       inspector: true,
       headless: !ENV["HEADLESS"].in?(%w[n 0 no false]) && !ENV["MAGIC_TEST"].in?(%w[y 1 yes true]),
+      flatten: false
     )
   end
   Capybara.default_driver = Capybara.javascript_driver = :bt_cuprite
