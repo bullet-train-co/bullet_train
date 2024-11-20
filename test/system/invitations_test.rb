@@ -90,10 +90,13 @@ class InvitationDetailsTest < ApplicationSystemTestCase
     end
 
     # Prep a new window for making sure we can't resend invitations for tombstoned memberships.
+    main_window = current_window
     new_window = open_new_window
+
     within_window new_window do
       visit account_team_memberships_path(hanakos_team)
     end
+    switch_to_window(main_window)
 
     within_membership_row(invited_membership) do
       click_on "Details"
@@ -105,10 +108,14 @@ class InvitationDetailsTest < ApplicationSystemTestCase
     assert_text("That user has been successfully removed from the team.")
 
     # We shouldn't be able to resend invitations for memberships that aren't on the team anymore.
+    switch_to_window new_window
     within_window new_window do
       click_on "Resend"
       assert_text("Sorry, we couldn't find an invitation to resend.")
     end
+
+    new_window.close
+    switch_to_window main_window
 
     # click the link in the email.
     # yes, this is a totally valid thing to do if you have access to the invitation email.
@@ -167,6 +174,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
     # The email was sent to takashi.yamaguchi@gmail.com,
     # but since the user signed up with the email takashi@yamaguchi.com,
     # we have to confirm that we actually want to join the team under this account.
+    assert_text "Join The Testing Team"
     click_on "Join The Testing Team"
 
     # this first name is purposefully different than the name they were invited with.
