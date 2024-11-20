@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# https://gist.github.com/vncsna/64825d5609c146e80de8b1fd623011ca
+# Note we're not using `x` because it's noisy. If you want to use it for debugging, uncomment the line below.
+set -euo pipefail
+#set -x
+
+bundle exec rails db:migrate
+GIT_STATUS=`git status db/schema.rb`
+
+if [[ $GIT_STATUS =~ "nothing to commit, working tree clean" ]]; then
+  exit 0
+else
+  # We don't want the git/grep/grep command below to fail this script so we temporarily `set +e`
+  set +e
+  `git diff db/schema.rb | grep "^+[^+]" | grep -v "ActiveRecord::Schema\["`
+  STATUS_CODE=$?
+  # Now that we've run the git/grep/grep command and captured it's status code we can `set -e` again
+  set -e
+
+  if [[ $STATUS_CODE == 1 ]] ; then
+    echo "Rails version was updated, but there were no changes to any tables."
+    exit 0
+  fi
+
+  echo ""
+  echo "rails db:migrate made a change to your database's schema."
+  echo "Please make sure your database is updated locally before pushing to CircleCI:"
+  git diff db/schema.rb
+  exit 1
+fi
