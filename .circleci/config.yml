@@ -82,7 +82,7 @@ jobs:
 
       - run:
           name: Running rails db:migrate shouldn't cause changes
-          command: bash ./.circleci/db_schema_check
+          command: bash ./bin/db_schema_check
 
   'Minitest':
     parameters:
