@@ -82,7 +82,7 @@ jobs:
 
       - run:
           name: Running rails db:migrate shouldn't cause changes
-          command: bash ./.circleci/db_schema_check
+          command: bash ./bin/db_schema_check
 
   'Minitest':
     parameters:
@@ -106,7 +106,7 @@ jobs:
       - when:
           condition: << parameters.use-core-repo >>
           steps:
-            - run: ./bin/checkout-and-link-core-repo
+            - run: ./.circleci/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -159,7 +159,7 @@ jobs:
       - when:
           condition: << parameters.use-core-repo >>
           steps:
-            - run: ./bin/checkout-and-link-core-repo
+            - run: ./.circleci/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -216,7 +216,7 @@ jobs:
       - when:
           condition: << parameters.use-core-repo >>
           steps:
-            - run: ./bin/checkout-and-link-core-repo
+            - run: ./.circleci/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -266,7 +266,7 @@ jobs:
       - when:
           condition: << parameters.use-core-repo >>
           steps:
-            - run: ./bin/checkout-and-link-core-repo
+            - run: ./.circleci/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install
@@ -321,7 +321,7 @@ jobs:
       - when:
           condition: << parameters.use-core-repo >>
           steps:
-            - run: ./bin/checkout-and-link-core-repo
+            - run: ./.circleci/checkout-and-link-core-repo
 
       # Install dependencies
       - ruby/bundle-install

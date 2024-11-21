@@ -177,7 +177,9 @@ group :test do
   # Write system tests by pointing and clicking in your browser.
   gem "magic_test"
 
-  # Increase parallelism to run CircleCI tests across multiple nodes
+  # Increase parallelism to run CI tests across multiple nodes
+  # Note: You need to ensure that ENV["KNAPSACK_PRO_CI_NODE_INDEX"] is set if you want to use this.
+  # See test/test_helper.rb for additional context around that env var.
   gem "knapsack_pro"
 end
 
