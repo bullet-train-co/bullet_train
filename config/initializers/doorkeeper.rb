@@ -368,7 +368,7 @@ Doorkeeper.configure do
   # The user doesn't have control over the authorization process, so clients
   # aren't limited by scope, and could potentially have the same capabilities
   # as the user themselves. See the second link above for countermeasures.
-  grant_flows %w[authorization_code password implicit client_credentials]
+  grant_flows %w[authorization_code client_credentials]
 
   # Allows to customize OAuth grant flows that +each+ application support.
   # You can configure a custom block (or use a class respond to `#call`) that must

@@ -1,28 +1,22 @@
 class Api::Test < ActionDispatch::IntegrationTest
   def access_token
-    params = {
-      client_id: @platform_application.uid,
-      client_secret: @platform_application.secret,
-      grant_type: "password",
-      scope: "read write delete"
-    }
-
-    post "/oauth/token", params: params
-    assert_response :success
-    response.parsed_body["access_token"]
+    access_token = Doorkeeper::AccessToken.create!(
+      resource_owner_id: @user.id,
+      token: SecureRandom.hex,
+      application: @platform_application,
+      scopes: "read write delete"
+    )
+    access_token.token
   end
 
   def another_access_token
-    params = {
-      client_id: @another_platform_application.uid,
-      client_secret: @another_platform_application.secret,
-      grant_type: "password",
-      scope: "read write delete"
-    }
-
-    post "/oauth/token", params: params
-    assert_response :success
-    response.parsed_body["access_token"]
+    access_token = Doorkeeper::AccessToken.create!(
+      resource_owner_id: @another_user.id,
+      token: SecureRandom.hex,
+      application: @another_platform_application,
+      scopes: "read write delete"
+    )
+    access_token.token
   end
 
   setup do
