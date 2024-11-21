@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+# Default to the main branch if we don't find a matching branch on the starter repository.
+CORE_REPO_BRANCH="main"
+
+# Look for a matching branch on the core repository when running tests on CircleCI.
+CI_BRANCH=$CIRCLE_BRANCH
+if [[ -v CI_BRANCH ]]
+then
+  BRANCH_RESPONSE=$(curl https://api.github.com/repos/bullet-train-co/bullet_train-core/branches/$CI_BRANCH)
+
+  echo "Branch response ===================="
+  echo $BRANCH_RESPONSE
+
+  # If the branch is missing in the repo the response will not contain the branch name
+  if echo $BRANCH_RESPONSE | grep "$CIRCLE_BRANCH"; then
+    CORE_REPO_BRANCH=$CI_BRANCH
+  fi
+fi
+
+
+mkdir core
+
+echo "Cloning from ${CORE_REPO_BRANCH}..."
+git clone -b $CORE_REPO_BRANCH --depth 1 https://github.com/bullet-train-co/bullet_train-core.git ./core
+
+# TODO: Maybe generate this list automatically based on the subdirectories in core that contain a .gemspec?
+packages=(
+  "bullet_train"
+  "bullet_train-api"
+  "bullet_train-fields"
+  "bullet_train-has_uuid"
+  "bullet_train-incoming_webhooks"
+  "bullet_train-integrations"
+  "bullet_train-integrations-stripe"
+  "bullet_train-obfuscates_id"
+  "bullet_train-outgoing_webhooks"
+  "bullet_train-roles"
+  "bullet_train-scope_questions"
+  "bullet_train-scope_validator"
+  "bullet_train-sortable"
+  "bullet_train-super_load_and_authorize_resource"
+  "bullet_train-super_scaffolding"
+  "bullet_train-themes"
+  "bullet_train-themes-light"
+  "bullet_train-themes-tailwind_css"
+)
+
+for package in "${packages[@]}"
+do
+  :
+  grep -v "gem \"$package\"" Gemfile > Gemfile.tmp
+  mv Gemfile.tmp Gemfile
+  echo "gem \"$package\", path: \"./core/$package\"" >> Gemfile
+done
+
+updates="${packages[@]}"
+bundle lock --conservative --update $updates
+
+
+packages=(
+  "bullet_train"
+  "bullet_train-sortable"
+)
+
+echo "yalc dir ======"
+npx yalc dir
+
+for package in "${packages[@]}"
+do
+  :
+  npm_package=${package/_/-}
+  echo "linking package: $package"
+  echo "npm package: $npm_package"
+
+  cd ./core/$package
+  yarn install
+  yarn build
+  npx yalc publish
+
+  cd ../../
+  npx yalc add @bullet-train/$npm_package
+done
+
+
+# For some reason the fields package is called bullet-train/field and doesn't match the pattern for other packages.
+# If it did match other packages it would be   bullet-train/bullet-train-fields.
+# Since it's different we have to treat it special. It would be nice to standardize, but that's likely to have
+# impacts beyond just fixing CI, so I'm doing the messy thing for now.
+
+package="bullet_train-fields"
+npm_package="fields"
+echo "linking package: $package"
+echo "npm package: $npm_package"
+
+cd ./core/$package
+yarn install
+yarn build
+npx yalc publish
+
+cd ../../
+npx yalc add @bullet-train/$npm_package
+
+
+cat package.json
+
+
+
+
