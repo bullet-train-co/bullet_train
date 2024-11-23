@@ -6,7 +6,7 @@
     "@bullet-train/bullet-train-sortable": "1.10.0",
     "@bullet-train/fields": "1.10.0",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
-    "@fullhuman/postcss-purgecss": "6.0.0",
+    "@fullhuman/postcss-purgecss": "7.0.2",
     "@hotwired/turbo-rails": "^8.0.12",
     "@icon/themify-icons": "^1.0.1-alpha.3",
     "@rails/actioncable": "^7.1.3",
