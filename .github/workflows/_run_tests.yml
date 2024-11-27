@@ -134,6 +134,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           coverage_path: tmp/starter/coverage/.last_run.json
           coverage_json_path: tmp/starter/coverage/coverage.json
+          check_job_name: "SimpleCov ${{ strategy.job-index }}/${{ strategy.job-total }}"
 
       - name: Test Summary
         uses: test-summary/action@v2
