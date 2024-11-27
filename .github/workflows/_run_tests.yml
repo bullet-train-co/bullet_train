@@ -145,7 +145,7 @@ jobs:
           --only-group ${{ strategy.job-index }} \
           --serialize-stdout \
           --group-by runtime \
-          --runtime-log tmp/old_parallel_runtime.log \
+          #--runtime-log tmp/old_parallel_runtime.log \
           --combine-stderr \
           --verbose \
           #--exclude-pattern '.*elasticsearch_integration_test.rb' || true
