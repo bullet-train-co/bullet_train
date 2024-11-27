@@ -148,6 +148,7 @@ jobs:
           AWS_REGION: us-east-1
           CI_NODE_TOTAL: ${{ strategy.job-total }}
           CI_NODE_INDEX: ${{ strategy.job-index }}
+          PARALLEL_TESTS_RECORD_RUNTIME: true
           MINITEST_JUNIT_REPORTER: yes
         run: |
           bundle exec parallel_test test \
@@ -161,6 +162,10 @@ jobs:
           #--exclude-pattern '.*elasticsearch_integration_test.rb' || true
           || true
         working-directory: tmp/starter
+        shell: bash
+
+      - name: ls tmp/starter/tmp
+        run: ls -al tmp/starter/tmp
         shell: bash
 
       - name: Test Summary
