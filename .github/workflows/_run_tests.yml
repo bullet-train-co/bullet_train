@@ -154,8 +154,7 @@ jobs:
           -n ${{ strategy.job-total }} \
           --only-group ${{ strategy.job-index }} \
           --serialize-stdout \
-          --group-by runtime \
-          --out tmp/parallel_runtime.log
+          --group-by default \
           #--runtime-log tmp/old_parallel_runtime.log \
           --combine-stderr \
           --verbose \
