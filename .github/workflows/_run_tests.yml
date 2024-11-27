@@ -66,7 +66,7 @@ jobs:
           path: tmp/starter
 
       - name: ls tmp/starter
-        run: ls -al temp/starter
+        run: ls -al tmp/starter
         shell: bash
 
       - name: Checkout Core Repo
