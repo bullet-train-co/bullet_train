@@ -459,6 +459,8 @@ GEM
       activerecord (>= 5)
       pagy (>= 6, < 9)
     parallel (1.26.3)
+    parallel_tests (4.7.2)
+      parallel
     parser (3.3.6.0)
       ast (~> 2.4.1)
       racc
@@ -745,6 +747,7 @@ DEPENDENCIES
   magic_test
   minitest-reporters
   minitest-retry
+  parallel_tests
   pg (>= 0.18, < 2.0)
   postmark-rails
   pry

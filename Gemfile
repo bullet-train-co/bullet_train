@@ -67,6 +67,10 @@ group :development, :test do
   # 6.3.0 and 6.4.0 have a bug https://github.com/thoughtbot/factory_bot_rails/issues/433
   # And now 6.4.1 and 6.4.2 break some things: https://github.com/bullet-train-co/bullet_train-core/issues/707
   gem "factory_bot_rails", "~> 6.2", "!= 6.3.0", "!= 6.4.0", "!= 6.4.1", "!= 6.4.2"
+
+  # In CI we use parallel tests to help increase test speed while keeping the number of
+  # test runners down. You can tweak the workflow to adjust your parallelism as needed.
+  gem 'parallel_tests'
 end
 
 group :development do
