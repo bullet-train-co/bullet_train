@@ -158,7 +158,7 @@ jobs:
         run: |
           bundle exec parallel_test test \
           -n ${{ strategy.job-total }} \
-          --only-group ${{ strategy.job-index + 1 }} \
+          --only-group ${{ matrix.ci_runners }} \
           --serialize-stdout \
           --group-by filesize \
           --combine-stderr \
