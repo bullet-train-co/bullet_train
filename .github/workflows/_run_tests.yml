@@ -65,6 +65,10 @@ jobs:
         with:
           path: tmp/starter
 
+      - name: ls tmp/starter
+        run: ls -al temp/starter
+        shell: bash
+
       - name: Checkout Core Repo
         uses: bullet-train-co/checkout-repo-with-matching-branch@v1
         if: ${{ inputs.use-core-repo == true }}
