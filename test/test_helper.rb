@@ -2,6 +2,11 @@
 # Open coverage/index.html in your browser after
 # running your tests for test coverage results.
 require "simplecov"
+require "simplecov-json"
+SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new([
+  SimpleCov::Formatter::HTMLFormatter,
+  SimpleCov::Formatter::JSONFormatter
+])
 SimpleCov.start "rails"
 
 ENV["RAILS_ENV"] ||= "test"
