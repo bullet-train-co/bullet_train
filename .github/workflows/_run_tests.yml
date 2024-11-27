@@ -144,7 +144,7 @@ jobs:
           CI_NODE_INDEX: ${{ strategy.job-index }}
           MINITEST_JUNIT_REPORTER: yes
         run: |
-          bundle exec parallel_test test \
+          bundle exec rake parallel:test \
           -n ${{ strategy.job-total }} \
           --only-group ${{ strategy.job-index }} \
           --serialize-stdout \
