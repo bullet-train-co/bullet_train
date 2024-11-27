@@ -35,12 +35,8 @@ Capybara.register_server :puma do |app, port, host|
   Rack::Handler::Puma.run(app, Host: host, Port: port, Threads: "5:5", config_files: ["-"])
 end
 
-puts "--------------------------------"
-puts ENV['TEST_ENV_NUMBER']
-puts "--------------------------------"
-
 Capybara.server = :puma
-Capybara.server_port = 3001  + ENV['TEST_ENV_NUMBER'].to_i
+Capybara.server_port = 3001 + ENV["TEST_ENV_NUMBER"].to_i
 Capybara.app_host = "http://localhost:#{Capybara.server_port}"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
@@ -80,7 +76,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   setup do
-    ENV["BASE_URL"] = "http://localhost:3001#{ENV['TEST_ENV_NUMBER'].to_i}"
+    ENV["BASE_URL"] = "http://localhost:#{Capybara.server_port}"
     Capybara.use_default_driver
     Capybara.reset_sessions!
   end
