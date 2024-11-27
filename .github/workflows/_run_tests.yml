@@ -129,6 +129,10 @@ jobs:
         working-directory: tmp/starter
         shell: bash
 
+      - name: Inspect coverage dir
+        run: ls -al tmp/starter/coverage
+        shell: bash
+
       - uses: joshmfrankel/simplecov-check-action@main
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
