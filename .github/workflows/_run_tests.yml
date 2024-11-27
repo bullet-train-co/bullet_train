@@ -171,6 +171,10 @@ jobs:
         run: ls -al tmp/starter/tmp
         shell: bash
 
+      - name: cat runtime log
+        run: cat tmp/starter/tmp/parallel_runtime_test.log
+        shell: bash
+
       - name: Test Summary
         uses: test-summary/action@v2
         with:
