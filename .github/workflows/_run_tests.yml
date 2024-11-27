@@ -131,6 +131,8 @@ jobs:
 
       - name: Run tests
         id: run-tests
+        working-directory: tmp/starter
+        shell: bash
         env:
           AUTH_ENDPOINT: https://no-site.nowhere
           AWS_REGION: us-east-1
