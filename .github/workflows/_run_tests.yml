@@ -131,8 +131,8 @@ jobs:
             runtime-cache-${{ runner.os }}-
 
       - name: Set up database schema
-        run: bin/rails db:schema:load
-        run: bin/rake parallel:setup
+        #run: bin/rails db:schema:load
+        run: bin/rake parallel:setup[2]
         working-directory: tmp/starter
 
       - run: yarn install
