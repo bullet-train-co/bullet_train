@@ -192,6 +192,7 @@ jobs:
           --verbose \
           --verbose-command \
           --highest-exit-status \
+          --failure-exit-code 1 \
           || true
         working-directory: tmp/starter
         continue-on-error: false
