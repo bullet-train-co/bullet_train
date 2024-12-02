@@ -194,6 +194,7 @@ jobs:
           --highest-exit-status \
           || true
         working-directory: tmp/starter
+        continue-on-error: false
         shell: bash
 
       - name: ls tmp/starter/tmp
