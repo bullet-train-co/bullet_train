@@ -64,14 +64,14 @@ jobs:
         shell: bash
 
       - name: Combine Runtime Logs
-        run: cat artifacts/**/parallel_runtime_test.log > tmp/starter/tmp/parallel_runtime.log
+        run: cat artifacts/**/parallel_runtime_test.log > tmp/starter/tmp/parallel_runtime_test.log
         shell: bash
 
       - name: Cat the combined log
-        run: cat tmp/starter/tmp/parallel_runtime.log
+        run: cat tmp/starter/tmp/parallel_runtime_test.log
         shell: bash
 
       - name: Line count the combined log
-        run: wc -l tmp/starter/tmp/parallel_runtime.log
+        run: wc -l tmp/starter/tmp/parallel_runtime_test.log
         shell: bash
 
