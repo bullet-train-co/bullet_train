@@ -133,6 +133,8 @@ jobs:
             runtime-cache-${{ runner.os }}-${{ github.ref }}-
             runtime-cache-${{ runner.os }}-
 
+      # We generate a fake secret because of this issue:
+      # https://github.com/rails/rails/issues/53661
       - name: Generate a fake secret
         shell: bash
         run: echo $(ruby -e "require 'securerandom'; puts SecureRandom.hex(64)") > tmp/local_secret.txt
