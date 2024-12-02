@@ -34,8 +34,8 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
+          #POSTGRES_DB: rails_test
+          #POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
         # Set health checks to wait until postgres has started
         options: >-
@@ -57,7 +57,7 @@ jobs:
       RAILS_ENV: test
       # Manually export your local RAILS_MASTER_KEY if using the credentials system.
       # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+      #DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       BUNDLE_JOBS: 2
       BUNDLE_RETRY: 3
     steps:
