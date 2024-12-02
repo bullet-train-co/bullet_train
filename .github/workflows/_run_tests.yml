@@ -186,9 +186,12 @@ jobs:
           bundle exec parallel_test test \
           -n 16 \
           --only-group ${{ matrix.ci_runners }} \
+          --serialize-stdout \
           --group-by runtime \
           --allowed-missing 100 \
-          || true
+          --verbose \
+          --verbose-command \
+          --failure-exit-code 1
         working-directory: tmp/starter
         continue-on-error: false
         shell: bash
