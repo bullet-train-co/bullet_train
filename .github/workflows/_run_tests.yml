@@ -141,6 +141,11 @@ jobs:
         #working-directory: tmp/starter
         #shell: bash
 
+      - name: Touch Parallel Tests Runtime Log
+        run: touch tmp/parallel_runtime_test.log
+        working-directory: tmp/starter
+        shell: bash
+
       - name: Run tests
         id: run-tests
         env:
@@ -160,9 +165,11 @@ jobs:
           -n ${{ strategy.job-total }} \
           --only-group ${{ matrix.ci_runners }} \
           --serialize-stdout \
-          --group-by filesize \
+          --group-by runtime \
+          --allowed-missing 100 \
           --combine-stderr \
           --verbose \
+          --verbose-command \
           || true
         working-directory: tmp/starter
         shell: bash
