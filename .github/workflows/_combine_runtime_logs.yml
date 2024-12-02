@@ -34,4 +34,14 @@ jobs:
 
       - name: List downloaded artifacts
         run: ls -R artifacts
+        shell: bash
+
+      - name: Combine Runtime Logs
+        run: cat artifacts/**/parallel_runtime_test_*.log > parallel_runtime.log
+        shell: bash
+
+      - name: Cat the combined log
+        run: cat parallel_runtime.log
+        shell: bash
+
 
