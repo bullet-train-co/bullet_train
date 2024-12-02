@@ -134,7 +134,7 @@ jobs:
 
       - name: Set up database schema
         #run: bin/rails db:schema:load
-        run: bin/rake parallel:setup[2]
+        run: bin/rake parallel:setup
         working-directory: tmp/starter
 
       - run: yarn install
