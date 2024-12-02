@@ -183,7 +183,7 @@ jobs:
         # This line allows excluding certain files...
         # --exclude-pattern '.*elasticsearch_integration_test.rb' || true
         run: |
-          bundle exec parallel_test test \
+          parallel_test test \
           -n 16 \
           --only-group ${{ matrix.ci_runners }} \
           --group-by runtime \
