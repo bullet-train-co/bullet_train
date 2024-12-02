@@ -133,6 +133,11 @@ jobs:
             runtime-cache-${{ runner.os }}-${{ github.ref }}-
             runtime-cache-${{ runner.os }}-
 
+      - name: Generate a fake secret
+        shell: bash
+        run: echo $(ruby -e "require 'securerandom'; puts SecureRandom.hex(64)") > tmp/local_secret.txt
+        working-directory: tmp/starter
+
       - name: Set up database schema
         run: bin/rake parallel:setup
         working-directory: tmp/starter
