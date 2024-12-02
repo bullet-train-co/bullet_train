@@ -20,29 +20,55 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
         with:
-          bundler-cache: true
+          path: tmp/starter
+
+      #- name: Install Ruby and gems
+        #uses: ruby/setup-ruby@v1
+        #with:
+          #bundler-cache: true
+
+      - name: runtime log cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            tmp/starter/tmp/parallel_runtime_test.log
+          key: runtime-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            runtime-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+            runtime-cache-${{ runner.os }}-${{ github.ref }}-
+            runtime-cache-${{ runner.os }}-
+
+      - name: ls tmp/starter/tmp
+        run: ls -al tmp/starter/tmp
+        shell: bash
+
+      - name: Touch Parallel Tests Runtime Log
+        run: touch tmp/parallel_runtime_test.log
+        working-directory: tmp/starter
+        shell: bash
+
+      - name: cat runtime log
+        run: cat tmp/starter/tmp/parallel_runtime_test.log
+        shell: bash
 
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts
           pattern: parallel_runtime_test_*.log
-          merge-multiple: true
+          merge-multiple: false
 
       - name: List downloaded artifacts
         run: ls -R artifacts
         shell: bash
 
       - name: Combine Runtime Logs
-        run: cat artifacts/**/parallel_runtime_test_*.log > parallel_runtime.log
+        run: cat artifacts/**/parallel_runtime_test_*.log > tmp/starter/tmp/parallel_runtime.log
         shell: bash
 
       - name: Cat the combined log
-        run: cat parallel_runtime.log
+        run: cat tmp/starter/tmp/parallel_runtime.log
         shell: bash
 
 

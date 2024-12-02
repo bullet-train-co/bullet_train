@@ -118,6 +118,17 @@ jobs:
             asset-cache-${{ runner.os }}-${{ github.ref }}-
             asset-cache-${{ runner.os }}-
 
+      - name: runtime log cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            tmp/starter/tmp/parallel_runtime_test.log
+          key: runtime-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            runtime-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+            runtime-cache-${{ runner.os }}-${{ github.ref }}-
+            runtime-cache-${{ runner.os }}-
+
       - name: Set up database schema
         run: bin/rails db:schema:load
         working-directory: tmp/starter
@@ -140,10 +151,17 @@ jobs:
         #run : ./bin/parallel-ci
         #working-directory: tmp/starter
         #shell: bash
+      - name: ls tmp/starter/tmp
+        run: ls -al tmp/starter/tmp
+        shell: bash
 
       - name: Touch Parallel Tests Runtime Log
         run: touch tmp/parallel_runtime_test.log
         working-directory: tmp/starter
+        shell: bash
+
+      - name: cat runtime log
+        run: cat tmp/starter/tmp/parallel_runtime_test.log
         shell: bash
 
       - name: Run tests
