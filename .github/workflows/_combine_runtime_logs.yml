@@ -71,4 +71,7 @@ jobs:
         run: cat tmp/starter/tmp/parallel_runtime.log
         shell: bash
 
+      - name: Line count the combined log
+        run: wc -l tmp/starter/tmp/parallel_runtime.log
+        shell: bash
 
