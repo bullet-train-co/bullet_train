@@ -28,6 +28,7 @@ jobs:
     name: 🪵 Combine Runtime Logs for Parallel Tests
     uses: ./.github/workflows/_combine_runtime_logs.yml
     secrets: inherit
+    needs: [minitest]
   # If you'd like to auto-deploy to your staging environment you can uncomment this next block.
   # You'll need to set HEROKU_EMAIL and HEROKU_API_KEY in your repo secrets.
   # Be sure to set the app name correctly below.
