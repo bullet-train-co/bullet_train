@@ -182,6 +182,12 @@ jobs:
         run: cat tmp/starter/tmp/parallel_runtime_test.log
         shell: bash
 
+      - name: Upload Parallel Test Runtime Log
+        uses: actions/upload-artifact@v4
+        with:
+          name: parallel_runtime_test_${{ matrix.ci_runners }}.log
+          path: tmp/starter/tmp/parallel_runtime_test.log
+
       - name: Test Summary
         uses: test-summary/action@v2
         with:
