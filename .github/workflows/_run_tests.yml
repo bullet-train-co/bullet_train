@@ -184,7 +184,7 @@ jobs:
         # --exclude-pattern '.*elasticsearch_integration_test.rb' || true
         run: |
           bundle exec parallel_test test \
-          -n 2 \
+          -n 4 \
           --only-group ${{ matrix.ci_runners }} \
           --serialize-stdout \
           --group-by runtime \
