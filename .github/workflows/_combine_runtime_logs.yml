@@ -1,0 +1,37 @@
+# This workflow will download runtime log artifacts created by parallel_test and combine
+# them into one log that is then used by subsequent test runs to help split up test files
+# more efficiently into groups.
+#
+# This workflow is meant to be called by other workflows.
+name: "🪵 Combine Runtime Logs for Parallel Tests"
+on:
+  workflow_call:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      # Manually export your local RAILS_MASTER_KEY if using the credentials system.
+      # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      BUNDLE_JOBS: 2
+      BUNDLE_RETRY: 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: parallel_runtime_test_*.log
+          merge-multiple: true
+
+      - name: List downloaded artifacts
+        run: ls -R artifacts
+
