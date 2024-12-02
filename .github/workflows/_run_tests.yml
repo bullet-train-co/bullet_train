@@ -191,6 +191,7 @@ jobs:
           --combine-stderr \
           --verbose \
           --verbose-command \
+          --highest-exit-status \
           || true
         working-directory: tmp/starter
         shell: bash
