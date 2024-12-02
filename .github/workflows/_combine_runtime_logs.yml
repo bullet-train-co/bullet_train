@@ -8,7 +8,7 @@ on:
   workflow_call:
 
 jobs:
-  lint:
+  combine_runtime_logs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
