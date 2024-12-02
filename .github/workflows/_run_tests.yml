@@ -26,7 +26,8 @@ jobs:
         # Set identifiers for parallel jobs. These can be anything. Just include as many items as you want parallelism.
         # For instance if you want a Three Amigos themed pipeline you could use:
         # ci_node_index: [Dusty, Ned, Lucky]
-        ci_runners: [1,2,3,4]
+        #ci_runners: [1,2,3,4]
+        ci_runners: ["[1,2]","[3,4]"]
     services:
       postgres:
         image: postgres:11-alpine
@@ -131,6 +132,7 @@ jobs:
 
       - name: Set up database schema
         run: bin/rails db:schema:load
+        run: bin/rake parallel:setup
         working-directory: tmp/starter
 
       - run: yarn install
@@ -180,7 +182,7 @@ jobs:
         # --exclude-pattern '.*elasticsearch_integration_test.rb' || true
         run: |
           bundle exec parallel_test test \
-          -n ${{ strategy.job-total }} \
+          -n 2 \
           --only-group ${{ matrix.ci_runners }} \
           --serialize-stdout \
           --group-by runtime \
