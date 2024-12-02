@@ -190,8 +190,7 @@ jobs:
           --group-by runtime \
           --allowed-missing 100 \
           --verbose \
-          --verbose-command \
-          --failure-exit-code 1
+          --verbose-command
         working-directory: tmp/starter
         continue-on-error: false
         shell: bash
