@@ -62,6 +62,8 @@ development:
 test:
   <<: *default
   database: untitled_application_test<%= ENV['TEST_ENV_NUMBER'] %>
+  <% if ENV['CI'] %>username: <%= ENV['POSTGRES_USER'] %><% end %>
+  <% if ENV['CI'] %>password: <%= ENV['POSTGRES_PASSWORD'] %><% end %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
