@@ -216,6 +216,10 @@ jobs:
           name: parallel_runtime_test_${{ matrix.ci_runners }}.log
           path: tmp/starter/tmp/parallel_runtime_test.log
 
+      - name: ls tmp/starter/coverage
+        run: ls -al tmp/starter/coverage
+        shell: bash
+
       - name: Upload Test Coverage Data
         uses: actions/upload-artifact@v4
         with:
