@@ -23,6 +23,12 @@ jobs:
         with:
           path: tmp/starter
 
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: tmp/starter
+          bundler-cache: true
+
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
@@ -31,7 +37,11 @@ jobs:
           merge-multiple: false
 
       - name: List downloaded artifacts
-        run: ls -R tmp/starter/coverage_artifacts
+        run: ls -alR tmp/starter/coverage_artifacts
+        shell: bash
+
+      - name: List coverage dir
+        run: ls -alR tmp/starter/coverage
         shell: bash
 
       - name: Combine Coverage Data
@@ -40,10 +50,10 @@ jobs:
         shell: bash
 
       - name: List downloaded artifacts
-        run: ls -R tmp/starter/coverage_artifacts
+        run: ls -alR tmp/starter/coverage_artifacts
         shell: bash
 
       - name: List coverage dir
-        run: ls -R tmp/starter/coverage
+        run: ls -alR tmp/starter/coverage
         shell: bash
 
