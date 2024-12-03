@@ -1,0 +1,50 @@
+# This workflow will download runtime log artifacts created by parallel_test and combine
+# them into one log that is then used by subsequent test runs to help split up test files
+# more efficiently into groups.
+#
+# This workflow is meant to be called by other workflows.
+name: "🪵 Combine Runtime Logs for Parallel Tests"
+on:
+  workflow_call:
+
+jobs:
+  combine_runtime_logs:
+    name: "🪵"
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      # Manually export your local RAILS_MASTER_KEY if using the credentials system.
+      # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      BUNDLE_JOBS: 2
+      BUNDLE_RETRY: 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: tmp/starter
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: tmp/starter/coverage_artifacts
+          pattern: test_coverage_*.log
+          merge-multiple: false
+
+      - name: List downloaded artifacts
+        run: ls -R tmp/starter/coverage_artifacts
+        shell: bash
+
+      - name: Combine Coverage Data
+        with:
+          working-directory: tmp/starter
+        run: rake coverage:report
+        shell: bash
+
+      - name: List downloaded artifacts
+        run: ls -R tmp/starter/coverage_artifacts
+        shell: bash
+
+      - name: List coverage dir
+        run: ls -R tmp/starter/coverage
+        shell: bash
+

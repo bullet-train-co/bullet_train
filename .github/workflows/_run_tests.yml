@@ -216,6 +216,12 @@ jobs:
           name: parallel_runtime_test_${{ matrix.ci_runners }}.log
           path: tmp/starter/tmp/parallel_runtime_test.log
 
+      - name: Upload Test Coverage Data
+        uses: actions/upload-artifact@v4
+        with:
+          name: test_coverage_${{ matrix.ci_runners }}.log
+          path: tmp/starter/coverage/.resultset.json
+
       - name: Upload Test Summary Logs
         uses: actions/upload-artifact@v4
         with:
