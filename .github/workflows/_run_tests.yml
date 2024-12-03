@@ -26,7 +26,7 @@ jobs:
         # Set identifiers for parallel jobs. These can be anything. Just include as many items as you want parallelism.
         # For instance if you want a Three Amigos themed pipeline you could use:
         # ci_node_index: [Dusty, Ned, Lucky]
-        ci_runners: ["[1,2]"]
+        ci_runners: ["1,2"]
         # This is for -n 4, which seems more consistent than -n 16
         #ci_runners: [1,2,3,4]
         # This is for -n 16, but it seems to be inconsistent on the number of tests run
