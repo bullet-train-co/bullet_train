@@ -2,6 +2,7 @@
 # Open coverage/index.html in your browser after
 # running your tests for test coverage results.
 require "simplecov"
+SimpleCov.command_name "test" + (ENV['TEST_ENV_NUMBER'] || '')
 SimpleCov.start "rails"
 
 ENV["RAILS_ENV"] ||= "test"
