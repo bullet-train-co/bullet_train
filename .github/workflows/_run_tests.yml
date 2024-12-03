@@ -225,6 +225,7 @@ jobs:
         with:
           name: test_coverage_${{ matrix.ci_runners }}.log
           path: tmp/starter/coverage/.resultset.json
+          include-hidden-files: true
 
       - name: Upload Test Summary Logs
         uses: actions/upload-artifact@v4
