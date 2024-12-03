@@ -223,8 +223,8 @@ jobs:
           path: tmp/starter/test/reports/**/TEST-*.xml
         if: always()
 
-      #- name: Test Summary
-        #uses: test-summary/action@v2
-        #with:
-          #paths: "tmp/starter/test/reports/**/TEST-*.xml"
-        #if: always()
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "tmp/starter/test/reports/**/TEST-*.xml"
+        if: always()
