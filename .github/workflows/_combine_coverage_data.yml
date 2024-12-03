@@ -47,7 +47,7 @@ jobs:
 
       - name: Combine Coverage Data
         working-directory: tmp/starter
-        run: "rake coverage:report"
+        run: "bundle exec rake coverage:report"
         shell: bash
 
       - name: List downloaded artifacts
