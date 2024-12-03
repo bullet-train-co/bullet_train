@@ -1,0 +1,41 @@
+# This workflow will download runtime log artifacts created by parallel_test and combine
+# them into one log that is then used by subsequent test runs to help split up test files
+# more efficiently into groups.
+#
+# This workflow is meant to be called by other workflows.
+name: "🪵 Combine Summary Logs for Parallel Tests"
+on:
+  workflow_call:
+
+jobs:
+  combine_summary_logs:
+    name: "🪵"
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      BUNDLE_JOBS: 2
+      BUNDLE_RETRY: 3
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: tmp/starter
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: test_summary_*.log
+          merge-multiple: false
+
+      - name: List downloaded artifacts
+        run: ls -R artifacts
+        shell: bash
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "artifacts/**/TEST-*.xml"
+        if: always()
+

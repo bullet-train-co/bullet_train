@@ -216,8 +216,15 @@ jobs:
           name: parallel_runtime_test_${{ matrix.ci_runners }}.log
           path: tmp/starter/tmp/parallel_runtime_test.log
 
-      - name: Test Summary
-        uses: test-summary/action@v2
+      - name: Upload Test Summary Logs
+        uses: actions/upload-artifact@v4
         with:
-          paths: "tmp/starter/test/reports/**/TEST-*.xml"
+          name: test_summary_${{ matrix.ci_runners }}.log
+          path: tmp/starter/test/reports/**/TEST-*.xml
         if: always()
+
+      #- name: Test Summary
+        #uses: test-summary/action@v2
+        #with:
+          #paths: "tmp/starter/test/reports/**/TEST-*.xml"
+        #if: always()
