@@ -40,10 +40,10 @@ jobs:
         run: ls -alR tmp/starter/coverage_artifacts
         shell: bash
 
-      - name: List coverage dir
-        run: ls -alR tmp/starter/coverage
-        continue-on-error: true
-        shell: bash
+      #- name: List coverage dir
+        #run: ls -alR tmp/starter/coverage
+        #continue-on-error: true
+        #shell: bash
 
       - name: Combine Coverage Data
         working-directory: tmp/starter
@@ -56,6 +56,16 @@ jobs:
 
       - name: List coverage dir
         run: ls -alR tmp/starter/coverage
+        continue-on-error: true
+        shell: bash
+
+      - name: cat .last_run.json
+        run: cat tmp/starter/coverage/.last_run.json
+        continue-on-error: true
+        shell: bash
+
+      - name: cat .resultset.json
+        run: cat tmp/starter/coverage/.resultset.json
         continue-on-error: true
         shell: bash
 
