@@ -35,8 +35,7 @@ jobs:
         shell: bash
 
       - name: Combine Coverage Data
-        with:
-          working-directory: tmp/starter
+        working-directory: tmp/starter
         run: "rake coverage:report"
         shell: bash
 
