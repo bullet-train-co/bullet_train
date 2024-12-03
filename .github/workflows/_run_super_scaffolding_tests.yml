@@ -139,8 +139,9 @@ jobs:
         if: ${{ strategy.job-index == 5 }}
         working-directory: tmp/starter
 
-      - name: Test Summary
-        uses: test-summary/action@v2
+      - name: Upload Test Summary Logs
+        uses: actions/upload-artifact@v4
         with:
-          paths: "tmp/starter/test/reports/**/TEST-*.xml"
+          name: test_summary_super_scaffolding_${{ strategy.job-index }}.log
+          path: tmp/starter/test/reports/**/TEST-*.xml
         if: always()

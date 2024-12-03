@@ -30,7 +30,7 @@ jobs:
     secrets: inherit
     needs: [minitest]
   combine_summary_logs:
-    name: 🪵 Combine Summary Logs for Parallel Tests
+    name: 🪵 Combine Summary for Parallel Tests
     uses: ./.github/workflows/_combine_summary_logs.yml
     secrets: inherit
     needs: [minitest]

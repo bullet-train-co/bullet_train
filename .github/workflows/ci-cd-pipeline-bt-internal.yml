@@ -42,3 +42,10 @@ jobs:
     secrets: inherit
     with:
       use-core-repo: true
+
+  combine_summary_logs:
+    name: 🪵 Combine Summary for Parallel Tests
+    uses: ./.github/workflows/_combine_summary_logs.yml
+    secrets: inherit
+    needs: [super_scaffolding, core_minitest, core_super_scaffolding]
+    if: ${{ always() }}
