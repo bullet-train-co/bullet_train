@@ -9,10 +9,6 @@ namespace :coverage do
         SimpleCov::Formatter::HTMLFormatter,
         SimpleCov::Formatter::JSONFormatter
       ])
-      #formatter SimpleCov::Formatter::MultiFormatter.new([
-        #SimpleCov::Formatter::SimpleFormatter,
-        #SimpleCov::Formatter::HTMLFormatter
-      #])
     end
   end
 end
