@@ -29,6 +29,7 @@ end
 require "sidekiq/testing"
 Sidekiq::Testing.inline!
 
+ENV["MINITEST_REPORTERS_REPORTS_DIR"] = "test/reports#{ENV['TEST_ENV_NUMBER'] || ''}"
 require "minitest/reporters"
 
 reporters = []

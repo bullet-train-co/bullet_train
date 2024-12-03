@@ -231,5 +231,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: test_summary_${{ matrix.ci_runners }}.log
-          path: tmp/starter/test/reports/**/TEST-*.xml
+          path: tmp/starter/test/reports*/**/TEST-*.xml
         if: always()
