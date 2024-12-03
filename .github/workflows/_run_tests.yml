@@ -196,7 +196,6 @@ jobs:
           bundle exec parallel_test test \
           -n 16 \
           --only-group ${{ matrix.ci_runners }} \
-          --serialize-stdout \
           --group-by runtime \
           --allowed-missing 100 \
           --verbose \
