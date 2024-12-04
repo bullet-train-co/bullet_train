@@ -16,7 +16,7 @@ jobs:
     name: 🧮 Calculate Dynamic Matrix
     uses: ./.github/workflows/_dynamic_matrix.yml
     secrets: inherit
-  minitest:
+  check_calculations:
     name: Check Calculation Output
     needs: [calculate_matrix]
     steps:
