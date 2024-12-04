@@ -107,7 +107,7 @@ jobs:
               core.summary.addRaw(`${coverageData.metrics.covered_lines} Lines Covered (of ${coverageData.metrics.total_lines})`,true)
               core.summary.addRaw(`Files with the least coverage`, true)
 
-              core.summary.addRaw(fileDetails.join("\n\r"), true)
+              core.summary.addRaw(fileDetails.join("\r\n"), true)
 
               core.summary.addTable(fileCoverageData);
             } catch(err) {
