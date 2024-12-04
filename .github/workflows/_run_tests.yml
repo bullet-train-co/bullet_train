@@ -45,11 +45,10 @@ jobs:
             }
             try {
               var matrix = []
-              var counter = 1
               for(var i = 1; i <= numberOfTestNodes; i++){
                 var runners = []
                 for(var j = 1; j <= testRunnersPerNode; j++){
-                  runners.push(counter++);
+                  runners.push( (i - 1) * testRunnersPerNode + j );
                 }
                 matrix.push(runners.join(`,`))
               }
@@ -71,18 +70,6 @@ jobs:
       fail-fast: false
       matrix:
         ci_runners: ${{ fromJson(needs.calculate_matrix.outputs.matrix) }}
-        # Set groups for parallel jobs. Each element in the array will be passed directly to
-        # parallel_test as the --only-group option. Each entry in the array should be one or
-        # more integers joined by a comma. You'll want to make sure that you include all
-        # integers from 1 up to whatever you set for N. Some additional examples below.
-        # This is for N=12, with 3 runners on 4 test nodes
-        #ci_runners: ["1,2,3","4,5,6","7,8,9","10,11,12"]
-        # If you set N=2 and want 2 runners on one test node
-        # ci_runners: ["1,2"]
-        # If you set N=2 and want 1 runner on two test node
-        # ci_runners: ["1","2"]
-        # This is for N=4, with two runners on two test nodes
-        # ci_runners: ["1,2","3,4"]
     services:
       postgres:
         image: postgres:11-alpine
