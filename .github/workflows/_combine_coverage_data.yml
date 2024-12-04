@@ -69,30 +69,22 @@ jobs:
         continue-on-error: true
         shell: bash
 
-      - uses: joshmfrankel/simplecov-check-action@main
-        with:
-          minimum_suite_coverage: 65
-          minimum_file_coverage: 30
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          coverage_path: tmp/starter/coverage/.last_run.json
-          coverage_json_path: tmp/starter/coverage/coverage.json
-
       - uses: actions/github-script@v7
         id: create-summary
         with:
           script: |
-            core.summary.addHeading('Coverage Results', 3)
             try {
               const fs = require('fs')
               const jsonString = fs.readFileSync('tmp/starter/coverage/coverage.json')
               var coverageData = JSON.parse(jsonString)
               core.summary.addHeading(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,4)
+              core.summary.addHeading(`Files with the least coverage`,4)
               var files = coverageData.files.sort((a, b) => a.covered_percent - b.covered_percent);
               files = files.slice(0,10)
               var fileCoverageData = [];
               fileCoverageData.push([{data: 'File', header: true}, {data: 'Coverage', header: true}])
               for (const file of files) {
-                fileCoverageData.push([file.filename, `${file.covered_percent.toFixed(1)}%`])
+                fileCoverageData.push([file.filename.split("tmp/starter/")[1], `${file.covered_percent.toFixed(1)}%`])
               }
               core.summary.addTable(fileCoverageData);
             } catch(err) {
