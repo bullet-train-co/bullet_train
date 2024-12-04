@@ -17,18 +17,51 @@ on:
         default: false
 
 jobs:
+  calculate_matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.calculate_matrix.outputs.result }}
+    steps:
+      - uses: actions/github-script@v7
+        id: calculate_matrix
+        name: Summary
+        with:
+          script: |
+            try {
+              var numberOfTestNodes = 4
+              var testRunnersPerNode = 3
+              var matrix = []
+              for(var i = 1; i <= numberOfTestNodes; i++){
+                var runners = []
+                for(var j = 1; j <= testRunnersPerNode; j++){
+                  runners.push( i + j - 1);
+                }
+                matrix.push(runners.join(`,`))
+              }
+              console.log("matrix ====")
+              console.log(matrix)
+              return matrix
+            } catch(err) {
+              core.summary.addRaw("Error while calculating matrix", true)
+              core.summary.addRaw(err.toString(), true)
+              core.error("Error while calculating matrix")
+              core.setFailed(err)
+            }
+
   test:
     name: "🧪"
     runs-on: ubuntu-latest
+    needs: calculate_matrix
     strategy:
       fail-fast: false
       matrix:
+        ci_runners: ${{ fromJson(needs.calculate_matrix.outputs.matrix) }}
         # Set groups for parallel jobs. Each element in the array will be passed directly to
         # parallel_test as the --only-group option. Each entry in the array should be one or
         # more integers joined by a comma. You'll want to make sure that you include all
         # integers from 1 up to whatever you set for N. Some additional examples below.
         # This is for N=12, with 3 runners on 4 test nodes
-        ci_runners: ["1,2,3","4,5,6","7,8,9","10,11,12"]
+        #ci_runners: ["1,2,3","4,5,6","7,8,9","10,11,12"]
         # If you set N=2 and want 2 runners on one test node
         # ci_runners: ["1,2"]
         # If you set N=2 and want 1 runner on two test node
