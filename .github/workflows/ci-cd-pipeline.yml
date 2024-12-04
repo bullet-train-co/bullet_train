@@ -17,6 +17,7 @@ jobs:
     uses: ./.github/workflows/_dynamic_matrix.yml
     secrets: inherit
   check_calculations:
+    runs-on: ubuntu-latest
     name: Check Calculation Output
     needs: [calculate_matrix]
     steps:
