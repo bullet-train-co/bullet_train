@@ -6,6 +6,7 @@ on:
         description: 'Number of test nodes (4 if blank)'
         required: false
         type: number
+        default: nil
       testRunnersPerNode:
         description: 'Test runners per node (if blank 4 for public repos, 2 for private repos)'
         required: false
@@ -45,6 +46,8 @@ jobs:
                 testRunnersPerNode = 2
               }
             }
+            console.log("total runners =====")
+            console.log(testRunnersPerNode * numberOfTestNodes)
             return testRunnersPerNode * numberOfTestNodes
 
       - uses: actions/github-script@v7

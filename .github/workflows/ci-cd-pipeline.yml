@@ -17,6 +17,16 @@ jobs:
     uses: ./.github/workflows/_dynamic_matrix.yml
     secrets: inherit
   minitest:
+    name: Check Calculation Output
+    needs: [calculate_matrix]
+    steps:
+      - name: Show output
+        run: echo ${{ needs.calculate_matrix.outputs.matrix }}
+        shell: bash
+      - name: Show output
+        run: echo ${{ needs.calculate_matrix.outputs.total_runners }}
+        shell: bash
+  minitest:
     name: 🧪 Minitest
     uses: ./.github/workflows/_run_tests.yml
     secrets: inherit
