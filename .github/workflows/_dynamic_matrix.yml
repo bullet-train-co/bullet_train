@@ -19,7 +19,7 @@ on:
         value: ${{ jobs.calculate_matrix.outputs.total_runners }}
 
 jobs:
-  example_job:
+  calculate_matrix:
     name: Generate output
     runs-on: ubuntu-latest
     # Map the job outputs to step outputs

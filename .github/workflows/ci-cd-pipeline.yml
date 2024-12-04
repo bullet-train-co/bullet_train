@@ -22,10 +22,10 @@ jobs:
     needs: [calculate_matrix]
     steps:
       - name: Show output
-        run: echo ${{ needs.calculate_matrix.outputs.matrix }}
+        run: echo "${{ needs.calculate_matrix.outputs.matrix }}"
         shell: bash
       - name: Show output
-        run: echo ${{ needs.calculate_matrix.outputs.total_runners }}
+        run: echo "${{ needs.calculate_matrix.outputs.total_runners }}"
         shell: bash
   minitest:
     name: 🧪 Minitest
