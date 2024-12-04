@@ -74,7 +74,7 @@ jobs:
               var groupCoverageData = JSON.parse(groupJsonString)
 
               var files = coverageData.files.sort((a, b) => a.covered_percent - b.covered_percent);
-              var numberOfFilesToShow = 20
+              var numberOfFilesToShow = 10
               files = files.slice(0,numberOfFilesToShow)
 
               var fileDetails = []
@@ -99,7 +99,6 @@ jobs:
               var groupDetails = []
               groupDetails.push(`<details>`)
               groupDetails.push(`<summary>Group Coverage Details</summary>`)
-              groupDetails.push(` `)
               groupDetails.push(` `)
               groupDetails.push(`| Group | Coverage |`)
               groupDetails.push(`| ---- | -------- |`)
