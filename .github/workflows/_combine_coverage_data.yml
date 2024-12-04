@@ -39,6 +39,17 @@ jobs:
         run: ls -alR tmp/starter/coverage_artifacts
         shell: bash
 
+
+      - name: Combine Coverage Data With Groups
+        working-directory: tmp/starter
+        run: "bundle exec rake coverage:report_with_groups"
+        shell: bash
+
+      - name: Copy coverage.json to coverage_with_groups.json
+        run: cp tmp/starter/coverage/coverage.json tmp/starter/coverage/coverage_with_groups.json
+        continue-on-error: true
+        shell: bash
+
       - name: Combine Coverage Data
         working-directory: tmp/starter
         run: "bundle exec rake coverage:report"
