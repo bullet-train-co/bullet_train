@@ -22,17 +22,28 @@ jobs:
     outputs:
       matrix: ${{ steps.calculate_matrix.outputs.result }}
     env:
-      IS_PRIVATE_REPO: ${{ github.event.repository.private }}
       REPO_VISIBILITY: ${{ github.event.repository.visibility }}
+      NUMBER_OF_TEST_NODES: 4
+      # If TEST_RUNNERS_PER_NODE is not explicitly specified we'll use 4 runners per node
+      # in public repos and we'll use 2 runners per node in private repos to match the number
+      # of CPUs that GitHub makes available in each case.
+      # TEST_RUNNERS_PER_NODE: 4
     steps:
       - uses: actions/github-script@v7
         id: calculate_matrix
         name: Calculate Matrix
         with:
           script: |
+            var numberOfTestNodes = process.env.NUMBER_OF_TEST_NODES || 4
+            var testRunnersPerNode = process.env.TEST_RUNNERS_PER_NODE
+            if(!testRunnersPerNode){
+              if(process.env.REPO_VISIBILITY == "public"){
+                testRunnersPerNode = 4
+              }else{
+                testRunnersPerNode = 2
+              }
+            }
             try {
-              var numberOfTestNodes = 4
-              var testRunnersPerNode = 3
               var matrix = []
               var counter = 1
               for(var i = 1; i <= numberOfTestNodes; i++){
