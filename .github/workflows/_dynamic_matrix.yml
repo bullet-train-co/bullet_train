@@ -58,8 +58,8 @@ jobs:
           TEST_RUNNERS_PER_NODE: ${{ inputs.testRunnersPerNode }}
         with:
           script: |
-            var numberOfTestNodes = process.env.NUMBER_OF_TEST_NODES || 4
-            var testRunnersPerNode = process.env.TEST_RUNNERS_PER_NODE
+            var numberOfTestNodes = Number(process.env.NUMBER_OF_TEST_NODES) || 4
+            var testRunnersPerNode = Number(process.env.TEST_RUNNERS_PER_NODE)
             if(!testRunnersPerNode){
               if(process.env.REPO_VISIBILITY == "public"){
                 testRunnersPerNode = 4
