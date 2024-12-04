@@ -31,10 +31,11 @@ jobs:
               var numberOfTestNodes = 4
               var testRunnersPerNode = 3
               var matrix = []
+              var counter = 1
               for(var i = 1; i <= numberOfTestNodes; i++){
                 var runners = []
                 for(var j = 1; j <= testRunnersPerNode; j++){
-                  runners.push( i + j - 1);
+                  runners.push(counter++);
                 }
                 matrix.push(runners.join(`,`))
               }
