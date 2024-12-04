@@ -77,3 +77,10 @@ jobs:
           coverage_path: tmp/starter/coverage/.last_run.json
           coverage_json_path: tmp/starter/coverage/coverage.json
 
+      - uses: actions/github-script@v7
+        id: create-summary
+        with:
+          script: |
+            core.summary.addHeading('Coverage Results')
+            core.summary.write
+
