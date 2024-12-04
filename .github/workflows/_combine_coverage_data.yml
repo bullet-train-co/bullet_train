@@ -77,18 +77,35 @@ jobs:
               const fs = require('fs')
               const jsonString = fs.readFileSync('tmp/starter/coverage/coverage.json')
               var coverageData = JSON.parse(jsonString)
+
               var files = coverageData.files.sort((a, b) => a.covered_percent - b.covered_percent);
-              files = files.slice(0,20)
+              var numberOfFilesToShow = 20
+              files = files.slice(0,numberOfFilesToShow)
+
+              var fileDetails = []
+              fileDetails.push(`<details>`)
+              fileDetails.push(`<summary>File Coverage Details</summary>`)
+              fileDetails.push(`${numberOfFilesToShow} files with the least coverage`)
+              fileDetails.push(`| File | Coverage |`)
+              fileDetails.push(`| ---- | -------- |`)
+              for (const file of files) {
+                var filePath = file.filename.split("tmp/starter/")[1];
+                var fileCoverage = file.covered_percent.toFixed(1)
+                fileDetails.push(`| ${filePath} | ${fileCoverage}% |`)
+              }
+              fileDetails.push(`</details>`)
+              core.summary.addRaw(fileDetails.join("\n"))
+
               var fileCoverageData = [];
               fileCoverageData.push([{data: 'File', header: true}, {data: 'Coverage', header: true}])
               for (const file of files) {
                 fileCoverageData.push([file.filename.split("tmp/starter/")[1], `${file.covered_percent.toFixed(1)}%`])
               }
 
-              core.summary.addHeading(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,4)
-              core.summary.addHeading(`${coverageData.files.length} Files`,4)
-              core.summary.addHeading(`${coverageData.metrics.covered_strength.toFixed(1)} Coverage Strength`,4)
-              core.summary.addHeading(`${coverageData.metrics.covered_lines} Lines Covered (of ${coverageData.metrics.total_lines})`,4)
+              core.summary.addRaw(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,true)
+              core.summary.addRaw(`${coverageData.files.length} Files`,true)
+              core.summary.addRaw(`${coverageData.metrics.covered_strength.toFixed(1)} Coverage Strength`,true)
+              core.summary.addRaw(`${coverageData.metrics.covered_lines} Lines Covered (of ${coverageData.metrics.total_lines})`,true)
               core.summary.addRaw(`Files with the least coverage`, true)
               core.summary.addTable(fileCoverageData);
             } catch(err) {
