@@ -15,7 +15,8 @@ namespace :coverage do
   end
   task :report_with_groups do
     require "simplecov"
-    # In this one we use the built-in JSONFormatter that includes group coverage info.
+    # In this one we use the JSONFormatter that ships with simplecov that includes group coverage info.
+    require "simplecov_json_formatter"
 
     SimpleCov.collate Dir["coverage_artifacts/**/.resultset.json"], "rails" do
       formatter SimpleCov::Formatter::MultiFormatter.new([
