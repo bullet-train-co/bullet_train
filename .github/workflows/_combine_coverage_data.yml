@@ -96,8 +96,6 @@ jobs:
               }
               core.summary.addTable(fileCoverageData);
             } catch(err) {
-
-            } catch(err) {
               core.summary.addRaw("Error while reading or parsing the coverage JSON", true)
               core.summary.addRaw(err.toString(), true)
               core.error("Error while reading or parsing the coverage JSON")
