@@ -12,10 +12,15 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  calculate_matrix:
+    name: 🧮 Calculate Dynamic Matrix
+    uses: ./.github/workflows/_dynamic_matrix.yml
+    secrets: inherit
   minitest:
     name: 🧪 Minitest
     uses: ./.github/workflows/_run_tests.yml
     secrets: inherit
+    needs: [calculate_matrix]
   standardrb:
     name: 🔬 Standardrb
     uses: ./.github/workflows/_standardrb.yml
