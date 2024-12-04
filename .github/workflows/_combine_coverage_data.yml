@@ -98,12 +98,6 @@ jobs:
               fileDetails.push(` `)
               fileDetails.push(`</details>`)
 
-              var fileCoverageData = [];
-              fileCoverageData.push([{data: 'File', header: true}, {data: 'Coverage', header: true}])
-              for (const file of files) {
-                fileCoverageData.push([file.filename.split("tmp/starter/")[1], `${file.covered_percent.toFixed(1)}%`])
-              }
-
               core.summary.addRaw(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,true)
               core.summary.addRaw(`${coverageData.files.length} Files`,true)
               core.summary.addRaw(`${coverageData.metrics.covered_strength.toFixed(1)} Coverage Strength`,true)
@@ -111,8 +105,6 @@ jobs:
               core.summary.addRaw(`Files with the least coverage`, true)
 
               core.summary.addRaw(fileDetails.join("\r\n"), true)
-
-              core.summary.addTable(fileCoverageData);
             } catch(err) {
               core.summary.addRaw("Error while reading or parsing the coverage JSON", true)
               core.summary.addRaw(err.toString(), true)
