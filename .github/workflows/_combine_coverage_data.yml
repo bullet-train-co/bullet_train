@@ -85,7 +85,9 @@ jobs:
               var fileDetails = []
               fileDetails.push(`<details>`)
               fileDetails.push(`<summary>File Coverage Details</summary>`)
+              fileDetails.push(` `)
               fileDetails.push(`${numberOfFilesToShow} files with the least coverage`)
+              fileDetails.push(` `)
               fileDetails.push(`| File | Coverage |`)
               fileDetails.push(`| ---- | -------- |`)
               for (const file of files) {
@@ -93,6 +95,7 @@ jobs:
                 var fileCoverage = file.covered_percent.toFixed(1)
                 fileDetails.push(`| ${filePath} | ${fileCoverage}% |`)
               }
+              fileDetails.push(` `)
               fileDetails.push(`</details>`)
 
               var fileCoverageData = [];
