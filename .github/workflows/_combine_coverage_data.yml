@@ -1,4 +1,4 @@
-# This workflow will download runtime log artifacts created by parallel_test and combine
+# This workflow will download simplecov artifacts created by parallel_test and combine
 # them into one set of test coverage data.
 #
 # This workflow is meant to be called by other workflows.

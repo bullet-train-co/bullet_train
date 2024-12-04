@@ -23,24 +23,24 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # Set identifiers for parallel jobs. These can be anything. Just include as many items as you want parallelism.
-        # For instance if you want a Three Amigos themed pipeline you could use:
-        # ci_node_index: [Dusty, Ned, Lucky]
-        #ci_runners: ["1,2"]
-        # This is for -n 4, which seems more consistent than -n 16
-        #ci_runners: [1,2,3,4]
-        # This is for -n 12
+        # Set groups for parallel jobs. Each element in the array will be passed directly to
+        # parallel_test as the --only-group option. Each entry in the array should be one or
+        # more integers joined by a comma. You'll want to make sure that you include all
+        # integers from 1 up to whatever you set for N. Some additional examples below.
+        # This is for N=12, with 3 runners on 4 test nodes
         ci_runners: ["1,2,3","4,5,6","7,8,9","10,11,12"]
-
-        # This is for -n 16, but it seems to be inconsistent on the number of tests run
-        # ci_runners: ["1,2,3,4","5,6,7,8","9,10,11,12","13,14,15,16"]
+        # If you set N=2 and want 2 runners on one test node
+        # ci_runners: ["1,2"]
+        # If you set N=2 and want 1 runner on two test node
+        # ci_runners: ["1","2"]
+        # This is for N=4, with two runners on two test nodes
+        # ci_runners: ["1,2","3,4"]
     services:
       postgres:
         image: postgres:11-alpine
         ports:
           - "5432:5432"
         env:
-          #POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
         # Set health checks to wait until postgres has started
@@ -63,8 +63,6 @@ jobs:
       RAILS_ENV: test
       # Manually export your local RAILS_MASTER_KEY if using the credentials system.
       # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      #DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-      SECRET_KEY_BASE: "a-test-key-to-keep-it-from-randomly-complaiing"
       BUNDLE_JOBS: 2
       BUNDLE_RETRY: 3
       POSTGRES_USER: rails
@@ -74,18 +72,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: tmp/starter
-
-      - name: pwd
-        run: pwd
-        shell: bash
-
-      - name: ls tmp/starter
-        run: ls -al tmp/starter
-        shell: bash
-
-      - name: ls main dir
-        run: ls -al
-        shell: bash
 
       - name: Checkout Core Repo
         uses: bullet-train-co/checkout-repo-with-matching-branch@v1
@@ -157,21 +143,8 @@ jobs:
       - run: yarn build:css
         working-directory: tmp/starter
 
-      #- name: Run Tests
-        #id: run-tests
-        #env:
-          #AUTH_ENDPOINT: https://no-site.nowhere
-          #AWS_REGION: us-east-1
-          #CI_NODE_TOTAL: ${{ strategy.job-total }}
-          #CI_NODE_INDEX: ${{ strategy.job-index }}
-        #continue-on-error: false
-        #run : ./bin/parallel-ci
-        #working-directory: tmp/starter
-        #shell: bash
-      - name: ls tmp/starter/tmp
-        run: ls -al tmp/starter/tmp
-        shell: bash
-
+      # We touch this file so that parallel_tests doesn't complain about it not being there.
+      # Without doing this it's hard to get tests running in a new repo without some hoop jumping.
       - name: Touch Parallel Tests Runtime Log
         run: touch tmp/parallel_runtime_test.log
         working-directory: tmp/starter
@@ -186,15 +159,8 @@ jobs:
         env:
           AUTH_ENDPOINT: https://no-site.nowhere
           AWS_REGION: us-east-1
-          CI_NODE_TOTAL: ${{ strategy.job-total }}
-          CI_NODE_INDEX: ${{ strategy.job-index }}
           PARALLEL_TESTS_RECORD_RUNTIME: true
           MINITEST_JUNIT_REPORTER: yes
-        # TODO: Eventually we want to be able to do this by runtime, but how do we bootstrap that file?
-        # This option is used to feed in runtime info from previous runs.
-        # --runtime-log tmp/old_parallel_runtime.log \
-        # This line allows excluding certain files...
-        # --exclude-pattern '.*elasticsearch_integration_test.rb' || true
         run: |
           bundle exec parallel_test test \
           -n 12 \
@@ -207,23 +173,11 @@ jobs:
         continue-on-error: false
         shell: bash
 
-      - name: ls tmp/starter/tmp
-        run: ls -al tmp/starter/tmp
-        shell: bash
-
-      - name: cat runtime log
-        run: cat tmp/starter/tmp/parallel_runtime_test.log
-        shell: bash
-
       - name: Upload Parallel Test Runtime Log
         uses: actions/upload-artifact@v4
         with:
           name: parallel_runtime_test_${{ matrix.ci_runners }}.log
           path: tmp/starter/tmp/parallel_runtime_test.log
-
-      - name: ls tmp/starter/coverage
-        run: ls -al tmp/starter/coverage
-        shell: bash
 
       - name: Upload Test Coverage Data
         uses: actions/upload-artifact@v4

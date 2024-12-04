@@ -48,7 +48,7 @@ jobs:
     # applications started from the starter repo. If you want to run super scaffolding
     # test for your own app you can remove or comment out this next line.
     if: always() && github.repository == 'bullet-train-co/bullet_train'
-    name: 🪵 Combine Summary for Parallel Tests
+    name: 📊 Test Results
     uses: ./.github/workflows/_combine_summary_logs.yml
     secrets: inherit
     needs: [super_scaffolding, core_minitest, core_super_scaffolding]
