@@ -6,7 +6,6 @@ on:
         description: 'Number of test nodes (4 if blank)'
         required: false
         type: number
-        default: nil
       testRunnersPerNode:
         description: 'Test runners per node (if blank 4 for public repos, 2 for private repos)'
         required: false
