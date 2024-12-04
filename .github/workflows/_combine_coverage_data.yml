@@ -103,7 +103,7 @@ jobs:
               groupDetails.push(` `)
               groupDetails.push(`| Group | Coverage |`)
               groupDetails.push(`| ---- | -------- |`)
-              for (const group of groupNames) {
+              for (const groupName of groupNames) {
                 var groupCoverage = groups[groupName].lines.covered_percent.toFixed(1)
                 groupDetails.push(`| ${groupName} | ${groupCoverage}% |`)
               }
