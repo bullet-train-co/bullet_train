@@ -94,7 +94,6 @@ jobs:
                 fileDetails.push(`| ${filePath} | ${fileCoverage}% |`)
               }
               fileDetails.push(`</details>`)
-              core.summary.addRaw(fileDetails.join("\n"))
 
               var fileCoverageData = [];
               fileCoverageData.push([{data: 'File', header: true}, {data: 'Coverage', header: true}])
@@ -107,6 +106,9 @@ jobs:
               core.summary.addRaw(`${coverageData.metrics.covered_strength.toFixed(1)} Coverage Strength`,true)
               core.summary.addRaw(`${coverageData.metrics.covered_lines} Lines Covered (of ${coverageData.metrics.total_lines})`,true)
               core.summary.addRaw(`Files with the least coverage`, true)
+
+              core.summary.addRaw(fileDetails.join("\n\r"), true)
+
               core.summary.addTable(fileCoverageData);
             } catch(err) {
               core.summary.addRaw("Error while reading or parsing the coverage JSON", true)
