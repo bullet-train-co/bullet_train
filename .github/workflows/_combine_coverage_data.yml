@@ -81,12 +81,22 @@ jobs:
         id: create-summary
         with:
           script: |
-            core.summary.addHeading('Coverage Results', 2)
+            core.summary.addHeading('Coverage Results', 3)
             try {
               const fs = require('fs')
               const jsonString = fs.readFileSync('tmp/starter/coverage/coverage.json')
               var coverageData = JSON.parse(jsonString)
-              core.summary.addHeading(`${coverageData["metrics"]["covered_percent"]} Covered`,3)
+              core.summary.addHeading(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,4)
+              var files = coverageData.files.sort((a, b) => a.covered_percent - b.covered_percent);
+              files = files.slice(0,10)
+              var fileCoverageData = [];
+              fileCoverageData.push([{data: 'File', header: true}, {data: 'Coverage', header: true}])
+              for (const file of files) {
+                fileCoverageData.push([file.filename, `${file.covered_percent.toFixed(1)}%`])
+              }
+              core.summary.addTable(fileCoverageData);
+            } catch(err) {
+
             } catch(err) {
               core.summary.addRaw("Error while reading or parsing the coverage JSON", true)
               core.summary.addRaw(err.toString(), true)
