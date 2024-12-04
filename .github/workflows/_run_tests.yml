@@ -21,10 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.calculate_matrix.outputs.result }}
+    env:
+      IS_PRIVATE_REPO: ${{ github.event.repository.private }}
+      REPO_VISIBILITY: ${{ github.event.repository.visibility }}
     steps:
       - uses: actions/github-script@v7
         id: calculate_matrix
-        name: Summary
+        name: Calculate Matrix
         with:
           script: |
             try {
