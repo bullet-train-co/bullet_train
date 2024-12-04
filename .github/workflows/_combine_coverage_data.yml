@@ -82,5 +82,5 @@ jobs:
         with:
           script: |
             core.summary.addHeading('Coverage Results')
-            core.summary.write
+            core.summary.write()
 
