@@ -11,22 +11,11 @@ jobs:
   combine_runtime_logs:
     name: "🪵"
     runs-on: ubuntu-latest
-    env:
-      RAILS_ENV: test
-      # Manually export your local RAILS_MASTER_KEY if using the credentials system.
-      # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      BUNDLE_JOBS: 2
-      BUNDLE_RETRY: 3
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           path: tmp/starter
-
-      #- name: Install Ruby and gems
-        #uses: ruby/setup-ruby@v1
-        #with:
-          #bundler-cache: true
 
       - name: runtime log cache
         uses: actions/cache@v4

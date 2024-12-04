@@ -1,15 +1,14 @@
 # This workflow will download runtime log artifacts created by parallel_test and combine
-# them into one log that is then used by subsequent test runs to help split up test files
-# more efficiently into groups.
+# them into one set of test coverage data.
 #
 # This workflow is meant to be called by other workflows.
-name: "🪵 Combine Runtime Logs for Parallel Tests"
+name: "🫣 SimpleCov Report"
 on:
   workflow_call:
 
 jobs:
   combine_runtime_logs:
-    name: "🪵"
+    name: "🫣"
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -40,18 +39,9 @@ jobs:
         run: ls -alR tmp/starter/coverage_artifacts
         shell: bash
 
-      #- name: List coverage dir
-        #run: ls -alR tmp/starter/coverage
-        #continue-on-error: true
-        #shell: bash
-
       - name: Combine Coverage Data
         working-directory: tmp/starter
         run: "bundle exec rake coverage:report"
-        shell: bash
-
-      - name: List downloaded artifacts
-        run: ls -alR tmp/starter/coverage_artifacts
         shell: bash
 
       - name: List coverage dir
@@ -59,18 +49,9 @@ jobs:
         continue-on-error: true
         shell: bash
 
-      - name: cat .last_run.json
-        run: cat tmp/starter/coverage/.last_run.json
-        continue-on-error: true
-        shell: bash
-
-      - name: cat .resultset.json
-        run: cat tmp/starter/coverage/.resultset.json
-        continue-on-error: true
-        shell: bash
-
       - uses: actions/github-script@v7
         id: create-summary
+        name: Summary
         with:
           script: |
             try {

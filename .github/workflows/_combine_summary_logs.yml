@@ -1,15 +1,14 @@
-# This workflow will download runtime log artifacts created by parallel_test and combine
-# them into one log that is then used by subsequent test runs to help split up test files
-# more efficiently into groups.
+# This workflow will download test summary artifacts created by parallel_test and combine
+# them into one summary report about test pass/fail status.
 #
 # This workflow is meant to be called by other workflows.
-name: "🪵 Combine Summary Logs for Parallel Tests"
+name: "📊 Test Results"
 on:
   workflow_call:
 
 jobs:
   combine_summary_logs:
-    name: "🪵"
+    name: "📊"
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
