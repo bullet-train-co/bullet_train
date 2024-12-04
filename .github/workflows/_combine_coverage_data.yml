@@ -77,15 +77,19 @@ jobs:
               const fs = require('fs')
               const jsonString = fs.readFileSync('tmp/starter/coverage/coverage.json')
               var coverageData = JSON.parse(jsonString)
-              core.summary.addHeading(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,4)
-              core.summary.addHeading(`Files with the least coverage`,4)
               var files = coverageData.files.sort((a, b) => a.covered_percent - b.covered_percent);
-              files = files.slice(0,10)
+              files = files.slice(0,20)
               var fileCoverageData = [];
               fileCoverageData.push([{data: 'File', header: true}, {data: 'Coverage', header: true}])
               for (const file of files) {
                 fileCoverageData.push([file.filename.split("tmp/starter/")[1], `${file.covered_percent.toFixed(1)}%`])
               }
+
+              core.summary.addHeading(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,4)
+              core.summary.addHeading(`${coverageData.files.length} Files`,4)
+              core.summary.addHeading(`${coverageData.metrics.covered_strength.toFixed(1)} Coverage Strength`,4)
+              core.summary.addHeading(`${coverageData.metrics.covered_lines} Lines Covered (of ${coverageData.metrics.total_lines})`,4)
+              core.summary.addRaw(`Files with the least coverage`, true)
               core.summary.addTable(fileCoverageData);
             } catch(err) {
               core.summary.addRaw("Error while reading or parsing the coverage JSON", true)
