@@ -81,6 +81,17 @@ jobs:
         id: create-summary
         with:
           script: |
-            core.summary.addHeading('Coverage Results')
+            core.summary.addHeading('Coverage Results', 2)
+            try {
+              const fs = require('fs')
+              const jsonString = fs.readFileSync('tmp/starter/coverage/coverage.json')
+              var coverageData = JSON.parse(jsonString)
+              core.summary.addHeading(`${coverageData["metrics"]["covered_percent"]} Covered`,3)
+            } catch(err) {
+              core.summary.addRaw("Error while reading or parsing the coverage JSON", true)
+              core.summary.addRaw(err.toString(), true)
+              core.error("Error while reading or parsing the coverage JSON")
+              core.setFailed(err)
+            }
             core.summary.write()
 
