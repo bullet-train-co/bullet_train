@@ -70,6 +70,9 @@ jobs:
               const jsonString = fs.readFileSync('tmp/starter/coverage/coverage.json')
               var coverageData = JSON.parse(jsonString)
 
+              const groupJsonString = fs.readFileSync('tmp/starter/coverage/coverage_with_groups.json')
+              var groupCoverageData = JSON.parse(groupJsonString)
+
               var files = coverageData.files.sort((a, b) => a.covered_percent - b.covered_percent);
               var numberOfFilesToShow = 20
               files = files.slice(0,numberOfFilesToShow)
@@ -90,13 +93,32 @@ jobs:
               fileDetails.push(` `)
               fileDetails.push(`</details>`)
 
+              var groups = groupCoverageData.groups;
+              var groupNames = Object.keys(groups)
+
+              var groupDetails = []
+              groupDetails.push(`<details>`)
+              groupDetails.push(`<summary>Group Coverage Details</summary>`)
+              groupDetails.push(` `)
+              groupDetails.push(` `)
+              groupDetails.push(`| Group | Coverage |`)
+              groupDetails.push(`| ---- | -------- |`)
+              for (const group of groupNames) {
+                var groupCoverage = groups[groupName].lines.covered_percent.toFixed(1)
+                groupDetails.push(`| ${groupName} | ${groupCoverage}% |`)
+              }
+              groupDetails.push(` `)
+              groupDetails.push(`</details>`)
+
               core.summary.addRaw(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,true)
               core.summary.addRaw(`${coverageData.files.length} Files`,true)
               core.summary.addRaw(`${coverageData.metrics.covered_strength.toFixed(1)} Coverage Strength`,true)
               core.summary.addRaw(`${coverageData.metrics.covered_lines} Lines Covered (of ${coverageData.metrics.total_lines})`,true)
-              core.summary.addRaw(`Files with the least coverage`, true)
+              core.summary.addRaw(` `,true)
 
               core.summary.addRaw(fileDetails.join("\r\n"), true)
+              core.summary.addRaw(` `,true)
+              core.summary.addRaw(groupDetails.join("\r\n"), true)
             } catch(err) {
               core.summary.addRaw("Error while reading or parsing the coverage JSON", true)
               core.summary.addRaw(err.toString(), true)
