@@ -12,35 +12,6 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  #calculate_matrix:
-    #name: 🧮 Calculate Dynamic Matrix
-    ##uses: ./.github/workflows/_dynamic_matrix.yml
-    #uses: bullet-train-co/parallel-test-dynamic-matrix/action.yml@main
-    #secrets: inherit
-  #calculate_matrix:
-    #name: 🧮 Calculate Dynamic Matrix
-    #runs-on: ubuntu-latest
-    #outputs:
-      #matrix: ${{ steps.dynamic-matrix.outputs.matrix }}
-      #total_runners: ${{ steps.dynamic-matrix.outputs.total_runners }}
-    #steps:
-      #- name: Dynamic Matrix
-        #id: dynamic-matrix
-        #uses: bullet-train-co/parallel-test-dynamic-matrix@main
-        #with:
-          #numberOfTestNodes: 3
-          ##testRunnersPerNode: 3
-  #check_calculations:
-    #runs-on: ubuntu-latest
-    #name: Check Calculation Output
-    #needs: [calculate_matrix]
-    #steps:
-      #- name: Show output
-        #run: echo "${{ needs.calculate_matrix.outputs.matrix }}"
-        #shell: bash
-      #- name: Show output
-        #run: echo "${{ needs.calculate_matrix.outputs.total_runners }}"
-        #shell: bash
   minitest:
     name: 🧪 Minitest
     uses: ./.github/workflows/_run_tests.yml
