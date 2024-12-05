@@ -23,6 +23,7 @@ jobs:
     outputs:
       matrix: ${{ steps.dynamic-matrix.outputs.matrix }}
       totalRunners: ${{ steps.dynamic-matrix.outputs.totalRunners }}
+      testRunnersPerNode: ${{ steps.dynamic-matrix.outputs.testRunnersPerNode }}
     steps:
       - name: Dynamic Matrix
         id: dynamic-matrix
@@ -139,7 +140,7 @@ jobs:
         working-directory: tmp/starter
 
       - name: Set up database schema
-        run: bin/rake parallel:setup
+        run: bin/rake parallel:setup[${{ fromJson(needs.calculate_matrix.outputs.testRunnersPerNode) }}]
         working-directory: tmp/starter
 
       - run: yarn install
