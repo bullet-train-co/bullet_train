@@ -48,6 +48,11 @@ jobs:
           pattern: parallel_runtime_test_*.log
           merge-multiple: false
 
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+            name: parallel_runtime_test_*.log
+
       - name: List downloaded artifacts
         run: ls -R artifacts
         shell: bash

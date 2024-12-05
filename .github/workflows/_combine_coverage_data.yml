@@ -35,6 +35,11 @@ jobs:
           pattern: test_coverage_*.log
           merge-multiple: false
 
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+            name: test_coverage_*.log
+
       - name: List downloaded artifacts
         run: ls -alR tmp/starter/coverage_artifacts
         shell: bash
