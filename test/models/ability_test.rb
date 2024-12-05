@@ -11,7 +11,7 @@ module AbilityTest
     end
 
     test "can manage their account" do
-      assert @user_ability.fake_can?(:manage, @user)
+      assert @user_ability.can?(:manage, @user)
     end
 
     test "can't manage foreign account" do
