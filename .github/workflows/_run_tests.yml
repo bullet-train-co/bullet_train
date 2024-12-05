@@ -38,6 +38,7 @@ jobs:
     name: "🧪"
     runs-on: ubuntu-latest
     needs: calculate_matrix
+    environment: testing
     strategy:
       fail-fast: false
       matrix:
