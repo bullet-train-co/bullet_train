@@ -29,7 +29,7 @@ jobs:
         uses: bullet-train-co/parallel-test-dynamic-matrix@v1
         with:
           # You can explicitly set the number of test nodes, or it will default to 4
-          # numberOfTestNodes: 2
+          numberOfTestNodes: 4
           # You can explicitly set the number of runners per node, or it will default to 4 for public repos and 2 for private
           # testRunnersPerNode: 2
 
