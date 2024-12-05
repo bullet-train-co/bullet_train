@@ -14,7 +14,8 @@ on:
 jobs:
   calculate_matrix:
     name: 🧮 Calculate Dynamic Matrix
-    uses: ./.github/workflows/_dynamic_matrix.yml
+    #uses: ./.github/workflows/_dynamic_matrix.yml
+    uses: bullet-train-co/parallel-test-dynamic-matrix/action.yml
     secrets: inherit
   check_calculations:
     runs-on: ubuntu-latest
