@@ -1,8 +1,6 @@
 class User < ApplicationRecord
   include Users::Base
   include Roles::User
-  #a comment the linter won't like
-
   # 🚅 add concerns above.
 
   # 🚅 add belongs_to associations above.
