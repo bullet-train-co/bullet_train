@@ -13,7 +13,7 @@ namespace :coverage do
       ])
     end
   end
-  task :report_with_groups, [:artifact_dir] do |t, args|
+  task :report_with_groups, [:artifacts] do |t, args|
     require "simplecov"
     # In this one we use the JSONFormatter that ships with simplecov that includes group coverage info.
     require "simplecov_json_formatter"
