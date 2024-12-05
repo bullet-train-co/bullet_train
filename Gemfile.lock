@@ -333,7 +333,7 @@ GEM
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
-    honeybadger (5.24.0)
+    honeybadger (5.25.0)
       logger
     htmlentities (4.3.4)
     http_accept_language (2.1.1)
