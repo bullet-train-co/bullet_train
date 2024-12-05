@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Dynamic Matrix
-        uses: bullet-train-co/parallel-test-dynamic-matrix
+        uses: bullet-train-co/parallel-test-dynamic-matrix@main
         with:
           numberOfTestNodes: 3
           #testRunnersPerNode: 3
