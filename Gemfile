@@ -62,6 +62,7 @@ group :development, :test do
 
   # A gem for generating test coverage results in your browser.
   gem "simplecov", require: false
+  gem "simplecov-json", require: false
 
   # Generate test objects.
   # 6.3.0 and 6.4.0 have a bug https://github.com/thoughtbot/factory_bot_rails/issues/433

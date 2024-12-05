@@ -626,6 +626,9 @@ GEM
       simplecov-html (~> 0.11)
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
+    simplecov-json (0.2.3)
+      json
+      simplecov
     simplecov_json_formatter (0.1.4)
     simpleidn (0.2.3)
     snaky_hash (2.0.1)
@@ -762,6 +765,7 @@ DEPENDENCIES
   sentry-ruby
   sentry-sidekiq
   simplecov
+  simplecov-json
   sprockets-rails
   standard
   stimulus-rails
