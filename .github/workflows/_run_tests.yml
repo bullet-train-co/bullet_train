@@ -28,8 +28,8 @@ jobs:
         id: dynamic-matrix
         uses: bullet-train-co/parallel-test-dynamic-matrix@main
         with:
-          numberOfTestNodes: 3
-          #testRunnersPerNode: 3
+          numberOfTestNodes: 2
+          testRunnersPerNode: 2
   #calculate_matrix:
     #runs-on: ubuntu-latest
     #outputs:
@@ -211,7 +211,7 @@ jobs:
           MINITEST_JUNIT_REPORTER: yes
         run: |
           bundle exec parallel_test test \
-          -n 12 \
+          -n ${{ fromJson(needs.calculate_matrix.outputs.total_runners) }} \
           --only-group ${{ matrix.ci_runners }} \
           --group-by runtime \
           --allowed-missing 100 \
