@@ -12,11 +12,17 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  #calculate_matrix:
+    #name: 🧮 Calculate Dynamic Matrix
+    ##uses: ./.github/workflows/_dynamic_matrix.yml
+    #uses: bullet-train-co/parallel-test-dynamic-matrix/action.yml@main
+    #secrets: inherit
   calculate_matrix:
     name: 🧮 Calculate Dynamic Matrix
-    #uses: ./.github/workflows/_dynamic_matrix.yml
-    uses: bullet-train-co/parallel-test-dynamic-matrix/action.yml@main
-    secrets: inherit
+    runs-on: ubuntu-latest
+    steps:
+      uses: bullet-train-co/parallel-test-dynamic-matrix
+      secrets: inherit
   check_calculations:
     runs-on: ubuntu-latest
     name: Check Calculation Output
