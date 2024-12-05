@@ -23,16 +23,3 @@ jobs:
         uses: standardrb/standard-ruby-action@v1
         with:
           autofix: false
-
-    #steps:
-      #- name: Checkout code
-        #uses: actions/checkout@v4
-
-      #- name: Install Ruby and gems
-        #uses: ruby/setup-ruby@v1
-        #with:
-          #bundler-cache: true
-
-      #- name: Run Standardrb
-        #id: run-standardrb
-        #run : bundle exec standardrb
