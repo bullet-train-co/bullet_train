@@ -60,6 +60,14 @@ jobs:
         continue-on-error: true
         shell: bash
 
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: test_coverage_report
+          path: tmp/starter/coverage
+          include-hidden-files: true
+          retention-days: 1
+
       - uses: actions/github-script@v7
         id: create-summary
         name: Summary
@@ -130,3 +138,5 @@ jobs:
         uses: geekyeggo/delete-artifact@v5
         with:
             name: test_coverage_*.log
+
+
