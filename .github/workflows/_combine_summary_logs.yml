@@ -28,11 +28,6 @@ jobs:
           pattern: test_summary_*.log
           merge-multiple: false
 
-      - name: Delete artifacts
-        uses: geekyeggo/delete-artifact@v5
-        with:
-            name: test_summary_*.log
-
       - name: List downloaded artifacts
         run: ls -R artifacts
         shell: bash
@@ -47,3 +42,7 @@ jobs:
           paths: "artifacts/**/TEST-*.xml"
         if: always()
 
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+            name: test_summary_*.log
