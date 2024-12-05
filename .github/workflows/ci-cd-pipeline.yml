@@ -21,8 +21,11 @@ jobs:
     name: 🧮 Calculate Dynamic Matrix
     runs-on: ubuntu-latest
     steps:
-      uses: bullet-train-co/parallel-test-dynamic-matrix
-      secrets: inherit
+      - name: Dynamic Matrix
+        uses: bullet-train-co/parallel-test-dynamic-matrix
+        with:
+          numberOfTestNodes: 3
+          #testRunnersPerNode: 3
   check_calculations:
     runs-on: ubuntu-latest
     name: Check Calculation Output
