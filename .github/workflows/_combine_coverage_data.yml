@@ -42,7 +42,7 @@ jobs:
 
       - name: Combine Coverage Data With Groups
         working-directory: tmp/starter
-        run: "bundle exec rake coverage:report_with_groups"
+        run: "bundle exec rake coverage:report_with_groups[coverage_artifacts/**/.resultset.json]"
         shell: bash
 
       - name: Copy coverage.json to coverage_with_groups.json
@@ -52,7 +52,7 @@ jobs:
 
       - name: Combine Coverage Data
         working-directory: tmp/starter
-        run: "bundle exec rake coverage:report"
+        run: "bundle exec rake coverage:report[coverage_artifacts/**/.resultset.json]"
         shell: bash
 
       - name: List coverage dir
