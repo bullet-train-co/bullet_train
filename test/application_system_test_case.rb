@@ -36,8 +36,8 @@ Capybara.register_server :puma do |app, port, host|
 end
 
 Capybara.server = :puma
-Capybara.server_port = 3001
-Capybara.app_host = "http://localhost:3001"
+Capybara.server_port = 3001 + ENV["TEST_ENV_NUMBER"].to_i
+Capybara.app_host = "http://localhost:#{Capybara.server_port}"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   def self.use_cuprite?
@@ -76,7 +76,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   setup do
-    ENV["BASE_URL"] = "http://localhost:3001"
+    ENV["BASE_URL"] = "http://localhost:#{Capybara.server_port}"
     Capybara.use_default_driver
     Capybara.reset_sessions!
   end

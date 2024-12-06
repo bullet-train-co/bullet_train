@@ -2,6 +2,7 @@
 # Open coverage/index.html in your browser after
 # running your tests for test coverage results.
 require "simplecov"
+SimpleCov.command_name "test" + (ENV["TEST_ENV_NUMBER"] || "")
 SimpleCov.start "rails"
 
 ENV["RAILS_ENV"] ||= "test"
@@ -28,6 +29,7 @@ end
 require "sidekiq/testing"
 Sidekiq::Testing.inline!
 
+ENV["MINITEST_REPORTERS_REPORTS_DIR"] = "test/reports#{ENV["TEST_ENV_NUMBER"] || ""}"
 require "minitest/reporters"
 
 reporters = []
@@ -48,6 +50,8 @@ end
 reporters.push Minitest::Reporters::JUnitReporter.new if ENV["CI"]
 
 Minitest::Reporters.use! reporters
+
+require "parallel_tests/test/runtime_logger" if ENV["PARALLEL_TESTS_RECORD_RUNTIME"]
 
 begin
   require "bullet_train/billing/test_support"

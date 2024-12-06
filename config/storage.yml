@@ -4,7 +4,7 @@ local:
 
 test:
   service: Disk
-  root: <%= Rails.root.join("tmp/storage") %>
+  root: <%= Rails.root.join("tmp/storage#{ENV['TEST_ENV_NUMBER']}") %>
 
 amazon:
   service: S3

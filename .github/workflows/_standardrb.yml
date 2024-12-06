@@ -15,15 +15,11 @@ jobs:
       # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
       BUNDLE_JOBS: 2
       BUNDLE_RETRY: 3
+    permissions:
+      checks: write
+      contents: read
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@v1
+      - name: Standard Ruby
+        uses: standardrb/standard-ruby-action@v1
         with:
-          bundler-cache: true
-
-      - name: Run Standardrb
-        id: run-standardrb
-        run : bundle exec standardrb
+          autofix: false
