@@ -17,9 +17,19 @@ on:
         default: false
 
 jobs:
+  # NOTE: This is here just to make the workflow visualization layout better.
+  # Without it the layout is really bad and confusing.
+  calculate_matrix:
+    name: 🤷 Fake Matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Do Nothing
+        run: echo "This is a useless step that just helps things look nicer..."
+        shell: bash
   test:
     name: "🏗️"
     runs-on: ubuntu-latest
+    needs: calculate_matrix
     strategy:
       fail-fast: false
       matrix:
