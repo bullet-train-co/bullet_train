@@ -39,6 +39,9 @@ jobs:
         run: ls -alR tmp/starter/coverage_artifacts
         shell: bash
 
+      - name: Cat an artifact
+        run: cat tmp/starter/coverage_artifacts/test_coverage_*.log/.resultset.json
+        shell: bash
 
       - name: Combine Coverage Data With Groups
         working-directory: tmp/starter
