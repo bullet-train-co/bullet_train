@@ -67,4 +67,5 @@ jobs:
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v5
         with:
-            name: parallel_runtime_test_*.log
+          name: parallel_runtime_test_*.log
+          failOnError: false

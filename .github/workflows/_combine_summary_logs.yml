@@ -45,4 +45,5 @@ jobs:
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v5
         with:
-            name: test_summary_*.log
+          name: test_summary_*.log
+          failOnError: false

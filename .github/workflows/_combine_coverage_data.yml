@@ -146,6 +146,7 @@ jobs:
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v5
         with:
-            name: test_coverage_*.log
+          name: test_coverage_*.log
+          failOnError: false
 
 
