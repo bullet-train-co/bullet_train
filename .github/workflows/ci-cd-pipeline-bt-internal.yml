@@ -42,3 +42,23 @@ jobs:
     secrets: inherit
     with:
       use-core-repo: true
+
+  combine_summary_logs:
+    # This makes it so that this job only runs in the starter repo itself, and not in
+    # applications started from the starter repo. If you want to run super scaffolding
+    # test for your own app you can remove or comment out this next line.
+    if: always() && github.repository == 'bullet-train-co/bullet_train'
+    name: 📊 Test Results
+    uses: ./.github/workflows/_combine_summary_logs.yml
+    secrets: inherit
+    needs: [super_scaffolding, core_minitest, core_super_scaffolding]
+
+  combine_coverage_data:
+    # This makes it so that this job only runs in the starter repo itself, and not in
+    # applications started from the starter repo. If you want to run super scaffolding
+    # test for your own app you can remove or comment out this next line.
+    if: always() && github.repository == 'bullet-train-co/bullet_train'
+    name: ♻️  SimpleCov
+    uses: ./.github/workflows/_combine_coverage_data.yml
+    secrets: inherit
+    needs: [super_scaffolding, core_minitest, core_super_scaffolding]

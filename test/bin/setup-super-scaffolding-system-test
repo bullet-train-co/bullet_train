@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# https://gist.github.com/vncsna/64825d5609c146e80de8b1fd623011ca
+# Note we're not using `x` because it's noisy. If you want to use it for debugging, uncomment the line below.
+set -euo pipefail
+#set -x
+#
 export SPRING=true
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then

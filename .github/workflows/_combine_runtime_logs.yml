@@ -1,0 +1,71 @@
+# This workflow will download runtime log artifacts created by parallel_test and combine
+# them into one log that is then used by subsequent test runs to help split up test files
+# more efficiently into groups.
+#
+# This workflow is meant to be called by other workflows.
+name: "🪵 Combine Runtime Logs for Parallel Tests"
+on:
+  workflow_call:
+
+jobs:
+  combine_runtime_logs:
+    name: "🪵"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: tmp/starter
+
+      - name: runtime log cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            tmp/starter/tmp/parallel_runtime_test.log
+          key: runtime-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            runtime-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+            runtime-cache-${{ runner.os }}-${{ github.ref }}-
+            runtime-cache-${{ runner.os }}-
+
+      - name: ls tmp/starter/tmp
+        run: ls -al tmp/starter/tmp
+        shell: bash
+
+      - name: Touch Parallel Tests Runtime Log
+        run: touch tmp/parallel_runtime_test.log
+        working-directory: tmp/starter
+        shell: bash
+
+      - name: cat runtime log
+        run: cat tmp/starter/tmp/parallel_runtime_test.log
+        shell: bash
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: parallel_runtime_test_*.log
+          merge-multiple: false
+
+      - name: List downloaded artifacts
+        run: ls -R artifacts
+        shell: bash
+
+      - name: Combine Runtime Logs
+        run: cat artifacts/**/parallel_runtime_test.log > tmp/starter/tmp/parallel_runtime_test.log
+        shell: bash
+
+      - name: Cat the combined log
+        run: cat tmp/starter/tmp/parallel_runtime_test.log
+        shell: bash
+
+      - name: Line count the combined log
+        run: wc -l tmp/starter/tmp/parallel_runtime_test.log
+        shell: bash
+
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: parallel_runtime_test_*.log
+          failOnError: false

@@ -24,6 +24,24 @@ jobs:
     name: 🔎 DB Schema
     uses: ./.github/workflows/_database_schema_check.yml
     secrets: inherit
+  combine_runtime_logs:
+    name: 🪵 Combine Runtime Logs for Parallel Tests
+    uses: ./.github/workflows/_combine_runtime_logs.yml
+    secrets: inherit
+    needs: [minitest]
+    if: ${{ always() }}
+  combine_coverage_data:
+    name: ♻️  SimpleCov
+    uses: ./.github/workflows/_combine_coverage_data.yml
+    secrets: inherit
+    needs: [minitest]
+    if: ${{ always() }}
+  combine_summary_logs:
+    name: 📊 Test Results
+    uses: ./.github/workflows/_combine_summary_logs.yml
+    secrets: inherit
+    needs: [minitest]
+    if: ${{ always() }}
   # If you'd like to auto-deploy to your production environment you can uncomment this next block.
   # You'll need to set HEROKU_EMAIL and HEROKU_API_KEY in your repo secrets.
   # Be sure to set the app name correctly below.
