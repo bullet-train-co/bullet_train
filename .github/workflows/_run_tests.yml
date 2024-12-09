@@ -182,12 +182,14 @@ jobs:
 
       - name: Upload Parallel Test Runtime Log
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: parallel_runtime_test_${{ matrix.parallel_test_groups }}.log
           path: tmp/starter/tmp/parallel_runtime_test.log
 
       - name: Upload Test Coverage Data
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: test_coverage_${{ matrix.parallel_test_groups }}.log
           path: tmp/starter/coverage/.resultset.json
@@ -195,7 +197,7 @@ jobs:
 
       - name: Upload Test Summary Logs
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: test_summary_${{ matrix.parallel_test_groups }}.log
           path: tmp/starter/test/reports*/**/TEST-*.xml
-        if: always()

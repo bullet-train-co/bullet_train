@@ -151,13 +151,14 @@ jobs:
 
       - name: Upload Test Summary Logs
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: test_summary_super_scaffolding_${{ strategy.job-index }}_${{ inputs.use-core-repo }}.log
           path: tmp/starter/test/reports/**/TEST-*.xml
-        if: always()
 
       - name: Upload Test Coverage Data
         uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: test_coverage_${{ strategy.job-index }}_${{ inputs.use-core-repo }}.log
           path: tmp/starter/coverage/.resultset.json
