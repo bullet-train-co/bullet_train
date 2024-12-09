@@ -32,7 +32,7 @@ jobs:
     needs: [minitest]
     if: ${{ always() }}
   combine_coverage_data:
-    name: 🫣 SimpleCov
+    name: ♻️  SimpleCov
     uses: ./.github/workflows/_combine_coverage_data.yml
     secrets: inherit
     needs: [minitest]

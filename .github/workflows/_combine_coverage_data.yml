@@ -2,13 +2,13 @@
 # them into one set of test coverage data.
 #
 # This workflow is meant to be called by other workflows.
-name: "🫣 SimpleCov Report"
+name: "♻️  SimpleCov Report"
 on:
   workflow_call:
 
 jobs:
   combine_runtime_logs:
-    name: "🫣"
+    name: "♻️ "
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
