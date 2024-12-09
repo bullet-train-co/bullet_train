@@ -30,11 +30,13 @@ jobs:
     uses: ./.github/workflows/_combine_runtime_logs.yml
     secrets: inherit
     needs: [minitest]
+    if: ${{ always() }}
   combine_coverage_data:
     name: 🫣 SimpleCov
     uses: ./.github/workflows/_combine_coverage_data.yml
     secrets: inherit
     needs: [minitest]
+    if: ${{ always() }}
   combine_summary_logs:
     name: 📊 Test Results
     uses: ./.github/workflows/_combine_summary_logs.yml
