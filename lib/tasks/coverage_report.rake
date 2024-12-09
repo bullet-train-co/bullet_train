@@ -36,9 +36,9 @@ namespace :coverage do
         !(src.filename =~ /local-core/)
       end
 
-      add_group "Bullet Train Core", "local-core"
+      add_group "Bullet Train Core", "local/bullet_train-core"
 
-      bt_gems = Dir.glob('local-core/*').select {|f| File.directory?(f) && f =~ /local-core\/bullet_train/ }
+      bt_gems = Dir.glob('local/bullet_train-core/*').select {|f| File.directory?(f) && f =~ /local\/bullet_train-core\/bullet_train/ }
       bt_gems.each do  |bt_gem|
         add_group bt_gem.split("/").last, "#{bt_gem}/"
       end
