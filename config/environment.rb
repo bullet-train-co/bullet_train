@@ -5,7 +5,7 @@ if ENV["CAPTURE_SIMPLECOV_AT_RUNTIME"]
   SimpleCov.command_name "runtime-simplecov-#{SecureRandom.hex}"
   SimpleCov.external_at_exit = true
   SimpleCov.start "rails"
-  #Rails.application.eager_load!
+  # Rails.application.eager_load!
 end
 
 # Load the Rails application.
