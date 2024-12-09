@@ -38,8 +38,8 @@ namespace :coverage do
 
       add_group "Bullet Train Core", "local/bullet_train-core"
 
-      bt_gems = Dir.glob('local/bullet_train-core/*').select {|f| File.directory?(f) && f =~ /local\/bullet_train-core\/bullet_train/ }
-      bt_gems.each do  |bt_gem|
+      bt_gems = Dir.glob("local/bullet_train-core/*").select { |f| File.directory?(f) && f =~ /local\/bullet_train-core\/bullet_train/ }
+      bt_gems.each do |bt_gem|
         add_group bt_gem.split("/").last, "#{bt_gem}/"
       end
       formatter SimpleCov::Formatter::MultiFormatter.new([
