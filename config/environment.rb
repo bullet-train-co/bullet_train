@@ -1,6 +1,8 @@
 if ENV["CAPTURE_SIMPLECOV_AT_RUNTIME"]
   require "simplecov"
-  SimpleCov.command_name ENV["SIMPLECOV_RUNTIME_COMMAND_NAME"] || "fake-command-for-simplecov"
+  # We use a random component here so that when we call `rails g super_scaffold` multiple times
+  # we merge that coverage info instead of clobbering it.
+  SimpleCov.command_name "runtime-simplecov-#{SecureRandom.hex}"
   SimpleCov.start "rails"
 end
 
