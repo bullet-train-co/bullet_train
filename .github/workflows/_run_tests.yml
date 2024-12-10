@@ -167,7 +167,6 @@ jobs:
           AUTH_ENDPOINT: https://no-site.nowhere
           AWS_REGION: us-east-1
           PARALLEL_TESTS_RECORD_RUNTIME: true
-          MINITEST_JUNIT_REPORTER: yes
         run: |
           bundle exec parallel_test test \
           -n ${{ fromJson(needs.calculate_matrix.outputs.totalRunners) }} \

@@ -10,10 +10,6 @@ jobs:
   combine_summary_logs:
     name: "📊"
     runs-on: ubuntu-latest
-    env:
-      RAILS_ENV: test
-      BUNDLE_JOBS: 2
-      BUNDLE_RETRY: 3
 
     steps:
       - name: Checkout code
