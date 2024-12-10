@@ -33,7 +33,7 @@ namespace :coverage do
     SimpleCov.collate Dir[args[:artifacts]], "rails" do
       groups.clear
       add_group "Starter Repo" do |src|
-        !(src.filename =~ /local-core/)
+        !(src.filename =~ /local\/bullet_train-core/)
       end
 
       add_group "Bullet Train Core", "local/bullet_train-core"
