@@ -3,7 +3,11 @@
 # running your tests for test coverage results.
 require "simplecov"
 SimpleCov.command_name "test" + (ENV["TEST_ENV_NUMBER"] || "")
-SimpleCov.start "rails"
+SimpleCov.start "rails" do
+  # By default we don't include avo in coverage reports since it's not user-facing application code.
+  # If you want to get test coverage for your avo resources, you can comment out or remove the next line.
+  add_filter "/avo/"
+end
 
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
