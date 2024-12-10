@@ -17,23 +17,37 @@ on:
         default: false
 
 jobs:
+  calculate_matrix:
+    name: 🧮 Calculate Dynamic Matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.dynamic-matrix.outputs.matrix }}
+      totalRunners: ${{ steps.dynamic-matrix.outputs.totalRunners }}
+      testRunnersPerNode: ${{ steps.dynamic-matrix.outputs.testRunnersPerNode }}
+    steps:
+      - name: Dynamic Matrix
+        id: dynamic-matrix
+        uses: bullet-train-co/parallel-test-dynamic-matrix@v1
+        with:
+          # You can explicitly set the number of test nodes, or it will default to 4
+          numberOfTestNodes: 4
+          # You can explicitly set the number of runners per node, or it will default to 4 for public repos and 2 for private
+          # testRunnersPerNode: 2
+
   test:
     name: "🧪"
     runs-on: ubuntu-latest
+    needs: calculate_matrix
     strategy:
       fail-fast: false
       matrix:
-        # Set identifiers for parallel jobs. These can be anything. Just include as many items as you want parallelism.
-        # For instance if you want a Three Amigos themed pipeline you could use:
-        # ci_node_index: [Dusty, Ned, Lucky]
-        ci_runners: [1,2,3,4]
+        parallel_test_groups: ${{ fromJson(needs.calculate_matrix.outputs.matrix) }}
     services:
       postgres:
         image: postgres:11-alpine
         ports:
           - "5432:5432"
         env:
-          POSTGRES_DB: rails_test
           POSTGRES_USER: rails
           POSTGRES_PASSWORD: password
         # Set health checks to wait until postgres has started
@@ -56,9 +70,10 @@ jobs:
       RAILS_ENV: test
       # Manually export your local RAILS_MASTER_KEY if using the credentials system.
       # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
       BUNDLE_JOBS: 2
       BUNDLE_RETRY: 3
+      POSTGRES_USER: rails
+      POSTGRES_PASSWORD: password
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -106,8 +121,26 @@ jobs:
             asset-cache-${{ runner.os }}-${{ github.ref }}-
             asset-cache-${{ runner.os }}-
 
+      - name: runtime log cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            tmp/starter/tmp/parallel_runtime_test.log
+          key: runtime-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+          restore-keys: |
+            runtime-cache-${{ runner.os }}-${{ github.ref }}-${{ github.sha }}
+            runtime-cache-${{ runner.os }}-${{ github.ref }}-
+            runtime-cache-${{ runner.os }}-
+
+      # We generate a fake secret because of this issue:
+      # https://github.com/rails/rails/issues/53661
+      - name: Generate a fake secret
+        shell: bash
+        run: echo $(ruby -e "require 'securerandom'; puts SecureRandom.hex(64)") > tmp/local_secret.txt
+        working-directory: tmp/starter
+
       - name: Set up database schema
-        run: bin/rails db:schema:load
+        run: bin/rake parallel:setup[${{ fromJson(needs.calculate_matrix.outputs.testRunnersPerNode) }}]
         working-directory: tmp/starter
 
       - run: yarn install
@@ -117,20 +150,53 @@ jobs:
       - run: yarn build:css
         working-directory: tmp/starter
 
-      - name: Run Tests
+      # We touch this file so that parallel_tests doesn't complain about it not being there.
+      # Without doing this it's hard to get tests running in a new repo without some hoop jumping.
+      - name: Touch Parallel Tests Runtime Log
+        run: touch tmp/parallel_runtime_test.log
+        working-directory: tmp/starter
+        shell: bash
+
+      - name: cat runtime log
+        run: cat tmp/starter/tmp/parallel_runtime_test.log
+        shell: bash
+
+      - name: Run tests
         id: run-tests
         env:
           AUTH_ENDPOINT: https://no-site.nowhere
           AWS_REGION: us-east-1
-          CI_NODE_TOTAL: ${{ strategy.job-total }}
-          CI_NODE_INDEX: ${{ strategy.job-index }}
-        continue-on-error: false
-        run : ./bin/parallel-ci
+          PARALLEL_TESTS_RECORD_RUNTIME: true
+        run: |
+          bundle exec parallel_test test \
+          -n ${{ fromJson(needs.calculate_matrix.outputs.totalRunners) }} \
+          --only-group ${{ matrix.parallel_test_groups }} \
+          --group-by runtime \
+          --allowed-missing 100 \
+          --verbose \
+          --verbose-command
         working-directory: tmp/starter
+        continue-on-error: false
         shell: bash
 
-      - name: Test Summary
-        uses: test-summary/action@v2
-        with:
-          paths: "tmp/starter/test/reports/**/TEST-*.xml"
+      - name: Upload Parallel Test Runtime Log
+        uses: actions/upload-artifact@v4
         if: always()
+        with:
+          name: parallel_runtime_test_${{ matrix.parallel_test_groups }}.log
+          path: tmp/starter/tmp/parallel_runtime_test.log
+
+      - name: Upload Test Coverage Data
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test_coverage_${{ matrix.parallel_test_groups }}.log
+          path: tmp/starter/coverage/.resultset.json
+          include-hidden-files: true
+
+      - name: Upload Test Summary Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test_summary_${{ matrix.parallel_test_groups }}.log
+          path: tmp/starter/test/reports*/**/TEST-*.xml

@@ -83,7 +83,7 @@ Rails.application.configure do
     config.cache_classes = true
   end
 
-  config.action_mailer.default_url_options = {host: "localhost", port: 3001}
+  config.action_mailer.default_url_options = {host: "localhost", port: 3001 + ENV["TEST_ENV_NUMBER"].to_i}
   config.i18n.raise_on_missing_translations = true
 
   # TODO for some reason this doesn't seem to be doing anything.

@@ -1,0 +1,45 @@
+# This workflow will download test summary artifacts created by parallel_test and combine
+# them into one summary report about test pass/fail status.
+#
+# This workflow is meant to be called by other workflows.
+name: "📊 Test Results"
+on:
+  workflow_call:
+
+jobs:
+  combine_summary_logs:
+    name: "📊"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: tmp/starter
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: test_summary_*.log
+          merge-multiple: false
+
+      - name: List downloaded artifacts
+        run: ls -R artifacts
+        shell: bash
+
+      - name: Count Test Result Files
+        run: ls -alR artifacts | grep TEST | wc -l
+        shell: bash
+
+      - name: Test Summary
+        uses: test-summary/action@v2
+        with:
+          paths: "artifacts/**/TEST-*.xml"
+        if: always()
+
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: test_summary_*.log
+          failOnError: false

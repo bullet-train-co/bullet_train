@@ -1,0 +1,152 @@
+# This workflow will download simplecov artifacts created by parallel_test and combine
+# them into one set of test coverage data.
+#
+# This workflow is meant to be called by other workflows.
+name: "♻️  SimpleCov Report"
+on:
+  workflow_call:
+
+jobs:
+  combine_runtime_logs:
+    name: "♻️ "
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      # Manually export your local RAILS_MASTER_KEY if using the credentials system.
+      # RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      BUNDLE_JOBS: 2
+      BUNDLE_RETRY: 3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          path: tmp/starter
+
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          working-directory: tmp/starter
+          bundler-cache: true
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: tmp/starter/coverage_artifacts
+          pattern: test_coverage_*.log
+          merge-multiple: false
+
+      - name: List downloaded artifacts
+        run: ls -alR tmp/starter/coverage_artifacts
+        shell: bash
+
+      - name: Cat an artifact
+        run: cat tmp/starter/coverage_artifacts/test_coverage_*.log/.resultset.json
+        shell: bash
+
+      - name: Combine Coverage Data With Groups
+        working-directory: tmp/starter
+        run: "bundle exec rake coverage:report_with_groups[coverage_artifacts/**/.resultset.json]"
+        shell: bash
+
+      - name: Copy coverage.json to coverage_with_groups.json
+        run: cp tmp/starter/coverage/coverage.json tmp/starter/coverage/coverage_with_groups.json
+        continue-on-error: true
+        shell: bash
+
+      - name: Combine Coverage Data
+        working-directory: tmp/starter
+        run: "bundle exec rake coverage:report[coverage_artifacts/**/.resultset.json]"
+        shell: bash
+
+      - name: List coverage dir
+        run: ls -alR tmp/starter/coverage
+        continue-on-error: true
+        shell: bash
+
+      - name: Upload Coverage Report
+        uses: actions/upload-artifact@v4
+        id: upload-coverage-report
+        with:
+          name: test_coverage_report
+          path: tmp/starter/coverage
+          include-hidden-files: true
+          retention-days: 1
+
+      - uses: actions/github-script@v7
+        id: create-summary
+        name: Summary
+        env:
+          COVERAGE_REPORT_LINK: ${{ steps.upload-coverage-report.outputs.artifact-url }}
+        with:
+          script: |
+            try {
+              const fs = require('fs')
+              const jsonString = fs.readFileSync('tmp/starter/coverage/coverage.json')
+              var coverageData = JSON.parse(jsonString)
+
+              const groupJsonString = fs.readFileSync('tmp/starter/coverage/coverage_with_groups.json')
+              var groupCoverageData = JSON.parse(groupJsonString)
+
+              var files = coverageData.files.sort((a, b) => a.covered_percent - b.covered_percent);
+              var numberOfFilesToShow = 10
+              files = files.slice(0,numberOfFilesToShow)
+
+              var fileDetails = []
+              fileDetails.push(`<details>`)
+              fileDetails.push(`<summary>File Coverage Details</summary>`)
+              fileDetails.push(` `)
+              fileDetails.push(`${numberOfFilesToShow} files with the least coverage`)
+              fileDetails.push(` `)
+              fileDetails.push(`| File | Coverage |`)
+              fileDetails.push(`| ---- | -------- |`)
+              for (const file of files) {
+                var filePath = file.filename.split("tmp/starter/")[1];
+                var fileCoverage = file.covered_percent.toFixed(1)
+                fileDetails.push(`| ${filePath} | ${fileCoverage}% |`)
+              }
+              fileDetails.push(` `)
+              fileDetails.push(`</details>`)
+
+              var groups = groupCoverageData.groups;
+              var groupNames = Object.keys(groups)
+
+              var groupDetails = []
+              groupDetails.push(`<details>`)
+              groupDetails.push(`<summary>Group Coverage Details</summary>`)
+              groupDetails.push(` `)
+              groupDetails.push(`| Group | Coverage |`)
+              groupDetails.push(`| ---- | -------- |`)
+              for (const groupName of groupNames) {
+                var groupCoverage = groups[groupName].lines.covered_percent.toFixed(1)
+                groupDetails.push(`| ${groupName} | ${groupCoverage}% |`)
+              }
+              groupDetails.push(` `)
+              groupDetails.push(`</details>`)
+
+              core.summary.addRaw(`${coverageData.metrics.covered_percent.toFixed(1)}% Covered`,true)
+              core.summary.addRaw(`${coverageData.files.length} Files`,true)
+              core.summary.addRaw(`${coverageData.metrics.covered_strength.toFixed(1)} Coverage Strength`,true)
+              core.summary.addRaw(`${coverageData.metrics.covered_lines} Lines Covered (of ${coverageData.metrics.total_lines})`,true)
+              core.summary.addRaw(` `,true)
+
+              core.summary.addRaw(fileDetails.join("\r\n"), true)
+              core.summary.addRaw(` `,true)
+              core.summary.addRaw(groupDetails.join("\r\n"), true)
+              core.summary.addRaw(` `,true)
+
+              core.summary.addLink('For the next 24 hours you can download a full coverage report.', process.env.COVERAGE_REPORT_LINK)
+            } catch(err) {
+              core.summary.addRaw("Error while reading or parsing the coverage JSON", true)
+              core.summary.addRaw(err.toString(), true)
+              core.error("Error while reading or parsing the coverage JSON")
+              core.setFailed(err)
+            }
+            core.summary.write()
+
+      - name: Delete artifacts
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: test_coverage_*.log
+          failOnError: false
+
+
