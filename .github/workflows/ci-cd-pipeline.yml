@@ -16,7 +16,6 @@ jobs:
     name: 🧪 Minitest
     uses: ./.github/workflows/_run_tests.yml
     secrets: inherit
-    #needs: [calculate_matrix]
   standardrb:
     name: 🔬 Standardrb
     uses: ./.github/workflows/_standardrb.yml
