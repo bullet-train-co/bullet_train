@@ -1945,14 +1945,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actiontext@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "@rails/actiontext@npm:8.0.0"
+"@rails/actiontext@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "@rails/actiontext@npm:8.0.1"
   dependencies:
     "@rails/activestorage": "npm:>= 8.0.0-alpha"
   peerDependencies:
     trix: ^2.0.0
-  checksum: 10c0/95b6eb2221f74ee905cf8018499ac2dcaade12b884f1833bf6f3aae55589faf115247e4a0c0ba7ddb7da27a11d9005f797df26b3dd144a56603c30960eef9f44
+  checksum: 10c0/98a84f5ab77ac9616e83607352a880ddb0fc3ec491a5d064d66fa58bf9232df3858e2bebe3fea30637aaba9ab8dcdb006f2d371d34b652c9dead31a3356a650b
   languageName: node
   linkType: hard
 
@@ -1979,10 +1979,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/ujs@npm:^7.1.500":
-  version: 7.1.500
-  resolution: "@rails/ujs@npm:7.1.500"
-  checksum: 10c0/365f9a3944454d64c83463de017d9be7064494d6376c1f4d8cbff38c0f278bac7d9ab85f19b31abb70f0e775f30b64ad682fd4545bc27b5d91baef3618642b9f
+"@rails/ujs@npm:^7.1.501":
+  version: 7.1.501
+  resolution: "@rails/ujs@npm:7.1.501"
+  checksum: 10c0/b75a30f36ff219264e0926da1ffcd14c2a5d6aee5be29da4dc81f9a45843875da79ac19cf7ed9a3f11a39084398d0ae4a75a8edb28ba94907db3081572af62b0
   languageName: node
   linkType: hard
 
@@ -2206,10 +2206,10 @@ __metadata:
     "@hotwired/turbo-rails": "npm:^8.0.12"
     "@icon/themify-icons": "npm:^1.0.1-alpha.3"
     "@rails/actioncable": "npm:^7.1.3"
-    "@rails/actiontext": "npm:^8.0.0"
+    "@rails/actiontext": "npm:^8.0.1"
     "@rails/activestorage": "npm:^8.0.0"
     "@rails/request.js": "npm:^0.0.11"
-    "@rails/ujs": "npm:^7.1.500"
+    "@rails/ujs": "npm:^7.1.501"
     "@redocly/cli": "npm:^1.0.0-beta.111"
     "@tailwindcss/forms": "npm:^0.5.9"
     "@tailwindcss/typography": "npm:^0.5.15"
