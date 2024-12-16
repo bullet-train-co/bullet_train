@@ -33,6 +33,10 @@
       "description": "Supply the fully-qualified URL for this Heroku app, e.g. `https://your-app.herokuapp.com`. You'll update this later after configuring a custom domain.",
       "value": "https://ENTER_YOUR_APP_NAME_HERE.herokuapp.com"
     },
+    "BT_IS_IN_HEROKU": {
+      "description": "We use this to tweak some run-time settings when we know we're running the app in Heroku. Don't change it!",
+      "value": "true"
+    },
     "FONTAWESOME_NPM_AUTH_TOKEN": {
       "description": "We recommend using Font Awesome Pro for icons. To use it, fetch your token from `https://fontawesome.com/how-to-use/on-the-web/setup/using-package-managers` and enter it here.",
       "required": false
