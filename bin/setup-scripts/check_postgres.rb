@@ -21,6 +21,20 @@ if /postgres/.match?(postgres_version_info.downcase)
 
   if postgres_version.match?(/^14/)
     puts "You have PostgreSQL 14 installed.".green
+
+    postgres_running = system("pg_isready > /dev/null 2>&1")
+    if postgres_running
+      puts "PostgreSQL is running.".green
+    else
+      puts "PostgreSQL is installed but not running. You will need it in the DB setup steps.".red
+      stop_now = ask_boolean "Would you like to stop here and start PostgreSQL first?", "n"
+      if stop_now
+        puts "PostgreSQL is not running and you've chosen to start it first. Run bin/setup again after.".red
+        exit
+      else
+        puts "Continuing without PostgreSQL running. You will need it in the next setup steps.".yellow
+      end
+    end
   else
     puts "You have PostgreSQL installed, but you're using v#{postgres_version} and not v14.".red
     continue_anyway = ask_boolean "Try proceeding without PostgreSQL 14?", "y"
@@ -36,6 +50,20 @@ elsif /postgres/.match?(psql_version_info.downcase)
 
   if psql_version.match?(/^14/)
     puts "You have PostgreSQL 14 installed.".green
+
+    postgres_running = system("pg_isready > /dev/null 2>&1")
+    if postgres_running
+      puts "PostgreSQL is running.".green
+    else
+      puts "PostgreSQL is installed but not running. You will need it in the DB setup steps.".red
+      stop_now = ask_boolean "Would you like to stop here and start PostgreSQL first?", "n"
+      if stop_now
+        puts "PostgreSQL is not running and you've chosen to start it first. Run bin/setup again after.".red
+        exit
+      else
+        puts "Continuing without PostgreSQL running. You will need it in the next setup steps.".yellow
+      end
+    end
   else
     puts "You have PostgreSQL installed, but you're using v#{psql_version} and not v14.".red
     continue_anyway = ask_boolean "Try proceeding without PostgreSQL 14?", "y"
