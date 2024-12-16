@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_10_18_172307) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_16_215520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -214,6 +214,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_10_18_172307) do
     t.boolean "boolean_button_value"
     t.string "option_value"
     t.jsonb "multiple_option_values", default: []
+    t.boolean "boolean_checkbox_value"
     t.index ["absolutely_abstract_creative_concept_id"], name: "index_tangible_things_on_creative_concept_id"
   end
 
