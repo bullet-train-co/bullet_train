@@ -20,6 +20,9 @@ jobs:
     name: 🔬 Standardrb
     uses: ./.github/workflows/_standardrb.yml
     secrets: inherit
+    permissions:
+      checks: write
+      contents: read
   db_schema:
     name: 🔎 DB Schema
     uses: ./.github/workflows/_database_schema_check.yml
