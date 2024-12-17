@@ -120,30 +120,30 @@ end
 BULLET_TRAIN_VERSION = "1.12.1"
 
 # Core packages.
-gem "bullet_train", path: "../bullet_train-core/bullet_train"
-gem "bullet_train-super_scaffolding", path: "../bullet_train-core/bullet_train-super_scaffolding"
-gem "bullet_train-api", path: "../bullet_train-core/bullet_train-api"
-gem "bullet_train-outgoing_webhooks", path: "../bullet_train-core/bullet_train-outgoing_webhooks"
-gem "bullet_train-incoming_webhooks", path: "../bullet_train-core/bullet_train-incoming_webhooks"
-gem "bullet_train-themes", path: "../bullet_train-core/bullet_train-themes"
-gem "bullet_train-themes-light", path: "../bullet_train-core/bullet_train-themes-light"
-gem "bullet_train-integrations", path: "../bullet_train-core/bullet_train-integrations"
-gem "bullet_train-integrations-stripe", path: "../bullet_train-core/bullet_train-integrations-stripe"
+gem "bullet_train", BULLET_TRAIN_VERSION
+gem "bullet_train-super_scaffolding", BULLET_TRAIN_VERSION
+gem "bullet_train-api", BULLET_TRAIN_VERSION
+gem "bullet_train-outgoing_webhooks", BULLET_TRAIN_VERSION
+gem "bullet_train-incoming_webhooks", BULLET_TRAIN_VERSION
+gem "bullet_train-themes", BULLET_TRAIN_VERSION
+gem "bullet_train-themes-light", BULLET_TRAIN_VERSION
+gem "bullet_train-integrations", BULLET_TRAIN_VERSION
+gem "bullet_train-integrations-stripe", BULLET_TRAIN_VERSION
 
 # Optional support packages.
-gem "bullet_train-sortable", path: "../bullet_train-core/bullet_train-sortable"
-gem "bullet_train-scope_questions", path: "../bullet_train-core/bullet_train-scope_questions"
-gem "bullet_train-obfuscates_id", path: "../bullet_train-core/bullet_train-obfuscates_id"
+gem "bullet_train-sortable", BULLET_TRAIN_VERSION
+gem "bullet_train-scope_questions", BULLET_TRAIN_VERSION
+gem "bullet_train-obfuscates_id", BULLET_TRAIN_VERSION
 
 # Core gems that are dependencies of gems listed above. Technically they
 # shouldn't need to be listed here, but we list them so that we can keep
 # version numbers in sync.
-gem "bullet_train-fields", path: "../bullet_train-core/bullet_train-fields"
-gem "bullet_train-has_uuid", path: "../bullet_train-core/bullet_train-has_uuid"
-gem "bullet_train-roles", path: "../bullet_train-core/bullet_train-roles"
-gem "bullet_train-scope_validator", path: "../bullet_train-core/bullet_train-scope_validator"
-gem "bullet_train-super_load_and_authorize_resource", path: "../bullet_train-core/bullet_train-super_load_and_authorize_resource"
-gem "bullet_train-themes-tailwind_css", path: "../bullet_train-core/bullet_train-themes-tailwind_css"
+gem "bullet_train-fields", BULLET_TRAIN_VERSION
+gem "bullet_train-has_uuid", BULLET_TRAIN_VERSION
+gem "bullet_train-roles", BULLET_TRAIN_VERSION
+gem "bullet_train-scope_validator", BULLET_TRAIN_VERSION
+gem "bullet_train-super_load_and_authorize_resource", BULLET_TRAIN_VERSION
+gem "bullet_train-themes-tailwind_css", BULLET_TRAIN_VERSION
 
 gem "devise"
 gem "devise-two-factor"
