@@ -51,6 +51,7 @@ class TangibleThingTest < ApplicationSystemTestCase
     click_on "Add New Tangible Thing"
     fill_in "Text Field Value", with: "My value for this text field"
     click_on "Yes"
+    check "Boolean checkbox value"
     click_on "Two" # this should never make it to the database, because of what comes next.
     click_on "Three"
     click_on "Four"
@@ -90,6 +91,7 @@ class TangibleThingTest < ApplicationSystemTestCase
 
     assert_text "My value for this text field"
     assert_text "Yes"
+    assert_text "Boolean Checkbox Value".upcase
     assert page.has_no_content? "Two"
     assert_text "Three"
     assert_text "Four and Five"
