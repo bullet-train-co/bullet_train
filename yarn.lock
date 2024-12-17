@@ -2214,7 +2214,7 @@ __metadata:
     "@tailwindcss/forms": "npm:^0.5.9"
     "@tailwindcss/typography": "npm:^0.5.15"
     autoprefixer: "npm:^10.4.20"
-    cable_ready: "npm:^5.0.5"
+    cable_ready: "npm:^5.0.6"
     dragula: "npm:^3.7.3"
     esbuild: "npm:^0.24.0"
     glob: "npm:^10.3.12"
@@ -2404,12 +2404,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cable_ready@npm:^5.0.5":
-  version: 5.0.5
-  resolution: "cable_ready@npm:5.0.5"
+"cable_ready@npm:^5.0.6":
+  version: 5.0.6
+  resolution: "cable_ready@npm:5.0.6"
   dependencies:
     morphdom: "npm:2.6.1"
-  checksum: 10c0/ad0c83379dab4a79c69eb14aceb71be9f25199ea65443a8da4aaf3d0c34b16a5a366717ac4a90bc91609d464b2f50588ff922f7454c0ffe116d6996e3f52e599
+  checksum: 10c0/dbcea09fab7faba82ee9fc6148ac2fce9385f9b9781d2d374162d5b99c8c85fc4609c9e638fed8a9aada6af4042d339dc6e7eddecb38ea82465e2178732e1c12
   languageName: node
   linkType: hard
 
