@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class SuperScaffolding::TestSite::SystemTest < ApplicationSystemTestCase
+class BulletTrain::SuperScaffolding::TestSiteTest < ApplicationSystemTestCase
   setup do
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
   end
