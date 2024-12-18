@@ -98,7 +98,7 @@ GEM
       zeitwerk (>= 2.6.12)
     awesome_print (1.9.2)
     aws-eventstream (1.3.0)
-    aws-partitions (1.1023.0)
+    aws-partitions (1.1024.0)
     aws-sdk-core (3.214.0)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -317,8 +317,8 @@ GEM
       logger
     faraday-follow_redirects (0.3.0)
       faraday (>= 1, < 3)
-    faraday-multipart (1.0.4)
-      multipart-post (~> 2)
+    faraday-multipart (1.1.0)
+      multipart-post (~> 2.0)
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
     fastimage (2.3.1)
@@ -333,7 +333,7 @@ GEM
     hashids (1.0.6)
     hashie (5.0.0)
     hiredis (0.6.3)
-    honeybadger (5.26.0)
+    honeybadger (5.26.1)
       logger
     htmlentities (4.3.4)
     http_accept_language (2.1.1)
@@ -489,7 +489,7 @@ GEM
     pry-stack_explorer (0.6.1)
       binding_of_caller (~> 1.0)
       pry (~> 0.13)
-    psych (5.2.1)
+    psych (5.2.2)
       date
       stringio
     public_suffix (6.0.1)
@@ -619,7 +619,7 @@ GEM
     sexp_processor (4.17.3)
     showcase-rails (0.4.6)
       rails (>= 6.1.0)
-    sidekiq (7.3.6)
+    sidekiq (7.3.7)
       connection_pool (>= 2.3.0)
       logger
       rack (>= 2.2.4)
