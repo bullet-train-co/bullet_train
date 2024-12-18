@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# https://gist.github.com/vncsna/64825d5609c146e80de8b1fd623011ca
+# Note we're not using `x` because it's noisy. If you want to use it for debugging, uncomment the line below.
+set -euo pipefail
+#set -x
+#
+export SPRING=true
+
+rails g super_scaffold TestSite Team name:text_field other_attribute:text_field url:text_field --navbar="ti-world" --sortable
+rails g super_scaffold TestPage TestSite,Team name:text_field path:text_field
+rails g super_scaffold:field TestSite membership_id:super_select{class_name=Membership}
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  sed -i "" "s/raise .*/team\.memberships/g" app/models/test_site.rb
+else
+  sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb
+fi

@@ -8,15 +8,15 @@ set -euo pipefail
 export SPRING=true
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-  rails g super_scaffold TestSite Team name:text_field other_attribute:text_field url:text_field --navbar="ti-world" --sortable
-  rails g super_scaffold TestPage TestSite,Team name:text_field path:text_field
-  rails g super_scaffold:field TestSite membership_id:super_select{class_name=Membership}
+  #rails g super_scaffold TestSite Team name:text_field other_attribute:text_field url:text_field --navbar="ti-world" --sortable
+  #rails g super_scaffold TestPage TestSite,Team name:text_field path:text_field
+  #rails g super_scaffold:field TestSite membership_id:super_select{class_name=Membership}
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i "" "s/raise .*/team\.memberships/g" app/models/test_site.rb
-  else
-    sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb
-  fi
+  #if [[ "$OSTYPE" == "darwin"* ]]; then
+    #sed -i "" "s/raise .*/team\.memberships/g" app/models/test_site.rb
+  #else
+    #sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb
+  #fi
 else
   echo "Skipping \`TestSite\` and \`TestPage\` on this CI node."
 fi
