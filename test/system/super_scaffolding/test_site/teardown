@@ -8,5 +8,5 @@ set -euo pipefail
 export SPRING=true
 
 rake db:migrate VERSION=`ls db/migrate | sort | tail -n 4 | head -n 1`
-git checkout .
-git clean -d -f
+git checkout app config db test
+git clean -d -f app config db test

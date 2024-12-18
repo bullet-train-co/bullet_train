@@ -16,3 +16,5 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
 else
   sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb
 fi
+
+bundle exec rails db:schema:load db:migrate db:test:prepare
