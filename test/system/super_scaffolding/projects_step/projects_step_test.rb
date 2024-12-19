@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class BulletTrain::SuperScaffolding::ProjectTest < ApplicationSystemTestCase
+class BulletTrain::SuperScaffolding::ProjectsStepTest < ApplicationSystemTestCase
   setup do
     @jane = create :onboarded_user, first_name: "Jane", last_name: "Smith"
   end
@@ -24,9 +24,8 @@ class BulletTrain::SuperScaffolding::ProjectTest < ApplicationSystemTestCase
 
   # force autoload.
   [
-    "Projects::Deliverable",
-    "Projects::Tag",
-    "Projects::AppliedTag",
+    "Projects::Step",
+    "Objective",
   ].each do |class_name|
     class_name.constantize
   rescue

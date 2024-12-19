@@ -24,14 +24,6 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
   # force autoload.
   [
-    "TestSite",
-    "TestPage",
-    "Project",
-    "Projects::Deliverable",
-    "Projects::Tag",
-    "Projects::AppliedTag",
-    "Projects::Step",
-    "Objective",
     "Insight",
     "Personality::CharacterTrait",
     "Personality::Disposition",
