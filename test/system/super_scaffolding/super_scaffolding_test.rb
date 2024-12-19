@@ -36,8 +36,8 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     #"Personality::CharacterTrait",
     #"Personality::Disposition",
     #"Personality::Note",
-    "Personality::Observation",
-    "Personality::Reactions::Response",
+    #"Personality::Observation",
+    #"Personality::Reactions::Response",
   ].each do |class_name|
     class_name.constantize
   rescue
