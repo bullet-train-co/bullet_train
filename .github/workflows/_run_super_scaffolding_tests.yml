@@ -169,7 +169,7 @@ jobs:
 
       - name: 'Run Super Scaffolding Webhook Test'
         run: bin/rails test test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
-        if: ${{ matrix.text == 'webhook' }}
+        if: ${{ matrix.test == 'webhook' }}
         working-directory: tmp/starter
 
       - name: Upload Test Summary Logs
