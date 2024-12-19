@@ -6,7 +6,7 @@ class Teardown < SuperScaffoldingTestTeardown
   # This allows us to define helper methods that aren't attached to thor commands
   no_commands do
     def teardown
-      puts "do the thing"
+      # custom teardown goes here
     end
   end
 end

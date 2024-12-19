@@ -6,7 +6,6 @@ class Setup < SuperScaffoldingTestSetup
   # This allows us to define helper methods that aren't attached to thor commands
   no_commands do
     def setup
-      puts "do the thing"
       puts `rails g super_scaffold TestSite Team name:text_field other_attribute:text_field url:text_field --navbar="ti-world" --sortable`
       puts `rails g super_scaffold TestPage TestSite,Team name:text_field path:text_field`
       puts `rails g super_scaffold:field TestSite membership_id:super_select{class_name=Membership}`
