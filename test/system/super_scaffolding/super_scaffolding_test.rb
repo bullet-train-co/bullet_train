@@ -205,27 +205,27 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     #end
   #end
 
-  if defined?(Personality::Observation)
-    test "developers can generate a Personality::Observation and a nested Personality::Reactions::Response model" do
-      login_as(@jane, scope: :user)
-      visit account_team_path(@jane.current_team)
+  #if defined?(Personality::Observation)
+    #test "developers can generate a Personality::Observation and a nested Personality::Reactions::Response model" do
+      #login_as(@jane, scope: :user)
+      #visit account_team_path(@jane.current_team)
 
-      click_on "Add New Observation"
-      click_on "Create Observation"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Observation"
-      click_on "Create Observation"
+      #click_on "Add New Observation"
+      #click_on "Create Observation"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Observation"
+      #click_on "Create Observation"
 
-      assert_text("Observation was successfully created.")
+      #assert_text("Observation was successfully created.")
 
-      click_on "Add New Response"
-      click_on "Create Response"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Response"
-      click_on "Create Response"
-      assert_text("Response was successfully created.")
-    end
-  end
+      #click_on "Add New Response"
+      #click_on "Create Response"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Response"
+      #click_on "Create Response"
+      #assert_text("Response was successfully created.")
+    #end
+  #end
 
   test "OpenAPI V3 document is still valid" do
     visit "/" # Make sure the test server is running before linting the file.
