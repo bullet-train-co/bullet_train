@@ -7,7 +7,12 @@ class SuperScaffoldingTestTeardown < Thor
   desc "scaffolding_teardown", "Run the teardown method for this test."
   option :allow_dirty_workspace
   def scaffolding_teardown
-    rollback
+    if db_schema_has_changed
+      puts "db/schema.rb has changed - we need to rollback"
+      rollback
+    else
+      puts "db/schema.rb has not changed - no need to rollback"
+    end
     clean_workspace
     teardown
   end
@@ -23,6 +28,11 @@ class SuperScaffoldingTestTeardown < Thor
     def clean_workspace
       puts `git checkout app config db test`
       puts `git clean -d -f app config db test`
+    end
+
+    def db_schema_has_changed
+      `git diff --exit-code db/schema.rb`
+      unstaged_changes_present = !$?.success?
     end
 
     def rollback
