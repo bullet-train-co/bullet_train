@@ -41,15 +41,6 @@ jobs:
               tests.push(test_dir_name)
             }
             return tests
-  # NOTE: This is here just to make the workflow visualization layout better.
-  # Without it the layout is really bad and confusing.
-  #calculate_matrix:
-    #name: 🤷 Fake Matrix
-    #runs-on: ubuntu-latest
-    #steps:
-      #- name: Do Nothing
-        #run: echo "This is a useless step that just helps things look nicer..."
-        #shell: bash
   test:
     name: "🏗️"
     runs-on: ubuntu-latest
@@ -57,9 +48,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # For super scaffolding tests we need to have exactly 5 runners.
         test: ${{ fromJson(needs.calculate_matrix.outputs.tests) }}
-        #ci_runners: ["TestSite, Project", "Project::Step, Insight", "Personality::Disposition, Personality::Observation", "TestFile, PartialTest", Webhook]
     services:
       postgres:
         image: postgres:11-alpine
@@ -149,15 +138,6 @@ jobs:
         working-directory: tmp/starter
       - run: yarn build:css
         working-directory: tmp/starter
-
-      # TODO: This might be a bad idea. Maybe we should just have spring in the Gemfile all the time.
-      #- name: Allow adding of spring
-        #run: bundle config unset deployment
-        #working-directory: tmp/starter
-
-      #- name: Add spring
-        #run: bundle add spring
-        #working-directory: tmp/starter
 
       - name: 'Setup Super Scaffolding System Test'
         run: bundle exec test/system/super_scaffolding/${{ matrix.test }}/setup.rb --allow-dirty-workspace
