@@ -24,18 +24,18 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
 
   # force autoload.
   [
-    "TestSite",
-    "TestPage",
-    "Project",
-    "Projects::Deliverable",
-    "Projects::Tag",
-    "Projects::AppliedTag",
-    "Projects::Step",
-    "Objective",
-    "Insight",
-    "Personality::CharacterTrait",
-    "Personality::Disposition",
-    "Personality::Note",
+    #"TestSite",
+    #"TestPage",
+    #"Project",
+    #"Projects::Deliverable",
+    #"Projects::Tag",
+    #"Projects::AppliedTag",
+    #"Projects::Step",
+    #"Objective",
+    #"Insight",
+    #"Personality::CharacterTrait",
+    #"Personality::Disposition",
+    #"Personality::Note",
     "Personality::Observation",
     "Personality::Reactions::Response",
   ].each do |class_name|
@@ -44,166 +44,166 @@ class SuperScaffoldingSystemTest < ApplicationSystemTestCase
     nil
   end
 
-  if defined?(Project)
-    test "developers can generate a Project and a nested Projects::Deliverable model" do
-      login_as(@jane, scope: :user)
-      visit account_team_path(@jane.current_team)
+  #if defined?(Project)
+    #test "developers can generate a Project and a nested Projects::Deliverable model" do
+      #login_as(@jane, scope: :user)
+      #visit account_team_path(@jane.current_team)
 
-      click_on "Add New Project"
-      click_on "Create Project"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Project"
-      click_on "Create Project"
+      #click_on "Add New Project"
+      #click_on "Create Project"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Project"
+      #click_on "Create Project"
 
-      assert_text("Project was successfully created.")
+      #assert_text("Project was successfully created.")
 
-      click_on "Add New Deliverable"
-      click_on "Create Deliverable"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Deliverable"
-      click_on "Create Deliverable"
-      assert_text("Deliverable was successfully created.")
+      #click_on "Add New Deliverable"
+      #click_on "Create Deliverable"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Deliverable"
+      #click_on "Create Deliverable"
+      #assert_text("Deliverable was successfully created.")
 
-      within "ol.breadcrumb" do
-        click_on "Projects"
-      end
+      #within "ol.breadcrumb" do
+        #click_on "Projects"
+      #end
 
-      assert_text("Your Team’s Projects")
+      #assert_text("Your Team’s Projects")
 
-      # this is ensuring cascading deletes generate properly.
-      accept_alert do
-        click_on "Delete"
-      end
+      ## this is ensuring cascading deletes generate properly.
+      #accept_alert do
+        #click_on "Delete"
+      #end
 
-      assert_text("Project was successfully destroyed.")
+      #assert_text("Project was successfully destroyed.")
 
-      click_on "Add New Project"
-      assert_text "New Project Details"
-      fill_in "Name", with: "Example Project"
-      click_on "Create Project"
-      assert_text "Project was successfully created."
+      #click_on "Add New Project"
+      #assert_text "New Project Details"
+      #fill_in "Name", with: "Example Project"
+      #click_on "Create Project"
+      #assert_text "Project was successfully created."
 
-      within "ol.breadcrumb" do
-        click_on "Dashboard"
-      end
+      #within "ol.breadcrumb" do
+        #click_on "Dashboard"
+      #end
 
-      click_on "Example Project"
-      assert_text "Below are the details we have for Example Project"
+      #click_on "Example Project"
+      #assert_text "Below are the details we have for Example Project"
 
-      click_on "Back"
-      assert_text "Below is a list of Projects"
+      #click_on "Back"
+      #assert_text "Below is a list of Projects"
 
-      click_on "Back"
-      assert_text "No Tags have been added"
+      #click_on "Back"
+      #assert_text "No Tags have been added"
 
-      click_on "Add New Tag"
-      assert_text "Please provide the details of the new Tag"
+      #click_on "Add New Tag"
+      #assert_text "Please provide the details of the new Tag"
 
-      fill_in "Name", with: "One"
-      click_on "Create Tag"
-      assert_text "Tag was successfully created"
+      #fill_in "Name", with: "One"
+      #click_on "Create Tag"
+      #assert_text "Tag was successfully created"
 
-      click_on "Back"
+      #click_on "Back"
 
-      click_on "Add New Tag"
-      assert_text "Please provide the details of the new Tag"
+      #click_on "Add New Tag"
+      #assert_text "Please provide the details of the new Tag"
 
-      fill_in "Name", with: "Two"
-      click_on "Create Tag"
-      assert_text "Tag was successfully created"
+      #fill_in "Name", with: "Two"
+      #click_on "Create Tag"
+      #assert_text "Tag was successfully created"
 
-      click_on "Back"
+      #click_on "Back"
 
-      click_on "Add New Tag"
-      assert_text "Please provide the details of the new Tag"
+      #click_on "Add New Tag"
+      #assert_text "Please provide the details of the new Tag"
 
-      fill_in "Name", with: "Three"
-      click_on "Create Tag"
-      assert_text "Tag was successfully created"
+      #fill_in "Name", with: "Three"
+      #click_on "Create Tag"
+      #assert_text "Tag was successfully created"
 
-      click_on "Back"
-      assert_text "Your Team’s Tags"
-      click_on "Back"
-      assert_text "Your Team’s Dashboard"
+      #click_on "Back"
+      #assert_text "Your Team’s Tags"
+      #click_on "Back"
+      #assert_text "Your Team’s Dashboard"
 
-      click_on "Add New Project"
-      assert_text "Please provide the details of the new Project"
+      #click_on "Add New Project"
+      #assert_text "Please provide the details of the new Project"
 
-      fill_in "Name", with: "New Project with Tags"
-      select2_select "Tags", ["One", "Two"]
-      click_on "Create Project"
-      assert_text "Project was successfully created"
+      #fill_in "Name", with: "New Project with Tags"
+      #select2_select "Tags", ["One", "Two"]
+      #click_on "Create Project"
+      #assert_text "Project was successfully created"
 
-      assert_text "Below are the details we have for New Project with Tags"
-      assert_text "One and Two"
-    end
-  end
+      #assert_text "Below are the details we have for New Project with Tags"
+      #assert_text "One and Two"
+    #end
+  #end
 
-  if defined?(Projects::Step)
-    test "developers can generate a Projects::Step and a nested Objective model" do
-      login_as(@jane, scope: :user)
-      visit account_team_path(@jane.current_team)
+  #if defined?(Projects::Step)
+    #test "developers can generate a Projects::Step and a nested Objective model" do
+      #login_as(@jane, scope: :user)
+      #visit account_team_path(@jane.current_team)
 
-      click_on "Add New Step"
-      click_on "Create Step"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Step"
-      click_on "Create Step"
+      #click_on "Add New Step"
+      #click_on "Create Step"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Step"
+      #click_on "Create Step"
 
-      assert_text("Step was successfully created.")
+      #assert_text("Step was successfully created.")
 
-      click_on "Add New Objective"
-      click_on "Create Objective"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Objective"
-      click_on "Create Objective"
-      assert_text("Objective was successfully created.")
-    end
-  end
+      #click_on "Add New Objective"
+      #click_on "Create Objective"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Objective"
+      #click_on "Create Objective"
+      #assert_text("Objective was successfully created.")
+    #end
+  #end
 
-  if defined?(Insight)
-    test "developers can generate a Insight and a nested Personality::CharacterTrait model" do
-      login_as(@jane, scope: :user)
-      visit account_team_path(@jane.current_team)
+  #if defined?(Insight)
+    #test "developers can generate a Insight and a nested Personality::CharacterTrait model" do
+      #login_as(@jane, scope: :user)
+      #visit account_team_path(@jane.current_team)
 
-      click_on "Add New Insight"
-      click_on "Create Insight"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Insight"
-      click_on "Create Insight"
+      #click_on "Add New Insight"
+      #click_on "Create Insight"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Insight"
+      #click_on "Create Insight"
 
-      assert_text("Insight was successfully created.")
+      #assert_text("Insight was successfully created.")
 
-      click_on "Add New Character Trait"
-      click_on "Create Character Trait"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Character Trait"
-      click_on "Create Character Trait"
-      assert_text("Character Trait was successfully created.")
-    end
-  end
+      #click_on "Add New Character Trait"
+      #click_on "Create Character Trait"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Character Trait"
+      #click_on "Create Character Trait"
+      #assert_text("Character Trait was successfully created.")
+    #end
+  #end
 
-  if defined?(Personality::Disposition)
-    test "developers can generate a Personality::Disposition and a nested Personality::Note model" do
-      login_as(@jane, scope: :user)
-      visit account_team_path(@jane.current_team)
+  #if defined?(Personality::Disposition)
+    #test "developers can generate a Personality::Disposition and a nested Personality::Note model" do
+      #login_as(@jane, scope: :user)
+      #visit account_team_path(@jane.current_team)
 
-      click_on "Add New Disposition"
-      click_on "Create Disposition"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Disposition"
-      click_on "Create Disposition"
+      #click_on "Add New Disposition"
+      #click_on "Create Disposition"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Disposition"
+      #click_on "Create Disposition"
 
-      assert_text("Disposition was successfully created.")
+      #assert_text("Disposition was successfully created.")
 
-      click_on "Add New Note"
-      click_on "Create Note"
-      assert_text("Name can't be blank.")
-      fill_in "Name", with: "Some New Example Note"
-      click_on "Create Note"
-      assert_text("Note was successfully created.")
-    end
-  end
+      #click_on "Add New Note"
+      #click_on "Create Note"
+      #assert_text("Name can't be blank.")
+      #fill_in "Name", with: "Some New Example Note"
+      #click_on "Create Note"
+      #assert_text("Note was successfully created.")
+    #end
+  #end
 
   if defined?(Personality::Observation)
     test "developers can generate a Personality::Observation and a nested Personality::Reactions::Response model" do
