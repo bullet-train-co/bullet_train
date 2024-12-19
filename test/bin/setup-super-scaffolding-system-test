@@ -70,17 +70,17 @@ export SPRING=true
   #echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
 #fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
-  rails g super_scaffold Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
-  rails g super_scaffold Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
-  else
-    sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
-  fi
-else
-  echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
-fi
+#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
+  #rails g super_scaffold Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
+  #rails g super_scaffold Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor
+  #if [[ "$OSTYPE" == "darwin"* ]]; then
+    #sed -i "" "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
+  #else
+    #sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb
+  #fi
+#else
+  #echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
+#fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
   rails g super_scaffold TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
