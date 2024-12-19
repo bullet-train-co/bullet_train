@@ -115,10 +115,10 @@ export SPRING=true
 
 
 # The test for this webhook is run inline in .github/workflows/_run_super_scaffolding_tests.yml
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
-  rails g super_scaffold:incoming_webhooks SomeProvider
-else
-  echo "Skipping \`Webhok\` on this CI node."
-fi
+#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "4" ]; then
+  #rails g super_scaffold:incoming_webhooks SomeProvider
+#else
+  #echo "Skipping \`Webhok\` on this CI node."
+#fi
 
 bundle exec spring rake db:schema:load db:migrate db:test:prepare
