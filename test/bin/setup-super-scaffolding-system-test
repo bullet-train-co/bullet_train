@@ -82,12 +82,12 @@ export SPRING=true
   #echo "Skipping \`Personality::Observation\` and \`Personality::Reactions::Response\` on this CI node."
 #fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
-  rails g super_scaffold TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
-  rails g super_scaffold ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
-else
-  echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
-fi
+#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+  #rails g super_scaffold TestFile Team name:text_field foo:file_field bars:file_field{multiple} --navbar="ti-tag"
+  #rails g super_scaffold ColorPicker Team color_picker_value:color_picker --navbar="ti-tag"
+#else
+  #echo "Skipping \`TestFile\` and \`ColorPicker\` on this CI node."
+#fi
 
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
