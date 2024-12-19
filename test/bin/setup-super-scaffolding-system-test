@@ -21,24 +21,24 @@ export SPRING=true
   #echo "Skipping \`TestSite\` and \`TestPage\` on this CI node."
 #fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
-  rails g super_scaffold Project Team name:text_field description:trix_editor --navbar="ti-layout"
-  rails g super_scaffold Projects::Deliverable Project,Team name:text_field description:trix_editor
+#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "0" ]; then
+  #rails g super_scaffold Project Team name:text_field description:trix_editor --navbar="ti-layout"
+  #rails g super_scaffold Projects::Deliverable Project,Team name:text_field description:trix_editor
 
-  # Setup for has-many-through test.
-  rails g super_scaffold Projects::Tag Team name:text_field --navbar="ti-tag"
+  ## Setup for has-many-through test.
+  #rails g super_scaffold Projects::Tag Team name:text_field --navbar="ti-tag"
 
-  rails g super_scaffold:join_model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
-  rails g super_scaffold:field Project tag_ids:super_select{class_name=Projects::Tag}
+  #rails g super_scaffold:join_model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}
+  #rails g super_scaffold:field Project tag_ids:super_select{class_name=Projects::Tag}
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
-  else
-    sed -i "s/raise .*/team\.projects_tags/g" app/models/project.rb
-  fi
-else
-  echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
-fi
+  #if [[ "$OSTYPE" == "darwin"* ]]; then
+    #sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb
+  #else
+    #sed -i "s/raise .*/team\.projects_tags/g" app/models/project.rb
+  #fi
+#else
+  #echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
+#fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   rails g super_scaffold Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
