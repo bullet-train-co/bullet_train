@@ -8,9 +8,6 @@ class Setup < SuperScaffoldingTestSetup
     def setup
       puts `rails g super_scaffold Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"`
       puts `rails g super_scaffold Objective Projects::Step,Team name:text_field description:trix_editor`
-
-      # TODO: Do we want to include this here?
-      # puts `bundle exec rails db:schema:load db:migrate db:test:prepare`
     end
   end
 end

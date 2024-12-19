@@ -15,9 +15,6 @@ class Setup < SuperScaffoldingTestSetup
       else
         puts `sed -i "s/\@response/\@response_object/g" test/controllers/api/v1/personality/reactions/responses_controller_test.rb`
       end
-
-      # TODO: Do we want to include this here?
-      # puts `bundle exec rails db:schema:load db:migrate db:test:prepare`
     end
   end
 end
