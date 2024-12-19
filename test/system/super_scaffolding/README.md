@@ -7,8 +7,8 @@ Each subdirectory below contains a `setup.rb` file that you can run to generate 
 After running the tests you can run `teardown.rb` from the same directory to remove the super scaffolded code.
 
 **NOTE** We highly reocmmend that you start with a clean git workspace. The super scaffolding commands generate
-a lot of files and the cleanup process is... let's call it "brute force". If you have changes in your repo before
-running `setup.rb` they're likely to get clobbered when you run `teardown.rb`
+a lot of files and the cleanup process is... let's call it "brute force". If you have uncommitted changes in
+your repo before running `setup.rb` they're likely to get clobbered when you run `teardown.rb`
 
 ### Example
 
