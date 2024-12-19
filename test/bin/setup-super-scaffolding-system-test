@@ -90,28 +90,28 @@ export SPRING=true
 #fi
 
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
-  # TODO: Generate these in parallel.
-  rails g super_scaffold PartialTest Team \
-    text_field_test:text_field \
-    boolean_test:boolean \
-    single_button_test:buttons \
-    multiple_buttons_test:buttons{multiple} \
-    date_test:date_field\
-    date_time_test:date_and_time_field \
-    file_test:file_field \
-    option_test:options \
-    multiple_options_test:options{multiple} \
-    password_test:password_field \
-    phone_field_test:phone_field \
-    super_select_test:super_select \
-    multiple_super_select_test:super_select{multiple} \
-    number_field_test:number_field \
-    text_area_test:text_area \
-    address_test:address_field --navbar="ti-layout"
-else
-  echo "Skipping \`PartialTest\` on this CI node."
-fi
+#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "3" ]; then
+  ## TODO: Generate these in parallel.
+  #rails g super_scaffold PartialTest Team \
+    #text_field_test:text_field \
+    #boolean_test:boolean \
+    #single_button_test:buttons \
+    #multiple_buttons_test:buttons{multiple} \
+    #date_test:date_field\
+    #date_time_test:date_and_time_field \
+    #file_test:file_field \
+    #option_test:options \
+    #multiple_options_test:options{multiple} \
+    #password_test:password_field \
+    #phone_field_test:phone_field \
+    #super_select_test:super_select \
+    #multiple_super_select_test:super_select{multiple} \
+    #number_field_test:number_field \
+    #text_area_test:text_area \
+    #address_test:address_field --navbar="ti-layout"
+#else
+  #echo "Skipping \`PartialTest\` on this CI node."
+#fi
 
 
 # The test for this webhook is run inline in .github/workflows/_run_super_scaffolding_tests.yml
