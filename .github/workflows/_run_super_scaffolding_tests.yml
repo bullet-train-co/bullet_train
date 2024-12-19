@@ -17,15 +17,39 @@ on:
         default: false
 
 jobs:
+  calculate_matrix:
+    name: 🏗️ Generate Test List
+    runs-on: ubuntu-latest
+    outputs:
+      tests: ${{ steps.generate-test-list.outputs.result }}
+    steps:
+      - name: Checkout Repo
+        uses: "actions/checkout@v4"
+
+      - uses: actions/github-script@v7
+        id: generate-test-list
+        name: Generate Test List
+        with:
+          script: |
+            const globber = await glob.create('test/system/super_scaffolding/**/setup.rb')
+            const tests = []
+            for await (const file of globber.globGenerator()) {
+              console.log(file)
+              var fileParts = file.split("/")
+              var test_dir_name = fileParts[fileParts.length - 1];
+              console.log("test_dir_name =", test_dir_name)
+              tests.push(test_dir_name)
+            }
+            return tests
   # NOTE: This is here just to make the workflow visualization layout better.
   # Without it the layout is really bad and confusing.
-  calculate_matrix:
-    name: 🤷 Fake Matrix
-    runs-on: ubuntu-latest
-    steps:
-      - name: Do Nothing
-        run: echo "This is a useless step that just helps things look nicer..."
-        shell: bash
+  #calculate_matrix:
+    #name: 🤷 Fake Matrix
+    #runs-on: ubuntu-latest
+    #steps:
+      #- name: Do Nothing
+        #run: echo "This is a useless step that just helps things look nicer..."
+        #shell: bash
   test:
     name: "🏗️"
     runs-on: ubuntu-latest
@@ -34,7 +58,8 @@ jobs:
       fail-fast: false
       matrix:
         # For super scaffolding tests we need to have exactly 5 runners.
-        ci_runners: ["TestSite, Project", "Project::Step, Insight", "Personality::Disposition, Personality::Observation", "TestFile, PartialTest", Webhook]
+        test: ${{ fromJson(needs.calculate_matrix.outputs.tests) }}
+        #ci_runners: ["TestSite, Project", "Project::Step, Insight", "Personality::Disposition, Personality::Observation", "TestFile, PartialTest", Webhook]
     services:
       postgres:
         image: postgres:11-alpine
@@ -126,27 +151,25 @@ jobs:
         working-directory: tmp/starter
 
       # TODO: This might be a bad idea. Maybe we should just have spring in the Gemfile all the time.
-      - name: Allow adding of spring
-        run: bundle config unset deployment
-        working-directory: tmp/starter
+      #- name: Allow adding of spring
+        #run: bundle config unset deployment
+        #working-directory: tmp/starter
 
-      - name: Add spring
-        run: bundle add spring
-        working-directory: tmp/starter
+      #- name: Add spring
+        #run: bundle add spring
+        #working-directory: tmp/starter
 
       - name: 'Setup Super Scaffolding System Test'
-        run: bundle exec test/bin/setup-super-scaffolding-system-test
+        run: bundle exec test/system/super_scaffolding/${{ matrix.test }}/setup.rb
         working-directory: tmp/starter
-        env:
-          CIRCLE_NODE_INDEX: ${{ strategy.job-index }}
 
       - name: 'Run Super Scaffolding Test'
-        run: bin/rails test test/system/super_scaffolding/
+        run: bin/rails test test/system/super_scaffolding/${{ matrix.test }}/
         working-directory: tmp/starter
 
       - name: 'Run Super Scaffolding Webhook Test'
         run: bin/rails test test/controllers/webhooks/incoming/some_provider_webhooks_controller_test.rb
-        if: ${{ strategy.job-index == 5 }}
+        if: ${{ matrix.text == 'webhook' }}
         working-directory: tmp/starter
 
       - name: Upload Test Summary Logs
