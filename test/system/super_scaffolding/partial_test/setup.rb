@@ -6,7 +6,7 @@ class Setup < SuperScaffoldingTestSetup
   # This allows us to define helper methods that aren't attached to thor commands
   no_commands do
     def setup
-      command = %{
+      command = %(
         rails g super_scaffold PartialTest Team \
             text_field_test:text_field \
             boolean_test:boolean \
@@ -24,7 +24,7 @@ class Setup < SuperScaffoldingTestSetup
             number_field_test:number_field \
             text_area_test:text_area \
             address_test:address_field --navbar="ti-layout"
-      }
+      )
       puts `#{command}`
     end
   end

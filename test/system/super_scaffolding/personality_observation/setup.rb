@@ -6,7 +6,6 @@ class Setup < SuperScaffoldingTestSetup
   # This allows us to define helper methods that aren't attached to thor commands
   no_commands do
     def setup
-
       puts `rails g super_scaffold Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"`
       puts `rails g super_scaffold Personality::Reactions::Response Personality::Observation,Team name:text_field description:trix_editor`
 
