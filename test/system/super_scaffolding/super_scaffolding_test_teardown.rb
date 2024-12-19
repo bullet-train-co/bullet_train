@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'thor'
+require "thor"
 
 class SuperScaffoldingTestTeardown < Thor
   # TODO: Need better naming and description.
@@ -32,7 +32,7 @@ class SuperScaffoldingTestTeardown < Thor
 
     def db_schema_has_changed
       `git diff --exit-code db/schema.rb`
-      unstaged_changes_present = !$?.success?
+      !$?.success?
     end
 
     def rollback
