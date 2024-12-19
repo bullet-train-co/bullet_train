@@ -36,7 +36,7 @@ jobs:
             for await (const file of globber.globGenerator()) {
               console.log(file)
               var fileParts = file.split("/")
-              var test_dir_name = fileParts[fileParts.length - 1];
+              var test_dir_name = fileParts[fileParts.length - 2];
               console.log("test_dir_name =", test_dir_name)
               tests.push(test_dir_name)
             }
