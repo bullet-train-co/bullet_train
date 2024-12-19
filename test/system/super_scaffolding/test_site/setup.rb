@@ -21,6 +21,9 @@ class Setup < SuperScaffoldingTestSetup
       else
         puts `sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb`
       end
+
+      # TODO: Do we want to include this here?
+      # puts `bundle exec rails db:schema:load db:migrate db:test:prepare`
     end
   end
 end
