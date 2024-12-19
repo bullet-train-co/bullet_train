@@ -89,4 +89,3 @@ class BulletTrain::SuperScaffolding::TestSiteTest < ApplicationSystemTestCase
     end
   end
 end
-

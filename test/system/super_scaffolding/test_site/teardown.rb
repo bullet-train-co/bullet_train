@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative '../super_scaffolding_test_teardown'
+require_relative "../super_scaffolding_test_teardown"
 
 class Teardown < SuperScaffoldingTestTeardown
   # This allows us to define helper methods that aren't attached to thor commands

@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require 'thor'
+require "thor"
 
 class SuperScaffoldingTestSetup < Thor
   # TODO: Need better naming and description.
@@ -47,9 +47,9 @@ class SuperScaffoldingTestSetup < Thor
       `git diff --cached --exit-code`
       staged_changes_present = !$?.success?
 
-      #puts "workspace_is_clean = #{unstaged_changes_present && staged_changes_present}"
+      # puts "workspace_is_clean = #{unstaged_changes_present && staged_changes_present}"
 
-      return unstaged_changes_present && staged_changes_present
+      unstaged_changes_present && staged_changes_present
     end
   end
 end
