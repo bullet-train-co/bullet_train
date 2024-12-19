@@ -49,7 +49,7 @@ class SuperScaffoldingTestTeardown < Thor
   end
 end
 
-# We create our own args array so that we don't have to ask the user to include `scaffolding_setup` on the command line
-args = ["scaffolding_teardown"] + ARGV
+# We create our own args array so that we don't have to ask the user to include `bump` on the command line
+# args = ["teardown"] + ARGV
 
-SuperScaffoldingTestTeardown.start(args)
+# Teardown.start(args)
