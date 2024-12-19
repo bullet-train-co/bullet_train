@@ -40,12 +40,12 @@ export SPRING=true
   #echo "Skipping \`Project\` and \`Projects::Deliverable\` on this CI node."
 #fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
-  rails g super_scaffold Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
-  rails g super_scaffold Objective Projects::Step,Team name:text_field description:trix_editor
-else
-  echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
-fi
+#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+  #rails g super_scaffold Projects::Step Team name:text_field description:trix_editor --navbar="ti-world"
+  #rails g super_scaffold Objective Projects::Step,Team name:text_field description:trix_editor
+#else
+  #echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
+#fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
   rails g super_scaffold Insight Team name:text_field description:trix_editor --navbar="ti-world"
