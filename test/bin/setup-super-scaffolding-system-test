@@ -47,28 +47,28 @@ export SPRING=true
   #echo "Skipping \`Projects::Step\` and \`Objective\` on this CI node."
 #fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
-  rails g super_scaffold Insight Team name:text_field description:trix_editor --navbar="ti-world"
-  rails g super_scaffold Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
-else
-  echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
-fi
+#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "1" ]; then
+  #rails g super_scaffold Insight Team name:text_field description:trix_editor --navbar="ti-world"
+  #rails g super_scaffold Personality::CharacterTrait Insight,Team name:text_field description:trix_editor
+#else
+  #echo "Skipping \`Insight\` and \`Personality::CharacterTrait\` on this CI node."
+#fi
 
-if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
-  rails g super_scaffold Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
-  rails g super_scaffold Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
+#if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
+  #rails g super_scaffold Personality::Disposition Team name:text_field description:trix_editor --navbar="ti-world"
+  #rails g super_scaffold Personality::Note Personality::Disposition,Team name:text_field description:trix_editor
 
-  # Test that the foreign key table name will be inserted into the migration.
-  rails g super_scaffold:field Personality::Note other_membership_id:super_select{class_name=Membership}
+  ## Test that the foreign key table name will be inserted into the migration.
+  #rails g super_scaffold:field Personality::Note other_membership_id:super_select{class_name=Membership}
 
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
-  else
-    sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb
-  fi
-else
-  echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
-fi
+  #if [[ "$OSTYPE" == "darwin"* ]]; then
+    #sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+  #else
+    #sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb
+  #fi
+#else
+  #echo "Skipping \`Personality::Disposition\` and \`Personality::Note\` on this CI node."
+#fi
 
 if [ -z "${CIRCLE_NODE_INDEX}" ] || [ "${CIRCLE_NODE_INDEX}" == "2" ]; then
   rails g super_scaffold Personality::Observation Team name:text_field description:trix_editor --navbar="ti-world"
