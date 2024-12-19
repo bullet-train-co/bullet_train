@@ -25,6 +25,7 @@ class SuperScaffoldingTestSetup < Thor
       return 1
     end
     setup
+    migrate
   end
 
   # This allows failure to be reported to the shell correctly.
@@ -37,6 +38,10 @@ class SuperScaffoldingTestSetup < Thor
   no_commands do
     def setup
       raise "Your subcommand should define the setup method."
+    end
+
+    def migrate
+      puts `bundle exec rails db:schema:load db:migrate db:test:prepare`
     end
 
     def git_workspace_clean
