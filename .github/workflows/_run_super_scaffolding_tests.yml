@@ -164,7 +164,7 @@ jobs:
         working-directory: tmp/starter
 
       - name: 'Run Super Scaffolding Test'
-        run: bin/rails test test/system/super_scaffolding/${{ matrix.test }}/
+        run: bin/rails test test/system/super_scaffolding/${{ matrix.test }}/ test/system/super_scaffolding/open_api_test.rb
         working-directory: tmp/starter
 
       - name: 'Run Super Scaffolding Webhook Test'
