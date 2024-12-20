@@ -41,7 +41,7 @@ class SuperScaffoldingTestSetup < Thor
     end
 
     def migrate
-      puts `bundle exec rails db:schema:load db:migrate db:test:prepare`
+      puts `bundle exec rails db:migrate db:test:prepare`
     end
 
     def git_workspace_clean
