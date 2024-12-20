@@ -10,18 +10,7 @@ class Setup < SuperScaffoldingTestSetup
       puts `rails g super_scaffold Personality::Note Personality::Disposition,Team name:text_field description:trix_editor`
 
       # Test that the foreign key table name will be inserted into the migration.
-      puts `rails g super_scaffold:field Personality::Note other_membership_id:super_select{class_name=Membership}`
-
-      # This "implements" the valid_* method
-      # We change this line:
-      # raise "please review and implement `valid_memberships` in `app/models/personality/note.rb`."
-      # to this:
-      # team.memberships
-      if Gem::Platform.local.os == "darwin"
-        puts `sed -i "" "s/raise .*/team\.memberships/g" app/models/personality/note.rb`
-      else
-        puts `sed -i "s/raise .*/team\.memberships/g" app/models/personality/note.rb`
-      end
+      puts `rails g super_scaffold:field Personality::Note other_membership_id:super_select{"class_name=Membership,source=team.memberships"}`
     end
   end
 end
