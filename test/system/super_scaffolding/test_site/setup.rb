@@ -8,18 +8,7 @@ class Setup < SuperScaffoldingTestSetup
     def setup
       puts `rails g super_scaffold TestSite Team name:text_field other_attribute:text_field url:text_field --navbar="ti-world" --sortable`
       puts `rails g super_scaffold TestPage TestSite,Team name:text_field path:text_field`
-      puts `rails g super_scaffold:field TestSite membership_id:super_select{class_name=Membership}`
-
-      # This "implements" the valid_memberships method on test_site.
-      # We change this line:
-      # raise "please review and implement `valid_memberships` in `app/models/test_site.rb`."
-      # to this:
-      # team.memberships
-      if Gem::Platform.local.os == "darwin"
-        puts `sed -i "" "s/raise .*/team\.memberships/g" app/models/test_site.rb`
-      else
-        puts `sed -i "s/raise .*/team\.memberships/g" app/models/test_site.rb`
-      end
+      puts `rails g super_scaffold:field TestSite membership_id:super_select{"class_name=Membership,source=team.memberships"}`
     end
   end
 end
