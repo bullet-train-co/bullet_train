@@ -4,6 +4,7 @@
   "repository": "https://github.com/bullet-train-co/bullet_train",
   "logo": "https://bullettrain.co/heroku-logo.png",
   "keywords": ["ruby", "rails"],
+  "stack": "heroku-24",
   "buildpacks": [
     { "url": "heroku/nodejs" },
     { "url": "https://github.com/gaffneyc/heroku-buildpack-jemalloc.git" },
