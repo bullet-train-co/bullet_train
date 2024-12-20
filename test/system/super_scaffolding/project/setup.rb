@@ -13,18 +13,7 @@ class Setup < SuperScaffoldingTestSetup
       puts `rails g super_scaffold Projects::Tag Team name:text_field --navbar="ti-tag"`
 
       puts `rails g super_scaffold:join_model Projects::AppliedTag project_id{class_name=Project} tag_id{class_name=Projects::Tag}`
-      puts `rails g super_scaffold:field Project tag_ids:super_select{class_name=Projects::Tag}`
-
-      # This "implements" the valid_* method
-      # We change this line:
-      # raise "please review and implement `valid_projects_tags` in `app/models/projects.rb`."
-      # to this:
-      # team.projects_tags
-      if Gem::Platform.local.os == "darwin"
-        puts `sed -i "" "s/raise .*/team\.projects_tags/g" app/models/project.rb`
-      else
-        puts `sed -i "s/raise .*/team\.projects_tags/g" app/models/project.rb`
-      end
+      puts `rails g super_scaffold:field Project tag_ids:super_select{"class_name=Projects::Tag,source=team.projects_tags"}`
     end
   end
 end
