@@ -1999,10 +1999,10 @@ __metadata:
   linkType: hard
 
 "@redocly/cli@npm:^1.0.0-beta.111":
-  version: 1.26.0
-  resolution: "@redocly/cli@npm:1.26.0"
+  version: 1.26.1
+  resolution: "@redocly/cli@npm:1.26.1"
   dependencies:
-    "@redocly/openapi-core": "npm:1.26.0"
+    "@redocly/openapi-core": "npm:1.26.1"
     abort-controller: "npm:^3.0.0"
     chokidar: "npm:^3.5.1"
     colorette: "npm:^1.2.0"
@@ -2024,7 +2024,7 @@ __metadata:
   bin:
     openapi: bin/cli.js
     redocly: bin/cli.js
-  checksum: 10c0/bb1d26459414a5166fec14c4788ff1074a01f604ed4f411baada362070bb8627004506c9864dc32b8ed35cba3bc68e7662ab4acd45a8e0aa70ca0318e0152587
+  checksum: 10c0/3a5f6bc1d414e2c327bc9e2f320c7a3fff91dad8530c6428fce94a62f3703ca5a05521567422e48897151d19ab64d8ae049213b5d4cd8dabc0a073b6969f3991
   languageName: node
   linkType: hard
 
@@ -2035,9 +2035,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redocly/openapi-core@npm:1.26.0, @redocly/openapi-core@npm:^1.4.0":
-  version: 1.26.0
-  resolution: "@redocly/openapi-core@npm:1.26.0"
+"@redocly/openapi-core@npm:1.26.1, @redocly/openapi-core@npm:^1.4.0":
+  version: 1.26.1
+  resolution: "@redocly/openapi-core@npm:1.26.1"
   dependencies:
     "@redocly/ajv": "npm:^8.11.2"
     "@redocly/config": "npm:^0.17.0"
@@ -2045,12 +2045,11 @@ __metadata:
     https-proxy-agent: "npm:^7.0.4"
     js-levenshtein: "npm:^1.1.6"
     js-yaml: "npm:^4.1.0"
-    lodash.isequal: "npm:^4.5.0"
     minimatch: "npm:^5.0.1"
     node-fetch: "npm:^2.6.1"
     pluralize: "npm:^8.0.0"
     yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/d55989a3d2b343c5f5792c704f0e7b2030d739be65f80fb7ff4625f6cb189bb646003180ea605940014c5c77f9954c21cc36d371fa510775c25fbd5534311b0e
+  checksum: 10c0/191ea9c971c758843a428f8f46f282c4a797120d93e4a8de89cd6622e709b8c5daf26f2f9c51f96e66f94a2ccc677e2fc7c48f57be3447a18dd7b59753fb9cd4
   languageName: node
   linkType: hard
 
@@ -4059,13 +4058,6 @@ __metadata:
   version: 4.0.8
   resolution: "lodash.debounce@npm:4.0.8"
   checksum: 10c0/762998a63e095412b6099b8290903e0a8ddcb353ac6e2e0f2d7e7d03abd4275fe3c689d88960eb90b0dde4f177554d51a690f22a343932ecbc50a5d111849987
-  languageName: node
-  linkType: hard
-
-"lodash.isequal@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "lodash.isequal@npm:4.5.0"
-  checksum: 10c0/dfdb2356db19631a4b445d5f37868a095e2402292d59539a987f134a8778c62a2810c2452d11ae9e6dcac71fc9de40a6fedcb20e2952a15b431ad8b29e50e28f
   languageName: node
   linkType: hard
 
