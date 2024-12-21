@@ -2847,14 +2847,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:^3.0.6":
-  version: 3.1.5
-  resolution: "dompurify@npm:3.1.5"
-  checksum: 10c0/8227fb1328c02d94f823de8cd499fca5ee07051e03e6b52bce06b592348aeb6e56ea8e2a4b0a9cfaeac7d623e4b5a52e4326aedf72596a6c2510b88dfcf2a2b6
-  languageName: node
-  linkType: hard
-
-"dompurify@npm:^3.2.3":
+"dompurify@npm:^3.0.6, dompurify@npm:^3.2.3":
   version: 3.2.3
   resolution: "dompurify@npm:3.2.3"
   dependencies:
@@ -5953,14 +5946,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^2.0.1":
-  version: 2.0.8
-  resolution: "trix@npm:2.0.8"
-  checksum: 10c0/b95f6e4c466863c656e4d64e757c53132dbfc07a2b19ce0aa84ac725211e0137aa8ae055298f248df461885122228c8b195082aa792ea85c9f79dfc068eb41db
-  languageName: node
-  linkType: hard
-
-"trix@npm:^2.1.11":
+"trix@npm:^2.0.1, trix@npm:^2.1.11":
   version: 2.1.11
   resolution: "trix@npm:2.1.11"
   dependencies:
