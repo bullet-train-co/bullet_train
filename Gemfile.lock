@@ -81,7 +81,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ansi (1.5.0)
     ast (2.4.2)
-    avo (3.15.5)
+    avo (3.15.6)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -414,7 +414,7 @@ GEM
     multipart-post (2.4.1)
     net-http (0.6.0)
       uri
-    net-imap (0.5.3)
+    net-imap (0.5.4)
       date
       net-protocol
     net-pop (0.1.2)
