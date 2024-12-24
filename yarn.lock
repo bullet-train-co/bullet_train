@@ -1970,16 +1970,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/activestorage@npm:>= 8.0.0-alpha":
-  version: 8.0.0
-  resolution: "@rails/activestorage@npm:8.0.0"
-  dependencies:
-    spark-md5: "npm:^3.0.1"
-  checksum: 10c0/e8a0ac86eda132f366ae75ac222a1b21cf6f2de800efb761307db4d777c8fd94efa9bbee0a8b618843eb7d9253a33ba924f6602ef53706972d6d406e7a11426c
-  languageName: node
-  linkType: hard
-
-"@rails/activestorage@npm:^8.0.100":
+"@rails/activestorage@npm:>= 8.0.0-alpha, @rails/activestorage@npm:^8.0.100":
   version: 8.0.100
   resolution: "@rails/activestorage@npm:8.0.100"
   dependencies:
