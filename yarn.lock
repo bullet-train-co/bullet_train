@@ -2013,10 +2013,10 @@ __metadata:
   linkType: hard
 
 "@redocly/cli@npm:^1.0.0-beta.111":
-  version: 1.27.0
-  resolution: "@redocly/cli@npm:1.27.0"
+  version: 1.27.1
+  resolution: "@redocly/cli@npm:1.27.1"
   dependencies:
-    "@redocly/openapi-core": "npm:1.27.0"
+    "@redocly/openapi-core": "npm:1.27.1"
     abort-controller: "npm:^3.0.0"
     chokidar: "npm:^3.5.1"
     colorette: "npm:^1.2.0"
@@ -2038,7 +2038,7 @@ __metadata:
   bin:
     openapi: bin/cli.js
     redocly: bin/cli.js
-  checksum: 10c0/70a2ef82a00088bc40765f9456867983e91e01302a4d341b13d98094278b171215a3698aa8d16b29d9dc64571852cc98bbf39ace26455f9d7e3c6575c6500359
+  checksum: 10c0/cca41a05b066b9232bc4450ea224738f0cf00f83b12309ee72ef5b3a1e49fe5ec507d96d75de198d48101de035e22dc4468d5e54a3da9bd606289f1e5512e320
   languageName: node
   linkType: hard
 
@@ -2049,9 +2049,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redocly/openapi-core@npm:1.27.0, @redocly/openapi-core@npm:^1.4.0":
-  version: 1.27.0
-  resolution: "@redocly/openapi-core@npm:1.27.0"
+"@redocly/openapi-core@npm:1.27.1, @redocly/openapi-core@npm:^1.4.0":
+  version: 1.27.1
+  resolution: "@redocly/openapi-core@npm:1.27.1"
   dependencies:
     "@redocly/ajv": "npm:^8.11.2"
     "@redocly/config": "npm:^0.17.0"
@@ -2063,7 +2063,7 @@ __metadata:
     node-fetch: "npm:^2.6.1"
     pluralize: "npm:^8.0.0"
     yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/2145d2a5b8c76a5e9ff8c7c1182e2012bdb9c8386159ad3ee66e2fe0a39d7f0eb8928bc8e39183181d6aef791f2ca453aa619377ff728be1b468fd2853a023da
+  checksum: 10c0/b8e5a78cd10d51eaa6a61b6458a286b01687d0a2f80b497fc2aa29e1dd1667ac54f10a9e25a9daabb27fa9b503208b3117ebae65aa5eb27f8aaf4e99046bfd66
   languageName: node
   linkType: hard
 
@@ -2077,20 +2077,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tailwindcss/forms@npm:^0.5.9":
-  version: 0.5.9
-  resolution: "@tailwindcss/forms@npm:0.5.9"
+"@tailwindcss/forms@npm:^0.5.10":
+  version: 0.5.10
+  resolution: "@tailwindcss/forms@npm:0.5.10"
   dependencies:
     mini-svg-data-uri: "npm:^1.2.3"
   peerDependencies:
-    tailwindcss: ">=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20"
-  checksum: 10c0/c7b99bc41ec548a27b68735ae459f5102535b3577020db3d9f348c88d997a623405e0833cf59beff5ca1bac7e7e2c55d5948ab374706277937e512e934947210
+    tailwindcss: ">=3.0.0 || >= 3.0.0-alpha.1 || >= 4.0.0-alpha.20 || >= 4.0.0-beta.1"
+  checksum: 10c0/235cbf08edf09362418808ebddcc767c9e151fba55f3d7d2d5c47862c715b6169204b9277461036707b4c30f3fb1e217933278f80525840e198f8e7dd9168e0d
   languageName: node
   linkType: hard
 
-"@tailwindcss/typography@npm:^0.5.15":
-  version: 0.5.15
-  resolution: "@tailwindcss/typography@npm:0.5.15"
+"@tailwindcss/typography@npm:^0.5.16":
+  version: 0.5.16
+  resolution: "@tailwindcss/typography@npm:0.5.16"
   dependencies:
     lodash.castarray: "npm:^4.4.0"
     lodash.isplainobject: "npm:^4.0.6"
@@ -2098,7 +2098,7 @@ __metadata:
     postcss-selector-parser: "npm:6.0.10"
   peerDependencies:
     tailwindcss: "*"
-  checksum: 10c0/bd1a1d0ab06816afe129a49cb8a693b4f6ffe77748f5279f07ea29ea9fcb44ef24d1f8b1cfcffaf41dd9cb60065745897cbfc9dcabc57c8a60ceb89d594c97c6
+  checksum: 10c0/35a7387876810c23c270a23848b920517229b707c8ead6a63c8bb7d6720a62f23728c3117f0a93b422a66d1e5ee9c7ad8a6c3f0fbf5255b535c0e4971ffa0158
   languageName: node
   linkType: hard
 
@@ -2232,8 +2232,8 @@ __metadata:
     "@rails/request.js": "npm:^0.0.11"
     "@rails/ujs": "npm:^7.1.501"
     "@redocly/cli": "npm:^1.0.0-beta.111"
-    "@tailwindcss/forms": "npm:^0.5.9"
-    "@tailwindcss/typography": "npm:^0.5.15"
+    "@tailwindcss/forms": "npm:^0.5.10"
+    "@tailwindcss/typography": "npm:^0.5.16"
     autoprefixer: "npm:^10.4.20"
     cable_ready: "npm:^5.0.6"
     dragula: "npm:^3.7.3"
