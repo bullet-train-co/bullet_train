@@ -33,7 +33,7 @@ FileUtils.chdir APP_ROOT do
   # gem does. In order to make it relatively easy to check for icu4c when you're installing that
   # gem we're leaving this sript in place so that we can tell people to run it before installing
   # the conversations gem.
-  # Here we automatically run it if the conversations gem is installed. This is for setting up and
+  # Here we automatically run it if the conversations gem is installed. This is for setting up an
   # existing project on a new machine. Or for new developers joining the team.
   text = File.read("Gemfile")
   if text.match "bullet_train-conversations"
