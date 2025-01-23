@@ -22,6 +22,11 @@ jobs:
   heroku:
     runs-on: ubuntu-latest
     steps:
+      # TODO: Will the heroku-deploy action eventually handle this for us?
+      # https://github.com/AkhileshNS/heroku-deploy/issues/188
+      - name: Install Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
       - uses: actions/checkout@v4
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
