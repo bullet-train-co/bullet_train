@@ -27,8 +27,20 @@ FileUtils.chdir APP_ROOT do
   # Now we check that you have base-level system dependencies installed.
   require "#{__dir__}/setup-scripts/check_postgres"
   require "#{__dir__}/setup-scripts/check_redis"
-  require "#{__dir__}/setup-scripts/check_icu"
-  require "#{__dir__}/setup-scripts/check_image_dependencies"  # Updated this line
+  require "#{__dir__}/setup-scripts/check_image_dependencies"
+
+  # NOTE: The starter repo itself doesn't require icu4c anymore, but the BulletTrain Conversations
+  # gem does. In order to make it relatively easy to check for icu4c when you're installing that
+  # gem we're leaving this sript in place so that we can tell people to run it before installing
+  # the conversations gem.
+  # Here we automatically run it if the conversations gem is installed. This is for setting up and
+  # existing project on a new machine. Or for new developers joining the team.
+  text = File.read("Gemfile")
+  if text.match "bullet_train-conversations"
+    require "#{__dir__}/setup-scripts/check_icu"
+  else
+    require "#{__dir__}/setup-scripts/skip_icu"
+  end
 
   require "#{__dir__}/setup-scripts/prepare_local_app"
 
