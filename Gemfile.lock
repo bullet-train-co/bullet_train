@@ -358,12 +358,13 @@ GEM
     json (2.9.1)
     jwt (2.10.1)
       base64
-    knapsack_pro (7.13.1)
+    knapsack_pro (7.14.0)
       rake
     language_server-protocol (3.17.0.3)
-    launchy (3.0.1)
+    launchy (3.1.0)
       addressable (~> 2.8)
       childprocess (~> 5.0)
+      logger (~> 1.6)
     letter_opener (1.10.0)
       launchy (>= 2.2, < 4)
     lint_roller (1.1.0)
