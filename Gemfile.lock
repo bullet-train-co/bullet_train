@@ -401,7 +401,7 @@ GEM
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    minitest-retry (0.2.3)
+    minitest-retry (0.2.4)
       minitest (>= 5.0)
     msgpack (1.7.5)
     multi_xml (0.7.1)
