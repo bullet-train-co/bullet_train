@@ -12,6 +12,15 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
+  # NOTE: This is here just to make the workflow visualization layout better.
+  # Without it the layout is really bad and confusing.
+  calculate_matrix:
+    name: 🤷 Fake Matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: Do Nothing
+        run: echo "This is a useless step that just helps things look nicer..."
+        shell: bash
   minitest:
     name: 🧪 Minitest
     uses: ./.github/workflows/_run_tests.yml
@@ -20,6 +29,7 @@ jobs:
     name: 🔬 Standardrb
     uses: ./.github/workflows/_standardrb.yml
     secrets: inherit
+    needs: calculate_matrix
     permissions:
       checks: write
       contents: read
@@ -27,6 +37,7 @@ jobs:
     name: 🔎 DB Schema
     uses: ./.github/workflows/_database_schema_check.yml
     secrets: inherit
+    needs: calculate_matrix
   combine_runtime_logs:
     name: 🪵 Combine Runtime Logs
     uses: ./.github/workflows/_combine_runtime_logs.yml
