@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # See `config/routes/*.rb` to customize these configurations.
   draw "concerns"
   draw "devise"
