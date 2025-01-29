@@ -53,6 +53,13 @@ yalc.lock
 !.yarn/sdks
 !.yarn/versions
 
+zapier/.yarn/*
+!zapier/.yarn/patches
+!zapier/.yarn/plugins
+!zapier/.yarn/releases
+!zapier/.yarn/sdks
+!zapier/.yarn/versions
+
 # 🚅 this is bullet train's list of files to ignore.
 # please add yours at the end of the file.
 
