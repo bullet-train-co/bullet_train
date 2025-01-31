@@ -13,8 +13,8 @@ services:
   - type: web
     name: web
     env: ruby
-    buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
+    buildCommand: "RUN_MIGRATIONS=1 ./bin/render-build.sh"
+    startCommand: "corepack enable && bundle exec puma -C config/puma.rb"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
@@ -29,8 +29,8 @@ services:
   - type: worker
     name: worker
     env: ruby
-    buildCommand: "bundle install && bundle exec rake assets:precompile && bundle exec rake assets:clean"
-    startCommand: "bundle exec sidekiq -t 25"
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "corepack enable && bundle exec sidekiq -t 25"
     envVars:
       - key: DATABASE_URL
         fromDatabase:
