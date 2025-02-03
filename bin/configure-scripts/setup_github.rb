@@ -14,7 +14,8 @@ SETUP_GITHUB = ask_boolean "Continue setting up with GitHub?", "y"
 
 puts "SETUP_GITHUB = #{SETUP_GITHUB}"
 if SETUP_GITHUB
-  if `git remote | grep origin`.strip.length > 0
+  git_remote_url = `git remote get-url origin`.strip
+  if git_remote_url.length > 0
     puts "Repository already has a `origin` remote.".yellow
   else
     ask "Hit <Return> and we'll open a browser to GitHub where you can create a new repository. When you're done, copy the SSH path from the new repository and return here. We'll ask you to paste it to us in the next step."
@@ -33,11 +34,18 @@ if SETUP_GITHUB
     if ssh_path == "skip"
       puts "Bailing out of GitHub setup.".yellow
       return
-    else
-      # We use this variable in the `deploy_button_heroku.rb` and `deploy_button_render.rb` scripts.
-      HTTP_PATH = "https://github.com/#{ssh_path.gsub(/.*:/, "")}".delete_suffix(".git")
     end
+    git_remote_url = ssh_path
     puts "Setting repository's `origin` remote to `#{ssh_path}`.".green
     puts `git remote add origin #{ssh_path}`.chomp
+  end
+
+  # We use this variable in the `deploy_button_heroku.rb` and `deploy_button_render.rb` scripts.
+  if git_remote_url.start_with?("git@github.com:")
+    HTTP_PATH = "https://github.com/#{git_remote_url.gsub(/.*:/, "")}".delete_suffix(".git")
+  elsif git_remote_url.start_with?("https://github.com/")
+    HTTP_PATH = git_remote_url.delete_suffix(".git")
+  else
+    raise "Unknown git remote url format: #{git_remote_url}"
   end
 end
