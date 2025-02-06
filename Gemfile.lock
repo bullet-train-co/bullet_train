@@ -99,7 +99,7 @@ GEM
       zeitwerk (>= 2.6.12)
     awesome_print (1.9.2)
     aws-eventstream (1.3.0)
-    aws-partitions (1.1045.0)
+    aws-partitions (1.1046.0)
     aws-sdk-core (3.217.1)
       aws-eventstream (~> 1, >= 1.3.0)
       aws-partitions (~> 1, >= 1.992.0)
@@ -463,7 +463,7 @@ GEM
     parallel (1.26.3)
     parallel_tests (4.9.0)
       parallel
-    parser (3.3.7.0)
+    parser (3.3.7.1)
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
