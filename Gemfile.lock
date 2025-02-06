@@ -467,6 +467,11 @@ GEM
     prism (1.4.0)
     prop_initializer (0.2.0)
       zeitwerk (>= 2.6.18)
+    propshaft (1.1.0)
+      actionpack (>= 7.0.0)
+      activesupport (>= 7.0.0)
+      rack
+      railties (>= 7.0.0)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -744,7 +749,6 @@ DEPENDENCIES
   sidekiq
   simplecov
   simplecov-json
-  sprockets-rails
   standard
   stimulus-rails
   terser
