@@ -2,7 +2,7 @@ databases:
   - name: database
     databaseName: database
     user: bullet_train
-    plan: starter
+    plan: basic-1gb
 
 services:
   - type: redis
