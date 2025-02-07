@@ -198,8 +198,6 @@ GEM
       active_hash
       activesupport
       cancancan
-    bullet_train-scope_questions (1.15.0)
-      rails (>= 6.0.0)
     bullet_train-scope_validator (1.15.0)
       rails
     bullet_train-sortable (1.15.0)
@@ -741,7 +739,6 @@ DEPENDENCIES
   bullet_train-obfuscates_id (= 1.15.0)
   bullet_train-outgoing_webhooks (= 1.15.0)
   bullet_train-roles (= 1.15.0)
-  bullet_train-scope_questions (= 1.15.0)
   bullet_train-scope_validator (= 1.15.0)
   bullet_train-sortable (= 1.15.0)
   bullet_train-super_load_and_authorize_resource (= 1.15.0)
