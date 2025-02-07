@@ -132,7 +132,6 @@ gem "bullet_train-integrations-stripe", BULLET_TRAIN_VERSION
 
 # Optional support packages.
 gem "bullet_train-sortable", BULLET_TRAIN_VERSION
-gem "bullet_train-scope_questions", BULLET_TRAIN_VERSION
 gem "bullet_train-obfuscates_id", BULLET_TRAIN_VERSION
 
 # Core gems that are dependencies of gems listed above. Technically they
