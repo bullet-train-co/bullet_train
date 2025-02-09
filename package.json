@@ -21,7 +21,7 @@
     "autoprefixer": "^10.4.20",
     "cable_ready": "^5.0.6",
     "dragula": "^3.7.3",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.25.0",
     "glob": "^10.3.12",
     "jstz": "^2.1.1",
     "postcss": "^8.4.38",
