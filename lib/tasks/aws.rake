@@ -1,8 +1,15 @@
-require "aws-sdk-s3"
-
 namespace :aws do
   desc "Set default CORS permissions on your S3 bucket"
   task set_cors: :environment do
+    begin
+      require "aws-sdk-s3"
+    rescue LoadError
+      require "colorize"
+      puts "We were unable to require the `aws-sdk-s3` gem.".yellow
+      puts "If you want to use S3 you should uncomment the line in the `Gemfile` for `aws-sdk-s3`.".yellow
+      abort "Aborting this task because we were unable to require `aws-sdk-s3`.".red
+    end
+
     # Fetch the settings defined in `config/storage.yml`.
     Rails.application.eager_load!
     s3_config = Rails.configuration.active_storage.service_configurations.with_indifferent_access[:amazon]
