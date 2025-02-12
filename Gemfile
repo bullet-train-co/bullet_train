@@ -200,22 +200,23 @@ end
 
 group :production do
   # We suggest using Postmark for email deliverability.
-  gem "postmark-rails"
+  # gem "postmark-rails"
 
   # If you're hosting on Heroku, this service is highly recommended for autoscaling of dynos.
-  gem "rails_autoscale_agent"
+  # gem "rails_autoscale_agent"
 
   # Exception tracking, uptime monitoring, and status page service with a generous free tier.
-  gem "honeybadger"
+  # gem "honeybadger"
 
   # Another exception tracking service.
-  gem "sentry-ruby"
-  gem "sentry-rails"
-  gem "sentry-sidekiq"
+  # gem "sentry-ruby"
+  # gem "sentry-rails"
+  # gem "sentry-sidekiq"
 
   # Use S3 for Active Storage by default.
-  gem "aws-sdk-s3", require: false
+  # gem "aws-sdk-s3", require: false
 
+  # terser is used to compress assets during precompilation
   gem "terser"
 end
 
