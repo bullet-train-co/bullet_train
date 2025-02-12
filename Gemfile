@@ -166,6 +166,12 @@ group :development do
 
   # For colorizing text in command line scripts.
   gem "colorize"
+
+  # derailed_benchmarks and stackprof are used to find opportunities for performance/memory improvements
+  # See the derailed_benchmarks docs for details: https://github.com/zombocom/derailed_benchmarks
+  gem "derailed_benchmarks"
+  # stackprof has some native components and it may be harder to compile locally, so we leave it as optional
+  # gem "stackprof"
 end
 
 group :test do
