@@ -26,6 +26,7 @@ if ENV["KNAPSACK_PRO_CI_NODE_INDEX"].present?
   knapsack_pro_adapter = KnapsackPro::Adapters::MinitestAdapter.bind
   knapsack_pro_adapter.set_test_helper_path(__FILE__)
 else
+  require "colorize"
   puts "Not requiring Knapsack Pro.".yellow
   puts "If you'd like to use Knapsack Pro make sure that you've set the environment variable KNAPSACK_PRO_CI_NODE_INDEX".yellow
 end
