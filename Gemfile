@@ -193,6 +193,11 @@ group :test do
   gem "knapsack_pro"
 end
 
+group :development, :test do
+  # A great debugger.
+  gem "pry"
+end
+
 group :production do
   # We suggest using Postmark for email deliverability.
   gem "postmark-rails"
@@ -216,9 +221,6 @@ end
 
 # Use Ruby hashes as readonly datasources for ActiveRecord-like models.
 gem "active_hash"
-
-# A great debugger.
-gem "pry"
 
 # OPTIONAL BULLET TRAIN GEMS
 # This section lists Ruby gems that we used to include by default. In an effort to
