@@ -224,7 +224,15 @@ gem "pry"
 # This section lists Ruby gems that we used to include by default. In an effort to
 # reduce memory use we're not including these as hard dependencies anymore, but if
 # you want to use them you can uncoment them.
+
+# Microscope adds useful scopes targeting ActiveRecord `boolean`, `date` and `datetime` attributes.
+# https://github.com/mirego/microscope
 # gem "microscope"
+
+# The bullet_train-action_models gem can use OpenAI during the CSV import process to
+# automatically match column names to database attributes.
+# https://github.com/sferik/openai-ruby
+# gem "ruby-openai"
 
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
