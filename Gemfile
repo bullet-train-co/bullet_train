@@ -234,6 +234,10 @@ gem "pry"
 # https://github.com/sferik/openai-ruby
 # gem "ruby-openai"
 
+# awesome_print allows us to `ap` our objects for a clean presentation of them.
+# https://github.com/awesome-print/awesome_print
+# gem "awesome_print"
+
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
 # that you run into a merge conflict in the future.
