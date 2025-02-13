@@ -247,6 +247,10 @@ gem "active_hash"
 # then there's no reason to include it.
 # gem "xxhash"
 
+# unicode-emoji is used by one method (strip_emojis) in the `core` repo that we don't seem to use anywhere.
+# If you are using that method then you can uncomment this gem.
+# gem "unicode-emoji"
+
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
 # that you run into a merge conflict in the future.
