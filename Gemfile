@@ -241,6 +241,12 @@ gem "active_hash"
 # https://github.com/awesome-print/awesome_print
 # gem "awesome_print"
 
+# xxhash was previously used by the `core` gems in the generation of random colors for user & team icons.
+# If you have an existing app and need to preserve the random colors that were previously being generated
+# you can do so by including xxhash here. For new apps, or if you don't care about preserving the colors,
+# then there's no reason to include it.
+# gem "xxhash"
+
 # YOUR GEMS
 # You can add any Ruby gems you need below. By keeping them separate from our gems above, you'll avoid the likelihood
 # that you run into a merge conflict in the future.
