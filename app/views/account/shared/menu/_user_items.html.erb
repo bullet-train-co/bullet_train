@@ -18,7 +18,7 @@
   <% end %>
 <% end %>
 
-<% if current_user.developer? %>
+<% if current_user.developer? && Object.const_defined?("Avo::Configuration") %>
   <%= render 'account/shared/menu/item', url: main_app.avo_path, label: "Admin" do |p| %>
     <% p.content_for :icon do %>
       <i class="ti ti-key"></i>

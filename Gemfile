@@ -149,7 +149,7 @@ gem "devise-two-factor"
 gem "rqrcode"
 
 # Admin panel
-gem "avo", ">= 3.1.7"
+#gem "avo", ">= 3.1.7"
 
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
