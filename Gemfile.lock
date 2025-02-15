@@ -81,7 +81,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ansi (1.5.0)
     ast (2.4.2)
-    avo (3.17.5)
+    avo (3.17.6)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -594,7 +594,7 @@ GEM
     sexp_processor (4.17.3)
     showcase-rails (0.4.6)
       rails (>= 6.1.0)
-    sidekiq (7.3.8)
+    sidekiq (7.3.9)
       base64
       connection_pool (>= 2.3.0)
       logger
