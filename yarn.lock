@@ -1996,10 +1996,10 @@ __metadata:
   linkType: hard
 
 "@redocly/cli@npm:^1.0.0-beta.111":
-  version: 1.28.5
-  resolution: "@redocly/cli@npm:1.28.5"
+  version: 1.29.0
+  resolution: "@redocly/cli@npm:1.29.0"
   dependencies:
-    "@redocly/openapi-core": "npm:1.28.5"
+    "@redocly/openapi-core": "npm:1.29.0"
     abort-controller: "npm:^3.0.0"
     chokidar: "npm:^3.5.1"
     colorette: "npm:^1.2.0"
@@ -2020,7 +2020,7 @@ __metadata:
   bin:
     openapi: bin/cli.js
     redocly: bin/cli.js
-  checksum: 10c0/7e6ac157e33fbdbc54fd27b9bec1d301a5a96f553ff6821269c4e9dd94a5c0c606e49b91ac519bfff4d698f0c63e24142bd1963088a996bfd9d45502ecda8fe1
+  checksum: 10c0/4b71b695cf6d94476e619a541ca45427872bdddcc891e58294469218b49f4438306db785f200a207a8a0f373ceb21bc41a3e0f3cec0504db20414a4142ec0c3b
   languageName: node
   linkType: hard
 
@@ -2031,9 +2031,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redocly/openapi-core@npm:1.28.5, @redocly/openapi-core@npm:^1.4.0":
-  version: 1.28.5
-  resolution: "@redocly/openapi-core@npm:1.28.5"
+"@redocly/openapi-core@npm:1.29.0, @redocly/openapi-core@npm:^1.4.0":
+  version: 1.29.0
+  resolution: "@redocly/openapi-core@npm:1.29.0"
   dependencies:
     "@redocly/ajv": "npm:^8.11.2"
     "@redocly/config": "npm:^0.20.1"
@@ -2044,7 +2044,7 @@ __metadata:
     minimatch: "npm:^5.0.1"
     pluralize: "npm:^8.0.0"
     yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/86a9cc3539a2b0df1254f170326c5b633bf3b465f599f4ef4c67c51728cf7ce8daf5d814ec216428cac450452c1376761f31acf963a02541896f13b8c1cbef00
+  checksum: 10c0/112c179a8821b7e382d00cd211791b4fd21909c2f83865316ffe9127610ed07769fd245b40531b3babd303348877dfcbb7e2dd1da4da496c021e9966d84d92b4
   languageName: node
   linkType: hard
 
