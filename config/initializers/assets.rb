@@ -5,6 +5,7 @@ Rails.application.config.assets.version = "1.0"
 
 # These prevent `propshaft` from adding a bunch of extra, unused assets to publis/assets during precompilation.
 Rails.application.config.assets.excluded_paths = [
+  # TODO: Once `avo` has slimmed down what they ship maybe we can remove one or all of the Avo paths
   Avo::Engine.root.join("app/assets/builds"),
   Avo::Engine.root.join("app/assets/config"),
   Avo::Engine.root.join("app/assets/stylesheets"),
