@@ -157,6 +157,9 @@ gem "sidekiq"
 # Protect the API routes via CORS
 gem "rack-cors"
 
+# Easy and automatic inline CSS for mailers
+gem "premailer-rails"
+
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
   gem "letter_opener"
