@@ -154,6 +154,9 @@ gem "avo", ">= 3.1.7"
 # Background processing
 gem "sidekiq"
 
+# Protect the API routes via CORS
+gem "rack-cors"
+
 group :development do
   # Open any sent emails in your browser instead of having to setup an SMTP trap.
   gem "letter_opener"
