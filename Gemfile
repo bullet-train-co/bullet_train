@@ -11,8 +11,8 @@ ruby(File.read(File.expand_path(".ruby-version", __dir__)))
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 8.0.0"
 
-# The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
-gem "sprockets-rails"
+# The modern asset pipeline for Rails [https://github.com/rails/propshaft]
+gem "propshaft"
 
 # Use postgresql as the database for Active Record
 gem "pg", ">= 0.18", "< 2.0"
