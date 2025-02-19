@@ -730,6 +730,7 @@ DEPENDENCIES
   minitest-retry
   parallel_tests
   pg (>= 0.18, < 2.0)
+  premailer-rails
   pry
   puma (~> 6.0)
   rack-cors
