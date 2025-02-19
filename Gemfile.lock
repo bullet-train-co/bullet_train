@@ -740,6 +740,7 @@ DEPENDENCIES
   rqrcode
   ruby-vips
   selenium-webdriver
+  sidekiq
   simplecov
   simplecov-json
   sprockets-rails
