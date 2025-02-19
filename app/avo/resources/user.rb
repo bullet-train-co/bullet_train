@@ -15,7 +15,7 @@ class Avo::Resources::User < Avo::BaseResource
     field :email, as: :text
     field :first_name, as: :text
     field :last_name, as: :text
-    field :time_zone, as: :select, options: -> { 
+    field :time_zone, as: :select, options: -> {
       ActiveSupport::TimeZone.all.map { |tz| ["(GMT#{tz.formatted_offset}) #{tz.name}", tz.name] }.to_h
     }
     field :current_team, as: :belongs_to
