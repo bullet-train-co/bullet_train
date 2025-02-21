@@ -537,7 +537,7 @@ GEM
     rake (13.2.1)
     rdoc (6.12.0)
       psych (>= 4.0.0)
-    redis (5.3.0)
+    redis (5.4.0)
       redis-client (>= 0.22.0)
     redis-client (0.23.2)
       connection_pool
@@ -724,7 +724,7 @@ DEPENDENCIES
   rails (~> 8.0.0)
   rails-erd
   rails_best_practices
-  redis (~> 5.3.0)
+  redis (~> 5.4.0)
   rqrcode
   ruby-vips
   selenium-webdriver
