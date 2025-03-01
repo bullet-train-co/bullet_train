@@ -439,7 +439,7 @@ GEM
       activerecord (>= 5)
       pagy (>= 6, < 9)
     parallel (1.26.3)
-    parallel_tests (4.9.1)
+    parallel_tests (4.10.0)
       parallel
     parser (3.3.7.1)
       ast (~> 2.4.1)
