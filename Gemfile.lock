@@ -81,7 +81,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ansi (1.5.0)
     ast (2.4.2)
-    avo (3.18.0)
+    avo (3.18.1)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -439,7 +439,7 @@ GEM
       activerecord (>= 5)
       pagy (>= 6, < 9)
     parallel (1.26.3)
-    parallel_tests (5.0.0)
+    parallel_tests (5.0.1)
       parallel
     parser (3.3.7.1)
       ast (~> 2.4.1)
@@ -539,7 +539,7 @@ GEM
       psych (>= 4.0.0)
     redis (5.4.0)
       redis-client (>= 0.22.0)
-    redis-client (0.23.2)
+    redis-client (0.24.0)
       connection_pool
     regexp_parser (2.10.0)
     reline (0.6.0)
@@ -588,12 +588,12 @@ GEM
     sexp_processor (4.17.3)
     showcase-rails (0.4.6)
       rails (>= 6.1.0)
-    sidekiq (7.3.9)
-      base64
-      connection_pool (>= 2.3.0)
-      logger
-      rack (>= 2.2.4)
-      redis-client (>= 0.22.2)
+    sidekiq (8.0.0)
+      connection_pool (>= 2.5.0)
+      json (>= 2.9.0)
+      logger (>= 1.6.2)
+      rack (>= 3.1.0)
+      redis-client (>= 0.23.2)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
