@@ -343,7 +343,7 @@ GEM
     json (2.10.1)
     jwt (2.10.1)
       base64
-    knapsack_pro (8.0.0)
+    knapsack_pro (8.0.1)
       rake
     language_server-protocol (3.17.0.4)
     launchy (3.1.1)
@@ -588,7 +588,7 @@ GEM
     sexp_processor (4.17.3)
     showcase-rails (0.4.6)
       rails (>= 6.1.0)
-    sidekiq (8.0.0)
+    sidekiq (8.0.1)
       connection_pool (>= 2.5.0)
       json (>= 2.9.0)
       logger (>= 1.6.2)
