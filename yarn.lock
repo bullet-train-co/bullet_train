@@ -2275,17 +2275,17 @@ __metadata:
   linkType: hard
 
 "@redocly/cli@npm:^1.0.0-beta.111":
-  version: 1.31.3
-  resolution: "@redocly/cli@npm:1.31.3"
+  version: 1.33.0
+  resolution: "@redocly/cli@npm:1.33.0"
   dependencies:
     "@opentelemetry/api": "npm:1.9.0"
     "@opentelemetry/exporter-trace-otlp-http": "npm:0.53.0"
     "@opentelemetry/resources": "npm:1.26.0"
     "@opentelemetry/sdk-trace-node": "npm:1.26.0"
     "@opentelemetry/semantic-conventions": "npm:1.27.0"
-    "@redocly/config": "npm:^0.21.0"
-    "@redocly/openapi-core": "npm:1.31.3"
-    "@redocly/respect-core": "npm:1.31.3"
+    "@redocly/config": "npm:^0.22.0"
+    "@redocly/openapi-core": "npm:1.33.0"
+    "@redocly/respect-core": "npm:1.33.0"
     abort-controller: "npm:^3.0.0"
     chokidar: "npm:^3.5.1"
     colorette: "npm:^1.2.0"
@@ -2307,23 +2307,23 @@ __metadata:
   bin:
     openapi: bin/cli.js
     redocly: bin/cli.js
-  checksum: 10c0/b384d0aee0427c1167cb3d98bc82eccb6b4e9bc31ce6217c09bc91a0a69de1fbbcc506a881a490a9ea30bfb440ff799fc17748e17c656784576d1e71457d8e70
+  checksum: 10c0/303908bec7df853e22a63ce2158917cfda21e93fa0194937cb552304029bd7a8be455f245f80d46f560bdad394e20095a666bb9b1ec21235f9aa4ebdf3d31ae8
   languageName: node
   linkType: hard
 
-"@redocly/config@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "@redocly/config@npm:0.21.0"
-  checksum: 10c0/29e8624a58b4e1be5afd6e7c0cfe4f06da6aff279fe3c8c8581b5ed7c1cba07cda70bfdd538a4f17d9d0f9f4e239f2d7e32ca8ddcc005995ce638a70e5d5f507
+"@redocly/config@npm:^0.22.0":
+  version: 0.22.1
+  resolution: "@redocly/config@npm:0.22.1"
+  checksum: 10c0/1519770af7c34d651f064229c0b4a90484b411bff1026310f4a890e03be380e4eeab312257527140ce0187c41700dfc269a27722a524702b6d88c5ddbfeab04e
   languageName: node
   linkType: hard
 
-"@redocly/openapi-core@npm:1.31.3, @redocly/openapi-core@npm:^1.4.0":
-  version: 1.31.3
-  resolution: "@redocly/openapi-core@npm:1.31.3"
+"@redocly/openapi-core@npm:1.33.0, @redocly/openapi-core@npm:^1.4.0":
+  version: 1.33.0
+  resolution: "@redocly/openapi-core@npm:1.33.0"
   dependencies:
     "@redocly/ajv": "npm:^8.11.2"
-    "@redocly/config": "npm:^0.21.0"
+    "@redocly/config": "npm:^0.22.0"
     colorette: "npm:^1.2.0"
     https-proxy-agent: "npm:^7.0.5"
     js-levenshtein: "npm:^1.1.6"
@@ -2331,17 +2331,17 @@ __metadata:
     minimatch: "npm:^5.0.1"
     pluralize: "npm:^8.0.0"
     yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/6b0fea021ae70ca9ee16bdc3db768716a1a8fb439d940d592f5e0e5220650eb681bb2e21c0fed8eacc06aa3fa8bc01dc491e005b3be26951590e37fd423b616b
+  checksum: 10c0/d30f94e352153a059deae89a341ac36baf8ce98a36bf85c70b787e1f00ba0106710994e9202e6578b43c9dad1e836453ee677befe733923d9042a65e39627a37
   languageName: node
   linkType: hard
 
-"@redocly/respect-core@npm:1.31.3":
-  version: 1.31.3
-  resolution: "@redocly/respect-core@npm:1.31.3"
+"@redocly/respect-core@npm:1.33.0":
+  version: 1.33.0
+  resolution: "@redocly/respect-core@npm:1.33.0"
   dependencies:
     "@faker-js/faker": "npm:^7.6.0"
     "@redocly/ajv": "npm:8.11.2"
-    "@redocly/openapi-core": "npm:1.31.3"
+    "@redocly/openapi-core": "npm:1.33.0"
     better-ajv-errors: "npm:^1.2.0"
     colorette: "npm:^2.0.20"
     concat-stream: "npm:^2.0.0"
@@ -2358,7 +2358,7 @@ __metadata:
     outdent: "npm:^0.8.0"
     set-cookie-parser: "npm:^2.3.5"
     undici: "npm:^6.21.1"
-  checksum: 10c0/b86f25afc4eb151369845e2a5f2315dc3c1a974ef2b6a751f1690c339f3bd1bc05930277f64aa4ca9ed1b94fa40ed9d53ab2bd0dbe62e5295f1f576a87b1a770
+  checksum: 10c0/c5240dc991711b685fb56099ebf39cce567a7cdebb2e102a3de890dd51c052787cbe61161993d58fdcca1298c302e6bb6d5341668b6d4a87f0c549ef47d76988
   languageName: node
   linkType: hard
 
