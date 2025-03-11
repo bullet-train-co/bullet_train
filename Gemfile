@@ -243,7 +243,7 @@ gem "active_hash"
 
 # The bullet_train-action_models gem can use OpenAI during the CSV import process to
 # automatically match column names to database attributes.
-# https://github.com/sferik/openai-ruby
+# https://github.com/alexrudall/ruby-openai
 # gem "ruby-openai"
 
 # awesome_print allows us to `ap` our objects for a clean presentation of them.
