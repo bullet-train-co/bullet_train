@@ -2214,21 +2214,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actioncable@npm:^8.0.100":
-  version: 8.0.100
-  resolution: "@rails/actioncable@npm:8.0.100"
-  checksum: 10c0/ae8870083e5c48448bd1d77268d28a16d7eee6d213dac8a6e20888c47d89ac959c4e835a613beaaa71b13b9aaaea14c4fb6d67120f972d174f1f899dd5a37e45
+"@rails/actioncable@npm:^8.0.200":
+  version: 8.0.200
+  resolution: "@rails/actioncable@npm:8.0.200"
+  checksum: 10c0/42c861f3b43131ab523d37125e30e802bd5bab98bf8150a780531f82f05177cd0071a75a7f1341eac9de772732625194ac16205a40b82dc567cc05c21c56e412
   languageName: node
   linkType: hard
 
-"@rails/actiontext@npm:^8.0.100":
-  version: 8.0.100
-  resolution: "@rails/actiontext@npm:8.0.100"
+"@rails/actiontext@npm:^8.0.200":
+  version: 8.0.200
+  resolution: "@rails/actiontext@npm:8.0.200"
   dependencies:
     "@rails/activestorage": "npm:>= 8.0.0-alpha"
   peerDependencies:
     trix: ^2.0.0
-  checksum: 10c0/d61faf67916020141c1c4451d0b39e858fbdfebe5f4011657cc52223d5bfe180c942d699b5c2bd0d9130ace22a33ad029110d51fcbca23a74a7779507a7cc905
+  checksum: 10c0/6a3ab58587cf3b8b3a4a0bed0df446b18b97fb995a71f12a733140bc3788758ee6c3b5b78c22df116e19c32ceb061de425b3f201e7e474eb4f7067822248097b
   languageName: node
   linkType: hard
 
@@ -2275,8 +2275,8 @@ __metadata:
   linkType: hard
 
 "@redocly/cli@npm:^1.0.0-beta.111":
-  version: 1.33.0
-  resolution: "@redocly/cli@npm:1.33.0"
+  version: 1.33.1
+  resolution: "@redocly/cli@npm:1.33.1"
   dependencies:
     "@opentelemetry/api": "npm:1.9.0"
     "@opentelemetry/exporter-trace-otlp-http": "npm:0.53.0"
@@ -2284,8 +2284,8 @@ __metadata:
     "@opentelemetry/sdk-trace-node": "npm:1.26.0"
     "@opentelemetry/semantic-conventions": "npm:1.27.0"
     "@redocly/config": "npm:^0.22.0"
-    "@redocly/openapi-core": "npm:1.33.0"
-    "@redocly/respect-core": "npm:1.33.0"
+    "@redocly/openapi-core": "npm:1.33.1"
+    "@redocly/respect-core": "npm:1.33.1"
     abort-controller: "npm:^3.0.0"
     chokidar: "npm:^3.5.1"
     colorette: "npm:^1.2.0"
@@ -2307,7 +2307,7 @@ __metadata:
   bin:
     openapi: bin/cli.js
     redocly: bin/cli.js
-  checksum: 10c0/303908bec7df853e22a63ce2158917cfda21e93fa0194937cb552304029bd7a8be455f245f80d46f560bdad394e20095a666bb9b1ec21235f9aa4ebdf3d31ae8
+  checksum: 10c0/b8ff807d4d49288312e49a052af0b4e026cc0a1b7b5b0227c97575bf2f58c4b0e7fb07839b235877326d10e1c00b45ca68190edcec91db8e78c5133c866dc05d
   languageName: node
   linkType: hard
 
@@ -2318,9 +2318,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redocly/openapi-core@npm:1.33.0, @redocly/openapi-core@npm:^1.4.0":
-  version: 1.33.0
-  resolution: "@redocly/openapi-core@npm:1.33.0"
+"@redocly/openapi-core@npm:1.33.1, @redocly/openapi-core@npm:^1.4.0":
+  version: 1.33.1
+  resolution: "@redocly/openapi-core@npm:1.33.1"
   dependencies:
     "@redocly/ajv": "npm:^8.11.2"
     "@redocly/config": "npm:^0.22.0"
@@ -2331,17 +2331,17 @@ __metadata:
     minimatch: "npm:^5.0.1"
     pluralize: "npm:^8.0.0"
     yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/d30f94e352153a059deae89a341ac36baf8ce98a36bf85c70b787e1f00ba0106710994e9202e6578b43c9dad1e836453ee677befe733923d9042a65e39627a37
+  checksum: 10c0/906bb8f6c299fcfd310433024d4b902f9ee296a0e9c1587a6d369990e5aff3b81154d20bd3c5c7a750ddee7d4f0ab598f0a286da367f0a287c476c02b02257a0
   languageName: node
   linkType: hard
 
-"@redocly/respect-core@npm:1.33.0":
-  version: 1.33.0
-  resolution: "@redocly/respect-core@npm:1.33.0"
+"@redocly/respect-core@npm:1.33.1":
+  version: 1.33.1
+  resolution: "@redocly/respect-core@npm:1.33.1"
   dependencies:
     "@faker-js/faker": "npm:^7.6.0"
     "@redocly/ajv": "npm:8.11.2"
-    "@redocly/openapi-core": "npm:1.33.0"
+    "@redocly/openapi-core": "npm:1.33.1"
     better-ajv-errors: "npm:^1.2.0"
     colorette: "npm:^2.0.20"
     concat-stream: "npm:^2.0.0"
@@ -2358,7 +2358,7 @@ __metadata:
     outdent: "npm:^0.8.0"
     set-cookie-parser: "npm:^2.3.5"
     undici: "npm:^6.21.1"
-  checksum: 10c0/c5240dc991711b685fb56099ebf39cce567a7cdebb2e102a3de890dd51c052787cbe61161993d58fdcca1298c302e6bb6d5341668b6d4a87f0c549ef47d76988
+  checksum: 10c0/ca6a10d3ff86f6326ccc7e5b96b79afdec398df91ab9931faddbe126f4eadb77ae80e8e6f4399fc26f5f2a2cfeb729598af844ff5963371f485428b776cb6bcf
   languageName: node
   linkType: hard
 
@@ -2533,8 +2533,8 @@ __metadata:
     "@hotwired/stimulus": "npm:^3.2.2"
     "@hotwired/turbo-rails": "npm:^8.0.13"
     "@icon/themify-icons": "npm:^1.0.1-alpha.3"
-    "@rails/actioncable": "npm:^8.0.100"
-    "@rails/actiontext": "npm:^8.0.100"
+    "@rails/actioncable": "npm:^8.0.200"
+    "@rails/actiontext": "npm:^8.0.200"
     "@rails/activestorage": "npm:^8.0.100"
     "@rails/request.js": "npm:^0.0.11"
     "@rails/ujs": "npm:^7.1.501"
