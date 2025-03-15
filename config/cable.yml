@@ -6,7 +6,7 @@ test:
 
 production:
   adapter: redis
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  url: "<%= ENV.fetch('REDIS_URL') { ENV["KAMAL_SETUP"] == "true" ? "redis://:#{ENV['REDIS_PASSWORD']}@#{ENV['REDIS_HOST']}:#{ENV['REDIS_PORT']}/1" : "redis://localhost:6379/1" } %>"
   channel_prefix: untitled_application_production
   driver: :ruby
   ssl_params:

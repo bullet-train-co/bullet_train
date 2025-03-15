@@ -21,6 +21,7 @@ connected_name = variable.delete("_") # i.e. `bullettrain` as opposed to `bullet
 puts ""
 puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
 replace_in_file("./.circleci/config.yml", "untitled_application", variable)
+replace_in_file("./.kamal/secrets", "UNTITLED_APPLICATION", environment_variable)
 replace_in_file("./config/application.rb", "untitled_application", connected_name)
 replace_in_file("./config/database.yml", "untitled_application", variable)
 replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
@@ -28,6 +29,9 @@ replace_in_file("./config/cable.yml", "untitled_application", variable)
 replace_in_file("./config/initializers/session_store.rb", "untitled_application", variable)
 replace_in_file("./config/environments/production.rb", "untitled_application", variable)
 replace_in_file("./config/application.rb", "UntitledApplication", class_name)
+replace_in_file("./config/deploy.yml", "untitled-application", kebab_case)
+replace_in_file("./config/deploy.yml", "untitled_application", variable)
+replace_in_file("./config/deploy.yml", "UNTITLED_APPLICATION", environment_variable)
 replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
 replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
