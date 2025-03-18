@@ -213,7 +213,7 @@ GEM
     capybara-email (3.0.2)
       capybara (>= 2.4, < 4.0)
       mail
-    capybara-lockstep (2.2.2)
+    capybara-lockstep (2.2.3)
       activesupport (>= 4.2)
       capybara (>= 3.0)
       ruby2_keywords
