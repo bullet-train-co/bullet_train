@@ -14,7 +14,6 @@
     "@rails/actiontext": "^8.0.200",
     "@rails/activestorage": "^8.0.100",
     "@rails/request.js": "^0.0.11",
-    "@rails/ujs": "^7.1.501",
     "@redocly/cli": "^1.0.0-beta.111",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
