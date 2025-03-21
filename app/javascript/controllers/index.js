@@ -21,17 +21,30 @@ window.Stimulus = application
 // Controller files must be named *_controller.js.
 import { context as controllersContext } from './**/*_controller.js';
 
-application.load(bulletTrainControllers)
-application.load(bulletTrainFieldControllers)
-application.load(bulletTrainSortableControllers)
-
 application.register('reveal', RevealController)
 application.register('scroll-reveal', ScrollReveal)
 
-const controllers = Object.keys(controllersContext).map((filename) => ({
+let controllers = Object.keys(controllersContext).map((filename) => ({
   identifier: identifierForContextKey(filename),
   controllerConstructor: controllersContext[filename] }))
+
+controllers = overrideByIdentifier([
+  ...bulletTrainControllers,
+  ...bulletTrainFieldControllers,
+  ...bulletTrainSortableControllers,
+  ...controllers,
+])
 
 application.load(controllers)
 
 CableReady.initialize({ consumer })
+
+function overrideByIdentifier(controllers) {
+  const byIdentifier = {}
+
+  controllers.forEach(item => {
+    byIdentifier[item.identifier] = item
+  })
+
+  return Object.values(byIdentifier)
+}
