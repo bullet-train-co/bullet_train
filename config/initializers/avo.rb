@@ -106,4 +106,6 @@ Avo.configure do |config|
   # config.profile_menu = -> {
   #   link "Profile", path: "/avo/profile", icon: "user-circle"
   # }
+  config.default_url_options = Rails.application.routes.default_url_options
+  Avo::Engine.routes.default_url_options = Rails.application.routes.default_url_options
 end
