@@ -3,7 +3,6 @@
 // includes should be specified at the end of the file, not in this section. This helps avoid merge conflicts in the
 // future should the framework defaults change.
 
-import Rails from "@rails/ujs"
 import * as ActiveStorage from "@rails/activestorage"
 import "@hotwired/turbo-rails"
 import "./controllers"
