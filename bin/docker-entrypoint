@@ -1,0 +1,15 @@
+#!/bin/bash -ex
+
+echo "🐳Docker entrypoint running..."
+
+# Enable jemalloc for reduced memory usage and latency.
+if [ -z "${LD_PRELOAD+x}" ]; then
+    echo "🚀 Saving RAM with jemalloc!"
+    LD_PRELOAD=$(find /usr/lib -name libjemalloc.so.2 -print -quit)
+    export LD_PRELOAD
+fi
+
+echo "Running ./bin/rails db:prepare in docker-entrypoint..."
+./bin/rails db:prepare
+
+exec "${@}"
