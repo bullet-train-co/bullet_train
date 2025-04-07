@@ -445,7 +445,7 @@ GEM
       ast (~> 2.4.1)
       racc
     pg (1.5.9)
-    phonelib (0.10.6)
+    phonelib (0.10.7)
     possessive (1.0.1)
     pp (0.6.2)
       prettyprint
