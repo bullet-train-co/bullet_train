@@ -26,7 +26,7 @@ aliases:
       paths:
         - node_modules
   - &ruby_node_browsers_docker_image
-      - image: cimg/ruby:3.4.2-browsers
+      - image: cimg/ruby:3.4.3-browsers
         environment:
           PGHOST: localhost
           PGUSER: untitled_application
