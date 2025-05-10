@@ -2553,7 +2553,7 @@ __metadata:
     stimulus-reveal: "npm:^1.4.2"
     stimulus-scroll-reveal: "npm:^3.2.0"
     tailwindcss: "npm:^3.4.17"
-    trix: "npm:^2.1.12"
+    trix: "npm:^2.1.15"
     yalc: "npm:^1.0.0-pre.53"
   languageName: unknown
   linkType: soft
@@ -3125,6 +3125,18 @@ __metadata:
   linkType: hard
 
 "dompurify@npm:^3.2.3, dompurify@npm:^3.2.4":
+  version: 3.2.5
+  resolution: "dompurify@npm:3.2.5"
+  dependencies:
+    "@types/trusted-types": "npm:^2.0.7"
+  dependenciesMeta:
+    "@types/trusted-types":
+      optional: true
+  checksum: 10c0/b564167cc588933ad2d25c185296716bdd7124e9d2a75dac76efea831bb22d1230ce5205a1ab6ce4c1010bb32ac35f7a5cb2dd16c78cbf382111f1228362aa59
+  languageName: node
+  linkType: hard
+
+"dompurify@npm:^3.2.5":
   version: 3.2.5
   resolution: "dompurify@npm:3.2.5"
   dependencies:
@@ -5854,12 +5866,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^2.0.1, trix@npm:^2.1.12":
+"trix@npm:^2.0.1":
   version: 2.1.13
   resolution: "trix@npm:2.1.13"
   dependencies:
     dompurify: "npm:^3.2.3"
   checksum: 10c0/b65bd3e1855a63f0e3f29ffb46609307d5f5b2a4022a1968b131a92f0ffa5a9d6b91df07ed0556dadeba18d637d581b27a2cb57421d9eee66228bbfede49818e
+  languageName: node
+  linkType: hard
+
+"trix@npm:^2.1.15":
+  version: 2.1.15
+  resolution: "trix@npm:2.1.15"
+  dependencies:
+    dompurify: "npm:^3.2.5"
+  checksum: 10c0/fb1b53d03e13d007a21c7417bbc994b24073a48d51b94bee679f8bb748b2e2cf9469372b3292d40f27bf502a88ab27d43a0c3c08928b708f65741c1f9eca7c77
   languageName: node
   linkType: hard
 
