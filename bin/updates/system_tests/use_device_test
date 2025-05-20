@@ -26,8 +26,8 @@ Pathname.glob("test/system/**/*.rb") do |path|
     lines.delete devices_line
 
     # Remove now needless `resize_for(display_details)\n\n`
-    lines.grep(/resize_for\(display_details\)\n/m).each do
-      index = lines.index _1
+    lines.grep(/resize_for\(display_details\)\n/m).each do |line|
+      index = lines.index line
       lines.delete_at index # Remove `resize_for` line
       lines.delete_at index if lines[index].match?(/^\s*\n$/) # Remove \n line, now at the same index.
     end
