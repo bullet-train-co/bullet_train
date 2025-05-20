@@ -103,7 +103,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def device_name
-    @device_name ||= @@test_devices.each_key.find { name.include?(_1.to_s) } || raise("unknown test device, you probably want to use `device_test` to generate this test")
+    @device_name ||= @@test_devices.each_key.find { name.include?(it.to_s) } || raise("unknown test device, you probably want to use `device_test` to generate this test")
   end
 
   def display_details
@@ -130,7 +130,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     location = caller_locations(1, 1).first
 
     name = name.remove(/[^\w ]/) # `def` is stricter than `define_method` so we have to scrub characters.
-    @device_test_methods ||= Module.new.tap { include _1 }
+    @device_test_methods ||= Module.new.tap { include it }
 
     @@test_devices.each_key do |device_name|
       test_name = ActiveSupport::Testing::Declarative.instance_method(:test).bind_call(@device_test_methods, "#{name} on a #{device_name}", &block)
