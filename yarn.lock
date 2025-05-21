@@ -3125,7 +3125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dompurify@npm:^3.2.3, dompurify@npm:^3.2.4, dompurify@npm:^3.2.5":
+"dompurify@npm:^3.2.4, dompurify@npm:^3.2.5":
   version: 3.2.5
   resolution: "dompurify@npm:3.2.5"
   dependencies:
@@ -5862,16 +5862,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^2.0.1":
-  version: 2.1.13
-  resolution: "trix@npm:2.1.13"
-  dependencies:
-    dompurify: "npm:^3.2.3"
-  checksum: 10c0/b65bd3e1855a63f0e3f29ffb46609307d5f5b2a4022a1968b131a92f0ffa5a9d6b91df07ed0556dadeba18d637d581b27a2cb57421d9eee66228bbfede49818e
-  languageName: node
-  linkType: hard
-
-"trix@npm:^2.1.15":
+"trix@npm:^2.0.1, trix@npm:^2.1.15":
   version: 2.1.15
   resolution: "trix@npm:2.1.15"
   dependencies:
