@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-#
+
 # We clear and override the stimulus:manifest:update task to avoid having it clobber
 # our custom and non-standard stimulus manifest file.
 # For details about why, see this issue:
