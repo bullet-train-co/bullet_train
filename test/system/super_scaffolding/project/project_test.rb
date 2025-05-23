@@ -45,8 +45,6 @@ class BulletTrain::SuperScaffolding::ProjectTest < ApplicationSystemTestCase
 
       assert_text("Your Team’s Projects")
 
-      # will this help?
-      sleep 1
       # this is ensuring cascading deletes generate properly.
       accept_confirm do
         click_on "Delete"
