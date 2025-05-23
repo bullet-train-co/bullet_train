@@ -171,5 +171,5 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: error_screenshots_${{ matrix.parallel_test_groups }}.log
+          name: error_screenshots_${{ matrix.parallel_test_groups }}.zip
           path: tmp/starter/tmp/screenshots/*.png
