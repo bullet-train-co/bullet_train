@@ -9,3 +9,10 @@ production:
   - mailers
   - low
   - action_mailbox_routing
+:scheduler:
+  webhooks_endpoints_deactivation:
+    enabled: <%= Rails.application.config.outgoing_webhooks[:automatic_deactivation_endpoint_enabled] %>
+    interval:
+      - <%= Rails.application.config.outgoing_webhooks[:automatic_deactivation_endpoint_settings][:run_job_every].inspect %>
+      - first_in: 5m
+    class: Webhooks::Outgoing::EndpointsDeactivationJob
