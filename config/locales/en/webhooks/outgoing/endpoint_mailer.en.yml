@@ -1,0 +1,36 @@
+en:
+  webhooks:
+    outgoing:
+      endpoint_mailer:
+        deactivation_limit_reached:
+          subject: "Webhook Endpoint Failure Limit Reached - %{endpoint_name}"
+          preview: "Your webhook endpoint %{endpoint_name} has reached the failure limit and may be deactivated"
+          alert: "⚠️ Action Required: Your webhook endpoint has reached the maximum number of failed delivery attempts."
+          heading: "Webhook Endpoint Failure Limit Reached"
+          body:
+            html: |
+              <p>Hello,</p>
+              <p>We wanted to notify you that your webhook endpoint "<strong>%{endpoint_name}</strong>" has reached the maximum number of consecutive failed delivery attempts. The endpoint is now marked for potential deactivation.</p>
+          details:
+            html: |
+              <p>Endpoint Name: <strong>%{endpoint_name}</strong></p>
+              <p>Endpoint Events: <strong>%{endpoint_events}</strong></p>
+          explanation:
+            heading: "What this means:"
+            text: "Your webhook endpoint is experiencing delivery failures. If this continues, the endpoint will be automatically deactivated to prevent further failed attempts."
+          action:
+            heading: "What you should do:"
+            html: |
+              <ul>
+                <li>Check that your webhook endpoint URL is accessible and responding correctly</li>
+                <li>Verify that your endpoint is returning HTTP 2xx status codes</li>
+                <li>Test your webhook endpoint to ensure it's functioning properly</li>
+                <li>If you've fixed the issue, successful deliveries will automatically reactivate the endpoint</li>
+              </ul>
+          troubleshooting:
+            html: |
+              <p>If you need help troubleshooting your webhook endpoint, please check your delivery logs in the application for more details about the specific errors.</p>
+          signature: &SIGNATURE
+            html:
+              <p>If you have any questions, please don't hesitate to <a href="mailto:%{support_email}">send us an email</a>.</p>
+              <p>Thanks,<br>The Untitled Application Team</p>
