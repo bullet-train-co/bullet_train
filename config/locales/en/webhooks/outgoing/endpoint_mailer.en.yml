@@ -5,7 +5,6 @@ en:
         deactivation_limit_reached:
           subject: "Webhook Endpoint Failure Limit Reached - %{endpoint_name}"
           preview: "Your webhook endpoint %{endpoint_name} has reached the failure limit and may be deactivated"
-          alert: "⚠️ Action Required: Your webhook endpoint has reached the maximum number of failed delivery attempts."
           heading: "Webhook Endpoint Failure Limit Reached"
           body:
             html: |
@@ -24,10 +23,7 @@ en:
               <ul>
                 <li>Check that your webhook endpoint URL is accessible and responding correctly</li>
                 <li>Verify that your endpoint is returning HTTP 2xx status codes</li>
-                <li>Test your webhook endpoint to ensure it's functioning properly</li>
-                <li>If you've fixed the issue, successful deliveries will automatically reactivate the endpoint</li>
               </ul>
-
               <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
                 <tr>
                   <td align="center">
