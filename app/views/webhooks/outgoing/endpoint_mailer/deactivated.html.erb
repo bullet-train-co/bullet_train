@@ -1,0 +1,18 @@
+<% content_for :preheader do %>
+  <%= t('.preview', @values) %>
+<% end %>
+
+<h1><%= t('.heading') %></h1>
+<%= t('.body.html', @values) %>
+
+<div class="endpoint-details">
+  <%= t('.details.html', @values) %>
+</div>
+
+<h2><%= t('.explanation.heading', @values) %></h2>
+<p><%= t('.explanation.text', @values) %></p>
+
+<h2><%= t('.action.heading', @values) %></h2>
+<%= t('.action.html', @values) %>
+
+<%= t('.signature.html', @values.merge({support_email: t('application.support_email')})) %>
