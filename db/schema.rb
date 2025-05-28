@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_28_140801) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_28_141219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -315,6 +315,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_140801) do
     t.text "response_message"
     t.text "error_message"
     t.integer "attempt_number"
+    t.index ["delivery_id"], name: "index_webhooks_outgoing_delivery_attempts_on_delivery_id"
   end
 
   create_table "webhooks_outgoing_endpoints", force: :cascade do |t|
