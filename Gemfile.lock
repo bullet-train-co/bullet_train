@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Riddlerrr/bullet_train-core.git
-  revision: a853bff7c0ce5261fc66cc72f950d67c40b994b2
+  revision: 006bd1fb91be8a5fd8c83c93b56c9a03e582e5ff
   branch: webhook-deactivation-system
   specs:
     bullet_train-outgoing_webhooks (1.20.0)
