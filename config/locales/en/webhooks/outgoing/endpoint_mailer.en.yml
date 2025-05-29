@@ -44,9 +44,6 @@ en:
                   </td>
                 </tr>
               </table>
-          troubleshooting:
-            html: |
-              <p>If you need help troubleshooting your webhook endpoint, please check your delivery logs in the application for more details about the specific errors.</p>
           signature: &SIGNATURE
             html:
               <p>If you have any questions, please don't hesitate to <a href="mailto:%{support_email}">send us an email</a>.</p>

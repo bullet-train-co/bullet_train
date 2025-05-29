@@ -3,16 +3,22 @@
 <% end %>
 
 <h1><%= t('.heading') %></h1>
+<br>
 <%= t('.body.html', @values) %>
 
+<br>
 <div class="endpoint-details">
   <%= t('.details.html', @values) %>
 </div>
 
+<br>
 <h2><%= t('.explanation.heading', @values) %></h2>
+<br>
 <p><%= t('.explanation.text', @values) %></p>
 
+<br>
 <h2><%= t('.action.heading', @values) %></h2>
+<br>
 <%= t('.action.html', @values) %>
-
+<br>
 <%= t('.signature.html', @values.merge({support_email: t('application.support_email')})) %>
