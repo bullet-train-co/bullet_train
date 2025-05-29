@@ -138,6 +138,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
         end
       end
 
+      assert_text("Re-Invite to Team")
       accept_alert { click_on "Re-Invite to Team" }
       assert_text("The user has been successfully re-invited. They will receive an email to rejoin the team.")
     end
