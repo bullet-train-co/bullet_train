@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/Riddlerrr/bullet_train-core.git
-  revision: 006bd1fb91be8a5fd8c83c93b56c9a03e582e5ff
+  revision: d456753d301b002919b3bfd861d5f728b7cd2150
   branch: webhook-deactivation-system
   specs:
-    bullet_train-outgoing_webhooks (1.20.0)
+    bullet_train-outgoing_webhooks (1.21.0)
       public_suffix
       rails (>= 6.0.0)
 
@@ -171,9 +171,6 @@ GEM
       stripe
     bullet_train-obfuscates_id (1.21.0)
       hashids
-      rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.21.0)
-      public_suffix
       rails (>= 6.0.0)
     bullet_train-roles (1.21.0)
       active_hash (>= 3.3.1)
@@ -715,7 +712,7 @@ DEPENDENCIES
   bullet_train-integrations (= 1.21.0)
   bullet_train-integrations-stripe (= 1.21.0)
   bullet_train-obfuscates_id (= 1.21.0)
-  bullet_train-outgoing_webhooks (= 1.21.0)
+  bullet_train-outgoing_webhooks!
   bullet_train-roles (= 1.21.0)
   bullet_train-scope_validator (= 1.21.0)
   bullet_train-sortable (= 1.21.0)
