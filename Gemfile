@@ -123,7 +123,8 @@ BULLET_TRAIN_VERSION = "1.21.0"
 gem "bullet_train", BULLET_TRAIN_VERSION
 gem "bullet_train-super_scaffolding", BULLET_TRAIN_VERSION
 gem "bullet_train-api", BULLET_TRAIN_VERSION
-gem "bullet_train-outgoing_webhooks", BULLET_TRAIN_VERSION
+# gem "bullet_train-outgoing_webhooks", BULLET_TRAIN_VERSION
+gem "bullet_train-outgoing_webhooks", github: "Riddlerrr/bullet_train-core", branch: "webhook-deactivation-system"
 gem "bullet_train-incoming_webhooks", BULLET_TRAIN_VERSION
 gem "bullet_train-themes", BULLET_TRAIN_VERSION
 gem "bullet_train-themes-light", BULLET_TRAIN_VERSION
@@ -153,6 +154,7 @@ gem "avo", ">= 3.1.7"
 
 # Background processing
 gem "sidekiq"
+gem "sidekiq-scheduler"
 
 # Protect the API routes via CORS
 gem "rack-cors"

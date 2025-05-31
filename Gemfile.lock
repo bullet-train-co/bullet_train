@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/Riddlerrr/bullet_train-core.git
+  revision: d456753d301b002919b3bfd861d5f728b7cd2150
+  branch: webhook-deactivation-system
+  specs:
+    bullet_train-outgoing_webhooks (1.21.0)
+      public_suffix
+      rails (>= 6.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -163,9 +172,6 @@ GEM
     bullet_train-obfuscates_id (1.21.0)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.21.0)
-      public_suffix
-      rails (>= 6.0.0)
     bullet_train-roles (1.21.0)
       active_hash (>= 3.3.1)
       activesupport
@@ -286,6 +292,8 @@ GEM
     erb (5.0.1)
     erubi (1.13.1)
     erubis (2.7.0)
+    et-orbi (1.2.11)
+      tzinfo
     execjs (2.10.0)
     factory_bot (6.5.2)
       activesupport (>= 6.1.0)
@@ -309,6 +317,9 @@ GEM
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     foreman (0.88.1)
+    fugit (1.11.1)
+      et-orbi (~> 1, >= 1.2.11)
+      raabro (~> 1.4)
     get_process_mem (1.0.0)
       bigdecimal (>= 2.0)
       ffi (~> 1.0)
@@ -476,6 +487,7 @@ GEM
     puma (6.6.0)
       nio4r (~> 2.0)
     pwned (2.4.1)
+    raabro (1.4.0)
     racc (1.8.1)
     rack (3.1.15)
     rack-cors (3.0.0)
@@ -585,6 +597,8 @@ GEM
       logger
     ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
+    rufus-scheduler (3.9.2)
+      fugit (~> 1.1, >= 1.11.1)
     securerandom (0.4.1)
     selenium-webdriver (4.33.0)
       base64 (~> 0.2)
@@ -601,6 +615,9 @@ GEM
       logger (>= 1.6.2)
       rack (>= 3.1.0)
       redis-client (>= 0.23.2)
+    sidekiq-scheduler (6.0.1)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 7.3, < 9)
     simplecov (0.22.0)
       docile (~> 1.1)
       simplecov-html (~> 0.11)
@@ -695,7 +712,7 @@ DEPENDENCIES
   bullet_train-integrations (= 1.21.0)
   bullet_train-integrations-stripe (= 1.21.0)
   bullet_train-obfuscates_id (= 1.21.0)
-  bullet_train-outgoing_webhooks (= 1.21.0)
+  bullet_train-outgoing_webhooks!
   bullet_train-roles (= 1.21.0)
   bullet_train-scope_validator (= 1.21.0)
   bullet_train-sortable (= 1.21.0)
@@ -738,6 +755,7 @@ DEPENDENCIES
   ruby-vips
   selenium-webdriver
   sidekiq
+  sidekiq-scheduler
   simplecov
   simplecov-json
   sprockets-rails
