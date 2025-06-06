@@ -576,7 +576,7 @@ GEM
       rexml
     ruby-progressbar (1.13.0)
     ruby-statistics (4.1.0)
-    ruby-vips (2.2.3)
+    ruby-vips (2.2.4)
       ffi (~> 1.12)
       logger
     ruby2_keywords (0.0.5)
