@@ -1,4 +1,5 @@
 require "application_system_test_case"
+require "pagy"
 
 class PaginationTest < ApplicationSystemTestCase
   setup do

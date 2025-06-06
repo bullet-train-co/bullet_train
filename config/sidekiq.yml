@@ -9,3 +9,10 @@ production:
   - mailers
   - low
   - action_mailbox_routing
+:scheduler:
+  webhooks_endpoints_deactivation:
+    enabled: true
+    interval:
+      - 6h
+      - first_in: 5m
+    class: Webhooks::Outgoing::EndpointsDeactivationJob
