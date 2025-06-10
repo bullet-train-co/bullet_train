@@ -10,11 +10,27 @@
 #######################################################################################################
 FROM docker.io/bullet_train/base AS base
 
+# ✅ ⬇️  Install your native runtime dependencies below
+
+
+# ✅ ⬆️  Install your native runtime dependencies above
 
 #######################################################################################################
 # Throw-away build stage to reduce size of final image
 FROM docker.io/bullet_train/build AS build
 
+# bullet_train/build provides pre-built verisons of all the gems in the starter repo. We copy them to our
+# new image to save time.
+RUN ls -al "${BUNDLE_PATH}/ruby/3.4.0/gems"
+# TODO: Does this really get us anything. Should BUNDLE_PATH already be in place?
+# The output from the ls -al command above is showing all the gems I would expect,
+# so I'm pretty sure there's not need to explictly copy the BUNDLE_PATH
+# COPY --from=docker.io/bullet_train/build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
+
+# ✅ ⬇️  Install your native build-time dependencies below
+
+
+# ✅ ⬆️  Install your native build-time dependencies above
 
 # Install application gems
 COPY Gemfile Gemfile.lock .ruby-version ./
