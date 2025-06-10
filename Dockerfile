@@ -8,14 +8,6 @@
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 #######################################################################################################
-FROM docker.io/bullet_train/base AS base
-
-# ✅ ⬇️  Install your native runtime dependencies below
-
-
-# ✅ ⬆️  Install your native runtime dependencies above
-
-#######################################################################################################
 # Throw-away build stage to reduce size of final image
 FROM docker.io/bullet_train/build AS build
 
@@ -52,7 +44,12 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 #######################################################################################################
 # Final stage for app image
-FROM base
+FROM docker.io/bullet_train/base
+
+# ✅ ⬇️  Install your native runtime dependencies below
+
+
+# ✅ ⬆️  Install your native runtime dependencies above
 
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
