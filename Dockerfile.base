@@ -2,7 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t untitled_application .
+# docker build -t bullet_train/base -f Dockerfile.base .
+# TODO: Fix this command. Or is it even useful to run this directly? Maybe for investigative purposes?
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name untitled_application untitled_application
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
