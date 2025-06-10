@@ -13,24 +13,8 @@ FROM docker.io/bullet_train/base AS base
 
 #######################################################################################################
 # Throw-away build stage to reduce size of final image
-FROM base AS build
+FROM docker.io/bullet_train/build AS build
 
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# TODO: Is this the best way to install node? Can we optimize this to combine with the install steps above?
-# TODO: Do we need ffmpeg?
-# Install Node.js (Version 20.x) and yarn
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
-    apt-get update && \
-    apt-get install -y yarn && \
-    #apt-get install -y ffmpeg && \
-    corepack enable
 
 # Install application gems
 COPY Gemfile Gemfile.lock .ruby-version ./
