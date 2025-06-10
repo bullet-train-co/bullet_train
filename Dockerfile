@@ -8,7 +8,7 @@
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 # TODO: Update this with info about the devcontainer that (will) ship with BT
 
-###################################################################################################################################
+######################################################################################################
 # bullet_train/base provides the runtime dependencies required by Bullet Train.
 FROM bullet_train/base AS base
 
@@ -20,7 +20,7 @@ FROM bullet_train/base AS base
 
 
 
-###################################################################################################################################
+######################################################################################################
 # Throw-away build stage to reduce size of final image
 FROM bullet_train/build:1.22.0 AS build
 
@@ -51,7 +51,7 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
 
-###################################################################################################################################
+######################################################################################################
 # The final shippable image
 FROM base
 
