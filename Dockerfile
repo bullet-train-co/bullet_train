@@ -8,6 +8,7 @@
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version
+#######################################################################################################
 ARG RUBY_VERSION=3.4.3
 FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
 
@@ -25,6 +26,10 @@ ENV RAILS_ENV="production" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
 
+
+
+
+#######################################################################################################
 # Throw-away build stage to reduce size of final image
 FROM base AS build
 
@@ -32,6 +37,18 @@ FROM base AS build
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
+
+# TODO: Is this the best way to install node? Can we optimize this to combine with the install steps above?
+# TODO: Do we need ffmpeg?
+# Install Node.js (Version 20.x) and yarn
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
+    apt-get update && \
+    apt-get install -y yarn && \
+    apt-get install -y ffmpeg && \
+    corepack enable
 
 # Install application gems
 COPY Gemfile Gemfile.lock .ruby-version ./
@@ -51,6 +68,7 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 
 
+#######################################################################################################
 # Final stage for app image
 FROM base
 
