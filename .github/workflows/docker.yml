@@ -61,7 +61,7 @@ jobs:
             const fs = require('fs')
             const versionString = fs.readFileSync('.ruby-version')
             console.log('versionString is', versionString)
-            return versionString
+            return versionString.toString()
 
       - name: Echo Ruby Version
         run: echo "${{ steps.extract-ruby-version.outputs.result }}"
