@@ -64,9 +64,6 @@ jobs:
             console.log('versionString is', versionString)
             return versionString.toString().trim()
 
-      - name: Echo Ruby Version
-        run: echo "${{ steps.extract-ruby-version.outputs.result }}"
-
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
       # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see [Usage](https://github.com/docker/build-push-action#usage) in the README of the `docker/build-push-action` repository.
       # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
@@ -146,6 +143,24 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Extract Bullet Train Version
+        id: extract-bullet-train-version
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const fs = require('fs')
+            const gemString = fs.readFileSync('Gemfile').toString()
+            const lines = gemString.split('\n')
+            const versionToken = "BULLET_TRAIN_VERSION = ";
+            const equalToken = " = "
+            for await (const line of lines) {
+              if (line.includes(versionToken)) {
+                return line.slit(equalToken).[1].trim().replaceAll('"','')
+              }
+            }
+
+
       # This step uses the `docker/build-push-action` action to build the image, based on your repository's `Dockerfile`. If the build succeeds, it pushes the image to GitHub Packages.
       # It uses the `context` parameter to define the build's context as the set of files located in the specified path. For more information, see [Usage](https://github.com/docker/build-push-action#usage) in the README of the `docker/build-push-action` repository.
       # It uses the `tags` and `labels` parameters to tag and label the image with the output from the "meta" step.
@@ -159,6 +174,8 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64,linux/arm64
+          build-args: |
+            BULLET_TRAIN_VERSION=${{ steps.extract-bullet-train-version.outputs.result }}
 
       # This step generates an artifact attestation for the image, which is an unforgeable statement about where and how it was built. It increases supply chain security for people who consume the image. For more information, see [Using artifact attestations to establish provenance for builds](/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
       - name: Generate artifact attestation
