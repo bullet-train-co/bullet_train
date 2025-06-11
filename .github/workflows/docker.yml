@@ -156,7 +156,7 @@ jobs:
             const equalToken = " = "
             for await (const line of lines) {
               if (line.includes(versionToken)) {
-                return line.slit(equalToken)[1].trim().replaceAll('"','')
+                return line.split(equalToken)[1].trim().replaceAll('"','')
               }
             }
 
