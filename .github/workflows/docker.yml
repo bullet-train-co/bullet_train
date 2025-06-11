@@ -91,7 +91,6 @@ jobs:
 
       - name: Checkout Core Repo
         uses: bullet-train-co/checkout-repo-with-matching-branch@v1
-        if: ${{ inputs.use-core-repo == true }}
         with:
           target_dir: core
           repository: bullet-train-co/bullet_train-core
