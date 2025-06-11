@@ -9,10 +9,10 @@
 
 #######################################################################################################
 # Throw-away build stage to reduce size of final image
-# bullet_train-core/build provides build-time dependencies and pre-built verisons of all the gems in the starter repo.
+# bullet_train/build provides build-time dependencies and pre-built verisons of all the gems in the starter repo.
 # TODO: How can we get this version number in a better way?
 ARG BULLET_TRAIN_VERSION=1.23.0
-FROM ghcr.io/bullet-train-co/bullet_train-core/build:$BULLET_TRAIN_VERSION AS build
+FROM ghcr.io/bullet-train-co/bullet_train/build:$BULLET_TRAIN_VERSION AS build
 
 # ✅ ⬇️  Install your native build-time dependencies below
 
@@ -39,8 +39,8 @@ RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
 #######################################################################################################
 # Final stage for app image
-# bullet_train-core/base provides run-time dependencies for everything used by the framework and starter repo.
-FROM ghcr.io/bullet-train-co/bullet_train-core/base:$BULLET_TRAIN_VERSION AS base
+# bullet_train/base provides run-time dependencies for everything used by the framework and starter repo.
+FROM ghcr.io/bullet-train-co/bullet_train/base:$BULLET_TRAIN_VERSION AS base
 
 # ✅ ⬇️  Install your native runtime dependencies below
 
