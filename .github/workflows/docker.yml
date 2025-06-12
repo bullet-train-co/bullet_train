@@ -13,7 +13,9 @@ env:
 
 # There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:
-  placeholder-job:
+  build-and-push-base-image:
+    # TODO: Remove this temporary next line
+    if: false
     runs-on: ubuntu-latest
 
     steps:
@@ -97,6 +99,8 @@ jobs:
           push-to-registry: true
 
   build-and-push-build-image:
+    # TODO: Remove this temporary next line
+    if: false
     runs-on: ubuntu-latest
     needs: build-and-push-base-image
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
@@ -195,7 +199,8 @@ jobs:
 
   build-and-push-preview-image:
     runs-on: ubuntu-latest
-    needs: build-and-push-build-image
+    # TODO: Uncomment the next line
+    #needs: build-and-push-build-image
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
       contents: read
