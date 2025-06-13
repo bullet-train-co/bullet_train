@@ -45,7 +45,7 @@ Clicking this button will set up a new Bullet Train project for development on [
 </p>
 
 <p align="center">
-<a href="https://www.clickfunnels.com"><img src="https://images.clickfunnel.com/uploads/digital_asset/file/176632/clickfunnels-dark-logo.svg" width="575" /></a>
+<a href="https://www.clickfunnels.com"><img src="https://statics.myclickfunnels.com/workspace/Yjxavr/image/15795008/file/e4d910a06aaea6730652fb2cf60531a6.svg" width="575" /></a>
 </p>
 
 <br>
