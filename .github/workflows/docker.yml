@@ -4,20 +4,25 @@ name: "🚢 ~ Docker"
 on:
   workflow_dispatch:
 
-# Defines two custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
+# Defines custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: bullet-train-co/bullet_train/base
   BUILD_IMAGE_NAME: bullet-train-co/bullet_train/build
   PREVIEW_IMAGE_NAME: bullet-train-co/bullet_train
 
-# There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:
   build-and-push-base-image:
     # TODO: Remove this temporary next line
     #if: false
-    runs-on: ubuntu-latest
-
+    runs-on: macos-latest
+    # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+      #
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -102,7 +107,7 @@ jobs:
   build-and-push-build-image:
     # TODO: Remove this temporary next line
     #if: false
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     needs: build-and-push-base-image
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
@@ -200,7 +205,7 @@ jobs:
           push-to-registry: true
 
   build-and-push-preview-image:
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     # TODO: Uncomment the next line
     needs: build-and-push-build-image
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
