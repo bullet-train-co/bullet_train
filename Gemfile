@@ -153,8 +153,6 @@ gem "avo", ">= 3.1.7"
 
 # Background processing
 gem "sidekiq"
-# Uncomment the line below to enable the webhook deactivation system
-# gem "sidekiq-scheduler"
 
 # Protect the API routes via CORS
 gem "rack-cors"
