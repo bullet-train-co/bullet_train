@@ -8,6 +8,9 @@ Rails.application.config.assets.version = "1.0"
 
 # TODO: Is this the best place for this?
 if ENV['SPROCKETS_NO_EXPORT_CONCURRENT']
+  # Prevent timeouts
+  Regexp.timeout = 60 * 5
+
   puts "********************************************************************************"
   puts "We are setting Sprockets.export_concurrent = false"
   puts "Regexp.timeout = #{Regexp.timeout}"
