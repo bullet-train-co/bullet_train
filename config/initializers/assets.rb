@@ -5,3 +5,10 @@ Rails.application.config.assets.version = "1.0"
 
 # Add additional assets to the asset load path.
 # Rails.application.config.assets.paths << Emoji.images_path
+
+# TODO: Is this the best place for this?
+if ENV['SPROCKETS_NO_EXPORT_CONCURRENT']
+  # This prevents asset precompilation from hanging indefinitely.
+  # https://github.com/rails/sprockets/issues/640
+  Sprockets.export_concurrent = false
+end
