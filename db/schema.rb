@@ -302,7 +302,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_141219) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.datetime "delivered_at", precision: nil
-    t.index ["delivered_at"], name: "index_webhooks_outgoing_deliveries_on_delivered_at"
+    t.index ["delivered_at", "created_at"], name: "idx_on_delivered_at_created_at_5c26227119"
     t.index ["endpoint_id", "event_id"], name: "index_webhooks_outgoing_deliveries_on_endpoint_id_and_event_id"
   end
 
