@@ -14,7 +14,7 @@ env:
 jobs:
   build-and-push-base-image:
     # TODO: Remove this temporary next line
-    if: false
+    #if: false
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
@@ -106,7 +106,7 @@ jobs:
 
   build-and-push-build-image:
     # TODO: Remove this temporary next line
-    if: false
+    #if: false
     runs-on: ubuntu-latest
     needs: build-and-push-base-image
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
@@ -207,7 +207,7 @@ jobs:
   build-and-push-preview-image:
     runs-on: ubuntu-latest
     # TODO: Uncomment the next line
-    # needs: build-and-push-build-image
+    needs: build-and-push-build-image
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
       contents: read
