@@ -14,4 +14,8 @@ if ENV['SPROCKETS_NO_EXPORT_CONCURRENT']
   # This prevents asset precompilation from hanging indefinitely.
   # https://github.com/rails/sprockets/issues/640
   Sprockets.export_concurrent = false
+else
+  puts "********************************************************************************"
+  puts "We are NOOOOOT setting Sprockets.export_concurrent = false"
+  puts "********************************************************************************"
 end
