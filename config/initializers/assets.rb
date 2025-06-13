@@ -8,6 +8,9 @@ Rails.application.config.assets.version = "1.0"
 
 # TODO: Is this the best place for this?
 if ENV['SPROCKETS_NO_EXPORT_CONCURRENT']
+  puts "********************************************************************************"
+  puts "We are setting Sprockets.export_concurrent = false"
+  puts "********************************************************************************"
   # This prevents asset precompilation from hanging indefinitely.
   # https://github.com/rails/sprockets/issues/640
   Sprockets.export_concurrent = false
