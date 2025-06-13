@@ -22,33 +22,34 @@ if ENV['SPROCKETS_NO_EXPORT_CONCURRENT']
   # https://github.com/capistrano/rails/issues/55
   Rails.application.config.assets.logger = Logger.new $stdout
 
-  class Sprockets::Manifest
-    # Public: Find all assets matching pattern set in environment.
-    #
-    # Returns Enumerator of Assets.
-    def find(*args)
-      puts "==============================================================="
-      puts "Using monkey patched find!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
-      puts "==============================================================="
-      unless environment
-        raise Error, "manifest requires environment for compilation"
-      end
+  # https://github.com/rails/sprockets/issues/640#issuecomment-1852558528
+  #class Sprockets::Manifest
+    ## Public: Find all assets matching pattern set in environment.
+    ##
+    ## Returns Enumerator of Assets.
+    #def find(*args)
+      #puts "==============================================================="
+      #puts "Using monkey patched find!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      #puts "==============================================================="
+      #unless environment
+        #raise Error, "manifest requires environment for compilation"
+      #end
 
-      return to_enum(__method__, *args) unless block_given?
+      #return to_enum(__method__, *args) unless block_given?
 
-      environment = self.environment.cached
-      promises = args.flatten.map do |path|
-        Concurrent::Promise.execute(executor: executor) do
-          environment.find_all_linked_assets(path).uniq do |asset|
-            yield asset
-          end
-        end
-      end
-      promises.each(&:wait!)
+      #environment = self.environment.cached
+      #promises = args.flatten.map do |path|
+        #Concurrent::Promise.execute(executor: executor) do
+          #environment.find_all_linked_assets(path).uniq do |asset|
+            #yield asset
+          #end
+        #end
+      #end
+      #promises.each(&:wait!)
 
-      nil
-    end
-  end
+      #nil
+    #end
+  #end
 else
   puts "********************************************************************************"
   puts "We are NOOOOOT setting Sprockets.export_concurrent = false"
