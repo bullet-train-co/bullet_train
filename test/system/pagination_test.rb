@@ -20,8 +20,8 @@ class PaginationTest < ApplicationSystemTestCase
 
     creative_concept = @team.scaffolding_absolutely_abstract_creative_concepts.create(name: "Test Name")
 
-    # Pagy::DEFAULT[:items] denotes the max of records that exist on one page.
-    (Pagy::DEFAULT[:items] + 1).times do |n|
+    # Pagy::DEFAULT[:limit] denotes the max of records that exist on one page.
+    (Pagy::DEFAULT[:limit] + 1).times do |n|
       creative_concept.completely_concrete_tangible_things.create(text_field_value: "Test #{n + 1}")
     end
 
@@ -36,9 +36,9 @@ class PaginationTest < ApplicationSystemTestCase
     visit account_scaffolding_absolutely_abstract_creative_concept_path(creative_concept)
 
     assert_text("Test 1")
-    refute_text("Test #{Pagy::DEFAULT[:items] + 1}")
+    refute_text("Test #{Pagy::DEFAULT[:limit] + 1}")
 
     click_on "2"
-    assert_text("Test #{Pagy::DEFAULT[:items] + 1}")
+    assert_text("Test #{Pagy::DEFAULT[:limit] + 1}")
   end
 end

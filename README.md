@@ -60,47 +60,6 @@ You can use this public repository to provision a new application and then push 
 
 Clicking this button will take you to the first step of a process that, when completed, will provision production-grade infrastructure for your Bullet Train application which will cost about **$30/month**.
 
-After you have confirmed the settings, it might be that you run into an error with the yarn version on the Render server, in which case you'd need to match your local yarn version to Render's version on their servers:
-
-```json
-// package.json
-{
-  // ... more configs...
-  "packageManager": "yarn@1.22.22"
-}
-```
-
-When you're done deploying to Render, you need to go into "Dashboard" > "web", copy the server URL, and then go into "Environment Groups" > "settings" of your project and paste the URL into the value for `BASE_URL`. If you configured a custom domain already than add that URL.
-
-#### Running on Render for free
-
-If you would like to get acquinted with Render and Bullet Train first, you can start with free settings like this:
-
-```yaml
-# render.yaml
-databases:
-  - name: database
-    databaseName: database
-    user: bullet_train
-    plan: free # Change this to "free".
-
-services:
-  - type: redis
-    name: redis
-    ipAllowList: []
-    plan: free # Change this to "free".
-    maxmemoryPolicy: noeviction
-  - type: web
-    name: web
-    plan: free # Change this to "free".
-# ...
-  - type: worker
-    name: worker
-    plan: free # Change this to "free". This will shut off the background worker.
-```
-
-The gotchas here are that the background workers will be shut off (e.g., you won't receive any email from the app) and a limited amount of hosting hours is granted with the servers sleeping in after some time of inactivity. This should be enough for you to get acquinted with Bullet Train and host your app from day one in the world wide web. Turning on the worker will incur extra cost ($7/mo at the time); You can configure your app to production-grade infrastructure with always-on servers starting at about 20$-30$ per month.
-
 ### Heroku
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=http://github.com/bullet-train-co/bullet_train)

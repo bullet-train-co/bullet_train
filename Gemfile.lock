@@ -102,14 +102,14 @@ GEM
     bcrypt (3.1.20)
     benchmark (0.4.1)
     benchmark-ips (2.14.0)
-    bigdecimal (3.2.1)
+    bigdecimal (3.2.2)
     bindex (0.8.1)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
     builder (3.3.0)
-    bullet_train (1.22.0)
+    bullet_train (1.23.0)
       bullet_train-fields
       bullet_train-has_uuid
       bullet_train-roles
@@ -127,69 +127,69 @@ GEM
       http_accept_language
       nice_partials (~> 0.9)
       omniauth (~> 2.0)
-      pagy (~> 8)
+      pagy (~> 9)
       possessive
       rails (>= 6.0.0)
       showcase-rails
-    bullet_train-api (1.22.0)
+    bullet_train-api (1.23.0)
       bullet_train
       bullet_train-super_scaffolding
       doorkeeper
       factory_bot
       jbuilder-schema (~> 2.6.6)
-      pagy (~> 8)
+      pagy (~> 9)
       rails (>= 6.0.0)
-    bullet_train-fields (1.22.0)
+    bullet_train-fields (1.23.0)
       chronic
       cloudinary
       phonelib
       rails (>= 6.0.0)
-    bullet_train-has_uuid (1.22.0)
+    bullet_train-has_uuid (1.23.0)
       rails (>= 6.0.0)
-    bullet_train-incoming_webhooks (1.22.0)
+    bullet_train-incoming_webhooks (1.23.0)
       bullet_train
       bullet_train-api
       bullet_train-super_scaffolding
       rails (>= 6.0.0)
-    bullet_train-integrations (1.22.0)
+    bullet_train-integrations (1.23.0)
       rails (>= 6.0.0)
-    bullet_train-integrations-stripe (1.22.0)
+    bullet_train-integrations-stripe (1.23.0)
       omniauth (~> 2.0)
       omniauth-rails_csrf_protection (~> 1.0)
       omniauth-stripe-connect-v2
       rails (>= 6.0.0)
       stripe
-    bullet_train-obfuscates_id (1.22.0)
+    bullet_train-obfuscates_id (1.23.0)
       hashids
       rails (>= 6.0.0)
-    bullet_train-outgoing_webhooks (1.22.0)
+    bullet_train-outgoing_webhooks (1.23.0)
       public_suffix
       rails (>= 6.0.0)
-    bullet_train-roles (1.22.0)
+    bullet_train-roles (1.23.0)
       active_hash (>= 3.3.1)
       activesupport
       cancancan
-    bullet_train-scope_validator (1.22.0)
+    bullet_train-scope_validator (1.23.0)
       rails (>= 6.0.0)
-    bullet_train-sortable (1.22.0)
+    bullet_train-sortable (1.23.0)
       rails (>= 6.0.0)
-    bullet_train-super_load_and_authorize_resource (1.22.0)
+    bullet_train-super_load_and_authorize_resource (1.23.0)
       cancancan
       rails (>= 6.0.0)
-    bullet_train-super_scaffolding (1.22.0)
+    bullet_train-super_scaffolding (1.23.0)
       colorize
       indefinite_article
       masamune-ast (~> 2.0.2)
       rails (>= 6.0.0)
-    bullet_train-themes (1.22.0)
+    bullet_train-themes (1.23.0)
       bullet_train-fields
       nice_partials (~> 0.9)
       rails (>= 6.0.0)
-    bullet_train-themes-light (1.22.0)
+    bullet_train-themes-light (1.23.0)
       bullet_train-themes-tailwind_css
       masamune-ast (~> 2.0.2)
       rails (>= 6.0.0)
-    bullet_train-themes-tailwind_css (1.22.0)
+    bullet_train-themes-tailwind_css (1.23.0)
       bullet_train-themes
       rails (>= 6.0.0)
     cable_ready (5.0.6)
@@ -435,7 +435,7 @@ GEM
       omniauth-oauth2 (~> 1.4)
     orm_adapter (0.5.0)
     ostruct (0.6.1)
-    pagy (8.6.3)
+    pagy (9.3.4)
     parallel (1.27.0)
     parallel_tests (5.3.0)
       parallel
@@ -473,11 +473,11 @@ GEM
       nio4r (~> 2.0)
     pwned (2.4.1)
     racc (1.8.1)
-    rack (3.1.15)
+    rack (3.1.16)
     rack-cors (3.0.0)
       logger
       rack (>= 3.0.14)
-    rack-mini-profiler (3.3.1)
+    rack-mini-profiler (4.0.0)
       rack (>= 1.2.0)
     rack-protection (4.1.1)
       base64 (>= 0.1.0)
@@ -565,7 +565,7 @@ GEM
       rubocop-ast (>= 1.44.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.45.0)
+    rubocop-ast (1.45.1)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
     rubocop-performance (1.25.0)
@@ -576,7 +576,7 @@ GEM
       rexml
     ruby-progressbar (1.13.0)
     ruby-statistics (4.1.0)
-    ruby-vips (2.2.3)
+    ruby-vips (2.2.4)
       ffi (~> 1.12)
       logger
     ruby2_keywords (0.0.5)
@@ -632,7 +632,7 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.7)
-    stripe (15.2.0)
+    stripe (15.2.1)
     terser (1.2.5)
       execjs (>= 0.3.0, < 3)
     thor (1.3.2)
@@ -683,23 +683,23 @@ DEPENDENCIES
   active_hash
   avo (>= 3.1.7)
   bootsnap
-  bullet_train (= 1.22.0)
-  bullet_train-api (= 1.22.0)
-  bullet_train-fields (= 1.22.0)
-  bullet_train-has_uuid (= 1.22.0)
-  bullet_train-incoming_webhooks (= 1.22.0)
-  bullet_train-integrations (= 1.22.0)
-  bullet_train-integrations-stripe (= 1.22.0)
-  bullet_train-obfuscates_id (= 1.22.0)
-  bullet_train-outgoing_webhooks (= 1.22.0)
-  bullet_train-roles (= 1.22.0)
-  bullet_train-scope_validator (= 1.22.0)
-  bullet_train-sortable (= 1.22.0)
-  bullet_train-super_load_and_authorize_resource (= 1.22.0)
-  bullet_train-super_scaffolding (= 1.22.0)
-  bullet_train-themes (= 1.22.0)
-  bullet_train-themes-light (= 1.22.0)
-  bullet_train-themes-tailwind_css (= 1.22.0)
+  bullet_train (= 1.23.0)
+  bullet_train-api (= 1.23.0)
+  bullet_train-fields (= 1.23.0)
+  bullet_train-has_uuid (= 1.23.0)
+  bullet_train-incoming_webhooks (= 1.23.0)
+  bullet_train-integrations (= 1.23.0)
+  bullet_train-integrations-stripe (= 1.23.0)
+  bullet_train-obfuscates_id (= 1.23.0)
+  bullet_train-outgoing_webhooks (= 1.23.0)
+  bullet_train-roles (= 1.23.0)
+  bullet_train-scope_validator (= 1.23.0)
+  bullet_train-sortable (= 1.23.0)
+  bullet_train-super_load_and_authorize_resource (= 1.23.0)
+  bullet_train-super_scaffolding (= 1.23.0)
+  bullet_train-themes (= 1.23.0)
+  bullet_train-themes-light (= 1.23.0)
+  bullet_train-themes-tailwind_css (= 1.23.0)
   capybara (~> 3.39)
   capybara-email
   capybara-lockstep
