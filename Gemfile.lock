@@ -81,7 +81,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ansi (1.5.0)
     ast (2.4.3)
-    avo (3.21.0)
+    avo (3.21.1)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -286,11 +286,11 @@ GEM
     erubi (1.13.1)
     erubis (2.7.0)
     execjs (2.10.0)
-    factory_bot (6.5.3)
+    factory_bot (6.5.4)
       activesupport (>= 6.1.0)
-    factory_bot_rails (6.4.4)
+    factory_bot_rails (6.5.0)
       factory_bot (~> 6.5)
-      railties (>= 5.0.0)
+      railties (>= 6.1.0)
     faraday (2.13.1)
       faraday-net_http (>= 2.0, < 3.5)
       json
