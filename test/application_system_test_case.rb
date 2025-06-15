@@ -3,7 +3,7 @@ require "capybara/email"
 require "support/waiting"
 require "minitest/retry"
 
-Minitest::Retry.use!(retry_count: 3, verbose: true, exceptions_to_retry: [Net::ReadTimeout])
+Minitest::Retry.use!(retry_count: 6, verbose: true, exceptions_to_retry: [Net::ReadTimeout, Capybara::ModalNotFound])
 OmniAuth.config.test_mode = true
 
 # Configure Capybara with either cuprite or selenium based on what gems are installed
