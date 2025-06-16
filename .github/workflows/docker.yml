@@ -15,7 +15,8 @@ jobs:
   build-and-push-base-image:
     # TODO: Remove this temporary next line
     #if: false
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
       contents: read
@@ -107,7 +108,8 @@ jobs:
   build-and-push-build-image:
     # TODO: Remove this temporary next line
     #if: false
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     needs: build-and-push-base-image
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
@@ -205,7 +207,8 @@ jobs:
           push-to-registry: true
 
   build-and-push-preview-image:
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     # TODO: Uncomment the next line
     needs: build-and-push-build-image
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
