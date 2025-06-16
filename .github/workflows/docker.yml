@@ -92,8 +92,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          #platforms: linux/amd64,linux/arm64
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
+          #platforms: linux/arm64
           build-args: |
             RUBY_VERSION=${{ steps.extract-ruby-version.outputs.result }}
 
@@ -193,8 +193,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          #platforms: linux/amd64,linux/arm64
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
+          #platforms: linux/arm64
           build-args: |
             BULLET_TRAIN_VERSION=${{ steps.extract-bullet-train-version.outputs.result }}
 
@@ -285,8 +285,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          #platforms: linux/amd64,linux/arm64
-          platforms: linux/arm64
+          platforms: linux/amd64,linux/arm64
+          #platforms: linux/arm64
           build-args: |
             BULLET_TRAIN_VERSION=${{ steps.extract-bullet-train-version.outputs.result }}
 
