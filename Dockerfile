@@ -20,10 +20,11 @@ FROM ghcr.io/bullet-train-co/bullet_train/build:$BULLET_TRAIN_VERSION AS build
 # ✅ ⬆️  Install your native build-time dependencies above
 
 # Install application gems
-COPY Gemfile Gemfile.lock .ruby-version ./
+COPY Gemfile Gemfile.lock .ruby-version package.json yarn.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
+    bundle exec bootsnap precompile --gemfile && \
+    yarn install
 
 # Copy application code
 COPY . .
