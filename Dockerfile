@@ -29,7 +29,9 @@ FROM ghcr.io/bullet-train-co/bullet_train/build:$BULLET_TRAIN_VERSION AS build
 COPY Gemfile Gemfile.lock .ruby-version package.json yarn.lock ./
 RUN bundle install --clean && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
+    echo "about to bootsnap precompile----------------------------" && \
     bundle exec bootsnap precompile --gemfile && \
+    echo "about to yarn install-----------------------------------" && \
     yarn install
 
 # Copy application code
