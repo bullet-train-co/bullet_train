@@ -5,6 +5,12 @@
 # docker build -t untitled_application .
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name untitled_application untitled_application
 
+# Sometimes it's handy to get long output and skip the cache:
+# docker build -t untitled_application -f Dockerfile . --no-cache --progress=plain
+#
+# You can then get a console to see what's on the build image by doing:
+# docker run -it untitled_application /bin/bash
+
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
 #######################################################################################################
