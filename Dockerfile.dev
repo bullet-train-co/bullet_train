@@ -9,13 +9,13 @@
 #### docker run -d -p 3000:3000 -e RAILS_MASTER_KEY=<value from config/master.key> --name untitled_application_dev untitled_application_dev
 
 
-# docker run -d --mount type=bind,src="$(pwd)",dst=/rails -p 3000:3000 --name untitled_application_dev untitled_application_dev
+# docker run -d --mount type=bind,src="$(pwd)",dst=/rails -p 3000:3000 -e DATABASE_USERNAME="$(whoami)" --name untitled_application_dev untitled_application_dev
 
 # Sometimes it's handy to get long output and skip the cache:
 # docker build -t untitled_application_dev -f Dockerfile . --no-cache --progress=plain
 #
 # You can then get a console to see what's on the build image by doing:
-# docker run --mount type=bind,src="$(pwd)",dst=/rails -it untitled_application_dev /bin/bash
+# docker run --mount type=bind,src="$(pwd)",dst=/rails -e DATABASE_USERNAME="$(whoami)" -it untitled_application_dev /bin/bash
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
@@ -34,6 +34,9 @@ FROM bullet_train/dev AS dev
 # TODO: Hoist this?
 ENV REDIS_URL="redis://host.docker.internal:6379/1"
 ENV BINDING=0.0.0.0
+ENV DATABASE_HOST=host.docker.internal
+ENV DATABASE_PORT=5432
+USER 1000:1000
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-entrypoint-dev"]
