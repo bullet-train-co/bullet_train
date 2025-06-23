@@ -1,6 +1,7 @@
 web: bin/rails server -p 3000
 worker: bundle exec sidekiq -t 25
 js: THEME="light" yarn build --watch
-light-css: yarn light:build:css --watch
-light-mailer-css: yarn light:build:mailer:css --watch
+# TODO: Inside Docker these two css tasks run and then show "exited with code 0" which causes foreman to exit. Why?
+#light-css: yarn light:build:css --watch
+#light-mailer-css: yarn light:build:mailer:css --watch
 # ngrok: ngrok http 3000

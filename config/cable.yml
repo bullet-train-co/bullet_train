@@ -1,5 +1,7 @@
 development:
   adapter: redis
+  # TODO: We should probably handle this via port mapping
+  url: redis://host.docker.internal:6379/1
 
 test:
   adapter: test
