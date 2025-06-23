@@ -21,6 +21,11 @@ default: &default
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
+  # TODO: We should handle this via port mapping
+  host: host.docker.internal
+  port: 5432
+  username: jgreen
+
 development:
   <<: *default
   database: untitled_application_development
