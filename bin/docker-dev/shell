@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+docker exec -it \
+  untitled_application_dev \
+  /bin/bash

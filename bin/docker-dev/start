@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+docker start untitled_application_dev
