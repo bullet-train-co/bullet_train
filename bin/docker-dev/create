@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+docker container create \
+  --mount type=bind,src="$(pwd)",dst=/rails \
+  -p 3000:3000 \
+  -e DATABASE_USERNAME="$(whoami)" \
+  --name untitled_application_dev \
+  untitled_application_dev

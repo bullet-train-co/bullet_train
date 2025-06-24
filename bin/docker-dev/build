@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+# Build an image named untitled_application_dev
+# Based on Dockerfile.dev
+# Using the top level app directory as context
+docker build \
+  -t untitled_application_dev \
+  -f Dockerfile.dev \
+  .
