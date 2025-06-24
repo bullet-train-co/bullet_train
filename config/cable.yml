@@ -1,7 +1,7 @@
 development:
   adapter: redis
-  # TODO: We should probably handle this via port mapping
-  url: redis://host.docker.internal:6379/1
+  # An accomodation for Docker
+  <% if ENV['REDIS_URL'] %>url: <%= ENV['REDIS_URL'] %><% end %>
 
 test:
   adapter: test
