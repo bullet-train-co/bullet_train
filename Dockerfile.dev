@@ -23,8 +23,8 @@
 # bullet_train/dev provides dependencies
 # TODO: How can we get this version number in a better way?
 ARG BULLET_TRAIN_VERSION=1.23.0
-#FROM ghcr.io/bullet-train-co/bullet_train/dev:$BULLET_TRAIN_VERSION AS dev
-FROM bullet_train/dev AS dev
+FROM ghcr.io/bullet-train-co/bullet_train/dev:$BULLET_TRAIN_VERSION AS dev
+#FROM bullet_train/dev AS dev
 
 # ✅ ⬇️  Install your native development dependencies below
 
