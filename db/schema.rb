@@ -329,8 +329,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_28_141219) do
     t.datetime "deactivation_limit_reached_at"
     t.datetime "deactivated_at"
     t.integer "consecutive_failed_deliveries", default: 0, null: false
-    t.index ["deactivated_at"], name: "index_webhooks_outgoing_endpoints_on_deactivated_at"
     t.index ["scaffolding_absolutely_abstract_creative_concept_id"], name: "index_endpoints_on_abstract_creative_concept_id"
+    t.index ["team_id", "deactivated_at"], name: "idx_on_team_id_deactivated_at_d8a33babf2"
     t.index ["team_id"], name: "index_webhooks_outgoing_endpoints_on_team_id"
   end
 
