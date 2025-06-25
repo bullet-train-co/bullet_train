@@ -1,8 +1,14 @@
+
 #
 name: "🚢 ~ Docker"
 
+# Configures this workflow to run every time a change is pushed to the branch called `release`.
+# TODO: Wire this up to happen automatically at the right time (whenever that is...). For now it's
+# set to be able to be run by hand.
 on:
   workflow_dispatch:
+  #push:
+    #branches: ['release']
 
 # Defines custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
@@ -89,3 +95,4 @@ jobs:
           subject-name: ${{ env.REGISTRY }}/${{ env.PREVIEW_IMAGE_NAME}}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
+
