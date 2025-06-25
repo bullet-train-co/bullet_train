@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # NOTE: We use the -t flag on this to ensure that the "yarn --watch" commands have a tty so that they don't exit immediately.
+# https://github.com/rails/rails/issues/44048#issuecomment-1004734401
 docker container create \
   -t \
   --mount type=bind,src="$(pwd)",dst=/rails \
