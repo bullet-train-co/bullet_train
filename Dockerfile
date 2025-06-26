@@ -2,11 +2,13 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t untitled_application .
+# Build:
+# docker build -t untitled_application --build-arg BULLET_TRAIN_VERSION=$(grep -m 1 BULLET_TRAIN_VERSION Gemfile | cut -d '"' -f 2) .
+# Run:
 # docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name untitled_application untitled_application
 
 # Sometimes it's handy to get long output and skip the cache:
-# docker build -t untitled_application -f Dockerfile . --no-cache --progress=plain
+# docker build -t untitled_application --build-arg BULLET_TRAIN_VERSION=$(grep -m 1 BULLET_TRAIN_VERSION Gemfile | cut -d '"' -f 2) . --no-cache --progress=plain
 #
 # You can then get a console to see what's on the build image by doing:
 # docker run -it untitled_application /bin/bash
@@ -17,8 +19,9 @@
 # Throw-away build stage to reduce size of final image
 # bullet_train/build provides build-time dependencies and pre-built verisons of all the gems in the starter repo.
 # TODO: How can we get this version number in a better way?
-ARG BULLET_TRAIN_VERSION=1.23.0
-FROM ghcr.io/bullet-train-co/bullet_train/build:$BULLET_TRAIN_VERSION AS build
+ARG BULLET_TRAIN_VERSION=fake.version
+ARG FROM_IMAGE=ghcr.io/bullet-train-co/bullet_train/build:$BULLET_TRAIN_VERSION
+FROM $FROM_IMAGE AS build
 
 # ✅ ⬇️  Install your native build-time dependencies below
 
