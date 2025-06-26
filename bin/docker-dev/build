@@ -6,4 +6,5 @@
 docker build \
   -t untitled_application_dev \
   -f Dockerfile.dev \
+  --build-arg BULLET_TRAIN_VERSION=$(grep -m 1 BULLET_TRAIN_VERSION Gemfile | cut -d '"' -f 2) \
   .
