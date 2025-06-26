@@ -25,5 +25,5 @@ jobs:
       # TODO: Why does it not accept ENV values here...
       image-name: bullet-train-co/bullet_train
       dockerfile: Dockerfile
-      runs-on: ubuntu-latest
-      target-platforms: linux/amd64
+      runs-on: ubuntu-24.04-arm
+      target-platforms: linux/amd64, linux/arm64
