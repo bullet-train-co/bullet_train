@@ -20,7 +20,7 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  # Some accomodations for Dockerfile.dev
+  # Some accomodations for dev.Dockerfile
   <% if ENV['DATABASE_HOST'] %>host: <%= ENV['DATABASE_HOST'] %><% end %>
   <% if ENV['DATABASE_USERNAME'] %>username: <%= ENV['DATABASE_USERNAME'] %><% end %>
   <% if ENV['DATABASE_PORT'] %>port: <%= ENV['DATABASE_PORT'] %><% end %>
