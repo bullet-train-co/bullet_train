@@ -3,12 +3,12 @@
 
 # This Dockerfile is designed for development.
 # Build:
-# docker build -t untitled_application_dev -f Dockerfile.dev --build-arg BULLET_TRAIN_VERSION=$(grep -m 1 BULLET_TRAIN_VERSION Gemfile | cut -d '"' -f 2) .
+# docker build -t untitled_application_dev -f dev.Dockerfile --build-arg BULLET_TRAIN_VERSION=$(grep -m 1 BULLET_TRAIN_VERSION Gemfile | cut -d '"' -f 2) .
 # Run:
 # docker run -dt -p 3000:3000 --mount type=bind,src="$(pwd)",dst=/rails -e DATABASE_USERNAME="$(whoami)" --name untitled_application_dev untitled_application_dev
 
 # Sometimes it's handy to get long output and skip the cache:
-# docker build -t untitled_application_dev -f Dockerfile.dev --build-arg BULLET_TRAIN_VERSION=$(grep -m 1 BULLET_TRAIN_VERSION Gemfile | cut -d '"' -f 2) . --no-cache --progress=plain
+# docker build -t untitled_application_dev -f dev.Dockerfile --build-arg BULLET_TRAIN_VERSION=$(grep -m 1 BULLET_TRAIN_VERSION Gemfile | cut -d '"' -f 2) . --no-cache --progress=plain
 #
 # You can then get a console to see what's on the build image by doing:
 # docker run --mount type=bind,src="$(pwd)",dst=/rails -e DATABASE_USERNAME="$(whoami)" -it untitled_application_dev /bin/bash
