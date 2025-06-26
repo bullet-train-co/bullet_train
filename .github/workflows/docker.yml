@@ -26,4 +26,4 @@ jobs:
       image-name: bullet-train-co/bullet_train
       dockerfile: Dockerfile
       runs-on: ubuntu-24.04-arm
-      target-platforms: linux/amd64, linux/arm64
+      platforms: linux/amd64, linux/arm64
