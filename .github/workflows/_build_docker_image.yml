@@ -17,7 +17,7 @@ on:
         description: 'The type of runner to use. Usually ubuntu-latest or ubuntu-24.04-arm'
         required: true
         type: string
-      target-platforms:
+      platforms:
         description: 'The platofmrs to build for.'
         required: true
         type: string
