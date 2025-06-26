@@ -1,5 +1,7 @@
 development:
   adapter: redis
+  # An accomodation for Docker
+  <% if ENV['REDIS_URL'] %>url: <%= ENV['REDIS_URL'] %><% end %>
 
 test:
   adapter: test

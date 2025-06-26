@@ -1,13 +1,29 @@
+
 #
 name: "🚢 ~ Docker"
 
+# Configures this workflow to run every time a change is pushed to the branch called `release`.
+# TODO: Wire this up to happen automatically at the right time (whenever that is...). For now it's
+# set to be able to be run by hand.
 on:
   workflow_dispatch:
+  #push:
+    #branches: ['release']
+
+# Defines custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
+env:
+  REGISTRY: ghcr.io
+  PREVIEW_IMAGE_NAME: bullet-train-co/bullet_train
 
 jobs:
-  placeholder-job:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+  build-and-push-preview-image:
+    name: "preview"
+    # TODO: Better file naming?
+    uses: ./.github/workflows/_build_docker_image.yml
+    secrets: inherit
+    with:
+      # TODO: Why does it not accept ENV values here...
+      image-name: bullet-train-co/bullet_train
+      dockerfile: Dockerfile
+      runs-on: ubuntu-24.04-arm
+      platforms: linux/amd64, linux/arm64

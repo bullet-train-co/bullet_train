@@ -4,7 +4,7 @@ bin/link
 
 if [ -x "$(command -v overmind)" ]
 then
-  overmind start -f Procfile.dev "$@"
+  bundle exec overmind start -f Procfile.dev "$@"
 else
-  foreman start -f Procfile.dev "$@"
+  bundle exec foreman start -f Procfile.dev "$@"
 fi
