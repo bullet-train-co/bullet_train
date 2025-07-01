@@ -32,13 +32,11 @@ USER 1000:1000
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-dev/entrypoint"]
-# Start server via Thruster by default, this can be overwritten at runtime
 #EXPOSE 80
 EXPOSE 3000
 
 # TODO: What's the best command to run here? I think ideally we'd piggy back off of bin/dev
 # but it doesn't seem to allow foreman to catch the term signal, so it doesn't shut down cleanly.
 # Running foreman directly here does shutdown cleanly.
-#CMD ["./bin/thrust", "./bin/rails", "server"]
 #CMD ["./bin/dev"]
 CMD ["bundle", "exec", "foreman", "start", "-f", "Procfile.dev"]

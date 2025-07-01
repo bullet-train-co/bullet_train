@@ -645,10 +645,6 @@ GEM
       execjs (>= 0.3.0, < 3)
     thor (1.4.0)
     thread-local (1.1.0)
-    thruster (0.1.13-aarch64-linux)
-    thruster (0.1.13-arm64-darwin)
-    thruster (0.1.13-x86_64-darwin)
-    thruster (0.1.13-x86_64-linux)
     timeout (0.4.3)
     turbo-rails (2.0.16)
       actionpack (>= 7.1.0)
@@ -752,7 +748,6 @@ DEPENDENCIES
   standard
   stimulus-rails
   terser
-  thruster
   turbo-rails
   tzinfo-data
   web-console
