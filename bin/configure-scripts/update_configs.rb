@@ -12,11 +12,18 @@ end
 
 require "active_support/inflector"
 
+# new_app_name
 variable = ActiveSupport::Inflector.parameterize(human.tr("-", " "), separator: "_")
+# NEW_APP_NAME
 environment_variable = ActiveSupport::Inflector.parameterize(human.tr("-", " "), separator: "_").upcase
+# NewAppName
 class_name = variable.classify
+# new-app-name
 kebab_case = variable.tr("_", "-")
-connected_name = variable.delete("_") # i.e. `bullettrain` as opposed to `bullet_train`
+# newappname
+connected_name = variable.delete("_")
+# New-App-Name
+http_header_style = ActiveSupport::Inflector.parameterize(human.tr("_", " "), separator: "-").titleize.tr(" ", "-")
 
 puts ""
 puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
@@ -27,6 +34,9 @@ replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_var
 replace_in_file("./config/cable.yml", "untitled_application", variable)
 replace_in_file("./config/initializers/session_store.rb", "untitled_application", variable)
 replace_in_file("./config/environments/production.rb", "untitled_application", variable)
+replace_in_file("./config/environments/production.rb", "Untitled-Application", http_header_style)
+replace_in_file("./config/environments/test.rb", "Untitled-Application", http_header_style)
+replace_in_file("./config/environments/development.rb", "Untitled-Application", http_header_style)
 replace_in_file("./config/application.rb", "UntitledApplication", class_name)
 replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
