@@ -123,6 +123,14 @@ jobs:
           digest="${{ steps.push.outputs.digest }}"
           touch "${{ runner.temp }}/digests/${digest#sha256:}"
 
+      - name: List digest
+        run: |
+          ls -al ${{ runner.temp }}/digests
+
+      - name: Cat digest
+        run: |
+          cat ${{ runner.temp }}/digests/*
+
       - name: Upload digest
         uses: actions/upload-artifact@v4
         with:
