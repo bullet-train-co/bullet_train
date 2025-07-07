@@ -16,14 +16,23 @@ env:
   PREVIEW_IMAGE_NAME: bullet-train-co/bullet_train
 
 jobs:
-  build-and-push-preview-image:
+  build-arm:
     name: "preview"
     # TODO: Better file naming?
     uses: ./.github/workflows/_build_docker_image.yml
     secrets: inherit
     with:
-      # TODO: Why does it not accept ENV values here...
-      image-name: bullet-train-co/bullet_train
+      image-name: bullet-train-co/bullet_train/arm
       dockerfile: Dockerfile
       runs-on: ubuntu-24.04-arm
-      platforms: linux/amd64, linux/arm64
+      platforms: linux/arm64
+  build-amd:
+    name: "preview"
+    # TODO: Better file naming?
+    uses: ./.github/workflows/_build_docker_image.yml
+    secrets: inherit
+    with:
+      image-name: bullet-train-co/bullet_train/amd
+      dockerfile: Dockerfile
+      runs-on: ubuntu-latest
+      platforms: linux/amd64
