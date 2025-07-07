@@ -17,8 +17,8 @@ on:
         description: 'The type of runner to use. Usually ubuntu-latest or ubuntu-24.04-arm'
         required: true
         type: string
-      platforms:
-        description: 'The platofmrs to build for.'
+      platform:
+        description: 'The platform to build for.'
         required: true
         type: string
 
@@ -56,6 +56,11 @@ jobs:
                 return line.split(equalToken)[1].trim().replaceAll('"','')
               }
             }
+
+      - name: Prepare
+        run: |
+          platform=${{ inputs.platform }}
+          echo "PLATFORM_PAIR=${platform//\//-}" >> $GITHUB_ENV
 
       # Uses the `docker/login-action` action to log in to the Container registry registry using the account and password that will publish the packages. Once published, the packages are scoped to the account defined here.
       - name: Log in to the Container registry
@@ -100,7 +105,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          platforms: ${{ inputs.platforms }}
+          platforms: ${{ inputs.platform }}
           build-args: |
             BULLET_TRAIN_VERSION=${{ steps.extract-bullet-train-version.outputs.result }}
 
