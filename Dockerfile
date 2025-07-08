@@ -69,7 +69,7 @@ RUN chown -R rails:rails db log storage tmp
 USER 1000:1000
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker/entrypoint"]
+ENTRYPOINT ["./bin/docker/entrypoint"]
 
 # Start server by default, this can be overwritten at runtime
 CMD ["./bin/rails", "server"]

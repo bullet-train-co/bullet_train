@@ -31,7 +31,7 @@ FROM $FROM_IMAGE AS dev
 USER 1000:1000
 
 # Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-dev/entrypoint"]
+ENTRYPOINT ["./bin/docker-dev/entrypoint"]
 
 # Start the dev server by default, this can be overwritten at runtime
 CMD ["./bin/dev"]
