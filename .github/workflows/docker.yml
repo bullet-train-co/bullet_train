@@ -49,12 +49,32 @@ jobs:
       - build-arm
       - build-amd
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Download digests
         uses: actions/download-artifact@v4
         with:
           path: ${{ runner.temp }}/digests
           pattern: digests-*
           merge-multiple: true
+
+      - name: Extract Bullet Train Version
+        id: extract-bullet-train-version
+        uses: actions/github-script@v7
+        with:
+          result-encoding: string
+          script: |
+            const fs = require('fs')
+            const gemString = fs.readFileSync('Gemfile').toString()
+            const lines = gemString.split('\n')
+            const versionToken = "BULLET_TRAIN_VERSION = ";
+            const equalToken = " = "
+            for await (const line of lines) {
+              if (line.includes(versionToken)) {
+                return line.split(equalToken)[1].trim().replaceAll('"','')
+              }
+            }
 
       - name: List digest
         run: |
