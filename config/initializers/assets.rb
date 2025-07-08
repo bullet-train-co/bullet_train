@@ -5,18 +5,3 @@ Rails.application.config.assets.version = "1.0"
 
 # Add additional assets to the asset load path.
 # Rails.application.config.assets.paths << Emoji.images_path
-
-# TODO: Is this the best place for this?
-#if ENV["SPROCKETS_NO_EXPORT_CONCURRENT"]
-  ## These things all help with multi-platform Docker builds in GitHub Actions.
-  ##
-  ## Regexp needs more time when compiling for a different platform
-  #Regexp.timeout = 60 * 5
-
-  ## This prevents asset precompilation from hanging indefinitely.
-  ## https://github.com/rails/sprockets/issues/640
-  #Sprockets.export_concurrent = false
-
-  ## https://github.com/capistrano/rails/issues/55
-  #Rails.application.config.assets.logger = Logger.new $stdout
-#end
