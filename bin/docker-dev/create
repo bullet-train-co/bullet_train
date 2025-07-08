@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+APP_ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+
 # NOTE: We use the -t flag on this to ensure that the "yarn --watch" commands have a tty so that they don't exit immediately.
 # https://github.com/rails/rails/issues/44048#issuecomment-1004734401
 docker container create \
   -t \
-  --mount type=bind,src="$(pwd)",dst=/rails \
+  --mount type=bind,src="${APP_ROOT}",dst=/rails \
   -p 3000:3000 \
   -e DATABASE_USERNAME="$(whoami)" \
   --name untitled_application_dev \
