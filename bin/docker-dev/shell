@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
-docker exec -it \
+docker run -it \
+  --mount type=bind,src="$(pwd)",dst=/rails \
+  -e DATABASE_USERNAME="$(whoami)" \
   untitled_application_dev \
   /bin/bash
