@@ -19,7 +19,7 @@
 # Throw-away build stage to reduce size of final image
 # bullet_train/build provides build-time dependencies and pre-built verisons of all the gems in the starter repo.
 # TODO: How can we get this version number in a better way?
-ARG BULLET_TRAIN_VERSION=fake.version
+ARG BULLET_TRAIN_VERSION=FAKE.VERSION
 ARG FROM_IMAGE=ghcr.io/bullet-train-co/bullet_train/build:$BULLET_TRAIN_VERSION
 FROM $FROM_IMAGE AS build
 
