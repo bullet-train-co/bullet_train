@@ -32,7 +32,6 @@ USER 1000:1000
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["/rails/bin/docker-dev/entrypoint"]
-#EXPOSE 80
-EXPOSE 3000
 
+# Start the dev server by default, this can be overwritten at runtime
 CMD ["./bin/dev"]
