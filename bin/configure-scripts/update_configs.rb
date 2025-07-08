@@ -47,7 +47,7 @@ replace_in_file("./zapier/package.json", "Untitled Application", human)
 replace_in_file("./app/views/api/v1/open_api/index.yaml.erb", "Untitled Application", human)
 replace_in_file("./app.json", "Untitled Application", human)
 replace_in_file("./.redocly.yaml", "untitled_application", variable)
-Dir.glob('./bin/docker-dev/*').each do|file|
+Dir.glob("./bin/docker-dev/*").each do |file|
   replace_in_file(file, "untitled_application", variable)
 end
 
