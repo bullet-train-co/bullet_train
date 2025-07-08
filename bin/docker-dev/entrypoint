@@ -6,15 +6,12 @@ if [ -z "${LD_PRELOAD+x}" ]; then
     export LD_PRELOAD
 fi
 
-# If running the rails server then create or migrate existing database
-if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
-  ./bin/rails db:prepare
-fi
-
 bundle install
 yarn install
 
-# TODO: When you start a container and then stop it we don't seem to cleanly shut down Sidekiq
-rm -f tmp/pids/server.pid
+# If running the dev server then create or migrate existing database
+if [ "${@: -1:1}" == "./bin/dev" ]; then
+  ./bin/rails db:prepare
+fi
 
 exec "${@}"

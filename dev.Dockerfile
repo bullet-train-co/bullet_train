@@ -35,8 +35,4 @@ ENTRYPOINT ["/rails/bin/docker-dev/entrypoint"]
 #EXPOSE 80
 EXPOSE 3000
 
-# TODO: What's the best command to run here? I think ideally we'd piggy back off of bin/dev
-# but it doesn't seem to allow foreman to catch the term signal, so it doesn't shut down cleanly.
-# Running foreman directly here does shutdown cleanly.
-#CMD ["./bin/dev"]
-CMD ["bundle", "exec", "foreman", "start", "-f", "Procfile.dev"]
+CMD ["./bin/dev"]
