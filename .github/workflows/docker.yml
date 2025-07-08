@@ -178,7 +178,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.PREVIEW_IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.PREVIEW_IMAGE_NAME }}
           tags: |
             type=ref,event=branch
             type=ref,event=pr
