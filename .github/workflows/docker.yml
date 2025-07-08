@@ -50,7 +50,6 @@ jobs:
   build-arm:
     name: "arm"
     needs: extract-bullet-train-version
-    # TODO: Better file naming?
     uses: ./.github/workflows/_build_docker_image.yml
     secrets: inherit
     with:
@@ -62,7 +61,6 @@ jobs:
   build-amd:
     name: "amd"
     needs: extract-bullet-train-version
-    # TODO: Better file naming?
     uses: ./.github/workflows/_build_docker_image.yml
     secrets: inherit
     with:
@@ -105,10 +103,6 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.PREVIEW_IMAGE_NAME }}
           tags: |
-            #type=ref,event=branch
-            #type=ref,event=pr
-            #type=semver,pattern={{version}}
-            #type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{version}},value=${{ needs.extract-bullet-train-version.outputs.version }}
 
       - name: Create manifest list and push
