@@ -17,7 +17,7 @@
 
 #######################################################################################################
 # Throw-away build stage to reduce size of final image
-# bullet_train/build provides build-time dependencies and pre-built verisons of all the gems in the starter repo.
+# bullet_train/build provides build-time dependencies for all the gems in the starter repo.
 ARG BULLET_TRAIN_VERSION=FAKE.VERSION
 ARG FROM_IMAGE=ghcr.io/bullet-train-co/bullet_train/build:$BULLET_TRAIN_VERSION
 FROM $FROM_IMAGE AS build
@@ -31,9 +31,7 @@ FROM $FROM_IMAGE AS build
 COPY Gemfile Gemfile.lock .ruby-version package.json yarn.lock ./
 RUN bundle install --clean && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    echo "about to bootsnap precompile----------------------------" && \
     bundle exec bootsnap precompile --gemfile && \
-    echo "about to yarn install-----------------------------------" && \
     yarn install
 
 # Copy application code
