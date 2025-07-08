@@ -58,6 +58,7 @@ jobs:
       dockerfile: Dockerfile
       runs-on: ubuntu-24.04-arm
       platform: linux/arm64
+      bullet-train-version: ${{ needs.extract-bullet-train-version.outputs.version }}
   build-amd:
     name: "amd"
     needs: extract-bullet-train-version
@@ -69,6 +70,7 @@ jobs:
       dockerfile: Dockerfile
       runs-on: ubuntu-latest
       platform: linux/amd64
+      bullet-train-version: ${{ needs.extract-bullet-train-version.outputs.version }}
 
   merge:
     runs-on: ubuntu-latest
