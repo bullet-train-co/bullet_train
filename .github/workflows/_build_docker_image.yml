@@ -30,11 +30,11 @@ jobs:
     name: "Build & Push"
     runs-on: ${{ inputs.runs-on }}
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
-    permissions:
-      contents: read
-      packages: write
-      attestations: write
-      id-token: write
+    #permissions:
+      #contents: read
+      #packages: write
+      #attestations: write
+      #id-token: write
 
     steps:
       - name: Checkout repository
