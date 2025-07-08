@@ -103,7 +103,8 @@ jobs:
           context: .
           file: ${{ inputs.dockerfile }}
           #push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          #tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ env.REGISTRY }}/${{ inputs.image-name }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: ${{ inputs.platform }}
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
