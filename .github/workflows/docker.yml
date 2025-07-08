@@ -22,45 +22,16 @@ permissions:
   id-token: write
 
 jobs:
-  build-arm:
-    name: "arm"
-    # TODO: Better file naming?
-    uses: ./.github/workflows/_build_docker_image.yml
-    secrets: inherit
-    with:
-      image-name: bullet-train-co/bullet_train
-      dockerfile: Dockerfile
-      runs-on: ubuntu-24.04-arm
-      platform: linux/arm64
-  build-amd:
-    name: "amd"
-    # TODO: Better file naming?
-    uses: ./.github/workflows/_build_docker_image.yml
-    secrets: inherit
-    with:
-      image-name: bullet-train-co/bullet_train
-      dockerfile: Dockerfile
-      runs-on: ubuntu-latest
-      platform: linux/amd64
-
-  merge:
+  extract-bullet-train-version:
+    name: "Extract Bullet Train Version"
     runs-on: ubuntu-latest
-    needs:
-      - build-arm
-      - build-amd
+    outputs:
+      version: ${{ steps.extract-version.outputs.result }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Download digests
-        uses: actions/download-artifact@v4
-        with:
-          path: ${{ runner.temp }}/digests
-          pattern: digests-*
-          merge-multiple: true
-
+      - name: Checkout Repo
+        uses: "actions/checkout@v4"
       - name: Extract Bullet Train Version
-        id: extract-bullet-train-version
+        id: extract-version
         uses: actions/github-script@v7
         with:
           result-encoding: string
@@ -75,6 +46,46 @@ jobs:
                 return line.split(equalToken)[1].trim().replaceAll('"','')
               }
             }
+
+  build-arm:
+    name: "arm"
+    needs: extract-bullet-train-version
+    # TODO: Better file naming?
+    uses: ./.github/workflows/_build_docker_image.yml
+    secrets: inherit
+    with:
+      image-name: bullet-train-co/bullet_train
+      dockerfile: Dockerfile
+      runs-on: ubuntu-24.04-arm
+      platform: linux/arm64
+  build-amd:
+    name: "amd"
+    needs: extract-bullet-train-version
+    # TODO: Better file naming?
+    uses: ./.github/workflows/_build_docker_image.yml
+    secrets: inherit
+    with:
+      image-name: bullet-train-co/bullet_train
+      dockerfile: Dockerfile
+      runs-on: ubuntu-latest
+      platform: linux/amd64
+
+  merge:
+    runs-on: ubuntu-latest
+    needs:
+      - extract-bullet-train-version
+      - build-arm
+      - build-amd
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download digests
+        uses: actions/download-artifact@v4
+        with:
+          path: ${{ runner.temp }}/digests
+          pattern: digests-*
+          merge-multiple: true
 
       - name: Login Container Registry
         uses: docker/login-action@v3
@@ -96,7 +107,7 @@ jobs:
             #type=ref,event=pr
             #type=semver,pattern={{version}}
             #type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{version}},value=${{ steps.extract-bullet-train-version.outputs.result }}
+            type=semver,pattern={{version}},value=${{ needs.extract-bullet-train-version.outputs.version }}
 
       - name: Create manifest list and push
         working-directory: ${{ runner.temp }}/digests

@@ -21,6 +21,11 @@ on:
         description: 'The platform to build for.'
         required: true
         type: string
+      bullet-train-version:
+        description: 'The version of Bullet Train.'
+        required: true
+        type: string
+
 
 env:
   REGISTRY: ghcr.io
@@ -34,22 +39,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Extract Bullet Train Version
-        id: extract-bullet-train-version
-        uses: actions/github-script@v7
-        with:
-          result-encoding: string
-          script: |
-            const fs = require('fs')
-            const gemString = fs.readFileSync('Gemfile').toString()
-            const lines = gemString.split('\n')
-            const versionToken = "BULLET_TRAIN_VERSION = ";
-            const equalToken = " = "
-            for await (const line of lines) {
-              if (line.includes(versionToken)) {
-                return line.split(equalToken)[1].trim().replaceAll('"','')
-              }
-            }
+      #- name: Extract Bullet Train Version
+        #id: extract-bullet-train-version
+        #uses: actions/github-script@v7
+        #with:
+          #result-encoding: string
+          #script: |
+            #const fs = require('fs')
+            #const gemString = fs.readFileSync('Gemfile').toString()
+            #const lines = gemString.split('\n')
+            #const versionToken = "BULLET_TRAIN_VERSION = ";
+            #const equalToken = " = "
+            #for await (const line of lines) {
+              #if (line.includes(versionToken)) {
+                #return line.split(equalToken)[1].trim().replaceAll('"','')
+              #}
+            #}
 
       - name: Prepare
         run: |
@@ -91,7 +96,7 @@ jobs:
           platforms: ${{ inputs.platform }}
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
           build-args: |
-            BULLET_TRAIN_VERSION=${{ steps.extract-bullet-train-version.outputs.result }}
+            BULLET_TRAIN_VERSION=${{ inputs.bullet-train-version }}
 
       # This step generates an artifact attestation for the image, which is an unforgeable statement about where and how it was built. It increases supply chain security for people who consume the image. For more information, see [Using artifact attestations to establish provenance for builds](/actions/security-guides/using-artifact-attestations-to-establish-provenance-for-builds).
       - name: Generate artifact attestation
