@@ -76,14 +76,6 @@ jobs:
               }
             }
 
-      - name: List digest
-        run: |
-          ls -al ${{ runner.temp }}/digests
-
-      - name: Cat digest
-        run: |
-          cat ${{ runner.temp }}/digests/*
-
       - name: Login Container Registry
         uses: docker/login-action@v3
         with:
