@@ -28,4 +28,9 @@
 
 <%= capybara_lockstep if defined?(Capybara::Lockstep) %>
 
+<% # TODO: Wrap this in a config or conditional? %>
+<% # TODO: Move to the layout in core? %>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="/manifest.json">
+
 <% # put your application-specific additions below to avoid merge conflicts later. %>
