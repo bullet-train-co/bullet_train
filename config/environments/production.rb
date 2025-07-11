@@ -162,7 +162,7 @@ Rails.application.configure do
   # Uncomment the following lines to change the default settings for automatic endpoint deactivation.
   # config.outgoing_webhooks[:automatic_endpoint_deactivation_settings] = {
   #   max_limit: 50,
-  #   deactivation_in: 3.day
+  #   deactivation_in: 3.days
   # }
 
   # ✅ YOUR APPLICATION'S CONFIGURATION
