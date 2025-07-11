@@ -89,4 +89,8 @@ dump.rdb
 # Ignore output from rails-erd
 erd.pdf
 
+# AI things
+/.claude
+CLAUDE.md
+
 # 🚅 add your files to ignore here.

@@ -155,6 +155,16 @@ Rails.application.configure do
   # This header namespace will be used when sending webhook events.
   config.outgoing_webhooks[:webhook_headers_namespace] = "X-Webhook-Untitled-Application"
 
+  # Automatic endpoint deactivation for outgoing webhooks. This feature is disabled by default.
+  # If you want to enable it, set the following configuration option to true.
+  # config.outgoing_webhooks[:automatic_endpoint_deactivation_enabled] = true
+
+  # Uncomment the following lines to change the default settings for automatic endpoint deactivation.
+  # config.outgoing_webhooks[:automatic_endpoint_deactivation_settings] = {
+  #   max_limit: 50,
+  #   deactivation_in: 3.days
+  # }
+
   # ✅ YOUR APPLICATION'S CONFIGURATION
   # If you need to customize your application's configuration, this is the place to do it. This helps avoid merge
   # conflicts in the future when Rails or Bullet Train update their own default settings.

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_27_133852) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_28_141219) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -302,6 +302,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_27_133852) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.datetime "delivered_at", precision: nil
+    t.index ["endpoint_id", "event_id"], name: "index_webhooks_outgoing_deliveries_on_endpoint_id_and_event_id"
   end
 
   create_table "webhooks_outgoing_delivery_attempts", force: :cascade do |t|
@@ -313,6 +314,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_27_133852) do
     t.text "response_message"
     t.text "error_message"
     t.integer "attempt_number"
+    t.index ["delivery_id"], name: "index_webhooks_outgoing_delivery_attempts_on_delivery_id"
   end
 
   create_table "webhooks_outgoing_endpoints", force: :cascade do |t|
@@ -325,7 +327,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_27_133852) do
     t.bigint "scaffolding_absolutely_abstract_creative_concept_id"
     t.integer "api_version", null: false
     t.string "webhook_secret", null: false
+    t.datetime "deactivation_limit_reached_at"
+    t.datetime "deactivated_at"
+    t.integer "consecutive_failed_deliveries", default: 0, null: false
     t.index ["scaffolding_absolutely_abstract_creative_concept_id"], name: "index_endpoints_on_abstract_creative_concept_id"
+    t.index ["team_id", "deactivated_at"], name: "idx_on_team_id_deactivated_at_d8a33babf2"
     t.index ["team_id"], name: "index_webhooks_outgoing_endpoints_on_team_id"
   end
 
