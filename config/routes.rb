@@ -15,11 +15,9 @@ Rails.application.routes.draw do
   # TODO Would love to get this out of the application routes file.
   extending = {only: []}
 
-  # TODO: Wrap this in a config or conditional?
-  # TODO: Move to the routes file in core?
-  # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in layouts/_head.html.erb)
+  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   scope module: "public" do
     # To keep things organized, we put non-authenticated controllers in the `Public::` namespace.
