@@ -328,7 +328,7 @@ GEM
     inline_svg (1.10.0)
       activesupport (>= 3.0)
       nokogiri (>= 1.6)
-    io-console (0.8.0)
+    io-console (0.8.1)
     irb (1.15.2)
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
@@ -345,7 +345,7 @@ GEM
     json (2.12.2)
     jwt (3.1.2)
       base64
-    knapsack_pro (8.3.1)
+    knapsack_pro (8.3.2)
       rake
     language_server-protocol (3.17.0.5)
     launchy (3.1.1)
