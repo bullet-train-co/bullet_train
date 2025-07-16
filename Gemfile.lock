@@ -283,7 +283,7 @@ GEM
     doorkeeper (5.8.2)
       railties (>= 5)
     drb (2.2.3)
-    erb (5.0.1)
+    erb (5.0.2)
     erubi (1.13.1)
     erubis (2.7.0)
     execjs (2.10.0)
@@ -543,7 +543,7 @@ GEM
       psych (>= 4.0.0)
     redis (5.4.0)
       redis-client (>= 0.22.0)
-    redis-client (0.25.0)
+    redis-client (0.25.1)
       connection_pool
     regexp_parser (2.10.0)
     reline (0.6.1)
