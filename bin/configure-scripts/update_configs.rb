@@ -28,6 +28,7 @@ http_header_style = ActiveSupport::Inflector.parameterize(human.tr("_", " "), se
 puts ""
 puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
 replace_in_file("./.circleci/config.yml", "untitled_application", variable)
+replace_in_file("./.kamal/secrets", "UNTITLED_APPLICATION", environment_variable)
 replace_in_file("./config/application.rb", "untitled_application", connected_name)
 replace_in_file("./config/database.yml", "untitled_application", variable)
 replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
@@ -38,6 +39,9 @@ replace_in_file("./config/environments/production.rb", "Untitled-Application", h
 replace_in_file("./config/environments/test.rb", "Untitled-Application", http_header_style)
 replace_in_file("./config/environments/development.rb", "Untitled-Application", http_header_style)
 replace_in_file("./config/application.rb", "UntitledApplication", class_name)
+replace_in_file("./config/deploy.yml", "untitled-application", kebab_case)
+replace_in_file("./config/deploy.yml", "untitled_application", variable)
+replace_in_file("./config/deploy.yml", "UNTITLED_APPLICATION", environment_variable)
 replace_in_file("./config/locales/en/application.en.yml", "Untitled Application", human, /name/)
 replace_in_file("./config/locales/en/application.en.yml", "untitled_application", variable)
 replace_in_file("./config/locales/en/application.en.yml", "untitled application", human.downcase, /keywords/)
