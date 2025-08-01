@@ -2276,7 +2276,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redocly/cli@npm:^1.0.0-beta.111":
+"@redocly/cli@npm:^1.34.5 <2.0.0":
   version: 1.34.5
   resolution: "@redocly/cli@npm:1.34.5"
   dependencies:
@@ -2539,7 +2539,7 @@ __metadata:
     "@rails/actiontext": "npm:^8.0.200"
     "@rails/activestorage": "npm:^8.0.100"
     "@rails/request.js": "npm:^0.0.12"
-    "@redocly/cli": "npm:^1.0.0-beta.111"
+    "@redocly/cli": "npm:^1.34.5 <2.0.0"
     "@tailwindcss/forms": "npm:^0.5.10"
     "@tailwindcss/typography": "npm:^0.5.16"
     autoprefixer: "npm:^10.4.21"
