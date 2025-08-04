@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-class InvitationDetailsTest < ApplicationSystemTestCase
+class InvitationsTest < ApplicationSystemTestCase
   device_test "visitors can sign-up and manage team members with subscriptions #{billing_enabled? ? "enabled" : "disabled"}" do
     be_invited_to_sign_up
 
