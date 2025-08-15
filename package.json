@@ -11,7 +11,7 @@
     "@hotwired/turbo-rails": "^8.0.16",
     "@icon/themify-icons": "^1.0.1-alpha.3",
     "@rails/actioncable": "^8.0.200",
-    "@rails/actiontext": "^8.0.200",
+    "@rails/actiontext": "^8.0.201",
     "@rails/activestorage": "^8.0.100",
     "@rails/request.js": "^0.0.12",
     "@redocly/cli": "^1.34.5 <2.0.0",
