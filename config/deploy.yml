@@ -1,0 +1,108 @@
+# Initially this file has some FIXMEs that you need to fill out to get started
+# with Kamal.
+#
+# This deploy.yml assumes the following prerequisites:
+#   - You have a Docker Hub account with a `docker-hub-username`.
+#   - You have a server you can SSH into.
+#   - You have a domain name that you own and will point to your server's IP address.
+#
+# Name of your application. Used to uniquely configure containers.
+service: untitled-application
+
+# Name of the container image.
+# FIXME: Change this to your Docker Hub username.
+image: docker-hub-username/untitled-application
+
+# Deploy to these servers.
+servers:
+  web:
+    - 999.999.999.999 # FIXME: The IP address of the server you can SSH into.
+  job:
+    hosts:
+      - 999.999.999.999 # FIXME: The IP address of the server you can SSH into.
+    cmd: bundle exec sidekiq
+
+# Enable SSL auto certification via Let's Encrypt and allow for multiple apps on
+# a single web server. Remove this section when using multiple web servers and
+# ensure you terminate SSL at your load balancer.
+#
+# Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to
+# enable CF-to-app encryption.
+proxy:
+  ssl: true
+  host: app.yoursaas-fix-me.com # FIXME: The domain you want to use for your app. You need to create a CNAME record that points to the IP address of the server you can SSH into.
+  app_port: 3000
+
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  username: docker-hub-username # FIXME: The username you use to log into Docker Hub.
+  # Always use an access token rather than real password (pulled from .kamal/secrets).
+  password:
+    - KAMAL_REGISTRY_PASSWORD
+
+# Configure builder setup.
+builder:
+  # By default, Kamal will only deploy committed changes. During development,
+  # you may want to uncomment this line to deploy uncommitted changes as well.
+  # context: .
+  arch: arm64 # FIXME: Match your server's architecture.
+
+# Inject ENV variables into containers (secrets come from .kamal/secrets).
+env:
+  secret:
+    - RAILS_MASTER_KEY
+    - POSTMARK_API_TOKEN # FIXME: Keep it or remove it and change the email provider. Keeping it will enable Postmark for email delivery.
+    - UNTITLED_APPLICATION_DATABASE_PASSWORD
+    - REDIS_PASSWORD
+    - POSTGRES_PASSWORD
+  clear:
+    DB_HOST: untitled-application-db
+    POSTGRES_USER: untitled_application
+    POSTGRES_DB: untitled_application_production
+    DB_PORT: 5432
+    REDIS_HOST: untitled-application-redis
+    REDIS_PORT: 6379
+    HIDE_THINGS: "true"
+    KAMAL_SETUP: "true"
+    # If you have a small server you might want to scale your app down:
+    # RAILS_MAX_THREADS: 3
+    # WEB_CONCURRENCY: 0 # or 2+ (https://judoscale.com/blog/opinionated-guide-to-configuring-rails-on-heroku)
+
+# So you can jump into your prod console with `kamal console`.
+aliases:
+  shell: app exec --interactive --reuse "bash"
+  console: app exec --interactive --reuse "bin/rails console"
+  logs: app logs -f
+  dbc: app exec --interactive --reuse "bin/rails dbconsole"
+  db_shell: accessory exec db --interactive --reuse "bash"
+  redis_shell: accessory exec redis --interactive --reuse "bash"
+
+# Use accessory services (secrets come from .kamal/secrets).
+accessories:
+  db:
+    image: postgres:14
+    host: 999.999.999.999 # FIXME: The IP address of the server you can SSH into.
+    port: "127.0.0.1:5432:5432" # Not exposing to Internet.
+    env:
+      clear:
+        POSTGRES_USER: untitled_application
+        POSTGRES_DB: untitled_application_production
+      secret:
+        - POSTGRES_PASSWORD
+        - UNTITLED_APPLICATION_DATABASE_PASSWORD
+    directories:
+      - data:/var/lib/postgresql/data
+  redis:
+    image: redis:7.0
+    port: 6379
+    roles:
+      - web
+      - job
+    cmd: "/bin/sh -c 'redis-server --requirepass $REDIS_PASSWORD'"
+    volumes:
+      - /var/lib/redis:/data
+    env:
+      secret:
+        - REDIS_PASSWORD

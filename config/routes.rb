@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Add /up route which is needed by Kamal.
+  get "/up", to: proc { [200, {}, ["OK"]] }
+
   # See `config/routes/*.rb` to customize these configurations.
   draw "concerns"
   draw "devise"

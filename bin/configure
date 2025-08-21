@@ -21,6 +21,7 @@ require "#{__dir__}/configure-scripts/update_configs"
 # Now we ask if you want a `Deploy to Heroku` and/or `Deploy to Render` button
 require "#{__dir__}/configure-scripts/deploy_button_heroku"
 require "#{__dir__}/configure-scripts/deploy_button_render"
+require "#{__dir__}/configure-scripts/deploy_kamal_instructions"
 
 # Now that we're finished making changes to the new repo we commit them if you want
 require "#{__dir__}/configure-scripts/commit_changes"
