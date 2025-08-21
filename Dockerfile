@@ -15,6 +15,8 @@
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
+
+
 #######################################################################################################
 # Throw-away build stage to reduce size of final image
 # bullet_train/build provides build-time dependencies for all the gems in the starter repo.
@@ -61,7 +63,6 @@ COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
 
 # Make sure that all the directories we expect are actually there
-# TODO: Maybe we should do this in the base image in the core repo?
 RUN mkdir -p db log storage tmp
 
 # Run and own only the runtime files as a non-root user for security
