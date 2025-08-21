@@ -43,4 +43,9 @@ jobs:
             ## What's changed in `bullet_train-core`
             Also check the corresponding release for the `bullet_train-core` repo:
             https://github.com/bullet-train-co/bullet_train-core/releases
-
+  docker:
+    name: Docker
+    needs: tag
+    if: ${{ startsWith(needs.tag.outputs.tag, 'v') }}
+    uses: ./.github/workflows/docker-bt-internal.yml
+    secrets: inherit

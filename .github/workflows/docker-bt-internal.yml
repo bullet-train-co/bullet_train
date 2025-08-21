@@ -1,12 +1,9 @@
 # This workflow is for building the official bullet-train-co/bullet_train Docker image.
-# TODO: Rename this file to something more like _bt_docker_image.yml or something. We probably
-# want to leave docker.yml open for downsteam apps. Or we may add a workflow for production
-# Docker that's different than building the official preview image.
 name: "🚢 ~ Docker"
 
-# TODO: Wire this up to happen automatically at the right time (whenever that is...). For now it's set to be able to be run by hand.
 on:
   workflow_dispatch:
+  workflow_call:
 
 # Defines custom environment variables for the workflow. These are used for the Container registry domain, and a name for the Docker image that this workflow builds.
 env:
