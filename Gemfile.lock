@@ -286,7 +286,6 @@ GEM
     erb (5.0.2)
     erubi (1.13.1)
     erubis (2.7.0)
-    execjs (2.10.0)
     factory_bot (6.5.5)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.0)
@@ -638,8 +637,6 @@ GEM
       railties (>= 6.0.0)
     stringio (3.1.7)
     stripe (15.5.0)
-    terser (1.2.6)
-      execjs (>= 0.3.0, < 3)
     thor (1.4.0)
     thread-local (1.1.0)
     timeout (0.4.3)
@@ -744,7 +741,6 @@ DEPENDENCIES
   simplecov-json
   standard
   stimulus-rails
-  terser
   turbo-rails
   tzinfo-data
   web-console

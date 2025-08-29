@@ -224,9 +224,6 @@ group :production do
 
   # Use S3 for Active Storage by default.
   # gem "aws-sdk-s3", require: false
-
-  # terser is used to compress assets during precompilation
-  gem "terser"
 end
 
 # Use Ruby hashes as readonly datasources for ActiveRecord-like models.
