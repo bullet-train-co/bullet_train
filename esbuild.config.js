@@ -81,6 +81,7 @@ let build_details = {
   // ESM + Splitting will only work if the script is type="module"
   // splitting: true,
   // format: "esm",
+  minify: true,
   format: "iife",
   sourcemap: true,
   outdir: path.join(process.cwd(), "app/assets/builds"),
