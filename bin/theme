@@ -15,6 +15,7 @@ if ARGV.size < 2
   puts "\t\"tailwind-mailer-config\""
   puts "\t\"tailwind-stylesheet\""
   puts "\t\"javascript\""
+  exit
 end
 
 file_type = ARGV.shift
