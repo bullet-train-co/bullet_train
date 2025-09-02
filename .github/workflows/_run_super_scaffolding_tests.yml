@@ -167,9 +167,22 @@ jobs:
           path: tmp/starter/coverage/.resultset.json
           include-hidden-files: true
 
+      - name: Check For Error Screenshots
+        id: check-for-error-screenshots
+        if: always()
+        run: |
+          FILE_PATH="tmp/starter/tmp/screenshots/*.png"
+          if [ -f "$FILE_PATH" ]; then
+            echo "File exists. $FILE_PATH"
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "File does not exist. $FILE_PATH"
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Upload Error Screenshots
         uses: actions/upload-artifact@v4
-        if: always()
+        if: steps.check-for-error-screenshots.outputs.exists == 'true'
         with:
           name: error_screenshots_${{ matrix.test }}.zip
           path: tmp/starter/tmp/screenshots/*.png
