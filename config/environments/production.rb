@@ -95,9 +95,6 @@ Rails.application.configure do
 
   config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present? || ENV["RENDER"].present?
 
-  # Compress JavaScript
-  config.assets.js_compressor = :terser
-
   config.active_job.queue_adapter = :sidekiq
 
   if (ENV["AWS_ACCESS_KEY_ID"] || ENV["BUCKETEER_AWS_ACCESS_KEY_ID"]).present?
