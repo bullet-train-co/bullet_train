@@ -20,7 +20,11 @@ jobs:
     steps:
       - name: Tag on PR merge
         id: tag-on-pr-merge
-        uses: David-Lor/action-tag-on-pr-merge@main
+        # TODO: Switch this back to David-Lor/action-tag-on-pr-merge@main after this PR is merged:
+        # https://github.com/David-Lor/action-tag-on-pr-merge/pull/30
+        # uses: David-Lor/action-tag-on-pr-merge@main
+        uses: jagthedrummer/action-tag-on-pr-merge@jeremy/replace-set-output-bug-fix
+        #uses: David-Lor/action-tag-on-pr-merge@main
         with:
           push-tag: true
       - name: Print fetched tag
