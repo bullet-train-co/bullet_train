@@ -9,7 +9,7 @@ button_file = "#{__dir__}/deploy-buttons/heroku.md"
 add_button = ask_boolean "Would you like to add a 'Deploy to Heroku' button to your project.", "y"
 if add_button
   puts "Adding a 'Deploy to Heroku' button.".green
-  new_repo_link = if defined?(SETUP_GITHUB)
+  new_repo_link = if defined?(SETUP_GITHUB) && SETUP_GITHUB
     HTTP_PATH
   else
     ask "What is the https variant of your repo URL? (Something like: https://github.com/your-org/your-repo)"
