@@ -1,3 +1,5 @@
+// Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
+
 // 🚫 DEFAULT RAILS INCLUDES
 // This section represents the default includes for a Rails application. Bullet Train's includes and your own
 // includes should be specified at the end of the file, not in this section. This helps avoid merge conflicts in the
