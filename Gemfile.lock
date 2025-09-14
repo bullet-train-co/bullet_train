@@ -462,7 +462,7 @@ GEM
       net-smtp
       premailer (~> 1.7, >= 1.7.9)
     prettyprint (0.2.0)
-    prism (1.5.0)
+    prism (1.5.1)
     prop_initializer (0.2.0)
       zeitwerk (>= 2.6.18)
     propshaft (1.2.1)
@@ -479,7 +479,7 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
-    puma (7.0.2)
+    puma (7.0.3)
       nio4r (~> 2.0)
     pwned (2.4.1)
     racc (1.8.1)
