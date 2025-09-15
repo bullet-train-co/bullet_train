@@ -29,6 +29,6 @@
 <%= capybara_lockstep if defined?(Capybara::Lockstep) %>
 
 <% # TODO: Should this be here or in core? I kinda think here. %>
-<%= javascript_importmap_tags %>
+<%= javascript_importmap_tags "application.importmaps" %>
 
 <% # put your application-specific additions below to avoid merge conflicts later. %>
