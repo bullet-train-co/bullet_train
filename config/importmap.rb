@@ -27,3 +27,6 @@ pin "crossvent" # @1.5.5
 pin "custom-event" # @1.0.1
 pin "process" # @2.1.0
 pin "ticky" # @1.0.1
+
+# TODO: This is needed by the bullet_train gem. Can we handle it there somehow?
+pin "el-transition" # @0.0.7
