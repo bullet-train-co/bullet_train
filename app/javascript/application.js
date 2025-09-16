@@ -5,18 +5,18 @@
 // includes should be specified at the end of the file, not in this section. This helps avoid merge conflicts in the
 // future should the framework defaults change.
 
-import * as ActiveStorage from "@rails/activestorage"
-import "@hotwired/turbo-rails"
+//import * as ActiveStorage from "@rails/activestorage"
+//import "@hotwired/turbo-rails"
 //import "./controllers"
-import "./channels"
+//import "./channels"
 
-ActiveStorage.start()
+//ActiveStorage.start()
 
 // 🚫 DEFAULT BULLET TRAIN INCLUDES
 // This section represents the default settings for a Bullet Train application. Your own includes should be specified
 // at the end of the file. This helps avoid merge conflicts in the future, should we need to change our own includes.
 
-import "./support/jstz";
+//import "./support/jstz";
 
 import "@bullet-train/bullet-train"
 import "@bullet-train/bullet-train-sortable"
