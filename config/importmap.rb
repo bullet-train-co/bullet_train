@@ -40,3 +40,5 @@ pin "emoji-mart" # @5.6.0
 pin "daterangepicker" # @3.1.0
 pin "moment" # @2.30.1
 pin "moment-timezone" # @0.6.0
+pin "@simonwep/pickr/dist/themes/monolith.min.css", to: "@simonwep--pickr--dist--themes--monolith.min.css.js" # @1.9.1
+pin "@simonwep/pickr", to: "@simonwep--pickr.js" # @1.9.1
