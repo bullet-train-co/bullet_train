@@ -3,9 +3,9 @@
 # Automatic integrity calculation for enhanced security
 enable_integrity!
 pin "application.importmaps", integrity: true
-pin_all_from 'app/javascript/controllers', under: 'controllers', integrity: true
-pin_all_from 'app/javascript/channels', under: 'channels', integrity: true
-pin_all_from "app/javascript/support", under: 'support', integrity: true
+pin_all_from "app/javascript/controllers", under: "controllers", integrity: true
+pin_all_from "app/javascript/channels", under: "channels", integrity: true
+pin_all_from "app/javascript/support", under: "support", integrity: true
 
 pin "@hotwired/stimulus", to: "@hotwired--stimulus.js" # @3.2.2
 
