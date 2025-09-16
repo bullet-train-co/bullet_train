@@ -18,13 +18,13 @@
 
 //import "./support/jstz";
 
-import "@bullet-train/bullet-train"
-import "@bullet-train/bullet-train-sortable"
+//import "@bullet-train/bullet-train"
+//import "@bullet-train/bullet-train-sortable"
 
-require("@icon/themify-icons/themify-icons.css")
+//require("@icon/themify-icons/themify-icons.css")
 
-import { trixEditor } from "@bullet-train/fields"
-trixEditor()
+//import { trixEditor } from "@bullet-train/fields"
+//trixEditor()
 
 // ✅ YOUR APPLICATION'S INCLUDES
 // If you need to customize your application's includes, this is the place to do it. This helps avoid merge
