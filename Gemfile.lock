@@ -560,6 +560,8 @@ GEM
     regexp_parser (2.11.2)
     reline (0.6.2)
       io-console (~> 0.5)
+    requestjs-rails (0.0.13)
+      railties (>= 7.1.0)
     require_all (3.0.0)
     responders (3.1.1)
       actionpack (>= 5.2)
@@ -738,6 +740,7 @@ DEPENDENCIES
   rails-erd
   rails_best_practices
   redis (~> 5.4.0)
+  requestjs-rails
   rqrcode
   ruby-vips
   selenium-webdriver
