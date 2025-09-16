@@ -15,6 +15,9 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin "@rails/activestorage", to: "activestorage.esm.js"
 # This file is proviced by the turbo-rails gem
 pin "@hotwired/turbo-rails", to: "turbo.min.js"
+# From the actiontext gem
+pin "@rails/actiontext", to: "actiontext.js"
+
 pin "jstz" # @2.1.1
 
 # TODO: This block is stuff that's needed by bullet_train-sortable.
@@ -40,5 +43,8 @@ pin "emoji-mart" # @5.6.0
 pin "daterangepicker" # @3.1.0
 pin "moment" # @2.30.1
 pin "moment-timezone" # @0.6.0
-pin "@simonwep/pickr/dist/themes/monolith.min.css", to: "@simonwep--pickr--dist--themes--monolith.min.css.js" # @1.9.1
+pin "@simonwep/pickr/dist/themes/monolith.min.css", to: "@simonwep--pickr--dist--themes--monolith.min.css" # @1.9.1
 pin "@simonwep/pickr", to: "@simonwep--pickr.js" # @1.9.1
+pin "tributejs" # @5.1.3
+pin "trix/dist/trix.css", to: "trix--dist--trix.css" # @2.1.15
+pin "trix" # @2.1.15

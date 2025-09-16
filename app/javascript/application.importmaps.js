@@ -29,8 +29,8 @@ import "support/jstz";
 
 //require("@icon/themify-icons/themify-icons.css")
 
-//import { trixEditor } from "@bullet-train/fields"
-//trixEditor()
+import { trixEditor } from "trix_editor"
+trixEditor()
 
 // ✅ YOUR APPLICATION'S INCLUDES
 // If you need to customize your application's includes, this is the place to do it. This helps avoid merge
