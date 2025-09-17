@@ -368,7 +368,7 @@ GEM
       net-imap
       net-pop
       net-smtp
-    marcel (1.0.4)
+    marcel (1.1.0)
     masamune-ast (2.0.2)
       activesupport
       prism (>= 0.14.0)
