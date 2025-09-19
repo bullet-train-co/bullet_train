@@ -1,0 +1,100 @@
+en:
+  pages: &pages
+    label: &label Pages
+    breadcrumbs:
+      label: *label
+    navigation:
+      label: *label
+      icon: fal fa-puzzle-piece
+    buttons: &buttons
+      new: Add New Page
+      create: Create Page
+      edit: Edit Page
+      update: Update Page
+      destroy: Remove Page
+      shorthand:
+        edit: Edit
+        destroy: Delete
+      confirmations:
+        # TODO customize for your use-case.
+        destroy: Are you sure you want to remove %{page_name}? This will also remove any child resources and can't be undone.
+    page:
+      buttons: *buttons
+    fields: &fields
+      id:
+        heading: Page ID
+      team_id:
+        heading: Team ID
+      name:
+        _: &name Name
+        label: *name
+        heading: *name
+        api_title: *name
+        api_description: *name
+      path:
+        _: &path Path
+        label: *path
+        heading: *path
+        api_title: *path
+        api_description: *path
+      # 🚅 super scaffolding will insert new fields above this line.
+      created_at:
+        _: &created_at Added
+        label: *created_at
+        heading: *created_at
+      updated_at:
+        _: &updated_at Updated
+        label: *updated_at
+        heading: *updated_at
+    api:
+      collection_actions: "Collection Actions for Pages"
+      index: "List Pages"
+      create: "Add a New Page"
+      member_actions: "Actions for an Individual Page"
+      show: "Retrieve a Page"
+      update: "Update a Page"
+      destroy: "Delete a Page"
+      fields: *fields
+    index:
+      section: "%{teams_possessive} Pages"
+      contexts:
+        team:
+          header: Pages
+          description: Below is a list of Pages that have been added for %{team_name}.
+          description_empty: No Pages have been added for %{team_name}.
+      fields: *fields
+      buttons: *buttons
+    show:
+      section: "%{page_name}"
+      header: Page Details
+      description: Below are the details we have for %{page_name}.
+      manage_description: You'll also find options for updating these details or removing %{page_name} from %{team_name} entirely.
+      fields: *fields
+      buttons: *buttons
+    form: &form
+      buttons: *buttons
+      fields: *fields
+    new:
+      section: "New Page for %{team_name}"
+      header: New Page Details
+      description: Please provide the details of the new Page you'd like to add to %{team_name}.
+      form: *form
+    edit:
+      section: "%{page_name}"
+      header: Edit Page Details
+      description: You can update the details or settings for %{page_name} below.
+      form: *form
+    notifications:
+      created: Page was successfully created.
+      updated: Page was successfully updated.
+      destroyed: Page was successfully destroyed.
+  account:
+    pages: *pages
+  activerecord:
+    attributes:
+      page:
+        name: *name
+        path: *path
+        # 🚅 super scaffolding will insert new activerecord attributes above this line.
+        created_at: *created_at
+        updated_at: *updated_at

@@ -1,0 +1,7 @@
+<%= render 'account/shared/page' do |page| %>
+  <% page.title t('.section') %>
+  <% page.body.render 'account/shared/box', divider: true do |box| %>
+    <% box.t :description, title: '.header' %>
+    <% box.body.render 'form', page: @page %>
+  <% end %>
+<% end %>
