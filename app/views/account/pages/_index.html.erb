@@ -22,6 +22,7 @@
           <table class="table">
             <thead>
               <tr>
+                <th class="w-6"></th>
                 <%= render "shared/tables/select_all" %>
                 <th><%= t('.fields.name.heading') %></th>
                 <%# 🚅 super scaffolding will insert new field headers above this line. %>
@@ -29,7 +30,7 @@
                 <th class="text-right"></th>
               </tr>
             </thead>
-            <tbody data-controller="sortable" data-sortable-reorder-path-value="<%= url_for [:reorder, :account, context, collection] %>">
+            <tbody data-controller="new-sortable" data-new-sortable-reorder-path-value="<%= url_for [:reorder, :account, context, collection] %>">
               <%= render partial: 'account/pages/page', collection: pages %>
             </tbody>
           </table>

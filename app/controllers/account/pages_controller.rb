@@ -1,5 +1,6 @@
 class Account::PagesController < Account::ApplicationController
   include SortableActions
+
   account_load_and_authorize_resource :page, through: :team, through_association: :pages
 
   # GET /account/teams/:team_id/pages

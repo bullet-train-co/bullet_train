@@ -1,6 +1,7 @@
 class Team < ApplicationRecord
   include Teams::Base
   include Webhooks::Outgoing::TeamSupport
+
   # 🚅 add concerns above.
 
   # 🚅 add belongs_to associations above.

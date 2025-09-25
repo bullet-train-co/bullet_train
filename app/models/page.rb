@@ -1,5 +1,6 @@
 class Page < ApplicationRecord
   include Sortable
+
   # 🚅 add concerns above.
 
   # 🚅 add attribute accessors above.
