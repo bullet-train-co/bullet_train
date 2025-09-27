@@ -85,6 +85,8 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 6. Run the setup script:
 
     ```
+    bundle install
+    corepack enable
     bin/setup
     ```
 
@@ -105,3 +107,4 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 ---
 
 This `README.md` file will be replaced with [`README.example.md`](./README.example.md) after running `bin/configure`.
+
