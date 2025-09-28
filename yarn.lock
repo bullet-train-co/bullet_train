@@ -1798,20 +1798,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/turbo-rails@npm:^8.0.16":
-  version: 8.0.16
-  resolution: "@hotwired/turbo-rails@npm:8.0.16"
+"@hotwired/turbo-rails@npm:^8.0.18":
+  version: 8.0.18
+  resolution: "@hotwired/turbo-rails@npm:8.0.18"
   dependencies:
-    "@hotwired/turbo": "npm:^8.0.13"
+    "@hotwired/turbo": "npm:^8.0.18"
     "@rails/actioncable": "npm:>=7.0"
-  checksum: 10c0/a3781bf5e7c798307754a726b5b66f63e4ec71a74e508549f257b3acf834ffc5c28baaf03b8dcdeeb7b35caa361769e417bbca629dcf873729398773585d35ca
+  checksum: 10c0/5a2ec94f5d2c530366bc4b8139eaae1764694a31509e7c754cda03ea0c03b56cc4f0da0d759b9e13acb11f963b2ae9aeb0b624e1db75c187fd3fc236cfb83f22
   languageName: node
   linkType: hard
 
-"@hotwired/turbo@npm:^8.0.13":
-  version: 8.0.13
-  resolution: "@hotwired/turbo@npm:8.0.13"
-  checksum: 10c0/fc9fd58ce2e006ad2f9e3948cf1ec71f47187ce8115f03e531bab849d0e13abc94cd0067f0888f7064d730b4c1a8212101bfa6d55f6166c6ad2db275e280149a
+"@hotwired/turbo@npm:^8.0.18":
+  version: 8.0.18
+  resolution: "@hotwired/turbo@npm:8.0.18"
+  checksum: 10c0/5021e77441cc1730629c4c4b25113d8cc765f4ebcdc173c3fcab53124a36c682f89c1c918be8f90c1e19175e7ac0391216728135b29ebdf1e701ec27d6acc70c
   languageName: node
   linkType: hard
 
@@ -2530,7 +2530,7 @@ __metadata:
     "@esbuild-plugins/node-globals-polyfill": "npm:^0.2.3"
     "@fullhuman/postcss-purgecss": "npm:7.0.2"
     "@hotwired/stimulus": "npm:^3.2.2"
-    "@hotwired/turbo-rails": "npm:^8.0.16"
+    "@hotwired/turbo-rails": "npm:^8.0.18"
     "@icon/themify-icons": "npm:^1.0.1-alpha.3"
     "@rails/actioncable": "npm:^8.0.200"
     "@rails/actiontext": "npm:^8.0.300"
