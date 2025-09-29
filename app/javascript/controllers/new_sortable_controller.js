@@ -13,9 +13,15 @@ const defaultClasses = {
 export default class extends Controller {
   static values = {
     reorderPath: String,
-    saveOnReorder: { type: Boolean, default: true }
+    saveOnReorder: { type: Boolean, default: true },
+    // This is used to get a hold of the draggable elements (tr by default) inside of the draggable container (tbody by default).
+    draggableSelector: { type: String, default: "tr" }
   }
   static classes = ["activeDropzone", "activeItem", "dropTarget"];
+
+  // will be reissued as native dom events name prepended with 'sortable:' e.g. 'sortable:drag', 'sortable:drop', etc
+  // TODO: I'm not sure all of these events are useful outside of a dragulat context.
+  static pluginEventsToReissue = [ "drag", "dragend", "drop", "cancel", "remove", "shadow", "over", "out", "cloned" ];
 
   dragHandleMouseDown(event){
     const draggableItem = getDataNode(event.target);
@@ -176,11 +182,57 @@ export default class extends Controller {
     this.element.addEventListener('dragend', this.dragend.bind(this));
     this.element.addEventListener('drop', this.drop.bind(this));
 
+    this.addDragHandles();
+
     let handles = this.element.querySelectorAll('.dragHandle')
     for (const handle of handles) {
       handle.addEventListener('mousedown', this.dragHandleMouseDown.bind(this));
       handle.addEventListener('mouseup', this.dragHandleMouseUp.bind(this));
     }
+
+    this.initReissuePluginEventsAsNativeEvents();
+  }
+
+  addDragHandles(){
+
+    // Here we assume that this controller is connected to a tbody element
+    const table = this.element.parentNode;
+    const thead = table.querySelector('thead');
+    const headRow = thead.querySelector('tr');
+    const newTh = document.createElement('th');
+    headRow.prepend(newTh);
+
+    const draggables = this.element.querySelectorAll('tr');
+    for (const draggable of draggables) {
+      console.log('draggable', draggable);
+
+      const newCell = document.createElement('td');
+      newCell.classList.add(...'dragHandle cursor-grab'.split(' '));
+
+      const iconSpan = document.createElement('span');
+      iconSpan.classList.add(...'h-6 w-6 text-center'.split(' '));
+      newCell.append(iconSpan);
+
+      const icon = document.createElement('i');
+      icon.classList.add(...'ti ti-line-double'.split(' '));
+
+      iconSpan.append(icon);
+
+      draggable.prepend(newCell);
+    }
+  }
+
+  // TODO: I'm not sure this is adequate. I think we may need to "manually" dispatch these from within the
+  // approriate event handles so that we can add more info to `args`. For instance, the "drop" event may
+  // need to include the sibling that the dropped element was dropped in front of. Related, do people actually
+  // use these re-issued events?
+  initReissuePluginEventsAsNativeEvents() {
+    this.constructor.pluginEventsToReissue.forEach((eventName) => {
+      this.element.addEventListener(eventName, (...args) => {
+        console.log('reissuing event', eventName);
+        this.dispatch(eventName, { detail: { type: eventName, args: args }})
+      })
+    })
   }
 
   disconnect() {

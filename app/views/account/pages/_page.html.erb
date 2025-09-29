@@ -6,11 +6,13 @@
 
 <% with_attribute_settings object: page do %>
   <tr data-id="<%= page.id %>">
+    <!--
     <td class="dragHandle cursor-grab">
       <span class="h-6 w-6 text-center">
         <i class="ti ti-line-double"></i>
       </span>
     </td>
+    -->
     <%= render "shared/tables/checkbox", object: page %>
     <td><%= render 'shared/attributes/text', attribute: :name, url: [:account, page] %></td>
     <%# 🚅 super scaffolding will insert new fields above this line. %>
