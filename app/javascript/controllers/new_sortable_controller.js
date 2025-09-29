@@ -5,9 +5,7 @@ import { post } from '@rails/request.js'
 export default class extends Controller {
   static values = {
     reorderPath: String,
-    saveOnReorder: { type: Boolean, default: true },
-    // This is used to get a hold of the draggable elements (tr by default) inside of the draggable container (tbody by default).
-    draggableSelector: { type: String, default: "tr" }
+    saveOnReorder: { type: Boolean, default: true }
   }
   static classes = ["activeDropzone", "activeItem", "dropTarget"];
 
@@ -131,8 +129,6 @@ class SortableTable{
     this.draggingDataId = draggableItem.dataset.id;
   }
 
-  drag(event){ }
-
   dragover(event) {
     event.stopPropagation();
     event.preventDefault();
@@ -246,7 +242,6 @@ class SortableTable{
   }
 
   addDragHandles(){
-
     // Here we assume that this controller is connected to a tbody element
     const table = this.element.parentNode;
     const thead = table.querySelector('thead');
@@ -263,13 +258,12 @@ class SortableTable{
 
       const iconSpan = document.createElement('span');
       iconSpan.classList.add(...'h-6 w-6 text-center'.split(' '));
-      newCell.append(iconSpan);
 
       const icon = document.createElement('i');
       icon.classList.add(...'ti ti-line-double'.split(' '));
 
       iconSpan.append(icon);
-
+      newCell.append(iconSpan);
       draggable.prepend(newCell);
     }
   }
