@@ -1,14 +1,6 @@
 import { Controller } from "@hotwired/stimulus"
 import { post } from '@rails/request.js'
 
-// These are defaults so that we don't have to require people to update their templates.
-// If the template does contain values for any of these the template values will be used instead.
-const defaultClasses = {
-  "activeDropzoneClasses": "border-dashed bg-gray-50 border-slate-400",
-  "activeItemClasses": "shadow bg-white cursor-grabbing bg-white *:bg-white opacity-100 *:opacity-100",
-  "dropTargetClasses": "shadow-inner shadow-gray-500 hover:shadow-inner bg-gray-100 *:opacity-0 *:bg-gray-100"
-};
-
 // Connects to data-controller="new-sortable"
 export default class extends Controller {
   static values = {
@@ -19,9 +11,98 @@ export default class extends Controller {
   }
   static classes = ["activeDropzone", "activeItem", "dropTarget"];
 
+  saveSortOrder(idsInOrder) {
+    console.log('controller saveSortOrder', idsInOrder, this.reorderPathValue);
+    //var idsInOrder = Array.from(this.element.childNodes).map((el) => { return parseInt(el.dataset?.id) });
+    post(this.reorderPathValue, { body: JSON.stringify({ids_in_order: idsInOrder}) })
+  }
+
+  connect() {
+    console.log('sortable controller connect', this.reorderPathValue, this.saveOnReorderValue)
+
+    const saveOrderCallback = this.saveOnReorderValue ? this.saveSortOrder.bind(this) : null;
+    this.sortableTable = new SortableTable(
+      this.element,
+      saveOrderCallback,
+      {
+        activeDropzoneClasses: this.activeDropzoneClasses,
+        activeItemClasses: this.activeItemClasses,
+        dropTargetClasses: this.dropTargetClasses
+      }
+    );
+  }
+
+  disconnect() {
+    this.sortableTable.destroy();
+  }
+}
+
+function getDataNode(node) {
+  return node.closest("[data-id]");
+}
+
+function getMetaValue(name) {
+  const element = document.head.querySelector(`meta[name="${name}"]`);
+  return element.getAttribute("content");
+}
+
+class SortableTable{
   // will be reissued as native dom events name prepended with 'sortable:' e.g. 'sortable:drag', 'sortable:drop', etc
   // TODO: I'm not sure all of these events are useful outside of a dragulat context.
   static pluginEventsToReissue = [ "drag", "dragend", "drop", "cancel", "remove", "shadow", "over", "out", "cloned" ];
+  static eventPrefix = "sortable";
+  // These are defaults so that we don't have to require people to update their templates.
+  // If the template does contain values for any of these the template values will be used instead.
+  static defaultClasses = {
+    "activeDropzoneClasses": "border-dashed bg-gray-50 border-slate-400",
+    "activeItemClasses": "shadow bg-white cursor-grabbing bg-white *:bg-white opacity-100 *:opacity-100",
+    "dropTargetClasses": "shadow-inner shadow-gray-500 hover:shadow-inner bg-gray-100 *:opacity-0 *:bg-gray-100"
+  };
+
+  constructor(tbodyElement, saveSortOrder, styles, customEventPrefix){
+    this.element = tbodyElement;
+    this.saveSortOrder = saveSortOrder;
+
+    this.activeDropzoneClassesWithDefaults = styles.activeDropzoneClasses.length == 0 ? this.constructor.defaultClasses["activeDropzoneClasses"].split(" ") : styles.activeDropzoneClasses;
+    this.activeItemClassesWithDefaults = styles.activeItemClasses.length == 0 ? this.constructor.defaultClasses["activeItemClasses"].split(" ") : styles.activeItemClasses;
+    this.dropTargetClassesWithDefaults = styles.dropTargetClasses.length == 0 ? this.constructor.defaultClasses["dropTargetClasses"].split(" ") : styles.dropTargetClasses;
+    this.eventPrefixWithDefaults = customEventPrefix ? customEventPrefix : this.constructor.eventPrefix;
+
+    this.element.addEventListener('dragstart', this.dragstart.bind(this));
+    this.element.addEventListener('drag', this.drag.bind(this));
+    this.element.addEventListener('dragover', this.dragover.bind(this));
+    this.element.addEventListener('dragenter', this.dragenter.bind(this));
+    this.element.addEventListener('dragleave', this.dragleave.bind(this));
+    this.element.addEventListener('dragend', this.dragend.bind(this));
+    this.element.addEventListener('drop', this.drop.bind(this));
+
+    this.addDragHandles();
+
+    let handles = this.element.querySelectorAll('.dragHandle')
+    for (const handle of handles) {
+      handle.addEventListener('mousedown', this.dragHandleMouseDown.bind(this));
+      handle.addEventListener('mouseup', this.dragHandleMouseUp.bind(this));
+    }
+
+    this.initReissuePluginEventsAsNativeEvents();
+  }
+
+  destroy(){
+    console.log('SortableTable destroy')
+    this.element.removeEventListener('dragstart', this.dragstart.bind(this));
+    this.element.removeEventListener('drag', this.drag.bind(this));
+    this.element.removeEventListener('dragover', this.dragover.bind(this));
+    this.element.removeEventListener('dragenter', this.dragenter.bind(this));
+    this.element.removeEventListener('dragleave', this.dragleave.bind(this));
+    this.element.removeEventListener('dragend', this.dragend.bind(this));
+    this.element.removeEventListener('drop', this.drop.bind(this));
+
+    let handles = this.element.querySelectorAll('.dragHangle')
+    for (const handle of handles) {
+      handle.removeEventListener('mousedown', this.dragHandleMouseDown.bind(this));
+      handle.removeEventListener('mouseup', this.dragHandleMouseUp.bind(this));
+    }
+  }
 
   dragHandleMouseDown(event){
     const draggableItem = getDataNode(event.target);
@@ -145,16 +226,14 @@ export default class extends Controller {
         let result = dropTarget.insertAdjacentElement("afterend", draggedItem);
       }
 
-      if (this.saveOnReorderValue) {
-        this.saveSortOrder()
+      if (this.saveSortOrder) {
+        console.log('end of drop handler saveSortOrder = ', this.saveSortOrder)
+        var idsInOrder = Array.from(this.element.childNodes).map((el) => { return el.dataset?.id ? parseInt(el.dataset?.id) : null });
+        idsInOrder = idsInOrder.filter(element => element !== null);
+        this.saveSortOrder(idsInOrder);
       }
     }
     event.preventDefault();
-  }
-
-  saveSortOrder() {
-    var idsInOrder = Array.from(this.element.childNodes).map((el) => { return parseInt(el.dataset?.id) });
-    post(this.reorderPathValue, { body: JSON.stringify({ids_in_order: idsInOrder}) })
   }
 
   dragend(event) {
@@ -164,33 +243,6 @@ export default class extends Controller {
     const draggableItem = getDataNode(event.target);
     draggableItem.setAttribute('draggable', false);
     draggableItem.dataset.dragEnterCount = 0;
-  }
-
-  connect() {
-    // We do this to ease the upgrade path so that people aren't required to udpate their templates.
-    this.activeDropzoneClassesWithDefaults = this.activeDropzoneClasses.length == 0 ? defaultClasses["activeDropzoneClasses"].split(" ") : this.activeDropzoneClasses;
-    this.activeItemClassesWithDefaults = this.activeItemClasses.length == 0 ? defaultClasses["activeItemClasses"].split(" ") : this.activeItemClasses;
-    this.dropTargetClassesWithDefaults = this.dropTargetClasses.length == 0 ? defaultClasses["dropTargetClasses"].split(" ") : this.dropTargetClasses;
-
-    // Normally with Stimulus we'd wire these up via the data-action attribute. We're doing it this way to make
-    // the transition to this new controller easier.
-    this.element.addEventListener('dragstart', this.dragstart.bind(this));
-    this.element.addEventListener('drag', this.drag.bind(this));
-    this.element.addEventListener('dragover', this.dragover.bind(this));
-    this.element.addEventListener('dragenter', this.dragenter.bind(this));
-    this.element.addEventListener('dragleave', this.dragleave.bind(this));
-    this.element.addEventListener('dragend', this.dragend.bind(this));
-    this.element.addEventListener('drop', this.drop.bind(this));
-
-    this.addDragHandles();
-
-    let handles = this.element.querySelectorAll('.dragHandle')
-    for (const handle of handles) {
-      handle.addEventListener('mousedown', this.dragHandleMouseDown.bind(this));
-      handle.addEventListener('mouseup', this.dragHandleMouseUp.bind(this));
-    }
-
-    this.initReissuePluginEventsAsNativeEvents();
   }
 
   addDragHandles(){
@@ -222,6 +274,12 @@ export default class extends Controller {
     }
   }
 
+  dispatch(eventName,data){
+    const fullEventName = this.eventPrefixWithDefaults + ":" + eventName;
+    const event = new CustomEvent(fullEventName, data);
+    this.element.dispatchEvent(event);
+  }
+
   // TODO: I'm not sure this is adequate. I think we may need to "manually" dispatch these from within the
   // approriate event handles so that we can add more info to `args`. For instance, the "drop" event may
   // need to include the sibling that the dropped element was dropped in front of. Related, do people actually
@@ -229,34 +287,9 @@ export default class extends Controller {
   initReissuePluginEventsAsNativeEvents() {
     this.constructor.pluginEventsToReissue.forEach((eventName) => {
       this.element.addEventListener(eventName, (...args) => {
-        console.log('reissuing event', eventName);
         this.dispatch(eventName, { detail: { type: eventName, args: args }})
       })
     })
   }
 
-  disconnect() {
-    this.element.removeEventListener('dragstart', this.dragstart.bind(this));
-    this.element.removeEventListener('drag', this.drag.bind(this));
-    this.element.removeEventListener('dragover', this.dragover.bind(this));
-    this.element.removeEventListener('dragenter', this.dragenter.bind(this));
-    this.element.removeEventListener('dragleave', this.dragleave.bind(this));
-    this.element.removeEventListener('dragend', this.dragend.bind(this));
-    this.element.removeEventListener('drop', this.drop.bind(this));
-
-    let handles = this.element.querySelectorAll('.dragHangle')
-    for (const handle of handles) {
-      handle.removeEventListener('mousedown', this.dragHandleMouseDown.bind(this));
-      handle.removeEventListener('mouseup', this.dragHandleMouseUp.bind(this));
-    }
-  }
-}
-
-function getDataNode(node) {
-  return node.closest("[data-id]");
-}
-
-function getMetaValue(name) {
-  const element = document.head.querySelector(`meta[name="${name}"]`);
-  return element.getAttribute("content");
 }
