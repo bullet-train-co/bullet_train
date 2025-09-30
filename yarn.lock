@@ -2541,7 +2541,6 @@ __metadata:
     "@tailwindcss/typography": "npm:^0.5.19"
     autoprefixer: "npm:^10.4.21"
     cable_ready: "npm:^5.0.6"
-    dragula: "npm:^3.7.3"
     esbuild: "npm:^0.25.10"
     glob: "npm:^10.3.12"
     jstz: "npm:^2.1.1"
