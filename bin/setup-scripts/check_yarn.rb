@@ -14,6 +14,14 @@ rescue
   :not_found
 end
 
+if actual_yarn != :not_found && actual_yarn != required_yarn
+  # Yarn is installed but is not the correct verison.
+  # Running `corepack enable` usually allows yarn to fix this situation itself.
+  # So we run `corepack enable` and then capture the version number again.
+  system!("corepack enable")
+  actual_yarn = `yarn -v`.strip
+end
+
 message = "Bullet Train requires yarn #{required_yarn} and `yarn -v` returns #{actual_yarn}."
 if actual_yarn == :not_found || actual_yarn == ""
   puts "You don't have yarn installed. We can't proceed without it. Try `npm install -g yarn && corepack enable`.".red

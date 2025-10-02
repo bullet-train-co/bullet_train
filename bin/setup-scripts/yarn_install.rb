@@ -1,10 +1,9 @@
+#!/usr/bin/env ruby
+
 require "#{__dir__}/utils"
 
-announce_section "Yarn setup"
+announce_section "Yarn install"
 
-# TODO: Robustify this. What if node isn't even installed? Include `corepack enable`. Etc...
-if command?("yarn") && `yarn -v`.to_f < 2
-  system("yarn check") || system!("yarn install")
-else
-  system!("yarn install")
-end
+# Theoretically this call to `corepack enable` is redundant, but we're including it as a failsafe.
+system!("corepack enable")
+system!("yarn install")
