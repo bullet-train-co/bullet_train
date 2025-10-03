@@ -1483,31 +1483,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bullet-train/bullet-train-sortable@npm:1.29.0":
-  version: 1.29.0
-  resolution: "@bullet-train/bullet-train-sortable@npm:1.29.0"
+"@bullet-train/bullet-train-sortable@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bullet-train/bullet-train-sortable@npm:1.30.0"
   dependencies:
     "@hotwired/stimulus": "npm:^3.0.1"
     "@rails/request.js": "npm:^0.0.6"
-    dragula: "npm:^3.7.3"
-    jquery: "npm:^3.7.1"
-  checksum: 10c0/cfdf85b3ca1b15ff0a60c8eca600c84a103a4e55b69fb0d2e367658b763c2865f60246cd2a47f5de018adca388b1dfdeb7f51e7538dd527d4f0b3f769e3f0d25
+  checksum: 10c0/438c0354b01d6f4261891f585f0910019d1fe9e1b1af23e5db3768d2c2dfdd1d8be2b4d4cc93e8c72ef42c5a50cc4ba611121b2c2e7105ea032620e22ecbf904
   languageName: node
   linkType: hard
 
-"@bullet-train/bullet-train@npm:1.29.0":
-  version: 1.29.0
-  resolution: "@bullet-train/bullet-train@npm:1.29.0"
+"@bullet-train/bullet-train@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bullet-train/bullet-train@npm:1.30.0"
   dependencies:
     "@domchristie/turn": "npm:^3.1.1"
     "@hotwired/stimulus": "npm:^3.0.1"
-  checksum: 10c0/6e5d4e2f7f289e035c2a03342f2432c251abd6b31cac30591b5ffd77e1aeb996592de5db914ee351d51b854ced00687d9bce34b0f31e57b3f874536575fb84e9
+  checksum: 10c0/6da72687aad73f051a927339a8542693be866230ab44ce8d2fcd3a7bca01bd6a75586b87b57bf43cddea05879d20c32a9878212388613c921a061278958f447f
   languageName: node
   linkType: hard
 
-"@bullet-train/fields@npm:1.29.0":
-  version: 1.29.0
-  resolution: "@bullet-train/fields@npm:1.29.0"
+"@bullet-train/fields@npm:1.30.0":
+  version: 1.30.0
+  resolution: "@bullet-train/fields@npm:1.30.0"
   dependencies:
     "@hotwired/stimulus": "npm:^3.0.1"
     "@simonwep/pickr": "npm:^1.8.1"
@@ -1521,7 +1519,7 @@ __metadata:
     tributejs: "npm:^5.1.3"
     trix: "npm:^2.0.1"
     zxcvbn: "npm:^4.4.2"
-  checksum: 10c0/68f508d7d93bf0b6a5f1cec925113dee085c26f47bfea5c61d1feeffc620d8e76ab8953039afc34de43774352f2b6d19dbcaf6fd256e71498a82e06825e3ba6c
+  checksum: 10c0/7c7be8d56a0f6339ef67add0489ab92a02f364ac0dd7fb8c8dccd9ff652bb8fe434387dfd99c76e91e984772cabf9b7d0b55dcecca4f814e34edc6dffd48b140
   languageName: node
   linkType: hard
 
@@ -2524,9 +2522,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "app@workspace:."
   dependencies:
-    "@bullet-train/bullet-train": "npm:1.29.0"
-    "@bullet-train/bullet-train-sortable": "npm:1.29.0"
-    "@bullet-train/fields": "npm:1.29.0"
+    "@bullet-train/bullet-train": "npm:1.30.0"
+    "@bullet-train/bullet-train-sortable": "npm:1.30.0"
+    "@bullet-train/fields": "npm:1.30.0"
     "@esbuild-plugins/node-globals-polyfill": "npm:^0.2.3"
     "@fullhuman/postcss-purgecss": "npm:7.0.2"
     "@hotwired/stimulus": "npm:^3.2.2"
@@ -2575,13 +2573,6 @@ __metadata:
   version: 0.4.0
   resolution: "asynckit@npm:0.4.0"
   checksum: 10c0/d73e2ddf20c4eb9337e1b3df1a0f6159481050a5de457c55b14ea2e5cb6d90bb69e004c9af54737a5ee0917fcf2c9e25de67777bbe58261847846066ba75bc9d
-  languageName: node
-  linkType: hard
-
-"atoa@npm:1.0.0":
-  version: 1.0.0
-  resolution: "atoa@npm:1.0.0"
-  checksum: 10c0/8aeb1418875135dbd3715d79331f5ce6af84aab9e5b74658e893a06d4a37b3a8a9b6847c7e5cb6c60ece11d593ae439fbe15a82616659ba6fc410c09b941c665
   languageName: node
   linkType: hard
 
@@ -2944,16 +2935,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"contra@npm:1.9.4":
-  version: 1.9.4
-  resolution: "contra@npm:1.9.4"
-  dependencies:
-    atoa: "npm:1.0.0"
-    ticky: "npm:1.0.1"
-  checksum: 10c0/c392226c1c718d23926b42ec3fccf6ad8a2b570b0637ff4ce3d7058ffd253618aa27edb2d392dc9ad6194805c1ca5527d4d602aef6e9087f8846479ed81821f1
-  languageName: node
-  linkType: hard
-
 "convert-source-map@npm:^1.1.0, convert-source-map@npm:^1.7.0":
   version: 1.9.0
   resolution: "convert-source-map@npm:1.9.0"
@@ -2995,15 +2976,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"crossvent@npm:1.5.5":
-  version: 1.5.5
-  resolution: "crossvent@npm:1.5.5"
-  dependencies:
-    custom-event: "npm:^1.0.0"
-  checksum: 10c0/52ae0c1c6a6202327776a16e24155a9288ecdf8078bfb4cc6946cf4a47211f637b44cccbcb96be2708e3311ea2fed6bcaea5a732b194a2f3c338fd886cd27d51
-  languageName: node
-  linkType: hard
-
 "css-color-keywords@npm:^1.0.0":
   version: 1.0.0
   resolution: "css-color-keywords@npm:1.0.0"
@@ -3035,13 +3007,6 @@ __metadata:
   version: 3.1.2
   resolution: "csstype@npm:3.1.2"
   checksum: 10c0/32c038af259897c807ac738d9eab16b3d86747c72b09d5c740978e06f067f9b7b1737e1b75e407c7ab1fe1543dc95f20e202b4786aeb1b8d3bdf5d5ce655e6c6
-  languageName: node
-  linkType: hard
-
-"custom-event@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "custom-event@npm:1.0.1"
-  checksum: 10c0/86cd8497328b1e17dcda894c8df34a73b7a99f915123940d39b33c709482b2d3a2e689cd5e79e4775eb4167227689f57a2ae2f99a3f0bc9c54c0ac1b06853bd5
   languageName: node
   linkType: hard
 
@@ -3149,16 +3114,6 @@ __metadata:
   version: 16.4.7
   resolution: "dotenv@npm:16.4.7"
   checksum: 10c0/be9f597e36a8daf834452daa1f4cc30e5375a5968f98f46d89b16b983c567398a330580c88395069a77473943c06b877d1ca25b4afafcdd6d4adb549e8293462
-  languageName: node
-  linkType: hard
-
-"dragula@npm:^3.7.3":
-  version: 3.7.3
-  resolution: "dragula@npm:3.7.3"
-  dependencies:
-    contra: "npm:1.9.4"
-    crossvent: "npm:1.5.5"
-  checksum: 10c0/5d16a6e385c688dce89fe63b9917e123157691ef3012f305f0ada113f9695f6c665204aaa1bbee96924fdf796376d2236ff4b596f12682d36e898358db25ea41
   languageName: node
   linkType: hard
 
@@ -5934,13 +5889,6 @@ __metadata:
   dependencies:
     any-promise: "npm:^1.0.0"
   checksum: 10c0/f375aeb2b05c100a456a30bc3ed07ef03a39cbdefe02e0403fb714b8c7e57eeaad1a2f5c4ecfb9ce554ce3db9c2b024eba144843cd9e344566d9fcee73b04767
-  languageName: node
-  linkType: hard
-
-"ticky@npm:1.0.1":
-  version: 1.0.1
-  resolution: "ticky@npm:1.0.1"
-  checksum: 10c0/7e9b085092647656655bcc5315d48596b9998d7b8b4e79ab8d7cb94d697f554b5f218e932d2e59f30b10fb939dbe396a53a6649c5e56882cf8b8b3cd26626f57
   languageName: node
   linkType: hard
 
