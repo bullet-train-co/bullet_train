@@ -283,7 +283,7 @@ GEM
     doorkeeper (5.8.2)
       railties (>= 5)
     drb (2.2.3)
-    erb (5.0.2)
+    erb (5.0.3)
     erubi (1.13.1)
     erubis (2.7.0)
     factory_bot (6.5.5)
@@ -395,7 +395,7 @@ GEM
     mutex_m (0.3.0)
     net-http (0.6.0)
       uri
-    net-imap (0.5.11)
+    net-imap (0.5.12)
       date
       net-protocol
     net-pop (0.1.2)
@@ -453,7 +453,7 @@ GEM
     pg (1.6.2-x86_64-linux)
     phonelib (0.10.12)
     possessive (1.0.1)
-    pp (0.6.2)
+    pp (0.6.3)
       prettyprint
     premailer (1.27.0)
       addressable
@@ -485,7 +485,7 @@ GEM
       nio4r (~> 2.0)
     pwned (2.4.1)
     racc (1.8.1)
-    rack (3.2.1)
+    rack (3.2.2)
     rack-cors (3.0.0)
       logger
       rack (>= 3.0.14)
@@ -656,7 +656,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    uri (1.0.3)
+    uri (1.0.4)
     useragent (0.16.11)
     version_gem (1.1.9)
     view_component (4.0.2)
