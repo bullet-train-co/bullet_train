@@ -2,9 +2,9 @@
   "name": "app",
   "private": true,
   "dependencies": {
-    "@bullet-train/bullet-train": "1.30.1",
-    "@bullet-train/bullet-train-sortable": "1.30.1",
-    "@bullet-train/fields": "1.30.1",
+    "@bullet-train/bullet-train": "1.31.0",
+    "@bullet-train/bullet-train-sortable": "1.31.0",
+    "@bullet-train/fields": "1.31.0",
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@fullhuman/postcss-purgecss": "7.0.2",
     "@hotwired/stimulus": "^3.2.2",
