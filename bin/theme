@@ -19,7 +19,7 @@ end
 
 file_type = ARGV.shift
 theme = ARGV.shift
-gem_path = `bundle show bullet_train-themes-#{theme} 2> /dev/null`.chomp
+gem_path = Gem::Specification.find_by_name("bullet_train-themes-#{theme}").gem_dir
 
 file_path, fallback_file_path = case file_type
 when "tailwind-config"

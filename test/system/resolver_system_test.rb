@@ -15,7 +15,7 @@ class ResolverSystemTest < ApplicationSystemTestCase
     if local_view_path
       assert `bin/resolve shared/attributes/text`.include?(local_view_path)
     else
-      themes_gem = `bundle show bullet_train-themes`.chomp
+      themes_gem = Gem::Specification.find_by_name("bullet_train-themes").gem_dir
       absolute_path = themes_gem + "/" + relative_view_path
       assert `bin/resolve shared/attributes/text`.include?(absolute_path)
     end
