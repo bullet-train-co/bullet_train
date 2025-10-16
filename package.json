@@ -19,7 +19,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "autoprefixer": "^10.4.21",
     "cable_ready": "^5.0.6",
-    "esbuild": "^0.25.10",
+    "esbuild": "^0.25.11",
     "glob": "^10.3.12",
     "jstz": "^2.1.1",
     "postcss": "^8.4.38",
