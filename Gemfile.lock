@@ -100,7 +100,7 @@ GEM
     avo-heroicons (0.1.1)
     base64 (0.3.0)
     bcrypt (3.1.20)
-    benchmark (0.4.1)
+    benchmark (0.5.0)
     benchmark-ips (2.14.0)
     bigdecimal (3.3.1)
     bindex (0.8.1)
