@@ -273,10 +273,10 @@ GEM
     devise-pwned_password (0.1.12)
       devise (~> 4)
       pwned (~> 2.4)
-    devise-two-factor (6.1.0)
-      activesupport (>= 7.0, < 8.1)
+    devise-two-factor (6.2.0)
+      activesupport (>= 7.0, < 8.2)
       devise (~> 4.0)
-      railties (>= 7.0, < 8.1)
+      railties (>= 7.0, < 8.2)
       rotp (~> 6.0)
     docile (1.4.1)
     doorkeeper (5.8.2)
@@ -363,7 +363,8 @@ GEM
       pry
       pry-stack_explorer
       rails (>= 5.0)
-    mail (2.8.1)
+    mail (2.9.0)
+      logger
       mini_mime (>= 0.1.1)
       net-imap
       net-pop
@@ -658,8 +659,8 @@ GEM
     uri (1.0.4)
     useragent (0.16.11)
     version_gem (1.1.9)
-    view_component (4.0.2)
-      activesupport (>= 7.1.0, < 8.1)
+    view_component (4.1.0)
+      activesupport (>= 7.1.0, < 8.2)
       concurrent-ruby (~> 1)
     warden (1.2.9)
       rack (>= 2.0.9)
