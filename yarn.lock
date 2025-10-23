@@ -2228,23 +2228,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actiontext@npm:^8.0.300":
-  version: 8.0.300
-  resolution: "@rails/actiontext@npm:8.0.300"
+"@rails/actiontext@npm:^8.1.0":
+  version: 8.1.0
+  resolution: "@rails/actiontext@npm:8.1.0"
   dependencies:
-    "@rails/activestorage": "npm:>= 8.0.0-alpha"
+    "@rails/activestorage": "npm:>= 8.1.0-alpha"
   peerDependencies:
     trix: ^2.0.0
-  checksum: 10c0/8f1f8ad80b3cf6c0a9451e7a7ff5fd77834a6949fb393420378193f690704f7c62ec813e091c99c144ce5a24f334b92ad537f524a97dbec9e2ec5f0c79f7e9ae
+  checksum: 10c0/0dfc7d3647b0d634b1510c37d642385ec5e3be88fd259726b858d47c2425c2a49aa544c1b4b31a1704b175e3e54808d715f7cb7cb6214d68a0d50a3546d58b72
   languageName: node
   linkType: hard
 
-"@rails/activestorage@npm:>= 8.0.0-alpha, @rails/activestorage@npm:^8.0.100":
-  version: 8.0.100
-  resolution: "@rails/activestorage@npm:8.0.100"
+"@rails/activestorage@npm:>= 8.1.0-alpha, @rails/activestorage@npm:^8.0.100":
+  version: 8.1.0
+  resolution: "@rails/activestorage@npm:8.1.0"
   dependencies:
     spark-md5: "npm:^3.0.1"
-  checksum: 10c0/db8692bbdd41d81b7268c8563b35bb6938e45b29cab1b83f967bad2e344342e8dfa295beaf2cc7dfea0e5774e43911ef50027b917961d33e50bd36de68eb66f9
+  checksum: 10c0/bf023f6123fd441101b5b0c84ae0d98ce2a01bfced89115968532aca3e4409fbc82a329fc055e75edf255da53798eea41ff74e671998b583addd4d0d5a7a49af
   languageName: node
   linkType: hard
 
@@ -2531,7 +2531,7 @@ __metadata:
     "@hotwired/turbo-rails": "npm:^8.0.18"
     "@icon/themify-icons": "npm:^1.0.1-alpha.3"
     "@rails/actioncable": "npm:^8.0.200"
-    "@rails/actiontext": "npm:^8.0.300"
+    "@rails/actiontext": "npm:^8.1.0"
     "@rails/activestorage": "npm:^8.0.100"
     "@rails/request.js": "npm:^0.0.12"
     "@redocly/cli": "npm:^1.34.5 <2.0.0"
