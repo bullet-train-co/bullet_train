@@ -444,14 +444,14 @@ GEM
     parallel (1.27.0)
     parallel_tests (5.4.0)
       parallel
-    parser (3.3.9.0)
+    parser (3.3.10.0)
       ast (~> 2.4.1)
       racc
     pg (1.6.2-aarch64-linux)
     pg (1.6.2-arm64-darwin)
     pg (1.6.2-x86_64-darwin)
     pg (1.6.2-x86_64-linux)
-    phonelib (0.10.12)
+    phonelib (0.10.13)
     possessive (1.0.1)
     pp (0.6.3)
       prettyprint
