@@ -10,6 +10,19 @@ if (!process.env.THEME) {
 const themeConfigFile = execSync(`bundle exec bin/theme tailwind-config ${process.env.THEME}`).toString().trim()
 let themeConfig = require(themeConfigFile)
 
+// *** Uncomment the block below if you want to override the base color. ***
+// Note, that you need to specify primary and secondary in addition to base.
+// The settings here will override and clobber the theme settings in theme.rb
+// (which is likely to be deprecated soon).
+//
+/*
+themeConfig.theme.extend.colors = ({colors}) => ({
+  base: colors.stone,
+  primary: colors.blue,
+  secondary: colors.blue,
+})
+*/
+
 // *** Uncomment these if required for your overrides ***
 
 // const defaultTheme = require('tailwindcss/defaultTheme')
