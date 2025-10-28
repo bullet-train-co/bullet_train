@@ -10,10 +10,10 @@
           <%= image_tag image_path("logo/logo.png"), class: 'reveal reveal-from-left h-40 w-auto mx-auto', "data-scroll-reveal-target": "item" %>
         <% end %>
 
-        <div class="col-span-1 reveal py-2 mt-10 mx-auto rounded-md shadow bg-slate-100" data-scroll-reveal-target="item" data-delay="400ms">
+        <div class="col-span-1 reveal py-2 mt-10 mx-auto rounded-md shadow bg-base-100" data-scroll-reveal-target="item" data-delay="400ms">
           <div class="p-2 m-3 shadow rounded-md bg-white">
             <div class="py-2 text-center">
-              <%= link_to t('bullet_train.name'), "https://bullettrain.co/", class: 'mx-5 mt-3 text-slate-800 text-4xl font-bold hover:text-primary-600 hover:no-underline', target: '_blank' %>
+              <%= link_to t('bullet_train.name'), "https://bullettrain.co/", class: 'mx-5 mt-3 text-base-800 text-4xl font-bold hover:text-primary-600 hover:no-underline', target: '_blank' %>
               <p><%= "v#{BulletTrain::VERSION}" %></p>
             </div>
 
@@ -21,7 +21,7 @@
               <%= render 'shared/line' %>
             </div>
 
-            <p class="text-slate-600 text-lg text-left p-5">
+            <p class="text-base-600 text-lg text-left p-5">
               Welcome to Bullet Train! Please read the <%= link_to "documentation", "/docs", target: '_blank' %> to get started.
             </p>
 
