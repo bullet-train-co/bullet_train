@@ -1,0 +1,8 @@
+<% object ||= current_attributes_object %>
+<% attribute ||= :image %>
+<% options ||= {} %>
+
+<% attachment = object.public_send(attribute) %>
+<% if attachment && attachment.attached? %>
+  <%= render 'active_storage/blobs/blob', blob: attachment, options: options %>
+<% end %>
