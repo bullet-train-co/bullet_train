@@ -1796,20 +1796,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hotwired/turbo-rails@npm:^8.0.18":
-  version: 8.0.18
-  resolution: "@hotwired/turbo-rails@npm:8.0.18"
+"@hotwired/turbo-rails@npm:^8.0.20":
+  version: 8.0.20
+  resolution: "@hotwired/turbo-rails@npm:8.0.20"
   dependencies:
-    "@hotwired/turbo": "npm:^8.0.18"
+    "@hotwired/turbo": "npm:^8.0.20"
     "@rails/actioncable": "npm:>=7.0"
-  checksum: 10c0/5a2ec94f5d2c530366bc4b8139eaae1764694a31509e7c754cda03ea0c03b56cc4f0da0d759b9e13acb11f963b2ae9aeb0b624e1db75c187fd3fc236cfb83f22
+  checksum: 10c0/b443c03ad9d4fdec660f0a52e20cec72c5747a2765a92b089f23aff1e0796b05cc7245d91a569135922fc6737da499e620b7d3935eeeccf4e0fa5160e508ecea
   languageName: node
   linkType: hard
 
-"@hotwired/turbo@npm:^8.0.18":
-  version: 8.0.18
-  resolution: "@hotwired/turbo@npm:8.0.18"
-  checksum: 10c0/5021e77441cc1730629c4c4b25113d8cc765f4ebcdc173c3fcab53124a36c682f89c1c918be8f90c1e19175e7ac0391216728135b29ebdf1e701ec27d6acc70c
+"@hotwired/turbo@npm:^8.0.20":
+  version: 8.0.20
+  resolution: "@hotwired/turbo@npm:8.0.20"
+  checksum: 10c0/bff9a871d2131e4006e3f085fea93906d89bc19cfb6b57f10d8ebe0ff1637632f2f5f69bb0e7a6221b315df1ff2fdf4a833bffdfde03b846b7eba4580cf78d87
   languageName: node
   linkType: hard
 
@@ -2228,14 +2228,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actiontext@npm:^8.1.0":
-  version: 8.1.0
-  resolution: "@rails/actiontext@npm:8.1.0"
+"@rails/actiontext@npm:^8.1.100":
+  version: 8.1.100
+  resolution: "@rails/actiontext@npm:8.1.100"
   dependencies:
     "@rails/activestorage": "npm:>= 8.1.0-alpha"
   peerDependencies:
     trix: ^2.0.0
-  checksum: 10c0/0dfc7d3647b0d634b1510c37d642385ec5e3be88fd259726b858d47c2425c2a49aa544c1b4b31a1704b175e3e54808d715f7cb7cb6214d68a0d50a3546d58b72
+  checksum: 10c0/36a90400b0b7332851d53ebd58e957fb7e83c004a5081731356313e8ddbc5f0fcec5edb0abe76b0a529e8319da81c692f79946bb51640865913da2428cef2575
   languageName: node
   linkType: hard
 
@@ -2528,10 +2528,10 @@ __metadata:
     "@esbuild-plugins/node-globals-polyfill": "npm:^0.2.3"
     "@fullhuman/postcss-purgecss": "npm:7.0.2"
     "@hotwired/stimulus": "npm:^3.2.2"
-    "@hotwired/turbo-rails": "npm:^8.0.18"
+    "@hotwired/turbo-rails": "npm:^8.0.20"
     "@icon/themify-icons": "npm:^1.0.1-alpha.3"
     "@rails/actioncable": "npm:^8.0.200"
-    "@rails/actiontext": "npm:^8.1.0"
+    "@rails/actiontext": "npm:^8.1.100"
     "@rails/activestorage": "npm:^8.0.100"
     "@rails/request.js": "npm:^0.0.12"
     "@redocly/cli": "npm:^1.34.5 <2.0.0"
