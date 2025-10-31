@@ -97,7 +97,7 @@ GEM
       turbo_power (>= 0.6.0)
       view_component (>= 3.7.0)
       zeitwerk (>= 2.6.12)
-    avo-heroicons (0.1.1)
+    avo-heroicons (0.1.2)
     base64 (0.3.0)
     bcrypt (3.1.20)
     benchmark (0.5.0)
@@ -393,7 +393,7 @@ GEM
       bigdecimal (~> 3.1)
     multipart-post (2.4.1)
     mutex_m (0.3.0)
-    net-http (0.6.0)
+    net-http (0.7.0)
       uri
     net-imap (0.5.12)
       date
@@ -442,7 +442,7 @@ GEM
     ostruct (0.6.3)
     pagy (9.4.0)
     parallel (1.27.0)
-    parallel_tests (5.4.0)
+    parallel_tests (5.5.0)
       parallel
     parser (3.3.10.0)
       ast (~> 2.4.1)
@@ -656,7 +656,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    uri (1.0.4)
+    uri (1.1.0)
     useragent (0.16.11)
     version_gem (1.1.9)
     view_component (4.1.0)
