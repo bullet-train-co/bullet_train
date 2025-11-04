@@ -608,7 +608,7 @@ GEM
     sexp_processor (4.17.4)
     showcase-rails (0.4.6)
       rails (>= 6.1.0)
-    sidekiq (8.0.8)
+    sidekiq (8.0.9)
       connection_pool (>= 2.5.0)
       json (>= 2.9.0)
       logger (>= 1.6.2)
