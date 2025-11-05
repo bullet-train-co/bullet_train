@@ -2,6 +2,7 @@ const { execSync } = require("child_process");
 
 const postcssImportConfigFile = execSync(`bundle exec bin/theme postcss-import-config ${process.env.THEME}`).toString().trim()
 const postcssImportConfig = require(postcssImportConfigFile)
+const tailwindImportConfigFile = execSync(`bundle exec bin/theme tailwind-mailer-config ${process.env.THEME}`).toString().trim()
 
 module.exports = {
   plugins: [
@@ -12,7 +13,7 @@ module.exports = {
     // Maybe someday we can remove this next plugin for the mailer stylesheet.
     require('postcss-css-variables'),
     require('tailwindcss/nesting'),
-    require('tailwindcss'),
+    require('tailwindcss')({ config: tailwindImportConfigFile }),
     require('autoprefixer'),
   ]
 }
