@@ -81,15 +81,14 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     ansi (1.5.0)
     ast (2.4.3)
-    avo (3.25.3)
+    avo (3.26.0)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
       activesupport (>= 6.1)
       addressable
-      avo-heroicons (>= 0.1.1)
+      avo-icons (>= 0.1.1)
       docile
-      inline_svg
       meta-tags
       pagy (>= 7.0.0)
       prop_initializer (>= 0.2.0)
@@ -97,7 +96,8 @@ GEM
       turbo_power (>= 0.6.0)
       view_component (>= 3.7.0)
       zeitwerk (>= 2.6.12)
-    avo-heroicons (0.1.2)
+    avo-icons (0.1.1)
+      inline_svg
     base64 (0.3.0)
     bcrypt (3.1.20)
     benchmark (0.5.0)
@@ -528,7 +528,7 @@ GEM
     rails-html-sanitizer (1.6.2)
       loofah (~> 2.21)
       nokogiri (>= 1.15.7, != 1.16.7, != 1.16.6, != 1.16.5, != 1.16.4, != 1.16.3, != 1.16.2, != 1.16.1, != 1.16.0.rc1, != 1.16.0)
-    rails_best_practices (1.23.2)
+    rails_best_practices (1.23.3)
       activesupport
       code_analyzer (~> 0.5.5)
       erubis
@@ -656,7 +656,7 @@ GEM
     unicode-display_width (3.2.0)
       unicode-emoji (~> 4.1)
     unicode-emoji (4.1.0)
-    uri (1.1.0)
+    uri (1.1.1)
     useragent (0.16.11)
     version_gem (1.1.9)
     view_component (4.1.0)
