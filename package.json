@@ -23,6 +23,7 @@
     "glob": "^10.3.12",
     "jstz": "^2.1.1",
     "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.1",
     "postcss-css-variables": "^0.19.0",
     "postcss-extend-rule": "^4.0.0",
     "postcss-import": "^16.1.1",
