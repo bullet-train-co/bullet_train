@@ -1,14 +1,35 @@
-<figure class="attachment attachment--<%= blob.representable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
-  <% if blob.representable? %>
-    <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [ 800, 600 ] : [ 1024, 768 ]) %>
+<% options ||= {} %>
+
+<% if blob.representable? %>
+  <%
+    image_source = nil
+    if blob.content_type == "application/pdf"
+      # If it's a PDF, increase the DPI to make the preview image readable
+      options[:width] ||= 400
+      options[:height] ||= 400
+      preview_options = { resize_to_limit: [options[:width], options[:height]] }
+      preview_options[:saver] = { dpi: 300 }
+      image_source = blob.representation(preview_options)
+    else
+      image_source = blob
+    end
+  %>
+
+  <%= link_to url_for(blob), target: "_blank", title: "View original: #{blob.filename}", class: "inline-block" do %>
+    <%= image_tag image_source, options.merge(class: "rounded-md max-w-full h-auto") %>
   <% end %>
 
-  <figcaption class="attachment__caption">
-    <% if caption = blob.try(:caption) %>
-      <%= caption %>
-    <% else %>
-      <span class="attachment__name"><%= blob.filename %></span>
-      <span class="attachment__size"><%= number_to_human_size blob.byte_size %></span>
+<% elsif blob.video? %>
+  <video controls width="<%= options[:width] %>" preload="metadata" class="max-w-full h-auto rounded-md">
+    <source src="<%= rails_blob_url(blob) %>" type="<%= blob.content_type %>">
+  </video>
+
+<% else %>
+  <%# Fallback for files that can't be represented as images, like zip files %>
+  <div class="p-3 border border-gray-300 rounded-md flex items-center space-x-2">
+    <%= link_to url_for(blob), target: "_blank", class: "flex items-center text-blue-600 hover:underline" do %>
+      <span class="text-xl mr-2">📄</span>
+      <span><%= blob.filename %></span>
     <% end %>
-  </figcaption>
-</figure>
+  </div>
+<% end %>
