@@ -1523,15 +1523,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@csstools/selector-specificity@npm:^2.0.0":
-  version: 2.2.0
-  resolution: "@csstools/selector-specificity@npm:2.2.0"
-  peerDependencies:
-    postcss-selector-parser: ^6.0.10
-  checksum: 10c0/d81c9b437f7d45ad0171e09240454ced439fa3e67576daae4ec7bb9c03e7a6061afeb0fa21d41f5f45d54bf8e242a7aa8101fbbba7ca7632dd847601468b5d9e
-  languageName: node
-  linkType: hard
-
 "@domchristie/turn@npm:^3.1.1":
   version: 3.1.1
   resolution: "@domchristie/turn@npm:3.1.1"
@@ -2545,7 +2536,6 @@ __metadata:
     postcss: "npm:^8.4.38"
     postcss-cli: "npm:^11.0.1"
     postcss-css-variables: "npm:^0.19.0"
-    postcss-extend-rule: "npm:^4.0.0"
     postcss-import: "npm:^16.1.1"
     postcss-nested: "npm:^7.0.2"
     stimulus-reveal: "npm:^1.4.2"
@@ -4979,17 +4969,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-extend-rule@npm:^4.0.0":
-  version: 4.0.0
-  resolution: "postcss-extend-rule@npm:4.0.0"
-  dependencies:
-    postcss-nesting: "npm:^10.1.2"
-  peerDependencies:
-    postcss: ^8.4.6
-  checksum: 10c0/86510032145ae25a8e3378ed230ad2dc214a34efe09c88fa9991886ef3b4eebcb3992b136d3471722ba1fcc338ee03930e73954ac1c7a3482402dfcea39f1a91
-  languageName: node
-  linkType: hard
-
 "postcss-import@npm:^15.1.0":
   version: 15.1.0
   resolution: "postcss-import@npm:15.1.0"
@@ -5088,18 +5067,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-nesting@npm:^10.1.2":
-  version: 10.2.0
-  resolution: "postcss-nesting@npm:10.2.0"
-  dependencies:
-    "@csstools/selector-specificity": "npm:^2.0.0"
-    postcss-selector-parser: "npm:^6.0.10"
-  peerDependencies:
-    postcss: ^8.2
-  checksum: 10c0/1f44201edeedaab3af8552a7e231cf8530785245ec56e30a7f756076ffa58ec97c12b75a8761327bf278b26aa9903351b2f3324d11784f239b07dc79295e0a77
-  languageName: node
-  linkType: hard
-
 "postcss-reporter@npm:^7.0.0":
   version: 7.1.0
   resolution: "postcss-reporter@npm:7.1.0"
@@ -5122,7 +5089,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-selector-parser@npm:^6.0.10, postcss-selector-parser@npm:^6.1.1, postcss-selector-parser@npm:^6.1.2":
+"postcss-selector-parser@npm:^6.1.1, postcss-selector-parser@npm:^6.1.2":
   version: 6.1.2
   resolution: "postcss-selector-parser@npm:6.1.2"
   dependencies:
