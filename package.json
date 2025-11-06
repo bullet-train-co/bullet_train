@@ -23,6 +23,7 @@
     "glob": "^10.3.12",
     "jstz": "^2.1.1",
     "postcss": "^8.4.38",
+    "postcss-cli": "^11.0.1",
     "postcss-css-variables": "^0.19.0",
     "postcss-extend-rule": "^4.0.0",
     "postcss-import": "^16.1.1",
@@ -37,8 +38,8 @@
     "heroku-postbuild": "echo 'This step prevents Heroku from trying to run `yarn build` before ruby and bundler are available. The asset pipeline will call it as part of asset precompilation.'",
     "build": "THEME=\"light\" node esbuild.config.js",
     "build:css": "bin/link; yarn light:build:css; yarn light:build:mailer:css",
-    "light:build:css": "THEME=\"light\" NODE_PATH=./node_modules tailwindcss -c tailwind.config.js -i ./app/assets/stylesheets/application.css -o ./app/assets/builds/application.light.css --postcss ./postcss.config.js",
-    "light:build:mailer:css": "THEME=\"light\" NODE_PATH=./node_modules tailwindcss -c $(bundle exec bin/theme tailwind-mailer-config light) -i $(bundle exec bin/theme tailwind-stylesheet light) -o ./app/assets/builds/application.mailer.light.css --postcss ./postcss.mailer.config.js"
+    "light:build:css": "THEME=\"light\" NODE_PATH=./node_modules postcss ./app/assets/stylesheets/application.css -o ./app/assets/builds/application.light.css --config ./postcss.config.js",
+    "light:build:mailer:css": "THEME=\"light\" NODE_PATH=./node_modules postcss $(bundle exec bin/theme tailwind-stylesheet light) -o ./app/assets/builds/application.mailer.light.css --config ./postcss_mailer_config"
   },
   "packageManager": "yarn@4.2.2"
 }
