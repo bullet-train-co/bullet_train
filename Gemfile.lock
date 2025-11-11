@@ -559,7 +559,7 @@ GEM
     redis-client (0.26.1)
       connection_pool
     regexp_parser (2.11.3)
-    reline (0.6.2)
+    reline (0.6.3)
       io-console (~> 0.5)
     require_all (3.0.0)
     responders (3.2.0)
