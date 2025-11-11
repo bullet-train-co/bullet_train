@@ -7,7 +7,8 @@ class UpdateMembershipsEmailToMatchUsers < ActiveRecord::Migration[8.0]
 
     # But instead of looping all Users we're looking specifically for Memberships where `user_email`
     # doesn't match the `email` column from the associated user.
-    memberships_to_update = Membership.joins(:user).includes(:user).where("memberships.user_email != users.email")
+    memberships_to_update = Membership.joins(:user).includes(:user)
+      .where("memberships.user_email != users.email")
 
     # Then we loop the memberships that need updating and call `update` on each one individually
     # so that `updated_at` will be set for us and so that ActiveRecord callbacks will run.
