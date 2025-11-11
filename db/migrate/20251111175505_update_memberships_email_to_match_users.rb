@@ -18,8 +18,8 @@ class UpdateMembershipsEmailToMatchUsers < ActiveRecord::Migration[8.0]
       membership.update(user_email: membership.user.email)
     end
 
-    # If you want to update all memberships in a single SQL call comment out the block above and
-    # uncomment the line below. Note that callbacks will not run, and `updated_at` will not be set.
+    # If you want to update all memberships in a single SQL call comment out the `find_each` block above
+    # and uncomment the line below. Note that callbacks will not run, and `updated_at` will not be set.
     # memberships_to_update.update_all('user_email = (select users.email from users where users.id = memberships.user_id)')
   end
 
