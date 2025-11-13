@@ -21,7 +21,7 @@ class TwoFactorAuthentication < ApplicationSystemTestCase
       assert_text("Dashboard")
     end
 
-    device_test "a user cannot log in with an invalid OTP a #{device_name}" do
+    device_test "a user cannot log in with an invalid OTP" do
       visit new_user_session_path
       assert_text("Sign In")
 
