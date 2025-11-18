@@ -318,7 +318,7 @@ GEM
     hashie (5.0.0)
     heapy (0.2.0)
       thor
-    htmlentities (4.3.4)
+    htmlentities (4.4.0)
     http_accept_language (2.1.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
@@ -380,7 +380,7 @@ GEM
     method_source (1.1.0)
     mini_histogram (0.3.1)
     mini_mime (1.1.5)
-    minitest (5.26.1)
+    minitest (5.26.2)
     minitest-reporters (1.7.1)
       ansi
       builder
