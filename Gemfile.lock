@@ -318,7 +318,7 @@ GEM
     hashie (5.0.0)
     heapy (0.2.0)
       thor
-    htmlentities (4.4.1)
+    htmlentities (4.4.2)
     http_accept_language (2.1.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
