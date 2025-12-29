@@ -29,8 +29,6 @@ class PlatformApplicationAndApiTest < ApplicationSystemTestCase
     assert_text("Platform Application was successfully created.")
 
     # Extract the credentials from the show page
-    uid = nil
-    secret = nil
 
     # Find the application we just created
     application = Platform::Application.find_by(name: "Test API Application")
