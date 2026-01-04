@@ -36,7 +36,10 @@ Capybara.register_server :puma do |app, port, host|
 end
 
 Capybara.server = :puma
-Capybara.server_port = 3001 + ENV["TEST_ENV_NUMBER"].to_i
+# Use a random port base above 3000 to allow concurrent test suite runs
+# Still respect TEST_ENV_NUMBER for parallel tests within the same suite
+base_port = (ENV["CAPYBARA_BASE_PORT"] ||= rand(10000..60000).to_s).to_i
+Capybara.server_port = base_port + ENV["TEST_ENV_NUMBER"].to_i
 Capybara.app_host = "http://localhost:#{Capybara.server_port}"
 
 class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
