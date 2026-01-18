@@ -8,7 +8,7 @@
     "@esbuild-plugins/node-globals-polyfill": "^0.2.3",
     "@fullhuman/postcss-purgecss": "7.0.2",
     "@hotwired/stimulus": "^3.2.2",
-    "@hotwired/turbo-rails": "^8.0.20",
+    "@hotwired/turbo-rails": "^8.0.21",
     "@icon/themify-icons": "^1.0.1-alpha.3",
     "@rails/actioncable": "^8.0.200",
     "@rails/actiontext": "^8.1.200",
