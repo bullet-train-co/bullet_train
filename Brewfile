@@ -1,3 +1,11 @@
+# Recommended Ruby version manager
+brew "rbenv"
+brew "ruby-build"
+
+# Recommended Node version manager and package manager
+brew "nvm"
+brew "yarn"
+
 # Database
 brew "postgresql@14"
 

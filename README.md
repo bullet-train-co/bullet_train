@@ -1,6 +1,19 @@
 # Bullet Train Application Template
 If you're new to Bullet Train, start with the [Bullet Train Developer Documentation](https://bullettrain.co/docs) and the [Getting Started](https://bullettrain.co/docs/getting-started) guide. You should also [join the community Discord server](https://discord.gg/bullettrain)!
 
+## Prerequisites
+
+### On macOS
+
+You can use [Homebrew](https://brew.sh) to install all required dependencies, including:
+
+ - [rbenv](https://github.com/rbenv/rbenv) and [ruby-build](https://github.com/rbenv/ruby-build) for Ruby version management
+ - [nvm](https://github.com/nvm-sh/nvm) and [Yarn](https://yarnpkg.com) for Node version and package management
+ - [PostgreSQL] as a relational database
+ - [Redis] for Action Cable WebSockets and background job queues
+
+The instructions below will explain when to run `brew bundle`.
+
 ## Building a New Application with Bullet Train
 If you're building a new application with Bullet Train, you don't want to "Fork" the template repository on GitHub. Instead, you should:
 
@@ -16,20 +29,36 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     cd your_new_project_name
     ```
 
-3. Run the configuration and setup scripts:
+4. If you're on macOS, you can use Homebrew to install all dependencies:
+
+    ```
+    brew bundle
+    ```
+
+    > ⚠️ If Homebrew is installing nvm for the first time, be sure to follow the instructions on what you need to copy into your `~/.zshrc`.
+
+5. Make sure Node.js is properly configured:
+
+    ```
+    source ~/.zshrc
+    nvm use
+    corepack enable
+    ```
+
+6. Run the configuration and setup scripts:
 
     ```
     bin/configure
     bin/setup
     ```
     
-4. Boot your application:
+7. Boot your application:
 
     ```
     bin/dev
     ```
     
-5. Visit `http://localhost:3000`.
+8. Visit `http://localhost:3000`.
 
 ## Cloud Development with Gitpod
 
