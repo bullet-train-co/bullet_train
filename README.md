@@ -45,7 +45,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     open ~/.zshrc
     ```
 
-    When the editor opens, paste the following into `~/.zshrc`:
+    When the editor opens, paste the following into `~/.zshrc` and save:
 
     ```
     export NVM_DIR="$HOME/.nvm"
@@ -158,4 +158,5 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 ---
 
 This `README.md` file will be replaced with [`README.example.md`](./README.example.md) after running `bin/configure`.
+
 
