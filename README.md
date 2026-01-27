@@ -9,8 +9,8 @@ You can use [Homebrew](https://brew.sh) to install all required dependencies, in
 
  - [rbenv](https://github.com/rbenv/rbenv) and [ruby-build](https://github.com/rbenv/ruby-build) for Ruby version management
  - [nvm](https://github.com/nvm-sh/nvm) and [Yarn](https://yarnpkg.com) for Node version and package management
- - [PostgreSQL] as a relational database
- - [Redis] for Action Cable WebSockets and background job queues
+ - [PostgreSQL](https://www.postgresql.org) as a relational database
+ - [Redis](https://redis.io) for Action Cable WebSockets and background job queues
 
 The instructions below will explain when to run `brew bundle`.
 
@@ -29,13 +29,13 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     cd your_new_project_name
     ```
 
-4. If you're on macOS, you can use Homebrew to install all dependencies:
+4. If you're on macOS, you can use [Homebrew](https://brew.sh) to install all dependencies:
 
     ```
     brew bundle
     ```
 
-    > ⚠️ If Homebrew is installing nvm for the first time, be sure to follow the instructions on what you need to copy into your `~/.zshrc`.
+    > ⚠️ If Homebrew is installing nvm for the first time, be sure to follow the instructions for what you need to copy into `~/.zshrc`.
 
 5. Make sure Node.js is properly configured:
 
