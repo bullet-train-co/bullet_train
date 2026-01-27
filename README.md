@@ -64,6 +64,22 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 
     > ⚠️ You'll need to open a new shell before continuing. The easiest way to do this on macOS is hitting `⌘` + `T` to open a new tab in the same working directory.   
 
+    ### Additional PostgreSQL configuration
+
+    If Homebrew is installing PostgreSQL for the first time, there are some additional steps you need to take:
+
+    ```
+    brew services start postgresql@14
+    ```
+
+    ### Additional Redis configuration
+
+    If Homebrew is installing Redis for the first time, there are some additional steps you need to take:
+
+    ```
+    brew services start redis
+    ```
+
 6. Make sure Node.js is properly configured:
 
     ```
@@ -158,5 +174,6 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 ---
 
 This `README.md` file will be replaced with [`README.example.md`](./README.example.md) after running `bin/configure`.
+
 
 
