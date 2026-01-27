@@ -23,8 +23,6 @@ FileUtils.chdir APP_ROOT do
   # since some gems require native libraries like vips.
   require "#{__dir__}/setup-scripts/brew_bundle"
 
-  require "#{__dir__}/setup-scripts/bundle_install"
-
   require "#{__dir__}/setup-scripts/check_node"
   require "#{__dir__}/setup-scripts/check_yarn"
   require "#{__dir__}/setup-scripts/yarn_install"
