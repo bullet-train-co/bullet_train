@@ -77,6 +77,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 7. Run the configuration and setup scripts:
 
     ```
+    bundle install
     bin/configure
     bin/setup
     ```
