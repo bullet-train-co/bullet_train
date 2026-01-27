@@ -5,16 +5,16 @@ If you're new to Bullet Train, start with the [Bullet Train Developer Documentat
 
 ### On macOS
 
-You can use [Homebrew](https://brew.sh) to install all required dependencies, including:
+If you haven't already, install [Homebrew](https://brew.sh). We'll use it later to automatically install other dependencies, including:
 
  - [rbenv](https://github.com/rbenv/rbenv) and [ruby-build](https://github.com/rbenv/ruby-build) for Ruby version management
  - [nvm](https://github.com/nvm-sh/nvm) and [Yarn](https://yarnpkg.com) for Node version and package management
  - [PostgreSQL](https://www.postgresql.org) as a relational database
  - [Redis](https://redis.io) for Action Cable WebSockets and background job queues
 
-The instructions below will explain when to run `brew bundle`.
 
 ## Building a New Application with Bullet Train
+
 If you're building a new application with Bullet Train, you don't want to "Fork" the template repository on GitHub. Instead, you should:
 
 1. Clone the template repository:
@@ -34,6 +34,8 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     ```
     brew bundle
     ```
+
+    Unfortunately when you install dependencies this way, Homebrew suppresses the additional set up instructions, so we've included those below.
 
     ### Additional nvm configuration
 
@@ -174,6 +176,7 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 ---
 
 This `README.md` file will be replaced with [`README.example.md`](./README.example.md) after running `bin/configure`.
+
 
 
 
