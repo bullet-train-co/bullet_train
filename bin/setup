@@ -18,6 +18,11 @@ FileUtils.chdir APP_ROOT do
   # We need to check for the same version of ruby as bin/configure, so we
   # reuse this one from the configure-scritps directory.
   require "#{__dir__}/configure-scripts/check_ruby"
+
+  # Install Homebrew dependencies (macOS only) before bundle install,
+  # since some gems require native libraries like vips.
+  require "#{__dir__}/setup-scripts/brew_bundle"
+
   require "#{__dir__}/setup-scripts/bundle_install"
 
   require "#{__dir__}/setup-scripts/check_node"
