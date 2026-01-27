@@ -20,7 +20,7 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
 1. Clone the template repository:
 
     ```
-    git clone git@github.com:bullet-train-co/bullet_train.git your_new_project_name
+    git clone https://github.com/bullet-train-co/bullet_train.git your_new_project_name
     ```
 
 2. Enter the project directory:
@@ -35,30 +35,59 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     brew bundle
     ```
 
-    > ⚠️ If Homebrew is installing nvm for the first time, be sure to follow the instructions for what you need to copy into `~/.zshrc`.
+    ### Additional nvm configuration
 
-5. Make sure Node.js is properly configured:
+    If Homebrew is installing nvm for the first time, there are some additional steps you need to take:
+
+    ```
+    mkdir ~/.nvm
+    touch ~/.zshrc
+    open ~/.zshrc
+    ```
+
+    When the editor opens, paste the following into `~/.zshrc`:
+
+    ```
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+    ```
+
+    ### Additional rbenv configuration
+
+    If Homebrew is installing rbenv for the first time, there are some additional steps you need to take:
+
+    ```
+    rbenv init
+    rbenv install `cat .ruby-version`
+    ```
+
+    > ⚠️ You'll need to open a new shell before continuing. The easiest way to do this on macOS is hitting `⌘` + `T` to open a new tab in the same working directory.   
+
+6. Make sure Node.js is properly configured:
 
     ```
     source ~/.zshrc
-    nvm use
+    nvm install
     corepack enable
     ```
 
-6. Run the configuration and setup scripts:
+   > ⚠️ You'll need to open a new shell before continuing. The easiest way to do this on macOS is hitting `⌘` + `T` to open a new tab in the same working directory.
+
+7. Run the configuration and setup scripts:
 
     ```
     bin/configure
     bin/setup
     ```
     
-7. Boot your application:
+8. Boot your application:
 
     ```
     bin/dev
     ```
     
-8. Visit `http://localhost:3000`.
+9. Visit `http://localhost:3000`.
 
 <br>
 <br>
@@ -128,3 +157,4 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 ---
 
 This `README.md` file will be replaced with [`README.example.md`](./README.example.md) after running `bin/configure`.
+
