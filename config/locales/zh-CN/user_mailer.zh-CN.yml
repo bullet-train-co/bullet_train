@@ -1,0 +1,34 @@
+zh-CN:
+  user_mailer:
+    signature: &signature_zhcn
+      html:
+        <p>如果您有任何疑问，请随时<a href="mailto:%{support_email}">给我们发送电子邮件</a>。</p>
+        <p>谢谢<br>Untitled Application团队</p>
+    invited:
+      subject: 邀请加入Untitled Application上的%{team_name}！
+      preview: "%{inviter_name}已向您发送此邀请。"
+      heading: 您已被邀请！
+      body:
+        html:
+          <p>
+            %{inviter_name}已邀请您加入Untitled Application上的%{team_name}。
+            您可以通过点击下方按钮加入%{team_name}。
+          </p>
+      cta:
+        label: 加入%{team_name}
+      signature:
+        <<: *signature_zhcn
+    welcome:
+      subject: 欢迎使用Untitled Application！
+      preview: 此电子邮件包含有关如何开始使用您的帐户的详细信息。
+      heading: 欢迎使用Untitled Application！
+      body:
+        html:
+          <p>这是默认的欢迎邮件！你可以在`config/locales/zh-CN/user_mailer.zh-CN.yml`中更新此欢迎邮件的内容。</p>
+          <p>感谢<a href="https://postmarkapp.com">Postmark</a>团队免费为此电子邮件模板提供<a href="https://github.com/wildbit/postmark-templates">原始基础</a>。</p>
+      cta:
+        heading: 下一步?
+        body: 您可以使用以下链接返回您的仪表盘。
+        label: 查看您的仪表盘
+      signature:
+        <<: *signature_zhcn
