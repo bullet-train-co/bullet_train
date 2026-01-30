@@ -20,6 +20,9 @@ gem "pg", ">= 0.18", "< 2.0"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 7.0"
 
+# Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
+gem "importmap-rails"
+
 # Bundle and transpile JavaScript [https://github.com/rails/jsbundling-rails]
 gem "jsbundling-rails"
 
@@ -143,6 +146,9 @@ gem "bullet_train-roles", BULLET_TRAIN_VERSION
 gem "bullet_train-scope_validator", BULLET_TRAIN_VERSION
 gem "bullet_train-super_load_and_authorize_resource", BULLET_TRAIN_VERSION
 gem "bullet_train-themes-tailwind_css", BULLET_TRAIN_VERSION
+
+# TODO: Why doesn't this work as a dependecy in bullet_train-sortable?
+gem 'requestjs-rails'
 
 gem "devise"
 gem "devise-two-factor"

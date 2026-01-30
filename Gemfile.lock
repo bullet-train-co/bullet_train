@@ -322,6 +322,10 @@ GEM
     http_accept_language (2.1.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
+    importmap-rails (2.2.2)
+      actionpack (>= 6.0.0)
+      activesupport (>= 6.0.0)
+      railties (>= 6.0.0)
     indefinite_article (0.2.5)
       activesupport
     inline_svg (1.10.0)
@@ -558,6 +562,8 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
+    requestjs-rails (0.0.13)
+      railties (>= 7.1.0)
     require_all (3.0.0)
     responders (3.2.0)
       actionpack (>= 7.0)
@@ -719,6 +725,7 @@ DEPENDENCIES
   devise-two-factor
   factory_bot_rails (~> 6.2, != 6.4.2, != 6.4.1, != 6.4.0, != 6.3.0)
   foreman
+  importmap-rails
   jbuilder
   jsbundling-rails
   knapsack_pro
@@ -738,6 +745,7 @@ DEPENDENCIES
   rails-erd
   rails_best_practices
   redis (~> 5.4.0)
+  requestjs-rails
   rqrcode
   ruby-vips
   selenium-webdriver
