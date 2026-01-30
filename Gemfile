@@ -38,6 +38,9 @@ gem "jbuilder"
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 5.4.0"
 
+# Use Wafris gem for providing a Web Application Firewall [https://github.com/Wafris/wafris-rb]
+gem "wafris"
+
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
