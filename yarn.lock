@@ -2541,7 +2541,7 @@ __metadata:
     stimulus-reveal: "npm:^1.4.2"
     stimulus-scroll-reveal: "npm:^3.2.0"
     tailwindcss: "npm:^3.4.17"
-    trix: "npm:^2.1.15"
+    trix: "npm:^2.1.16"
     yalc: "npm:^1.0.0-pre.53"
   languageName: unknown
   linkType: soft
@@ -5964,12 +5964,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^2.0.1, trix@npm:^2.1.15":
+"trix@npm:^2.0.1":
   version: 2.1.15
   resolution: "trix@npm:2.1.15"
   dependencies:
     dompurify: "npm:^3.2.5"
   checksum: 10c0/fb1b53d03e13d007a21c7417bbc994b24073a48d51b94bee679f8bb748b2e2cf9469372b3292d40f27bf502a88ab27d43a0c3c08928b708f65741c1f9eca7c77
+  languageName: node
+  linkType: hard
+
+"trix@npm:^2.1.16":
+  version: 2.1.16
+  resolution: "trix@npm:2.1.16"
+  dependencies:
+    dompurify: "npm:^3.2.5"
+  checksum: 10c0/2ff194df6b932ff89b12fab999588c62dc64732a76e45433259725530f3d1d6b203e58b9e099e70e1faa5fdad3766dbd8c373c4d9cbb56b1ca7a8c3fb0421f43
   languageName: node
   linkType: hard
 
