@@ -172,7 +172,7 @@ jobs:
         if: always()
         run: |
           FILE_PATH="tmp/starter/tmp/screenshots/*.png"
-          if [ -f "$FILE_PATH" ]; then
+          if ls $FILE_PATH 1> /dev/null 2>&1; then
             echo "File exists. $FILE_PATH"
             echo "exists=true" >> $GITHUB_OUTPUT
           else
