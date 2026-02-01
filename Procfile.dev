@@ -2,5 +2,4 @@ web: bin/rails server -p 3000
 worker: bundle exec sidekiq -t 25
 js: THEME="light" yarn build --watch
 light-css: yarn light:build:css --watch
-light-mailer-css: yarn light:build:mailer:css --watch
 # ngrok: ngrok http 3000
