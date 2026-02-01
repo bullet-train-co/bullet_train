@@ -216,7 +216,7 @@ jobs:
 
       - name: Upload Error Screenshots
         uses: actions/upload-artifact@v4
-        if: steps.check-for-error-screenshots.outputs.exists == 'true'
+        if: always() && steps.check-for-error-screenshots.outputs.exists == 'true'
         with:
           name: error_screenshots_${{ matrix.parallel_test_groups }}.zip
           path: tmp/starter/tmp/screenshots/*.png
