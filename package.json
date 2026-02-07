@@ -19,7 +19,7 @@
     "@tailwindcss/postcss": "^4.1.0",
     "@tailwindcss/typography": "^0.5.19",
     "cable_ready": "^5.0.6",
-    "esbuild": "^0.27.2",
+    "esbuild": "^0.27.3",
     "glob": "^10.3.12",
     "jstz": "^2.1.1",
     "postcss": "^8.4.38",
