@@ -167,9 +167,6 @@ group :development do
   # Ruby formatter. Try `standardrb --fix`.
   gem "standard"
 
-  # Similar to standard for correcting format.
-  gem "rails_best_practices"
-
   # Rails doesn't include this by default, but we depend on it.
   gem "foreman"
 
