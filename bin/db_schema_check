@@ -25,7 +25,7 @@ else
 
   echo ""
   echo "rails db:migrate made a change to your database's schema."
-  echo "Please make sure your database is updated locally before pushing to CircleCI:"
+  echo "Please make sure your database is updated locally before pushing to CI:"
   git diff db/schema.rb
   exit 1
 fi

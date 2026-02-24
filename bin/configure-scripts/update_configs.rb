@@ -27,7 +27,6 @@ http_header_style = ActiveSupport::Inflector.parameterize(human.tr("_", " "), se
 
 puts ""
 puts "Replacing instances of \"Untitled Application\" with \"#{human}\" throughout the codebase.".green
-replace_in_file("./.circleci/config.yml", "untitled_application", variable)
 replace_in_file("./config/application.rb", "untitled_application", connected_name)
 replace_in_file("./config/database.yml", "untitled_application", variable)
 replace_in_file("./config/database.yml", "UNTITLED_APPLICATION", environment_variable)
