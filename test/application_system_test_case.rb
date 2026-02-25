@@ -164,19 +164,19 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
   end
 
   def within_team_menu(display_details = self.display_details)
-    first("#team").click
+    first("#team").hover
     yield
   end
   alias_method :within_team_menu_for, :within_team_menu
 
   def within_user_menu(display_details = self.display_details)
-    find("#user").click
+    find("#user").hover
     yield
   end
   alias_method :within_user_menu_for, :within_user_menu
 
   def within_developers_menu(display_details = self.display_details)
-    find("#developers").click
+    find("#developers").hover
     yield
   end
   alias_method :within_developers_menu_for, :within_developers_menu
@@ -208,7 +208,7 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     if display_details[:mobile]
       open_mobile_menu
     else
-      find("#user").click
+      find("#user").hover
     end
     click_on "Logout"
 
