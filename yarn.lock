@@ -1832,13 +1832,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@isaacs/cliui@npm:^9.0.0":
-  version: 9.0.0
-  resolution: "@isaacs/cliui@npm:9.0.0"
-  checksum: 10c0/971063b7296419f85053dacd0a0285dcadaa3dfc139228b23e016c1a9848121ad4aa5e7fcca7522062014e1eb6239a7424188b9f2cba893a79c90aae5710319c
-  languageName: node
-  linkType: hard
-
 "@jest/schemas@npm:^29.6.3":
   version: 29.6.3
   resolution: "@jest/schemas@npm:29.6.3"
@@ -2535,10 +2528,10 @@ __metadata:
     "@redocly/cli": "npm:^1.34.5 <2.0.0"
     "@tailwindcss/forms": "npm:^0.5.11"
     "@tailwindcss/typography": "npm:^0.5.19"
-    autoprefixer: "npm:^10.4.23"
+    autoprefixer: "npm:^10.4.27"
     cable_ready: "npm:^5.0.6"
     esbuild: "npm:^0.27.3"
-    glob: "npm:^12.0.0"
+    glob: "npm:^13.0.6"
     jstz: "npm:^2.1.1"
     postcss: "npm:^8.4.38"
     postcss-cli: "npm:^11.0.1"
@@ -2574,12 +2567,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^10.4.23":
-  version: 10.4.23
-  resolution: "autoprefixer@npm:10.4.23"
+"autoprefixer@npm:^10.4.27":
+  version: 10.4.27
+  resolution: "autoprefixer@npm:10.4.27"
   dependencies:
     browserslist: "npm:^4.28.1"
-    caniuse-lite: "npm:^1.0.30001760"
+    caniuse-lite: "npm:^1.0.30001774"
     fraction.js: "npm:^5.3.4"
     picocolors: "npm:^1.1.1"
     postcss-value-parser: "npm:^4.2.0"
@@ -2587,7 +2580,7 @@ __metadata:
     postcss: ^8.1.0
   bin:
     autoprefixer: bin/autoprefixer
-  checksum: 10c0/3765c5d0fa3e95fb2ebe9d5a6d4da0156f5d346c7ec9ac0fbf5c97c8139d0ca1e8743bf5dc1b4aa954467be6929fddf8498a3b6202d468d70b5f359f3b6af90f
+  checksum: 10c0/698ad9e23436635af1806d4a8b80393020135174d1d4a97eb81887cdddac2f297f198d1d717932db8503b325f9f2dc3accb6e290b2d3ce1a7ddeb947100e5b25
   languageName: node
   linkType: hard
 
@@ -2800,10 +2793,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"caniuse-lite@npm:^1.0.30001759, caniuse-lite@npm:^1.0.30001760":
-  version: 1.0.30001760
-  resolution: "caniuse-lite@npm:1.0.30001760"
-  checksum: 10c0/cee26dff5c5b15ba073ab230200e43c0d4e88dc3bac0afe0c9ab963df70aaa876c3e513dde42a027f317136bf6e274818d77b073708b74c5807dfad33c029d3c
+"caniuse-lite@npm:^1.0.30001759, caniuse-lite@npm:^1.0.30001774":
+  version: 1.0.30001774
+  resolution: "caniuse-lite@npm:1.0.30001774"
+  checksum: 10c0/cc6a340a5421b9a67d8fa80889065ee27b2839ad62993571dded5296e18f02bbf685ce7094e93fe908cddc9fefdfad35d6c010b724cc3d22a6479b0d0b679f8c
   languageName: node
   linkType: hard
 
@@ -2988,7 +2981,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.6":
+"cross-spawn@npm:^7.0.0":
   version: 7.0.6
   resolution: "cross-spawn@npm:7.0.6"
   dependencies:
@@ -3481,16 +3474,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"foreground-child@npm:^3.3.1":
-  version: 3.3.1
-  resolution: "foreground-child@npm:3.3.1"
-  dependencies:
-    cross-spawn: "npm:^7.0.6"
-    signal-exit: "npm:^4.0.1"
-  checksum: 10c0/8986e4af2430896e65bc2788d6679067294d6aee9545daefc84923a0a4b399ad9c7a3ea7bd8c0b2b80fdf4a92de4c69df3f628233ff3224260e9c1541a9e9ed3
-  languageName: node
-  linkType: hard
-
 "form-data@npm:^4.0.4":
   version: 4.0.4
   resolution: "form-data@npm:4.0.4"
@@ -3673,19 +3656,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^12.0.0":
-  version: 12.0.0
-  resolution: "glob@npm:12.0.0"
+"glob@npm:^13.0.6":
+  version: 13.0.6
+  resolution: "glob@npm:13.0.6"
   dependencies:
-    foreground-child: "npm:^3.3.1"
-    jackspeak: "npm:^4.1.1"
-    minimatch: "npm:^10.1.1"
-    minipass: "npm:^7.1.2"
-    package-json-from-dist: "npm:^1.0.0"
-    path-scurry: "npm:^2.0.0"
-  bin:
-    glob: dist/esm/bin.mjs
-  checksum: 10c0/923fbb7e30913496dc1c30191edb7ebb610a26edac81710a5f697c718b08694bce7fb0245baceba5383472778a8431ff7c36571703507cc6563602d3c139c993
+    minimatch: "npm:^10.2.2"
+    minipass: "npm:^7.1.3"
+    path-scurry: "npm:^2.0.2"
+  checksum: 10c0/269c236f11a9b50357fe7a8c6aadac667e01deb5242b19c84975628f05f4438d8ee1354bb62c5d6c10f37fd59911b54d7799730633a2786660d8c69f1d18120a
   languageName: node
   linkType: hard
 
@@ -4010,15 +3988,6 @@ __metadata:
     "@pkgjs/parseargs":
       optional: true
   checksum: 10c0/f01d8f972d894cd7638bc338e9ef5ddb86f7b208ce177a36d718eac96ec86638a6efa17d0221b10073e64b45edc2ce15340db9380b1f5d5c5d000cbc517dc111
-  languageName: node
-  linkType: hard
-
-"jackspeak@npm:^4.1.1":
-  version: 4.2.3
-  resolution: "jackspeak@npm:4.2.3"
-  dependencies:
-    "@isaacs/cliui": "npm:^9.0.0"
-  checksum: 10c0/b5c0c414f1607c2aa0597f4bf2c03b8443897fccd5fd3c2b3e4f77d556b2bc7c3d3413828ba91e0789f6fb40ad90242f7f89fb20aee9e9d705bc1681f7564f67
   languageName: node
   linkType: hard
 
@@ -4375,7 +4344,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:^10.1.1":
+"minimatch@npm:^10.2.2":
   version: 10.2.4
   resolution: "minimatch@npm:10.2.4"
   dependencies:
@@ -4485,14 +4454,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minipass@npm:^5.0.0 || ^6.0.2 || ^7.0.0, minipass@npm:^7.0.2, minipass@npm:^7.0.3, minipass@npm:^7.0.4":
-  version: 7.1.2
-  resolution: "minipass@npm:7.1.2"
-  checksum: 10c0/b0fd20bb9fb56e5fa9a8bfac539e8915ae07430a619e4b86ff71f5fc757ef3924b23b2c4230393af1eda647ed3d75739e4e0acb250a6b1eb277cf7f8fe449557
-  languageName: node
-  linkType: hard
-
-"minipass@npm:^7.1.2":
+"minipass@npm:^5.0.0 || ^6.0.2 || ^7.0.0, minipass@npm:^7.0.2, minipass@npm:^7.0.3, minipass@npm:^7.0.4, minipass@npm:^7.1.2, minipass@npm:^7.1.3":
   version: 7.1.3
   resolution: "minipass@npm:7.1.3"
   checksum: 10c0/539da88daca16533211ea5a9ee98dc62ff5742f531f54640dd34429e621955e91cc280a91a776026264b7f9f6735947629f920944e9c1558369e8bf22eb33fbb
@@ -4855,13 +4817,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"package-json-from-dist@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "package-json-from-dist@npm:1.0.1"
-  checksum: 10c0/62ba2785eb655fec084a257af34dbe24292ab74516d6aecef97ef72d4897310bc6898f6c85b5cd22770eaa1ce60d55a0230e150fb6a966e3ecd6c511e23d164b
-  languageName: node
-  linkType: hard
-
 "path-browserify@npm:^1.0.1":
   version: 1.0.1
   resolution: "path-browserify@npm:1.0.1"
@@ -4900,7 +4855,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"path-scurry@npm:^2.0.0":
+"path-scurry@npm:^2.0.2":
   version: 2.0.2
   resolution: "path-scurry@npm:2.0.2"
   dependencies:
@@ -6062,16 +6017,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^2.0.1":
-  version: 2.1.15
-  resolution: "trix@npm:2.1.15"
-  dependencies:
-    dompurify: "npm:^3.2.5"
-  checksum: 10c0/fb1b53d03e13d007a21c7417bbc994b24073a48d51b94bee679f8bb748b2e2cf9469372b3292d40f27bf502a88ab27d43a0c3c08928b708f65741c1f9eca7c77
-  languageName: node
-  linkType: hard
-
-"trix@npm:^2.1.16":
+"trix@npm:^2.0.1, trix@npm:^2.1.16":
   version: 2.1.16
   resolution: "trix@npm:2.1.16"
   dependencies:
