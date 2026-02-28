@@ -18,5 +18,8 @@ brew "vips"
 # Process manager for running bin/dev (recommended)
 brew "overmind"
 
+# Entity-relationship diagrams
+brew "graphviz"
+
 # Uncomment if using bullet_train-conversations gem
 # brew "icu4c"
