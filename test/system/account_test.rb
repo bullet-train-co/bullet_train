@@ -66,6 +66,6 @@ class AccountTest < ApplicationSystemTestCase
     # TODO: At some point when devise is updated their translations should capitalize password.
     # That will make this next line fail. At that point we should capitalize 'password' below and remove these comments.
     # See: https://github.com/heartcombo/devise/pull/5454
-    assert_text("Invalid Email Address or password.")
+    assert_text("Invalid email address or password.")
   end
 end

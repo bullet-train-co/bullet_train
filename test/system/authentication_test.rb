@@ -9,7 +9,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
 
     # try to sign-up without providing any information.
     click_on "Sign Up"
-    assert_text("Email Address can't be blank.")
+    assert_text("Email address can't be blank.")
     assert_text("Password can't be blank.")
 
     # try non-matching passwords.
@@ -53,7 +53,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
     fill_in "Set Password", with: example_password
     fill_in "Confirm Password", with: example_password
     click_on "Sign Up"
-    assert_text("Email Address has already been taken.")
+    assert_text("Email address has already been taken.")
 
     # try signing in now.
     click_on "Already have an account?"
@@ -74,7 +74,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
     # TODO: At some point when devise is updated their translations should capitalize password.
     # That will make this next line fail. At that point we should capitalize 'password' below and remove these comments.
     # See: https://github.com/heartcombo/devise/pull/5454
-    assert_text("Invalid Email Address or password.")
+    assert_text("Invalid email address or password.")
 
     # try signing in with the valid credentials.
     fill_in "Your Email Address", with: "andrew.culver@gmail.com"
@@ -97,14 +97,14 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
     assert_text("Reset Your Password")
 
     click_on "Reset Password by Email"
-    assert_text("Email Address can't be blank.")
+    assert_text("Email address can't be blank.")
 
     # try resetting the email for a bogus account.
     fill_in "Your Email Address", with: "not.andrew.culver@gmail.com"
     click_on "Reset Password by Email"
 
     # that shouldn't work.
-    assert_text("Email Address not found.")
+    assert_text("Email address not found.")
 
     perform_enqueued_jobs do
       # try resetting the email for our actual account.
