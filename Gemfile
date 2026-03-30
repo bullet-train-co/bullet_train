@@ -184,7 +184,6 @@ group :development do
 end
 
 group :test do
-
   # We're pinning this beause minitest-reporters 1.7.1 doesn't work with minitest 6.
   # When a new version of minitest-reporters is released we should be able to unpin this.
   gem "minitest", "~> 5.27.0"
