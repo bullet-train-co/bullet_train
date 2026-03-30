@@ -104,7 +104,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
     click_on "Reset Password by Email"
 
     # that shouldn't work.
-    assert_text("Email Address not found.")
+    assert_text("Email address not found.")
 
     perform_enqueued_jobs do
       # try resetting the email for our actual account.
