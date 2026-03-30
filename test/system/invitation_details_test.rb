@@ -39,7 +39,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
     fill_in "Email", with: ""
     click_on "Create Invitation"
     assert_text("Please correct the errors below.")
-    assert_text("Email can't be blank.")
+    assert_text("Email address can't be blank.")
   end
 
   device_test "admin can cancel invitation" do
