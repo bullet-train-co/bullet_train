@@ -53,7 +53,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
     fill_in "Set Password", with: example_password
     fill_in "Confirm Password", with: example_password
     click_on "Sign Up"
-    assert_text("Email Address has already been taken.")
+    assert_text("Email address has already been taken.")
 
     # try signing in now.
     click_on "Already have an account?"

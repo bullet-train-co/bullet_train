@@ -39,7 +39,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
     fill_in "Email", with: ""
     click_on "Create Invitation"
     assert_text("Please correct the errors below.")
-    assert_text("Email address can't be blank.")
+    assert_text("Email Address can't be blank.")
   end
 
   device_test "admin can cancel invitation" do
@@ -47,7 +47,7 @@ class InvitationDetailsTest < ApplicationSystemTestCase
     create :invitation, team: @jane.current_team, from_membership: @jane.memberships.first, email: @john.email, membership: membership
 
     # Cannot create a duplicate invitation
-    assert_raises(ActiveRecord::RecordInvalid, "Email Address has already been taken") do
+    assert_raises(ActiveRecord::RecordInvalid, "Email address has already been taken") do
       create :invitation, team: @jane.current_team, from_membership: @jane.memberships.first, email: @john.email, membership: membership
     end
 
