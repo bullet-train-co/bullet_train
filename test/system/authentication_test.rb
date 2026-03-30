@@ -9,7 +9,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
 
     # try to sign-up without providing any information.
     click_on "Sign Up"
-    assert_text("Email Address can't be blank.")
+    assert_text("Email can't be blank.")
     assert_text("Password can't be blank.")
 
     # try non-matching passwords.
@@ -97,7 +97,7 @@ class AuthenticationSystemTest < ApplicationSystemTestCase
     assert_text("Reset Your Password")
 
     click_on "Reset Password by Email"
-    assert_text("Email Address can't be blank.")
+    assert_text("Email can't be blank.")
 
     # try resetting the email for a bogus account.
     fill_in "Your Email Address", with: "not.andrew.culver@gmail.com"
