@@ -6017,16 +6017,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"trix@npm:^2.0.1":
-  version: 2.1.16
-  resolution: "trix@npm:2.1.16"
-  dependencies:
-    dompurify: "npm:^3.2.5"
-  checksum: 10c0/2ff194df6b932ff89b12fab999588c62dc64732a76e45433259725530f3d1d6b203e58b9e099e70e1faa5fdad3766dbd8c373c4d9cbb56b1ca7a8c3fb0421f43
-  languageName: node
-  linkType: hard
-
-"trix@npm:^2.1.18":
+"trix@npm:^2.0.1, trix@npm:^2.1.18":
   version: 2.1.18
   resolution: "trix@npm:2.1.18"
   dependencies:
