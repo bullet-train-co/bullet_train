@@ -382,7 +382,9 @@ GEM
     method_source (1.1.0)
     mini_histogram (0.3.1)
     mini_mime (1.1.5)
-    minitest (5.27.0)
+    minitest (6.0.3)
+      drb (~> 2.0)
+      prism (~> 1.5)
     minitest-reporters (1.8.0)
       ansi
       builder
@@ -728,7 +730,7 @@ DEPENDENCIES
   knapsack_pro
   letter_opener
   magic_test
-  minitest (~> 5.27.0)
+  minitest (~> 6.0.3)
   minitest-reporters
   minitest-retry
   parallel_tests
