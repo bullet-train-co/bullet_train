@@ -730,7 +730,7 @@ DEPENDENCIES
   knapsack_pro
   letter_opener
   magic_test
-  minitest (~> 6.0.3)
+  minitest
   minitest-reporters
   minitest-retry
   parallel_tests
