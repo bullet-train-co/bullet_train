@@ -281,7 +281,7 @@ GEM
     doorkeeper (5.9.0)
       railties (>= 5)
     drb (2.2.3)
-    erb (6.0.2)
+    erb (6.0.3)
     erubi (1.13.1)
     erubis (2.7.0)
     factory_bot (6.5.6)
@@ -551,7 +551,7 @@ GEM
       tsort (>= 0.2)
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
-    rake (13.4.1)
+    rake (13.4.2)
     rdoc (7.2.0)
       erb
       psych (>= 4.0.0)
