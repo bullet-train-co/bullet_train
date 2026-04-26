@@ -22,7 +22,7 @@
     "esbuild": "^0.28.0",
     "glob": "^13.0.6",
     "jstz": "^2.1.1",
-    "postcss": "^8.4.38",
+    "postcss": "^8.5.10",
     "postcss-cli": "^11.0.1",
     "postcss-css-variables": "^0.19.0",
     "postcss-import": "^16.1.1",
