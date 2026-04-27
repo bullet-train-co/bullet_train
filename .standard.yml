@@ -15,3 +15,5 @@ ignore:
     - Style/GlobalStdStream
     - Layout/ExtraSpacing
     - Layout/SpaceInsideArrayLiteralBrackets
+  # This is a monkey patch that will hopefully be temporary
+  - 'config/initializers/active_record_schema_dumper_monkey_patch.rb'
