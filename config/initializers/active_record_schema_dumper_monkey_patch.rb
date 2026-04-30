@@ -1,11 +1,12 @@
 # Hopefully this monkey patch will be temporary. The story for why it's here:
-# - This PR changed it so that columns would be alphabetically ordered in schema.rb
+# - This PR to Rails changed it so that columns would be alphabetically ordered in schema.rb
 #   https://github.com/rails/rails/pull/53281
-#   That has some undersirable side-effcts. 1) It makes database index defenitions unpredictable because they
-#   rely on "leftmost column" optimizations, and if a database was created by leading the schema instead
-#   of running migrations in series the columns would be created in a different order. 2) It breakes our
-#   automatic detection of the "first defined string column" which we use in BT if a model doesn't explicitly
-#   define a `label_attribute`.
+#   That has some undersirable side-effcts.
+#     1) It makes database table structure unpredictable because the order of columns in the
+#     physical database will differ depending on whether the database wascreated by loading the
+#     schema or by running migrations in series.
+#     2) It breakes our automatic detection of the "first defined string column" which we use in BT if
+#     a model doesn't explicitly define a `label_attribute`.
 # - If/when this PR is merged we can get rid of this monkey patch:
 #   https://github.com/rails/rails/pull/56842
 # - Or maybe they'll choose to merge this one instead, in which case we'll need to adjust some configs when
