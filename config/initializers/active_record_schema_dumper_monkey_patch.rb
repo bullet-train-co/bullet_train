@@ -7,7 +7,7 @@
 #     schema or by running migrations in series.
 #     2) It breakes our automatic detection of the "first defined string column" which we use in BT if
 #     a model doesn't explicitly define a `label_attribute`.
-# - If/when this PR is merged we can get rid of this monkey patch:
+# - If/when this Rails PR is merged we can get rid of this monkey patch:
 #   https://github.com/rails/rails/pull/56842
 # - Or maybe they'll choose to merge this one instead, in which case we'll need to adjust some configs when
 #   we drop this monkey patch:
