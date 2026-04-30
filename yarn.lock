@@ -2212,10 +2212,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actioncable@npm:>=7.0, @rails/actioncable@npm:^8.0.200":
+"@rails/actioncable@npm:>=7.0":
   version: 8.0.200
   resolution: "@rails/actioncable@npm:8.0.200"
   checksum: 10c0/42c861f3b43131ab523d37125e30e802bd5bab98bf8150a780531f82f05177cd0071a75a7f1341eac9de772732625194ac16205a40b82dc567cc05c21c56e412
+  languageName: node
+  linkType: hard
+
+"@rails/actioncable@npm:^8.1.300":
+  version: 8.1.300
+  resolution: "@rails/actioncable@npm:8.1.300"
+  checksum: 10c0/144e6cc6d83e5bc56287ecd3c989c494915f0bf8593eedf7cbf4c10741fa2a1f75e4bcf7963b3e14114a70563a1dd64272580f81ed707b5fbb7e3734a3f3a6a8
   languageName: node
   linkType: hard
 
@@ -2230,12 +2237,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/activestorage@npm:>= 8.1.0-alpha, @rails/activestorage@npm:^8.0.100":
+"@rails/activestorage@npm:>= 8.1.0-alpha":
   version: 8.1.0
   resolution: "@rails/activestorage@npm:8.1.0"
   dependencies:
     spark-md5: "npm:^3.0.1"
   checksum: 10c0/bf023f6123fd441101b5b0c84ae0d98ce2a01bfced89115968532aca3e4409fbc82a329fc055e75edf255da53798eea41ff74e671998b583addd4d0d5a7a49af
+  languageName: node
+  linkType: hard
+
+"@rails/activestorage@npm:^8.1.300":
+  version: 8.1.300
+  resolution: "@rails/activestorage@npm:8.1.300"
+  dependencies:
+    spark-md5: "npm:^3.0.1"
+  checksum: 10c0/eacb07a0bccc98c4586cc34d933e481dd8c0c6c3be155816ea5bd8c1e805c78f4bbb8ad65920760888d881a3aa0d2dd9036b50299cc3d1036ce6b4571387a1fa
   languageName: node
   linkType: hard
 
@@ -2521,9 +2537,9 @@ __metadata:
     "@hotwired/stimulus": "npm:^3.2.2"
     "@hotwired/turbo-rails": "npm:^8.0.23"
     "@icon/themify-icons": "npm:^1.0.1-alpha.3"
-    "@rails/actioncable": "npm:^8.0.200"
+    "@rails/actioncable": "npm:^8.1.300"
     "@rails/actiontext": "npm:^8.1.300"
-    "@rails/activestorage": "npm:^8.0.100"
+    "@rails/activestorage": "npm:^8.1.300"
     "@rails/request.js": "npm:^0.0.13"
     "@redocly/cli": "npm:^1.34.5 <2.0.0"
     "@tailwindcss/forms": "npm:^0.5.11"
