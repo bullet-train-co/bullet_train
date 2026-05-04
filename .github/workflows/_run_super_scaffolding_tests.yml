@@ -153,14 +153,14 @@ jobs:
         working-directory: tmp/starter
 
       - name: Upload Test Summary Logs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: test_summary_super_scaffolding_${{ matrix.test }}_${{ inputs.use-core-repo }}.log
           path: tmp/starter/test/reports/**/TEST-*.xml
 
       - name: Upload Test Coverage Data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: test_coverage_${{ matrix.test }}_${{ inputs.use-core-repo }}.log
@@ -181,7 +181,7 @@ jobs:
           fi
 
       - name: Upload Error Screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: steps.check-for-error-screenshots.outputs.exists == 'true'
         with:
           name: error_screenshots_${{ matrix.test }}.zip

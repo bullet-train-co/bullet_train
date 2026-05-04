@@ -180,14 +180,14 @@ jobs:
         shell: bash
 
       - name: Upload Parallel Test Runtime Log
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: parallel_runtime_test_${{ matrix.parallel_test_groups }}.log
           path: tmp/starter/tmp/parallel_runtime_test.log
 
       - name: Upload Test Coverage Data
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: test_coverage_${{ matrix.parallel_test_groups }}.log
@@ -195,7 +195,7 @@ jobs:
           include-hidden-files: true
 
       - name: Upload Test Summary Logs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: test_summary_${{ matrix.parallel_test_groups }}.log
@@ -215,7 +215,7 @@ jobs:
           fi
 
       - name: Upload Error Screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: steps.check-for-error-screenshots.outputs.exists == 'true'
         with:
           name: error_screenshots_${{ matrix.parallel_test_groups }}.zip

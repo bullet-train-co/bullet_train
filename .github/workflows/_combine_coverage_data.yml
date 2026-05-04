@@ -29,7 +29,7 @@ jobs:
           bundler-cache: true
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: tmp/starter/coverage_artifacts
           pattern: test_coverage_*.log
@@ -64,7 +64,7 @@ jobs:
         shell: bash
 
       - name: Upload Coverage Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         id: upload-coverage-report
         with:
           name: test_coverage_report

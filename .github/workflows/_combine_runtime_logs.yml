@@ -42,7 +42,7 @@ jobs:
         shell: bash
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
           pattern: parallel_runtime_test_*.log
