@@ -36,7 +36,12 @@ jobs:
         uses: test-summary/action@v2
         with:
           paths: "artifacts/**/TEST-*.xml"
+        # TODO: We can hopefully remove this once this issue is resolved:
+        # https://github.com/test-summary/action/issues/68
+        env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         if: always()
+
 
       - name: Delete artifacts
         uses: geekyeggo/delete-artifact@v6
