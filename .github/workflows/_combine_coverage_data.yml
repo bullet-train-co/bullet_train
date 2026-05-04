@@ -72,7 +72,7 @@ jobs:
           include-hidden-files: true
           retention-days: 1
 
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v9
         id: create-summary
         name: Summary
         env:

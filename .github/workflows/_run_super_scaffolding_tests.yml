@@ -26,7 +26,7 @@ jobs:
       - name: Checkout Repo
         uses: "actions/checkout@v5"
 
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v9
         id: generate-test-list
         name: Generate Test List
         with:
