@@ -20,7 +20,7 @@ jobs:
       contents: read
     steps:
       - name: Standard Ruby
-        uses: standardrb/standard-ruby-action@v1
+        uses: standardrb/standard-ruby-action@v1.5.0
         with:
           autofix: false
         env:
