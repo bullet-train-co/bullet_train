@@ -144,7 +144,7 @@ jobs:
             core.summary.write()
 
       - name: Delete artifacts
-        uses: geekyeggo/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: test_coverage_*.log
           failOnError: false
