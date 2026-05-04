@@ -13,12 +13,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: tmp/starter
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
           pattern: test_summary_*.log
@@ -36,10 +36,15 @@ jobs:
         uses: test-summary/action@v2
         with:
           paths: "artifacts/**/TEST-*.xml"
+        env:
+          # TODO: We can hopefully remove this env var once this issue is resolved:
+          # https://github.com/test-summary/action/issues/68
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
         if: always()
 
+
       - name: Delete artifacts
-        uses: geekyeggo/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: test_summary_*.log
           failOnError: false

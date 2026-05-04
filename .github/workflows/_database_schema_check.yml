@@ -33,7 +33,7 @@ jobs:
       BUNDLE_RETRY: 3
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1

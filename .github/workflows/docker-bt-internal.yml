@@ -25,11 +25,11 @@ jobs:
       version: ${{ steps.extract-version.outputs.result }}
     steps:
       - name: Checkout Repo
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v6"
 
       - name: Extract Bullet Train Version
         id: extract-version
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         with:
           result-encoding: string
           script: |
@@ -75,10 +75,10 @@ jobs:
       - build-amd
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download digests
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: ${{ runner.temp }}/digests
           pattern: digests-*

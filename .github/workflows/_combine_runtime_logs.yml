@@ -13,12 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: tmp/starter
 
       - name: runtime log cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             tmp/starter/tmp/parallel_runtime_test.log
@@ -42,7 +42,7 @@ jobs:
         shell: bash
 
       - name: Download artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           path: artifacts
           pattern: parallel_runtime_test_*.log
@@ -65,7 +65,7 @@ jobs:
         shell: bash
 
       - name: Delete artifacts
-        uses: geekyeggo/delete-artifact@v5
+        uses: geekyeggo/delete-artifact@v6
         with:
           name: parallel_runtime_test_*.log
           failOnError: false
