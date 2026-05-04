@@ -23,3 +23,7 @@ jobs:
         uses: standardrb/standard-ruby-action@v1
         with:
           autofix: false
+        env:
+          # TODO: We can hopefully remove this env var once this issue is resolved:
+          # https://github.com/standardrb/standard-ruby-action/issues/77
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
