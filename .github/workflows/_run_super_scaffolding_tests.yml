@@ -24,7 +24,7 @@ jobs:
       tests: ${{ steps.generate-test-list.outputs.result }}
     steps:
       - name: Checkout Repo
-        uses: "actions/checkout@v4"
+        uses: "actions/checkout@v5"
 
       - uses: actions/github-script@v7
         id: generate-test-list
@@ -83,7 +83,7 @@ jobs:
       BUNDLE_RETRY: 3
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: tmp/starter
 
