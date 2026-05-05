@@ -108,7 +108,7 @@ GEM
     bindex (0.8.1)
     binding_of_caller (2.0.0)
       debug_inspector (>= 1.2.0)
-    bootsnap (1.24.1)
+    bootsnap (1.24.3)
       msgpack (~> 1.2)
     builder (3.3.0)
     bullet_train (1.44.1)
@@ -286,7 +286,7 @@ GEM
     erb (6.0.4)
     erubi (1.13.1)
     erubis (2.7.0)
-    factory_bot (6.5.6)
+    factory_bot (6.6.0)
       activesupport (>= 6.1.0)
     factory_bot_rails (6.5.1)
       factory_bot (~> 6.5)
@@ -347,9 +347,9 @@ GEM
     json (2.19.5)
     jwt (3.1.2)
       base64
-    knapsack_pro (9.2.3)
-      logger
+    knapsack_pro (10.0.0)
       rake
+      thor (~> 1.4)
     language_server-protocol (3.17.0.5)
     launchy (3.1.1)
       addressable (~> 2.8)
