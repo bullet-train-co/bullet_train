@@ -1811,7 +1811,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@icon/themify-icons@npm:^1.0.1-alpha.3":
+"@icon/themify-icons@npm:^1.0.1":
   version: 1.0.1
   resolution: "@icon/themify-icons@npm:1.0.1"
   checksum: 10c0/4c0132753e755ca20710eab370773399431df5537d2056f42109df659c4f47be8dc3ca0f679bd1807721b0d79ed68024392765ca1c3c89f15d2a37401a330dcd
@@ -2520,7 +2520,7 @@ __metadata:
     "@fullhuman/postcss-purgecss": "npm:8.0.0"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@hotwired/turbo-rails": "npm:^8.0.23"
-    "@icon/themify-icons": "npm:^1.0.1-alpha.3"
+    "@icon/themify-icons": "npm:^1.0.1"
     "@rails/actioncable": "npm:^8.1.300"
     "@rails/actiontext": "npm:^8.1.300"
     "@rails/activestorage": "npm:^8.1.300"
