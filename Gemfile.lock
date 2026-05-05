@@ -111,7 +111,7 @@ GEM
     bootsnap (1.24.3)
       msgpack (~> 1.2)
     builder (3.3.0)
-    bullet_train (1.44.1)
+    bullet_train (1.45.0)
       bullet_train-fields
       bullet_train-has_uuid
       bullet_train-roles
@@ -133,7 +133,7 @@ GEM
       possessive
       rails (>= 7.0.0)
       showcase-rails
-    bullet_train-api (1.44.1)
+    bullet_train-api (1.45.0)
       bullet_train
       bullet_train-super_scaffolding
       doorkeeper
@@ -141,57 +141,57 @@ GEM
       jbuilder-schema (~> 2.6.6)
       pagy (~> 9)
       rails (>= 7.0.0)
-    bullet_train-fields (1.44.1)
+    bullet_train-fields (1.45.0)
       chronic
       cloudinary
       phonelib
       rails (>= 7.0.0)
-    bullet_train-has_uuid (1.44.1)
+    bullet_train-has_uuid (1.45.0)
       rails (>= 7.0.0)
-    bullet_train-incoming_webhooks (1.44.1)
+    bullet_train-incoming_webhooks (1.45.0)
       bullet_train
       bullet_train-api
       bullet_train-super_scaffolding
       rails (>= 7.0.0)
-    bullet_train-integrations (1.44.1)
+    bullet_train-integrations (1.45.0)
       rails (>= 7.0.0)
-    bullet_train-integrations-stripe (1.44.1)
+    bullet_train-integrations-stripe (1.45.0)
       omniauth (~> 2.0)
       omniauth-rails_csrf_protection (~> 1.0)
       omniauth-stripe-connect-v2
       rails (>= 7.0.0)
       stripe
-    bullet_train-obfuscates_id (1.44.1)
+    bullet_train-obfuscates_id (1.45.0)
       hashids
       rails (>= 7.0.0)
-    bullet_train-outgoing_webhooks (1.44.1)
+    bullet_train-outgoing_webhooks (1.45.0)
       public_suffix
       rails (>= 7.0.0)
-    bullet_train-roles (1.44.1)
+    bullet_train-roles (1.45.0)
       active_hash (~> 3.3.1)
       activesupport
       cancancan
-    bullet_train-scope_validator (1.44.1)
+    bullet_train-scope_validator (1.45.0)
       rails (>= 7.0.0)
-    bullet_train-sortable (1.44.1)
+    bullet_train-sortable (1.45.0)
       rails (>= 7.0.0)
-    bullet_train-super_load_and_authorize_resource (1.44.1)
+    bullet_train-super_load_and_authorize_resource (1.45.0)
       cancancan
       rails (>= 7.0.0)
-    bullet_train-super_scaffolding (1.44.1)
+    bullet_train-super_scaffolding (1.45.0)
       colorize
       indefinite_article
       masamune-ast (~> 2.0.2)
       rails (>= 7.0.0)
-    bullet_train-themes (1.44.1)
+    bullet_train-themes (1.45.0)
       bullet_train-fields
       nice_partials (~> 0.9)
       rails (>= 7.0.0)
-    bullet_train-themes-light (1.44.1)
+    bullet_train-themes-light (1.45.0)
       bullet_train-themes-tailwind_css
       masamune-ast (~> 2.0.2)
       rails (>= 7.0.0)
-    bullet_train-themes-tailwind_css (1.44.1)
+    bullet_train-themes-tailwind_css (1.45.0)
       bullet_train-themes
       rails (>= 7.0.0)
     cable_ready (5.0.6)
@@ -699,23 +699,23 @@ DEPENDENCIES
   active_hash
   avo (>= 3.1.7)
   bootsnap
-  bullet_train (= 1.44.1)
-  bullet_train-api (= 1.44.1)
-  bullet_train-fields (= 1.44.1)
-  bullet_train-has_uuid (= 1.44.1)
-  bullet_train-incoming_webhooks (= 1.44.1)
-  bullet_train-integrations (= 1.44.1)
-  bullet_train-integrations-stripe (= 1.44.1)
-  bullet_train-obfuscates_id (= 1.44.1)
-  bullet_train-outgoing_webhooks (= 1.44.1)
-  bullet_train-roles (= 1.44.1)
-  bullet_train-scope_validator (= 1.44.1)
-  bullet_train-sortable (= 1.44.1)
-  bullet_train-super_load_and_authorize_resource (= 1.44.1)
-  bullet_train-super_scaffolding (= 1.44.1)
-  bullet_train-themes (= 1.44.1)
-  bullet_train-themes-light (= 1.44.1)
-  bullet_train-themes-tailwind_css (= 1.44.1)
+  bullet_train (= 1.45.0)
+  bullet_train-api (= 1.45.0)
+  bullet_train-fields (= 1.45.0)
+  bullet_train-has_uuid (= 1.45.0)
+  bullet_train-incoming_webhooks (= 1.45.0)
+  bullet_train-integrations (= 1.45.0)
+  bullet_train-integrations-stripe (= 1.45.0)
+  bullet_train-obfuscates_id (= 1.45.0)
+  bullet_train-outgoing_webhooks (= 1.45.0)
+  bullet_train-roles (= 1.45.0)
+  bullet_train-scope_validator (= 1.45.0)
+  bullet_train-sortable (= 1.45.0)
+  bullet_train-super_load_and_authorize_resource (= 1.45.0)
+  bullet_train-super_scaffolding (= 1.45.0)
+  bullet_train-themes (= 1.45.0)
+  bullet_train-themes-light (= 1.45.0)
+  bullet_train-themes-tailwind_css (= 1.45.0)
   capybara (~> 3.39)
   capybara-email
   capybara-lockstep
