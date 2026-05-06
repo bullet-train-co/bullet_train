@@ -31,7 +31,8 @@ FROM $FROM_IMAGE AS build
 
 # Install application gems
 COPY Gemfile Gemfile.lock .ruby-version package.json yarn.lock ./
-RUN bundle install --clean && \
+RUN bundle install && \
+    bundle clean && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile && \
     yarn install
