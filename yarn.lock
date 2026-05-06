@@ -367,10 +367,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@icon/themify-icons@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@icon/themify-icons@npm:1.0.1"
-  checksum: 10c0/4c0132753e755ca20710eab370773399431df5537d2056f42109df659c4f47be8dc3ca0f679bd1807721b0d79ed68024392765ca1c3c89f15d2a37401a330dcd
+"@icon/themify-icons@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@icon/themify-icons@npm:1.0.6"
+  checksum: 10c0/abedb6c2d7c11fde1b0a4f555451605018e51673b3845633e5dc5011847f7abf2f81ea632d17a7486e4c50b7d204e0f7964075368553b87cb392921c85fffd5d
   languageName: node
   linkType: hard
 
@@ -809,7 +809,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redocly/ajv@npm:8.11.2, @redocly/ajv@npm:^8.11.2":
+"@redocly/ajv@npm:8.11.2":
   version: 8.11.2
   resolution: "@redocly/ajv@npm:8.11.2"
   dependencies:
@@ -865,14 +865,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@redocly/config@npm:^0.22.0":
-  version: 0.22.1
-  resolution: "@redocly/config@npm:0.22.1"
-  checksum: 10c0/1519770af7c34d651f064229c0b4a90484b411bff1026310f4a890e03be380e4eeab312257527140ce0187c41700dfc269a27722a524702b6d88c5ddbfeab04e
-  languageName: node
-  linkType: hard
-
-"@redocly/openapi-core@npm:1.34.14":
+"@redocly/openapi-core@npm:1.34.14, @redocly/openapi-core@npm:^1.4.0":
   version: 1.34.14
   resolution: "@redocly/openapi-core@npm:1.34.14"
   dependencies:
@@ -886,23 +879,6 @@ __metadata:
     pluralize: "npm:8.0.0"
     yaml-ast-parser: "npm:0.0.43"
   checksum: 10c0/2e37b3ba5be0428efe2235c2a8d112911e0985692030958b22c6c1b25bc649e7cb6d25db35a58d90a8596a52fede1be989ebcdf9281e92a4e2c7d77923b6d820
-  languageName: node
-  linkType: hard
-
-"@redocly/openapi-core@npm:^1.4.0":
-  version: 1.34.5
-  resolution: "@redocly/openapi-core@npm:1.34.5"
-  dependencies:
-    "@redocly/ajv": "npm:^8.11.2"
-    "@redocly/config": "npm:^0.22.0"
-    colorette: "npm:^1.2.0"
-    https-proxy-agent: "npm:^7.0.5"
-    js-levenshtein: "npm:^1.1.6"
-    js-yaml: "npm:^4.1.0"
-    minimatch: "npm:^5.0.1"
-    pluralize: "npm:^8.0.0"
-    yaml-ast-parser: "npm:0.0.43"
-  checksum: 10c0/e75ca28d9a7ad3dcb4879e958f2f064aa6d00dc8a52377fbed5a4fec48fa7892056c33dae7996ced9c613b347b400a4610c1c50d4910eb951e40222dbb154085
   languageName: node
   linkType: hard
 
@@ -1100,7 +1076,7 @@ __metadata:
     "@fullhuman/postcss-purgecss": "npm:8.0.0"
     "@hotwired/stimulus": "npm:^3.2.2"
     "@hotwired/turbo-rails": "npm:^8.0.23"
-    "@icon/themify-icons": "npm:^1.0.1"
+    "@icon/themify-icons": "npm:^1.0.6"
     "@rails/actioncable": "npm:^8.1.300"
     "@rails/actiontext": "npm:^8.1.300"
     "@rails/activestorage": "npm:^8.1.300"
@@ -1219,16 +1195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"brace-expansion@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "brace-expansion@npm:2.0.1"
-  dependencies:
-    balanced-match: "npm:^1.0.0"
-  checksum: 10c0/b358f2fe060e2d7a87aa015979ecea07f3c37d4018f8d6deb5bd4c229ad3a0384fe6029bb76cd8be63c81e516ee52d1a0673edbe2023d53a5191732ae3c3e49f
-  languageName: node
-  linkType: hard
-
-"brace-expansion@npm:^2.0.2":
+"brace-expansion@npm:^2.0.1, brace-expansion@npm:^2.0.2":
   version: 2.1.0
   resolution: "brace-expansion@npm:2.1.0"
   dependencies:
@@ -1467,7 +1434,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colorette@npm:1.4.0, colorette@npm:^1.2.0":
+"colorette@npm:1.4.0":
   version: 1.4.0
   resolution: "colorette@npm:1.4.0"
   checksum: 10c0/4955c8f7daafca8ae7081d672e4bd89d553bd5782b5846d5a7e05effe93c2f15f7e9c0cb46f341b59f579a39fcf436241ff79594899d75d5f3460c03d607fe9e
@@ -1981,17 +1948,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-xml-parser@npm:^4.5.0":
-  version: 4.5.6
-  resolution: "fast-xml-parser@npm:4.5.6"
-  dependencies:
-    strnum: "npm:^1.0.5"
-  bin:
-    fxparser: src/cli/cli.js
-  checksum: 10c0/1c19e183b5ee93bea9b24e1ddb0aed8564b273c6106af622b1c11ff8eb1fc8d2033cd7a0cb68976a5f3e05d1cbf0a0026e6f300f904be0bc854ff896dbdf38d2
-  languageName: node
-  linkType: hard
-
 "fast-xml-parser@npm:^5.3.4":
   version: 5.7.3
   resolution: "fast-xml-parser@npm:5.7.3"
@@ -2341,7 +2297,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"https-proxy-agent@npm:7.0.6, https-proxy-agent@npm:^7.0.1, https-proxy-agent@npm:^7.0.5":
+"https-proxy-agent@npm:7.0.6, https-proxy-agent@npm:^7.0.1":
   version: 7.0.6
   resolution: "https-proxy-agent@npm:7.0.6"
   dependencies:
@@ -2596,7 +2552,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-levenshtein@npm:1.1.6, js-levenshtein@npm:^1.1.6":
+"js-levenshtein@npm:1.1.6":
   version: 1.1.6
   resolution: "js-levenshtein@npm:1.1.6"
   checksum: 10c0/14045735325ea1fd87f434a74b11d8a14380f090f154747e613529c7cff68b5ee607f5230fa40665d5fb6125a3791f4c223f73b9feca754f989b059f5c05864f
@@ -2610,7 +2566,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:4.1.0, js-yaml@npm:^4.1.0":
+"js-yaml@npm:4.1.0":
   version: 4.1.0
   resolution: "js-yaml@npm:4.1.0"
   dependencies:
@@ -2860,7 +2816,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:5.1.9, minimatch@npm:^5.0.1":
+"minimatch@npm:5.1.9":
   version: 5.1.9
   resolution: "minimatch@npm:5.1.9"
   dependencies:
@@ -3306,7 +3262,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"openapi-sampler@npm:1.7.0":
+"openapi-sampler@npm:1.7.0, openapi-sampler@npm:^1.5.0":
   version: 1.7.0
   resolution: "openapi-sampler@npm:1.7.0"
   dependencies:
@@ -3314,17 +3270,6 @@ __metadata:
     fast-xml-parser: "npm:^5.3.4"
     json-pointer: "npm:0.6.2"
   checksum: 10c0/c367e0f907091d3f55de7e6cb3faaf536d60ac349a93481ce5dc562a7e0096623a1c689e655e819e37d379670271bc7cb6c2328fe854b995c0af6e77b47da2f0
-  languageName: node
-  linkType: hard
-
-"openapi-sampler@npm:^1.5.0":
-  version: 1.6.1
-  resolution: "openapi-sampler@npm:1.6.1"
-  dependencies:
-    "@types/json-schema": "npm:^7.0.7"
-    fast-xml-parser: "npm:^4.5.0"
-    json-pointer: "npm:0.6.2"
-  checksum: 10c0/b5c95d03e3a035e06da514b3db3e9645e36029dd37551e44fdbdf162c764db52a4d4fe077ea1e02e96a95580b968924000fd9275ab03a1092c734f7862951c87
   languageName: node
   linkType: hard
 
@@ -3441,7 +3386,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pluralize@npm:8.0.0, pluralize@npm:^8.0.0":
+"pluralize@npm:8.0.0":
   version: 8.0.0
   resolution: "pluralize@npm:8.0.0"
   checksum: 10c0/2044cfc34b2e8c88b73379ea4a36fc577db04f651c2909041b054c981cd863dd5373ebd030123ab058d194ae615d3a97cfdac653991e499d10caf592e8b3dc33
@@ -3997,21 +3942,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:7.7.4":
+"semver@npm:7.7.4, semver@npm:^7.3.5, semver@npm:^7.5.2":
   version: 7.7.4
   resolution: "semver@npm:7.7.4"
   bin:
     semver: bin/semver.js
   checksum: 10c0/5215ad0234e2845d4ea5bb9d836d42b03499546ddafb12075566899fc617f68794bb6f146076b6881d755de17d6c6cc73372555879ec7dce2c2feee947866ad2
-  languageName: node
-  linkType: hard
-
-"semver@npm:^7.3.5, semver@npm:^7.5.2":
-  version: 7.6.1
-  resolution: "semver@npm:7.6.1"
-  bin:
-    semver: bin/semver.js
-  checksum: 10c0/fd28315954ffc80204df0cb5c62355160ebf54059f5ffe386e9903162ddf687ed14004c30f6e5347fa695fc77bafa242798af8d351f1d260207f007cfbeccb82
   languageName: node
   linkType: hard
 
@@ -4281,13 +4217,6 @@ __metadata:
   dependencies:
     ansi-regex: "npm:^6.0.1"
   checksum: 10c0/a198c3762e8832505328cbf9e8c8381de14a4fa50a4f9b2160138158ea88c0f5549fb50cb13c651c3088f47e63a108b34622ec18c0499b6c8c3a5ddf6b305ac4
-  languageName: node
-  linkType: hard
-
-"strnum@npm:^1.0.5":
-  version: 1.1.2
-  resolution: "strnum@npm:1.1.2"
-  checksum: 10c0/a0fce2498fa3c64ce64a40dada41beb91cabe3caefa910e467dc0518ef2ebd7e4d10f8c2202a6104f1410254cae245066c0e94e2521fb4061a5cb41831952392
   languageName: node
   linkType: hard
 
