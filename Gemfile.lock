@@ -84,7 +84,7 @@ GEM
       public_suffix (>= 2.0.2, < 8.0)
     ansi (1.6.0)
     ast (2.4.3)
-    avo (3.31.2)
+    avo (3.32.1)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
@@ -99,7 +99,7 @@ GEM
       turbo_power (>= 0.6.0)
       view_component (>= 3.7.0)
       zeitwerk (>= 2.6.12)
-    avo-icons (0.1.4)
+    avo-icons (0.1.5)
       inline_svg
     base64 (0.3.0)
     bcrypt (3.1.22)
@@ -235,7 +235,7 @@ GEM
     commonmarker (2.8.1-arm64-darwin)
     commonmarker (2.8.1-x86_64-darwin)
     commonmarker (2.8.1-x86_64-linux)
-    concurrent-ruby (1.3.6)
+    concurrent-ruby (1.3.7)
     connection_pool (3.0.2)
     crass (1.0.6)
     css_parser (2.1.0)
@@ -322,7 +322,7 @@ GEM
       thor
     htmlentities (4.4.2)
     http_accept_language (2.1.1)
-    i18n (1.14.8)
+    i18n (1.15.0)
       concurrent-ruby (~> 1.0)
     indefinite_article (0.2.5)
       activesupport
@@ -344,7 +344,7 @@ GEM
       rails (>= 5.0.0)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
-    json (2.19.5)
+    json (2.19.9)
     jwt (3.2.0)
       base64
     knapsack_pro (10.0.0)
@@ -471,7 +471,7 @@ GEM
       premailer (~> 1.7, >= 1.7.9)
     prettyprint (0.2.0)
     prism (1.9.0)
-    prop_initializer (0.3.0)
+    prop_initializer (0.4.0)
       zeitwerk (>= 2.6.18)
     propshaft (1.3.2)
       actionpack (>= 7.0.0)
@@ -484,7 +484,7 @@ GEM
     pry-stack_explorer (0.6.3)
       binding_of_caller (>= 1.0)
       pry (~> 0.13)
-    psych (5.3.1)
+    psych (5.4.0)
       date
       stringio
     public_suffix (7.0.5)
@@ -666,7 +666,7 @@ GEM
     uri (1.1.1)
     useragent (0.16.11)
     version_gem (1.1.9)
-    view_component (4.9.0)
+    view_component (4.12.0)
       actionview (>= 7.1.0)
       activesupport (>= 7.1.0)
       concurrent-ruby (~> 1)
@@ -683,7 +683,7 @@ GEM
     websocket-extensions (0.1.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.5)
+    zeitwerk (2.8.2)
 
 PLATFORMS
   aarch64-linux
