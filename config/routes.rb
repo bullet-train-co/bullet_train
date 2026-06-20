@@ -15,6 +15,10 @@ Rails.application.routes.draw do
   # TODO Would love to get this out of the application routes file.
   extending = {only: []}
 
+  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in layouts/_head.html.erb)
+  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
   scope module: "public" do
     # To keep things organized, we put non-authenticated controllers in the `Public::` namespace.
     # The root `/` path is routed to `Public::HomeController#index` by default. You can set it
