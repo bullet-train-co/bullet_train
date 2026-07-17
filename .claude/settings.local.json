@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bundle show:*)",
+      "Bash(rails routes:*)",
+      "Bash(rails test:*)",
+      "Bash(bun --version:*)"
+    ]
+  }
+}
