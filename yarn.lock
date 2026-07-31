@@ -1093,7 +1093,7 @@ __metadata:
     postcss-cli: "npm:^11.0.1"
     postcss-css-variables: "npm:^0.19.0"
     postcss-import: "npm:^16.1.1"
-    postcss-nested: "npm:^7.0.2"
+    postcss-nested: "npm:^8.0.0"
     stimulus-reveal: "npm:^1.4.2"
     stimulus-scroll-reveal: "npm:^3.2.0"
     tailwindcss: "npm:^3.4.17"
@@ -3530,14 +3530,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-nested@npm:^7.0.2":
-  version: 7.0.2
-  resolution: "postcss-nested@npm:7.0.2"
+"postcss-nested@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "postcss-nested@npm:8.0.0"
   dependencies:
-    postcss-selector-parser: "npm:^7.0.0"
+    postcss-selector-parser: "npm:^7.1.4"
   peerDependencies:
     postcss: ^8.2.14
-  checksum: 10c0/b467f328c89c5b0dcd1b569ae083f6163235c0cac09494a0b284eef5275fa1386bbc26c66c85adf194cef0a65d315994140724a34539a096e5acd39d9c753338
+  checksum: 10c0/a3f17ad72b2c8f39d6b1421fa9250b855697d7809ede7f2becffe8393d4fd292e0b70574589714b568fb5cb959d52a03d87ce09a27f4b2c2f9400583d8db09b1
   languageName: node
   linkType: hard
 
@@ -3573,13 +3573,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-selector-parser@npm:^7.0.0":
-  version: 7.0.0
-  resolution: "postcss-selector-parser@npm:7.0.0"
+"postcss-selector-parser@npm:^7.0.0, postcss-selector-parser@npm:^7.1.4":
+  version: 7.1.4
+  resolution: "postcss-selector-parser@npm:7.1.4"
   dependencies:
     cssesc: "npm:^3.0.0"
     util-deprecate: "npm:^1.0.2"
-  checksum: 10c0/e96e096afcce70bf5c97789f5ea09d7415ae5eb701d82b05b5e8532885d31363b484fcb1ca9488c9a331f30508d9e5bb6c3109eb2eb5067ef3d3919f9928cd9d
+  checksum: 10c0/3d533d25bab83592e7134be0435e6cb1e2865f5e7d9fde65f1e7e1c75ccc5905168c9f55b05d2a3e10d01914a178433d3a54eab003f5ef6aa9a9d6816926caa2
   languageName: node
   linkType: hard
 
