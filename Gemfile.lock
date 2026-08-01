@@ -568,9 +568,9 @@ GEM
       prism (>= 1.6.0)
       rbs (>= 4.0.0)
       tsort
-    redis (5.4.1)
-      redis-client (>= 0.22.0)
-    redis-client (0.28.0)
+    redis (6.0.0)
+      redis-client (= 0.30.1)
+    redis-client (0.30.1)
       connection_pool
     regexp_parser (2.12.0)
     reline (0.6.3)
@@ -756,7 +756,7 @@ DEPENDENCIES
   rails (~> 8.1.0)
   rails-erd
   rails_best_practices
-  redis (~> 5.4.0)
+  redis (~> 6.0.0)
   rqrcode
   ruby-vips
   selenium-webdriver
