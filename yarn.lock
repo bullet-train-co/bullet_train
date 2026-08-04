@@ -1093,7 +1093,7 @@ __metadata:
     postcss-cli: "npm:^11.0.1"
     postcss-css-variables: "npm:^0.19.0"
     postcss-import: "npm:^16.1.1"
-    postcss-nested: "npm:^8.0.0"
+    postcss-nested: "npm:^8.0.1"
     stimulus-reveal: "npm:^1.4.2"
     stimulus-scroll-reveal: "npm:^3.2.0"
     tailwindcss: "npm:^3.4.17"
@@ -3530,14 +3530,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-nested@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "postcss-nested@npm:8.0.0"
+"postcss-nested@npm:^8.0.1":
+  version: 8.0.1
+  resolution: "postcss-nested@npm:8.0.1"
   dependencies:
     postcss-selector-parser: "npm:^7.1.4"
   peerDependencies:
     postcss: ^8.2.14
-  checksum: 10c0/a3f17ad72b2c8f39d6b1421fa9250b855697d7809ede7f2becffe8393d4fd292e0b70574589714b568fb5cb959d52a03d87ce09a27f4b2c2f9400583d8db09b1
+  checksum: 10c0/f65c87cca4158fb3e04fddee04959e70dad80bce1587e90f05787378610be8b7160a2c0421201c83885a2b43cbfa01f486f7fd7f4dcd32ff63135409f542f9ea
   languageName: node
   linkType: hard
 
