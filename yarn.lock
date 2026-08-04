@@ -1089,7 +1089,7 @@ __metadata:
     esbuild: "npm:^0.28.1"
     glob: "npm:^13.0.6"
     jstz: "npm:^2.1.1"
-    postcss: "npm:^8.5.10"
+    postcss: "npm:^8.5.23"
     postcss-cli: "npm:^11.0.1"
     postcss-css-variables: "npm:^0.19.0"
     postcss-import: "npm:^16.1.1"
@@ -3041,6 +3041,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.3.16":
+  version: 3.3.17
+  resolution: "nanoid@npm:3.3.17"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 10c0/06f7949c7cce5c92c6aea66022f29a1eae7f56e05acbfddf1e049e819b4bf234c44a765cc44da7163482b111677948514012e27acdfa56f95309295768bdae32
+  languageName: node
+  linkType: hard
+
 "nanopop@npm:2.3.0":
   version: 2.3.0
   resolution: "nanopop@npm:2.3.0"
@@ -3601,7 +3610,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.4.47, postcss@npm:^8.5.10":
+"postcss@npm:^8.4.47":
   version: 8.5.14
   resolution: "postcss@npm:8.5.14"
   dependencies:
@@ -3609,6 +3618,17 @@ __metadata:
     picocolors: "npm:^1.1.1"
     source-map-js: "npm:^1.2.1"
   checksum: 10c0/48138207cf5ef5581be1bfe2cb65ccfe0ac75e43888ba045afc8ed6043d7b56aeb3b9a9fe5b353ff554be943cd0cc15d826ccb991525159175971e5ee8ab0237
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.5.23":
+  version: 8.5.23
+  resolution: "postcss@npm:8.5.23"
+  dependencies:
+    nanoid: "npm:^3.3.16"
+    picocolors: "npm:^1.1.1"
+    source-map-js: "npm:^1.2.1"
+  checksum: 10c0/ed714e635b330bb42666ecdd0c0b4f30224ded15b0b0052d6bc2b92832f2cf17d1c1141359453f96f0a84f8fbf4c405a74df187f559163b8f31131b2535455aa
   languageName: node
   linkType: hard
 
