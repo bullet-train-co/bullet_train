@@ -1,0 +1,14 @@
+zh-CN:
+  application:
+    name: Untitled Application
+    owner: Unidentified Developer
+    description: 您可以在`config/locales/zh-CN/application.zh-CN.yml`中更新此说明。
+    keywords: untitled application SEO 关键词
+    support_email: change.me@localhost
+    key: untitled_application
+  webhooks/outgoing/endpoints:
+    fields:
+      api_version:
+        options:
+          1: V1
+          # 🚅 super scaffolding will insert new api versions above this line.
