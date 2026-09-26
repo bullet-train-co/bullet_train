@@ -696,14 +696,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rails/actiontext@npm:^8.1.300":
-  version: 8.1.300
-  resolution: "@rails/actiontext@npm:8.1.300"
+"@rails/actiontext@npm:^8.1.400":
+  version: 8.1.400
+  resolution: "@rails/actiontext@npm:8.1.400"
   dependencies:
     "@rails/activestorage": "npm:>= 8.1.0-alpha"
   peerDependencies:
     trix: ^2.0.0
-  checksum: 10c0/0be7c3d183a995310aea2e54c958dbe5dc39283b0314c53385edf2f5743bae93e3fc3f826d10af0470f54e21dbd87087cf550d9621639e63a0c69173b95fe588
+  checksum: 10c0/cc165d5582e5064d15488beaf79ad9a50a97978e6256a99e61be7f05ba11751cd4d14aaf905bf6dd1e74a6a04eface6a5f17c80ad512ec194e806eb260d13235
   languageName: node
   linkType: hard
 
@@ -991,7 +991,7 @@ __metadata:
     "@hotwired/turbo-rails": "npm:^8.0.23"
     "@icon/themify-icons": "npm:^1.0.6"
     "@rails/actioncable": "npm:^8.1.300"
-    "@rails/actiontext": "npm:^8.1.300"
+    "@rails/actiontext": "npm:^8.1.400"
     "@rails/activestorage": "npm:^8.1.300"
     "@rails/request.js": "npm:^0.0.13"
     "@redocly/cli": "npm:^1.34.5 <2.0.0"
