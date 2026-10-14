@@ -4,9 +4,9 @@
 
 1. You must have the following dependencies installed:
 
-     - Ruby 3
+     - Ruby 4
           - See [`.ruby-version`](.ruby-version) for the specific version.
-     - Node 19
+     - Node 24
           - See [`.nvmrc`](.nvmrc) for the specific version.
      - PostgreSQL 14
      - Redis 6.2
