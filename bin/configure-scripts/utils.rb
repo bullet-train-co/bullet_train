@@ -34,6 +34,11 @@ def stream(command, prefix = "  ")
 end
 
 def replace_in_file(file, before, after, target_regexp = nil)
+  unless File.exist?(file)
+    puts "Skipping '#{file}' because it doesn't exist.".yellow
+    return
+  end
+
   puts "Replacing in '#{file}'."
   if target_regexp
     target_file_content = ""

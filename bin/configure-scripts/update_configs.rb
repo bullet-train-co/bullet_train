@@ -50,14 +50,21 @@ Dir.glob("./bin/docker-dev/*").each do |file|
   replace_in_file(file, "untitled_application", variable)
 end
 
-replace_in_file("./README.example.md", "Untitled Application", human)
+# `bin/configure` may have already been run once, in which case the example
+# README has already been moved into place and the funding file removed.
+if File.exist?("./README.example.md")
+  replace_in_file("./README.example.md", "Untitled Application", human)
 
-puts ""
+  puts ""
 
-puts "Moving `./README.example.md` to `./README.md`.".green
-puts `mv ./README.example.md ./README.md`.chomp
+  puts "Moving `./README.example.md` to `./README.md`.".green
+  File.rename("./README.example.md", "./README.md")
+else
+  puts ""
+  puts "Skipping `./README.example.md` because it has already been moved to `./README.md`.".yellow
+end
 
-puts `rm .github/FUNDING.yml`.chomp
+File.delete(".github/FUNDING.yml") if File.exist?(".github/FUNDING.yml")
 
 # TODO: Uncomment this when the enable bulk invitations JS is implemented.
 # Enable the bulk invitations configuration.
