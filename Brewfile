@@ -4,7 +4,6 @@ brew "ruby-build"
 
 # Recommended Node version manager and package manager
 brew "nvm"
-brew "yarn"
 
 # Database
 brew "postgresql@14"
