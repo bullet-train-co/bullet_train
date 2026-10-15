@@ -1005,7 +1005,7 @@ __metadata:
     postcss: "npm:^8.5.10"
     postcss-cli: "npm:^12.0.0"
     postcss-css-variables: "npm:^0.19.0"
-    postcss-import: "npm:^17.0.0"
+    postcss-import: "npm:^17.0.1"
     postcss-nested: "npm:^8.0.1"
     stimulus-reveal: "npm:^1.4.2"
     stimulus-scroll-reveal: "npm:^3.2.0"
@@ -3376,16 +3376,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-import@npm:^17.0.0":
-  version: 17.0.0
-  resolution: "postcss-import@npm:17.0.0"
+"postcss-import@npm:^17.0.1":
+  version: 17.0.1
+  resolution: "postcss-import@npm:17.0.1"
   dependencies:
     postcss-value-parser: "npm:^4.0.0"
     read-cache: "npm:^1.0.0"
     resolve: "npm:^1.1.7"
   peerDependencies:
     postcss: ^8.0.0
-  checksum: 10c0/67080e7d0770b02814e1188fd7624cf6d0076971eb6ff425f5834f58cd3af7126e05b6460006c987b298496ac5339921f5297b5511f10d48f1d7be35bf15f3c0
+  checksum: 10c0/9552088e232d2daa6322c9fc9d885bd13d084eaafc96c91636eacbc32d32bf1631123cb8ec0f32a8a0b206d3f52a02986395ecc32287acbb3dd52f6c75472809
   languageName: node
   linkType: hard
 
