@@ -8,11 +8,12 @@ test:
 
 amazon:
   service: S3
-  # If you update this, you also have to update `config/environments/production.rb`.
-  access_key_id: <%= ENV['AWS_ACCESS_KEY_ID'] || ENV['BUCKETEER_AWS_ACCESS_KEY_ID'] %>
-  secret_access_key: <%= ENV['AWS_SECRET_ACCESS_KEY'] || ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY'] %>
-  bucket: <%= ENV['AWS_S3_BUCKET'] || ENV['BUCKETEER_BUCKET_NAME'] %>
-  region: <%= ENV['AWS_S3_REGION'] || ENV['BUCKETEER_AWS_REGION'] %>
+  # S3-specific variables (`AWS_S3_*`) take priority, then the generic `AWS_*` variables, then Heroku Bucketeer.
+  # If you update this, you also have to update `config/environments/development.rb` and `config/environments/production.rb`.
+  access_key_id: <%= ENV['AWS_S3_ACCESS_KEY_ID'] || ENV['AWS_ACCESS_KEY_ID'] || ENV['BUCKETEER_AWS_ACCESS_KEY_ID'] %>
+  secret_access_key: <%= ENV['AWS_S3_SECRET_ACCESS_KEY'] || ENV['AWS_SECRET_ACCESS_KEY'] || ENV['BUCKETEER_AWS_SECRET_ACCESS_KEY'] %>
+  bucket: <%= ENV['AWS_S3_BUCKET'] || ENV['AWS_BUCKET'] || ENV['BUCKETEER_BUCKET_NAME'] %>
+  region: <%= ENV['AWS_S3_REGION'] || ENV['AWS_REGION'] || ENV['BUCKETEER_AWS_REGION'] %>
 
 cloudinary:
   service: Cloudinary
