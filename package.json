@@ -20,7 +20,7 @@
     "autoprefixer": "^10.6.2",
     "cable_ready": "^5.0.6",
     "esbuild": "^0.28.2",
-    "glob": "^13.0.6",
+    "glob": "^14.0.3",
     "jstz": "^2.1.1",
     "postcss": "^8.5.10",
     "postcss-cli": "^12.0.0",
