@@ -4,6 +4,9 @@ name: "🚢 ~ Docker"
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   placeholder-job:
     runs-on: ubuntu-latest

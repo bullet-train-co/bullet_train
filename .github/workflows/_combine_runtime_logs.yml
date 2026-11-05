@@ -7,6 +7,11 @@ name: "🪵 Combine Runtime Logs for Parallel Tests"
 on:
   workflow_call:
 
+permissions:
+  contents: read
+  # Deletes the per-runner artifacts once they are combined.
+  actions: write
+
 jobs:
   combine_runtime_logs:
     name: "🪵"

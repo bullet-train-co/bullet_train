@@ -16,6 +16,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+
 jobs:
   calculate_matrix:
     name: 🧮 Calculate Dynamic Matrix
