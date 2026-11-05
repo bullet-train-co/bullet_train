@@ -48,7 +48,6 @@ jobs:
     name: "arm"
     needs: extract-bullet-train-version
     uses: ./.github/workflows/_build_docker_image.yml
-    secrets: inherit
     with:
       image-name: bullet-train-co/bullet_train
       dockerfile: Dockerfile
@@ -59,7 +58,6 @@ jobs:
     name: "amd"
     needs: extract-bullet-train-version
     uses: ./.github/workflows/_build_docker_image.yml
-    secrets: inherit
     with:
       image-name: bullet-train-co/bullet_train
       dockerfile: Dockerfile

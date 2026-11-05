@@ -51,4 +51,3 @@ jobs:
     needs: tag
     if: ${{ startsWith(needs.tag.outputs.tag, 'v') }}
     uses: ./.github/workflows/docker-bt-internal.yml
-    secrets: inherit
