@@ -28,8 +28,7 @@ jobs:
       # TODO: Will the heroku-deploy action eventually handle this for us?
       # https://github.com/AkhileshNS/heroku-deploy/issues/188
       - name: Install Heroku CLI
-        run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
+        run: npm install -g heroku@11.12.1
       - uses: actions/checkout@v6
         with:
           persist-credentials: false
