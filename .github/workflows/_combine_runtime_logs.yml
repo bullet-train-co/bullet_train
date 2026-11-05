@@ -20,6 +20,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
+          persist-credentials: false
           path: tmp/starter
 
       - name: runtime log cache

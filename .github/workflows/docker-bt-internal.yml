@@ -25,7 +25,9 @@ jobs:
       version: ${{ steps.extract-version.outputs.result }}
     steps:
       - name: Checkout Repo
-        uses: "actions/checkout@v6"
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Extract Bullet Train Version
         id: extract-version
@@ -74,6 +76,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
+        with:
+          persist-credentials: false
 
       - name: Download digests
         uses: actions/download-artifact@v8
