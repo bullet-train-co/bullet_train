@@ -2,7 +2,8 @@
 brew "rbenv"
 brew "ruby-build"
 
-# Recommended Node version manager and package manager
+# Recommended Node version manager. Yarn is intentionally not listed here: it's provided by
+# Corepack (`corepack enable`), and a Homebrew-installed yarn fights with Corepack's `yarn` shim.
 brew "nvm"
 
 # Database
