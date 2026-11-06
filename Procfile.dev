@@ -4,3 +4,4 @@ js: THEME="light" yarn build --watch
 light-css: yarn light:build:css --watch
 light-mailer-css: yarn light:build:mailer:css --watch
 # ngrok: ngrok http 3000
+# mailtrap-local: mailtrap-local
