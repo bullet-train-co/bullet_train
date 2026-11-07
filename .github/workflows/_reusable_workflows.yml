@@ -4,6 +4,9 @@ name: " 🚫 |----- Reusable Worfklows Below"
 on:
   workflow_call:
 
+permissions:
+  contents: read
+
 jobs:
   nothing:
     runs-on: ubuntu-latest
