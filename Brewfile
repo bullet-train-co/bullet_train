@@ -22,3 +22,6 @@ brew "graphviz"
 
 # Uncomment if using bullet_train-conversations gem
 # brew "icu4c"
+
+# Uncomment if using mailtrap-local as a local email catcher in development
+# brew "mailtrap/local/mailtrap-local"
