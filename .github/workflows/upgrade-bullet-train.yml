@@ -8,6 +8,9 @@ on:
         description: 'Version Number (latest if blank)'
         type: string
 
+permissions:
+  contents: read
+
 jobs:
   update:
     runs-on: ubuntu-latest

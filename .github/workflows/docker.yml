@@ -4,10 +4,15 @@ name: "🚢 ~ Docker"
 on:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   placeholder-job:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v6.1.0
+        with:
+          persist-credentials: false
