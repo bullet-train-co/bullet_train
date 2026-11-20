@@ -8,7 +8,7 @@ If you're new to Bullet Train, start with the [Bullet Train Developer Documentat
 If you haven't already, install [Homebrew](https://brew.sh). We'll use it later to automatically install other dependencies, including:
 
  - [rbenv](https://github.com/rbenv/rbenv) and [ruby-build](https://github.com/rbenv/ruby-build) for Ruby version management
- - [nvm](https://github.com/nvm-sh/nvm) and [Yarn](https://yarnpkg.com) for Node version and package management
+ - [nvm](https://github.com/nvm-sh/nvm) for Node version management ([Yarn](https://yarnpkg.com) is provided by [Corepack](https://github.com/nodejs/corepack), not Homebrew)
  - [PostgreSQL](https://www.postgresql.org) as a relational database
  - [Redis](https://redis.io) for Action Cable WebSockets and background job queues
 
@@ -89,6 +89,8 @@ If you're building a new application with Bullet Train, you don't want to "Fork"
     nvm install
     corepack enable
     ```
+
+    > If you use Node.js 25 or newer instead of the version in `.nvmrc`, note that Corepack is no longer bundled with Node.js. Run `npm install -g corepack` before `corepack enable`.
 
    > ⚠️ You'll need to open a new shell before continuing. The easiest way to do this on macOS is hitting `⌘` + `T` to open a new tab in the same working directory.
 

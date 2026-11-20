@@ -17,9 +17,24 @@ when "darwin"
   if command?("brew")
     puts "Brewfile found. Installing Homebrew dependencies...".green
     puts ""
-    system!("brew bundle --file=#{brewfile_path}")
+    # We intentionally don't use `system!` here. `brew bundle` keeps going when a single dependency
+    # fails and prints its own detailed error output, and the steps that follow check each dependency
+    # individually. So one failure here (e.g. a symlink conflict) shouldn't abort the whole setup.
+    bundle_succeeded = system("brew bundle --file=#{brewfile_path}")
     puts ""
-    puts "Homebrew dependencies installed.".green
+    if bundle_succeeded
+      puts "Homebrew dependencies installed.".green
+    else
+      puts "Homebrew reported a problem installing one or more dependencies. See the output above for details.".red
+      puts "The next steps check each dependency individually, so this may not be a problem.".yellow
+      continue_anyway = ask_boolean "Try proceeding anyway?", "y"
+      if continue_anyway
+        puts "Continuing. If a dependency is actually missing, the next steps will let you know.".yellow
+      else
+        puts "You've chosen not to continue. Please resolve the Homebrew errors above and run bin/setup again.".red
+        exit
+      end
+    end
   else
     puts "Homebrew is not installed.".red
     puts "You can install it from https://brew.sh".yellow
