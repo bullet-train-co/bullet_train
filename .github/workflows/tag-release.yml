@@ -11,7 +11,7 @@ on:
 jobs:
   tag:
     name: Tag
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       tag: ${{ steps.tag-on-pr-merge.outputs.tag }}
     # This 'if' condition is important for ensuring the workflow only runs for merged PRs
@@ -30,7 +30,7 @@ jobs:
         run: echo "${{ steps.tag-on-pr-merge.outputs.tag }}"
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: tag
     # If we created a `v*` tag then we checkout the repo and tag a release.
     if: ${{ startsWith(needs.tag.outputs.tag, 'v') }}

@@ -19,7 +19,7 @@ on:
 jobs:
   calculate_matrix:
     name: 🏗️ Generate Test List
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       tests: ${{ steps.generate-test-list.outputs.result }}
     steps:
@@ -43,7 +43,7 @@ jobs:
             return tests
   test:
     name: "🏗️"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: calculate_matrix
     strategy:
       fail-fast: false
