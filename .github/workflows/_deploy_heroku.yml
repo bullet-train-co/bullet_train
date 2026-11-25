@@ -20,7 +20,7 @@ on:
 
 jobs:
   heroku:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       # TODO: Will the heroku-deploy action eventually handle this for us?
       # https://github.com/AkhileshNS/heroku-deploy/issues/188

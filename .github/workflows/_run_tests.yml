@@ -19,7 +19,7 @@ on:
 jobs:
   calculate_matrix:
     name: 🧮 Calculate Dynamic Matrix
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       matrix: ${{ steps.dynamic-matrix.outputs.matrix }}
       totalRunners: ${{ steps.dynamic-matrix.outputs.totalRunners }}
@@ -36,7 +36,7 @@ jobs:
 
   test:
     name: "🧪"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: calculate_matrix
     strategy:
       fail-fast: false
