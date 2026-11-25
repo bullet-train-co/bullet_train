@@ -9,7 +9,7 @@ on:
 jobs:
   combine_runtime_logs:
     name: "♻️ "
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       RAILS_ENV: test
       # Manually export your local RAILS_MASTER_KEY if using the credentials system.

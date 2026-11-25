@@ -20,7 +20,7 @@ permissions:
 jobs:
   extract-bullet-train-version:
     name: "Extract Bullet Train Version"
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       version: ${{ steps.extract-version.outputs.result }}
     steps:
@@ -63,12 +63,12 @@ jobs:
     with:
       image-name: bullet-train-co/bullet_train
       dockerfile: Dockerfile
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-24.04
       platform: linux/amd64
       bullet-train-version: ${{ needs.extract-bullet-train-version.outputs.version }}
 
   merge:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs:
       - extract-bullet-train-version
       - build-arm

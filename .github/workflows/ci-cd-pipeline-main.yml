@@ -16,7 +16,7 @@ jobs:
   # Without it the layout is really bad and confusing.
   calculate_matrix:
     name: 🤷 Fake Matrix
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Do Nothing
         run: echo "This is a useless step that just helps things look nicer..."
