@@ -5,7 +5,7 @@ extending = {only: []}
 shallow do
   namespace :v1 do
     # user specific resources.
-    resources :users, extending do
+    model "User", extending do
       namespace :oauth do
         # 🚅 super scaffolding will insert new oauth providers above this line.
       end
@@ -14,16 +14,16 @@ shallow do
     end
 
     # team-level resources.
-    resources :teams, extending do
+    model "Team", extending do
       # routes for many teams actions and resources are configured in the `bullet_train` gem, but you can add more here.
 
       # add your resources here.
 
-      resources :invitations, extending do
+      model "Invitation", extending do
         # routes for standard invitation actions and resources are configured in the `bullet_train` gem, but you can add more here.
       end
 
-      resources :memberships, extending do
+      model "Membership", extending do
         # routes for standard membership actions and resources are configured in the `bullet_train` gem, but you can add more here.
       end
 

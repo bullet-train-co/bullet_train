@@ -720,6 +720,7 @@ DEPENDENCIES
   bullet_train-obfuscates_id (= 1.46.0)
   bullet_train-outgoing_webhooks (= 1.46.0)
   bullet_train-roles (= 1.46.0)
+  bullet_train-routes (= 1.46.0)
   bullet_train-scope_validator (= 1.46.0)
   bullet_train-sortable (= 1.46.0)
   bullet_train-super_load_and_authorize_resource (= 1.46.0)

@@ -140,6 +140,7 @@ gem "bullet_train-obfuscates_id", BULLET_TRAIN_VERSION
 gem "bullet_train-fields", BULLET_TRAIN_VERSION
 gem "bullet_train-has_uuid", BULLET_TRAIN_VERSION
 gem "bullet_train-roles", BULLET_TRAIN_VERSION
+gem "bullet_train-routes", BULLET_TRAIN_VERSION
 gem "bullet_train-scope_validator", BULLET_TRAIN_VERSION
 gem "bullet_train-super_load_and_authorize_resource", BULLET_TRAIN_VERSION
 gem "bullet_train-themes-tailwind_css", BULLET_TRAIN_VERSION
