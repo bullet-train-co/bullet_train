@@ -173,6 +173,30 @@ If you're looking contribute to Bullet Train, you should "Fork" this template re
 
 8. Visit http://localhost:3000.
 
+## Optional: Local Email Catcher
+
+If you want to catch outgoing email from your Bullet Train app in development, [mailtrap-local](https://github.com/mailtrap/mailtrap-local) is a self-contained Go binary that runs an SMTP catcher on `127.0.0.1:3535` and gives you a web inbox on `127.0.0.1:3550`. MIT licensed. Unlike `letter_opener`, it speaks real SMTP (so dev exercises the same delivery path as production) and catches mail from the Sidekiq worker and any other process pointed at it with one config.
+
+Setup:
+
+```
+brew tap mailtrap/local
+brew trust --formula mailtrap/local/mailtrap-local
+brew install mailtrap-local
+```
+
+Then uncomment the `mailtrap-local` line in `Procfile.dev` (and the Brewfile entry if you want `brew bundle` to install it automatically), and point ActionMailer at it in `config/environments/development.rb`:
+
+```ruby
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.smtp_settings = {
+  address: ENV.fetch("SMTP_ADDRESS", "127.0.0.1"),
+  port: ENV.fetch("SMTP_PORT", "3535").to_i
+}
+```
+
+Browse caught mail at [http://127.0.0.1:3550](http://127.0.0.1:3550).
+
 ---
 
 This `README.md` file will be replaced with [`README.example.md`](./README.example.md) after running `bin/configure`.
